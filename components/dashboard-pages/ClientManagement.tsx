@@ -26,7 +26,7 @@ import {
   AlertCircle,
   Clock
 } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@/lib/supabase/client';
 import { toast } from '@/hooks/use-toast';
 import ClientOnboardingWizard from '@/components/wizards/ClientOnboardingWizard';
 import { ActionButtons } from '@/components/ui/action-buttons';

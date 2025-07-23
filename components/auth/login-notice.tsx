@@ -1,36 +1,31 @@
-// components/auth/login-notice.tsx
-
 'use client'
 
 import { CheckCircle } from 'lucide-react'
 
-
 export default function LoginNotice() {
   return (
-    <div className="h-full w-full py-12 px-2 flex flex-col justify-center text-white">
-      <p className="text-xs sm:text-sm font-semibold text-brand-green">
-        Welcome to the sheet-show
-      </p>
+    <div className="h-full w-full max-w-2xl mx-auto px-4 py-12 flex flex-col justify-center text-white">
+      {/* Header */}
+      <div className="space-y-2">
+        <p className="text-xs sm:text-sm font-semibold text-brand-green">
+          Welcome to the sheet-show
+        </p>
+        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-pretty text-white">
+          Our Backyard
+        </h1>
+        <p className="text-sm sm:text-base text-brand-light max-w-md mt-2">
+          Your secure workspace for managing clients, workflows, documents, payroll, and compliance — all in one place.
+        </p>
+      </div>
 
-      <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl sm:text-balance">
-        Our Backyard
-      </h1>
-
-      <p className="mt-4 text-sm text-brand-light max-w-md">
-        Your secure workspace for managing clients, workflows, documents, payroll, and compliance — all in one place.
-      </p>
-
-      <h2 className="mt-6 text-xl font-semibold tracking-tight text-white sm:text-balance">
-        Dedicated Decks and Dashboards
-      </h2>
-
-      <div className="mt-4 grid grid-cols-2 gap-1 text-xs">
-  {/* Airtable Workspace Decks */}
+      {/* Section: Decks and Features */}
+      <div className="mt-10 space-y-6">
+        {/* Airtable Decks */}
         <div>
-          <h3 className="text-sm font-semibold text-brand-green mb-2">
-            Airtable Workspace
-          </h3>
-          <ul className="space-y-2 text-brand-light">
+          <h2 className="text-lg font-semibold text-white mb-3">
+            Airtable Workspace Decks
+          </h2>
+          <ul className="grid grid-cols-2 gap-y-2 text-sm text-brand-light">
             {[
               'Exec deck',
               'BD deck',
@@ -46,43 +41,40 @@ export default function LoginNotice() {
               'Reports – clients',
               'Forms'
             ].map((label) => (
-              <li key={label} className="flex items-start gap-2">
-                <CheckCircle className="h-4 w-4 text-brand-green" />
-                {label}
+              <li key={label} className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4 text-brand-green shrink-0" />
+                <span>{label}</span>
               </li>
             ))}
           </ul>
         </div>
-                {/* Kounted Business Suite Features */}
+
+        {/* Kounted Features */}
         <div>
-          <h3 className="text-sm font-semibold text-brand-green mb-2">
+          <h2 className="text-lg font-semibold text-white mb-3">
             Kounted Business Suite
-          </h3>
-          <ul className="space-y-2 text-brand-light">
-            <li className="flex items-start gap-2">
-              <CheckCircle className="h-4 w-4 text-brand-green" />
-              SPV compliance plans
-              <span className="ml-auto text-green-400 font-medium">Live</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <CheckCircle className="h-4 w-4 text-brand-green" />
-              Client repository
-              <span className="ml-auto text-zinc-400">Coming soon</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <CheckCircle className="h-4 w-4 text-brand-green" />
-              AI case assistant
-              <span className="ml-auto text-zinc-400">Coming soon</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <CheckCircle className="h-4 w-4 text-brand-green" />
-              Payroll dashboard
-              <span className="ml-auto text-green-400 font-medium">Live</span>
-            </li>
+          </h2>
+          <ul className="space-y-3 text-sm text-brand-light">
+            {[
+              { label: 'SPV compliance plans', status: 'Live' },
+              { label: 'Client repository', status: 'Coming soon' },
+              { label: 'AI case assistant', status: 'Coming soon' },
+              { label: 'Payroll dashboard', status: 'Live' },
+            ].map(({ label, status }) => (
+              <li key={label} className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4 text-brand-green shrink-0" />
+                <span>{label}</span>
+                <span className="ml-auto text-xs font-medium text-right rounded px-2 py-0.5 bg-white/10">
+                  {status === 'Live' ? (
+                    <span className="text-green-400">Live</span>
+                  ) : (
+                    <span className="text-zinc-400">{status}</span>
+                  )}
+                </span>
+              </li>
+            ))}
           </ul>
         </div>
-
-      
       </div>
     </div>
   )

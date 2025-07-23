@@ -2,3 +2,5 @@ onlyBuiltDependencies:
   - '@swc/core'
   - esbuild
   - sharp
+  - supabase
+  - unrs-resolver

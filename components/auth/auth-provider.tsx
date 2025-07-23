@@ -39,16 +39,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       } = await supabase.auth.getSession()
 
       setSession(currentSession)
-
+      
       if (currentSession?.user?.id) {
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from("v_authenticated_profiles")
           .select("*")
           .eq("id", currentSession.user.id)
-          .maybeSingle()
+          .maybeSingle();
 
         if (!error && data) {
-          setProfile(data as VAuthenticatedProfile)
+          setProfile(data as VAuthenticatedProfile);
         }
       }
 

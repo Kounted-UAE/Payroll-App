@@ -5,12 +5,11 @@ import { Geist, Geist_Mono } from "next/font/google"
 import Script from "next/script"
 
 import { AuthProvider } from "@/components/auth/auth-provider"
-import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
-import AdvontierRibbon from "@/components/layout/advontier-ribbon"
+import AdvontierRibbon from "@/components/advontier-ribbon"
 import { cn } from "@/lib/utils"
 
-import "./globals.css"
+import "@/lib/styles/global.css"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,12 +42,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={cn("min-h-screen bg-background font-sans antialiased")}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <AuthProvider>{children}</AuthProvider>
+                  <AuthProvider>{children}</AuthProvider>
           <Toaster />
           <AdvontierRibbon />
-        </ThemeProvider>
-      </body>
+              </body>
     </html>
   )
 }
