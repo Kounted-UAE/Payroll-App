@@ -1,5 +1,5 @@
-import React from 'react';
+import SOPManagementPage from '@/components/wizards/sop-management/SOPManagementPage';
 
-export default function SOPManagementPage() {
-  return <div className="p-8">SOP Management Page (placeholder)</div>;
+export default function Page() {
+  return <SOPManagementPage />;
 } 

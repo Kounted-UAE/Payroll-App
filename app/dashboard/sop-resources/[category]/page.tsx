@@ -1,5 +1,5 @@
-import React from 'react';
+import SOPCategoryPage from '@/components/wizards/sop-management/SOPCategoryPage';
 
-export default function SOPCategoryPage({ params }: { params: { category: string } }) {
-  return <div className="p-8">SOP Category: {params.category} (placeholder)</div>;
+export default function Page() {
+  return <SOPCategoryPage />;
 } 

@@ -1,5 +1,7 @@
-import React from 'react';
+'use client'
 
-export default function PayrollSalaryStructuresPage() {
-  return <div className="p-8">Payroll Salary Structures Page (placeholder)</div>;
+import PayrollSalaryStructures from '@/components/dashboard-pages/PayrollSalaryStructures';
+
+export default function SalaryStructuresPage() {
+  return <PayrollSalaryStructures />;
 } 

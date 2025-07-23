@@ -1,5 +1,7 @@
-import React from 'react';
+'use client'
 
-export default function CreateSalaryStructureWizardPage() {
-  return <div className="p-8">Create Salary Structure Wizard Page (placeholder)</div>;
+import CreateSalaryStructureWizard from '@/components/wizards/payroll-wizards/CreateSalaryStructureWizard';
+
+export default function CreateSalaryStructurePage() {
+  return <CreateSalaryStructureWizard />;
 } 

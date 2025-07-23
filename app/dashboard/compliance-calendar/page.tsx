@@ -1,5 +1,7 @@
-import React from 'react';
+'use client'
+
+import ComplianceCalendar from '@/components/dashboard-pages/ComplianceCalendar'
 
 export default function ComplianceCalendarPage() {
-  return <div className="p-8">Compliance Calendar Page (placeholder)</div>;
-} 
+  return <ComplianceCalendar />
+}

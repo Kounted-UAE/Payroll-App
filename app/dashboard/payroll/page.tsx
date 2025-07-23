@@ -1,5 +1,7 @@
-import React from 'react';
+'use client'
+
+import PayrollDashboard from '@/components/dashboard-pages/PayrollDashboard';
 
 export default function PayrollDashboardPage() {
-  return <div className="p-8">Payroll Dashboard Page (placeholder)</div>;
+  return <PayrollDashboard />;
 } 

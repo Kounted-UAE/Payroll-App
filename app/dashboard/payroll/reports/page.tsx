@@ -1,5 +1,8 @@
-import React from 'react';
+//app/dashboard/payroll/reports/page.tsx
+'use client'
 
-export default function PayrollReportsPage() {
-  return <div className="p-8">Payroll Reports Page (placeholder)</div>;
+import PayrollReports from '@/components/dashboard-pages/PayrollReports';
+
+export default function ReportsPage() {
+  return <PayrollReports />;
 } 

@@ -31,7 +31,7 @@ interface ExpenseData {
 }
 
 const SubmitExpenseWizard = () => {
-  const navigate = useNavigate()
+  const router = useRouter()
   const [currentStep, setCurrentStep] = useState(1)
   const [data, setData] = useState<ExpenseData>({
     description: "",
@@ -75,7 +75,7 @@ const SubmitExpenseWizard = () => {
       setCurrentStep(currentStep + 1)
     } else {
       // Submit expense
-      navigate("/payroll/expenses")
+      router.push("/payroll/expenses")
     }
   }
 
@@ -114,7 +114,7 @@ const SubmitExpenseWizard = () => {
             Submit a new expense claim for reimbursement
           </p>
         </div>
-        <Button variant="outline" onClick={() => navigate("/payroll/expenses")}>
+        <Button variant="outline" onClick={() => router.push("/payroll/expenses")}>
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Expenses
         </Button>

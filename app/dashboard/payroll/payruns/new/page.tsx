@@ -1,5 +1,7 @@
-import React from 'react';
+'use client'
 
-export default function CreatePayrunWizardPage() {
-  return <div className="p-8">Create Payrun Wizard Page (placeholder)</div>;
+import CreatePayrunWizard from '@/components/wizards/payroll-wizards/CreatePayrunWizard';
+
+export default function CreatePayrunPage() {
+  return <CreatePayrunWizard />;
 } 

@@ -1,5 +1,7 @@
-import React from 'react';
+'use client'
 
-export default function SubmitExpenseWizardPage() {
-  return <div className="p-8">Submit Expense Wizard Page (placeholder)</div>;
+import SubmitExpenseWizard from '@/components/wizards/payroll-wizards/SubmitExpenseWizard';
+
+export default function SubmitExpensePage() {
+  return <SubmitExpenseWizard />;
 } 

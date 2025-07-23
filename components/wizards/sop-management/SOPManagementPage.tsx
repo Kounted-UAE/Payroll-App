@@ -1,3 +1,4 @@
+'use client'
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -18,7 +19,7 @@ import {
   MoreHorizontal,
   Filter
 } from 'lucide-react';
-import { SOPWizard } from '@/components/sop/SOPWizard';
+import { SOPWizard } from './SOPWizard';
 
 const managementSOPs = [
   {
@@ -67,7 +68,7 @@ const categories = [
 ];
 
 export default function SOPManagementPage() {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [categoryFilter, setCategoryFilter] = useState('all');
@@ -85,7 +86,7 @@ export default function SOPManagementPage() {
   };
 
   const handleView = (sopId: string, category: string) => {
-    navigate(`/sop-resources/${category}/${sopId}`);
+    navigate.push(`/sop-resources/${category}/${sopId}`);
   };
 
   const getStatusColor = (status: string) => {
@@ -127,7 +128,7 @@ export default function SOPManagementPage() {
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4 mb-6">
-          <Button variant="outline" onClick={() => navigate('/sop-resources')}>
+          <Button variant="outline" onClick={() => navigate.push('/sop-resources')}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to SOP Center
           </Button>

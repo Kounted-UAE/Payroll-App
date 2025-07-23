@@ -33,31 +33,26 @@ export function TopNavbar() {
           {/* Notifications */}
           <Button variant="ghost" size="sm" className="relative">
             <Bell className="h-4 w-4" />
-            <Badge 
-              variant="destructive" 
-              className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs"
-            >
-              3
-            </Badge>
+            
           </Button>
 
           {/* User menu */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm" className="flex items-center gap-2 px-2">
-                <Avatar className="h-7 w-7">
-                  <AvatarImage src="https://github.com/shadcn.png" alt="User" />
-                  <AvatarFallback>CN</AvatarFallback>
+                <Avatar className="h-8 w-8">
+                  <AvatarImage src="/team/kevin.webp" alt="User" />
+                  <AvatarFallback>KC</AvatarFallback>
                 </Avatar>
-                <span className="hidden md:inline text-sm font-medium">John Doe</span>
+                <span className="hidden md:inline text-sm font-medium">Kevin Cashmore</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">John Doe</p>
+                  <p className="text-sm font-medium leading-none">Kevin Cashmore</p>
                   <p className="text-xs leading-none text-muted-foreground">
-                    john@example.com
+                    kevin@kounted.ae
                   </p>
                 </div>
               </DropdownMenuLabel>

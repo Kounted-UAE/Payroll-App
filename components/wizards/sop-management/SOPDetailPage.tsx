@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -131,8 +131,8 @@ const sopDetailData = {
 };
 
 export default function SOPDetailPage() {
-  const { category, sopId } = useParams();
-  const navigate = useNavigate();
+  const { category, sopId } = useParams<{ category: string; sopId: string }>();
+  const navigate = useRouter();
   
   const sopData = sopDetailData[sopId as keyof typeof sopDetailData];
 
@@ -147,7 +147,7 @@ export default function SOPDetailPage() {
               <p className="text-muted-foreground mb-4">
                 The requested Standard Operating Procedure could not be found.
               </p>
-              <Button onClick={() => navigate('/sop-resources')}>
+              <Button onClick={() => navigate.push('/sop-resources')}>
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to SOP Center
               </Button>
@@ -193,7 +193,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
-          <Button variant="outline" onClick={() => navigate(`/sop-resources/${category}`)}>
+          <Button variant="outline" onClick={() => navigate.push(`/sop-resources/${category}`)}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to {category?.replace('-', ' ')}
           </Button>
@@ -395,7 +395,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
                     key={index}
                     variant="outline"
                     size="sm"
-                    onClick={() => navigate(`/sop-resources/${category}/${sopId}`)}
+                    onClick={() => navigate.push(`/sop-resources/${category}/${sopId}`)}
                   >
                     {sopId.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                     <ExternalLink className="ml-2 h-3 w-3" />

@@ -59,7 +59,7 @@ export function AppSidebar() {
           </div>
         ) : (
           <div className="p-2 flex justify-center">
-            <span className="h-6 w-6 bg-primary rounded-full" />
+            <span className="h-10 w-10 bg-primary rounded-full" />
           </div>
         )}
       </SidebarHeader>
@@ -94,7 +94,7 @@ export function AppSidebar() {
                     className="h-auto p-1 hover:bg-accent"
                   >
                     <ChevronDown
-                      className={`h-3 w-3 transition-transform ${expanded[section.label] !== false ? "rotate-0" : "-rotate-90"}`}
+                      className={`h-2 w-2 transition-transform ${expanded[section.label] !== false ? "rotate-0" : "-rotate-90"}`}
                     />
                   </Button>
                 )}
@@ -115,44 +115,7 @@ export function AppSidebar() {
                       </SidebarMenuItem>
                     ))}
                   </SidebarMenu>
-                )}
-                {section.children?.map((child) => (
-                  <SidebarGroup key={child.label}>
-                    {!collapsed && (
-                      <div className="flex items-center justify-between px-3 py-2">
-                        <SidebarGroupLabel className="text-[10px] font-semibold text-muted-foreground uppercase tracking-tight">
-                          {child.label}
-                        </SidebarGroupLabel>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => toggle(child.label)}
-                          className="h-auto p-1 hover:bg-accent"
-                        >
-                          <ChevronDown
-                            className={`h-3 w-3 transition-transform ${expanded[child.label] !== false ? "rotate-0" : "-rotate-90"}`}
-                          />
-                        </Button>
-                      </div>
-                    )}
-                    {expanded[child.label] !== false && (
-                      <SidebarGroupContent>
-                        <SidebarMenu>
-                          {child.items.map((item) => (
-                            <SidebarMenuItem key={item.title}>
-                              <SidebarMenuButton asChild>
-                                <Link href={item.url} className={getNavCls(item.url)}>
-                                  <item.icon className="h-4 w-4" />
-                                  {!collapsed && <span className="pl-2 text-[10px]">{item.title}</span>}
-                                </Link>
-                              </SidebarMenuButton>
-                            </SidebarMenuItem>
-                          ))}
-                        </SidebarMenu>
-                      </SidebarGroupContent>
-                    )}
-                  </SidebarGroup>
-                ))}
+                )}                 
               </SidebarGroupContent>
             ) : null}
             {section.label !== "Settings" && <Separator className="mx-4 mt-2" />}
@@ -164,7 +127,7 @@ export function AppSidebar() {
         {!collapsed ? (
           <div className="p-4">
             <Button variant="outline" size="sm" className="w-full bg-brand-green text-white flex items-center gap-2">
-              <Plus className="h-3 w-3" />
+              <Plus className="h-2 w-2" />
               Quick Add
             </Button>
           </div>

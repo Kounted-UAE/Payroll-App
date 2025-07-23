@@ -24,21 +24,21 @@ import {
     {
       label: "Sales Tools",
       items: [
-        { title: "$KWAY CPQ", url: "#", icon: RocketIcon },
-        { title: "$KORP Kiosk", url: "#", icon: ShoppingCart },
+        { title: "$KWAY CPQ", url: "/dashboard/kway-cpq", icon: RocketIcon },
+        { title: "$KORP Kiosk", url: "/dashboard/korp-kiosk", icon: ShoppingCart },
       ],
     },
     {
       label: "Payroll Tools",
       items: [
-        { title: "Payroll Dashboard", url: "/payroll", icon: BarChart3 },
-            { title: "Employers", url: "/payroll/employers", icon: Building },
-            { title: "Employees", url: "/payroll/employees", icon: Users },
-            { title: "Salary Structures", url: "/payroll/salary-structures", icon: DollarSign },
-            { title: "Payruns", url: "/payroll/payruns", icon: Calendar },
-            { title: "Payslips", url: "/payroll/payslips", icon: FileText },
-            { title: "Expense Claims", url: "/payroll/expenses", icon: Receipt },
-            { title: "Reports", url: "/payroll/reports", icon: BarChart3 },
+        { title: "Payroll Dashboard", url: "/dashboard/payroll", icon: BarChart3 },
+            { title: "Employers", url: "/dashboard/payroll/employers", icon: Building },
+            { title: "Employees", url: "/dashboard/payroll/employees", icon: Users },
+            { title: "Salary Structures", url: "/dashboard/payroll/salary-structures", icon: DollarSign },
+            { title: "Payruns", url: "/dashboard/payroll/payruns", icon: Calendar },
+            { title: "Payslips", url: "/dashboard/payroll/payslips", icon: FileText },
+            { title: "Expense Claims", url: "/dashboard/payroll/expenses", icon: Receipt },
+            { title: "Reports", url: "/dashboard/payroll/reports", icon: BarChart3 },
       ],
     },
     
@@ -50,9 +50,9 @@ import {
     {
       label: "Resource Centre",
       items: [
-        { title: "Guides", url: "/sop-resources", icon: BookOpen },
-        { title: "Manage SOPs", url: "/sop-resources/manage", icon: FolderOpen },
-        { title: "Compliance Calendar", url: "/compliance-calendar", icon: CheckSquare },
+        { title: "Guides", url: "/dashboard/sop-resources", icon: BookOpen },
+        { title: "Manage SOPs", url: "/dashboard/sop-resources/manage", icon: FolderOpen },
+        { title: "Compliance Calendar", url: "/dashboard/compliance-calendar", icon: CheckSquare },
         { title: "Templates", url: "#", icon: LayoutTemplate },
         { title: "Quick Links", url: "#", icon: LinkIcon },
       ],
@@ -60,7 +60,7 @@ import {
     {
       label: "Admin",
       items: [
-        { title: "Component Library", url: "#", icon: PanelTopInactiveIcon },        
+        { title: "Component Library", url: "/dashboard/admin/component-library", icon: PanelTopInactiveIcon },        
       ],
     },
     {

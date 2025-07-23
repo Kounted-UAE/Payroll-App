@@ -1,5 +1,7 @@
-import React from 'react';
+'use client'
 
-export default function GeneratePayslipsWizardPage() {
-  return <div className="p-8">Generate Payslips Wizard Page (placeholder)</div>;
+import GeneratePayslipsWizard from '@/components/wizards/payroll-wizards/GeneratePayslipsWizard';
+
+export default function GeneratePayslipsPage() {
+  return <GeneratePayslipsWizard />;
 } 

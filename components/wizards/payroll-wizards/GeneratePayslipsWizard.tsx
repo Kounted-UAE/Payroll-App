@@ -68,7 +68,7 @@ const GeneratePayslipsWizard = () => {
       setCurrentStep(currentStep + 1)
     } else {
       // Generate payslips
-      navigate("/payroll/payslips")
+        router.push("/payroll/payslips")
     }
   }
 
@@ -97,8 +97,8 @@ const GeneratePayslipsWizard = () => {
             Create and distribute employee payslips from completed payruns
           </p>
         </div>
-        <Button variant="outline" onClick={() => navigate("/payroll/payslips")}>
-          <ArrowLeft className="mr-2 h-4 w-4" />
+        <Button variant="outline" onClick={() => router.push("/payroll/payslips")}>
+          <ArrowLeft className="mr-2 h-4 w-4" />  
           Back to Payslips
         </Button>
       </div>

@@ -1,5 +1,5 @@
-import React from 'react';
+import SOPResourceCenter from '@/components/dashboard-pages/SOPResourceCenter';
 
-export default function SOPResourceCenterPage() {
-  return <div className="p-8">SOP Resource Center Page (placeholder)</div>;
+export default function Page() {
+  return <SOPResourceCenter />;
 } 

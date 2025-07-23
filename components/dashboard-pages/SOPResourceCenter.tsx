@@ -1,3 +1,4 @@
+'use client'
 
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -112,15 +113,15 @@ const recentSOPs = [
 ];
 
 export default function SOPResourceCenter() {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleCategoryClick = (categoryId: string) => {
-    navigate(`/sop-resources/${categoryId}`);
+    navigate.push(`/sop-resources/${categoryId}`);
   };
 
   const handleSOPClick = (categoryId: string, sopId: string) => {
-    navigate(`/sop-resources/${categoryId}/${sopId}`);
+    navigate.push(`/sop-resources/${categoryId}/${sopId}`);
   };
 
   const totalSOPs = categories.reduce((sum, category) => sum + category.sopCount, 0);
@@ -137,11 +138,11 @@ export default function SOPResourceCenter() {
             </p>
           </div>
           <div className="flex gap-3">
-            <Button onClick={() => navigate('/sop-resources/manage')}>
+            <Button onClick={() => navigate.push('/sop-resources/manage')}>
               <Plus className="mr-2 h-4 w-4" />
               Add SOP
             </Button>
-            <Button variant="outline" onClick={() => navigate('/sop-resources/manage')}>
+            <Button variant="outline" onClick={() => navigate.push('/sop-resources/manage')}>
               <Settings className="mr-2 h-4 w-4" />
               Manage SOPs
             </Button>
