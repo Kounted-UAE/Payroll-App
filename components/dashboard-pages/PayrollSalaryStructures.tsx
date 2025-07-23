@@ -16,7 +16,7 @@ import {
   Building,
   Users
 } from "lucide-react"
-import { Link } from "react-router-dom"
+import Link from "next/link"
 
 const PayrollSalaryStructures = () => {
   const [searchQuery, setSearchQuery] = useState("")
@@ -105,7 +105,7 @@ const PayrollSalaryStructures = () => {
             Manage employee salary components and allowances
           </p>
         </div>
-        <Link to="/payroll/salary-structures/new">
+        <Link href="/payroll/salary-structures/new">
           <Button>
             <Plus className="mr-2 h-4 w-4" />
             Add Salary Structure
@@ -313,7 +313,7 @@ const PayrollSalaryStructures = () => {
             <p className="text-muted-foreground mb-4">
               {searchQuery ? "Try adjusting your search criteria" : "Get started by creating your first salary structure"}
             </p>
-            <Link to="/payroll/salary-structures/new">
+            <Link href="/payroll/salary-structures/new">
               <Button>
                 <Plus className="mr-2 h-4 w-4" />
                 Create First Structure

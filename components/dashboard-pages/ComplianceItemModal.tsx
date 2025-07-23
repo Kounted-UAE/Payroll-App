@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 import {
   Dialog,
@@ -16,7 +18,7 @@ import {
   FileText,
   ExternalLink
 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 interface ComplianceItem {
   id: string;
@@ -40,7 +42,7 @@ interface ComplianceItemModalProps {
 }
 
 export default function ComplianceItemModal({ item, isOpen, onClose }: ComplianceItemModalProps) {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   if (!item) return null;
 
@@ -100,7 +102,7 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
     }
     
     onClose();
-    navigate(`/compliance/sop/${sopId}`);
+    router.push(`/dashboard/compliance/sop/${sopId}`);
   };
 
   return (

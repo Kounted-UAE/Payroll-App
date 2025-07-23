@@ -19,7 +19,7 @@ import {
   Clock,
   Star
 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 const categories = [
   {

@@ -1,5 +1,11 @@
-import React from 'react';
+// app/clients/wizard/[clientId]/page.tsx
 
-export default function ClientWizardPage({ params }: { params: { clientId: string } }) {
-  return <div className="p-8">Client Wizard for clientId: {params.clientId} (placeholder)</div>;
-} 
+"use client";
+
+import { useParams } from "next/navigation";
+import ClientWizard from "@/components/wizards/client-management/ClientWizard";
+
+export default function ClientWizardPage() {
+  const { clientId } = useParams();
+  return <ClientWizard clientId={clientId as string} />;
+}

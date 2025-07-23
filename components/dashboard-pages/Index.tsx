@@ -1,29 +1,63 @@
-import { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Code, Eye, Plus, Save, Search, ChevronDown, ChevronLeft, ChevronRight, Home, FileText, Settings, Users, Folder } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+'use client'
 
-// Component imports
-import { RevenueCard } from "@/components/dashboard/RevenueCard";
-import { SubscriptionsCard } from "@/components/dashboard/SubscriptionsCard";
-import { CalendarWidget } from "@/components/dashboard/CalendarWidget";
-import { MoveGoalWidget } from "@/components/dashboard/MoveGoalWidget";
-import { ExerciseMinutesChart } from "@/components/dashboard/ExerciseMinutesChart";
-import { UpgradeSubscriptionForm } from "@/components/dashboard/UpgradeSubscriptionForm";
-import { CreateAccountForm } from "@/components/dashboard/CreateAccountForm";
-import { PaymentsTable } from "@/components/dashboard/PaymentsTable";
-import { TeamMembersWidget } from "@/components/dashboard/TeamMembersWidget";
-import { SupportChatWidget } from "@/components/dashboard/SupportChatWidget";
+import { useState } from 'react'
+import {
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  Badge,
+  Separator,
+  Switch,
+  Label,
+  Textarea,
+  Input,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui'
+import {
+  Code,
+  Eye,
+  Plus,
+  Save,
+  Search,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Home,
+  FileText,
+  Settings,
+  Users,
+  Folder,
+} from 'lucide-react'
+import { useToast } from '@/hooks/use-toast'
+
+
+// design showcase imports
+import { RevenueCard ,
+SubscriptionsCard,
+CalendarWidget,
+MoveGoalWidget,
+ExerciseMinutesChart,
+UpgradeSubscriptionForm,
+CreateAccountForm,
+PaymentsTable,
+TeamMembersWidget,
+SupportChatWidget } from '@/components/design-showcase';
 
 const Index = () => {
   const [selectedComponent, setSelectedComponent] = useState<string | null>(null);

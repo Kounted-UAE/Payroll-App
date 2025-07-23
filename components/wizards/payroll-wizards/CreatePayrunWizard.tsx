@@ -18,7 +18,7 @@ import {
   CheckCircle,
   AlertCircle
 } from "lucide-react"
-import { useNavigate } from "react-router-dom"
+import { useRouter } from "next/navigation"
 
 interface PayrunData {
   employer_id: string
@@ -30,7 +30,7 @@ interface PayrunData {
 }
 
 const CreatePayrunWizard = () => {
-  const navigate = useNavigate()
+  const router = useRouter()
   const [currentStep, setCurrentStep] = useState(1)
   const [data, setData] = useState<PayrunData>({
     employer_id: "",
@@ -71,7 +71,7 @@ const CreatePayrunWizard = () => {
       setCurrentStep(currentStep + 1)
     } else {
       // Create payrun
-      navigate("/payroll/payruns")
+      router.push("/dashboard/payroll/payruns")
     }
   }
 
@@ -100,7 +100,7 @@ const CreatePayrunWizard = () => {
             Set up a new payroll run for processing employee salaries
           </p>
         </div>
-        <Button variant="outline" onClick={() => navigate("/payroll/payruns")}>
+        <Button variant="outline" onClick={() => router.push("/dashboard/payroll/payruns")}>
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Payruns
         </Button>

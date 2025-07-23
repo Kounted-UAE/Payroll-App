@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -16,7 +18,7 @@ import {
   CreditCard,
   FileText
 } from "lucide-react"
-import { Link } from "react-router-dom"
+import Link from "next/link"
 
 const PayrollEmployees = () => {
   const [searchQuery, setSearchQuery] = useState("")
@@ -121,7 +123,7 @@ const PayrollEmployees = () => {
             Manage employee profiles and their employment details
           </p>
         </div>
-        <Link to="/payroll/employees/new">
+        <Link href="/payroll/employees/new">
           <Button>
             <Plus className="mr-2 h-4 w-4" />
             Add Employee
@@ -313,7 +315,7 @@ const PayrollEmployees = () => {
                       <span className="text-lg font-bold text-green-600">AED {employee.base_salary.toLocaleString()}</span>
                     </div>
                     <div className="pt-2 space-y-2">
-                      <Link to={`/payroll/salary-structures?employee=${employee.id}`}>
+                      <Link href={`/dashboard/payroll/salary-structures?employee=${employee.id}`}>
                         <Button variant="outline" size="sm" className="w-full">
                           View Salary Structure
                         </Button>
@@ -335,7 +337,7 @@ const PayrollEmployees = () => {
             <p className="text-muted-foreground mb-4">
               {searchQuery ? "Try adjusting your search criteria" : "Get started by adding your first employee"}
             </p>
-            <Link to="/payroll/employees/new">
+            <Link href="/payroll/employees/new">
               <Button>
                 <Plus className="mr-2 h-4 w-4" />
                 Add First Employee

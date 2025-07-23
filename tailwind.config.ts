@@ -79,12 +79,14 @@ export default {
 					foreground: 'hsl(var(--failed-foreground))'
 				},
 				brand: {
-					green: 'hsl(142 76% 36%)',       // same as --primary
-					charcoal: 'hsl(0 0% 10%)',       // #1A1A1A or adjust as needed
-					light: 'hsl(0 0% 80%)',          // #CCCCCC
-					dark: 'hsl(0 0% 4%)',            // near black
+					green: 'hsl(142 76% 36%)',     
+					light: 'hsl(142 50% 40%)',
 					white: 'hsl(0 0% 100%)',
-					black: 'hsl(0 0% 0%)'
+					black: 'hsl(0 0% 0%)',
+					dark: 'hsl(146 68% 14%)',
+					charcoal: 'hsl(192 6% 15%)',
+					olive: 'hsl(132 23% 92%)',
+					
 				  },
 				  chart: {
 					'1': 'hsl(var(--chart-1))',

@@ -4,7 +4,7 @@ import type React from "react"
 import { Geist, Geist_Mono } from "next/font/google"
 import Script from "next/script"
 
-import { AuthProvider } from "@/components/auth/auth-provider"
+import  AuthProvider  from "@/components/auth/auth-provider"
 import { Toaster } from "@/components/ui/sonner"
 import AdvontierRibbon from "@/components/advontier-ribbon"
 import { cn } from "@/lib/utils"

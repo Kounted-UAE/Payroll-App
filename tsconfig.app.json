@@ -9,13 +9,17 @@
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
     "jsx": "react-jsx",
     "strict": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noImplicitAny": false,
     "noFallthroughCasesInSwitch": false,
+
+    // ✅ REQUIRED FOR PROJECT REFERENCE
+    "composite": true,
+    "noEmit": false,
+
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],

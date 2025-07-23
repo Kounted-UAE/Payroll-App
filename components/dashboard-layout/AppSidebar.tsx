@@ -1,27 +1,10 @@
-import React from "react"
-import { 
-  Home, 
-  Palette, 
-  Settings, 
-  Users, 
-  FileText, 
-  Search,
-  ChevronDown,
-  Plus,
-  Code,
-  Calendar,
-  CheckSquare,
-  DollarSign,
-  Building,
-  Receipt,
-  BarChart3,
-  BookOpen,
-  FolderOpen,
-  ShoppingCart
-} from "lucide-react"
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+// FILE: components/layout/AppSidebar.tsx
 
+'use client'
+
+import React from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 import {
   Sidebar,
   SidebarContent,
@@ -38,88 +21,50 @@ import {
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import { Search, ChevronDown, Plus } from "lucide-react"
+import Image from "next/image"
 
-const mainItems = [
-  { title: "Dashboard", url: "/", icon: Home },
-  { title: "Client Management", url: "/clients", icon: Users },
-  { title: "Order Kiosk", url: "/order-kiosk", icon: FileText },
-  { title: "$KORP Kiosk", url: "/korp-kiosk", icon: ShoppingCart },
-  { title: "Compliance Calendar", url: "/compliance-calendar", icon: CheckSquare },
-  { title: "Settings", url: "/settings", icon: Settings },
-]
-
-const payrollItems = [
-  { title: "Payroll Dashboard", url: "/payroll", icon: BarChart3 },
-  { title: "Employers", url: "/payroll/employers", icon: Building },
-  { title: "Employees", url: "/payroll/employees", icon: Users },
-  { title: "Salary Structures", url: "/payroll/salary-structures", icon: DollarSign },
-  { title: "Payruns", url: "/payroll/payruns", icon: Calendar },
-  { title: "Payslips", url: "/payroll/payslips", icon: FileText },
-  { title: "Expense Claims", url: "/payroll/expenses", icon: Receipt },
-  { title: "Reports", url: "/payroll/reports", icon: BarChart3 },
-]
-
-const resourceItems = [
-  { title: "SOP Resources", url: "/sop-resources", icon: BookOpen },
-  { title: "Manage SOPs", url: "/sop-resources/manage", icon: FolderOpen },
-]
-
-const componentCategories = [
-  { title: "Cards", url: "/components/cards", icon: Code },
-  { title: "Forms", url: "/components/forms", icon: Code },
-  { title: "Charts", url: "/components/charts", icon: Code },
-  { title: "Widgets", url: "/components/widgets", icon: Code },
-  { title: "Tables", url: "/components/tables", icon: Code },
-]
+import { sidebarSections } from "@/lib/config/sidebar-nav"
 
 export function AppSidebar() {
   const { state } = useSidebar()
-  const pathname = usePathname();
+  const pathname = usePathname()
+  const collapsed = state === "collapsed"
+
   const [searchQuery, setSearchQuery] = React.useState("")
-  const [isComponentsExpanded, setIsComponentsExpanded] = React.useState(true)
-  const [isPayrollExpanded, setIsPayrollExpanded] = React.useState(true)
-  const [isResourcesExpanded, setIsResourcesExpanded] = React.useState(true)
+  const [expanded, setExpanded] = React.useState<Record<string, boolean>>({})
 
   const isActive = (path: string) => pathname === path
   const getNavCls = (path: string) =>
-    isActive(path) ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium" : "text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground"
+    isActive(path)
+      ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
+      : "text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground"
 
-  const filteredMainItems = mainItems.filter(item =>
-    item.title.toLowerCase().includes(searchQuery.toLowerCase())
-  )
-
-  const filteredPayrollItems = payrollItems.filter(item =>
-    item.title.toLowerCase().includes(searchQuery.toLowerCase())
-  )
-
-  const filteredResourceItems = resourceItems.filter(item =>
-    item.title.toLowerCase().includes(searchQuery.toLowerCase())
-  )
-
-  const filteredComponentCategories = componentCategories.filter(item =>
-    item.title.toLowerCase().includes(searchQuery.toLowerCase())
-  )
-
-  const collapsed = state === "collapsed"
+  const toggle = (label: string) =>
+    setExpanded((prev) => ({ ...prev, [label]: !prev[label] }))
 
   return (
     <Sidebar className={collapsed ? "w-14" : "w-64"} collapsible="icon">
-      <SidebarHeader className="border-b border-border">
-        {!collapsed && (
+      <SidebarHeader className="shadow-sm border-b border-border bg-zinc-100">
+        {!collapsed ? (
           <div className="p-4">
-            <h2 className="text-lg font-semibold text-foreground">Accounting Firm</h2>
-            <p className="text-sm text-muted-foreground">Client Portal</p>
+            <div className="flex items-center gap-2"><Image src="/icons/kounted_Icon_green_light.webp" alt="Kounted Logo" width={32} height={32} />
+              <div className="flex flex-col">
+                <h2 className="text-md font-bold text-brand-charcoal">Kounted's Backyard</h2>
+                <p className="text-[10px] text-brand-charcoal">
+                  powered by <span className="text-green-600">advontier.com</span>
+                </p>
+              </div>
+            </div>
           </div>
-        )}
-        {collapsed && (
+        ) : (
           <div className="p-2 flex justify-center">
-            <Code className="h-6 w-6 text-primary" />
+            <span className="h-6 w-6 bg-primary rounded-full" />
           </div>
         )}
       </SidebarHeader>
 
       <SidebarContent>
-        {/* Search */}
         {!collapsed && (
           <div className="p-4 pb-2">
             <div className="relative">
@@ -134,152 +79,96 @@ export function AppSidebar() {
           </div>
         )}
 
-        {/* Main Navigation */}
-        <SidebarGroup>
-          {!collapsed && (
-            <SidebarGroupLabel>Navigation</SidebarGroupLabel>
-          )}
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {filteredMainItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link href={item.url} className={getNavCls(item.url)}>
-                      <item.icon className="h-4 w-4" />
-                      {!collapsed && <span>{item.title}</span>}
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        <Separator className="mx-4" />
-
-        {/* UAE Payroll Section */}
-        <SidebarGroup>
-          {!collapsed && (
-            <div className="flex items-center justify-between px-3 py-2">
-              <SidebarGroupLabel>UAE Payroll</SidebarGroupLabel>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setIsPayrollExpanded(!isPayrollExpanded)}
-                className="h-auto p-1 hover:bg-accent"
-              >
-                <ChevronDown className={`h-3 w-3 transition-transform ${
-                  isPayrollExpanded ? 'rotate-0' : '-rotate-90'
-                }`} />
-              </Button>
-            </div>
-          )}
-          
-          {(collapsed || isPayrollExpanded) && (
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {filteredPayrollItems.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
-                      <Link href={item.url} className={getNavCls(item.url)}>
-                        <item.icon className="h-4 w-4" />
-                        {!collapsed && <span>{item.title}</span>}
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
+        {sidebarSections.map((section) => (
+          <SidebarGroup key={section.label}>
+            {!collapsed && (
+              <div className="flex items-center justify-between px-3 py-2">
+                <SidebarGroupLabel className="text-[10px] font-semibold text-brand-light uppercase tracking-tight">
+                  {section.label}
+                </SidebarGroupLabel>
+                {section.collapsible !== false && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => toggle(section.label)}
+                    className="h-auto p-1 hover:bg-accent"
+                  >
+                    <ChevronDown
+                      className={`h-3 w-3 transition-transform ${expanded[section.label] !== false ? "rotate-0" : "-rotate-90"}`}
+                    />
+                  </Button>
+                )}
+              </div>
+            )}
+            {section.collapsible === false || expanded[section.label] !== false ? (
+              <SidebarGroupContent>
+                {section.items && (
+                  <SidebarMenu>
+                    {section.items.map((item) => (
+                      <SidebarMenuItem key={item.title}>
+                        <SidebarMenuButton asChild>
+                          <Link href={item.url} className={getNavCls(item.url)}>
+                            <item.icon className="h-4 w-4" />
+                            {!collapsed && <span className="text-[12px]">{item.title}</span>}
+                          </Link>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    ))}
+                  </SidebarMenu>
+                )}
+                {section.children?.map((child) => (
+                  <SidebarGroup key={child.label}>
+                    {!collapsed && (
+                      <div className="flex items-center justify-between px-3 py-2">
+                        <SidebarGroupLabel className="text-[10px] font-semibold text-muted-foreground uppercase tracking-tight">
+                          {child.label}
+                        </SidebarGroupLabel>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => toggle(child.label)}
+                          className="h-auto p-1 hover:bg-accent"
+                        >
+                          <ChevronDown
+                            className={`h-3 w-3 transition-transform ${expanded[child.label] !== false ? "rotate-0" : "-rotate-90"}`}
+                          />
+                        </Button>
+                      </div>
+                    )}
+                    {expanded[child.label] !== false && (
+                      <SidebarGroupContent>
+                        <SidebarMenu>
+                          {child.items.map((item) => (
+                            <SidebarMenuItem key={item.title}>
+                              <SidebarMenuButton asChild>
+                                <Link href={item.url} className={getNavCls(item.url)}>
+                                  <item.icon className="h-4 w-4" />
+                                  {!collapsed && <span className="pl-2 text-[10px]">{item.title}</span>}
+                                </Link>
+                              </SidebarMenuButton>
+                            </SidebarMenuItem>
+                          ))}
+                        </SidebarMenu>
+                      </SidebarGroupContent>
+                    )}
+                  </SidebarGroup>
                 ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          )}
-        </SidebarGroup>
-
-        <Separator className="mx-4" />
-
-        {/* Resource Centre Section */}
-        <SidebarGroup>
-          {!collapsed && (
-            <div className="flex items-center justify-between px-3 py-2">
-              <SidebarGroupLabel>Resource Centre</SidebarGroupLabel>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setIsResourcesExpanded(!isResourcesExpanded)}
-                className="h-auto p-1 hover:bg-accent"
-              >
-                <ChevronDown className={`h-3 w-3 transition-transform ${
-                  isResourcesExpanded ? 'rotate-0' : '-rotate-90'
-                }`} />
-              </Button>
-            </div>
-          )}
-          
-          {(collapsed || isResourcesExpanded) && (
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {filteredResourceItems.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
-                      <Link href={item.url} className={getNavCls(item.url)}>
-                        <item.icon className="h-4 w-4" />
-                        {!collapsed && <span>{item.title}</span>}
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          )}
-        </SidebarGroup>
-
-        <Separator className="mx-4" />
-
-        {/* Component Categories */}
-        <SidebarGroup>
-          {!collapsed && (
-            <div className="flex items-center justify-between px-3 py-2">
-              <SidebarGroupLabel>Components</SidebarGroupLabel>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setIsComponentsExpanded(!isComponentsExpanded)}
-                className="h-auto p-1 hover:bg-accent"
-              >
-                <ChevronDown className={`h-3 w-3 transition-transform ${
-                  isComponentsExpanded ? 'rotate-0' : '-rotate-90'
-                }`} />
-              </Button>
-            </div>
-          )}
-          
-          {(collapsed || isComponentsExpanded) && (
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {filteredComponentCategories.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
-                      <Link href={item.url} className={getNavCls(item.url)}>
-                        <item.icon className="h-4 w-4" />
-                        {!collapsed && <span>{item.title}</span>}
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          )}
-        </SidebarGroup>
+              </SidebarGroupContent>
+            ) : null}
+            {section.label !== "Settings" && <Separator className="mx-4 mt-2" />}
+          </SidebarGroup>
+        ))}
       </SidebarContent>
 
       <SidebarFooter className="border-t border-border">
-        {!collapsed && (
+        {!collapsed ? (
           <div className="p-4">
-            <Button variant="outline" size="sm" className="w-full flex items-center gap-2">
+            <Button variant="outline" size="sm" className="w-full bg-brand-green text-white flex items-center gap-2">
               <Plus className="h-3 w-3" />
-              New Component
+              Quick Add
             </Button>
           </div>
-        )}
-        {collapsed && (
+        ) : (
           <div className="p-2 flex justify-center">
             <Button variant="outline" size="sm" className="p-2">
               <Plus className="h-3 w-3" />

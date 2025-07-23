@@ -18,7 +18,7 @@ import {
   Building,
   Users
 } from "lucide-react"
-import { Link } from "react-router-dom"
+import Link from "next/link"
 
 const PayrollExpenses = () => {
   const [searchQuery, setSearchQuery] = useState("")
@@ -133,7 +133,7 @@ const PayrollExpenses = () => {
             Manage and approve employee expense reimbursements
           </p>
         </div>
-        <Link to="/payroll/expenses/new">
+        <Link href="/payroll/expenses/new">
           <Button>
             <Plus className="mr-2 h-4 w-4" />
             Submit Expense
@@ -393,7 +393,7 @@ const PayrollExpenses = () => {
             <p className="text-muted-foreground mb-4">
               {searchQuery ? "Try adjusting your search criteria" : "Get started by submitting your first expense claim"}
             </p>
-            <Link to="/payroll/expenses/new">
+            <Link href="/payroll/expenses/new">
               <Button>
                 <Plus className="mr-2 h-4 w-4" />
                 Submit First Expense

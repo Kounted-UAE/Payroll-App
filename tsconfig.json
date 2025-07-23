@@ -1,13 +1,4 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -31,10 +22,7 @@
       ]
     },
     "noImplicitAny": false,
-    "noUnusedParameters": false,
     "skipLibCheck": true,
-    "allowJs": true,
-    "noUnusedLocals": false,
     "strictNullChecks": false,
     "target": "ES2017",
     "lib": [
@@ -42,7 +30,6 @@
       "dom.iterable",
       "esnext"
     ],
-    "strict": false,
     "noEmit": true,
     "incremental": true,
     "module": "esnext",
@@ -55,7 +42,9 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "allowJs": true,
+    "strict": false
   },
   "include": [
     "next-env.d.ts",

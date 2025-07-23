@@ -1,5 +1,3 @@
-//components/auth/auth-provider.tsx
-
 // components/auth/auth-provider.tsx
 
 "use client"
@@ -8,7 +6,7 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { createBrowserClient } from "@supabase/ssr"
 import type { Session, SupabaseClient } from "@supabase/supabase-js"
 import type { Database } from "@/lib/types/supabase"
-import type { VAuthenticatedProfile } from "@/lib/auth/server"
+import type { VAuthenticatedProfile } from "@/lib/supabase/server"
 
 type AuthContextType = {
   session: Session | null
@@ -20,7 +18,7 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
+export default function AuthProvider({ children }: { children: React.ReactNode }) {
   const [supabase] = useState(() =>
     createBrowserClient<Database>(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,

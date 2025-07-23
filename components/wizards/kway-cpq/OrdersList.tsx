@@ -3,10 +3,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Search, FileText, Calendar, DollarSign } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@/lib/supabase/client';
 import { toast } from '@/hooks/use-toast';
 import { ActionButtons } from '@/components/ui/action-buttons';
-import OrderActionsDialog from '@/components/wizards/korp-kiosk/OrderActionsDialog';
 
 interface Order {
   id: string;

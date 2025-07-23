@@ -15,7 +15,7 @@ import {
   Phone,
   Mail
 } from "lucide-react"
-import { Link } from "react-router-dom"
+import Link from "next/link"
 
 const PayrollEmployers = () => {
   const [searchQuery, setSearchQuery] = useState("")
@@ -79,7 +79,7 @@ const PayrollEmployers = () => {
             Manage client companies and their payroll setup
           </p>
         </div>
-        <Link to="/payroll/employers/new">
+        <Link href="/payroll/employers/new">
           <Button>
             <Plus className="mr-2 h-4 w-4" />
             Add Employer
@@ -199,7 +199,7 @@ const PayrollEmployers = () => {
                       <span className="text-lg font-bold text-blue-600">{employer.employee_count}</span>
                     </div>
                     <div className="pt-2">
-                      <Link to={`/payroll/employees?employer=${employer.id}`}>
+                      <Link href={`/dashboard/payroll/employees?employer=${employer.id}`}>
                         <Button variant="outline" size="sm" className="w-full">
                           View Employees
                         </Button>
@@ -221,7 +221,7 @@ const PayrollEmployers = () => {
             <p className="text-muted-foreground mb-4">
               {searchQuery ? "Try adjusting your search criteria" : "Get started by adding your first client employer"}
             </p>
-            <Link to="/payroll/employers/new">
+            <Link href="/payroll/employers/new">
               <Button>
                 <Plus className="mr-2 h-4 w-4" />
                 Add First Employer

@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -23,7 +25,7 @@ import {
   ArrowUpDown,
   Filter
 } from 'lucide-react';
-import ComplianceItemModal from '@/components/ComplianceItemModal';
+import ComplianceItemModal from '@/components/dashboard-pages/ComplianceItemModal';
 
 interface ComplianceItem {
   id: string;

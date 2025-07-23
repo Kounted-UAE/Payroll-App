@@ -17,7 +17,7 @@ import {
   Mail,
   Download
 } from "lucide-react"
-import { useNavigate } from "react-router-dom"
+import { useRouter } from "next/navigation"
 
 interface PayslipData {
   payrun_id: string
@@ -29,7 +29,7 @@ interface PayslipData {
 }
 
 const GeneratePayslipsWizard = () => {
-  const navigate = useNavigate()
+  const router = useRouter()
   const [currentStep, setCurrentStep] = useState(1)
   const [data, setData] = useState<PayslipData>({
     payrun_id: "",

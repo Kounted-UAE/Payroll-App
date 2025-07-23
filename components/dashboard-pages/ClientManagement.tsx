@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -28,9 +30,9 @@ import {
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase/client';
 import { toast } from '@/hooks/use-toast';
-import ClientOnboardingWizard from '@/components/wizards/ClientOnboardingWizard';
+import ClientOnboardingWizard from '@/components/wizards/accounting-onboarding/ClientOnboardingWizard';
 import { ActionButtons } from '@/components/ui/action-buttons';
-import ClientActionsDialog from '@/components/ClientActionsDialog';
+import ClientActionsDialog from '@/components/wizards/client-management/ClientActionsDialog';
 
 interface Client {
   id: string;

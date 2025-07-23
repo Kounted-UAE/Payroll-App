@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+'use client'
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
 import { Building2, CheckSquare, FileText, ArrowRight, BarChart } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
-import KWAYKioskWizard from '@/components/kiosk/KWAYKioskWizard';
-import OrdersList from '@/components/OrdersList';
+import { supabase } from '@/lib/supabase/client';
+import KWAYKioskWizard from '@/components/wizards/kway-cpq/KWAYKioskWizard';
+import OrdersList from '@/components/wizards/kway-cpq/OrdersList';
 
 export default function KWAYKiosk() {
   const [orderStarted, setOrderStarted] = useState(false);
@@ -23,16 +25,13 @@ export default function KWAYKiosk() {
 
   const loadOrderStats = async () => {
     try {
-      const { data, error } = await supabase
-        .from('order_intakes')
-        .select('status');
-
+      const { data, error } = await supabase.from('order_intakes').select('status');
       if (error) throw error;
 
       if (data) {
         const completed = data.filter(item => item.status === 'completed').length;
         const inProgress = data.filter(item => item.status === 'draft').length;
-        
+
         setOrderStats({
           total: data.length,
           completed,
@@ -64,25 +63,22 @@ export default function KWAYKiosk() {
                   <CheckSquare className="h-8 w-8 text-primary" />
                 </div>
               </div>
-              
+
               <div className="space-y-2">
                 <p className="text-lg font-medium">Thank you for your order!</p>
                 <p className="text-muted-foreground">
                   Our team will contact you shortly to discuss the next steps.
                 </p>
               </div>
-              
+
               <div className="flex flex-col md:flex-row justify-center gap-4 pt-4">
-                <Button 
-                  variant="outline"
-                  onClick={() => setShowOrdersList(true)}
-                >
+                <Button variant="outline" onClick={() => setShowOrdersList(true)}>
                   <FileText className="mr-2 h-4 w-4" />
                   View All Orders
                 </Button>
-                
+
                 <Button asChild>
-                  <Link to="/">
+                  <Link href="/">
                     <BarChart className="mr-2 h-4 w-4" />
                     Go to Dashboard
                   </Link>
@@ -95,9 +91,7 @@ export default function KWAYKiosk() {
     );
   }
 
-  if (orderStarted) {
-    return <KWAYKioskWizard onComplete={handleOrderComplete} />;
-  }
+  if (orderStarted) return <KWAYKioskWizard onComplete={handleOrderComplete} />;
 
   if (showOrdersList) {
     return (
@@ -121,13 +115,13 @@ export default function KWAYKiosk() {
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-5xl mx-auto space-y-6">
-        {/* Header */}
         <div>
           <h1 className="text-3xl font-bold text-foreground">Service Order Kiosk</h1>
-          <p className="text-muted-foreground">Configure and order accounting services for your business</p>
+          <p className="text-muted-foreground">
+            Configure and order accounting services for your business
+          </p>
         </div>
-        
-        {/* Stats Cards */}
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Card>
             <CardContent className="p-6">
@@ -142,7 +136,7 @@ export default function KWAYKiosk() {
               </div>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center">
@@ -156,7 +150,7 @@ export default function KWAYKiosk() {
               </div>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center">
@@ -171,50 +165,55 @@ export default function KWAYKiosk() {
             </CardContent>
           </Card>
         </div>
-        
-        {/* Welcome Card */}
+
         <Card className="bg-card border-border overflow-hidden">
           <div className="md:grid md:grid-cols-5">
             <div className="md:col-span-3 p-6 md:p-8">
               <div className="space-y-4">
                 <h2 className="text-2xl font-bold">Configure Your Accounting Services</h2>
                 <p className="text-muted-foreground">
-                  Use our self-service wizard to configure and order accounting, payroll, tax, and HR services 
+                  Use our self-service wizard to configure and order accounting, payroll, tax, and HR services
                   tailored to your business needs.
                 </p>
-                
+
                 <div className="space-y-2">
                   <div className="flex items-start gap-2">
                     <CheckSquare className="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">8-Step Guided Process</p>
-                      <p className="text-sm text-muted-foreground">Simple questions to understand your needs</p>
+                      <p className="text-sm text-muted-foreground">
+                        Simple questions to understand your needs
+                      </p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-2">
                     <CheckSquare className="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">Instant Pricing</p>
-                      <p className="text-sm text-muted-foreground">Get transparent pricing based on your selections</p>
+                      <p className="text-sm text-muted-foreground">
+                        Get transparent pricing based on your selections
+                      </p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-2">
                     <CheckSquare className="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">Flexible Services</p>
-                      <p className="text-sm text-muted-foreground">Customized to your business requirements</p>
+                      <p className="text-sm text-muted-foreground">
+                        Customized to your business requirements
+                      </p>
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="flex gap-4 mt-4">
                   <Button onClick={() => setOrderStarted(true)} size="lg">
                     Start Service Configuration
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
-                  
+
                   <Button onClick={() => setShowOrdersList(true)} variant="outline" size="lg">
                     View Orders
                     <FileText className="ml-2 h-4 w-4" />
@@ -222,7 +221,7 @@ export default function KWAYKiosk() {
                 </div>
               </div>
             </div>
-            
+
             <div className="md:col-span-2 bg-muted p-6 md:p-8 flex items-center justify-center">
               <div className="space-y-6">
                 <div className="space-y-2 text-center">
@@ -231,7 +230,7 @@ export default function KWAYKiosk() {
                     Configure your business services from these categories
                   </p>
                 </div>
-                
+
                 <div className="space-y-3">
                   <div className="bg-background rounded-lg p-3 flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
@@ -239,21 +238,21 @@ export default function KWAYKiosk() {
                     </div>
                     <span>Accounting & Bookkeeping</span>
                   </div>
-                  
+
                   <div className="bg-background rounded-lg p-3 flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                       <FileText className="h-4 w-4 text-primary" />
                     </div>
                     <span>Payroll Services</span>
                   </div>
-                  
+
                   <div className="bg-background rounded-lg p-3 flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                       <FileText className="h-4 w-4 text-primary" />
                     </div>
                     <span>Tax Compliance</span>
                   </div>
-                  
+
                   <div className="bg-background rounded-lg p-3 flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                       <FileText className="h-4 w-4 text-primary" />

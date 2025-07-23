@@ -1,8 +1,10 @@
-import { useLocation } from "react-router-dom";
+'use client'
+
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const NotFound = () => {
-  const location = useLocation();
+  const router = useRouter();
 
   useEffect(() => {
     console.error(

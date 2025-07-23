@@ -36,6 +36,13 @@ All colors MUST be HSL.
     --input: 214.3 31.8% 91.4%;
     --ring: 142 76% 36%;
 
+    --brand-light: 142 50% 40%;
+    --brand-dark: 146 68% 14%;
+    --brand-green: 142 76% 36%;
+    --brand-charcoal: 192 6% 15%;
+    --brand-olive: 132 23% 92%;
+
+
     /* Dashboard specific colors */
     --success: 142 76% 36%;
     --success-foreground: 0 0% 98%;
@@ -89,6 +96,14 @@ All colors MUST be HSL.
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
+
+    --brand-light: 90 33% 96%;
+    --brand-dark: 146 68% 14%;
+    --brand-green: 90 50% 50%;
+    --brand-charcoal: 192 6% 15%;
+    --brand-olive: 132 23% 92%;
+
+
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;

@@ -17,7 +17,7 @@ import {
   FileText,
   X
 } from "lucide-react"
-import { useNavigate } from "react-router-dom"
+import { useRouter } from "next/navigation"
 
 interface ExpenseData {
   description: string

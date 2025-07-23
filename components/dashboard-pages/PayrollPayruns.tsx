@@ -17,7 +17,7 @@ import {
   Play,
   CheckCircle
 } from "lucide-react"
-import { Link } from "react-router-dom"
+import Link from "next/link"
 
 const PayrollPayruns = () => {
   const [searchQuery, setSearchQuery] = useState("")
@@ -119,7 +119,7 @@ const PayrollPayruns = () => {
             Process and manage monthly payroll calculations
           </p>
         </div>
-        <Link to="/payroll/payruns/new">
+        <Link href="/payroll/payruns/new">
           <Button>
             <Plus className="mr-2 h-4 w-4" />
             Create Payrun
@@ -354,7 +354,7 @@ const PayrollPayruns = () => {
             <p className="text-muted-foreground mb-4">
               {searchQuery ? "Try adjusting your search criteria" : "Get started by creating your first payrun"}
             </p>
-            <Link to="/payroll/payruns/new">
+            <Link href="/payroll/payruns/new">
               <Button>
                 <Plus className="mr-2 h-4 w-4" />
                 Create First Payrun

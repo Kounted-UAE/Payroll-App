@@ -1,3 +1,5 @@
+'use client'
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { 
@@ -11,7 +13,7 @@ import {
   Calendar,
   TrendingUp
 } from "lucide-react"
-import { Link } from "react-router-dom"
+import Link from "next/link"
 
 const PayrollDashboard = () => {
   const stats = [
@@ -113,13 +115,13 @@ const PayrollDashboard = () => {
           </p>
         </div>
         <div className="flex gap-2">
-          <Link to="/payroll/reports">
+          <Link href="/payroll/reports">
             <Button variant="outline">
               <BarChart3 className="mr-2 h-4 w-4" />
               Reports
             </Button>
           </Link>
-          <Link to="/payroll/payruns/new">
+          <Link href="/payroll/payruns/new">
             <Button>
               <Plus className="mr-2 h-4 w-4" />
               New Payrun
@@ -165,7 +167,7 @@ const PayrollDashboard = () => {
             <CardContent>
               <div className="grid gap-4 md:grid-cols-2">
                 {quickActions.map((action) => (
-                  <Link key={action.title} to={action.href}>
+                  <Link key={action.title} href={action.href}>
                     <Card className="cursor-pointer hover:bg-accent transition-colors">
                       <CardContent className="p-4">
                         <div className="flex items-center space-x-3">

@@ -17,7 +17,7 @@ import {
   Users,
   Send
 } from "lucide-react"
-import { Link } from "react-router-dom"
+import Link from "next/link"
 
 const PayrollPayslips = () => {
   const [searchQuery, setSearchQuery] = useState("")
@@ -134,7 +134,7 @@ const PayrollPayslips = () => {
             Generate and distribute employee payslips
           </p>
         </div>
-        <Link to="/payroll/payslips/generate">
+        <Link href="/payroll/payslips/generate">
           <Button>
             <Plus className="mr-2 h-4 w-4" />
             Generate Payslips
@@ -357,7 +357,7 @@ const PayrollPayslips = () => {
             <p className="text-muted-foreground mb-4">
               {searchQuery ? "Try adjusting your search criteria" : "Generate payslips from completed payruns"}
             </p>
-            <Link to="/payroll/payslips/generate">
+            <Link href="/payroll/payslips/generate">
               <Button>
                 <Plus className="mr-2 h-4 w-4" />
                 Generate Payslips
