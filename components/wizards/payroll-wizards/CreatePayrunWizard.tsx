@@ -1,0 +1,415 @@
+import { useState } from "react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Badge } from "@/components/ui/badge"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Separator } from "@/components/ui/separator"
+import { 
+  ArrowLeft, 
+  ArrowRight, 
+  Building, 
+  Calendar, 
+  Users, 
+  DollarSign,
+  FileText,
+  CheckCircle,
+  AlertCircle
+} from "lucide-react"
+import { useNavigate } from "react-router-dom"
+
+interface PayrunData {
+  employer_id: string
+  pay_period_start: string
+  pay_period_end: string
+  payroll_month: string
+  selected_employees: string[]
+  confirmation: boolean
+}
+
+const CreatePayrunWizard = () => {
+  const navigate = useNavigate()
+  const [currentStep, setCurrentStep] = useState(1)
+  const [data, setData] = useState<PayrunData>({
+    employer_id: "",
+    pay_period_start: "",
+    pay_period_end: "",
+    payroll_month: "",
+    selected_employees: [],
+    confirmation: false
+  })
+
+  const employers = [
+    { id: "1", name: "Emirates Technology LLC", employees: 85 },
+    { id: "2", name: "Al Noor Industries PJSC", employees: 156 },
+    { id: "3", name: "Gulf Trading Company LLC", employees: 42 }
+  ]
+
+  const employees = [
+    { id: "1", name: "Ahmed Al-Mansouri", basic_salary: 15000, status: "Active" },
+    { id: "2", name: "Sarah Johnson", basic_salary: 12000, status: "Active" },
+    { id: "3", name: "Mohammed Hassan", basic_salary: 18000, status: "Active" },
+    { id: "4", name: "Priya Sharma", basic_salary: 8000, status: "Active" },
+    { id: "5", name: "Omar Al-Farisi", basic_salary: 22000, status: "Active" }
+  ]
+
+  const steps = [
+    { id: 1, title: "Select Employer", description: "Choose the employer company" },
+    { id: 2, title: "Pay Period", description: "Set the payroll period dates" },
+    { id: 3, title: "Select Employees", description: "Choose employees to include" },
+    { id: 4, title: "Review & Create", description: "Review and create payrun" }
+  ]
+
+  const selectedEmployer = employers.find(e => e.id === data.employer_id)
+  const selectedEmployees = employees.filter(e => data.selected_employees.includes(e.id))
+  const totalGrossPay = selectedEmployees.reduce((sum, emp) => sum + emp.basic_salary, 0)
+
+  const handleNext = () => {
+    if (currentStep < 4) {
+      setCurrentStep(currentStep + 1)
+    } else {
+      // Create payrun
+      navigate("/payroll/payruns")
+    }
+  }
+
+  const handlePrevious = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1)
+    }
+  }
+
+  const canProceed = () => {
+    switch (currentStep) {
+      case 1: return data.employer_id !== ""
+      case 2: return data.pay_period_start !== "" && data.pay_period_end !== ""
+      case 3: return data.selected_employees.length > 0
+      case 4: return data.confirmation
+      default: return false
+    }
+  }
+
+  return (
+    <div className="flex-1 space-y-6 p-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Create New Payrun</h1>
+          <p className="text-muted-foreground">
+            Set up a new payroll run for processing employee salaries
+          </p>
+        </div>
+        <Button variant="outline" onClick={() => navigate("/payroll/payruns")}>
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Payruns
+        </Button>
+      </div>
+
+      {/* Progress Steps */}
+      <Card>
+        <CardContent className="p-6">
+          <div className="flex items-center justify-between">
+            {steps.map((step, index) => (
+              <div key={step.id} className="flex items-center">
+                <div className={`flex items-center space-x-2 ${
+                  currentStep >= step.id ? "text-primary" : "text-muted-foreground"
+                }`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                    currentStep >= step.id ? "bg-primary text-primary-foreground" : "bg-muted"
+                  }`}>
+                    {currentStep > step.id ? <CheckCircle className="h-4 w-4" /> : step.id}
+                  </div>
+                  <div>
+                    <p className="font-medium">{step.title}</p>
+                    <p className="text-sm text-muted-foreground">{step.description}</p>
+                  </div>
+                </div>
+                {index < steps.length - 1 && (
+                  <div className={`h-px w-20 mx-4 ${
+                    currentStep > step.id ? "bg-primary" : "bg-muted"
+                  }`} />
+                )}
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Step Content */}
+      <Card>
+        <CardContent className="p-8">
+          {currentStep === 1 && (
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Select Employer Company</h3>
+                <p className="text-muted-foreground mb-6">Choose the employer for this payrun</p>
+              </div>
+              
+              <div className="grid gap-4">
+                {employers.map((employer) => (
+                  <div 
+                    key={employer.id}
+                    className={`p-4 border rounded-lg cursor-pointer transition-all ${
+                      data.employer_id === employer.id 
+                        ? "border-primary bg-primary/5" 
+                        : "border-border hover:border-primary/50"
+                    }`}
+                    onClick={() => setData(prev => ({ ...prev, employer_id: employer.id }))}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <Building className="h-8 w-8 text-blue-600" />
+                        <div>
+                          <h4 className="font-medium">{employer.name}</h4>
+                          <p className="text-sm text-muted-foreground">{employer.employees} employees</p>
+                        </div>
+                      </div>
+                      {data.employer_id === employer.id && (
+                        <CheckCircle className="h-5 w-5 text-primary" />
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {currentStep === 2 && (
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Set Pay Period</h3>
+                <p className="text-muted-foreground mb-6">Define the payroll period dates</p>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="payroll_month">Payroll Month</Label>
+                  <Select value={data.payroll_month} onValueChange={(value) => 
+                    setData(prev => ({ ...prev, payroll_month: value }))
+                  }>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select month" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="2024-01">January 2024</SelectItem>
+                      <SelectItem value="2024-02">February 2024</SelectItem>
+                      <SelectItem value="2024-03">March 2024</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label>Selected Employer</Label>
+                  <div className="p-3 bg-muted rounded-md">
+                    <p className="font-medium">{selectedEmployer?.name}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="start_date">Period Start Date</Label>
+                  <Input
+                    id="start_date"
+                    type="date"
+                    value={data.pay_period_start}
+                    onChange={(e) => setData(prev => ({ ...prev, pay_period_start: e.target.value }))}
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="end_date">Period End Date</Label>
+                  <Input
+                    id="end_date"
+                    type="date"
+                    value={data.pay_period_end}
+                    onChange={(e) => setData(prev => ({ ...prev, pay_period_end: e.target.value }))}
+                  />
+                </div>
+              </div>
+
+              {data.pay_period_start && data.pay_period_end && (
+                <div className="p-4 bg-blue-50 rounded-lg">
+                  <div className="flex items-center space-x-2">
+                    <Calendar className="h-5 w-5 text-blue-600" />
+                    <div>
+                      <p className="font-medium text-blue-900">Pay Period Summary</p>
+                      <p className="text-blue-700">
+                        {data.pay_period_start} to {data.pay_period_end}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {currentStep === 3 && (
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Select Employees</h3>
+                <p className="text-muted-foreground mb-6">Choose employees to include in this payrun</p>
+              </div>
+              
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-4">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setData(prev => ({ 
+                      ...prev, 
+                      selected_employees: employees.map(e => e.id) 
+                    }))}
+                  >
+                    Select All
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setData(prev => ({ ...prev, selected_employees: [] }))}
+                  >
+                    Clear All
+                  </Button>
+                </div>
+                <Badge variant="secondary">
+                  {data.selected_employees.length} of {employees.length} selected
+                </Badge>
+              </div>
+
+              <div className="grid gap-3">
+                {employees.map((employee) => (
+                  <div key={employee.id} className="flex items-center space-x-3 p-3 border rounded-lg">
+                    <Checkbox
+                      checked={data.selected_employees.includes(employee.id)}
+                      onCheckedChange={(checked) => {
+                        setData(prev => ({
+                          ...prev,
+                          selected_employees: checked
+                            ? [...prev.selected_employees, employee.id]
+                            : prev.selected_employees.filter(id => id !== employee.id)
+                        }))
+                      }}
+                    />
+                    <Users className="h-5 w-5 text-blue-600" />
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="font-medium">{employee.name}</p>
+                          <p className="text-sm text-muted-foreground">Basic Salary: AED {employee.basic_salary.toLocaleString()}</p>
+                        </div>
+                        <Badge variant="outline">{employee.status}</Badge>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {currentStep === 4 && (
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Review & Confirm</h3>
+                <p className="text-muted-foreground mb-6">Review the payrun details before creation</p>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">Payrun Details</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Employer:</span>
+                      <span className="font-medium">{selectedEmployer?.name}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Pay Period:</span>
+                      <span className="font-medium">{data.pay_period_start} - {data.pay_period_end}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Month:</span>
+                      <span className="font-medium">{data.payroll_month}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">Employee Summary</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Total Employees:</span>
+                      <span className="font-medium">{selectedEmployees.length}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Estimated Gross:</span>
+                      <span className="font-medium text-green-600">AED {totalGrossPay.toLocaleString()}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Status:</span>
+                      <Badge variant="outline">Draft</Badge>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="p-4 bg-yellow-50 rounded-lg">
+                <div className="flex items-start space-x-3">
+                  <AlertCircle className="h-5 w-5 text-yellow-600 mt-0.5" />
+                  <div>
+                    <p className="font-medium text-yellow-900">Important Notes</p>
+                    <ul className="text-yellow-800 text-sm mt-1 space-y-1">
+                      <li>• The payrun will be created in draft status</li>
+                      <li>• You can edit employee selections before processing</li>
+                      <li>• Salary calculations will be based on current salary structures</li>
+                      <li>• EOSB accruals will be automatically calculated</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  checked={data.confirmation}
+                  onCheckedChange={(checked) => setData(prev => ({ ...prev, confirmation: checked as boolean }))}
+                />
+                <Label>I confirm that the above details are correct and want to create this payrun</Label>
+              </div>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Navigation */}
+      <div className="flex items-center justify-between">
+        <Button
+          variant="outline"
+          onClick={handlePrevious}
+          disabled={currentStep === 1}
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Previous
+        </Button>
+
+        <div className="flex items-center space-x-2">
+          <span className="text-sm text-muted-foreground">
+            Step {currentStep} of {steps.length}
+          </span>
+        </div>
+
+        <Button
+          onClick={handleNext}
+          disabled={!canProceed()}
+        >
+          {currentStep === 4 ? "Create Payrun" : "Next"}
+          {currentStep < 4 && <ArrowRight className="ml-2 h-4 w-4" />}
+        </Button>
+      </div>
+    </div>
+  )
+}
+
+export default CreatePayrunWizard

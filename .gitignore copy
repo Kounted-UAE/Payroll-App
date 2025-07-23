@@ -1,0 +1,142 @@
+# -----------------------
+# Environment variables and Project Management Files
+# -----------------------
+.env
+.env.*
+!.env.example
+z._*
+*_.z_*
+z_project-context.md
+z_app-structure.txt
+z_session_checklist_18July2025.txt
+
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# -----------------------
+# Node dependencies
+# -----------------------
+node_modules/
+
+# -----------------------
+# Next.js build output
+# -----------------------
+.next/
+out/
+build/
+
+# -----------------------
+# System files (macOS)
+# -----------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+local.image.assets
+/local.image.assets/**   
+/local.image.assets/
+.eslintrc.js
+
+
+# -----------------------
+# Logs and debug
+# -----------------------
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+
+
+
+# -----------------------
+# Supabase metadata and local dev
+# -----------------------
+.supabase/
+
+# -----------------------
+# Vercel
+# -----------------------
+.vercel/
+
+# -----------------------
+# TypeScript
+# -----------------------
+*.tsbuildinfo
+next-env.d.ts
+
+# -----------------------
+# Testing
+# -----------------------
+coverage/
+*.lcov
+
+# -----------------------
+# IDE/editor artifacts
+# -----------------------
+.vscode/
+.vscode*
+.idea/
+*.swp
+
+# -----------------------
+# OS and file system
+# -----------------------
+*.orig
+*.sublime-workspace
+*.sublime-project
+
+# -----------------------
+# Git merge/conflict
+# -----------------------
+*.mergeBackup
+*.orig
+
+# -----------------------
+# Local development
+# -----------------------
+*.local
+*.log
+lib/scripts/export-supabase-policies.ts
+*/export-supabase-policies.ts
+
+# -----------------------
+# Misc
+# -----------------------
+tmp/
+temp/
+.cache/
+
+# Supabase CLI project metadata
+.supabase/
+
+# Supabase generated artifacts (e.g. generated types, migrations if you want)
+supabase/.temp/
+supabase/migrations/.temp/
+
+# Optional: if you generate types using Supabase CLI
+supabase/generated/
