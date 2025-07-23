@@ -201,11 +201,17 @@ const PayrollEmployers = () => {
                       <span className="text-lg font-bold text-blue-600">{employer.employee_count}</span>
                     </div>
                     <div className="pt-2">
-                      <Link href={`/dashboard/payroll/employees?employer=${employer.id}`}>
-                        <Button variant="outline" size="sm" className="w-full">
+                      {employer.id ? (
+                        <Link href={`/dashboard/payroll/employees?employer=${employer.id}`}>
+                          <Button variant="outline" size="sm" className="w-full">
+                            View Employees
+                          </Button>
+                        </Link>
+                      ) : (
+                        <Button variant="outline" size="sm" className="w-full" disabled>
                           View Employees
                         </Button>
-                      </Link>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -315,11 +315,17 @@ const PayrollEmployees = () => {
                       <span className="text-lg font-bold text-green-600">AED {employee.base_salary.toLocaleString()}</span>
                     </div>
                     <div className="pt-2 space-y-2">
-                      <Link href={`/dashboard/payroll/salary-structures?employee=${employee.id}`}>
-                        <Button variant="outline" size="sm" className="w-full">
+                      {employee.id ? (
+                        <Link href={`/dashboard/payroll/salary-structures?employee=${employee.id}`}>
+                          <Button variant="outline" size="sm" className="w-full">
+                            View Salary Structure
+                          </Button>
+                        </Link>
+                      ) : (
+                        <Button variant="outline" size="sm" className="w-full" disabled>
                           View Salary Structure
                         </Button>
-                      </Link>
+                      )}
                     </div>
                   </div>
                 </div>

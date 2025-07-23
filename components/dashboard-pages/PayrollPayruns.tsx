@@ -330,14 +330,19 @@ const PayrollPayruns = () => {
                         Export WPS
                       </Button>
                     )}
-                    {payrun.status === "Completed" && (
-                      <Link to={`/payroll/payslips?payrun=${payrun.id}`}>
+                    {payrun.status === "Completed" && payrun.id ? (
+                      <Link href={`/payroll/payslips?payrun=${payrun.id}`}>
                         <Button variant="outline" size="sm">
                           <FileText className="mr-2 h-4 w-4" />
                           View Payslips
                         </Button>
                       </Link>
-                    )}
+                    ) : payrun.status === "Completed" ? (
+                      <Button variant="outline" size="sm" disabled>
+                        <FileText className="mr-2 h-4 w-4" />
+                        View Payslips
+                      </Button>
+                    ) : null}
                   </div>
                 </div>
               </CardContent>

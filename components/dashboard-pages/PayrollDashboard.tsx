@@ -167,8 +167,26 @@ const PayrollDashboard = () => {
             <CardContent>
               <div className="grid gap-4 md:grid-cols-2">
                 {quickActions.map((action) => (
-                  <Link key={action.title} href={action.href}>
-                    <Card className="cursor-pointer hover:bg-accent transition-colors">
+                  action.href ? (
+                    <Link key={action.title} href={action.href}>
+                      <Card className="cursor-pointer hover:bg-accent transition-colors">
+                        <CardContent className="p-4">
+                          <div className="flex items-center space-x-3">
+                            <div className={`p-2 rounded-md ${action.color}`}>
+                              <action.icon className="h-4 w-4 text-white" />
+                            </div>
+                            <div>
+                              <h3 className="font-semibold">{action.title}</h3>
+                              <p className="text-sm text-muted-foreground">
+                                {action.description}
+                              </p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ) : (
+                    <Card key={action.title} className="opacity-50 cursor-not-allowed">
                       <CardContent className="p-4">
                         <div className="flex items-center space-x-3">
                           <div className={`p-2 rounded-md ${action.color}`}>
@@ -183,7 +201,7 @@ const PayrollDashboard = () => {
                         </div>
                       </CardContent>
                     </Card>
-                  </Link>
+                  )
                 ))}
               </div>
             </CardContent>
