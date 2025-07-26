@@ -89,7 +89,7 @@
     "keyRoutes": [
       "/login",
       "/auth/callback",
-      "/dashboard",
+      "/backyard",
       "/kyc",
       "/my-kounted/client/**",
       "/my-kounted/staff/**"

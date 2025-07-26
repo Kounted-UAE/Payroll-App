@@ -14,141 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      audit_logs: {
-        Row: {
-          action: string
-          created_at: string | null
-          details: Json | null
-          id: string
-          ip_address: unknown | null
-          new_values: Json | null
-          record_id: string | null
-          resource_id: string | null
-          resource_type: string
-          table_name: string | null
-          user_agent: string | null
-          user_id: string | null
-        }
-        Insert: {
-          action: string
-          created_at?: string | null
-          details?: Json | null
-          id?: string
-          ip_address?: unknown | null
-          new_values?: Json | null
-          record_id?: string | null
-          resource_id?: string | null
-          resource_type: string
-          table_name?: string | null
-          user_agent?: string | null
-          user_id?: string | null
-        }
-        Update: {
-          action?: string
-          created_at?: string | null
-          details?: Json | null
-          id?: string
-          ip_address?: unknown | null
-          new_values?: Json | null
-          record_id?: string | null
-          resource_id?: string | null
-          resource_type?: string
-          table_name?: string | null
-          user_agent?: string | null
-          user_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "audit_logs_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "public_user_profiles"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "audit_logs_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "v_authenticated_profiles"
-            referencedColumns: ["profile_id"]
-          },
-        ]
-      }
-      catalogue_items: {
-        Row: {
-          created_at: string
-          fk_jurisdiction: string
-          fk_sales_group: string
-          id: string
-          index: number
-          pk_catalogue_sku: string
-          sales_item_main_type_id: string | null
-          sales_item_main_type_name: string
-          sales_item_sub_type_id: string | null
-          sales_item_sub_type_name: string
-          sales_item_variant_name: string | null
-          service_type_code: string
-          sku_id: string
-          status: string
-          task_name: string | null
-          updated_at: string
-          zone_code: string
-        }
-        Insert: {
-          created_at?: string
-          fk_jurisdiction: string
-          fk_sales_group: string
-          id?: string
-          index: number
-          pk_catalogue_sku: string
-          sales_item_main_type_id?: string | null
-          sales_item_main_type_name: string
-          sales_item_sub_type_id?: string | null
-          sales_item_sub_type_name: string
-          sales_item_variant_name?: string | null
-          service_type_code: string
-          sku_id: string
-          status?: string
-          task_name?: string | null
-          updated_at?: string
-          zone_code?: string
-        }
-        Update: {
-          created_at?: string
-          fk_jurisdiction?: string
-          fk_sales_group?: string
-          id?: string
-          index?: number
-          pk_catalogue_sku?: string
-          sales_item_main_type_id?: string | null
-          sales_item_main_type_name?: string
-          sales_item_sub_type_id?: string | null
-          sales_item_sub_type_name?: string
-          sales_item_variant_name?: string | null
-          service_type_code?: string
-          sku_id?: string
-          status?: string
-          task_name?: string | null
-          updated_at?: string
-          zone_code?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "catalogue_items_fk_jurisdiction_fkey"
-            columns: ["fk_jurisdiction"]
-            isOneToOne: false
-            referencedRelation: "jurisdictions"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "catalogue_items_fk_sales_group_fkey"
-            columns: ["fk_sales_group"]
-            isOneToOne: false
-            referencedRelation: "sales_groups"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       core_file_link_contacts: {
         Row: {
           contact_id: string | null
@@ -238,6 +103,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "source_desk_tickets"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "core_file_link_desk_tickets_ticket_id_fkey"
+            columns: ["ticket_id"]
+            isOneToOne: false
+            referencedRelation: "v_ticket_revenue"
+            referencedColumns: ["ticket_id"]
           },
         ]
       }
@@ -1276,206 +1148,183 @@ export type Database = {
           },
         ]
       }
-      employees: {
+      kounted_catalogue_items: {
         Row: {
-          bank_name: string | null
-          contract_type: string | null
-          created_at: string | null
-          date_of_birth: string | null
-          emirates_id: string | null
-          employer_id: string | null
-          full_name: string
-          iban: string | null
+          created_at: string
+          fk_jurisdiction: string
+          fk_sales_group: string
           id: string
-          individual_id: string | null
-          job_title: string | null
-          nationality: string | null
-          passport_number: string | null
-          start_date: string
-          status: string | null
-          termination_date: string | null
-          updated_at: string | null
-          visa_info: Json | null
-          wps_compliance_flag: boolean | null
-        }
-        Insert: {
-          bank_name?: string | null
-          contract_type?: string | null
-          created_at?: string | null
-          date_of_birth?: string | null
-          emirates_id?: string | null
-          employer_id?: string | null
-          full_name: string
-          iban?: string | null
-          id?: string
-          individual_id?: string | null
-          job_title?: string | null
-          nationality?: string | null
-          passport_number?: string | null
-          start_date: string
-          status?: string | null
-          termination_date?: string | null
-          updated_at?: string | null
-          visa_info?: Json | null
-          wps_compliance_flag?: boolean | null
-        }
-        Update: {
-          bank_name?: string | null
-          contract_type?: string | null
-          created_at?: string | null
-          date_of_birth?: string | null
-          emirates_id?: string | null
-          employer_id?: string | null
-          full_name?: string
-          iban?: string | null
-          id?: string
-          individual_id?: string | null
-          job_title?: string | null
-          nationality?: string | null
-          passport_number?: string | null
-          start_date?: string
-          status?: string | null
-          termination_date?: string | null
-          updated_at?: string | null
-          visa_info?: Json | null
-          wps_compliance_flag?: boolean | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "employees_employer_id_fkey"
-            columns: ["employer_id"]
-            isOneToOne: false
-            referencedRelation: "employers"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "employees_individual_id_fkey"
-            columns: ["individual_id"]
-            isOneToOne: false
-            referencedRelation: "core_objects_individuals"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      employers: {
-        Row: {
-          address: string | null
-          contact_info: Json | null
-          created_at: string | null
-          entity_id: string | null
-          id: string
-          legal_name: string
-          trade_license: string
+          index: number
+          pk_catalogue_sku: string
+          sales_item_main_type_id: string | null
+          sales_item_main_type_name: string
+          sales_item_sub_type_id: string | null
+          sales_item_sub_type_name: string
+          sales_item_variant_name: string | null
+          service_type_code: string
+          sku_id: string
+          status: string
+          task_name: string | null
           updated_at: string
-          wps_details: Json | null
+          zone_code: string
         }
         Insert: {
-          address?: string | null
-          contact_info?: Json | null
-          created_at?: string | null
-          entity_id?: string | null
+          created_at?: string
+          fk_jurisdiction: string
+          fk_sales_group: string
           id?: string
-          legal_name: string
-          trade_license: string
+          index: number
+          pk_catalogue_sku: string
+          sales_item_main_type_id?: string | null
+          sales_item_main_type_name: string
+          sales_item_sub_type_id?: string | null
+          sales_item_sub_type_name: string
+          sales_item_variant_name?: string | null
+          service_type_code: string
+          sku_id: string
+          status?: string
+          task_name?: string | null
           updated_at?: string
-          wps_details?: Json | null
+          zone_code?: string
         }
         Update: {
-          address?: string | null
-          contact_info?: Json | null
-          created_at?: string | null
-          entity_id?: string | null
+          created_at?: string
+          fk_jurisdiction?: string
+          fk_sales_group?: string
           id?: string
-          legal_name?: string
-          trade_license?: string
+          index?: number
+          pk_catalogue_sku?: string
+          sales_item_main_type_id?: string | null
+          sales_item_main_type_name?: string
+          sales_item_sub_type_id?: string | null
+          sales_item_sub_type_name?: string
+          sales_item_variant_name?: string | null
+          service_type_code?: string
+          sku_id?: string
+          status?: string
+          task_name?: string | null
           updated_at?: string
-          wps_details?: Json | null
+          zone_code?: string
         }
         Relationships: [
           {
-            foreignKeyName: "employers_entity_id_fkey"
-            columns: ["entity_id"]
+            foreignKeyName: "catalogue_items_fk_jurisdiction_fkey"
+            columns: ["fk_jurisdiction"]
             isOneToOne: false
-            referencedRelation: "core_objects_entities"
+            referencedRelation: "kounted_uae_jurisdictions"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "fk_employers_entity_id"
-            columns: ["entity_id"]
+            foreignKeyName: "catalogue_items_fk_sales_group_fkey"
+            columns: ["fk_sales_group"]
             isOneToOne: false
-            referencedRelation: "core_objects_entities"
+            referencedRelation: "kounted_sales_groups"
             referencedColumns: ["id"]
           },
         ]
       }
-      expense_claims: {
+      kounted_price_lists: {
         Row: {
-          amount: number
-          approved_at: string | null
-          approver_id: string | null
+          client_type: string | null
+          created_at: string | null
+          currency: string | null
+          effective_from: string
+          effective_to: string | null
+          id: string
+          is_retainer_only: boolean | null
+          jurisdiction: string | null
+          price: number
+          product_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          client_type?: string | null
+          created_at?: string | null
+          currency?: string | null
+          effective_from: string
+          effective_to?: string | null
+          id?: string
+          is_retainer_only?: boolean | null
+          jurisdiction?: string | null
+          price: number
+          product_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          client_type?: string | null
+          created_at?: string | null
+          currency?: string | null
+          effective_from?: string
+          effective_to?: string | null
+          id?: string
+          is_retainer_only?: boolean | null
+          jurisdiction?: string | null
+          price?: number
+          product_id?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "price_lists_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "kounted_product_list"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      kounted_product_list: {
+        Row: {
           category: string | null
-          claim_date: string
           created_at: string | null
           description: string | null
-          employee_id: string | null
           id: string
-          payrun_id: string | null
-          receipt_url: string | null
-          status: string | null
+          is_active: boolean | null
+          name: string
+          sku: string
+          updated_at: string | null
         }
         Insert: {
-          amount: number
-          approved_at?: string | null
-          approver_id?: string | null
           category?: string | null
-          claim_date: string
           created_at?: string | null
           description?: string | null
-          employee_id?: string | null
           id?: string
-          payrun_id?: string | null
-          receipt_url?: string | null
-          status?: string | null
+          is_active?: boolean | null
+          name: string
+          sku: string
+          updated_at?: string | null
         }
         Update: {
-          amount?: number
-          approved_at?: string | null
-          approver_id?: string | null
           category?: string | null
-          claim_date?: string
           created_at?: string | null
           description?: string | null
-          employee_id?: string | null
           id?: string
-          payrun_id?: string | null
-          receipt_url?: string | null
-          status?: string | null
+          is_active?: boolean | null
+          name?: string
+          sku?: string
+          updated_at?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "expense_claims_employee_id_fkey"
-            columns: ["employee_id"]
-            isOneToOne: false
-            referencedRelation: "employees"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "expense_claims_payrun_id_fkey"
-            columns: ["payrun_id"]
-            isOneToOne: false
-            referencedRelation: "payrun_batch_status"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "expense_claims_payrun_id_fkey"
-            columns: ["payrun_id"]
-            isOneToOne: false
-            referencedRelation: "payruns"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
-      jurisdictions: {
+      kounted_sales_groups: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          id: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      kounted_uae_jurisdictions: {
         Row: {
           created_at: string
           id: string
@@ -2181,7 +2030,266 @@ export type Database = {
         }
         Relationships: []
       }
-      payrun_items: {
+      payroll_audit_logs: {
+        Row: {
+          action: string
+          created_at: string | null
+          details: Json | null
+          id: string
+          ip_address: unknown | null
+          new_values: Json | null
+          record_id: string | null
+          resource_id: string | null
+          resource_type: string
+          table_name: string | null
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          created_at?: string | null
+          details?: Json | null
+          id?: string
+          ip_address?: unknown | null
+          new_values?: Json | null
+          record_id?: string | null
+          resource_id?: string | null
+          resource_type: string
+          table_name?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          created_at?: string | null
+          details?: Json | null
+          id?: string
+          ip_address?: unknown | null
+          new_values?: Json | null
+          record_id?: string | null
+          resource_id?: string | null
+          resource_type?: string
+          table_name?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audit_logs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_user_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "audit_logs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "v_authenticated_profiles"
+            referencedColumns: ["profile_id"]
+          },
+        ]
+      }
+      payroll_expense_claims: {
+        Row: {
+          amount: number
+          approved_at: string | null
+          approver_id: string | null
+          category: string | null
+          claim_date: string
+          created_at: string | null
+          description: string | null
+          employee_id: string | null
+          id: string
+          payrun_id: string | null
+          receipt_url: string | null
+          status: string | null
+        }
+        Insert: {
+          amount: number
+          approved_at?: string | null
+          approver_id?: string | null
+          category?: string | null
+          claim_date: string
+          created_at?: string | null
+          description?: string | null
+          employee_id?: string | null
+          id?: string
+          payrun_id?: string | null
+          receipt_url?: string | null
+          status?: string | null
+        }
+        Update: {
+          amount?: number
+          approved_at?: string | null
+          approver_id?: string | null
+          category?: string | null
+          claim_date?: string
+          created_at?: string | null
+          description?: string | null
+          employee_id?: string | null
+          id?: string
+          payrun_id?: string | null
+          receipt_url?: string | null
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expense_claims_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "payroll_objects_employees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "expense_claims_payrun_id_fkey"
+            columns: ["payrun_id"]
+            isOneToOne: false
+            referencedRelation: "payroll_payrun_records"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "expense_claims_payrun_id_fkey"
+            columns: ["payrun_id"]
+            isOneToOne: false
+            referencedRelation: "payrun_batch_status"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payroll_objects_employees: {
+        Row: {
+          bank_name: string | null
+          contract_type: string | null
+          created_at: string | null
+          date_of_birth: string | null
+          emirates_id: string | null
+          employer_id: string | null
+          full_name: string
+          iban: string | null
+          id: string
+          individual_id: string | null
+          job_title: string | null
+          nationality: string | null
+          passport_number: string | null
+          start_date: string
+          status: string | null
+          termination_date: string | null
+          updated_at: string | null
+          visa_info: Json | null
+          wps_compliance_flag: boolean | null
+        }
+        Insert: {
+          bank_name?: string | null
+          contract_type?: string | null
+          created_at?: string | null
+          date_of_birth?: string | null
+          emirates_id?: string | null
+          employer_id?: string | null
+          full_name: string
+          iban?: string | null
+          id?: string
+          individual_id?: string | null
+          job_title?: string | null
+          nationality?: string | null
+          passport_number?: string | null
+          start_date: string
+          status?: string | null
+          termination_date?: string | null
+          updated_at?: string | null
+          visa_info?: Json | null
+          wps_compliance_flag?: boolean | null
+        }
+        Update: {
+          bank_name?: string | null
+          contract_type?: string | null
+          created_at?: string | null
+          date_of_birth?: string | null
+          emirates_id?: string | null
+          employer_id?: string | null
+          full_name?: string
+          iban?: string | null
+          id?: string
+          individual_id?: string | null
+          job_title?: string | null
+          nationality?: string | null
+          passport_number?: string | null
+          start_date?: string
+          status?: string | null
+          termination_date?: string | null
+          updated_at?: string | null
+          visa_info?: Json | null
+          wps_compliance_flag?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "employees_employer_id_fkey"
+            columns: ["employer_id"]
+            isOneToOne: false
+            referencedRelation: "payroll_objects_employers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "employees_individual_id_fkey"
+            columns: ["individual_id"]
+            isOneToOne: false
+            referencedRelation: "core_objects_individuals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payroll_objects_employers: {
+        Row: {
+          address: string | null
+          contact_info: Json | null
+          created_at: string | null
+          entity_id: string | null
+          id: string
+          legal_name: string
+          trade_license: string
+          updated_at: string
+          wps_details: Json | null
+        }
+        Insert: {
+          address?: string | null
+          contact_info?: Json | null
+          created_at?: string | null
+          entity_id?: string | null
+          id?: string
+          legal_name: string
+          trade_license: string
+          updated_at?: string
+          wps_details?: Json | null
+        }
+        Update: {
+          address?: string | null
+          contact_info?: Json | null
+          created_at?: string | null
+          entity_id?: string | null
+          id?: string
+          legal_name?: string
+          trade_license?: string
+          updated_at?: string
+          wps_details?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "employers_entity_id_fkey"
+            columns: ["entity_id"]
+            isOneToOne: false
+            referencedRelation: "core_objects_entities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_employers_entity_id"
+            columns: ["entity_id"]
+            isOneToOne: false
+            referencedRelation: "core_objects_entities"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payroll_payrun_items: {
         Row: {
           base_salary: number | null
           created_at: string | null
@@ -2232,7 +2340,14 @@ export type Database = {
             foreignKeyName: "payrun_items_employee_id_fkey"
             columns: ["employee_id"]
             isOneToOne: false
-            referencedRelation: "employees"
+            referencedRelation: "payroll_objects_employees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payrun_items_payrun_id_fkey"
+            columns: ["payrun_id"]
+            isOneToOne: false
+            referencedRelation: "payroll_payrun_records"
             referencedColumns: ["id"]
           },
           {
@@ -2242,16 +2357,9 @@ export type Database = {
             referencedRelation: "payrun_batch_status"
             referencedColumns: ["id"]
           },
-          {
-            foreignKeyName: "payrun_items_payrun_id_fkey"
-            columns: ["payrun_id"]
-            isOneToOne: false
-            referencedRelation: "payruns"
-            referencedColumns: ["id"]
-          },
         ]
       }
-      payruns: {
+      payroll_payrun_records: {
         Row: {
           created_at: string | null
           created_by: string | null
@@ -2296,12 +2404,12 @@ export type Database = {
             foreignKeyName: "payruns_employer_id_fkey"
             columns: ["employer_id"]
             isOneToOne: false
-            referencedRelation: "employers"
+            referencedRelation: "payroll_objects_employers"
             referencedColumns: ["id"]
           },
         ]
       }
-      payslips: {
+      payroll_payslip_records: {
         Row: {
           created_at: string | null
           email_sent: boolean | null
@@ -2334,100 +2442,64 @@ export type Database = {
             foreignKeyName: "payslips_employee_id_fkey"
             columns: ["employee_id"]
             isOneToOne: false
-            referencedRelation: "employees"
+            referencedRelation: "payroll_objects_employees"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "payslips_payrun_item_id_fkey"
             columns: ["payrun_item_id"]
             isOneToOne: false
-            referencedRelation: "payrun_items"
+            referencedRelation: "payroll_payrun_items"
             referencedColumns: ["id"]
           },
         ]
       }
-      price_lists: {
+      payroll_salary_structures: {
         Row: {
-          client_type: string | null
+          base_salary: number
           created_at: string | null
-          currency: string | null
+          deductions: Json | null
           effective_from: string
           effective_to: string | null
+          employee_id: string | null
+          eosb_accrual_method: string | null
+          fixed_allowances: Json | null
           id: string
-          is_retainer_only: boolean | null
-          jurisdiction: string | null
-          price: number
-          product_id: string | null
-          updated_at: string | null
+          variable_allowances: Json | null
         }
         Insert: {
-          client_type?: string | null
+          base_salary: number
           created_at?: string | null
-          currency?: string | null
+          deductions?: Json | null
           effective_from: string
           effective_to?: string | null
+          employee_id?: string | null
+          eosb_accrual_method?: string | null
+          fixed_allowances?: Json | null
           id?: string
-          is_retainer_only?: boolean | null
-          jurisdiction?: string | null
-          price: number
-          product_id?: string | null
-          updated_at?: string | null
+          variable_allowances?: Json | null
         }
         Update: {
-          client_type?: string | null
+          base_salary?: number
           created_at?: string | null
-          currency?: string | null
+          deductions?: Json | null
           effective_from?: string
           effective_to?: string | null
+          employee_id?: string | null
+          eosb_accrual_method?: string | null
+          fixed_allowances?: Json | null
           id?: string
-          is_retainer_only?: boolean | null
-          jurisdiction?: string | null
-          price?: number
-          product_id?: string | null
-          updated_at?: string | null
+          variable_allowances?: Json | null
         }
         Relationships: [
           {
-            foreignKeyName: "price_lists_product_id_fkey"
-            columns: ["product_id"]
+            foreignKeyName: "salary_structures_employee_id_fkey"
+            columns: ["employee_id"]
             isOneToOne: false
-            referencedRelation: "products"
+            referencedRelation: "payroll_objects_employees"
             referencedColumns: ["id"]
           },
         ]
-      }
-      products: {
-        Row: {
-          category: string | null
-          created_at: string | null
-          description: string | null
-          id: string
-          is_active: boolean | null
-          name: string
-          sku: string
-          updated_at: string | null
-        }
-        Insert: {
-          category?: string | null
-          created_at?: string | null
-          description?: string | null
-          id?: string
-          is_active?: boolean | null
-          name: string
-          sku: string
-          updated_at?: string | null
-        }
-        Update: {
-          category?: string | null
-          created_at?: string | null
-          description?: string | null
-          id?: string
-          is_active?: boolean | null
-          name?: string
-          sku?: string
-          updated_at?: string | null
-        }
-        Relationships: []
       }
       public_access_grant_logs: {
         Row: {
@@ -2780,122 +2852,195 @@ export type Database = {
           },
         ]
       }
-      salary_structures: {
-        Row: {
-          base_salary: number
-          created_at: string | null
-          deductions: Json | null
-          effective_from: string
-          effective_to: string | null
-          employee_id: string | null
-          eosb_accrual_method: string | null
-          fixed_allowances: Json | null
-          id: string
-          variable_allowances: Json | null
-        }
-        Insert: {
-          base_salary: number
-          created_at?: string | null
-          deductions?: Json | null
-          effective_from: string
-          effective_to?: string | null
-          employee_id?: string | null
-          eosb_accrual_method?: string | null
-          fixed_allowances?: Json | null
-          id?: string
-          variable_allowances?: Json | null
-        }
-        Update: {
-          base_salary?: number
-          created_at?: string | null
-          deductions?: Json | null
-          effective_from?: string
-          effective_to?: string | null
-          employee_id?: string | null
-          eosb_accrual_method?: string | null
-          fixed_allowances?: Json | null
-          id?: string
-          variable_allowances?: Json | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "salary_structures_employee_id_fkey"
-            columns: ["employee_id"]
-            isOneToOne: false
-            referencedRelation: "employees"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      sales_groups: {
-        Row: {
-          created_at: string
-          id: string
-          name: string
-        }
-        Insert: {
-          created_at?: string
-          id: string
-          name: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          name?: string
-        }
-        Relationships: []
-      }
       source_desk_agents: {
         Row: {
+          agentid: number | null
+          autofollowoncc: boolean | null
+          avatarurl: string | null
+          createdat: string | null
+          createdbyid: number | null
+          editmethod: string | null
+          email: string | null
+          firstname: string | null
           id: string
+          isappowner: boolean | null
+          isparttime: boolean | null
+          lastname: string | null
+          ldkey: string | null
+          projectscompanyid: number | null
+          reviewer: boolean | null
+          role: string | null
+          sendpushnotifications: boolean | null
+          sendwebnotifications: boolean | null
           source_data: Json
+          state: string | null
           synced_at: string | null
+          ticketreplyredirect: string | null
+          timeformatid: number | null
+          timezoneid: number | null
+          trainingwheelsenrollment: string | null
+          updatedat: string | null
+          updatedbyid: number | null
         }
         Insert: {
+          agentid?: number | null
+          autofollowoncc?: boolean | null
+          avatarurl?: string | null
+          createdat?: string | null
+          createdbyid?: number | null
+          editmethod?: string | null
+          email?: string | null
+          firstname?: string | null
           id?: string
+          isappowner?: boolean | null
+          isparttime?: boolean | null
+          lastname?: string | null
+          ldkey?: string | null
+          projectscompanyid?: number | null
+          reviewer?: boolean | null
+          role?: string | null
+          sendpushnotifications?: boolean | null
+          sendwebnotifications?: boolean | null
           source_data: Json
+          state?: string | null
           synced_at?: string | null
+          ticketreplyredirect?: string | null
+          timeformatid?: number | null
+          timezoneid?: number | null
+          trainingwheelsenrollment?: string | null
+          updatedat?: string | null
+          updatedbyid?: number | null
         }
         Update: {
+          agentid?: number | null
+          autofollowoncc?: boolean | null
+          avatarurl?: string | null
+          createdat?: string | null
+          createdbyid?: number | null
+          editmethod?: string | null
+          email?: string | null
+          firstname?: string | null
           id?: string
+          isappowner?: boolean | null
+          isparttime?: boolean | null
+          lastname?: string | null
+          ldkey?: string | null
+          projectscompanyid?: number | null
+          reviewer?: boolean | null
+          role?: string | null
+          sendpushnotifications?: boolean | null
+          sendwebnotifications?: boolean | null
           source_data?: Json
+          state?: string | null
           synced_at?: string | null
+          ticketreplyredirect?: string | null
+          timeformatid?: number | null
+          timezoneid?: number | null
+          trainingwheelsenrollment?: string | null
+          updatedat?: string | null
+          updatedbyid?: number | null
         }
         Relationships: []
       }
       source_desk_articles: {
         Row: {
+          articleid: number | null
+          authorid: number | null
+          categoryid: number | null
+          createdat: string | null
           id: string
+          siteid: number | null
           source_data: Json
+          status: string | null
           synced_at: string | null
+          title: string | null
+          updatedat: string | null
+          visibility: string | null
         }
         Insert: {
+          articleid?: number | null
+          authorid?: number | null
+          categoryid?: number | null
+          createdat?: string | null
           id?: string
+          siteid?: number | null
           source_data: Json
+          status?: string | null
           synced_at?: string | null
+          title?: string | null
+          updatedat?: string | null
+          visibility?: string | null
         }
         Update: {
+          articleid?: number | null
+          authorid?: number | null
+          categoryid?: number | null
+          createdat?: string | null
           id?: string
+          siteid?: number | null
           source_data?: Json
+          status?: string | null
           synced_at?: string | null
+          title?: string | null
+          updatedat?: string | null
+          visibility?: string | null
         }
         Relationships: []
       }
       source_desk_categories: {
         Row: {
+          categoryid: number | null
+          createdat: string | null
+          createdbyid: number | null
+          displayondochomepage: boolean | null
+          displayorder: number | null
+          helpdocssiteid: number | null
           id: string
+          name: string | null
+          oldurl: string | null
+          parentid: number | null
+          slug: string | null
           source_data: Json
+          state: string | null
           synced_at: string | null
+          updatedat: string | null
+          updatedbyid: number | null
         }
         Insert: {
+          categoryid?: number | null
+          createdat?: string | null
+          createdbyid?: number | null
+          displayondochomepage?: boolean | null
+          displayorder?: number | null
+          helpdocssiteid?: number | null
           id?: string
+          name?: string | null
+          oldurl?: string | null
+          parentid?: number | null
+          slug?: string | null
           source_data: Json
+          state?: string | null
           synced_at?: string | null
+          updatedat?: string | null
+          updatedbyid?: number | null
         }
         Update: {
+          categoryid?: number | null
+          createdat?: string | null
+          createdbyid?: number | null
+          displayondochomepage?: boolean | null
+          displayorder?: number | null
+          helpdocssiteid?: number | null
           id?: string
+          name?: string | null
+          oldurl?: string | null
+          parentid?: number | null
+          slug?: string | null
           source_data?: Json
+          state?: string | null
           synced_at?: string | null
+          updatedat?: string | null
+          updatedbyid?: number | null
         }
         Relationships: []
       }
@@ -2919,36 +3064,108 @@ export type Database = {
       }
       source_desk_customers: {
         Row: {
+          address: string | null
+          avatarurl: string | null
+          company: string | null
+          createdat: string | null
+          customerid: number | null
+          email: string | null
+          extradata: string | null
+          facebookurl: string | null
+          firstname: string | null
           id: string
+          jobtitle: string | null
+          language: string | null
+          lastname: string | null
+          linkedinurl: string | null
+          mobile: string | null
+          notes: string | null
+          phone: string | null
           source_data: Json
           synced_at: string | null
+          twitterhandle: string | null
+          updatedat: string | null
         }
         Insert: {
+          address?: string | null
+          avatarurl?: string | null
+          company?: string | null
+          createdat?: string | null
+          customerid?: number | null
+          email?: string | null
+          extradata?: string | null
+          facebookurl?: string | null
+          firstname?: string | null
           id?: string
+          jobtitle?: string | null
+          language?: string | null
+          lastname?: string | null
+          linkedinurl?: string | null
+          mobile?: string | null
+          notes?: string | null
+          phone?: string | null
           source_data: Json
           synced_at?: string | null
+          twitterhandle?: string | null
+          updatedat?: string | null
         }
         Update: {
+          address?: string | null
+          avatarurl?: string | null
+          company?: string | null
+          createdat?: string | null
+          customerid?: number | null
+          email?: string | null
+          extradata?: string | null
+          facebookurl?: string | null
+          firstname?: string | null
           id?: string
+          jobtitle?: string | null
+          language?: string | null
+          lastname?: string | null
+          linkedinurl?: string | null
+          mobile?: string | null
+          notes?: string | null
+          phone?: string | null
           source_data?: Json
           synced_at?: string | null
+          twitterhandle?: string | null
+          updatedat?: string | null
         }
         Relationships: []
       }
       source_desk_inboxes: {
         Row: {
+          color: string | null
+          email: string | null
+          icon: string | null
           id: string
+          inboxid: number | null
+          name: string | null
           source_data: Json
+          source_type: string | null
           synced_at: string | null
         }
         Insert: {
+          color?: string | null
+          email?: string | null
+          icon?: string | null
           id?: string
+          inboxid?: number | null
+          name?: string | null
           source_data: Json
+          source_type?: string | null
           synced_at?: string | null
         }
         Update: {
+          color?: string | null
+          email?: string | null
+          icon?: string | null
           id?: string
+          inboxid?: number | null
+          name?: string | null
           source_data?: Json
+          source_type?: string | null
           synced_at?: string | null
         }
         Relationships: []
@@ -2986,6 +3203,66 @@ export type Database = {
           id?: string
           source_data?: Json
           synced_at?: string | null
+        }
+        Relationships: []
+      }
+      source_desk_statuses: {
+        Row: {
+          code: string | null
+          color: string | null
+          createdat: string | null
+          createdbyid: number | null
+          createdbytype: string | null
+          displayorder: number | null
+          icon: string | null
+          id: string
+          iscustom: boolean | null
+          name: string | null
+          source_data: Json
+          state: string | null
+          statusid: number | null
+          synced_at: string | null
+          updatedat: string | null
+          updatedbyid: number | null
+          updatedbytype: string | null
+        }
+        Insert: {
+          code?: string | null
+          color?: string | null
+          createdat?: string | null
+          createdbyid?: number | null
+          createdbytype?: string | null
+          displayorder?: number | null
+          icon?: string | null
+          id?: string
+          iscustom?: boolean | null
+          name?: string | null
+          source_data: Json
+          state?: string | null
+          statusid?: number | null
+          synced_at?: string | null
+          updatedat?: string | null
+          updatedbyid?: number | null
+          updatedbytype?: string | null
+        }
+        Update: {
+          code?: string | null
+          color?: string | null
+          createdat?: string | null
+          createdbyid?: number | null
+          createdbytype?: string | null
+          displayorder?: number | null
+          icon?: string | null
+          id?: string
+          iscustom?: boolean | null
+          name?: string | null
+          source_data?: Json
+          state?: string | null
+          statusid?: number | null
+          synced_at?: string | null
+          updatedat?: string | null
+          updatedbyid?: number | null
+          updatedbytype?: string | null
         }
         Relationships: []
       }
@@ -3063,19 +3340,115 @@ export type Database = {
       }
       source_desk_tickets: {
         Row: {
+          assignedtoid: string | null
+          attachments: string | null
+          createdat: string | null
+          customerid: string | null
+          firstmessage: string | null
+          hasattachments: boolean | null
           id: string
           source_data: Json
+          subject: string | null
           synced_at: string | null
+          tags: string | null
+          threadcount: number | null
+          ticketid: number | null
+          ticketstatus: string | null
+          tickettype: string | null
+          updatedat: string | null
         }
         Insert: {
+          assignedtoid?: string | null
+          attachments?: string | null
+          createdat?: string | null
+          customerid?: string | null
+          firstmessage?: string | null
+          hasattachments?: boolean | null
           id?: string
           source_data: Json
+          subject?: string | null
           synced_at?: string | null
+          tags?: string | null
+          threadcount?: number | null
+          ticketid?: number | null
+          ticketstatus?: string | null
+          tickettype?: string | null
+          updatedat?: string | null
         }
         Update: {
+          assignedtoid?: string | null
+          attachments?: string | null
+          createdat?: string | null
+          customerid?: string | null
+          firstmessage?: string | null
+          hasattachments?: boolean | null
           id?: string
           source_data?: Json
+          subject?: string | null
           synced_at?: string | null
+          tags?: string | null
+          threadcount?: number | null
+          ticketid?: number | null
+          ticketstatus?: string | null
+          tickettype?: string | null
+          updatedat?: string | null
+        }
+        Relationships: []
+      }
+      source_desk_types: {
+        Row: {
+          createdat: string | null
+          createdbyid: number | null
+          createdbytype: string | null
+          displayorder: number | null
+          enabledforfutureinboxes: boolean | null
+          id: string
+          inboxes: Json | null
+          isdefault: boolean | null
+          name: string | null
+          source_data: Json
+          state: string | null
+          synced_at: string | null
+          typeid: number | null
+          updatedat: string | null
+          updatedbyid: number | null
+          updatedbytype: string | null
+        }
+        Insert: {
+          createdat?: string | null
+          createdbyid?: number | null
+          createdbytype?: string | null
+          displayorder?: number | null
+          enabledforfutureinboxes?: boolean | null
+          id?: string
+          inboxes?: Json | null
+          isdefault?: boolean | null
+          name?: string | null
+          source_data: Json
+          state?: string | null
+          synced_at?: string | null
+          typeid?: number | null
+          updatedat?: string | null
+          updatedbyid?: number | null
+          updatedbytype?: string | null
+        }
+        Update: {
+          createdat?: string | null
+          createdbyid?: number | null
+          createdbytype?: string | null
+          displayorder?: number | null
+          enabledforfutureinboxes?: boolean | null
+          id?: string
+          inboxes?: Json | null
+          isdefault?: boolean | null
+          name?: string | null
+          source_data?: Json
+          state?: string | null
+          synced_at?: string | null
+          typeid?: number | null
+          updatedat?: string | null
+          updatedbyid?: number | null
+          updatedbytype?: string | null
         }
         Relationships: []
       }
@@ -3117,19 +3490,64 @@ export type Database = {
       }
       source_projects_companies: {
         Row: {
+          address: Json | null
+          avatarpath: string | null
+          companyid: number | null
+          customerscount: number | null
+          details: string | null
+          domains: Json | null
+          email: string | null
           id: string
+          industry: string | null
+          kind: string | null
+          name: string | null
+          permission: string | null
+          phones: Json | null
+          sociallinks: Json | null
           source_data: Json
           synced_at: string | null
+          ticketscount: number | null
+          website: string | null
         }
         Insert: {
+          address?: Json | null
+          avatarpath?: string | null
+          companyid?: number | null
+          customerscount?: number | null
+          details?: string | null
+          domains?: Json | null
+          email?: string | null
           id?: string
+          industry?: string | null
+          kind?: string | null
+          name?: string | null
+          permission?: string | null
+          phones?: Json | null
+          sociallinks?: Json | null
           source_data: Json
           synced_at?: string | null
+          ticketscount?: number | null
+          website?: string | null
         }
         Update: {
+          address?: Json | null
+          avatarpath?: string | null
+          companyid?: number | null
+          customerscount?: number | null
+          details?: string | null
+          domains?: Json | null
+          email?: string | null
           id?: string
+          industry?: string | null
+          kind?: string | null
+          name?: string | null
+          permission?: string | null
+          phones?: Json | null
+          sociallinks?: Json | null
           source_data?: Json
           synced_at?: string | null
+          ticketscount?: number | null
+          website?: string | null
         }
         Relationships: []
       }
@@ -3315,61 +3733,154 @@ export type Database = {
       }
       source_projects_projects: {
         Row: {
+          budget_capacity: number | null
+          budget_left: number | null
+          budget_used: number | null
           category_id: number | null
+          category_name: string | null
+          cl_renewal_date: string | null
           company_id: number | null
+          company_name: string | null
+          completed_by_firstname: string | null
+          completed_by_lastname: string | null
+          completed_date: string | null
+          completed_on_time: boolean | null
+          ct_filing_date: string | null
           custom_fields: Json | null
           date_created: string | null
           default_privacy: string | null
+          description: string | null
+          due_date: string | null
+          end_date: string | null
+          external_code: string | null
           harvest_timers_enabled: boolean | null
           id: string
           is_archived: boolean | null
+          jurisdiction: string | null
+          last_active: string | null
           last_changed_on: string | null
+          latest_update: string | null
           logo_url: string | null
+          payroll_incl_sla: boolean | null
+          portfolio_boards: string | null
+          portfolio_column: string | null
+          project_health: string | null
+          project_id: number | null
+          project_name: string | null
           project_owner_id: number | null
+          project_owner_name: string | null
           project_url: string | null
           source_data: Json
           starred: boolean | null
+          start_date: string | null
+          status: string | null
           status_color: string | null
           synced_at: string | null
           tags: Json | null
+          tax_incl_sla: boolean | null
+          tw_updated_date: string | null
+          vat_periods: string | null
+          xero_code: string | null
         }
         Insert: {
+          budget_capacity?: number | null
+          budget_left?: number | null
+          budget_used?: number | null
           category_id?: number | null
+          category_name?: string | null
+          cl_renewal_date?: string | null
           company_id?: number | null
+          company_name?: string | null
+          completed_by_firstname?: string | null
+          completed_by_lastname?: string | null
+          completed_date?: string | null
+          completed_on_time?: boolean | null
+          ct_filing_date?: string | null
           custom_fields?: Json | null
           date_created?: string | null
           default_privacy?: string | null
+          description?: string | null
+          due_date?: string | null
+          end_date?: string | null
+          external_code?: string | null
           harvest_timers_enabled?: boolean | null
           id?: string
           is_archived?: boolean | null
+          jurisdiction?: string | null
+          last_active?: string | null
           last_changed_on?: string | null
+          latest_update?: string | null
           logo_url?: string | null
+          payroll_incl_sla?: boolean | null
+          portfolio_boards?: string | null
+          portfolio_column?: string | null
+          project_health?: string | null
+          project_id?: number | null
+          project_name?: string | null
           project_owner_id?: number | null
+          project_owner_name?: string | null
           project_url?: string | null
           source_data: Json
           starred?: boolean | null
+          start_date?: string | null
+          status?: string | null
           status_color?: string | null
           synced_at?: string | null
           tags?: Json | null
+          tax_incl_sla?: boolean | null
+          tw_updated_date?: string | null
+          vat_periods?: string | null
+          xero_code?: string | null
         }
         Update: {
+          budget_capacity?: number | null
+          budget_left?: number | null
+          budget_used?: number | null
           category_id?: number | null
+          category_name?: string | null
+          cl_renewal_date?: string | null
           company_id?: number | null
+          company_name?: string | null
+          completed_by_firstname?: string | null
+          completed_by_lastname?: string | null
+          completed_date?: string | null
+          completed_on_time?: boolean | null
+          ct_filing_date?: string | null
           custom_fields?: Json | null
           date_created?: string | null
           default_privacy?: string | null
+          description?: string | null
+          due_date?: string | null
+          end_date?: string | null
+          external_code?: string | null
           harvest_timers_enabled?: boolean | null
           id?: string
           is_archived?: boolean | null
+          jurisdiction?: string | null
+          last_active?: string | null
           last_changed_on?: string | null
+          latest_update?: string | null
           logo_url?: string | null
+          payroll_incl_sla?: boolean | null
+          portfolio_boards?: string | null
+          portfolio_column?: string | null
+          project_health?: string | null
+          project_id?: number | null
+          project_name?: string | null
           project_owner_id?: number | null
+          project_owner_name?: string | null
           project_url?: string | null
           source_data?: Json
           starred?: boolean | null
+          start_date?: string | null
+          status?: string | null
           status_color?: string | null
           synced_at?: string | null
           tags?: Json | null
+          tax_incl_sla?: boolean | null
+          tw_updated_date?: string | null
+          vat_periods?: string | null
+          xero_code?: string | null
         }
         Relationships: []
       }
@@ -3429,19 +3940,112 @@ export type Database = {
       }
       source_projects_tasks: {
         Row: {
+          assigned_to: string | null
+          billable_minutes: number | null
+          board_column: string | null
+          company_name: string | null
+          completed_by: string | null
+          completed_date: string | null
+          created_at: string | null
+          created_by: string | null
+          due_date: string | null
           id: string
+          is_private: boolean | null
+          milestone: string | null
+          nonbillable_minutes: number | null
+          parent_task_id: number | null
+          price: number | null
+          priority: string | null
+          priority_level: string | null
+          priority_text: string | null
+          progress: number | null
+          project_description: string | null
+          project_name: string | null
+          sku_ref: string | null
           source_data: Json
+          start_date: string | null
+          status: string | null
           synced_at: string | null
+          tags: string[] | null
+          task_description: string | null
+          task_list: string | null
+          task_list_description: string | null
+          task_list_name: string | null
+          task_name: string | null
+          taskid: number | null
+          time_estimate: string | null
         }
         Insert: {
+          assigned_to?: string | null
+          billable_minutes?: number | null
+          board_column?: string | null
+          company_name?: string | null
+          completed_by?: string | null
+          completed_date?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          due_date?: string | null
           id?: string
+          is_private?: boolean | null
+          milestone?: string | null
+          nonbillable_minutes?: number | null
+          parent_task_id?: number | null
+          price?: number | null
+          priority?: string | null
+          priority_level?: string | null
+          priority_text?: string | null
+          progress?: number | null
+          project_description?: string | null
+          project_name?: string | null
+          sku_ref?: string | null
           source_data: Json
+          start_date?: string | null
+          status?: string | null
           synced_at?: string | null
+          tags?: string[] | null
+          task_description?: string | null
+          task_list?: string | null
+          task_list_description?: string | null
+          task_list_name?: string | null
+          task_name?: string | null
+          taskid?: number | null
+          time_estimate?: string | null
         }
         Update: {
+          assigned_to?: string | null
+          billable_minutes?: number | null
+          board_column?: string | null
+          company_name?: string | null
+          completed_by?: string | null
+          completed_date?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          due_date?: string | null
           id?: string
+          is_private?: boolean | null
+          milestone?: string | null
+          nonbillable_minutes?: number | null
+          parent_task_id?: number | null
+          price?: number | null
+          priority?: string | null
+          priority_level?: string | null
+          priority_text?: string | null
+          progress?: number | null
+          project_description?: string | null
+          project_name?: string | null
+          sku_ref?: string | null
           source_data?: Json
+          start_date?: string | null
+          status?: string | null
           synced_at?: string | null
+          tags?: string[] | null
+          task_description?: string | null
+          task_list?: string | null
+          task_list_description?: string | null
+          task_list_name?: string | null
+          task_name?: string | null
+          taskid?: number | null
+          time_estimate?: string | null
         }
         Relationships: []
       }
@@ -3610,237 +4214,33 @@ export type Database = {
       source_xero_contacts: {
         Row: {
           AccountNumber: string | null
-          AccountsPayableTaxCodeName: string | null
-          AccountsReceivableTaxCodeName: string | null
-          BankAccountName: string | null
-          BankAccountNumber: string | null
-          BankAccountParticulars: string | null
-          BrandingTheme: string | null
-          CompanyNumber: string | null
           ContactName: string | null
-          DDINumber: string | null
-          DefaultTaxBills: string | null
-          DefaultTaxSales: string | null
-          Discount: string | null
-          DueDateBillDay: string | null
-          DueDateBillTerm: string | null
-          DueDateSalesDay: string | null
-          DueDateSalesTerm: string | null
           EmailAddress: string | null
-          FaxNumber: string | null
           FirstName: string | null
           id: string
           LastName: string | null
-          LegalName: string | null
-          MobileNumber: string | null
-          Person1Email: string | null
-          Person1FirstName: string | null
-          Person1IncludeInEmail: string | null
-          Person1LastName: string | null
-          Person2Email: string | null
-          Person2FirstName: string | null
-          Person2IncludeInEmail: string | null
-          Person2LastName: string | null
-          Person3Email: string | null
-          Person3FirstName: string | null
-          Person3IncludeInEmail: string | null
-          Person3LastName: string | null
-          Person4Email: string | null
-          Person4FirstName: string | null
-          Person4IncludeInEmail: string | null
-          Person4LastName: string | null
-          Person5Email: string | null
-          Person5FirstName: string | null
-          Person5IncludeInEmail: string | null
-          Person5LastName: string | null
-          PhoneNumber: string | null
-          POAddressLine1: string | null
-          POAddressLine2: string | null
-          POAddressLine3: string | null
-          POAddressLine4: string | null
-          POAttentionTo: string | null
-          POCity: string | null
-          POCountry: string | null
-          POPostalCode: string | null
-          PORegion: string | null
-          PurchasesAccount: string | null
-          PurchasesTrackingOption1: string | null
-          PurchasesTrackingOption2: string | null
-          SAAddressLine1: string | null
-          SAAddressLine2: string | null
-          SAAddressLine3: string | null
-          SAAddressLine4: string | null
-          SAAttentionTo: string | null
-          SACity: string | null
-          SACountry: string | null
-          SalesAccount: string | null
-          SalesTrackingOption1: string | null
-          SalesTrackingOption2: string | null
-          SAPostalCode: string | null
-          SARegion: string | null
-          SkypeName: string | null
           source_data: Json
           synced_at: string | null
-          TaxNumber: string | null
-          TrackingName1: string | null
-          TrackingName2: string | null
-          Website: string | null
         }
         Insert: {
           AccountNumber?: string | null
-          AccountsPayableTaxCodeName?: string | null
-          AccountsReceivableTaxCodeName?: string | null
-          BankAccountName?: string | null
-          BankAccountNumber?: string | null
-          BankAccountParticulars?: string | null
-          BrandingTheme?: string | null
-          CompanyNumber?: string | null
           ContactName?: string | null
-          DDINumber?: string | null
-          DefaultTaxBills?: string | null
-          DefaultTaxSales?: string | null
-          Discount?: string | null
-          DueDateBillDay?: string | null
-          DueDateBillTerm?: string | null
-          DueDateSalesDay?: string | null
-          DueDateSalesTerm?: string | null
           EmailAddress?: string | null
-          FaxNumber?: string | null
           FirstName?: string | null
           id?: string
           LastName?: string | null
-          LegalName?: string | null
-          MobileNumber?: string | null
-          Person1Email?: string | null
-          Person1FirstName?: string | null
-          Person1IncludeInEmail?: string | null
-          Person1LastName?: string | null
-          Person2Email?: string | null
-          Person2FirstName?: string | null
-          Person2IncludeInEmail?: string | null
-          Person2LastName?: string | null
-          Person3Email?: string | null
-          Person3FirstName?: string | null
-          Person3IncludeInEmail?: string | null
-          Person3LastName?: string | null
-          Person4Email?: string | null
-          Person4FirstName?: string | null
-          Person4IncludeInEmail?: string | null
-          Person4LastName?: string | null
-          Person5Email?: string | null
-          Person5FirstName?: string | null
-          Person5IncludeInEmail?: string | null
-          Person5LastName?: string | null
-          PhoneNumber?: string | null
-          POAddressLine1?: string | null
-          POAddressLine2?: string | null
-          POAddressLine3?: string | null
-          POAddressLine4?: string | null
-          POAttentionTo?: string | null
-          POCity?: string | null
-          POCountry?: string | null
-          POPostalCode?: string | null
-          PORegion?: string | null
-          PurchasesAccount?: string | null
-          PurchasesTrackingOption1?: string | null
-          PurchasesTrackingOption2?: string | null
-          SAAddressLine1?: string | null
-          SAAddressLine2?: string | null
-          SAAddressLine3?: string | null
-          SAAddressLine4?: string | null
-          SAAttentionTo?: string | null
-          SACity?: string | null
-          SACountry?: string | null
-          SalesAccount?: string | null
-          SalesTrackingOption1?: string | null
-          SalesTrackingOption2?: string | null
-          SAPostalCode?: string | null
-          SARegion?: string | null
-          SkypeName?: string | null
           source_data: Json
           synced_at?: string | null
-          TaxNumber?: string | null
-          TrackingName1?: string | null
-          TrackingName2?: string | null
-          Website?: string | null
         }
         Update: {
           AccountNumber?: string | null
-          AccountsPayableTaxCodeName?: string | null
-          AccountsReceivableTaxCodeName?: string | null
-          BankAccountName?: string | null
-          BankAccountNumber?: string | null
-          BankAccountParticulars?: string | null
-          BrandingTheme?: string | null
-          CompanyNumber?: string | null
           ContactName?: string | null
-          DDINumber?: string | null
-          DefaultTaxBills?: string | null
-          DefaultTaxSales?: string | null
-          Discount?: string | null
-          DueDateBillDay?: string | null
-          DueDateBillTerm?: string | null
-          DueDateSalesDay?: string | null
-          DueDateSalesTerm?: string | null
           EmailAddress?: string | null
-          FaxNumber?: string | null
           FirstName?: string | null
           id?: string
           LastName?: string | null
-          LegalName?: string | null
-          MobileNumber?: string | null
-          Person1Email?: string | null
-          Person1FirstName?: string | null
-          Person1IncludeInEmail?: string | null
-          Person1LastName?: string | null
-          Person2Email?: string | null
-          Person2FirstName?: string | null
-          Person2IncludeInEmail?: string | null
-          Person2LastName?: string | null
-          Person3Email?: string | null
-          Person3FirstName?: string | null
-          Person3IncludeInEmail?: string | null
-          Person3LastName?: string | null
-          Person4Email?: string | null
-          Person4FirstName?: string | null
-          Person4IncludeInEmail?: string | null
-          Person4LastName?: string | null
-          Person5Email?: string | null
-          Person5FirstName?: string | null
-          Person5IncludeInEmail?: string | null
-          Person5LastName?: string | null
-          PhoneNumber?: string | null
-          POAddressLine1?: string | null
-          POAddressLine2?: string | null
-          POAddressLine3?: string | null
-          POAddressLine4?: string | null
-          POAttentionTo?: string | null
-          POCity?: string | null
-          POCountry?: string | null
-          POPostalCode?: string | null
-          PORegion?: string | null
-          PurchasesAccount?: string | null
-          PurchasesTrackingOption1?: string | null
-          PurchasesTrackingOption2?: string | null
-          SAAddressLine1?: string | null
-          SAAddressLine2?: string | null
-          SAAddressLine3?: string | null
-          SAAddressLine4?: string | null
-          SAAttentionTo?: string | null
-          SACity?: string | null
-          SACountry?: string | null
-          SalesAccount?: string | null
-          SalesTrackingOption1?: string | null
-          SalesTrackingOption2?: string | null
-          SAPostalCode?: string | null
-          SARegion?: string | null
-          SkypeName?: string | null
           source_data?: Json
           synced_at?: string | null
-          TaxNumber?: string | null
-          TrackingName1?: string | null
-          TrackingName2?: string | null
-          Website?: string | null
         }
         Relationships: []
       }
@@ -3936,19 +4336,67 @@ export type Database = {
       }
       source_xero_invoices: {
         Row: {
+          contact_name: string | null
+          currency: string | null
+          due_date: string | null
+          email_address: string | null
           id: string
+          invoice_number: string | null
+          issue_date: string | null
+          reference: string | null
           source_data: Json
+          status: string | null
+          subtotal: number | null
           synced_at: string | null
+          tax_amount: number | null
+          total: number | null
+          tracking_name_1: string | null
+          tracking_name_2: string | null
+          tracking_option_1: string | null
+          tracking_option_2: string | null
+          type: string | null
         }
         Insert: {
+          contact_name?: string | null
+          currency?: string | null
+          due_date?: string | null
+          email_address?: string | null
           id?: string
+          invoice_number?: string | null
+          issue_date?: string | null
+          reference?: string | null
           source_data: Json
+          status?: string | null
+          subtotal?: number | null
           synced_at?: string | null
+          tax_amount?: number | null
+          total?: number | null
+          tracking_name_1?: string | null
+          tracking_name_2?: string | null
+          tracking_option_1?: string | null
+          tracking_option_2?: string | null
+          type?: string | null
         }
         Update: {
+          contact_name?: string | null
+          currency?: string | null
+          due_date?: string | null
+          email_address?: string | null
           id?: string
+          invoice_number?: string | null
+          issue_date?: string | null
+          reference?: string | null
           source_data?: Json
+          status?: string | null
+          subtotal?: number | null
           synced_at?: string | null
+          tax_amount?: number | null
+          total?: number | null
+          tracking_name_1?: string | null
+          tracking_name_2?: string | null
+          tracking_option_1?: string | null
+          tracking_option_2?: string | null
+          type?: string | null
         }
         Relationships: []
       }
@@ -4093,6 +4541,57 @@ export type Database = {
           id?: string
           source_data?: Json
           synced_at?: string | null
+        }
+        Relationships: []
+      }
+      source_xero_quotes: {
+        Row: {
+          branding: string | null
+          business_unit: string | null
+          contact_account_number: string | null
+          contact_name: string | null
+          created_date: string | null
+          expiry_date: string | null
+          id: string
+          quote_date: string | null
+          quote_number: string | null
+          source_data: Json
+          status: string | null
+          synced_at: string | null
+          total_amount: number | null
+          vertical: string | null
+        }
+        Insert: {
+          branding?: string | null
+          business_unit?: string | null
+          contact_account_number?: string | null
+          contact_name?: string | null
+          created_date?: string | null
+          expiry_date?: string | null
+          id?: string
+          quote_date?: string | null
+          quote_number?: string | null
+          source_data: Json
+          status?: string | null
+          synced_at?: string | null
+          total_amount?: number | null
+          vertical?: string | null
+        }
+        Update: {
+          branding?: string | null
+          business_unit?: string | null
+          contact_account_number?: string | null
+          contact_name?: string | null
+          created_date?: string | null
+          expiry_date?: string | null
+          id?: string
+          quote_date?: string | null
+          quote_number?: string | null
+          source_data?: Json
+          status?: string | null
+          synced_at?: string | null
+          total_amount?: number | null
+          vertical?: string | null
         }
         Relationships: []
       }
@@ -4482,6 +4981,20 @@ export type Database = {
             referencedColumns: ["auth_user_id"]
           },
         ]
+      }
+      v_ticket_revenue: {
+        Row: {
+          contact_name: string | null
+          invoice_number: string | null
+          invoice_status: string | null
+          invoice_total: number | null
+          quote_number: string | null
+          quote_status: string | null
+          quote_total: number | null
+          subject: string | null
+          ticket_id: string | null
+        }
+        Relationships: []
       }
     }
     Functions: {

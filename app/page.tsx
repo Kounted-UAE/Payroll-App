@@ -14,7 +14,7 @@ const { profile, loading } = useAuth()
 useEffect(() => {
   if (!loading) {
     if (profile) {
-      router.push("/dashboard")
+      router.push("/backyard")
     } else {
       router.push("/auth/login")
     }

@@ -1,3 +1,5 @@
+// app/auth/login/page.tsx
+
 'use client'
 
 import Image from 'next/image'
@@ -6,36 +8,48 @@ import LoginNotice from '@/components/auth/login-notice'
 
 export default function LoginPage() {
   return (
-<section className="relative min-h-screen flex flex-col  bg-brand-dark/50 lg:flex-row text-foreground">
-  {/* Background pattern */}
-  <div className="absolute inset-0 -z-10">
-    <Image
-      src="/backgrounds/kounted_bg_charcoal.webp"
-      alt="Kounted Background"
-      fill
-      className="object-cover"
-      priority
-    />
-    <div className="absolute inset-0 bg-gradient-to-br from-black/70 to-transparent" />
-  </div>
+    <div className="relative min-h-screen flex flex-col items-center justify-start px-4 py-4">
+      
+       {/* Background pattern */}
+       <div className="absolute inset-0 -z-10 overflow-hidden  bg-zinc-900">
+        <Image
+          src="/backgrounds/kounted_bg_charcoal.webp"
+          alt="Dark background"
+          fill
+          className="object-cover opacity-10 block "
+          priority
+        />
+      </div>
 
-   {/* Right: Notice board with subtle blur and border */}
-   <div className="w-full lg:w-1/2 flex items-center justify-center px-4 py-12">
-    <div className="w-full max-w-md bg-white/5 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
-      <LoginNotice />
+
+
+      {/* Hero */}
+      <section className='mx-auto max-w-7xl relative flex items-center justify-between mt-8 px-4'>
+      <div className='text-center w-full '>
+      <Image
+          src="/logos/kounted_logo_text_light.webp"
+          alt="Kounted Logo"
+          width={240}
+          height={60}
+          className="mx-auto py-2"
+        />
+          <h2 className=" max-w-3xl text-4xl mt-4 font-medium tracking-tight leading-tight text-white">
+                     We take <span className="text-brand-lime">complete ownership</span> of our client's compliance and operational requirements.
+          </h2>
+          <br />        
+        
+      </div>
+    </section>
+
+      {/* Form */}
+      <div className="w-full max-w-md mt-2 backdrop-blur-sm border border-border rounded-2xl p-6 shadow-xl z-10">
+        <LoginForm />
+      </div>
+
+      {/* Notice */}
+      <div className="w-full max-w-md mt-2 backdrop-blur-sm">
+        <LoginNotice />
+      </div>
     </div>
-  </div>
-
-  {/* Left: Login form with similar card treatment */}
-  <div className="w-full lg:w-1/2 flex items-center justify-center px-4 py-12">
-    <div className="w-full max-w-md bg-white/5 backdrop-blur-sm border border-border rounded-2xl p-6 shadow-xl">
-      <LoginForm />
-    </div>
-  </div>
-
- 
-
-</section>
-
   )
 }

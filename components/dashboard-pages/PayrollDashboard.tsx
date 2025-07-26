@@ -2,6 +2,8 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { Skeleton } from "@/components/ui/skeleton"
+import { usePayrollStats } from "@/hooks/usePayroll"
 import { 
   Users, 
   Building, 
@@ -11,36 +13,39 @@ import {
   BarChart3,
   Plus,
   Calendar,
-  TrendingUp
+  TrendingUp,
+  AlertCircle
 } from "lucide-react"
 import Link from "next/link"
 
 const PayrollDashboard = () => {
-  const stats = [
+  const { stats, loading, error } = usePayrollStats()
+
+  const statsData = [
     {
       title: "Total Employers",
-      value: "12",
+      value: loading ? <Skeleton className="h-8 w-16" /> : stats.totalEmployers.toString(),
       description: "Active clients",
       icon: Building,
       trend: "+2 this month"
     },
     {
       title: "Total Employees",
-      value: "456",
+      value: loading ? <Skeleton className="h-8 w-16" /> : stats.totalEmployees.toString(),
       description: "Across all employers",
       icon: Users,
       trend: "+23 this month"
     },
     {
       title: "Monthly Payroll",
-      value: "AED 2.4M",
+      value: loading ? <Skeleton className="h-8 w-20" /> : `AED ${(stats.monthlyPayroll / 1000).toFixed(1)}K`,
       description: "Current month total",
       icon: DollarSign,
       trend: "+8.2% vs last month"
     },
     {
       title: "Pending Payruns",
-      value: "3",
+      value: loading ? <Skeleton className="h-8 w-8" /> : stats.activePayruns.toString(),
       description: "Awaiting processing",
       icon: Calendar,
       trend: "Due this week"
@@ -52,28 +57,28 @@ const PayrollDashboard = () => {
       title: "Add New Employer",
       description: "Onboard a new client company",
       icon: Building,
-      href: "/payroll/employers/new",
+      href: "/backyard/payroll/employers/new",
       color: "bg-blue-500"
     },
     {
       title: "Add Employee",
       description: "Register new employee",
       icon: Users,
-      href: "/payroll/employees/new",
+      href: "/backyard/payroll/employees/new",
       color: "bg-green-500"
     },
     {
       title: "Create Payrun",
       description: "Process monthly payroll",
       icon: FileText,
-      href: "/payroll/payruns/new",
+      href: "/backyard/payroll/payruns/new",
       color: "bg-purple-500"
     },
     {
       title: "Review Claims",
       description: "Approve expense claims",
       icon: Receipt,
-      href: "/payroll/expenses",
+      href: "/backyard/payroll/expenses",
       color: "bg-orange-500"
     }
   ]
@@ -105,23 +110,45 @@ const PayrollDashboard = () => {
     }
   ]
 
+  if (error) {
+    return (
+      <div className="flex-1 space-y-6 p-6">
+        <div className="flex items-center space-x-2 text-red-600">
+          <AlertCircle className="h-5 w-5" />
+          <h1 className="text-2xl font-bold">Error Loading Dashboard</h1>
+        </div>
+        <Card>
+          <CardContent className="p-6">
+            <p className="text-muted-foreground">{error}</p>
+            <Button 
+              onClick={() => window.location.reload()} 
+              className="mt-4"
+            >
+              Retry
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
   return (
     <div className="flex-1 space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">UAE Payroll Dashboard</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Payroll under Management</h1>
           <p className="text-muted-foreground">
             Comprehensive payroll management for UAE businesses
           </p>
         </div>
         <div className="flex gap-2">
-          <Link href="/payroll/reports">
+          <Link href="/backyard/payroll/reports">
             <Button variant="outline">
               <BarChart3 className="mr-2 h-4 w-4" />
               Reports
             </Button>
           </Link>
-          <Link href="/payroll/payruns/new">
+          <Link href="/backyard/payroll/payruns/new">
             <Button>
               <Plus className="mr-2 h-4 w-4" />
               New Payrun
@@ -132,7 +159,7 @@ const PayrollDashboard = () => {
 
       {/* Statistics Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {stats.map((stat) => (
+        {statsData.map((stat) => (
           <Card key={stat.title}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">

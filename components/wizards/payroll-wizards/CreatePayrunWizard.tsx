@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -71,7 +73,7 @@ const CreatePayrunWizard = () => {
       setCurrentStep(currentStep + 1)
     } else {
       // Create payrun
-      router.push("/dashboard/payroll/payruns")
+      router.push("/backyard/payroll/payruns")
     }
   }
 
@@ -100,7 +102,7 @@ const CreatePayrunWizard = () => {
             Set up a new payroll run for processing employee salaries
           </p>
         </div>
-        <Button variant="outline" onClick={() => router.push("/dashboard/payroll/payruns")}>
+        <Button variant="outline" onClick={() => router.push("/backyard/payroll/payruns")}>
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Payruns
         </Button>

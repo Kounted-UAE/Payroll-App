@@ -1,4 +1,4 @@
-//app/dashboard/payroll/reports/page.tsx
+//app/backyard/payroll/reports/page.tsx
 'use client'
 
 import PayrollReports from '@/components/dashboard-pages/PayrollReports';

@@ -37,7 +37,7 @@ export default function LoginForm() {
     if (authError) setError(authError.message)
     else if (user && session) {
       setSuccess('Login successful! Redirecting...')
-      setTimeout(() => router.push('/dashboard'), 1000)
+      setTimeout(() => router.push('/backyard'), 1000)
     }
     setLoading(false)
   }
@@ -54,13 +54,15 @@ export default function LoginForm() {
       {/* Header */}
       <div className="space-y-3 text-center">
         <Image
-          src="/logos/kounted_logo_text_light.webp"
+          src="/icons/kounted_Icon_green_light.webp"
           alt="Kounted Logo"
-          width={130}
-          height={30}
+          width={48}
+          height={48}
           className="mx-auto py-2"
         />
-        <h1 className="text-lg font-semibold text-brand-green">Sign In</h1>
+        <p className={'mt-6 text-lg leading-6 font-semibold text-brand-lime '}>
+          Welcome to the Sheet Show
+        </p>
         <p className="text-sm text-zinc-300">
           Enter your email to receive a secure one-time login code.
         </p>
@@ -87,8 +89,8 @@ export default function LoginForm() {
           className="space-y-5 bg-white/5 backdrop-blur-md border border-border rounded-2xl p-6 shadow-lg"
         >
           <div className="space-y-1">
-            <Label htmlFor="email" className="text-xs text-brand-light">
-              Submit Email Address
+            <Label htmlFor="email" className="text-xs text-brand-apple">
+              Enter your Kounted email
             </Label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400" />
@@ -97,7 +99,7 @@ export default function LoginForm() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
+                placeholder="you@kounted.ae"
                 className="pl-10 bg-white text-black text-sm"
                 required
               />
@@ -105,7 +107,7 @@ export default function LoginForm() {
           </div>
           <Button
             type="submit"
-            className="w-full bg-brand-green text-brand-dark text-sm"
+            className="w-full bg-brand-lime text-brand-dark text-sm"
             disabled={loading}
           >
             {loading ? 'Sending OTP...' : 'Send OTP to Email'}
@@ -121,7 +123,7 @@ export default function LoginForm() {
           className="space-y-5 bg-white/5 backdrop-blur-md border border-border rounded-2xl p-6 shadow-lg"
         >
           <div className="space-y-1">
-            <Label htmlFor="otp" className="text-xs text-brand-light">
+            <Label htmlFor="otp" className="text-xs text-brand-apple">
               Enter OTP Code
             </Label>
             <Input

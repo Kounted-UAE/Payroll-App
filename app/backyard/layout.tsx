@@ -1,4 +1,4 @@
-// app/dashboard/layout.tsx
+// app/backyard/layout.tsx
 import DashboardLayout from "@/components/dashboard-layout/DashboardLayout";
 import { SidebarProvider } from '@/components/ui/sidebar'
 

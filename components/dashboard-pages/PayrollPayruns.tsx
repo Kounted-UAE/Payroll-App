@@ -1,8 +1,13 @@
-import { useState } from "react"
+'use client'
+
+import React, { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
+import { Skeleton } from "@/components/ui/skeleton"
+import { useToast } from "@/hooks/use-toast"
+import { usePayrollPayruns } from "@/hooks/usePayroll"
 import { 
   Calendar, 
   Search, 
@@ -15,99 +20,307 @@ import {
   DollarSign,
   FileText,
   Play,
-  CheckCircle
+  CheckCircle,
+  AlertCircle,
+  ArrowUpDown,
+  MoreHorizontal
 } from "lucide-react"
 import Link from "next/link"
+import { z } from "zod"
+import {
+  ColumnDef,
+  ColumnFiltersState,
+  SortingState,
+  VisibilityState,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+// Payrun Schema using Zod
+const PayrunSchema = z.object({
+  id: z.string(),
+  employer_name: z.string(),
+  pay_period_start: z.string(),
+  pay_period_end: z.string(),
+  created_at: z.string(),
+  updated_at: z.string(),
+  processed_at: z.string().optional(),
+  status: z.enum(["draft", "locked", "processing", "completed"]),
+})
+
+type Payrun = z.infer<typeof PayrunSchema>
 
 const PayrollPayruns = () => {
   const [searchQuery, setSearchQuery] = useState("")
+  const [sorting, setSorting] = useState<SortingState>([])
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+  const [rowSelection, setRowSelection] = useState({})
+  
+  const { toast } = useToast()
+  const { 
+    payruns, 
+    loading, 
+    error, 
+    closePayrun 
+  } = usePayrollPayruns()
 
-  const payruns = [
+  // Transform payruns data to match schema
+  const tableData: Payrun[] = payruns.map(payrun => ({
+    id: payrun.id,
+    employer_name: payrun.payroll_objects_employers?.legal_name || 'Unknown Employer',
+    pay_period_start: payrun.pay_period_start,
+    pay_period_end: payrun.pay_period_end,
+    created_at: payrun.created_at,
+    updated_at: payrun.updated_at,
+    processed_at: payrun.processed_at,
+    status: payrun.status as "draft" | "locked" | "processing" | "completed",
+  }))
+
+  // Table columns definition
+  const columns: ColumnDef<Payrun>[] = [
     {
-      id: 1,
-      employer: "Emirates Technology LLC",
-      employer_id: 1,
-      pay_period_start: "2024-01-01",
-      pay_period_end: "2024-01-31",
-      employee_count: 85,
-      gross_total: 1275000,
-      net_total: 1147500,
-      eosb_total: 63750,
-      status: "Completed",
-      created_date: "2024-02-01",
-      locked_date: "2024-02-05",
-      wps_exported: true
+      accessorKey: "employer_name",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+            className="h-auto p-0 font-semibold"
+          >
+            Employer
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+      cell: ({ row }) => <div className="font-medium">{row.getValue("employer_name")}</div>,
     },
     {
-      id: 2,
-      employer: "Al Noor Industries PJSC",
-      employer_id: 2,
-      pay_period_start: "2024-01-01",
-      pay_period_end: "2024-01-31",
-      employee_count: 156,
-      gross_total: 2340000,
-      net_total: 2106000,
-      eosb_total: 117000,
-      status: "Locked",
-      created_date: "2024-02-01",
-      locked_date: "2024-02-03",
-      wps_exported: false
+      accessorKey: "pay_period_start",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+            className="h-auto p-0 font-semibold"
+          >
+            Period Start
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+      cell: ({ row }) => <div>{new Date(row.getValue("pay_period_start")).toLocaleDateString()}</div>,
     },
     {
-      id: 3,
-      employer: "Gulf Trading Company LLC",
-      employer_id: 3,
-      pay_period_start: "2024-01-01",
-      pay_period_end: "2024-01-31",
-      employee_count: 42,
-      gross_total: 378000,
-      net_total: 340200,
-      eosb_total: 18900,
-      status: "Draft",
-      created_date: "2024-02-01",
-      locked_date: null,
-      wps_exported: false
+      accessorKey: "pay_period_end",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+            className="h-auto p-0 font-semibold"
+          >
+            Period End
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+      cell: ({ row }) => <div>{new Date(row.getValue("pay_period_end")).toLocaleDateString()}</div>,
     },
     {
-      id: 4,
-      employer: "Emirates Technology LLC",
-      employer_id: 1,
-      pay_period_start: "2024-02-01",
-      pay_period_end: "2024-02-29",
-      employee_count: 85,
-      gross_total: 1275000,
-      net_total: 1147500,
-      eosb_total: 63750,
-      status: "Processing",
-      created_date: "2024-03-01",
-      locked_date: null,
-      wps_exported: false
-    }
+      accessorKey: "status",
+      header: "Status",
+      cell: ({ row }) => {
+        const status = row.getValue("status") as string
+        return (
+          <Badge variant={getStatusColor(status)}>
+            {status}
+          </Badge>
+        )
+      },
+    },
+    {
+      accessorKey: "created_at",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+            className="h-auto p-0 font-semibold"
+          >
+            Created
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+      cell: ({ row }) => <div>{new Date(row.getValue("created_at")).toLocaleDateString()}</div>,
+    },
+    {
+      accessorKey: "processed_at",
+      header: "Processed",
+      cell: ({ row }) => {
+        const processedAt = row.getValue("processed_at") as string | undefined
+        return processedAt ? <div>{new Date(processedAt).toLocaleDateString()}</div> : <div className="text-muted-foreground">-</div>
+      },
+    },
+    {
+      id: "actions",
+      enableHiding: false,
+      cell: ({ row }) => {
+        const payrun = row.original
+        const StatusIcon = getStatusIcon(payrun.status)
+
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuItem
+                onClick={() => navigator.clipboard.writeText(payrun.id)}
+              >
+                Copy payrun ID
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Link href={`/backyard/payroll/payruns/${payrun.id}`} className="flex items-center">
+                  <Eye className="mr-2 h-4 w-4" />
+                  View Details
+                </Link>
+              </DropdownMenuItem>
+              {payrun.status === "draft" && (
+                <DropdownMenuItem
+                  onClick={() => handleClosePayrun(payrun.id, payrun.employer_name)}
+                >
+                  <Play className="mr-2 h-4 w-4" />
+                  Process Payrun
+                </DropdownMenuItem>
+              )}
+              <DropdownMenuItem>
+                <Link href={`/backyard/payroll/payslips?payrun=${payrun.id}`} className="flex items-center">
+                  <FileText className="mr-2 h-4 w-4" />
+                  View Payslips
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href={`/backyard/payroll/reports?payrun=${payrun.id}`} className="flex items-center">
+                  <Download className="mr-2 h-4 w-4" />
+                  Export Report
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )
+      },
+    },
   ]
 
-  const filteredPayruns = payruns.filter(payrun =>
-    payrun.employer.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    payrun.status.toLowerCase().includes(searchQuery.toLowerCase())
-  )
+  // Initialize table
+  const table = useReactTable({
+    data: tableData,
+    columns,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      sorting,
+      columnFilters,
+      columnVisibility,
+      rowSelection,
+    },
+  })
 
-  const getStatusColor = (status: string) => {
+  // Update table filter when search query changes
+  React.useEffect(() => {
+    table.getColumn("employer_name")?.setFilterValue(searchQuery)
+  }, [searchQuery, table])
+
+  const getStatusColor = (status: string | null) => {
     switch (status) {
-      case "Completed": return "default"
-      case "Locked": return "secondary"
-      case "Processing": return "destructive"
-      case "Draft": return "outline"
+      case "completed": return "default"
+      case "locked": return "secondary"
+      case "processing": return "destructive"
+      case "draft": return "outline"
       default: return "secondary"
     }
   }
 
-  const getStatusIcon = (status: string) => {
+  const getStatusIcon = (status: string | null) => {
     switch (status) {
-      case "Completed": return CheckCircle
-      case "Locked": return Lock
-      case "Processing": return Play
-      case "Draft": return FileText
+      case "completed": return CheckCircle
+      case "locked": return Lock
+      case "processing": return Play
+      case "draft": return FileText
       default: return FileText
     }
+  }
+
+  const handleClosePayrun = async (id: string, name: string) => {
+    try {
+      await closePayrun(id)
+      toast({
+        title: "Payrun closed",
+        description: `${name} has been successfully closed.`,
+      })
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to close payrun. Please try again.",
+        variant: "destructive",
+      })
+    }
+  }
+
+  if (error) {
+    return (
+      <div className="flex-1 space-y-6 p-6">
+        <div className="flex items-center space-x-2 text-red-600">
+          <AlertCircle className="h-5 w-5" />
+          <h1 className="text-2xl font-bold">Error Loading Payruns</h1>
+        </div>
+        <Card>
+          <CardContent className="p-6">
+            <p className="text-muted-foreground">{error}</p>
+            <Button 
+              onClick={() => window.location.reload()} 
+              className="mt-4"
+            >
+              Retry
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    )
   }
 
   return (
@@ -119,7 +332,7 @@ const PayrollPayruns = () => {
             Process and manage monthly payroll calculations
           </p>
         </div>
-        <Link href="/payroll/payruns/new">
+        <Link href="/backyard/payroll/payruns/new">
           <Button>
             <Plus className="mr-2 h-4 w-4" />
             Create Payrun
@@ -157,7 +370,9 @@ const PayrollPayruns = () => {
             <div className="flex items-center space-x-2">
               <FileText className="h-5 w-5 text-blue-600" />
               <div>
-                <p className="text-2xl font-bold">{payruns.filter(p => p.status === "Draft").length}</p>
+                <p className="text-2xl font-bold">
+                  {loading ? <Skeleton className="h-8 w-8" /> : payruns.filter(p => p.status === "draft").length}
+                </p>
                 <p className="text-sm text-muted-foreground">Draft Payruns</p>
               </div>
             </div>
@@ -168,7 +383,9 @@ const PayrollPayruns = () => {
             <div className="flex items-center space-x-2">
               <Play className="h-5 w-5 text-orange-600" />
               <div>
-                <p className="text-2xl font-bold">{payruns.filter(p => p.status === "Processing").length}</p>
+                <p className="text-2xl font-bold">
+                  {loading ? <Skeleton className="h-8 w-8" /> : payruns.filter(p => p.status === "processing").length}
+                </p>
                 <p className="text-sm text-muted-foreground">Processing</p>
               </div>
             </div>
@@ -179,7 +396,9 @@ const PayrollPayruns = () => {
             <div className="flex items-center space-x-2">
               <Lock className="h-5 w-5 text-purple-600" />
               <div>
-                <p className="text-2xl font-bold">{payruns.filter(p => p.status === "Locked").length}</p>
+                <p className="text-2xl font-bold">
+                  {loading ? <Skeleton className="h-8 w-8" /> : payruns.filter(p => p.status === "locked").length}
+                </p>
                 <p className="text-sm text-muted-foreground">Locked</p>
               </div>
             </div>
@@ -190,7 +409,9 @@ const PayrollPayruns = () => {
             <div className="flex items-center space-x-2">
               <CheckCircle className="h-5 w-5 text-green-600" />
               <div>
-                <p className="text-2xl font-bold">{payruns.filter(p => p.status === "Completed").length}</p>
+                <p className="text-2xl font-bold">
+                  {loading ? <Skeleton className="h-8 w-8" /> : payruns.filter(p => p.status === "completed").length}
+                </p>
                 <p className="text-sm text-muted-foreground">Completed</p>
               </div>
             </div>
@@ -198,175 +419,171 @@ const PayrollPayruns = () => {
         </Card>
       </div>
 
-      {/* Payruns List */}
-      <div className="grid gap-6">
-        {filteredPayruns.map((payrun) => {
-          const StatusIcon = getStatusIcon(payrun.status)
-          return (
-            <Card key={payrun.id}>
+      {/* Loading State */}
+      {loading && (
+        <div className="grid gap-6">
+          {[1, 2, 3].map((i) => (
+            <Card key={i}>
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex items-start space-x-4">
-                    <div className="p-3 bg-blue-50 rounded-lg">
-                      <StatusIcon className="h-6 w-6 text-blue-600" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-xl">{payrun.employer}</CardTitle>
-                      <CardDescription className="flex items-center space-x-4 mt-1">
-                        <span>Period: {payrun.pay_period_start} to {payrun.pay_period_end}</span>
-                        <span>•</span>
-                        <span>Created: {payrun.created_date}</span>
-                      </CardDescription>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Badge variant={getStatusColor(payrun.status)}>
-                      {payrun.status}
-                    </Badge>
-                    {payrun.wps_exported && (
-                      <Badge variant="outline" className="text-green-600">
-                        WPS Exported
-                      </Badge>
-                    )}
-                    <div className="flex space-x-1">
-                      <Button variant="ghost" size="sm">
-                        <Eye className="h-4 w-4" />
-                      </Button>
-                      {payrun.status === "Draft" && (
-                        <Button variant="ghost" size="sm">
-                          <Play className="h-4 w-4" />
-                        </Button>
-                      )}
-                      {payrun.status === "Locked" && (
-                        <Button variant="ghost" size="sm">
-                          <Download className="h-4 w-4" />
-                        </Button>
-                      )}
+                    <Skeleton className="h-12 w-12 rounded-lg" />
+                    <div className="space-y-2">
+                      <Skeleton className="h-6 w-48" />
+                      <Skeleton className="h-4 w-32" />
                     </div>
                   </div>
                 </div>
               </CardHeader>
               <CardContent>
                 <div className="grid md:grid-cols-4 gap-6">
-                  <div className="space-y-3">
-                    <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
-                      Employee Count
-                    </h4>
-                    <div className="flex items-center space-x-2">
-                      <Users className="h-5 w-5 text-blue-600" />
-                      <span className="text-2xl font-bold">{payrun.employee_count}</span>
-                      <span className="text-sm text-muted-foreground">employees</span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
-                      Gross Total
-                    </h4>
-                    <div className="flex items-center space-x-2">
-                      <DollarSign className="h-5 w-5 text-green-600" />
-                      <span className="text-2xl font-bold text-green-600">
-                        AED {payrun.gross_total.toLocaleString()}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
-                      Net Total
-                    </h4>
-                    <div className="flex items-center space-x-2">
-                      <DollarSign className="h-5 w-5 text-blue-600" />
-                      <span className="text-2xl font-bold text-blue-600">
-                        AED {payrun.net_total.toLocaleString()}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
-                      EOSB Accrual
-                    </h4>
-                    <div className="flex items-center space-x-2">
-                      <Calendar className="h-5 w-5 text-purple-600" />
-                      <span className="text-2xl font-bold text-purple-600">
-                        AED {payrun.eosb_total.toLocaleString()}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 pt-4 border-t flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    {payrun.locked_date && (
-                      <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                        <Lock className="h-4 w-4" />
-                        <span>Locked on {payrun.locked_date}</span>
+                  {[1, 2, 3, 4].map((j) => (
+                    <div key={j} className="space-y-3">
+                      <Skeleton className="h-4 w-24" />
+                      <div className="space-y-2">
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-3/4" />
                       </div>
-                    )}
-                  </div>
-                  <div className="flex space-x-2">
-                    {payrun.status === "Draft" && (
-                      <>
-                        <Button variant="outline" size="sm">
-                          <FileText className="mr-2 h-4 w-4" />
-                          Edit
-                        </Button>
-                        <Button size="sm">
-                          <Play className="mr-2 h-4 w-4" />
-                          Process
-                        </Button>
-                      </>
-                    )}
-                    {payrun.status === "Processing" && (
-                      <Button variant="outline" size="sm">
-                        <Lock className="mr-2 h-4 w-4" />
-                        Lock & Finalize
-                      </Button>
-                    )}
-                    {payrun.status === "Locked" && !payrun.wps_exported && (
-                      <Button size="sm">
-                        <Download className="mr-2 h-4 w-4" />
-                        Export WPS
-                      </Button>
-                    )}
-                    {payrun.status === "Completed" && payrun.id ? (
-                      <Link href={`/payroll/payslips?payrun=${payrun.id}`}>
-                        <Button variant="outline" size="sm">
-                          <FileText className="mr-2 h-4 w-4" />
-                          View Payslips
-                        </Button>
-                      </Link>
-                    ) : payrun.status === "Completed" ? (
-                      <Button variant="outline" size="sm" disabled>
-                        <FileText className="mr-2 h-4 w-4" />
-                        View Payslips
-                      </Button>
-                    ) : null}
-                  </div>
+                    </div>
+                  ))}
                 </div>
               </CardContent>
             </Card>
-          )
-        })}
-      </div>
+          ))}
+        </div>
+      )}
 
-      {filteredPayruns.length === 0 && (
-        <Card>
-          <CardContent className="p-12 text-center">
-            <Calendar className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-lg font-semibold mb-2">No payruns found</h3>
-            <p className="text-muted-foreground mb-4">
-              {searchQuery ? "Try adjusting your search criteria" : "Get started by creating your first payrun"}
-            </p>
-            <Link href="/payroll/payruns/new">
-              <Button>
-                <Plus className="mr-2 h-4 w-4" />
-                Create First Payrun
+      {/* Payruns Table */}
+      {!loading && (
+        <div className="space-y-4">
+          {/* Table Controls */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <Input
+                placeholder="Filter employers..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="max-w-sm"
+              />
+            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="ml-auto">
+                  Columns <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                {table
+                  .getAllColumns()
+                  .filter((column) => column.getCanHide())
+                  .map((column) => {
+                    return (
+                      <DropdownMenuCheckboxItem
+                        key={column.id}
+                        className="capitalize"
+                        checked={column.getIsVisible()}
+                        onCheckedChange={(value) =>
+                          column.toggleVisibility(!!value)
+                        }
+                      >
+                        {column.id}
+                      </DropdownMenuCheckboxItem>
+                    )
+                  })}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          {/* Table */}
+          <div className="rounded-md border">
+            <Table>
+              <TableHeader>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => {
+                      return (
+                        <TableHead key={header.id}>
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                        </TableHead>
+                      )
+                    })}
+                  </TableRow>
+                ))}
+              </TableHeader>
+              <TableBody>
+                {table.getRowModel().rows?.length ? (
+                  table.getRowModel().rows.map((row) => (
+                    <TableRow
+                      key={row.id}
+                      data-state={row.getIsSelected() && "selected"}
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell
+                      colSpan={columns.length}
+                      className="h-24 text-center"
+                    >
+                      <div className="flex flex-col items-center justify-center space-y-2">
+                        <Calendar className="h-8 w-8 text-muted-foreground" />
+                        <h3 className="text-lg font-semibold">No payruns found</h3>
+                        <p className="text-muted-foreground">
+                          {searchQuery ? "Try adjusting your search criteria" : "Get started by creating your first payrun"}
+                        </p>
+                        <Link href="/backyard/payroll/payruns/new">
+                          <Button>
+                            <Plus className="mr-2 h-4 w-4" />
+                            Create First Payrun
+                          </Button>
+                        </Link>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </div>
+
+          {/* Pagination */}
+          <div className="flex items-center justify-end space-x-2 py-4">
+            <div className="flex-1 text-sm text-muted-foreground">
+              {table.getFilteredSelectedRowModel().rows.length} of{" "}
+              {table.getFilteredRowModel().rows.length} row(s) selected.
+            </div>
+            <div className="space-x-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => table.previousPage()}
+                disabled={!table.getCanPreviousPage()}
+              >
+                Previous
               </Button>
-            </Link>
-          </CardContent>
-        </Card>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => table.nextPage()}
+                disabled={!table.getCanNextPage()}
+              >
+                Next
+              </Button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   )

@@ -1,4 +1,6 @@
 
+'use client'
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -12,8 +14,8 @@ import { ChevronLeft, ChevronRight, Save, Check, Building, MapPin, CreditCard, U
 import { toast } from '@/hooks/use-toast';
 
 interface AddEmployerWizardProps {
-  onComplete: (employerData: any) => void;
-  onCancel: () => void;
+  onComplete?: (employerData: any) => void;
+  onCancel?: () => void;
 }
 
 const STEPS = [
@@ -107,7 +109,11 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
       title: "Success",
       description: "Employer added successfully"
     });
-    onComplete(formData);
+    if (onComplete) {
+      onComplete(formData);
+    } else {
+      // Default behavior: could add navigation here if needed
+    }
   };
 
   const progress = (currentStep / STEPS.length) * 100;
@@ -665,7 +671,13 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
 
       {/* Navigation */}
       <div className="flex items-center justify-between mt-6">
-        <Button variant="outline" onClick={onCancel}>
+        <Button variant="outline" onClick={() => {
+          if (onCancel) {
+            onCancel();
+          } else {
+            window.history.back();
+          }
+        }}>
           Cancel
         </Button>
         

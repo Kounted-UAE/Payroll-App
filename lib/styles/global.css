@@ -2,12 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Design system: HSL color tokens, radii, and contextual variables */
 
 @layer base {
   :root {
+    /* Base layout */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -17,33 +16,44 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 142 76% 36%;
+    --radius: 0.5rem;
+
+    /* Core UI colors */
     --primary: 142 76% 36%;
     --primary-foreground: 0 0% 98%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
     --accent: 142 69% 58%;
     --accent-foreground: 0 0% 98%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 142 76% 36%;
+    /* Brand colors */
+    --brand-lime: hsl(91 53% 43%);        /* #80C041 */
+    --brand-dark: hsl(139 82% 15%);       /* #094213 */
+    --brand-charcoal: hsl(139 70% 17%);   /* #0B4624 */
+    --brand-light: hsl(90 44% 96%);       /* #F6F9F3 */
 
-    --brand-light: 142 50% 40%;
-    --brand-dark: 146 68% 14%;
-    --brand-green: 142 76% 36%;
-    --brand-charcoal: 192 6% 15%;
-    --brand-olive: 132 23% 92%;
+    /* Sidebar system */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 220 9% 30%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 142 69% 92%;
+    --sidebar-accent-foreground: 220 9% 60%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
 
-
-    /* Dashboard specific colors */
+    /* Dashboard / status colors */
     --success: 142 76% 36%;
     --success-foreground: 0 0% 98%;
     --warning: 48 96% 53%;
@@ -53,23 +63,12 @@ All colors MUST be HSL.
     --failed: 0 84.2% 60.2%;
     --failed-foreground: 0 0% 98%;
 
-    /* Chart colors */
+    /* Chart palette */
     --chart-1: 142 76% 36%;
     --chart-2: 142 69% 58%;
     --chart-3: 142 62% 80%;
     --chart-4: 142 55% 90%;
     --chart-5: 142 48% 95%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 220 9% 30%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 142 69% 92%;
-    --sidebar-accent-foreground: 220 9% 60%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
@@ -82,32 +81,31 @@ All colors MUST be HSL.
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --brand-light: 90 33% 96%;
-    --brand-dark: 146 68% 14%;
-    --brand-green: 90 50% 50%;
-    --brand-charcoal: 192 6% 15%;
-    --brand-olive: 132 23% 92%;
+   /* Brand colors */
+    --brand-lime: hsl(91 53% 43%);        /* #80C041 */
+    --brand-dark: hsl(139 82% 15%);       /* #094213 */
+    --brand-charcoal: hsl(139 70% 17%);   /* #0B4624 */
+    --brand-light: hsl(90 44% 96%);       /* #F6F9F3 */
 
-
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 220 9% 30%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -117,9 +115,7 @@ All colors MUST be HSL.
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }

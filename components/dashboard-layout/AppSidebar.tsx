@@ -37,17 +37,17 @@ export function AppSidebar() {
   const isActive = (path: string) => pathname === path
   const getNavCls = (path: string) =>
     isActive(path)
-      ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
-      : "text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground"
+      ? "bg-green-600/30 text-zinc-500 font-bold rounded-xl hover:bg-zinc-500/20"
+      : "text-sidebar-foreground hover:bg-zinc-500/20 hover:text-sidebar-accent-foreground"
 
   const toggle = (label: string) =>
     setExpanded((prev) => ({ ...prev, [label]: !prev[label] }))
 
   return (
-    <Sidebar className={collapsed ? "w-14" : "w-64"} collapsible="icon">
+    <Sidebar className={collapsed ? "w-24" : "w-64"} collapsible="icon">
       <SidebarHeader className="shadow-sm border-b border-border bg-zinc-100">
         {!collapsed ? (
-          <div className="p-4">
+          <div className="p-4 h-20">
             <div className="flex items-center gap-2"><Image src="/icons/kounted_Icon_green_light.webp" alt="Kounted Logo" width={32} height={32} />
               <div className="flex flex-col">
                 <h2 className="text-md font-bold text-brand-charcoal">Kounted's Backyard</h2>
@@ -83,7 +83,7 @@ export function AppSidebar() {
           <SidebarGroup key={section.label}>
             {!collapsed && (
               <div className="flex items-center justify-between px-3 py-2">
-                <SidebarGroupLabel className="text-[10px] font-semibold text-brand-light uppercase tracking-tight">
+                <SidebarGroupLabel className="text-[10px] font-semibold text-brand-apple uppercase tracking-tight">
                   {section.label}
                 </SidebarGroupLabel>
                 {section.collapsible !== false && (
@@ -104,16 +104,34 @@ export function AppSidebar() {
               <SidebarGroupContent>
                 {section.items && (
                   <SidebarMenu>
-                    {section.items.map((item) => (
-                      <SidebarMenuItem key={item.title}>
-                        <SidebarMenuButton asChild>
-                          <Link href={item.url} className={getNavCls(item.url)}>
-                            <item.icon className="h-4 w-4" />
-                            {!collapsed && <span className="text-[12px]">{item.title}</span>}
-                          </Link>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    ))}
+                    {section.items.map((item) => {
+                      const status = item.status || "active";
+                      const isInactive = status === "coming-soon" || status === "wip";
+                      return (
+                        <SidebarMenuItem key={item.title}>
+                          {isInactive ? (
+                            <div className="flex items-center px-2 py-1 opacity-60 italic text-zinc-400 cursor-not-allowed select-none">
+                              <item.icon className="h-4 w-4" />
+                              {!collapsed && (
+                                <>
+                                  <span className="text-[12px] ml-2">{item.title}</span>
+                                  <span className="ml-auto text-xs bg-zinc-200 text-zinc-500 rounded px-2 py-0.5">
+                                    {status === "coming-soon" ? "Coming Soon" : "WIP"}
+                                  </span>
+                                </>
+                              )}
+                            </div>
+                          ) : (
+                            <SidebarMenuButton asChild>
+                              <Link href={item.url} className={getNavCls(item.url)}>
+                                <item.icon className="h-4 w-4" />
+                                {!collapsed && <span className="text-[12px]">{item.title}</span>}
+                              </Link>
+                            </SidebarMenuButton>
+                          )}
+                        </SidebarMenuItem>
+                      );
+                    })}
                   </SidebarMenu>
                 )}                 
               </SidebarGroupContent>

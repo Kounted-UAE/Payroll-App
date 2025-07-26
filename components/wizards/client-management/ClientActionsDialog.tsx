@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState } from 'react';
 import {
   Dialog,
@@ -9,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { supabase } from '@/integrations/supabase/client';
+import { getSupabaseClient } from '@/lib/supabase/client';
 import { toast } from '@/hooks/use-toast';
 
 interface Client {
@@ -84,6 +86,7 @@ export default function ClientActionsDialog({
     setLoading(true);
 
     try {
+      const supabase = getSupabaseClient();
       if (mode === 'edit' && client) {
         const { error } = await supabase
           .from('clients')

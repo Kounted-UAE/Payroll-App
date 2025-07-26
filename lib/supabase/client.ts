@@ -3,13 +3,18 @@
 import { createBrowserClient } from "@supabase/ssr"
 import { Database } from "@/lib/types/supabase"
 
-export const supabase = createBrowserClient<Database>(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  {
-    auth: {
-      persistSession: true,
-      storage: localStorage, // critical for persistent login across reloads
-    },
+export function getSupabaseClient() {
+  if (typeof window === 'undefined') {
+    throw new Error('getSupabaseClient must be called in the browser')
   }
-)
+  return createBrowserClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      auth: {
+        persistSession: true,
+        storage: localStorage, // critical for persistent login across reloads
+      },
+    }
+  )
+}

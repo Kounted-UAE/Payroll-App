@@ -1,8 +1,9 @@
 // lib/supabase/auth.ts
 
-import { supabase } from "./client"
+import { getSupabaseClient } from "./client"
 
 export async function signInWithOTP(email: string) {
+  const supabase = getSupabaseClient()
   const { error } = await supabase.auth.signInWithOtp({
     email,
     options: {
@@ -13,6 +14,7 @@ export async function signInWithOTP(email: string) {
 }
 
 export async function verifyOTP(email: string, token: string) {
+  const supabase = getSupabaseClient()
   const { data, error } = await supabase.auth.verifyOtp({
     email,
     token,

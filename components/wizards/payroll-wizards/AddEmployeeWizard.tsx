@@ -1,4 +1,6 @@
 
+'use client'
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -12,8 +14,8 @@ import { ChevronLeft, ChevronRight, Save, Check, User, Briefcase, CreditCard, Do
 import { toast } from '@/hooks/use-toast';
 
 interface AddEmployeeWizardProps {
-  onComplete: (employeeData: any) => void;
-  onCancel: () => void;
+  onComplete?: (employeeData: any) => void;
+  onCancel?: () => void;
 }
 
 const STEPS = [
@@ -109,7 +111,11 @@ export default function AddEmployeeWizard({ onComplete, onCancel }: AddEmployeeW
       title: "Success",
       description: "Employee added successfully"
     });
-    onComplete(formData);
+    if (onComplete) {
+      onComplete(formData);
+    } else {
+      // Default behavior: could add navigation here if needed
+    }
   };
 
   const progress = (currentStep / STEPS.length) * 100;
@@ -645,7 +651,13 @@ export default function AddEmployeeWizard({ onComplete, onCancel }: AddEmployeeW
 
       {/* Navigation */}
       <div className="flex items-center justify-between mt-6">
-        <Button variant="outline" onClick={onCancel}>
+        <Button variant="outline" onClick={() => {
+          if (onCancel) {
+            onCancel();
+          } else {
+            window.history.back();
+          }
+        }}>
           Cancel
         </Button>
         

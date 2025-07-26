@@ -104,7 +104,7 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
     }
     
     onClose();
-    router.push(`/dashboard/compliance/sop/${sopId}`);
+    router.push(`/backyard/compliance/sop/${sopId}`);
   };
 
   return (
