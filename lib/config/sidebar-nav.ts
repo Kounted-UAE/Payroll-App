@@ -31,7 +31,7 @@ import {
     {
       label: "Payroll Tools",
       items: [
-        { title: "Payroll Overview", url: "/backyard/payroll", icon: BarChart3, status: "active" },
+        { title: "Kounted Payroll", url: "/backyard/payroll", icon: BarChart3, status: "active" },
         { title: "Employers", url: "/backyard/payroll/employers", icon: Building, status: "active" },
         { title: "Employees", url: "/backyard/payroll/employees", icon: Users, status: "active" },
         { title: "Salary Structures", url: "/backyard/payroll/salary-structures", icon: DollarSign, status: "active" },

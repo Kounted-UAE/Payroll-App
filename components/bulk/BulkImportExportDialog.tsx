@@ -1,32 +1,35 @@
+// components/bulk/BulkImportExportDialog.tsx
+
 'use client'
 
-import React, { useRef, useEffect, useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import Papa from 'papaparse';
-import { z, ZodSchema } from 'zod';
-import { createClient } from '@supabase/supabase-js';
-import { toast } from '@/hooks/use-toast';
-import { Upload as UploadIcon } from 'lucide-react';
+import React, { useRef, useEffect, useState } from 'react'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Badge } from '@/components/ui/badge'
+import Papa from 'papaparse'
+import { z, ZodSchema } from 'zod'
+import { createClient } from '@supabase/supabase-js'
+import { toast } from '@/hooks/use-toast'
+import { Upload as UploadIcon } from 'lucide-react'
+import { checkForDuplicates } from '@/lib/utils/checkForDuplicates'
 
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 export type BulkImportExportDialogProps<T> = {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  objectName: string;
-  tableName: string;
-  schema: ZodSchema<T>;
-  templateHeaders: string[];
-  exampleRow: Partial<T>;
-  transform?: (row: T) => T | Promise<T>;
-  filters?: Record<string, any>;
-};
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  objectName: string
+  tableName: string
+  schema: ZodSchema<T>
+  templateHeaders: string[]
+  exampleRow: Partial<T>
+  transform?: (row: T) => T | Promise<T>
+  filters?: Record<string, any>
+  deduplicationKeys?: (keyof T)[]
+}
 
 export function BulkImportExportDialog<T>({
   open,
@@ -37,133 +40,149 @@ export function BulkImportExportDialog<T>({
   templateHeaders,
   exampleRow,
   transform,
-  filters
+  filters,
+  deduplicationKeys = ['email', 'emirates_id'] as (keyof T)[]
 }: BulkImportExportDialogProps<T>) {
-  const [tab, setTab] = useState<'import' | 'export' | 'template'>('import');
-  const [csvFile, setCsvFile] = useState<File | null>(null);
-  const [parsedRows, setParsedRows] = useState<any[]>([]);
-  const [validationResults, setValidationResults] = useState<{ valid: T[]; errors: { row: number; error: string }[] }>({ valid: [], errors: [] });
-  const [importing, setImporting] = useState(false);
-  const [exporting, setExporting] = useState(false);
-  const [downloading, setDownloading] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [tab, setTab] = useState<'import' | 'export' | 'template'>('import')
+  const [csvFile, setCsvFile] = useState<File | null>(null)
+  const [parsedRows, setParsedRows] = useState<any[]>([])
+  const [validationResults, setValidationResults] = useState<{ valid: T[]; errors: { row: number; error: string }[] }>({ valid: [], errors: [] })
+  const [importing, setImporting] = useState(false)
+  const [exporting, setExporting] = useState(false)
+  const [downloading, setDownloading] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setCsvFile(file);
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setCsvFile(file)
+
     Papa.parse(file, {
       header: true,
       skipEmptyLines: true,
-      complete: (results) => {
-        const rows = results.data as any[];
-        setParsedRows(rows);
-        const valid: T[] = [];
-        const errors: { row: number; error: string }[] = [];
+      complete: async (results) => {
+        const rows = results.data as any[]
+        setParsedRows(rows)
+
+        const valid: (T & { __index: number })[] = []
+        const errors: { row: number; error: string }[] = []
+
+        // First pass: validate schema
         rows.forEach((row, idx) => {
-          const parsed = schema.safeParse(row);
+          const parsed = schema.safeParse(row)
           if (parsed.success) {
-            valid.push(parsed.data);
+            valid.push({ ...parsed.data, __index: idx + 2 })
           } else {
-            errors.push({ row: idx + 2, error: parsed.error.errors.map(e => e.message).join('; ') });
+            errors.push({
+              row: idx + 2,
+              error: parsed.error.errors.map(e => e.message).join('; ')
+            })
           }
-        });
-        setValidationResults({ valid, errors });
+        })
+
+        // Second pass: apply transform if available
+        let transformedRows = valid
+        if (transform) {
+          try {
+            transformedRows = await Promise.all(
+              valid.map(async (row) => {
+                const transformed = await transform(row)
+                return { ...transformed, __index: row.__index }
+              })
+            )
+          } catch (err) {
+            console.error('Transform error:', err)
+            errors.push({
+              row: 0,
+              error: 'Transform function failed'
+            })
+          }
+        }
+
+        // Third pass: deduplication check (AFTER transform)
+        try {
+          const { data: existingRows, error: existingError } = await supabase
+            .from(tableName)
+            .select(deduplicationKeys.join(','))
+
+          if (existingError || !existingRows) {
+            toast({
+              title: 'Deduplication Error',
+              description: existingError?.message || 'Could not fetch existing records.',
+              variant: 'destructive'
+            })
+            return
+          }
+
+          const { unique, duplicates } = checkForDuplicates<T>(
+            transformedRows,
+            existingRows as T[],
+            deduplicationKeys
+          )
+
+          setValidationResults({
+            valid: unique,
+            errors: [
+              ...errors,
+              ...duplicates.map(d => ({
+                row: (d as any).__index || 0,
+                error: 'Duplicate employee (same first name, last name, and employer)'
+              }))
+            ]
+          })
+        } catch (err) {
+          console.error('❌ Deduplication logic error:', err)
+        }
       },
       error: (err) => {
-        toast({ title: 'CSV Parse Error', description: err.message, variant: 'destructive' });
+        toast({ title: 'CSV Parse Error', description: err.message, variant: 'destructive' })
       }
-    });
-  };
+    })
+  }
 
   const handleCopyErrors = () => {
-    const text = validationResults.errors.map(e => `Row ${e.row}: ${e.error}`).join('\n');
-    navigator.clipboard.writeText(text);
-    toast({ title: 'Copied', description: 'Error messages copied to clipboard.' });
-  };
+    const text = validationResults.errors.map(e => `Row ${e.row}: ${e.error}`).join('\n')
+    navigator.clipboard.writeText(text)
+    toast({ title: 'Copied', description: 'Error messages copied to clipboard.' })
+  }
 
   const handleImport = async () => {
-    setImporting(true);
-    let rows = validationResults.valid;
+    setImporting(true)
+    let rows = validationResults.valid
 
     try {
-      // Apply transform if provided
-      if (transform) {
-        console.log('🔄 Applying transform to', rows.length, 'rows...');
-        rows = await Promise.all(rows.map(transform));
-        console.log('✅ Transform completed. Sample row:', rows[0]);
-      }
+      // Remove the transform here since it was already applied in handleFileChange
+      // Clean up internal properties before insertion
+      const cleanRows = rows.map(row => {
+        const { __index, ...cleanRow } = row as any
+        return cleanRow
+      })
 
-      console.log('📊 Attempting to insert', rows.length, 'rows into', tableName);
-      console.log('📋 Sample data being inserted:', JSON.stringify(rows.slice(0, 1), null, 2));
-      console.log('📦 Total rows:', rows.length);
+      if (cleanRows.length === 0) return
 
-      // Test with single row first if multiple rows
-      if (rows.length > 1) {
-        console.log('🧪 Testing single row insert first...');
-        const testResult = await supabase.from(tableName).insert(rows[0]);
-        if (testResult.error) {
-          console.error('❌ Single row test failed:', testResult.error);
-          console.log('🔍 Failed row data:', JSON.stringify(rows[0], null, 2));
-          toast({
-            title: 'Import Error',
-            description: `Test insert failed: ${testResult.error.message || 'Constraint violation'}`,
-            variant: 'destructive'
-          });
-          return;
-        } else {
-          console.log('✅ Single row test successful, proceeding with batch insert...');
-        }
-      }
-
-      // Enhanced insert with better error handling
-      const { data, error } = await supabase.from(tableName).insert(rows);
+      const { error } = await supabase.from(tableName).insert(cleanRows)
 
       if (error) {
-        console.error('❌ Supabase insert error:', error);
-        console.error('🔍 Error details:', {
-          message: error.message,
-          details: error.details,
-          hint: error.hint,
-          code: error.code
-        });
-        console.log('🔍 Inserted row shape:', JSON.stringify(rows[0], null, 2));
-        console.log('🔍 All rows shape:', rows.map((row, i) => ({ row: i, keys: Object.keys(row) })));
-
-        // Check for common constraint violations
-        let errorMessage = error.message || 'Unknown constraint violation';
-        if (error.code === '23505') {
-          errorMessage = 'Duplicate entry detected (unique constraint violation)';
-        } else if (error.code === '23502') {
-          errorMessage = 'Required field missing (NOT NULL constraint violation)';
-        } else if (error.code === '22P02') {
-          errorMessage = 'Invalid data type (type mismatch)';
-        }
-
         toast({
           title: 'Import Error',
-          description: `Database error: ${errorMessage}`,
+          description: error.message || 'Insert failed.',
           variant: 'destructive'
-        });
-      } else {
-        console.log('✅ Insert successful. Inserted data:', data);
-        toast({
-          title: 'Import Success',
-          description: `Successfully imported ${rows.length} ${objectName.toLowerCase()}(s).`
-        });
-        onOpenChange(false);
+        })
+        return
       }
-    } catch (err) {
-      console.error('💥 Unexpected error during import:', err);
+
       toast({
-        title: 'Import Error',
-        description: `Unexpected error: ${err instanceof Error ? err.message : 'Unknown error'}`,
-        variant: 'destructive'
-      });
+        title: 'Import Success',
+        description: `Imported ${cleanRows.length} ${objectName}(s)`
+      })
+      onOpenChange(false)
+    } catch (err) {
+      console.error(err)
+      toast({ title: 'Import Error', description: 'Unexpected error', variant: 'destructive' })
     } finally {
-      setImporting(false);
+      setImporting(false)
     }
-  };
+  }
 
   const handleExport = async () => {
     setExporting(true);
@@ -266,29 +285,24 @@ export function BulkImportExportDialog<T>({
           <div className="space-y-6">
             {/* File Input */}
             <div>
-           {/* Enhanced File Upload Label */}
-<div className="relative inline-block">
-<label
-  htmlFor="csv-upload"
-  className="flex items-center gap-2 px-4 py-2 text-xs font-medium text-blue-700 border border-border rounded-md bg-background cursor-pointer transition-colors duration-150 hover:bg-accent hover:text-accent-foreground"
->
-  <UploadIcon className="w-4 h-4" />
-  {csvFile ? csvFile.name : 'Upload CSV File'}
-</label>
-
-  <input
-    id="csv-upload"
-    type="file"
-    accept=".csv"
-    ref={fileInputRef}
-    onChange={handleFileChange}
-    className="absolute inset-0 opacity-0 cursor-pointer"
-  />
-</div>
-
-
-
-
+              {/* Enhanced File Upload Label */}
+              <div className="relative inline-block">
+                <label
+                  htmlFor="csv-upload"
+                  className="flex items-center gap-2 px-4 py-2 text-xs font-medium text-blue-700 border border-border rounded-md bg-background cursor-pointer transition-colors duration-150 hover:bg-accent hover:text-accent-foreground"
+                >
+                  <UploadIcon className="w-4 h-4" />
+                  {csvFile ? csvFile.name : 'Upload CSV File'}
+                </label>
+                <input
+                  id="csv-upload"
+                  type="file"
+                  accept=".csv"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  className="absolute inset-0 opacity-0 cursor-pointer"
+                />
+              </div>
             </div>
 
             {/* Preview and Validation Results */}

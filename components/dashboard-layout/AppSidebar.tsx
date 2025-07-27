@@ -49,7 +49,7 @@ export function AppSidebar() {
       )}
     >
       {/* Sticky Header */}
-      <SidebarHeader className="sticky top-0 z-50 h-24 border-b border-border bg-gradient-to-r from-[#022000] to-[#020000] text-zinc-100 shadow-sm">
+      <SidebarHeader className="sticky top-0 z-100 h-24 border-b border-border bg-gradient-to-r from-[#022000] to-[#020000] text-zinc-100 shadow-sm">
         {!collapsed ? (
           <div className="flex items-center justify-center h-full px-4">
             <KountedLabelLogoLight className="h-16 w-full" />
@@ -63,7 +63,7 @@ export function AppSidebar() {
 
       {/* Scrollable Content */}
       <ScrollArea className="flex-1 overflow-y-auto">
-        <SidebarContent className="bg-zinc-50 text-zinc-700 text-xs">
+        <SidebarContent className="bg-zinc-100 text-zinc-700 text-xs">
           {sidebarSections.map((section) => (
             <SidebarGroup key={section.label}>
               {!collapsed && (

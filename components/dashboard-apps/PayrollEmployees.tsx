@@ -177,99 +177,94 @@ const PayrollEmployees = () => {
         schema={employeeCsvSchema}
         templateHeaders={EMPLOYEE_CSV_TEMPLATE}
         exampleRow={EMPLOYEE_EXAMPLE_ROW}
-        transform={(row) => ({
-          ...row,
-          // Ensure required fields are present with hardened parsing
-          start_date: (() => {
-            if (row.start_date && row.start_date.trim() !== '') {
-              try {
-                // Try to parse and format the date properly
-                const date = new Date(row.start_date);
+        deduplicationKeys={['first_name', 'last_name', 'employer_id']} // Add this line
+        transform={(row) => {
+          // Construct full_name (REQUIRED by database)
+          const fullName = (() => {
+            if (row.full_name && row.full_name.trim()) {
+              return row.full_name.trim()
+                .split(' ')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                .join(' ');
+            }
+            
+            const firstName = row.first_name?.trim() || '';
+            const lastName = row.last_name?.trim() || '';
+            const combined = `${firstName} ${lastName}`.trim();
+            
+            if (!combined) {
+              throw new Error('First name and last name are required to construct full name');
+            }
+            
+            return combined
+              .split(' ')
+              .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+              .join(' ');
+          })();
+
+          // Handle start_date (REQUIRED by database)
+          const startDate = (() => {
+            if (!row.start_date || row.start_date.trim() === '') {
+              return new Date().toISOString().split('T')[0];
+            }
+            
+            const cleanInput = row.start_date.trim();
+            
+            // Handle DD/MM/YYYY format
+            if (cleanInput.includes('/')) {
+              const parts = cleanInput.split('/');
+              if (parts.length === 3) {
+                const [day, month, year] = parts;
+                const iso = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+                const date = new Date(iso);
                 if (!isNaN(date.getTime())) {
                   return date.toISOString().split('T')[0];
                 }
-              } catch (e) {
-                console.warn('Invalid start_date format:', row.start_date);
               }
             }
+            
+            // Fallback to current date if parsing fails
             return new Date().toISOString().split('T')[0];
-          })(),
+          })();
 
-          full_name: (() => {
-            const name = row.full_name || `${row.first_name || ''} ${row.last_name || ''}`.trim();
-            if (!name || name === '') return 'Unknown Employee';
-
-            // Convert to proper case: "ali hussain" → "Ali Hussain"
-            return name.toLowerCase()
-              .split(' ')
-              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(' ');
-          })(),
-
-          // Safe number conversions - ensure null instead of empty strings
-          base_salary: row.base_salary && row.base_salary.toString().trim() !== '' ? Number(row.base_salary) : null,
-          housing_allowance: row.housing_allowance && row.housing_allowance.toString().trim() !== '' ? Number(row.housing_allowance) : null,
-          transport_allowance: row.transport_allowance && row.transport_allowance.toString().trim() !== '' ? Number(row.transport_allowance) : null,
-          food_allowance: row.food_allowance && row.food_allowance.toString().trim() !== '' ? Number(row.food_allowance) : null,
-
-          // Enhanced validation - ensure null instead of empty strings
-          email: (() => {
-            if (!row.email || row.email.trim() === '') return null;
-            // Clean and validate email: trim whitespace, convert to lowercase
-            const cleanEmail = row.email.trim().toLowerCase();
-            // Basic email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(cleanEmail) ? cleanEmail : null;
-          })(),
-
-          // Enhanced IBAN validation - ensure null instead of empty strings
-          iban: (() => {
-            if (!row.iban || row.iban.trim() === '') return null;
-            // Basic IBAN format check (starts with 2 letters, then numbers)
-            const ibanRegex = /^[A-Z]{2}[0-9]{2}[A-Z0-9]{4}[0-9]{7}([A-Z0-9]?){0,16}$/;
-            return ibanRegex.test(row.iban.trim().replace(/\s/g, '')) ? row.iban.trim() : null;
-          })(),
-
-          // Handle JSON fields properly (using type assertion for fields not in schema)
-          visa_info: (() => {
-            const visaInfo = (row as any).visa_info;
-            if (!visaInfo || visaInfo.trim() === '') return null;
-            try {
-              return typeof visaInfo === 'string' ? JSON.parse(visaInfo) : visaInfo;
-            } catch (e) {
-              console.warn('Invalid visa_info JSON:', visaInfo);
-              return null;
-            }
-          })(),
-
-          other_allowances: (() => {
-            const otherAllowances = (row as any).other_allowances;
-            if (!otherAllowances || otherAllowances.trim() === '') return null;
-            try {
-              return typeof otherAllowances === 'string' ? JSON.parse(otherAllowances) : otherAllowances;
-            } catch (e) {
-              console.warn('Invalid other_allowances JSON:', otherAllowances);
-              return null;
-            }
-          })(),
-
-          // Ensure string fields are null instead of empty strings for optional fields
-          emirates_id: row.emirates_id && row.emirates_id.trim() !== '' ? row.emirates_id.trim() : null,
-          passport_number: row.passport_number && row.passport_number.trim() !== '' ? row.passport_number.trim() : null,
-          nationality: row.nationality && row.nationality.trim() !== '' ? row.nationality.trim() : null,
-          job_title: row.job_title && row.job_title.trim() !== '' ? row.job_title.trim() : null,
-          contract_type: row.contract_type && row.contract_type.trim() !== '' ? row.contract_type.trim() : null,
-          employer_id: row.employer_id && row.employer_id.trim() !== '' ? row.employer_id.trim() : null,
-          bank_name: row.bank_name && row.bank_name.trim() !== '' ? row.bank_name.trim() : null,
-          routing_code: row.routing_code && row.routing_code.trim() !== '' ? row.routing_code.trim() : null,
-          account_number: row.account_number && row.account_number.trim() !== '' ? row.account_number.trim() : null,
-          currency: row.currency && row.currency.trim() !== '' ? row.currency.trim() : null,
-
-          // Set defaults for important fields
-          status: row.status && row.status.trim() !== '' ? row.status : 'Active',
-          created_at: row.created_at && row.created_at.trim() !== '' ? row.created_at : new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        })}
+          return {
+            // Required fields
+            full_name: fullName,
+            start_date: startDate,
+            
+            // Optional fields with proper null handling
+            first_name: row.first_name?.trim() || null,
+            last_name: row.last_name?.trim() || null,
+            email: (() => {
+              if (!row.email || row.email.trim() === '') return null;
+              const cleanEmail = row.email.trim().toLowerCase();
+              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              return emailRegex.test(cleanEmail) ? cleanEmail : null;
+            })(),
+            emirates_id: row.emirates_id?.trim() || null,
+            passport_number: row.passport_number?.trim() || null,
+            nationality: row.nationality?.trim() || null,
+            job_title: row.job_title?.trim() || null,
+            contract_type: row.contract_type?.trim() || null,
+            employer_id: row.employer_id?.trim() || null,
+            bank_name: row.bank_name?.trim() || null,
+            routing_code: row.routing_code?.trim() || null,
+            account_number: row.account_number?.trim() || null,
+            iban: row.iban?.trim() || null,
+            
+            // Numeric fields
+            base_salary: row.base_salary ? Number(row.base_salary) : null,
+            housing_allowance: row.housing_allowance ? Number(row.housing_allowance) : null,
+            transport_allowance: row.transport_allowance ? Number(row.transport_allowance) : null,
+            food_allowance: row.food_allowance ? Number(row.food_allowance) : null,
+            
+            // Default fields
+            currency: row.currency?.trim() || 'AED',
+            status: row.status?.trim() || 'Active',
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          };
+        }}
       />
 
       {/* Search */}

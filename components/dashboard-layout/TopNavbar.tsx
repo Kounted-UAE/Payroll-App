@@ -48,7 +48,7 @@ export function TopNavbar() {
   });
 
   return (
-    <header className="h-24 border-b border-border text-zinc-100 bg-gradient-to-r from-[#020000] to-[#022000] font-semibold backdrop-blur supports-[backdrop-filter]:bg-zince-900/60 sticky top-0 z-50">
+    <header className="text-sm h-24 border-b border-border text-zinc-100 bg-gradient-to-r from-[#020000] to-[#022000] font-semibold backdrop-blur supports-[backdrop-filter]:bg-zince-900/60 sticky top-0 z-50">
       <div className="h-full flex items-center justify-between px-4">
         {/* Left side - Sidebar trigger and breadcrumb */}
         <div className="flex items-center gap-3">

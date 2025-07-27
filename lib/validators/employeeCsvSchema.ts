@@ -7,39 +7,28 @@
 import { z } from 'zod';
 
 export const employeeCsvSchema = z.object({
-  full_name: z.string().optional(),
-  first_name: z.string().min(1),
-  last_name: z.string().min(1),
-
-  // Allow empty email or valid email format
-  email: z.string().email().optional().or(z.literal('')),
-
-  emirates_id: z.coerce.string().optional(),
-  passport_number: z.coerce.string().optional(),
-  nationality: z.coerce.string().optional(),
-  job_title: z.coerce.string().optional(),
-  start_date: z.coerce.string().optional(),
-  contract_type: z.coerce.string().optional(),
-  employer_id: z.coerce.string().optional(),
-
-  bank_name: z.coerce.string().optional(),
-  routing_code: z.coerce.string().optional(),
-  account_number: z.coerce.string().optional(),
-  iban: z.coerce.string().optional(),
-
+  full_name: z.string().optional(), // Will be constructed in transform
+  first_name: z.string().min(1, "First name is required"),
+  last_name: z.string().min(1, "Last name is required"),
+  email: z.string().email("Invalid email format").optional().or(z.literal('')),
+  emirates_id: z.string().optional(),
+  passport_number: z.string().optional(),
+  nationality: z.string().optional(),
+  job_title: z.string().optional(),
+  start_date: z.string().optional(), // Will be converted in transform - REQUIRED by DB
+  contract_type: z.string().optional(),
+  employer_id: z.string().optional(),
+  bank_name: z.string().optional(),
+  routing_code: z.string().optional(),
+  account_number: z.string().optional(),
+  iban: z.string().optional(),
   base_salary: z.coerce.number().optional(),
   housing_allowance: z.coerce.number().optional(),
   transport_allowance: z.coerce.number().optional(),
   food_allowance: z.coerce.number().optional(),
-
-  currency: z.coerce.string().optional(),
-
-  // Transform empty string → "Active", then enforce enum
-  status: z.string()
-    .transform(val => val === '' ? 'Active' : val)
-    .pipe(z.enum(['Active', 'Inactive']).optional()),
-
-  created_at: z.coerce.string().optional()
+  currency: z.string().optional(),
+  status: z.string().optional(),
+  created_at: z.string().optional()
 });
 
 
