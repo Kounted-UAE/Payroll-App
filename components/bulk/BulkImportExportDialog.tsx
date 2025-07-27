@@ -251,13 +251,25 @@ export function BulkImportExportDialog<T>({
           <div className="space-y-6">
             {/* File Input */}
             <div>
-              <Input 
-                type="file" 
-                accept=".csv" 
-                ref={fileInputRef} 
-                onChange={handleFileChange}
-                className="w-full"
-              />
+            <div className="relative inline-block">
+  <label
+    htmlFor="csv-upload"
+    className="cursor-pointer px-4 py-2 text-blue-700 font-semibold hover:text-green-500 hover:bg-muted border rounded-md transition-all"
+  >
+    {csvFile ? csvFile.name : 'Click to Upload CSV'}
+  </label>
+  <input
+    id="csv-upload"
+    type="file"
+    accept=".csv"
+    ref={fileInputRef}
+    onChange={handleFileChange}
+    className="absolute inset-0 opacity-0 cursor-pointer"
+  />
+</div>
+
+
+
             </div>
 
             {/* Preview and Validation Results */}
