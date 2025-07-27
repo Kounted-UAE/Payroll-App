@@ -2219,6 +2219,7 @@ export type Database = {
           emirates_id: string | null
           employer_id: string | null
           eosb_applicable: boolean | null
+          first_name: string | null
           food_allowance: number | null
           full_name: string
           gender: string | null
@@ -2227,12 +2228,14 @@ export type Database = {
           id: string
           individual_id: string | null
           job_title: string | null
+          last_name: string | null
           marital_status: string | null
           mobile_allowance: number | null
           nationality: string | null
           other_allowances: Json | null
           passport_number: string | null
           probation_period: string | null
+          routing_code: string | null
           start_date: string
           status: string | null
           swift_code: string | null
@@ -2263,6 +2266,7 @@ export type Database = {
           emirates_id?: string | null
           employer_id?: string | null
           eosb_applicable?: boolean | null
+          first_name?: string | null
           food_allowance?: number | null
           full_name: string
           gender?: string | null
@@ -2271,12 +2275,14 @@ export type Database = {
           id?: string
           individual_id?: string | null
           job_title?: string | null
+          last_name?: string | null
           marital_status?: string | null
           mobile_allowance?: number | null
           nationality?: string | null
           other_allowances?: Json | null
           passport_number?: string | null
           probation_period?: string | null
+          routing_code?: string | null
           start_date: string
           status?: string | null
           swift_code?: string | null
@@ -2307,6 +2313,7 @@ export type Database = {
           emirates_id?: string | null
           employer_id?: string | null
           eosb_applicable?: boolean | null
+          first_name?: string | null
           food_allowance?: number | null
           full_name?: string
           gender?: string | null
@@ -2315,12 +2322,14 @@ export type Database = {
           id?: string
           individual_id?: string | null
           job_title?: string | null
+          last_name?: string | null
           marital_status?: string | null
           mobile_allowance?: number | null
           nationality?: string | null
           other_allowances?: Json | null
           passport_number?: string | null
           probation_period?: string | null
+          routing_code?: string | null
           start_date?: string
           status?: string | null
           swift_code?: string | null
@@ -2778,52 +2787,7 @@ export type Database = {
           },
         ]
       }
-      payroll_salary_structure_items: {
-        Row: {
-          amount: number
-          effective_from: string
-          effective_to: string | null
-          frequency: string | null
-          id: string
-          pay_type_id: string | null
-          salary_structure_id: string | null
-        }
-        Insert: {
-          amount: number
-          effective_from?: string
-          effective_to?: string | null
-          frequency?: string | null
-          id?: string
-          pay_type_id?: string | null
-          salary_structure_id?: string | null
-        }
-        Update: {
-          amount?: number
-          effective_from?: string
-          effective_to?: string | null
-          frequency?: string | null
-          id?: string
-          pay_type_id?: string | null
-          salary_structure_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "payroll_salary_structure_items_pay_type_id_fkey"
-            columns: ["pay_type_id"]
-            isOneToOne: false
-            referencedRelation: "payroll_pay_types"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "payroll_salary_structure_items_salary_structure_id_fkey"
-            columns: ["salary_structure_id"]
-            isOneToOne: false
-            referencedRelation: "payroll_salary_structures"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      payroll_salary_structures: {
+      payroll_salary_setup: {
         Row: {
           base_salary: number
           created_at: string | null
