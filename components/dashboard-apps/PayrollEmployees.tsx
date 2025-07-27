@@ -2,7 +2,8 @@
 
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect  } from "react"
+import { getSupabaseClient } from "@/lib/supabase/client"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -31,6 +32,14 @@ import {
 } from "@/lib/validators/employeeCsvSchema"
 import { ViewToggle } from "@/components/ui/ViewToggle"
 import { EmployeeDrawer } from "@/components/drawers/EmployeeDrawer"
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem
+} from "@/components/ui/dropdown-menu"
+import { ScrollArea } from "@/components/ui/scroll-area"
+
 
 
 const PayrollEmployees = () => {
@@ -40,17 +49,28 @@ const PayrollEmployees = () => {
   const [employers, setEmployers] = useState<any[]>([]); // For future employer mapping
   const [selectedEmployee, setSelectedEmployee] = useState<any | null>(null);
   const [drawerMode, setDrawerMode] = useState<'view' | 'edit' | 'delete'>('view');
+  const [statusFilter, setStatusFilter] = useState<'All' | 'Active' | 'Inactive' | 'Archived'>('All');
+  const [employerFilter, setEmployerFilter] = useState<string | 'All'>('All');
+  const [employerSearch, setEmployerSearch] = useState("")
 
-  // Utility function for employer mapping (future enhancement)
-  const mapEmployerByName = (employerName: string) => {
-    if (!employerName || !employers.length) return null;
-    const employer = employers.find(emp =>
-      emp.legal_name?.toLowerCase().includes(employerName.toLowerCase()) ||
-      emp.name?.toLowerCase().includes(employerName.toLowerCase())
-    );
-    return employer?.id || null;
-  };
+  useEffect(() => {
+    const fetchEmployers = async () => {
+      const supabase = getSupabaseClient()
+      const { data, error } = await supabase
+        .from("payroll_objects_employers")
+        .select("id, legal_name")
+        .order("legal_name", { ascending: true })
+  
+      if (!error && data) {
+        setEmployers(data)
+      }
+    }
+  
+    fetchEmployers()
+  }, [])
+  
 
+  
   const { toast } = useToast()
   const {
     employees,
@@ -58,11 +78,16 @@ const PayrollEmployees = () => {
     error,
     deleteEmployee,
     updateEmployee,
+
+    
+
+
   } = usePayrollEmployees()
 
   const filteredEmployees = employees.filter((employee) => {
     const query = searchQuery.toLowerCase();
-    return (
+  
+    const matchesQuery =
       employee.full_name?.toLowerCase().includes(query) ||
       employee.first_name?.toLowerCase().includes(query) ||
       employee.last_name?.toLowerCase().includes(query) ||
@@ -73,8 +98,16 @@ const PayrollEmployees = () => {
       employee.termination_date?.toString().includes(query) ||
       employee.start_date?.toString().includes(query) ||
       employee.payroll_objects_employers?.legal_name?.toLowerCase().includes(query)
-    );
-  });
+  
+    const matchesStatus =
+      statusFilter === 'All' || employee.status === statusFilter
+  
+      const matchesEmployer =
+      employerFilter === 'All' || employee.employer_id === employerFilter
+    
+    return matchesQuery && matchesStatus && matchesEmployer    
+  })
+  
 
 
 
@@ -93,7 +126,7 @@ const PayrollEmployees = () => {
       });
     }
   };
-  
+
 
   const handleUpdateEmployee = async (updates: Partial<any>) => {
     if (!selectedEmployee?.id) return
@@ -111,7 +144,7 @@ const PayrollEmployees = () => {
       })
     }
   }
-  
+
 
   return (
     <div className="flex-1 space-y-6 p-6">
@@ -252,12 +285,59 @@ const PayrollEmployees = () => {
                 className="pl-9"
               />
             </div>
-            <Button variant="outline">
-              Filter by Employer
-            </Button>
-            <Button variant="outline">
-              Filter by Status
-            </Button>
+            <DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">
+      Filter by Employer
+    </Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent className="w-64 p-2">
+    <Input
+      placeholder="Search employer..."
+      value={employerSearch}
+      onChange={(e) => setEmployerSearch(e.target.value)}
+      className="mb-2"
+    />
+    <ScrollArea className="max-h-60">
+      <DropdownMenuItem onClick={() => setEmployerFilter('All')}>
+        All Employers
+      </DropdownMenuItem>
+      {employers
+        .filter(emp =>
+          emp.legal_name?.toLowerCase().includes(employerSearch.toLowerCase())
+        )
+        .map((employer) => (
+          <DropdownMenuItem
+            key={employer.id}
+            onClick={() => setEmployerFilter(employer.id)}
+          >
+            {employer.legal_name || 'Unnamed'}
+          </DropdownMenuItem>
+        ))}
+    </ScrollArea>
+  </DropdownMenuContent>
+</DropdownMenu>
+
+
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline">
+                  Filter by Status
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                {['All', 'Active', 'Inactive', 'Archived'].map(status => (
+                  <DropdownMenuItem
+                    key={status}
+                    onClick={() => setStatusFilter(status as any)}
+                    className="cursor-pointer"
+                  >
+                    {status}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
           </div>
         </CardContent>
       </Card>
@@ -292,17 +372,17 @@ const PayrollEmployees = () => {
               <CardContent className="flex justify-between items-center">
                 <div className="text-xs">
                   <div>Status: <Badge
-  variant={
-    employee.status === 'Archived'
-      ? 'destructive'
-      : employee.status === 'Inactive'
-      ? 'warning'
-      : 'default'
-  }
->
-  {employee.status || 'Active'}
-</Badge>
-</div>
+                    variant={
+                      employee.status === 'Archived'
+                        ? 'destructive'
+                        : employee.status === 'Inactive'
+                          ? 'warning'
+                          : 'default'
+                    }
+                  >
+                    {employee.status || 'Active'}
+                  </Badge>
+                  </div>
                   <div>Nationality: {employee.nationality || '—'}</div>
                   <div>Start Date: {employee.start_date || '—'}</div>
                 </div>
@@ -362,17 +442,17 @@ const PayrollEmployees = () => {
                 <TableCell>{employee.start_date || '—'}</TableCell>
                 <TableCell>{employee.termination_date || '—'}</TableCell>
                 <TableCell>
-                <Badge
-  variant={
-    employee.status === 'Archived'
-      ? 'destructive'
-      : employee.status === 'Inactive'
-      ? 'warning'
-      : 'default'
-  }
->
-  {employee.status || 'Active'}
-</Badge>
+                  <Badge
+                    variant={
+                      employee.status === 'Archived'
+                        ? 'destructive'
+                        : employee.status === 'Inactive'
+                          ? 'warning'
+                          : 'default'
+                    }
+                  >
+                    {employee.status || 'Active'}
+                  </Badge>
 
                 </TableCell>
                 <TableCell>
@@ -405,16 +485,16 @@ const PayrollEmployees = () => {
       )}
 
 
-{selectedEmployee && (
-  <EmployeeDrawer
-    employee={selectedEmployee}
-    mode={drawerMode}
-    open={!!selectedEmployee}
-    onOpenChange={() => setSelectedEmployee(null)}
-    onDelete={() => handleDeleteEmployee(selectedEmployee.id, selectedEmployee.full_name)}
-    onSave={handleUpdateEmployee} // <- ADD THIS
-  />
-)}
+      {selectedEmployee && (
+        <EmployeeDrawer
+          employee={selectedEmployee}
+          mode={drawerMode}
+          open={!!selectedEmployee}
+          onOpenChange={() => setSelectedEmployee(null)}
+          onDelete={() => handleDeleteEmployee(selectedEmployee.id, selectedEmployee.full_name)}
+          onSave={handleUpdateEmployee} // <- ADD THIS
+        />
+      )}
 
 
 
