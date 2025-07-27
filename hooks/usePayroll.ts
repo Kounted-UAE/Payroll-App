@@ -154,12 +154,16 @@ export function usePayrollEmployees(employerId?: string) {
       const supabase = getClient()
       if (!supabase) return
       
-      let query = supabase
-        .from('payroll_objects_employees')
-        .select(`
-          *,
-          payroll_objects_employers!inner(legal_name)
-        `)
+let query = supabase
+  .from('payroll_objects_employees')
+  .select(`
+    *,
+    payroll_objects_employers (
+      id,
+      legal_name
+    )
+  `)
+
         .order('created_at', { ascending: false })
 
       if (employerId) {

@@ -78,7 +78,7 @@ const PayrunSchema = z.object({
 type Payrun = z.infer<typeof PayrunSchema>
 
 const PayrollPayruns = () => {
-  const [view, setView] = useClientState<'grid' | 'list'>('grid');
+  const [view, setView] = useState<'list' | 'grid'>('list');
   const [dialogOpen, setDialogOpen] = useClientState(false);
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])

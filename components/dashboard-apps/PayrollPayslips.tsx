@@ -31,7 +31,7 @@ import {
 
 const PayrollPayslips = () => {
   const [searchQuery, setSearchQuery] = useState("")
-  const [view, setView] = useState<'grid' | 'list'>('grid')
+  const [view, setView] = useState<'list' | 'grid'>('list');
   const [dialogOpen, setDialogOpen] = useState(false)
 
   const payslips = [/* static mock data as before */]

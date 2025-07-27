@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,6 +9,8 @@ import Papa from 'papaparse';
 import { z, ZodSchema } from 'zod';
 import { createClient } from '@supabase/supabase-js';
 import { toast } from '@/hooks/use-toast';
+import { Upload as UploadIcon } from 'lucide-react';
+
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
@@ -83,7 +85,7 @@ export function BulkImportExportDialog<T>({
   const handleImport = async () => {
     setImporting(true);
     let rows = validationResults.valid;
-    
+
     try {
       // Apply transform if provided
       if (transform) {
@@ -91,11 +93,11 @@ export function BulkImportExportDialog<T>({
         rows = await Promise.all(rows.map(transform));
         console.log('✅ Transform completed. Sample row:', rows[0]);
       }
-      
+
       console.log('📊 Attempting to insert', rows.length, 'rows into', tableName);
       console.log('📋 Sample data being inserted:', JSON.stringify(rows.slice(0, 1), null, 2));
       console.log('📦 Total rows:', rows.length);
-      
+
       // Test with single row first if multiple rows
       if (rows.length > 1) {
         console.log('🧪 Testing single row insert first...');
@@ -103,20 +105,20 @@ export function BulkImportExportDialog<T>({
         if (testResult.error) {
           console.error('❌ Single row test failed:', testResult.error);
           console.log('🔍 Failed row data:', JSON.stringify(rows[0], null, 2));
-          toast({ 
-            title: 'Import Error', 
-            description: `Test insert failed: ${testResult.error.message || 'Constraint violation'}`, 
-            variant: 'destructive' 
+          toast({
+            title: 'Import Error',
+            description: `Test insert failed: ${testResult.error.message || 'Constraint violation'}`,
+            variant: 'destructive'
           });
           return;
         } else {
           console.log('✅ Single row test successful, proceeding with batch insert...');
         }
       }
-      
+
       // Enhanced insert with better error handling
       const { data, error } = await supabase.from(tableName).insert(rows);
-      
+
       if (error) {
         console.error('❌ Supabase insert error:', error);
         console.error('🔍 Error details:', {
@@ -127,7 +129,7 @@ export function BulkImportExportDialog<T>({
         });
         console.log('🔍 Inserted row shape:', JSON.stringify(rows[0], null, 2));
         console.log('🔍 All rows shape:', rows.map((row, i) => ({ row: i, keys: Object.keys(row) })));
-        
+
         // Check for common constraint violations
         let errorMessage = error.message || 'Unknown constraint violation';
         if (error.code === '23505') {
@@ -137,26 +139,26 @@ export function BulkImportExportDialog<T>({
         } else if (error.code === '22P02') {
           errorMessage = 'Invalid data type (type mismatch)';
         }
-        
-        toast({ 
-          title: 'Import Error', 
-          description: `Database error: ${errorMessage}`, 
-          variant: 'destructive' 
+
+        toast({
+          title: 'Import Error',
+          description: `Database error: ${errorMessage}`,
+          variant: 'destructive'
         });
       } else {
         console.log('✅ Insert successful. Inserted data:', data);
-        toast({ 
-          title: 'Import Success', 
-          description: `Successfully imported ${rows.length} ${objectName.toLowerCase()}(s).` 
+        toast({
+          title: 'Import Success',
+          description: `Successfully imported ${rows.length} ${objectName.toLowerCase()}(s).`
         });
         onOpenChange(false);
       }
     } catch (err) {
       console.error('💥 Unexpected error during import:', err);
-      toast({ 
-        title: 'Import Error', 
-        description: `Unexpected error: ${err instanceof Error ? err.message : 'Unknown error'}`, 
-        variant: 'destructive' 
+      toast({
+        title: 'Import Error',
+        description: `Unexpected error: ${err instanceof Error ? err.message : 'Unknown error'}`,
+        variant: 'destructive'
       });
     } finally {
       setImporting(false);
@@ -214,50 +216,66 @@ export function BulkImportExportDialog<T>({
     }
   };
 
+  useEffect(() => {
+    if (open) {
+      setCsvFile(null);
+      setParsedRows([]);
+      setValidationResults({ valid: [], errors: [] });
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  }, [open]);
+
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-4xl max-h-[95vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Bulk Import/Export {objectName}s</DialogTitle>
         </DialogHeader>
-        
+
         {/* Tab Navigation */}
-        <div className="flex space-x-2 mb-6">
-          <Button 
-            variant={tab === 'import' ? 'default' : 'outline'} 
+        <div className="flex gap-4 mb-6">
+          <Button
+            variant={tab === 'import' ? 'default' : 'outline'}
             onClick={() => setTab('import')}
-            className="flex-1"
+            className="w-40"
           >
             Import CSV
           </Button>
-          <Button 
-            variant={tab === 'export' ? 'default' : 'outline'} 
+          <Button
+            variant={tab === 'export' ? 'default' : 'outline'}
             onClick={() => setTab('export')}
-            className="flex-1"
+            className="w-40"
           >
             Export CSV
           </Button>
-          <Button 
-            variant={tab === 'template' ? 'default' : 'outline'} 
+          <Button
+            variant={tab === 'template' ? 'default' : 'outline'}
             onClick={() => setTab('template')}
-            className="flex-1"
+            className="w-40"
           >
             Download Template
           </Button>
         </div>
+
 
         {/* Import Tab */}
         {tab === 'import' && (
           <div className="space-y-6">
             {/* File Input */}
             <div>
-            <div className="relative inline-block">
-  <label
-    htmlFor="csv-upload"
-    className="cursor-pointer px-4 py-2 text-blue-700 font-semibold hover:text-green-500 hover:bg-muted border rounded-md transition-all"
-  >
-    {csvFile ? csvFile.name : 'Click to Upload CSV'}
-  </label>
+           {/* Enhanced File Upload Label */}
+<div className="relative inline-block">
+<label
+  htmlFor="csv-upload"
+  className="flex items-center gap-2 px-4 py-2 text-xs font-medium text-blue-700 border border-border rounded-md bg-background cursor-pointer transition-colors duration-150 hover:bg-accent hover:text-accent-foreground"
+>
+  <UploadIcon className="w-4 h-4" />
+  {csvFile ? csvFile.name : 'Upload CSV File'}
+</label>
+
   <input
     id="csv-upload"
     type="file"
@@ -267,6 +285,7 @@ export function BulkImportExportDialog<T>({
     className="absolute inset-0 opacity-0 cursor-pointer"
   />
 </div>
+
 
 
 
@@ -329,6 +348,7 @@ export function BulkImportExportDialog<T>({
                   )}
                 </div>
 
+
                 {/* Error Details */}
                 {validationResults.errors.length > 0 && (
                   <div className="border rounded-lg p-3">
@@ -348,8 +368,8 @@ export function BulkImportExportDialog<T>({
                   </div>
                 )}
 
-                {/* Action Buttons */}
-                <div className="flex justify-end gap-3 pt-4 border-t">
+                {/* Action Buttons - LEFT aligned */}
+                <div className="flex justify-start gap-3 pt-4 border-t">
                   <Button
                     variant="outline"
                     onClick={resetImport}
@@ -360,7 +380,7 @@ export function BulkImportExportDialog<T>({
                   <Button
                     onClick={handleImport}
                     disabled={importing || validationResults.valid.length === 0}
-                    className="min-w-[120px]"
+                    className="min-w-[140px]"
                   >
                     {importing ? (
                       <>
@@ -372,6 +392,7 @@ export function BulkImportExportDialog<T>({
                     )}
                   </Button>
                 </div>
+
               </div>
             )}
           </div>
@@ -384,8 +405,8 @@ export function BulkImportExportDialog<T>({
               <div className="text-sm text-muted-foreground mb-4">
                 Export all or filtered {objectName}s as CSV.
               </div>
-              <Button 
-                onClick={handleExport} 
+              <Button
+                onClick={handleExport}
                 disabled={exporting}
                 className="w-full"
               >
@@ -409,8 +430,8 @@ export function BulkImportExportDialog<T>({
               <div className="text-sm text-muted-foreground mb-4">
                 Download a sample CSV template for {objectName}s.
               </div>
-              <Button 
-                onClick={handleDownloadTemplate} 
+              <Button
+                onClick={handleDownloadTemplate}
                 disabled={downloading}
                 className="w-full"
               >
@@ -424,7 +445,7 @@ export function BulkImportExportDialog<T>({
                 )}
               </Button>
             </div>
-            
+
             <div className="border rounded-lg p-4">
               <div className="text-sm font-medium mb-3">Template Fields:</div>
               <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">

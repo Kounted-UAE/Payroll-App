@@ -6,7 +6,7 @@ import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
+import { Badge, badgeVariants } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useToast } from "@/hooks/use-toast"
 import { usePayrollEmployees } from "@/hooks/usePayroll"
@@ -17,6 +17,7 @@ import {
   Eye,
   Edit,
   Upload,
+  Trash2Icon,
   LayoutGrid,
   List as ListIcon,
 } from "lucide-react"
@@ -29,17 +30,21 @@ import {
   EMPLOYEE_EXAMPLE_ROW
 } from "@/lib/validators/employeeCsvSchema"
 import { ViewToggle } from "@/components/ui/ViewToggle"
+import { EmployeeDrawer } from "@/components/drawers/EmployeeDrawer"
+
 
 const PayrollEmployees = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [view, setView] = useState<'grid' | 'list'>('grid');
+  const [view, setView] = useState<'list' | 'grid'>('list');
   const [dialogOpen, setDialogOpen] = useState(false);
   const [employers, setEmployers] = useState<any[]>([]); // For future employer mapping
+  const [selectedEmployee, setSelectedEmployee] = useState<any | null>(null);
+  const [drawerMode, setDrawerMode] = useState<'view' | 'edit' | 'delete'>('view');
 
   // Utility function for employer mapping (future enhancement)
   const mapEmployerByName = (employerName: string) => {
     if (!employerName || !employers.length) return null;
-    const employer = employers.find(emp => 
+    const employer = employers.find(emp =>
       emp.legal_name?.toLowerCase().includes(employerName.toLowerCase()) ||
       emp.name?.toLowerCase().includes(employerName.toLowerCase())
     );
@@ -51,30 +56,62 @@ const PayrollEmployees = () => {
     employees,
     loading,
     error,
-    deleteEmployee
+    deleteEmployee,
+    updateEmployee,
   } = usePayrollEmployees()
 
-  const filteredEmployees = employees.filter(employee =>
-    employee.full_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    (employee.emirates_id && employee.emirates_id.includes(searchQuery)) ||
-    (employee.job_title && employee.job_title.toLowerCase().includes(searchQuery.toLowerCase()))
-  )
+  const filteredEmployees = employees.filter((employee) => {
+    const query = searchQuery.toLowerCase();
+    return (
+      employee.full_name?.toLowerCase().includes(query) ||
+      employee.first_name?.toLowerCase().includes(query) ||
+      employee.last_name?.toLowerCase().includes(query) ||
+      employee.email?.toLowerCase().includes(query) ||
+      employee.emirates_id?.toLowerCase().includes(query) ||
+      employee.job_title?.toLowerCase().includes(query) ||
+      employee.status?.toLowerCase().includes(query) ||
+      employee.termination_date?.toString().includes(query) ||
+      employee.start_date?.toString().includes(query) ||
+      employee.payroll_objects_employers?.legal_name?.toLowerCase().includes(query)
+    );
+  });
+
+
 
   const handleDeleteEmployee = async (id: string, name: string) => {
     try {
-      await deleteEmployee(id)
+      await updateEmployee(id, { status: 'Archived' });
       toast({
-        title: "Employee deleted",
-        description: `${name} has been successfully deleted.`,
+        title: "Employee archived",
+        description: `${name} has been marked as Archived.`,
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to archive employee. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+  
+
+  const handleUpdateEmployee = async (updates: Partial<any>) => {
+    if (!selectedEmployee?.id) return
+    try {
+      await updateEmployee(selectedEmployee.id, updates)
+      toast({
+        title: "Employee updated",
+        description: `${selectedEmployee.full_name} has been successfully updated.`,
       })
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to delete employee. Please try again.",
+        description: "Failed to update employee. Please try again.",
         variant: "destructive",
       })
     }
   }
+  
 
   return (
     <div className="flex-1 space-y-6 p-6">
@@ -124,24 +161,24 @@ const PayrollEmployees = () => {
             }
             return new Date().toISOString().split('T')[0];
           })(),
-          
+
           full_name: (() => {
             const name = row.full_name || `${row.first_name || ''} ${row.last_name || ''}`.trim();
             if (!name || name === '') return 'Unknown Employee';
-            
+
             // Convert to proper case: "ali hussain" → "Ali Hussain"
             return name.toLowerCase()
               .split(' ')
               .map(word => word.charAt(0).toUpperCase() + word.slice(1))
               .join(' ');
           })(),
-          
+
           // Safe number conversions - ensure null instead of empty strings
           base_salary: row.base_salary && row.base_salary.toString().trim() !== '' ? Number(row.base_salary) : null,
           housing_allowance: row.housing_allowance && row.housing_allowance.toString().trim() !== '' ? Number(row.housing_allowance) : null,
           transport_allowance: row.transport_allowance && row.transport_allowance.toString().trim() !== '' ? Number(row.transport_allowance) : null,
           food_allowance: row.food_allowance && row.food_allowance.toString().trim() !== '' ? Number(row.food_allowance) : null,
-          
+
           // Enhanced validation - ensure null instead of empty strings
           email: (() => {
             if (!row.email || row.email.trim() === '') return null;
@@ -151,7 +188,7 @@ const PayrollEmployees = () => {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return emailRegex.test(cleanEmail) ? cleanEmail : null;
           })(),
-          
+
           // Enhanced IBAN validation - ensure null instead of empty strings
           iban: (() => {
             if (!row.iban || row.iban.trim() === '') return null;
@@ -159,7 +196,7 @@ const PayrollEmployees = () => {
             const ibanRegex = /^[A-Z]{2}[0-9]{2}[A-Z0-9]{4}[0-9]{7}([A-Z0-9]?){0,16}$/;
             return ibanRegex.test(row.iban.trim().replace(/\s/g, '')) ? row.iban.trim() : null;
           })(),
-          
+
           // Handle JSON fields properly (using type assertion for fields not in schema)
           visa_info: (() => {
             const visaInfo = (row as any).visa_info;
@@ -171,7 +208,7 @@ const PayrollEmployees = () => {
               return null;
             }
           })(),
-          
+
           other_allowances: (() => {
             const otherAllowances = (row as any).other_allowances;
             if (!otherAllowances || otherAllowances.trim() === '') return null;
@@ -182,7 +219,7 @@ const PayrollEmployees = () => {
               return null;
             }
           })(),
-          
+
           // Ensure string fields are null instead of empty strings for optional fields
           emirates_id: row.emirates_id && row.emirates_id.trim() !== '' ? row.emirates_id.trim() : null,
           passport_number: row.passport_number && row.passport_number.trim() !== '' ? row.passport_number.trim() : null,
@@ -194,7 +231,7 @@ const PayrollEmployees = () => {
           routing_code: row.routing_code && row.routing_code.trim() !== '' ? row.routing_code.trim() : null,
           account_number: row.account_number && row.account_number.trim() !== '' ? row.account_number.trim() : null,
           currency: row.currency && row.currency.trim() !== '' ? row.currency.trim() : null,
-          
+
           // Set defaults for important fields
           status: row.status && row.status.trim() !== '' ? row.status : 'Active',
           created_at: row.created_at && row.created_at.trim() !== '' ? row.created_at : new Date().toISOString(),
@@ -254,24 +291,43 @@ const PayrollEmployees = () => {
               </CardHeader>
               <CardContent className="flex justify-between items-center">
                 <div className="text-xs">
-                  <div>Status: <Badge>{employee.status || 'Active'}</Badge></div>
+                  <div>Status: <Badge
+  variant={
+    employee.status === 'Archived'
+      ? 'destructive'
+      : employee.status === 'Inactive'
+      ? 'warning'
+      : 'default'
+  }
+>
+  {employee.status || 'Active'}
+</Badge>
+</div>
                   <div>Nationality: {employee.nationality || '—'}</div>
                   <div>Start Date: {employee.start_date || '—'}</div>
                 </div>
                 <div className="flex space-x-1">
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" onClick={() => {
+                    setSelectedEmployee(employee);
+                    setDrawerMode('view');
+                  }}>
                     <Eye className="h-4 w-4" />
                   </Button>
-                  <Button variant="ghost" size="sm">
+
+                  <Button variant="ghost" size="sm" onClick={() => {
+                    setSelectedEmployee(employee);
+                    setDrawerMode('edit');
+                  }}>
                     <Edit className="h-4 w-4" />
                   </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => handleDeleteEmployee(employee.id, employee.full_name)}
-                  >
-                    <Upload className="h-4 w-4" />
+
+                  <Button variant="ghost" size="sm" onClick={() => {
+                    setSelectedEmployee(employee);
+                    setDrawerMode('delete');
+                  }}>
+                    <Trash2Icon className="h-4 w-4" />
                   </Button>
+
                 </div>
               </CardContent>
             </Card>
@@ -279,44 +335,67 @@ const PayrollEmployees = () => {
         </div>
       )}
 
+
+
       {/* List View */}
       {!loading && view === 'list' && (
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Full Name</TableHead>
-              <TableHead>Job Title</TableHead>
-              <TableHead>Emirates ID</TableHead>
-              <TableHead>Status</TableHead>
+              <TableHead>First Name</TableHead>
+              <TableHead>Last Name</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead>Employer</TableHead>
               <TableHead>Start Date</TableHead>
+              <TableHead>Termination Date</TableHead>
+              <TableHead>Status</TableHead>
               <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filteredEmployees.map((employee) => (
               <TableRow key={employee.id}>
-                <TableCell>{employee.full_name}</TableCell>
-                <TableCell>{employee.job_title}</TableCell>
-                <TableCell>{employee.emirates_id}</TableCell>
+                <TableCell>{employee.first_name}</TableCell>
+                <TableCell>{employee.last_name}</TableCell>
+                <TableCell>{employee.email}</TableCell>
+                <TableCell>{employee.payroll_objects_employers?.legal_name || '—'}</TableCell>
+                <TableCell>{employee.start_date || '—'}</TableCell>
+                <TableCell>{employee.termination_date || '—'}</TableCell>
                 <TableCell>
-                  <Badge>{employee.status || 'Active'}</Badge>
+                <Badge
+  variant={
+    employee.status === 'Archived'
+      ? 'destructive'
+      : employee.status === 'Inactive'
+      ? 'warning'
+      : 'default'
+  }
+>
+  {employee.status || 'Active'}
+</Badge>
+
                 </TableCell>
-                <TableCell>{employee.start_date}</TableCell>
                 <TableCell>
                   <div className="flex space-x-1">
-                    <Button variant="ghost" size="sm">
+                    <Button variant="ghost" size="sm" onClick={() => {
+                      setSelectedEmployee(employee);
+                      setDrawerMode('view');
+                    }}>
                       <Eye className="h-4 w-4" />
                     </Button>
-                    <Button variant="ghost" size="sm">
+                    <Button variant="ghost" size="sm" onClick={() => {
+                      setSelectedEmployee(employee);
+                      setDrawerMode('edit');
+                    }}>
                       <Edit className="h-4 w-4" />
                     </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => handleDeleteEmployee(employee.id, employee.full_name)}
-                    >
-                      <Upload className="h-4 w-4" />
+                    <Button variant="ghost" size="sm" onClick={() => {
+                      setSelectedEmployee(employee);
+                      setDrawerMode('delete');
+                    }}>
+                      <Trash2Icon className="h-4 w-4 text-red-700" />
                     </Button>
+
                   </div>
                 </TableCell>
               </TableRow>
@@ -324,6 +403,20 @@ const PayrollEmployees = () => {
           </TableBody>
         </Table>
       )}
+
+
+{selectedEmployee && (
+  <EmployeeDrawer
+    employee={selectedEmployee}
+    mode={drawerMode}
+    open={!!selectedEmployee}
+    onOpenChange={() => setSelectedEmployee(null)}
+    onDelete={() => handleDeleteEmployee(selectedEmployee.id, selectedEmployee.full_name)}
+    onSave={handleUpdateEmployee} // <- ADD THIS
+  />
+)}
+
+
 
       {!loading && filteredEmployees.length === 0 && (
         <Card>

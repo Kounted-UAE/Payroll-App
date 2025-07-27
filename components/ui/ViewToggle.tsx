@@ -1,3 +1,5 @@
+//components/ui/ViewToggle.tsx
+
 import { LayoutGrid, List as ListIcon } from "lucide-react";
 
 export function ViewToggle({ view, setView }: { view: 'grid' | 'list'; setView: (v: 'grid' | 'list') => void }) {

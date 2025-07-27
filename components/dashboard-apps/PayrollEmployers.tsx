@@ -32,7 +32,7 @@ import { employerCsvSchema, EMPLOYER_CSV_TEMPLATE, EMPLOYER_EXAMPLE_ROW } from '
 
 const PayrollEmployers = () => {
   const [searchQuery, setSearchQuery] = useState("")
-  const [view, setView] = useState<'grid' | 'list'>('grid')
+  const [view, setView] = useState<'list' | 'grid'>('list');
   const [dialogOpen, setDialogOpen] = useState(false)
   const { toast } = useToast()
   const {
