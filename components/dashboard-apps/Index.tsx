@@ -74,10 +74,10 @@ const Index = () => {
     code: `// New Component
 <Card className="bg-card border-border">
   <CardHeader>
-    <CardTitle className="text-lg font-semibold">New Component</CardTitle>
+    <CardTitle className="text-xs font-semibold">New Component</CardTitle>
   </CardHeader>
   <CardContent>
-    <p className="text-sm text-muted-foreground">Component content goes here</p>
+    <p className="text-xs text-muted-foreground">Component content goes here</p>
   </CardContent>
 </Card>`
   });
@@ -93,9 +93,9 @@ const Index = () => {
       code: `// Revenue Card Component
 <Card className="bg-card border-border">
   <CardHeader>
-    <CardTitle className="text-lg font-semibold">Total Revenue</CardTitle>
-    <div className="text-2xl font-bold text-primary">$45,231.89</div>
-    <p className="text-sm text-muted-foreground">+20.1% from last month</p>
+    <CardTitle className="text-xs font-semibold">Total Revenue</CardTitle>
+    <div className="text-xs font-bold text-primary">$45,231.89</div>
+    <p className="text-xs text-muted-foreground">+20.1% from last month</p>
   </CardHeader>
 </Card>`
     },
@@ -108,9 +108,9 @@ const Index = () => {
       code: `// Subscriptions Card Component
 <Card className="bg-card border-border">
   <CardHeader>
-    <CardTitle className="text-lg font-semibold">Subscriptions</CardTitle>
-    <div className="text-2xl font-bold text-primary">+2350</div>
-    <p className="text-sm text-muted-foreground">+180.1% from last month</p>
+    <CardTitle className="text-xs font-semibold">Subscriptions</CardTitle>
+    <div className="text-xs font-bold text-primary">+2350</div>
+    <p className="text-xs text-muted-foreground">+180.1% from last month</p>
   </CardHeader>
 </Card>`
     },
@@ -123,7 +123,7 @@ const Index = () => {
       code: `// Calendar Widget Component
 <Card className="bg-card border-border">
   <CardHeader>
-    <CardTitle className="text-lg font-semibold">Calendar</CardTitle>
+    <CardTitle className="text-xs font-semibold">Calendar</CardTitle>
   </CardHeader>
   <CardContent>
     <Calendar mode="single" className="rounded-md border" />
@@ -139,13 +139,13 @@ const Index = () => {
       code: `// Move Goal Widget Component
 <Card className="bg-card border-border">
   <CardHeader>
-    <CardTitle className="text-lg font-semibold">Move Goal</CardTitle>
-    <p className="text-sm text-muted-foreground">Daily activity tracker</p>
+    <CardTitle className="text-xs font-semibold">Move Goal</CardTitle>
+    <p className="text-xs text-muted-foreground">Daily activity tracker</p>
   </CardHeader>
   <CardContent>
     <div className="space-y-2">
       <Progress value={70} className="h-2" />
-      <p className="text-sm text-muted-foreground">70% of daily goal completed</p>
+      <p className="text-xs text-muted-foreground">70% of daily goal completed</p>
     </div>
   </CardContent>
 </Card>`
@@ -159,7 +159,7 @@ const Index = () => {
       code: `// Exercise Minutes Chart Component
 <Card className="bg-card border-border">
   <CardHeader>
-    <CardTitle className="text-lg font-semibold">Exercise Minutes</CardTitle>
+    <CardTitle className="text-xs font-semibold">Exercise Minutes</CardTitle>
   </CardHeader>
   <CardContent>
     <ResponsiveContainer width="100%" height={200}>
@@ -181,7 +181,7 @@ const Index = () => {
       code: `// Upgrade Subscription Form Component
 <Card className="bg-card border-border">
   <CardHeader>
-    <CardTitle className="text-lg font-semibold">Upgrade Plan</CardTitle>
+    <CardTitle className="text-xs font-semibold">Upgrade Plan</CardTitle>
   </CardHeader>
   <CardContent>
     <form className="space-y-4">
@@ -211,7 +211,7 @@ const Index = () => {
       code: `// Create Account Form Component
 <Card className="bg-card border-border">
   <CardHeader>
-    <CardTitle className="text-lg font-semibold">Create Account</CardTitle>
+    <CardTitle className="text-xs font-semibold">Create Account</CardTitle>
   </CardHeader>
   <CardContent>
     <form className="space-y-4">
@@ -237,7 +237,7 @@ const Index = () => {
       code: `// Payments Table Component
 <Card className="bg-card border-border">
   <CardHeader>
-    <CardTitle className="text-lg font-semibold">Recent Payments</CardTitle>
+    <CardTitle className="text-xs font-semibold">Recent Payments</CardTitle>
   </CardHeader>
   <CardContent>
     <Table>
@@ -268,7 +268,7 @@ const Index = () => {
       code: `// Team Members Widget Component
 <Card className="bg-card border-border">
   <CardHeader>
-    <CardTitle className="text-lg font-semibold">Team Members</CardTitle>
+    <CardTitle className="text-xs font-semibold">Team Members</CardTitle>
   </CardHeader>
   <CardContent>
     <div className="space-y-3">
@@ -277,7 +277,7 @@ const Index = () => {
           <AvatarFallback>JD</AvatarFallback>
         </Avatar>
         <div>
-          <p className="text-sm font-medium">John Doe</p>
+          <p className="text-xs font-medium">John Doe</p>
           <p className="text-xs text-muted-foreground">Administrator</p>
         </div>
       </div>
@@ -294,12 +294,12 @@ const Index = () => {
       code: `// Support Chat Widget Component
 <Card className="bg-card border-border">
   <CardHeader>
-    <CardTitle className="text-lg font-semibold">Support Chat</CardTitle>
+    <CardTitle className="text-xs font-semibold">Support Chat</CardTitle>
   </CardHeader>
   <CardContent>
     <div className="space-y-3">
       <div className="bg-muted p-3 rounded-lg">
-        <p className="text-sm">How can we help you today?</p>
+        <p className="text-xs">How can we help you today?</p>
       </div>
       <div className="flex space-x-2">
         <Input placeholder="Type your message..." className="flex-1" />
@@ -319,20 +319,20 @@ const Index = () => {
           <div className="flex h-full">
             <div className="w-60 border-r bg-muted/10 p-4">
               <div className="space-y-4">
-                <div className="font-semibold text-lg">Documentation</div>
+                <div className="font-semibold text-xs">Documentation</div>
                 <div className="space-y-2">
-                  <div className="text-sm font-medium">Getting Started</div>
+                  <div className="text-xs font-medium">Getting Started</div>
                   <div className="ml-4 space-y-1">
-                    <div className="text-sm text-muted-foreground cursor-pointer hover:text-foreground">Installation</div>
-                    <div className="text-sm text-muted-foreground cursor-pointer hover:text-foreground">Project Structure</div>
+                    <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Installation</div>
+                    <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Project Structure</div>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <div className="text-sm font-medium">Building Your Application</div>
+                  <div className="text-xs font-medium">Building Your Application</div>
                   <div className="ml-4 space-y-1">
-                    <div className="text-sm text-primary bg-primary/10 px-2 py-1 rounded">Data Fetching</div>
-                    <div className="text-sm text-muted-foreground cursor-pointer hover:text-foreground">Routing</div>
-                    <div className="text-sm text-muted-foreground cursor-pointer hover:text-foreground">Rendering</div>
+                    <div className="text-xs text-primary bg-primary/10 px-2 py-1 rounded">Data Fetching</div>
+                    <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Routing</div>
+                    <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Rendering</div>
                   </div>
                 </div>
               </div>
@@ -350,12 +350,12 @@ const Index = () => {
   <div className="flex h-full">
     <div className="w-60 border-r bg-muted/10 p-4">
       <div className="space-y-4">
-        <div className="font-semibold text-lg">Documentation</div>
+        <div className="font-semibold text-xs">Documentation</div>
         <div className="space-y-2">
-          <div className="text-sm font-medium">Getting Started</div>
+          <div className="text-xs font-medium">Getting Started</div>
           <div className="ml-4 space-y-1">
-            <div className="text-sm text-muted-foreground cursor-pointer hover:text-foreground">Installation</div>
-            <div className="text-sm text-muted-foreground cursor-pointer hover:text-foreground">Project Structure</div>
+            <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Installation</div>
+            <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Project Structure</div>
           </div>
         </div>
       </div>
@@ -379,36 +379,36 @@ const Index = () => {
             <div className="w-60 border-r bg-muted/10 p-4">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <div className="font-semibold text-lg">Documentation</div>
+                  <div className="font-semibold text-xs">Documentation</div>
                   <div className="text-xs bg-muted px-2 py-1 rounded">v1.0.1</div>
                 </div>
                 <div className="relative">
                   <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
                   <input
                     placeholder="Search"
-                    className="w-full pl-8 pr-4 py-2 text-sm border rounded-md bg-background"
+                    className="w-full pl-8 pr-4 py-2 text-xs border rounded-md bg-background"
                   />
                 </div>
                 <div className="space-y-3">
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-sm font-medium">
+                    <div className="flex items-center gap-2 text-xs font-medium">
                       <ChevronDown className="h-4 w-4" />
                       Getting Started
                     </div>
                     <div className="ml-6 space-y-1">
-                      <div className="text-sm text-muted-foreground cursor-pointer hover:text-foreground">Installation</div>
-                      <div className="text-sm text-muted-foreground cursor-pointer hover:text-foreground">Project Structure</div>
+                      <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Installation</div>
+                      <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Project Structure</div>
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-sm font-medium">
+                    <div className="flex items-center gap-2 text-xs font-medium">
                       <ChevronDown className="h-4 w-4" />
                       Building Your Application
                     </div>
                     <div className="ml-6 space-y-1">
-                      <div className="text-sm text-primary bg-primary/10 px-2 py-1 rounded">Data Fetching</div>
-                      <div className="text-sm text-muted-foreground cursor-pointer hover:text-foreground">Routing</div>
-                      <div className="text-sm text-muted-foreground cursor-pointer hover:text-foreground">Rendering</div>
+                      <div className="text-xs text-primary bg-primary/10 px-2 py-1 rounded">Data Fetching</div>
+                      <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Routing</div>
+                      <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Rendering</div>
                     </div>
                   </div>
                 </div>
@@ -428,12 +428,12 @@ const Index = () => {
     <div className="w-60 border-r bg-muted/10 p-4">
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <div className="font-semibold text-lg">Documentation</div>
+          <div className="font-semibold text-xs">Documentation</div>
           <div className="text-xs bg-muted px-2 py-1 rounded">v1.0.1</div>
         </div>
         <div className="relative">
           <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-          <input placeholder="Search" className="w-full pl-8 pr-4 py-2 text-sm border rounded-md bg-background" />
+          <input placeholder="Search" className="w-full pl-8 pr-4 py-2 text-xs border rounded-md bg-background" />
         </div>
       </div>
     </div>
@@ -450,7 +450,7 @@ const Index = () => {
           <div className="flex h-full">
             <div className="w-16 border-r bg-muted/10 p-2 flex flex-col items-center space-y-4">
               <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
-                <span className="text-primary-foreground text-sm font-bold">D</span>
+                <span className="text-primary-foreground text-xs font-bold">D</span>
               </div>
               <div className="space-y-2">
                 <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center cursor-pointer">
@@ -480,7 +480,7 @@ const Index = () => {
   <div className="flex h-full">
     <div className="w-16 border-r bg-muted/10 p-2 flex flex-col items-center space-y-4">
       <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
-        <span className="text-primary-foreground text-sm font-bold">D</span>
+        <span className="text-primary-foreground text-xs font-bold">D</span>
       </div>
       <div className="space-y-2">
         <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center cursor-pointer">
@@ -504,29 +504,29 @@ const Index = () => {
           <div className="flex h-full">
             <div className="w-64 border-r bg-muted/10 p-4">
               <div className="space-y-2">
-                <div className="font-semibold text-sm">Explorer</div>
+                <div className="font-semibold text-xs">Explorer</div>
                 <div className="space-y-1">
-                  <div className="flex items-center gap-1 text-sm">
+                  <div className="flex items-center gap-1 text-xs">
                     <ChevronDown className="h-3 w-3" />
                     <Folder className="h-4 w-4" />
                     <span>components</span>
                   </div>
                   <div className="ml-4 space-y-1">
-                    <div className="flex items-center gap-1 text-sm">
+                    <div className="flex items-center gap-1 text-xs">
                       <ChevronDown className="h-3 w-3" />
                       <Folder className="h-4 w-4" />
                       <span>ui</span>
                     </div>
                     <div className="ml-8 space-y-1">
-                      <div className="flex items-center gap-1 text-sm text-primary bg-primary/10 px-1 rounded">
+                      <div className="flex items-center gap-1 text-xs text-primary bg-primary/10 px-1 rounded">
                         <FileText className="h-3 w-3" />
                         <span>button.tsx</span>
                       </div>
-                      <div className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground cursor-pointer">
+                      <div className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground cursor-pointer">
                         <FileText className="h-3 w-3" />
                         <span>input.tsx</span>
                       </div>
-                      <div className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground cursor-pointer">
+                      <div className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground cursor-pointer">
                         <FileText className="h-3 w-3" />
                         <span>card.tsx</span>
                       </div>
@@ -548,9 +548,9 @@ const Index = () => {
   <div className="flex h-full">
     <div className="w-64 border-r bg-muted/10 p-4">
       <div className="space-y-2">
-        <div className="font-semibold text-sm">Explorer</div>
+        <div className="font-semibold text-xs">Explorer</div>
         <div className="space-y-1">
-          <div className="flex items-center gap-1 text-sm">
+          <div className="flex items-center gap-1 text-xs">
             <ChevronDown className="h-3 w-3" />
             <Folder className="h-4 w-4" />
             <span>components</span>
@@ -597,17 +597,17 @@ const Index = () => {
                   })}
                 </div>
                 <div className="space-y-2">
-                  <div className="text-sm font-medium">My Calendars</div>
+                  <div className="text-xs font-medium">My Calendars</div>
                   <div className="space-y-1">
-                    <div className="flex items-center gap-2 text-sm">
+                    <div className="flex items-center gap-2 text-xs">
                       <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
                       <span>Personal</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm">
+                    <div className="flex items-center gap-2 text-xs">
                       <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                       <span>Work</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm">
+                    <div className="flex items-center gap-2 text-xs">
                       <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
                       <span>Family</span>
                     </div>
@@ -707,7 +707,7 @@ const Index = () => {
       <div 
         className="bg-card p-4 border rounded-lg"
         dangerouslySetInnerHTML={{ 
-          __html: `<div class="text-sm text-muted-foreground">Custom Component: ${newComponent.title}</div><div class="mt-2 p-2 bg-muted/30 rounded text-xs">Preview of custom component</div>` 
+          __html: `<div class="text-xs text-muted-foreground">Custom Component: ${newComponent.title}</div><div class="mt-2 p-2 bg-muted/30 rounded text-xs">Preview of custom component</div>` 
         }}
       />
     );
@@ -731,10 +731,10 @@ const Index = () => {
       code: `// New Component
 <Card className="bg-card border-border">
   <CardHeader>
-    <CardTitle className="text-lg font-semibold">New Component</CardTitle>
+    <CardTitle className="text-xs font-semibold">New Component</CardTitle>
   </CardHeader>
   <CardContent>
-    <p className="text-sm text-muted-foreground">Component content goes here</p>
+    <p className="text-xs text-muted-foreground">Component content goes here</p>
   </CardContent>
 </Card>`
     });
@@ -752,7 +752,7 @@ const Index = () => {
         <div className="container px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold tracking-tight">Dashboard Components</h1>
+              <h1 className="text-lg font-bold tracking-tight">Dashboard Components</h1>
               <p className="text-muted-foreground mt-1">Interactive component library showcase</p>
             </div>
             <Badge variant="secondary" className="bg-primary/10 text-primary">
@@ -791,7 +791,7 @@ const Index = () => {
                 <Card key={comp.id} className="group hover:shadow-lg transition-all duration-200 border-2 hover:border-primary/20">
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between">
-                      <CardTitle className="text-lg">{comp.title}</CardTitle>
+                      <CardTitle className="text-xs">{comp.title}</CardTitle>
                       <Badge variant="outline" className="text-xs">
                         {comp.category}
                       </Badge>
@@ -812,7 +812,7 @@ const Index = () => {
                     {selectedComponent === comp.id && (
                       <div className="mt-4 p-4 bg-muted/50 rounded-lg">
                         <h4 className="font-semibold mb-2">Component Details</h4>
-                        <p className="text-sm text-muted-foreground mb-3">{comp.description}</p>
+                        <p className="text-xs text-muted-foreground mb-3">{comp.description}</p>
                         <div className="flex flex-wrap gap-2">
                           <Badge variant="secondary">React</Badge>
                           <Badge variant="secondary">TypeScript</Badge>
@@ -840,7 +840,7 @@ const Index = () => {
                   {/* Component Palette */}
                   <div className="lg:col-span-1 space-y-4">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider">
+                      <h3 className="font-semibold text-xs text-muted-foreground uppercase tracking-wider">
                         Components
                       </h3>
                       <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
@@ -941,7 +941,7 @@ const Index = () => {
                   {/* Playground Canvas */}
                   <div className="lg:col-span-3">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider">
+                      <h3 className="font-semibold text-xs text-muted-foreground uppercase tracking-wider">
                         Canvas ({playgroundComponents.length} components)
                       </h3>
                       <div className="flex items-center gap-4">
@@ -951,7 +951,7 @@ const Index = () => {
                             checked={editMode}
                             onCheckedChange={setEditMode}
                           />
-                          <Label htmlFor="edit-mode" className="flex items-center gap-2 text-sm">
+                          <Label htmlFor="edit-mode" className="flex items-center gap-2 text-xs">
                             {editMode ? <Code className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                             {editMode ? 'Edit Mode' : 'Preview Mode'}
                           </Label>
@@ -975,7 +975,7 @@ const Index = () => {
                             <p className="text-muted-foreground">
                               No components added yet
                             </p>
-                            <p className="text-sm text-muted-foreground">
+                            <p className="text-xs text-muted-foreground">
                               Click on components from the left panel to add them here
                             </p>
                           </div>

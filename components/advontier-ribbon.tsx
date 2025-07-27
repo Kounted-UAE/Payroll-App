@@ -9,7 +9,7 @@ export default function MarketingFooter() {
   const year = useMemo(() => new Date().getFullYear(), [])
 
   return (
-    <footer className="w-full bg-brand-charcoal border-t border-blue-300">      
+    <footer className="w-full bg-zinc-900 border-t border-blue-300">      
       <div className="flex max-w-7xl items-center px-2 py-1 text-[8px] flex-col justify-center">
         <Link
           href="https://advontier.com"

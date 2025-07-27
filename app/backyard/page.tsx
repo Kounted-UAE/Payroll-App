@@ -1,110 +1,228 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { sidebarSections } from "@/lib/config/sidebar-nav";
-import { Users, Building, FileText, Briefcase, RocketIcon, BarChart3, Calendar, DollarSign, Receipt, CheckSquare, BookOpen, FolderOpen, LayoutTemplate, Link as LinkIcon, PanelTopInactiveIcon, Settings } from "lucide-react";
+'use client'
+
+import { useState, Fragment } from "react"
+import {
+  Dialog,
+  Transition,
+} from "@headlessui/react"
+import {
+  EllipsisVerticalIcon,
+  XMarkIcon,
+} from "@heroicons/react/20/solid"
+import { sidebarSections } from "@/lib/config/sidebar-nav"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import {
+  MapPin,
+  ChartBar,
+  FileText,
+  Users,
+  DollarSign,
+  CheckSquare,
+  Briefcase,
+  AppWindowIcon,
+  Settings,
+  BarChart3,
+} from "lucide-react"
 import DashboardEntityStats from '@/components/backyard/DashboardEntityStats'
 import DashboardKPICards from '@/components/backyard/DashboardKPICards'
-import type { KPI } from "@/components/backyard/DashboardKPICards";
+import type { KPI } from "@/components/backyard/DashboardKPICards"
+import DashboardQuicklinks from '@/components/backyard/DashboardQuicklinks'
 
-
-
-// Placeholder counts (replace with Supabase queries)
 const metrics = [
-  { label: "Active Customers", count: 128, description: "Companies with ongoing engagement",  link: "/backyard/clients" },
-  { label: "KWAY Retainers", count: 62, description: "Ongoing fractional support agreements",  link: "#" },
-  { label: "KORP Retainers", count: 21, description: "Modular or ad hoc engagement types",  link: "#" },  
-  { label: "Corporate Profiles", count: 434, description: "Incorporated entities on file",  link: "#" },
-  { label: "Personal Profiles", count: 85, description: "Verified private individuals in CRM",  link: "#" },
-  { label: "Visas", count: 55, description: "Active and historical visa records",  link: "#" },
-  { label: "Trade Licensess", count: 23, description: "Valid business licenses across zones",  link: "#" },
-  
+  { label: "Active Customers", count: 128, description: "Companies with ongoing engagement", link: "/backyard/clients" },
+  { label: "KWAY Retainers", count: 62, description: "Ongoing fractional support agreements", link: "#" },
+  { label: "KORP Retainers", count: 21, description: "Modular or ad hoc engagement types", link: "#" },
+  { label: "Corporate Profiles", count: 434, description: "Incorporated entities on file", link: "#" },
+  { label: "Personal Profiles", count: 85, description: "Verified private individuals in CRM", link: "#" },
+  { label: "Visas", count: 55, description: "Active and historical visa records", link: "#" },
+  { label: "Trade Licensess", count: 23, description: "Valid business licenses across zones", link: "#" },
 ]
 
 const kpiStats: KPI[] = [
   { kpi_id: 1, name: 'Total Revenue (YTD)', stat: 'AED 1.2M', previousStat: 'AED 950K', change: '26%', changeType: 'increase' },
-  { kpi_id: 2, name: 'Quotes Issued', stat: '312', previousStat: '280', change: '11%', changeType: 'increase' },
+  { kpi_id: 2, name: 'Sales Offers Issued', stat: '312', previousStat: '280', change: '11%', changeType: 'increase' },
   { kpi_id: 3, name: 'Payroll Processed', stat: 'AED 3.4M', previousStat: 'AED 2.9M', change: '17%', changeType: 'increase' },
 ]
 
-
-
 function groupRoadmap(sections) {
-  const active = [];
-  const comingSoon = [];
+  const active = []
+  const comingSoon = []
   sections.forEach(section => {
     section.items?.forEach(item => {
-      if (!item.title) return;
-      if (item.status === "active") active.push({ ...item, section: section.label });
-      else comingSoon.push({ ...item, section: section.label });
-    });
-  });
-  return { active, comingSoon };
+      if (!item.title) return
+      const enriched = { ...item, section: section.label }
+      item.status === "active" ? active.push(enriched) : comingSoon.push(enriched)
+    })
+  })
+  return { active, comingSoon }
 }
 
+
 export default function DashboardHome() {
-  const { active, comingSoon } = groupRoadmap(sidebarSections);
+  const [open, setOpen] = useState(false)
+  const { active, comingSoon } = groupRoadmap(sidebarSections)
+
   return (
-    <div className="p-6 space-y-8">
-     
+    <div className=" bg-transparent rounded-t-2xl">
+
+     {/* Quick Links Cards */}
+
+  <section id="quicklinks">
+      <div className="p-4 flex items-center justify-between py-2">
+      <h1 className="text-xs font-semibold flex items-center gap-2 mb-1">
+        <AppWindowIcon className="h-5 w-5 text-primary" />
+        Quick Links
+      </h1>
+      <Button variant="ghost" onClick={() => setOpen(true)} className="">
+
+<h1 className="text-md font-semibold flex items-center gap-2 mb-1">
+
+  Platform Roadmap
+  <MapPin className="h-5 w-5 text-primary" />
+</h1>
+</Button>
+    </div>
+
+      <DashboardQuicklinks />
+      
+      </section>
 
       {/* KPI Performance Cards */}
-      <section>
-        <h2 className="text-xl font-semibold mb-4">Performance Overview</h2>
+      <section id="performance">
+        <div className="p-4 flex items-center justify-between">
+          <div>
+            <h1 className="text-xs font-semibold flex items-center gap-2 mb-1">
+              <ChartBar className="h-5 w-5 text-primary" />
+              Performance Overview
+            </h1>
+          </div>
+         
+        </div>
         <DashboardKPICards stats={kpiStats} />
       </section>
 
+ 
+
       {/* Object Summary Cards */}
-      <section>
-        <h2 className="text-xl font-semibold mb-4">Managed Records</h2>
+      <section id="records">
+      <div className="p-4 flex items-center justify-between py-12">
+      <h1 className="text-xs font-semibold flex items-center gap-2 mb-1">
+            <FileText className="h-5 w-5 text-primary" />
+            Managed Records
+          </h1>
+          </div>
         <DashboardEntityStats metrics={metrics} />
       </section>
+      
+    
 
+      {/* Slideout Drawer */}
+      <Transition show={open} as={Fragment}>
+        <Dialog as="div" className="relative z-50" onClose={setOpen}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" />
+          </Transition.Child>
 
- {/* Platform Overview */}
- <section className="bg-zinc-100 rounded-xl p-6 shadow flex flex-col md:flex-row gap-8 items-center">
-        <div className="flex-1">
-          <h1 className="text-xl font-bold mb-2 text-brand-charcoal">Kounted Platform Overview</h1>
-          <p className="text-zinc-700 mb-4 max-w-2xl">
-            Kounted's Backyard is our all-in-one compliance and client management interface. The platform is designed to:
-          </p>
-          <ul className="list-disc pl-6 text-zinc-700 space-y-1">
-            <li><b>Client Management</b>: Manage corporate entities and private individuals in a unified repository.</li>
-            <li><b>Sales Quoting Tools</b>: Generate quotes and proposals with $KWAY CPQ and manage orders via KORP Kiosk.</li>
-            <li><b>Payroll Suite</b>: Oversee employers, employees, payruns, payslips, and expenses with full compliance.</li>
-            <li><b>Compliance Center</b>: Stay on top of KYC, SOPs, tax, and regulatory requirements.</li>
-            <li><b>Admin & Settings</b>: Configure platform settings and access advanced admin tools.</li>
-          </ul>
-        </div>  
-        <div>
-          <h2 className="text-xl font-semibold mb-4">Platform Roadmap</h2> <div className="grid grid-cols-2 gap-6">
-         <div>
-            <h3 className="text-xs font-medium text-green-700 flex items-center px-2 gap-2 mb-2 border-b border-zinc-300 pb-2">✅ Active</h3>
-            <ul className="space-y-2">
-              {active.map(item => (
-                <li key={item.title} className="text-xs flex items-center gap-2 rounded px-2 py-2">
-                  <item.icon className="h-4 w-4 text-green-600" />
-                  <span className="font-medium">{item.title}</span>
-                  <span className="ml-auto"><span className="inline-block bg-green-100 text-green-700 text-xs rounded px-2 py-0.5">{item.section}</span></span>
-                </li>
-              ))}
-            </ul>
+          <div className="fixed inset-0 overflow-hidden">
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+                <Transition.Child
+                  as={Fragment}
+                  enter="transform transition ease-in-out duration-300"
+                  enterFrom="translate-x-full"
+                  enterTo="translate-x-0"
+                  leave="transform transition ease-in-out duration-300"
+                  leaveFrom="translate-x-0"
+                  leaveTo="translate-x-full"
+                >
+                  <Dialog.Panel className="pointer-events-auto w-screen max-w-md bg-white shadow-xl">
+                    <div className="flex h-full flex-col divide-y divide-gray-200">
+                      <img src="/images/Tour de Backyard_ Champion in Yellow.JPEG" alt="Backyard Logo" className="w-full" />
+                      <div className="flex items-center justify-between px-6 py-4 bg-yellow-300">
+                        <Dialog.Title className="rounded-2xl p-2 bg-yellow-500 text-xs font-medium text-gray-900 flex items-center gap-2">
+                          <p className="text-xs">🚴🏻💨...</p>
+                          <p className="text-xs font-bold text-yellow-50 font-italic">Development Roadmap</p>
+                        </Dialog.Title>
+                        <button
+                          type="button"
+                          className="text-yellow-800 bg-yellow-100 p-2 rounded-full hover:text-gray-500"
+                          onClick={() => setOpen(false)}
+                        >
+                          <span className="sr-only">Close</span>
+                          <XMarkIcon className="h-4 w-4" />
+                        </button>
+                      </div>
+                      <div className="flex-1 overflow-y-auto p-6 space-y-6">
+                        {/* Coming Soon */}
+                        <div>
+                          <h4 className="text-xs font-semibold text-yellow-700 mb-2">...stages ahead 🚧 🚴🏻</h4>
+                          <ul className="space-y-2">
+                            {comingSoon.map(item => (
+                              <li key={item.title} className="flex items-center text-xs gap-2 italic opacity-90">
+                                <item.icon className="h-4 w-4 text-yellow-600" />
+                                <span>{item.title}</span>
+                                <Badge className="ml-auto text-xs bg-yellow-100 text-yellow-700">{item.section}</Badge>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        {/* Work in Progress */}
+                        <div>
+                          <h4 className="text-xs font-semibold text-green-700 mb-2">✅ Routes in progress</h4>
+                          <ul className="space-y-2">
+                            {active.map(item => (
+                              <li key={item.title} className="flex items-center text-xs gap-2">
+                                <item.icon className="h-4 w-4 text-primary" />
+                                <span>{item.title}</span>
+                                <Badge className="ml-auto text-xs bg-green-100 text-green-700">{item.section}</Badge>
+                              </li>
+                            ))}
+                          </ul>
+
+                        </div>
+                      </div>
+                    </div>
+                  </Dialog.Panel>
+                </Transition.Child>
+              </div>
+            </div>
           </div>
-          <div>
-            <h3 className="text-xs  font-medium text-yellow-700 flex items-center px-2 gap-2 mb-2 border-b border-zinc-200 pb-2">🚧 Coming Soon</h3>
-            <ul className="space-y-2">
-              {comingSoon.map(item => (
-                <li key={item.title} className="text-xs flex items-center gap-2 rounded px-3 py-2 opacity-80 italic">
-                  <item.icon className="h-4 w-4 text-yellow-600" />
-                  <span className="font-medium">{item.title}</span>
-                  <span className="ml-auto"><span className="inline-block bg-yellow-100 text-yellow-700 text-xs rounded px-2 py-0.5">{item.section}</span></span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          </div>
-        </div>    
-      </section>
+        </Dialog>
+      </Transition>
     </div>
-  );
+  )
 }
-  
+
+function DropdownMenu({ deck }: { deck: any }) {
+  const handleInfo = () => alert(`${deck.title}: A powerful deck for managing ${deck.members} records.`)
+  const handleLearn = () => console.log(`Learn more about ${deck.title}`)
+
+  return (
+    <div className="relative inline-block text-left">
+      <button
+        type="button"
+        className="inline-flex size-8 items-center justify-center rounded-full text-gray-400 hover:text-gray-500 focus:outline-none"
+      >
+        <EllipsisVerticalIcon className="h-5 w-5" />
+        <span className="sr-only">Open options</span>
+      </button>
+      {/* Simulated menu */}
+      <div className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <div className="py-1 text-xs">
+          <button onClick={() => alert('View')} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">View</button>
+          <button onClick={handleInfo} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Info</button>
+          <button onClick={handleLearn} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Learn More</button>
+        </div>
+      </div>
+    </div>
+  )
+}

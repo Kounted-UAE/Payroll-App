@@ -41,7 +41,7 @@ interface RadioFieldProps extends BaseFieldProps {
 export function TextField({ label, name, value = '', onChange, required, description, type = 'text', placeholder }: TextFieldProps) {
   return (
     <div className="space-y-2">
-      <Label htmlFor={name} className="text-sm font-medium">
+      <Label htmlFor={name} className="text-xs font-medium">
         {label}
         {required && <span className="text-destructive ml-1">*</span>}
       </Label>
@@ -65,7 +65,7 @@ export function SelectField({ label, name, value = '', onChange, required, descr
 
   return (
     <div className="space-y-2">
-      <Label htmlFor={name} className="text-sm font-medium">
+      <Label htmlFor={name} className="text-xs font-medium">
         {label}
         {required && <span className="text-destructive ml-1">*</span>}
       </Label>
@@ -89,7 +89,7 @@ export function SelectField({ label, name, value = '', onChange, required, descr
 export function TextareaField({ label, name, value = '', onChange, required, description, placeholder, rows = 3 }: TextareaFieldProps) {
   return (
     <div className="space-y-2">
-      <Label htmlFor={name} className="text-sm font-medium">
+      <Label htmlFor={name} className="text-xs font-medium">
         {label}
         {required && <span className="text-destructive ml-1">*</span>}
       </Label>
@@ -115,7 +115,7 @@ export function CheckboxField({ label, name, checked = false, onChange, descript
         onCheckedChange={(val) => onChange(name, val)}
       />
       <div className="space-y-1 leading-none">
-        <Label htmlFor={name} className="text-sm font-medium cursor-pointer">
+        <Label htmlFor={name} className="text-xs font-medium cursor-pointer">
           {label}
         </Label>
         {description && <p className="text-xs text-muted-foreground">{description}</p>}
@@ -131,12 +131,12 @@ export function RadioField({ label, name, value = '', onChange, options, descrip
 
   return (
     <div className="space-y-2">
-      <Label className="text-sm font-medium">{label}</Label>
+      <Label className="text-xs font-medium">{label}</Label>
       <RadioGroup value={value} onValueChange={(val) => onChange(name, val)}>
         {normalizedOptions.map(option => (
           <div key={option.value} className="flex items-center space-x-2">
             <RadioGroupItem value={option.value} id={`${name}-${option.value}`} />
-            <Label htmlFor={`${name}-${option.value}`} className="text-sm cursor-pointer">
+            <Label htmlFor={`${name}-${option.value}`} className="text-xs cursor-pointer">
               {option.label}
             </Label>
           </div>

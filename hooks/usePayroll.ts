@@ -34,7 +34,13 @@ type PayrollExpenseClaimWithEmployee = PayrollExpenseClaim & {
   } | null
 }
 
-const supabase = getSupabaseClient()
+// Helper function to get Supabase client
+const getClient = () => {
+  if (typeof window === 'undefined') {
+    return null
+  }
+  return getSupabaseClient()
+}
 
 // Employers Hooks
 export function usePayrollEmployers() {
@@ -45,6 +51,9 @@ export function usePayrollEmployers() {
   const fetchEmployers = async () => {
     try {
       setLoading(true)
+      const supabase = getClient()
+      if (!supabase) return
+      
       const { data, error } = await supabase
         .from('payroll_objects_employers')
         .select('*')
@@ -61,6 +70,9 @@ export function usePayrollEmployers() {
 
   const createEmployer = async (employer: Omit<PayrollEmployer, 'id' | 'created_at' | 'updated_at'>) => {
     try {
+      const supabase = getClient()
+      if (!supabase) throw new Error('Supabase client not available')
+      
       const { data, error } = await supabase
         .from('payroll_objects_employers')
         .insert(employer)
@@ -78,6 +90,9 @@ export function usePayrollEmployers() {
 
   const updateEmployer = async (id: string, updates: Partial<PayrollEmployer>) => {
     try {
+      const supabase = getClient()
+      if (!supabase) throw new Error('Supabase client not available')
+      
       const { data, error } = await supabase
         .from('payroll_objects_employers')
         .update(updates)
@@ -96,6 +111,9 @@ export function usePayrollEmployers() {
 
   const deleteEmployer = async (id: string) => {
     try {
+      const supabase = getClient()
+      if (!supabase) throw new Error('Supabase client not available')
+      
       const { error } = await supabase
         .from('payroll_objects_employers')
         .delete()
@@ -133,6 +151,9 @@ export function usePayrollEmployees(employerId?: string) {
   const fetchEmployees = async () => {
     try {
       setLoading(true)
+      const supabase = getClient()
+      if (!supabase) return
+      
       let query = supabase
         .from('payroll_objects_employees')
         .select(`
@@ -158,6 +179,9 @@ export function usePayrollEmployees(employerId?: string) {
 
   const createEmployee = async (employee: Omit<PayrollEmployee, 'id' | 'created_at' | 'updated_at'>) => {
     try {
+      const supabase = getClient()
+      if (!supabase) throw new Error('Supabase client not available')
+      
       const { data, error } = await supabase
         .from('payroll_objects_employees')
         .insert(employee)
@@ -176,6 +200,9 @@ export function usePayrollEmployees(employerId?: string) {
 
   const updateEmployee = async (id: string, updates: Partial<PayrollEmployee>) => {
     try {
+      const supabase = getClient()
+      if (!supabase) throw new Error('Supabase client not available')
+      
       const { data, error } = await supabase
         .from('payroll_objects_employees')
         .update(updates)
@@ -195,6 +222,9 @@ export function usePayrollEmployees(employerId?: string) {
 
   const deleteEmployee = async (id: string) => {
     try {
+      const supabase = getClient()
+      if (!supabase) throw new Error('Supabase client not available')
+      
       const { error } = await supabase
         .from('payroll_objects_employees')
         .delete()
@@ -232,6 +262,9 @@ export function usePayrollPayruns(employerId?: string) {
   const fetchPayruns = async () => {
     try {
       setLoading(true)
+      const supabase = getClient()
+      if (!supabase) return
+      
       let query = supabase
         .from('payroll_payrun_records')
         .select(`
@@ -257,6 +290,9 @@ export function usePayrollPayruns(employerId?: string) {
 
   const createPayrun = async (payrun: Omit<PayrollPayrunRecord, 'id' | 'created_at' | 'updated_at'>) => {
     try {
+      const supabase = getClient()
+      if (!supabase) throw new Error('Supabase client not available')
+      
       const { data, error } = await supabase
         .from('payroll_payrun_records')
         .insert(payrun)
@@ -264,8 +300,7 @@ export function usePayrollPayruns(employerId?: string) {
         .single()
 
       if (error) throw error
-      // Refetch to get the joined data
-      await fetchPayruns()
+      await fetchPayruns() // Refetch to get the joined data
       return data
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to create payrun')
@@ -275,6 +310,9 @@ export function usePayrollPayruns(employerId?: string) {
 
   const updatePayrun = async (id: string, updates: Partial<PayrollPayrunRecord>) => {
     try {
+      const supabase = getClient()
+      if (!supabase) throw new Error('Supabase client not available')
+      
       const { data, error } = await supabase
         .from('payroll_payrun_records')
         .update(updates)
@@ -283,8 +321,7 @@ export function usePayrollPayruns(employerId?: string) {
         .single()
 
       if (error) throw error
-      // Refetch to get the joined data
-      await fetchPayruns()
+      await fetchPayruns() // Refetch to get the joined data
       return data
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to update payrun')
@@ -294,10 +331,13 @@ export function usePayrollPayruns(employerId?: string) {
 
   const closePayrun = async (id: string) => {
     try {
+      const supabase = getClient()
+      if (!supabase) throw new Error('Supabase client not available')
+      
       const { data, error } = await supabase
         .from('payroll_payrun_records')
-        .update({ 
-          status: 'closed',
+        .update({
+          status: 'locked',
           processed_at: new Date().toISOString()
         })
         .eq('id', id)
@@ -305,8 +345,7 @@ export function usePayrollPayruns(employerId?: string) {
         .single()
 
       if (error) throw error
-      // Refetch to get the joined data
-      await fetchPayruns()
+      await fetchPayruns() // Refetch to get the joined data
       return data
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to close payrun')
@@ -331,20 +370,26 @@ export function usePayrollPayruns(employerId?: string) {
 
 // Salary Structures Hooks
 export function usePayrollSalaryStructures(employeeId?: string) {
-  const [salaryStructures, setSalaryStructures] = useState<PayrollSalaryStructure[]>([])
+  const [salaryStructures, setSalaryStructures] = useState<PayrollSalaryStructureWithEmployee[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   const fetchSalaryStructures = async () => {
     try {
       setLoading(true)
+      const supabase = getClient()
+      if (!supabase) return
+      
       let query = supabase
         .from('payroll_salary_structures')
         .select(`
           *,
-          payroll_objects_employees!inner(full_name, payroll_objects_employers!inner(legal_name))
+          payroll_objects_employees!inner(
+            full_name,
+            payroll_objects_employers!inner(legal_name)
+          )
         `)
-        .order('effective_from', { ascending: false })
+        .order('created_at', { ascending: false })
 
       if (employeeId) {
         query = query.eq('employee_id', employeeId)
@@ -363,6 +408,9 @@ export function usePayrollSalaryStructures(employeeId?: string) {
 
   const createSalaryStructure = async (structure: Omit<PayrollSalaryStructure, 'id' | 'created_at'>) => {
     try {
+      const supabase = getClient()
+      if (!supabase) throw new Error('Supabase client not available')
+      
       const { data, error } = await supabase
         .from('payroll_salary_structures')
         .insert(structure)
@@ -370,7 +418,7 @@ export function usePayrollSalaryStructures(employeeId?: string) {
         .single()
 
       if (error) throw error
-      setSalaryStructures(prev => [data, ...prev])
+      await fetchSalaryStructures() // Refetch to get the joined data
       return data
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to create salary structure')
@@ -380,6 +428,9 @@ export function usePayrollSalaryStructures(employeeId?: string) {
 
   const updateSalaryStructure = async (id: string, updates: Partial<PayrollSalaryStructure>) => {
     try {
+      const supabase = getClient()
+      if (!supabase) throw new Error('Supabase client not available')
+      
       const { data, error } = await supabase
         .from('payroll_salary_structures')
         .update(updates)
@@ -388,10 +439,28 @@ export function usePayrollSalaryStructures(employeeId?: string) {
         .single()
 
       if (error) throw error
-      setSalaryStructures(prev => prev.map(s => s.id === id ? data : s))
+      await fetchSalaryStructures() // Refetch to get the joined data
       return data
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to update salary structure')
+      throw err
+    }
+  }
+
+  const deleteSalaryStructure = async (id: string) => {
+    try {
+      const supabase = getClient()
+      if (!supabase) throw new Error('Supabase client not available')
+      
+      const { error } = await supabase
+        .from('payroll_salary_structures')
+        .delete()
+        .eq('id', id)
+
+      if (error) throw error
+      setSalaryStructures(prev => prev.filter(structure => structure.id !== id))
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to delete salary structure')
       throw err
     }
   }
@@ -406,26 +475,33 @@ export function usePayrollSalaryStructures(employeeId?: string) {
     error,
     createSalaryStructure,
     updateSalaryStructure,
+    deleteSalaryStructure,
     refetch: fetchSalaryStructures
   }
 }
 
 // Expense Claims Hooks
 export function usePayrollExpenseClaims(employeeId?: string) {
-  const [expenseClaims, setExpenseClaims] = useState<PayrollExpenseClaim[]>([])
+  const [expenseClaims, setExpenseClaims] = useState<PayrollExpenseClaimWithEmployee[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   const fetchExpenseClaims = async () => {
     try {
       setLoading(true)
+      const supabase = getClient()
+      if (!supabase) return
+      
       let query = supabase
         .from('payroll_expense_claims')
         .select(`
           *,
-          payroll_objects_employees!inner(full_name, payroll_objects_employers!inner(legal_name))
+          payroll_objects_employees!inner(
+            full_name,
+            payroll_objects_employers!inner(legal_name)
+          )
         `)
-        .order('claim_date', { ascending: false })
+        .order('created_at', { ascending: false })
 
       if (employeeId) {
         query = query.eq('employee_id', employeeId)
@@ -444,6 +520,9 @@ export function usePayrollExpenseClaims(employeeId?: string) {
 
   const createExpenseClaim = async (claim: Omit<PayrollExpenseClaim, 'id' | 'created_at'>) => {
     try {
+      const supabase = getClient()
+      if (!supabase) throw new Error('Supabase client not available')
+      
       const { data, error } = await supabase
         .from('payroll_expense_claims')
         .insert(claim)
@@ -451,7 +530,7 @@ export function usePayrollExpenseClaims(employeeId?: string) {
         .single()
 
       if (error) throw error
-      setExpenseClaims(prev => [data, ...prev])
+      await fetchExpenseClaims() // Refetch to get the joined data
       return data
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to create expense claim')
@@ -461,19 +540,22 @@ export function usePayrollExpenseClaims(employeeId?: string) {
 
   const approveExpenseClaim = async (id: string, approverId: string) => {
     try {
+      const supabase = getClient()
+      if (!supabase) throw new Error('Supabase client not available')
+      
       const { data, error } = await supabase
         .from('payroll_expense_claims')
-        .update({ 
+        .update({
           status: 'approved',
           approved_at: new Date().toISOString(),
-          approver_id: approverId
+          approved_by: approverId
         })
         .eq('id', id)
         .select()
         .single()
 
       if (error) throw error
-      setExpenseClaims(prev => prev.map(c => c.id === id ? data : c))
+      await fetchExpenseClaims() // Refetch to get the joined data
       return data
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to approve expense claim')
@@ -483,22 +565,43 @@ export function usePayrollExpenseClaims(employeeId?: string) {
 
   const rejectExpenseClaim = async (id: string, approverId: string) => {
     try {
+      const supabase = getClient()
+      if (!supabase) throw new Error('Supabase client not available')
+      
       const { data, error } = await supabase
         .from('payroll_expense_claims')
-        .update({ 
+        .update({
           status: 'rejected',
-          approved_at: new Date().toISOString(),
-          approver_id: approverId
+          rejected_at: new Date().toISOString(),
+          rejected_by: approverId
         })
         .eq('id', id)
         .select()
         .single()
 
       if (error) throw error
-      setExpenseClaims(prev => prev.map(c => c.id === id ? data : c))
+      await fetchExpenseClaims() // Refetch to get the joined data
       return data
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to reject expense claim')
+      throw err
+    }
+  }
+
+  const deleteExpenseClaim = async (id: string) => {
+    try {
+      const supabase = getClient()
+      if (!supabase) throw new Error('Supabase client not available')
+      
+      const { error } = await supabase
+        .from('payroll_expense_claims')
+        .delete()
+        .eq('id', id)
+
+      if (error) throw error
+      setExpenseClaims(prev => prev.filter(claim => claim.id !== id))
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to delete expense claim')
       throw err
     }
   }
@@ -514,6 +617,7 @@ export function usePayrollExpenseClaims(employeeId?: string) {
     createExpenseClaim,
     approveExpenseClaim,
     rejectExpenseClaim,
+    deleteExpenseClaim,
     refetch: fetchExpenseClaims
   }
 }
@@ -527,17 +631,16 @@ export function usePayrollPayslips(payrunId?: string) {
   const fetchPayslips = async () => {
     try {
       setLoading(true)
+      const supabase = getClient()
+      if (!supabase) return
+      
       let query = supabase
         .from('payroll_payslip_records')
-        .select(`
-          *,
-          payroll_objects_employees!inner(full_name, payroll_objects_employers!inner(legal_name)),
-          payroll_payrun_items!inner(payroll_payrun_records!inner(payrun_name))
-        `)
+        .select('*')
         .order('created_at', { ascending: false })
 
       if (payrunId) {
-        query = query.eq('payroll_payrun_items.payrun_id', payrunId)
+        query = query.eq('payrun_id', payrunId)
       }
 
       const { data, error } = await query
@@ -553,6 +656,9 @@ export function usePayrollPayslips(payrunId?: string) {
 
   const generatePayslip = async (employeeId: string, payrunItemId: string) => {
     try {
+      const supabase = getClient()
+      if (!supabase) throw new Error('Supabase client not available')
+      
       const { data, error } = await supabase
         .from('payroll_payslip_records')
         .insert({
@@ -564,7 +670,7 @@ export function usePayrollPayslips(payrunId?: string) {
         .single()
 
       if (error) throw error
-      setPayslips(prev => [data, ...prev])
+      await fetchPayslips() // Refetch to get the updated data
       return data
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to generate payslip')
@@ -574,9 +680,12 @@ export function usePayrollPayslips(payrunId?: string) {
 
   const sendPayslipEmail = async (id: string) => {
     try {
+      const supabase = getClient()
+      if (!supabase) throw new Error('Supabase client not available')
+      
       const { data, error } = await supabase
         .from('payroll_payslip_records')
-        .update({ 
+        .update({
           email_sent: true,
           email_sent_at: new Date().toISOString()
         })
@@ -585,10 +694,28 @@ export function usePayrollPayslips(payrunId?: string) {
         .single()
 
       if (error) throw error
-      setPayslips(prev => prev.map(p => p.id === id ? data : p))
+      await fetchPayslips() // Refetch to get the updated data
       return data
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to send payslip email')
+      throw err
+    }
+  }
+
+  const deletePayslip = async (id: string) => {
+    try {
+      const supabase = getClient()
+      if (!supabase) throw new Error('Supabase client not available')
+      
+      const { error } = await supabase
+        .from('payroll_payslip_records')
+        .delete()
+        .eq('id', id)
+
+      if (error) throw error
+      setPayslips(prev => prev.filter(payslip => payslip.id !== id))
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to delete payslip')
       throw err
     }
   }
@@ -603,17 +730,17 @@ export function usePayrollPayslips(payrunId?: string) {
     error,
     generatePayslip,
     sendPayslipEmail,
+    deletePayslip,
     refetch: fetchPayslips
   }
 }
 
-// Payroll Dashboard Stats Hook
+// Stats Hook
 export function usePayrollStats() {
   const [stats, setStats] = useState({
     totalEmployers: 0,
     totalEmployees: 0,
     activePayruns: 0,
-    pendingExpenses: 0,
     monthlyPayroll: 0
   })
   const [loading, setLoading] = useState(true)
@@ -622,34 +749,47 @@ export function usePayrollStats() {
   const fetchStats = async () => {
     try {
       setLoading(true)
+      const supabase = getClient()
+      if (!supabase) return
       
-      // Get counts
-      const [employersCount, employeesCount, payrunsCount, expensesCount] = await Promise.all([
+      // Fetch counts
+      const [employersResult, employeesResult, payrunsResult] = await Promise.all([
         supabase.from('payroll_objects_employers').select('*', { count: 'exact', head: true }),
         supabase.from('payroll_objects_employees').select('*', { count: 'exact', head: true }),
-        supabase.from('payroll_payrun_records').select('*', { count: 'exact', head: true }).eq('status', 'draft'),
-        supabase.from('payroll_expense_claims').select('*', { count: 'exact', head: true }).eq('status', 'pending')
+        supabase.from('payroll_payrun_records').select('*', { count: 'exact', head: true }).eq('status', 'draft')
       ])
 
-      // Calculate monthly payroll (sum of all payrun items for current month)
-      const currentMonth = new Date().toISOString().slice(0, 7)
-      const { data: payrunItems } = await supabase
-        .from('payroll_payrun_items')
-        .select('gross_pay')
-        .gte('created_at', `${currentMonth}-01`)
-        .lt('created_at', `${currentMonth}-32`)
+      if (employersResult.error) throw employersResult.error
+      if (employeesResult.error) throw employeesResult.error
+      if (payrunsResult.error) throw payrunsResult.error
 
-      const monthlyPayroll = payrunItems?.reduce((sum, item) => sum + (item.gross_pay || 0), 0) || 0
+      // Calculate monthly payroll (simplified - you might want to calculate this differently)
+      const { data: salaryStructures } = await supabase
+        .from('payroll_salary_structures')
+        .select('base_salary, fixed_allowances, variable_allowances')
+
+      const monthlyPayroll = salaryStructures?.reduce((total, structure) => {
+        const base = structure.base_salary || 0
+        
+        // Parse fixed allowances from JSON
+        const fixedAllowances = structure.fixed_allowances as Record<string, number> || {}
+        const fixedTotal = Object.values(fixedAllowances).reduce((sum, amount) => sum + (amount || 0), 0)
+        
+        // Parse variable allowances from JSON
+        const variableAllowances = structure.variable_allowances as Record<string, number> || {}
+        const variableTotal = Object.values(variableAllowances).reduce((sum, amount) => sum + (amount || 0), 0)
+        
+        return total + base + fixedTotal + variableTotal
+      }, 0) || 0
 
       setStats({
-        totalEmployers: employersCount.count || 0,
-        totalEmployees: employeesCount.count || 0,
-        activePayruns: payrunsCount.count || 0,
-        pendingExpenses: expensesCount.count || 0,
+        totalEmployers: employersResult.count || 0,
+        totalEmployees: employeesResult.count || 0,
+        activePayruns: payrunsResult.count || 0,
         monthlyPayroll
       })
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch payroll stats')
+      setError(err instanceof Error ? err.message : 'Failed to fetch stats')
     } finally {
       setLoading(false)
     }

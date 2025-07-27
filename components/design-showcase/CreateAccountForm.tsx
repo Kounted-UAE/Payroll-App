@@ -17,8 +17,8 @@ export const CreateAccountForm = () => {
   return (
     <Card className="w-full max-w-md">
       <CardHeader className="pb-4">
-        <CardTitle className="text-lg">Create an account</CardTitle>
-        <p className="text-sm text-muted-foreground">
+        <CardTitle className="text-xs">Create an account</CardTitle>
+        <p className="text-xs text-muted-foreground">
           Enter your email below to create your account
         </p>
       </CardHeader>

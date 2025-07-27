@@ -49,7 +49,7 @@ export default function HRComplianceStep({ data, allData, onChange }: StepProps)
     <div className="space-y-6">
       <FormSection title="HR Services">
         <div className="space-y-4">
-          <p className="text-sm text-muted-foreground">Select the HR services you need:</p>
+          <p className="text-xs text-muted-foreground">Select the HR services you need:</p>
           
           <div className="space-y-3">
             {HR_SERVICES.map(service => (
@@ -63,7 +63,7 @@ export default function HRComplianceStep({ data, allData, onChange }: StepProps)
                 />
                 <Label
                   htmlFor={`service-${service.value}`}
-                  className="text-sm font-normal cursor-pointer"
+                  className="text-xs font-normal cursor-pointer"
                 >
                   {service.label}
                 </Label>

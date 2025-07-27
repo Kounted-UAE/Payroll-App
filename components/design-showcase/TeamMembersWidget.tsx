@@ -28,8 +28,8 @@ export const TeamMembersWidget = () => {
   return (
     <Card className="w-full max-w-md">
       <CardHeader className="pb-4">
-        <CardTitle className="text-lg">Team Members</CardTitle>
-        <p className="text-sm text-muted-foreground">
+        <CardTitle className="text-xs">Team Members</CardTitle>
+        <p className="text-xs text-muted-foreground">
           Invite your team members to collaborate.
         </p>
       </CardHeader>
@@ -45,7 +45,7 @@ export const TeamMembersWidget = () => {
                 </AvatarFallback>
               </Avatar>
               <div>
-                <p className="text-sm font-medium">{member.name}</p>
+                <p className="text-xs font-medium">{member.name}</p>
                 <p className="text-xs text-muted-foreground">{member.email}</p>
               </div>
             </div>

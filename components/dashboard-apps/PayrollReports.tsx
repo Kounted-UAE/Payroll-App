@@ -114,7 +114,7 @@ const PayrollReports = () => {
     switch (type) {
       case "Summary": return "bg-blue-50 text-blue-600"
       case "EOSB": return "bg-purple-50 text-purple-600"
-      case "Cost Analysis": return "bg-green-50 text-green-600"
+      case "Cost Analysis": return "bg-green-50 text-primary"
       case "WPS": return "bg-orange-50 text-orange-600"
       case "Demographics": return "bg-pink-50 text-pink-600"
       case "Compliance": return "bg-indigo-50 text-indigo-600"
@@ -126,7 +126,7 @@ const PayrollReports = () => {
     <div className="flex-1 space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Payroll Reports</h1>
+          <h1 className="text-lg font-bold tracking-tight">Payroll Reports</h1>
           <p className="text-muted-foreground">
             Generate and download comprehensive payroll analytics
           </p>
@@ -162,10 +162,10 @@ const PayrollReports = () => {
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center space-x-2">
-              <DollarSign className="h-5 w-5 text-green-600" />
+              <DollarSign className="h-5 w-5 text-primary" />
               <div>
-                <p className="text-2xl font-bold">AED 892.5K</p>
-                <p className="text-sm text-muted-foreground">Total Payroll Cost</p>
+                <p className="text-xs font-bold">AED 892.5K</p>
+                <p className="text-xs text-muted-foreground">Total Payroll Cost</p>
               </div>
             </div>
           </CardContent>
@@ -175,8 +175,8 @@ const PayrollReports = () => {
             <div className="flex items-center space-x-2">
               <Users className="h-5 w-5 text-blue-600" />
               <div>
-                <p className="text-2xl font-bold">283</p>
-                <p className="text-sm text-muted-foreground">Active Employees</p>
+                <p className="text-xs font-bold">283</p>
+                <p className="text-xs text-muted-foreground">Active Employees</p>
               </div>
             </div>
           </CardContent>
@@ -186,8 +186,8 @@ const PayrollReports = () => {
             <div className="flex items-center space-x-2">
               <Calendar className="h-5 w-5 text-purple-600" />
               <div>
-                <p className="text-2xl font-bold">AED 4.76M</p>
-                <p className="text-sm text-muted-foreground">EOSB Liability</p>
+                <p className="text-xs font-bold">AED 4.76M</p>
+                <p className="text-xs text-muted-foreground">EOSB Liability</p>
               </div>
             </div>
           </CardContent>
@@ -197,8 +197,8 @@ const PayrollReports = () => {
             <div className="flex items-center space-x-2">
               <Building className="h-5 w-5 text-orange-600" />
               <div>
-                <p className="text-2xl font-bold">15</p>
-                <p className="text-sm text-muted-foreground">Employers</p>
+                <p className="text-xs font-bold">15</p>
+                <p className="text-xs text-muted-foreground">Employers</p>
               </div>
             </div>
           </CardContent>
@@ -218,7 +218,7 @@ const PayrollReports = () => {
                       <ReportIcon className="h-6 w-6" />
                     </div>
                     <div>
-                      <CardTitle className="text-lg">{report.title}</CardTitle>
+                      <CardTitle className="text-xs">{report.title}</CardTitle>
                       <CardDescription className="mt-1">
                         {report.description}
                       </CardDescription>
@@ -244,16 +244,16 @@ const PayrollReports = () => {
                   {report.type === "Summary" && (
                     <>
                       <div>
-                        <p className="text-2xl font-bold text-green-600">AED {(report.total_cost / 1000).toFixed(0)}K</p>
-                        <p className="text-sm text-muted-foreground">Total Cost</p>
+                        <p className="text-xs font-bold text-primary">AED {(report.total_cost / 1000).toFixed(0)}K</p>
+                        <p className="text-xs text-muted-foreground">Total Cost</p>
                       </div>
                       <div>
-                        <p className="text-2xl font-bold text-blue-600">{report.employee_count}</p>
-                        <p className="text-sm text-muted-foreground">Employees</p>
+                        <p className="text-xs font-bold text-blue-600">{report.employee_count}</p>
+                        <p className="text-xs text-muted-foreground">Employees</p>
                       </div>
                       <div>
-                        <p className="text-2xl font-bold text-purple-600">{report.employer_count}</p>
-                        <p className="text-sm text-muted-foreground">Employers</p>
+                        <p className="text-xs font-bold text-purple-600">{report.employer_count}</p>
+                        <p className="text-xs text-muted-foreground">Employers</p>
                       </div>
                     </>
                   )}
@@ -261,16 +261,16 @@ const PayrollReports = () => {
                   {report.type === "EOSB" && (
                     <>
                       <div>
-                        <p className="text-2xl font-bold text-purple-600">AED {(report.total_liability / 1000000).toFixed(1)}M</p>
-                        <p className="text-sm text-muted-foreground">Total Liability</p>
+                        <p className="text-xs font-bold text-purple-600">AED {(report.total_liability / 1000000).toFixed(1)}M</p>
+                        <p className="text-xs text-muted-foreground">Total Liability</p>
                       </div>
                       <div>
-                        <p className="text-2xl font-bold text-blue-600">{report.employee_count}</p>
-                        <p className="text-sm text-muted-foreground">Employees</p>
+                        <p className="text-xs font-bold text-blue-600">{report.employee_count}</p>
+                        <p className="text-xs text-muted-foreground">Employees</p>
                       </div>
                       <div>
-                        <p className="text-2xl font-bold text-orange-600">AED {Math.round(report.total_liability / report.employee_count).toLocaleString()}</p>
-                        <p className="text-sm text-muted-foreground">Avg. per Employee</p>
+                        <p className="text-xs font-bold text-orange-600">AED {Math.round(report.total_liability / report.employee_count).toLocaleString()}</p>
+                        <p className="text-xs text-muted-foreground">Avg. per Employee</p>
                       </div>
                     </>
                   )}
@@ -278,16 +278,16 @@ const PayrollReports = () => {
                   {report.type === "Cost Analysis" && (
                     <>
                       <div>
-                        <p className="text-2xl font-bold text-green-600">AED {(report.total_cost / 1000).toFixed(0)}K</p>
-                        <p className="text-sm text-muted-foreground">Total Cost</p>
+                        <p className="text-xs font-bold text-primary">AED {(report.total_cost / 1000).toFixed(0)}K</p>
+                        <p className="text-xs text-muted-foreground">Total Cost</p>
                       </div>
                       <div>
-                        <p className="text-2xl font-bold text-green-500">+{report.cost_increase}%</p>
-                        <p className="text-sm text-muted-foreground">Month Growth</p>
+                        <p className="text-xs font-bold text-green-500">+{report.cost_increase}%</p>
+                        <p className="text-xs text-muted-foreground">Month Growth</p>
                       </div>
                       <div>
-                        <p className="text-2xl font-bold text-blue-600">{report.employer_count}</p>
-                        <p className="text-sm text-muted-foreground">Employers</p>
+                        <p className="text-xs font-bold text-blue-600">{report.employer_count}</p>
+                        <p className="text-xs text-muted-foreground">Employers</p>
                       </div>
                     </>
                   )}
@@ -295,16 +295,16 @@ const PayrollReports = () => {
                   {report.type === "WPS" && (
                     <>
                       <div>
-                        <p className="text-2xl font-bold text-orange-600">AED {(report.total_transfers / 1000).toFixed(0)}K</p>
-                        <p className="text-sm text-muted-foreground">Transfers</p>
+                        <p className="text-xs font-bold text-orange-600">AED {(report.total_transfers / 1000).toFixed(0)}K</p>
+                        <p className="text-xs text-muted-foreground">Transfers</p>
                       </div>
                       <div>
-                        <p className="text-2xl font-bold text-blue-600">{report.transfer_count}</p>
-                        <p className="text-sm text-muted-foreground">WPS Files</p>
+                        <p className="text-xs font-bold text-blue-600">{report.transfer_count}</p>
+                        <p className="text-xs text-muted-foreground">WPS Files</p>
                       </div>
                       <div>
-                        <p className="text-2xl font-bold text-purple-600">{report.employer_count}</p>
-                        <p className="text-sm text-muted-foreground">Employers</p>
+                        <p className="text-xs font-bold text-purple-600">{report.employer_count}</p>
+                        <p className="text-xs text-muted-foreground">Employers</p>
                       </div>
                     </>
                   )}
@@ -312,16 +312,16 @@ const PayrollReports = () => {
                   {report.type === "Demographics" && (
                     <>
                       <div>
-                        <p className="text-2xl font-bold text-pink-600">{report.employee_count}</p>
-                        <p className="text-sm text-muted-foreground">Employees</p>
+                        <p className="text-xs font-bold text-pink-600">{report.employee_count}</p>
+                        <p className="text-xs text-muted-foreground">Employees</p>
                       </div>
                       <div>
-                        <p className="text-2xl font-bold text-blue-600">{report.nationality_count}</p>
-                        <p className="text-sm text-muted-foreground">Nationalities</p>
+                        <p className="text-xs font-bold text-blue-600">{report.nationality_count}</p>
+                        <p className="text-xs text-muted-foreground">Nationalities</p>
                       </div>
                       <div>
-                        <p className="text-2xl font-bold text-green-600">{report.avg_tenure_months}m</p>
-                        <p className="text-sm text-muted-foreground">Avg. Tenure</p>
+                        <p className="text-xs font-bold text-primary">{report.avg_tenure_months}m</p>
+                        <p className="text-xs text-muted-foreground">Avg. Tenure</p>
                       </div>
                     </>
                   )}
@@ -329,23 +329,23 @@ const PayrollReports = () => {
                   {report.type === "Compliance" && (
                     <>
                       <div>
-                        <p className="text-2xl font-bold text-green-600">{report.compliance_score}%</p>
-                        <p className="text-sm text-muted-foreground">Compliance</p>
+                        <p className="text-xs font-bold text-primary">{report.compliance_score}%</p>
+                        <p className="text-xs text-muted-foreground">Compliance</p>
                       </div>
                       <div>
-                        <p className="text-2xl font-bold text-orange-600">{report.pending_renewals}</p>
-                        <p className="text-sm text-muted-foreground">Pending</p>
+                        <p className="text-xs font-bold text-orange-600">{report.pending_renewals}</p>
+                        <p className="text-xs text-muted-foreground">Pending</p>
                       </div>
                       <div>
-                        <p className="text-2xl font-bold text-red-600">{report.expired_visas}</p>
-                        <p className="text-sm text-muted-foreground">Expired</p>
+                        <p className="text-xs font-bold text-red-600">{report.expired_visas}</p>
+                        <p className="text-xs text-muted-foreground">Expired</p>
                       </div>
                     </>
                   )}
                 </div>
                 
                 <div className="mt-6 pt-4 border-t flex items-center justify-between">
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-xs text-muted-foreground">
                     Generated: {report.generated_date}
                   </div>
                   <div className="flex space-x-2">

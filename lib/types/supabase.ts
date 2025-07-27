@@ -1223,6 +1223,30 @@ export type Database = {
           },
         ]
       }
+      kounted_country_codes: {
+        Row: {
+          alpha2_code: string
+          created_at: string | null
+          flag_url: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          alpha2_code: string
+          created_at?: string | null
+          flag_url?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          alpha2_code?: string
+          created_at?: string | null
+          flag_url?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
       kounted_price_lists: {
         Row: {
           client_type: string | null
@@ -1326,19 +1350,25 @@ export type Database = {
       }
       kounted_uae_jurisdictions: {
         Row: {
+          code: string | null
           created_at: string
           id: string
           name: string
+          region_code: string | null
         }
         Insert: {
+          code?: string | null
           created_at?: string
           id: string
           name: string
+          region_code?: string | null
         }
         Update: {
+          code?: string | null
           created_at?: string
           id?: string
           name?: string
+          region_code?: string | null
         }
         Relationships: []
       }
@@ -2142,6 +2172,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "expense_claims_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "v_wps_payslip_export"
+            referencedColumns: ["employee_id"]
+          },
+          {
             foreignKeyName: "expense_claims_payrun_id_fkey"
             columns: ["payrun_id"]
             isOneToOne: false
@@ -2155,71 +2192,147 @@ export type Database = {
             referencedRelation: "payrun_batch_status"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "expense_claims_payrun_id_fkey"
+            columns: ["payrun_id"]
+            isOneToOne: false
+            referencedRelation: "v_wps_payslip_export"
+            referencedColumns: ["payrun_id"]
+          },
         ]
       }
       payroll_objects_employees: {
         Row: {
+          account_number: string | null
+          address: string | null
           bank_name: string | null
+          base_salary: number | null
+          contact_number: string | null
+          contract_duration: string | null
           contract_type: string | null
           created_at: string | null
+          currency: string | null
           date_of_birth: string | null
+          department: string | null
+          effective_from: string | null
+          email: string | null
           emirates_id: string | null
           employer_id: string | null
+          eosb_applicable: boolean | null
+          food_allowance: number | null
           full_name: string
+          gender: string | null
+          housing_allowance: number | null
           iban: string | null
           id: string
           individual_id: string | null
           job_title: string | null
+          marital_status: string | null
+          mobile_allowance: number | null
           nationality: string | null
+          other_allowances: Json | null
           passport_number: string | null
+          probation_period: string | null
           start_date: string
           status: string | null
+          swift_code: string | null
           termination_date: string | null
+          transport_allowance: number | null
           updated_at: string | null
+          visa_expiry: string | null
           visa_info: Json | null
+          visa_type: string | null
+          work_permit_number: string | null
           wps_compliance_flag: boolean | null
+          wps_flag: boolean | null
         }
         Insert: {
+          account_number?: string | null
+          address?: string | null
           bank_name?: string | null
+          base_salary?: number | null
+          contact_number?: string | null
+          contract_duration?: string | null
           contract_type?: string | null
           created_at?: string | null
+          currency?: string | null
           date_of_birth?: string | null
+          department?: string | null
+          effective_from?: string | null
+          email?: string | null
           emirates_id?: string | null
           employer_id?: string | null
+          eosb_applicable?: boolean | null
+          food_allowance?: number | null
           full_name: string
+          gender?: string | null
+          housing_allowance?: number | null
           iban?: string | null
           id?: string
           individual_id?: string | null
           job_title?: string | null
+          marital_status?: string | null
+          mobile_allowance?: number | null
           nationality?: string | null
+          other_allowances?: Json | null
           passport_number?: string | null
+          probation_period?: string | null
           start_date: string
           status?: string | null
+          swift_code?: string | null
           termination_date?: string | null
+          transport_allowance?: number | null
           updated_at?: string | null
+          visa_expiry?: string | null
           visa_info?: Json | null
+          visa_type?: string | null
+          work_permit_number?: string | null
           wps_compliance_flag?: boolean | null
+          wps_flag?: boolean | null
         }
         Update: {
+          account_number?: string | null
+          address?: string | null
           bank_name?: string | null
+          base_salary?: number | null
+          contact_number?: string | null
+          contract_duration?: string | null
           contract_type?: string | null
           created_at?: string | null
+          currency?: string | null
           date_of_birth?: string | null
+          department?: string | null
+          effective_from?: string | null
+          email?: string | null
           emirates_id?: string | null
           employer_id?: string | null
+          eosb_applicable?: boolean | null
+          food_allowance?: number | null
           full_name?: string
+          gender?: string | null
+          housing_allowance?: number | null
           iban?: string | null
           id?: string
           individual_id?: string | null
           job_title?: string | null
+          marital_status?: string | null
+          mobile_allowance?: number | null
           nationality?: string | null
+          other_allowances?: Json | null
           passport_number?: string | null
+          probation_period?: string | null
           start_date?: string
           status?: string | null
+          swift_code?: string | null
           termination_date?: string | null
+          transport_allowance?: number | null
           updated_at?: string | null
+          visa_expiry?: string | null
           visa_info?: Json | null
+          visa_type?: string | null
+          work_permit_number?: string | null
           wps_compliance_flag?: boolean | null
+          wps_flag?: boolean | null
         }
         Relationships: [
           {
@@ -2241,36 +2354,126 @@ export type Database = {
       payroll_objects_employers: {
         Row: {
           address: string | null
-          contact_info: Json | null
+          address_line_1: string | null
+          address_line_2: string | null
+          bank_code: string | null
+          bank_name: string | null
+          business_type: string | null
+          city: string | null
+          company_account_number: string | null
+          company_iban: string | null
+          contact_person_email: string | null
+          contact_person_name: string | null
+          contact_person_phone: string | null
+          contact_person_title: string | null
           created_at: string | null
+          email: string | null
+          email_address: string | null
+          emirate: string | null
           entity_id: string | null
+          establishment_card: string | null
+          fax_number: string | null
           id: string
+          jurisdiction: string | null
           legal_name: string
-          trade_license: string
+          license_expiry: string | null
+          mohre_establishment_id: string | null
+          mohre_id: string | null
+          phone: string | null
+          phone_number: string | null
+          po_box: string | null
+          routing_code: string | null
+          routing_number: string | null
+          salary_transfer_method: string | null
+          trade_license: string | null
+          trade_license_number: string | null
+          trade_name: string | null
           updated_at: string
-          wps_details: Json | null
+          website: string | null
+          wps_employer_id: string | null
+          wps_registered: boolean | null
         }
         Insert: {
           address?: string | null
-          contact_info?: Json | null
+          address_line_1?: string | null
+          address_line_2?: string | null
+          bank_code?: string | null
+          bank_name?: string | null
+          business_type?: string | null
+          city?: string | null
+          company_account_number?: string | null
+          company_iban?: string | null
+          contact_person_email?: string | null
+          contact_person_name?: string | null
+          contact_person_phone?: string | null
+          contact_person_title?: string | null
           created_at?: string | null
+          email?: string | null
+          email_address?: string | null
+          emirate?: string | null
           entity_id?: string | null
+          establishment_card?: string | null
+          fax_number?: string | null
           id?: string
+          jurisdiction?: string | null
           legal_name: string
-          trade_license: string
+          license_expiry?: string | null
+          mohre_establishment_id?: string | null
+          mohre_id?: string | null
+          phone?: string | null
+          phone_number?: string | null
+          po_box?: string | null
+          routing_code?: string | null
+          routing_number?: string | null
+          salary_transfer_method?: string | null
+          trade_license?: string | null
+          trade_license_number?: string | null
+          trade_name?: string | null
           updated_at?: string
-          wps_details?: Json | null
+          website?: string | null
+          wps_employer_id?: string | null
+          wps_registered?: boolean | null
         }
         Update: {
           address?: string | null
-          contact_info?: Json | null
+          address_line_1?: string | null
+          address_line_2?: string | null
+          bank_code?: string | null
+          bank_name?: string | null
+          business_type?: string | null
+          city?: string | null
+          company_account_number?: string | null
+          company_iban?: string | null
+          contact_person_email?: string | null
+          contact_person_name?: string | null
+          contact_person_phone?: string | null
+          contact_person_title?: string | null
           created_at?: string | null
+          email?: string | null
+          email_address?: string | null
+          emirate?: string | null
           entity_id?: string | null
+          establishment_card?: string | null
+          fax_number?: string | null
           id?: string
+          jurisdiction?: string | null
           legal_name?: string
-          trade_license?: string
+          license_expiry?: string | null
+          mohre_establishment_id?: string | null
+          mohre_id?: string | null
+          phone?: string | null
+          phone_number?: string | null
+          po_box?: string | null
+          routing_code?: string | null
+          routing_number?: string | null
+          salary_transfer_method?: string | null
+          trade_license?: string | null
+          trade_license_number?: string | null
+          trade_name?: string | null
           updated_at?: string
-          wps_details?: Json | null
+          website?: string | null
+          wps_employer_id?: string | null
+          wps_registered?: boolean | null
         }
         Relationships: [
           {
@@ -2286,6 +2489,99 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "core_objects_entities"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      payroll_pay_types: {
+        Row: {
+          code: string
+          created_at: string | null
+          employer_id: string | null
+          gl_account: string | null
+          id: string
+          is_taxable: boolean | null
+          is_wps: boolean | null
+          label: string
+          type: string
+        }
+        Insert: {
+          code: string
+          created_at?: string | null
+          employer_id?: string | null
+          gl_account?: string | null
+          id?: string
+          is_taxable?: boolean | null
+          is_wps?: boolean | null
+          label: string
+          type: string
+        }
+        Update: {
+          code?: string
+          created_at?: string | null
+          employer_id?: string | null
+          gl_account?: string | null
+          id?: string
+          is_taxable?: boolean | null
+          is_wps?: boolean | null
+          label?: string
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payroll_pay_types_employer_id_fkey"
+            columns: ["employer_id"]
+            isOneToOne: false
+            referencedRelation: "payroll_objects_employers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payroll_payrun_item_lines: {
+        Row: {
+          amount: number
+          id: string
+          is_manual: boolean | null
+          notes: string | null
+          pay_type_id: string | null
+          payrun_item_id: string | null
+        }
+        Insert: {
+          amount: number
+          id?: string
+          is_manual?: boolean | null
+          notes?: string | null
+          pay_type_id?: string | null
+          payrun_item_id?: string | null
+        }
+        Update: {
+          amount?: number
+          id?: string
+          is_manual?: boolean | null
+          notes?: string | null
+          pay_type_id?: string | null
+          payrun_item_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payroll_payrun_item_lines_pay_type_id_fkey"
+            columns: ["pay_type_id"]
+            isOneToOne: false
+            referencedRelation: "payroll_pay_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payroll_payrun_item_lines_payrun_item_id_fkey"
+            columns: ["payrun_item_id"]
+            isOneToOne: false
+            referencedRelation: "payroll_payrun_items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payroll_payrun_item_lines_payrun_item_id_fkey"
+            columns: ["payrun_item_id"]
+            isOneToOne: false
+            referencedRelation: "v_wps_payslip_export"
+            referencedColumns: ["payrun_item_id"]
           },
         ]
       }
@@ -2344,6 +2640,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "payrun_items_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "v_wps_payslip_export"
+            referencedColumns: ["employee_id"]
+          },
+          {
             foreignKeyName: "payrun_items_payrun_id_fkey"
             columns: ["payrun_id"]
             isOneToOne: false
@@ -2356,6 +2659,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "payrun_batch_status"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payrun_items_payrun_id_fkey"
+            columns: ["payrun_id"]
+            isOneToOne: false
+            referencedRelation: "v_wps_payslip_export"
+            referencedColumns: ["payrun_id"]
           },
         ]
       }
@@ -2446,10 +2756,69 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "payslips_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "v_wps_payslip_export"
+            referencedColumns: ["employee_id"]
+          },
+          {
             foreignKeyName: "payslips_payrun_item_id_fkey"
             columns: ["payrun_item_id"]
             isOneToOne: false
             referencedRelation: "payroll_payrun_items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payslips_payrun_item_id_fkey"
+            columns: ["payrun_item_id"]
+            isOneToOne: false
+            referencedRelation: "v_wps_payslip_export"
+            referencedColumns: ["payrun_item_id"]
+          },
+        ]
+      }
+      payroll_salary_structure_items: {
+        Row: {
+          amount: number
+          effective_from: string
+          effective_to: string | null
+          frequency: string | null
+          id: string
+          pay_type_id: string | null
+          salary_structure_id: string | null
+        }
+        Insert: {
+          amount: number
+          effective_from?: string
+          effective_to?: string | null
+          frequency?: string | null
+          id?: string
+          pay_type_id?: string | null
+          salary_structure_id?: string | null
+        }
+        Update: {
+          amount?: number
+          effective_from?: string
+          effective_to?: string | null
+          frequency?: string | null
+          id?: string
+          pay_type_id?: string | null
+          salary_structure_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payroll_salary_structure_items_pay_type_id_fkey"
+            columns: ["pay_type_id"]
+            isOneToOne: false
+            referencedRelation: "payroll_pay_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payroll_salary_structure_items_salary_structure_id_fkey"
+            columns: ["salary_structure_id"]
+            isOneToOne: false
+            referencedRelation: "payroll_salary_structures"
             referencedColumns: ["id"]
           },
         ]
@@ -2498,6 +2867,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "payroll_objects_employees"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "salary_structures_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "v_wps_payslip_export"
+            referencedColumns: ["employee_id"]
           },
         ]
       }
@@ -4993,6 +5369,27 @@ export type Database = {
           quote_total: number | null
           subject: string | null
           ticket_id: string | null
+        }
+        Relationships: []
+      }
+      v_wps_payslip_export: {
+        Row: {
+          account_number: string | null
+          bank_name: string | null
+          emirates_id: string | null
+          employee_id: string | null
+          exported_at: string | null
+          full_name: string | null
+          iban: string | null
+          net_pay: number | null
+          pay_period_end: string | null
+          pay_period_start: string | null
+          payment_date: string | null
+          payrun_id: string | null
+          payrun_item_id: string | null
+          payrun_name: string | null
+          swift_code: string | null
+          wps_compliance_flag: boolean | null
         }
         Relationships: []
       }

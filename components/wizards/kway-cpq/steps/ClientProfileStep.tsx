@@ -7,10 +7,14 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import FormSection from '@/components/wizards/FormSection';
-import { TextField, SelectField } from '@/components/wizards/FormField';
+import FormSection from '@/components/forms/FormSection';
+import { TextField, SelectField } from '@/components/forms/FormField';
 import { Building2, ChevronsUpDown, Check, Building, Calendar, User } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 interface StepProps {
   data: any;
@@ -34,14 +38,6 @@ const ENTITY_TYPES = [
   { value: 'spv', label: 'SPV' },
   { value: 'holdingco', label: 'Holding Company' },
   { value: 'offshore', label: 'Offshore' }
-];
-
-const JURISDICTIONS = [
-  { value: 'uae_mainland', label: 'UAE Mainland' },
-  { value: 'adgm', label: 'ADGM' },
-  { value: 'difc', label: 'DIFC' },
-  { value: 'dmcc', label: 'DMCC' },
-  { value: 'other_freezone', label: 'Other Free Zone' }
 ];
 
 const LEGAL_STRUCTURES = [
@@ -68,6 +64,7 @@ export default function ClientProfileStep({ data, onChange }: StepProps) {
   const [selectedClient, setSelectedClient] = useState<Client | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [showResults, setShowResults] = useState(false);
+  const [jurisdictions, setJurisdictions] = useState<any[]>([]);
 
   useEffect(() => {
     if (isExistingClient === 'existing') {
@@ -78,6 +75,22 @@ export default function ClientProfileStep({ data, onChange }: StepProps) {
       loadSelectedClient(data.selectedClientId);
     }
   }, [isExistingClient, data.selectedClientId]);
+
+  // Fetch jurisdictions data
+  useEffect(() => {
+    const fetchJurisdictions = async () => {
+      const { data, error } = await supabase
+        .from('kounted_uae_jurisdictions')
+        .select('name')
+        .order('name');
+      
+      if (!error && data) {
+        setJurisdictions(data);
+      }
+    };
+    
+    fetchJurisdictions();
+  }, []);
 
   const loadClients = async () => {
     try {
@@ -203,7 +216,7 @@ export default function ClientProfileStep({ data, onChange }: StepProps) {
                   <div>
                     <div className="font-medium">{selectedClient.name}</div>
                     {selectedClient.contact_person && (
-                      <div className="text-sm text-muted-foreground">{selectedClient.contact_person}</div>
+                      <div className="text-xs text-muted-foreground">{selectedClient.contact_person}</div>
                     )}
                   </div>
                   {selectedClient.business_type && (
@@ -273,7 +286,7 @@ export default function ClientProfileStep({ data, onChange }: StepProps) {
             name="jurisdiction"
             value={data.jurisdiction || ''}
             onChange={updateField}
-            options={JURISDICTIONS}
+            options={jurisdictions.map(j => ({ value: j.name, label: j.name }))}
             required
           />
         </div>
@@ -317,7 +330,7 @@ export default function ClientProfileStep({ data, onChange }: StepProps) {
 
       <FormSection title="Integration Needs">
         <div className="space-y-3">
-          <p className="text-sm text-muted-foreground">Select the systems you need to integrate with:</p>
+          <p className="text-xs text-muted-foreground">Select the systems you need to integrate with:</p>
           
           <div className="grid grid-cols-2 gap-2">
             {INTEGRATION_NEEDS.map(integration => (

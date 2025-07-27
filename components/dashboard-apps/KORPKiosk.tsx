@@ -148,12 +148,12 @@ export default function KORPKiosk() {
         <CardHeader>
           <div className="flex justify-between items-start">
             <div>
-              <CardTitle className="text-lg">{sku.name}</CardTitle>
+              <CardTitle className="text-xs">{sku.name}</CardTitle>
               <CardDescription>{sku.description}</CardDescription>
             </div>
             <Badge variant="secondary">{sku.category}</Badge>
           </div>
-          <div className="text-2xl font-bold text-primary">
+          <div className="text-xs font-bold text-primary">
             ${sku.basePrice.toLocaleString()}
           </div>
         </CardHeader>
@@ -217,7 +217,7 @@ export default function KORPKiosk() {
           )}
 
           <div className="pt-4">
-            <div className="text-lg font-semibold mb-2">
+            <div className="text-xs font-semibold mb-2">
               Total: ${(sku.basePrice * (config.quantity || 1)).toLocaleString()}
             </div>
             <Button 
@@ -251,7 +251,7 @@ export default function KORPKiosk() {
                 <div className="flex justify-between items-start">
                   <div className="flex-1">
                     <h4 className="font-medium">{item.name}</h4>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-xs text-muted-foreground">
                       Qty: {item.quantity}
                       {item.selectedDate && ` • Date: ${item.selectedDate}`}
                       {item.selectedDuration && ` • Duration: ${item.selectedDuration}`}
@@ -271,7 +271,7 @@ export default function KORPKiosk() {
               </div>
             ))}
             <Separator />
-            <div className="flex justify-between items-center text-lg font-bold">
+            <div className="flex justify-between items-center text-xs font-bold">
               <span>Total:</span>
               <span>${cartTotal.toLocaleString()}</span>
             </div>
@@ -362,7 +362,7 @@ export default function KORPKiosk() {
                   <h4 className="font-medium mb-2">Order Summary</h4>
                   <div className="space-y-2">
                     {cart.map((item) => (
-                      <div key={item.id} className="flex justify-between text-sm">
+                      <div key={item.id} className="flex justify-between text-xs">
                         <span>{item.name} (x{item.quantity})</span>
                         <span>${item.totalPrice.toLocaleString()}</span>
                       </div>
@@ -417,7 +417,7 @@ export default function KORPKiosk() {
       <div className="container mx-auto px-6 py-8">
         <div className="max-w-2xl mx-auto">
           <div className="mb-6">
-            <h1 className="text-3xl font-bold">Checkout</h1>
+            <h1 className="text-lg font-bold">Checkout</h1>
             <p className="text-muted-foreground">Complete your service order</p>
           </div>
           <CheckoutFlow />
@@ -429,7 +429,7 @@ export default function KORPKiosk() {
   return (
     <div className="container mx-auto px-6 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold">$KORP Kiosk</h1>
+        <h1 className="text-lg font-bold">$KORP Kiosk</h1>
         <p className="text-muted-foreground">Self-service ordering for ad hoc professional services</p>
       </div>
 

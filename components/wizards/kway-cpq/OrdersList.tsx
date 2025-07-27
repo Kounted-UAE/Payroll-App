@@ -152,7 +152,7 @@ export default function OrdersList() {
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
                         <FileText className="h-5 w-5 text-muted-foreground" />
-                        <h3 className="font-semibold text-lg">
+                        <h3 className="font-semibold text-xs">
                           {order.reference_id || `Order ${order.id.slice(0, 8)}`}
                         </h3>
                         <Badge variant={getStatusColor(order.status) as any}>
@@ -160,7 +160,7 @@ export default function OrdersList() {
                         </Badge>
                       </div>
                       
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-muted-foreground">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-muted-foreground">
                         <div className="flex items-center gap-2">
                           <Calendar className="h-4 w-4" />
                           {new Date(order.created_at).toLocaleDateString()}

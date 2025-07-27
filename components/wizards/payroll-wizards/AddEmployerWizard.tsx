@@ -1,7 +1,8 @@
+// AddEmployerWizard.tsx
 
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,6 +13,11 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { ChevronLeft, ChevronRight, Save, Check, Building, MapPin, CreditCard, Users, Upload } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 interface AddEmployerWizardProps {
   onComplete?: (employerData: any) => void;
@@ -27,6 +33,10 @@ const STEPS = [
 
 export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerWizardProps) {
   const [currentStep, setCurrentStep] = useState(1);
+  const [jurisdictions, setJurisdictions] = useState<any[]>([]);
+  const [emirates, setEmirates] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [touchedFields, setTouchedFields] = useState<string[]>([]);
   const [formData, setFormData] = useState({
     // Company Details
     legal_name: '',
@@ -69,51 +79,161 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
     hr_managers: []
   });
 
+  // Fetch jurisdictions and emirates data
+  useEffect(() => {
+    const fetchJurisdictionsAndEmirates = async () => {
+      const { data, error } = await supabase
+        .from('kounted_uae_jurisdictions')
+        .select('name')
+        .order('name');
+      
+      if (!error && data) {
+        setJurisdictions(data);
+        // Extract unique emirates from jurisdiction names (you may need to adjust this based on your data structure)
+        const uniqueEmirates = [...new Set(data.map(item => {
+          // Extract emirate from jurisdiction name - adjust this logic based on your data
+          const name = item.name.toLowerCase();
+          if (name.includes('dubai')) return 'Dubai';
+          if (name.includes('abu dhabi')) return 'Abu Dhabi';
+          if (name.includes('sharjah')) return 'Sharjah';
+          if (name.includes('ajman')) return 'Ajman';
+          if (name.includes('ras al khaimah') || name.includes('rak')) return 'Ras Al Khaimah';
+          if (name.includes('fujairah')) return 'Fujairah';
+          if (name.includes('umm al quwain') || name.includes('uaq')) return 'Umm Al Quwain';
+          return null;
+        }).filter(Boolean))];
+        setEmirates(uniqueEmirates.map(name => ({ name })));
+      }
+    };
+    
+    fetchJurisdictionsAndEmirates();
+  }, []);
+
   const updateField = (name: string, value: any) => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const validateStep = (step: number): boolean => {
-    switch (step) {
-      case 1:
-        return !!(formData.legal_name && formData.trade_license_number && formData.jurisdiction);
-      case 2:
-        return !!(formData.address_line_1 && formData.city && formData.emirate && formData.contact_person_name);
-      case 3:
-        return !!(formData.bank_name && formData.company_iban);
-      case 4:
-        return true; // Role assignment is optional
-      default:
-        return true;
+  const handleFieldBlur = (fieldName: string) => {
+    if (!touchedFields.includes(fieldName)) {
+      setTouchedFields(prev => [...prev, fieldName]);
     }
   };
 
-  const handleNext = () => {
-    if (validateStep(currentStep)) {
-      if (currentStep < STEPS.length) {
-        setCurrentStep(currentStep + 1);
-      } else {
-        handleComplete();
+  const validateStep = (step: number): string[] => {
+    const errors: string[] = [];
+    if (step === 1) {
+      if (!formData.legal_name?.trim()) errors.push("legal_name");
+      if (!formData.trade_license_number?.trim()) errors.push("trade_license_number");
+      if (!formData.jurisdiction?.trim()) errors.push("jurisdiction");
+    } else if (step === 2) {
+      if (!formData.address_line_1?.trim()) errors.push("address_line_1");
+      if (!formData.city?.trim()) errors.push("city");
+      if (!formData.emirate?.trim()) errors.push("emirate");
+      if (!formData.contact_person_name?.trim()) errors.push("contact_person_name");
+      // Validate email format if provided
+      if (formData.contact_person_email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.contact_person_email)) {
+        errors.push("contact_person_email");
       }
+    } else if (step === 3) {
+      if (!formData.bank_name?.trim()) errors.push("bank_name");
+      if (!formData.company_iban?.trim()) errors.push("company_iban");
+    }
+    return errors;
+  };
+  
+
+const handleNext = () => {
+  const errors = validateStep(currentStep);
+  if (errors.length === 0) {
+    setTouchedFields([]); // clear previous errors
+    if (currentStep < STEPS.length) {
+      setCurrentStep(currentStep + 1);
     } else {
+      handleComplete();
+    }
+  } else {
+    setTouchedFields(errors);
+    toast({
+      title: "Validation Error",
+      description: "Please complete all required fields before proceeding.",
+      variant: "destructive",
+    });
+  }
+};
+
+
+  const handleComplete = async () => {
+    // Validate required fields before submission
+    if (!formData.legal_name?.trim()) {
       toast({
         title: "Validation Error",
-        description: "Please fill in all required fields",
+        description: "Legal company name is required",
         variant: "destructive"
       });
+      return;
     }
-  };
 
-  const handleComplete = () => {
+    setLoading(true);
+    
+    // Transform form data to match database schema - only include valid fields
+    const entityData = {
+      name: formData.legal_name.trim(), // Required field
+      profile_short_name: formData.trade_name?.trim() || null,
+      profile_main_license_number: formData.trade_license_number?.trim() || null,
+      lookup_jurisdiction_name: formData.jurisdiction?.trim() || null,
+      lookup_emirate_name: formData.emirate?.trim() || null,
+      profile_license_type: formData.business_type?.trim() || null,
+      expiry_main_license: formData.license_expiry || null,
+      status: 'Active', // Set default status
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+
+    console.log('Submitting entity data:', entityData);
+
+    const { data, error } = await supabase
+      .from('core_objects_entities')
+      .insert([entityData])
+      .select();
+
+    setLoading(false);
+
+    if (error) {
+      console.error('Supabase error details:', {
+        message: error.message,
+        details: error.details,
+        hint: error.hint,
+        code: error.code
+      });
+      toast({
+        title: "Error",
+        description: `Failed to create employer: ${error.message}`,
+        variant: "destructive"
+      });
+      return;
+    }
+
+    console.log('Successfully created entity:', data);
+
     toast({
       title: "Success",
       description: "Employer added successfully"
     });
     if (onComplete) {
-      onComplete(formData);
-    } else {
-      // Default behavior: could add navigation here if needed
+      onComplete(data?.[0] || entityData);
     }
+  };
+
+  // Add visual validation helper
+  const isFieldError = (fieldName: string) => {
+    return touchedFields.includes(fieldName);
+  };
+
+  // Add error styling helper
+  const getFieldClassName = (fieldName: string) => {
+    return isFieldError(fieldName) 
+      ? "border-red-500 focus:border-red-500 focus:ring-red-500" 
+      : "";
   };
 
   const progress = (currentStep / STEPS.length) * 100;
@@ -130,9 +250,12 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                   id="legal_name"
                   value={formData.legal_name}
                   onChange={(e) => updateField('legal_name', e.target.value)}
+                  onBlur={() => handleFieldBlur('legal_name')}
                   placeholder="Emirates Technology LLC"
                   required
+                  className={getFieldClassName('legal_name')}
                 />
+                {isFieldError('legal_name') && <p className="text-red-500 text-xs mt-1">Required field</p>}
               </div>
               <div>
                 <Label htmlFor="trade_name">Trade Name</Label>
@@ -141,6 +264,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                   value={formData.trade_name}
                   onChange={(e) => updateField('trade_name', e.target.value)}
                   placeholder="ETech Solutions"
+                  className={getFieldClassName('trade_name')}
                 />
               </div>
             </div>
@@ -152,29 +276,32 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                   id="trade_license_number"
                   value={formData.trade_license_number}
                   onChange={(e) => updateField('trade_license_number', e.target.value)}
+                  onBlur={() => handleFieldBlur('trade_license_number')}
                   placeholder="CN-1234567"
                   required
+                  className={getFieldClassName('trade_license_number')}
                 />
+                {isFieldError('trade_license_number') && <p className="text-red-500 text-xs mt-1">Required field</p>}
               </div>
               <div>
                 <Label htmlFor="jurisdiction">Jurisdiction *</Label>
-                <Select value={formData.jurisdiction} onValueChange={(value) => updateField('jurisdiction', value)}>
-                  <SelectTrigger>
+                <Select 
+                  value={formData.jurisdiction} 
+                  onValueChange={(value) => updateField('jurisdiction', value)}
+                  onOpenChange={(open) => !open && handleFieldBlur('jurisdiction')}
+                >
+                  <SelectTrigger className={getFieldClassName('jurisdiction')}>
                     <SelectValue placeholder="Select jurisdiction" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="DED">Dubai Economy (DED)</SelectItem>
-                    <SelectItem value="ADCCI">Abu Dhabi Chamber</SelectItem>
-                    <SelectItem value="SCCI">Sharjah Chamber</SelectItem>
-                    <SelectItem value="AJCCI">Ajman Chamber</SelectItem>
-                    <SelectItem value="RAKCCI">RAK Chamber</SelectItem>
-                    <SelectItem value="FUCCI">Fujairah Chamber</SelectItem>
-                    <SelectItem value="UAQCCI">UAQ Chamber</SelectItem>
-                    <SelectItem value="DIFC">DIFC</SelectItem>
-                    <SelectItem value="ADGM">ADGM</SelectItem>
-                    <SelectItem value="JAFZA">JAFZA</SelectItem>
+                    {jurisdictions.map((jurisdiction) => (
+                      <SelectItem key={jurisdiction.name} value={jurisdiction.name}>
+                        {jurisdiction.name}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
+                {isFieldError('jurisdiction') && <p className="text-red-500 text-xs mt-1">Required field</p>}
               </div>
             </div>
 
@@ -186,6 +313,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                   type="date"
                   value={formData.license_expiry}
                   onChange={(e) => updateField('license_expiry', e.target.value)}
+                  className={getFieldClassName('license_expiry')}
                 />
               </div>
               <div>
@@ -204,6 +332,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                     <SelectItem value="Representative">Representative Office</SelectItem>
                   </SelectContent>
                 </Select>
+                {isFieldError('business_type') && <p className="text-red-500 text-xs mt-1">Required field</p>}
               </div>
             </div>
 
@@ -215,6 +344,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                   value={formData.establishment_card}
                   onChange={(e) => updateField('establishment_card', e.target.value)}
                   placeholder="EC-123456789"
+                  className={getFieldClassName('establishment_card')}
                 />
               </div>
               <div>
@@ -224,6 +354,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                   value={formData.mohre_establishment_id}
                   onChange={(e) => updateField('mohre_establishment_id', e.target.value)}
                   placeholder="MID-987654321"
+                  className={getFieldClassName('mohre_establishment_id')}
                 />
               </div>
             </div>
@@ -233,10 +364,10 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                 <Upload className="h-5 w-5 text-blue-600" />
                 <h4 className="font-semibold text-blue-900">Document Upload</h4>
               </div>
-              <p className="text-sm text-blue-700 mb-3">
-                Please upload the following documents (PDF format recommended):
+              <p className="text-xs text-blue-700 mb-3">
+                Please review the following documents (PDF format recommended) during KYC/CDD:
               </p>
-              <div className="grid grid-cols-2 gap-2 text-sm">
+              <div className="grid grid-cols-2 gap-2 text-xs">
                 <div>• Trade License Copy</div>
                 <div>• Establishment Card</div>
                 <div>• MoHRE Registration</div>
@@ -260,7 +391,9 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                     onChange={(e) => updateField('address_line_1', e.target.value)}
                     placeholder="Office 501, ABC Tower"
                     required
+                    className={getFieldClassName('address_line_1')}
                   />
+                  {isFieldError('address_line_1') && <p className="text-red-500 text-xs mt-1">Required field</p>}
                 </div>
                 <div>
                   <Label htmlFor="address_line_2">Address Line 2</Label>
@@ -269,6 +402,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                     value={formData.address_line_2}
                     onChange={(e) => updateField('address_line_2', e.target.value)}
                     placeholder="Sheikh Zayed Road"
+                    className={getFieldClassName('address_line_2')}
                   />
                 </div>
               </div>
@@ -282,7 +416,9 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                     onChange={(e) => updateField('city', e.target.value)}
                     placeholder="Dubai"
                     required
+                    className={getFieldClassName('city')}
                   />
+                  {isFieldError('city') && <p className="text-red-500 text-xs mt-1">Required field</p>}
                 </div>
                 <div>
                   <Label htmlFor="emirate">Emirate *</Label>
@@ -291,15 +427,14 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                       <SelectValue placeholder="Select emirate" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="Dubai">Dubai</SelectItem>
-                      <SelectItem value="Abu Dhabi">Abu Dhabi</SelectItem>
-                      <SelectItem value="Sharjah">Sharjah</SelectItem>
-                      <SelectItem value="Ajman">Ajman</SelectItem>
-                      <SelectItem value="Ras Al Khaimah">Ras Al Khaimah</SelectItem>
-                      <SelectItem value="Fujairah">Fujairah</SelectItem>
-                      <SelectItem value="Umm Al Quwain">Umm Al Quwain</SelectItem>
+                      {emirates.map((emirate) => (
+                        <SelectItem key={emirate.name} value={emirate.name}>
+                          {emirate.name}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
+                  {isFieldError('emirate') && <p className="text-red-500 text-xs mt-1">Required field</p>}
                 </div>
                 <div>
                   <Label htmlFor="po_box">P.O. Box</Label>
@@ -308,6 +443,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                     value={formData.po_box}
                     onChange={(e) => updateField('po_box', e.target.value)}
                     placeholder="12345"
+                    className={getFieldClassName('po_box')}
                   />
                 </div>
               </div>
@@ -323,6 +459,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                     value={formData.phone_number}
                     onChange={(e) => updateField('phone_number', e.target.value)}
                     placeholder="+971 4 123 4567"
+                    className={getFieldClassName('phone_number')}
                   />
                 </div>
                 <div>
@@ -332,6 +469,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                     value={formData.fax_number}
                     onChange={(e) => updateField('fax_number', e.target.value)}
                     placeholder="+971 4 123 4568"
+                    className={getFieldClassName('fax_number')}
                   />
                 </div>
               </div>
@@ -345,7 +483,9 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                     value={formData.email_address}
                     onChange={(e) => updateField('email_address', e.target.value)}
                     placeholder="info@company.com"
+                    className={getFieldClassName('email_address')}
                   />
+                  {isFieldError('email_address') && <p className="text-red-500 text-xs mt-1">Required field</p>}
                 </div>
                 <div>
                   <Label htmlFor="website">Website</Label>
@@ -354,6 +494,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                     value={formData.website}
                     onChange={(e) => updateField('website', e.target.value)}
                     placeholder="www.company.com"
+                    className={getFieldClassName('website')}
                   />
                 </div>
               </div>
@@ -370,7 +511,9 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                     onChange={(e) => updateField('contact_person_name', e.target.value)}
                     placeholder="Ahmed Al-Mansouri"
                     required
+                    className={getFieldClassName('contact_person_name')}
                   />
+                  {isFieldError('contact_person_name') && <p className="text-red-500 text-xs mt-1">Required field</p>}
                 </div>
                 <div>
                   <Label htmlFor="contact_person_title">Job Title</Label>
@@ -379,6 +522,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                     value={formData.contact_person_title}
                     onChange={(e) => updateField('contact_person_title', e.target.value)}
                     placeholder="HR Manager"
+                    className={getFieldClassName('contact_person_title')}
                   />
                 </div>
               </div>
@@ -391,6 +535,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                     value={formData.contact_person_phone}
                     onChange={(e) => updateField('contact_person_phone', e.target.value)}
                     placeholder="+971 50 123 4567"
+                    className={getFieldClassName('contact_person_phone')}
                   />
                 </div>
                 <div>
@@ -401,7 +546,9 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                     value={formData.contact_person_email}
                     onChange={(e) => updateField('contact_person_email', e.target.value)}
                     placeholder="ahmed@company.com"
+                    className={getFieldClassName('contact_person_email')}
                   />
+                  {isFieldError('contact_person_email') && <p className="text-red-500 text-xs mt-1">Please enter a valid email address</p>}
                 </div>
               </div>
             </div>
@@ -415,20 +562,17 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
               <h4 className="font-semibold mb-4">Banking Information</h4>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="bank_name">Bank Name *</Label>
-                  <Select value={formData.bank_name} onValueChange={(value) => updateField('bank_name', value)}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select bank" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Emirates NBD">Emirates NBD</SelectItem>
-                      <SelectItem value="ADCB">Abu Dhabi Commercial Bank</SelectItem>
-                      <SelectItem value="FAB">First Abu Dhabi Bank</SelectItem>
-                      <SelectItem value="RAKBANK">RAKBANK</SelectItem>
-                      <SelectItem value="CBD">Commercial Bank of Dubai</SelectItem>
-                      <SelectItem value="ENBD">Emirates Islamic</SelectItem>
-                    </SelectContent>
-                  </Select>
+                <Label htmlFor="bank_name">Bank Name *</Label>
+<Input
+  id="bank_name"
+  name="bank_name"
+  type="text"
+  value={formData.bank_name}
+  onChange={(e) => updateField('bank_name', e.target.value)}
+  placeholder="Enter bank name"
+  className={getFieldClassName('bank_name')}
+/>
+                {isFieldError('bank_name') && <p className="text-red-500 text-xs mt-1">Required field</p>}
                 </div>
                 <div>
                   <Label htmlFor="bank_code">Bank Code</Label>
@@ -437,6 +581,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                     value={formData.bank_code}
                     onChange={(e) => updateField('bank_code', e.target.value)}
                     placeholder="033"
+                    className={getFieldClassName('bank_code')}
                   />
                 </div>
               </div>
@@ -449,6 +594,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                     value={formData.company_account_number}
                     onChange={(e) => updateField('company_account_number', e.target.value)}
                     placeholder="1234567890123456"
+                    className={getFieldClassName('company_account_number')}
                   />
                 </div>
                 <div>
@@ -459,7 +605,9 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                     onChange={(e) => updateField('company_iban', e.target.value)}
                     placeholder="AE07 0331 2345 6789 0123 456"
                     required
+                    className={getFieldClassName('company_iban')}
                   />
+                  {isFieldError('company_iban') && <p className="text-red-500 text-xs mt-1">Required field</p>}
                 </div>
               </div>
 
@@ -470,6 +618,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                   value={formData.routing_code}
                   onChange={(e) => updateField('routing_code', e.target.value)}
                   placeholder="EBILAEAD"
+                  className={getFieldClassName('routing_code')}
                 />
               </div>
             </div>
@@ -497,6 +646,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                         value={formData.wps_employer_id}
                         onChange={(e) => updateField('wps_employer_id', e.target.value)}
                         placeholder="WPS123456789"
+                        className={getFieldClassName('wps_employer_id')}
                       />
                     </div>
                     <div>
@@ -520,7 +670,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                     <CreditCard className="h-5 w-5 text-amber-600" />
                     <h5 className="font-semibold text-amber-900">WPS Registration Required</h5>
                   </div>
-                  <p className="text-sm text-amber-800">
+                  <p className="text-xs text-amber-800">
                     All companies in the UAE must be registered with the Wage Protection System (WPS) 
                     to process salary payments. Contact your bank to complete WPS registration if not already done.
                   </p>
@@ -535,7 +685,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
           <div className="space-y-6">
             <div>
               <h4 className="font-semibold mb-4">Role Assignment</h4>
-              <p className="text-sm text-muted-foreground mb-6">
+              <p className="text-xs text-muted-foreground mb-6">
                 Assign team members to manage this employer's payroll and HR functions. 
                 These assignments can be modified later.
               </p>
@@ -543,7 +693,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
               <div className="space-y-6">
                 <div>
                   <Label className="text-base font-medium">Admin Users</Label>
-                  <p className="text-sm text-muted-foreground mb-3">
+                  <p className="text-xs text-muted-foreground mb-3">
                     Full access to all payroll and HR functions
                   </p>
                   <div className="space-y-2">
@@ -563,7 +713,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
 
                 <div>
                   <Label className="text-base font-medium">Payroll Officers</Label>
-                  <p className="text-sm text-muted-foreground mb-3">
+                  <p className="text-xs text-muted-foreground mb-3">
                     Access to payroll processing and salary management
                   </p>
                   <div className="space-y-2">
@@ -586,7 +736,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
 
                 <div>
                   <Label className="text-base font-medium">HR Managers</Label>
-                  <p className="text-sm text-muted-foreground mb-3">
+                  <p className="text-xs text-muted-foreground mb-3">
                     Access to employee management and HR compliance
                   </p>
                   <div className="space-y-2">
@@ -606,7 +756,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
 
               <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
                 <h5 className="font-semibold text-blue-900 mb-2">Permission Levels</h5>
-                <div className="text-sm text-blue-800 space-y-1">
+                <div className="text-xs text-blue-800 space-y-1">
                   <div><strong>Admin:</strong> All functions including settings and user management</div>
                   <div><strong>Payroll Officer:</strong> Process payruns, manage salaries, generate reports</div>
                   <div><strong>HR Manager:</strong> Employee management, leave tracking, compliance</div>
@@ -625,7 +775,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
     <div className="max-w-4xl mx-auto">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-2xl font-bold">Add New Employer</h1>
+        <h1 className="text-xs font-bold">Add New Employer</h1>
         <p className="text-muted-foreground">Complete the employer setup and WPS configuration</p>
         <div className="mt-4">
           <Progress value={progress} className="h-2" />
@@ -650,7 +800,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
                 `}>
                   {isCompleted ? <Check className="h-5 w-5" /> : <StepIcon className="h-5 w-5" />}
                 </div>
-                <div className={`mt-2 text-sm font-medium ${isActive ? 'text-primary' : 'text-gray-500'}`}>
+                <div className={`mt-2 text-xs font-medium ${isActive ? 'text-primary' : 'text-gray-500'}`}>
                   {step.title}
                 </div>
               </div>
@@ -691,17 +841,19 @@ export default function AddEmployerWizard({ onComplete, onCancel }: AddEmployerW
             Previous
           </Button>
           
-          <Button onClick={handleNext}>
-            {currentStep === STEPS.length ? (
-              <>
-                <Save className="h-4 w-4 mr-1" />
-                Add Employer
-              </>
-            ) : (
-              <>
-                Next
-                <ChevronRight className="h-4 w-4 ml-1" />
-              </>
+          <Button onClick={handleNext} disabled={loading}>
+            {loading ? "Saving..." : (
+              currentStep === STEPS.length ? (
+                <>
+                  <Save className="h-4 w-4 mr-1" />
+                  Add Employer
+                </>
+              ) : (
+                <>
+                  Next
+                  <ChevronRight className="h-4 w-4 ml-1" />
+                </>
+              )
             )}
           </Button>
         </div>

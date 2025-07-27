@@ -92,7 +92,7 @@ export default function ComponentLibraryPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Dashboard Components</h1>
+            <h1 className="text-lg font-bold text-foreground">Dashboard Components</h1>
             <p className="text-muted-foreground">Interactive component library showcase</p>
           </div>
           <Badge variant="secondary" className="text-xs font-medium">
@@ -129,12 +129,12 @@ export default function ComponentLibraryPage() {
                 <Card key={comp.key} className="flex flex-col h-full">
                   <CardContent className="p-6 flex-1 flex flex-col">
                     <div className="flex items-center justify-between mb-2">
-                      <h2 className="text-lg font-semibold">{comp.title}</h2>
+                      <h2 className="text-xs font-semibold">{comp.title}</h2>
                       <Badge variant="secondary" className="text-xs lowercase">
                         {comp.category}
                       </Badge>
                     </div>
-                    <p className="text-sm text-muted-foreground mb-4">{comp.description}</p>
+                    <p className="text-xs text-muted-foreground mb-4">{comp.description}</p>
                     <div className="flex-1 flex items-center justify-center mb-4">
                       {comp.component}
                     </div>

@@ -60,10 +60,10 @@ export default function LoginForm() {
           height={48}
           className="mx-auto py-2"
         />
-        <p className={'mt-6 text-lg leading-6 font-semibold text-brand-lime '}>
+        <p className={'mt-6 text-xs leading-6 font-semibold text-lime-600 '}>
           Welcome to the Sheet Show
         </p>
-        <p className="text-sm text-zinc-300">
+        <p className="text-xs text-zinc-300">
           Enter your email to receive a secure one-time login code.
         </p>
       </div>
@@ -89,7 +89,7 @@ export default function LoginForm() {
           className="space-y-5 bg-white/5 backdrop-blur-md border border-border rounded-2xl p-6 shadow-lg"
         >
           <div className="space-y-1">
-            <Label htmlFor="email" className="text-xs text-brand-apple">
+            <Label htmlFor="email" className="text-xs text-lime-600">
               Enter your Kounted email
             </Label>
             <div className="relative">
@@ -100,14 +100,14 @@ export default function LoginForm() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@kounted.ae"
-                className="pl-10 bg-white text-black text-sm"
+                className="pl-10 bg-white text-black text-xs"
                 required
               />
             </div>
           </div>
           <Button
             type="submit"
-            className="w-full bg-brand-lime text-brand-dark text-sm"
+            className="w-full bg-blue-600 text-white text-xs"
             disabled={loading}
           >
             {loading ? 'Sending OTP...' : 'Send OTP to Email'}
@@ -123,7 +123,7 @@ export default function LoginForm() {
           className="space-y-5 bg-white/5 backdrop-blur-md border border-border rounded-2xl p-6 shadow-lg"
         >
           <div className="space-y-1">
-            <Label htmlFor="otp" className="text-xs text-brand-apple">
+            <Label htmlFor="otp" className="text-xs text-primary">
               Enter OTP Code
             </Label>
             <Input
@@ -132,7 +132,7 @@ export default function LoginForm() {
               value={otpToken}
               onChange={(e) => setOtpToken(e.target.value)}
               placeholder="123456"
-              className="text-center text-lg tracking-widest text-black bg-white"
+              className="text-center text-xs tracking-widest text-black bg-white"
               maxLength={6}
               required
             />

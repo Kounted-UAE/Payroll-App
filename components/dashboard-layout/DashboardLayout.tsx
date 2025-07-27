@@ -1,3 +1,4 @@
+// DashboardLayout.tsx
 'use client'
 
 import React from "react";
@@ -8,16 +9,16 @@ import { TopNavbar } from "./TopNavbar";
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen w-full bg-muted/40">
+      <div className="flex min-h-screen w-full">
         {/* Sidebar */}
-        <div className="hidden border-r bg-zinc-100 md:block">
+        <div className="hidden md:block">
           <AppSidebar />
         </div>
 
         {/* Content Area */}
         <div className="flex flex-1 flex-col">
           <TopNavbar />
-          <main className="flex-1 p-4">{children}</main>
+          <main className="flex-1 p-2">{children}</main>
         </div>
       </div>
     </SidebarProvider>

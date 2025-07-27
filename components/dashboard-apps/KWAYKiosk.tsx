@@ -55,7 +55,7 @@ export default function KWAYKiosk() {
         <div className="max-w-2xl mx-auto">
           <Card>
             <CardHeader>
-              <CardTitle className="text-center text-2xl">Order Submitted Successfully</CardTitle>
+              <CardTitle className="text-center text-xs">Order Submitted Successfully</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6 text-center">
               <div className="flex justify-center">
@@ -65,7 +65,7 @@ export default function KWAYKiosk() {
               </div>
 
               <div className="space-y-2">
-                <p className="text-lg font-medium">Thank you for your order!</p>
+                <p className="text-xs font-medium">Thank you for your order!</p>
                 <p className="text-muted-foreground">
                   Our team will contact you shortly to discuss the next steps.
                 </p>
@@ -99,7 +99,7 @@ export default function KWAYKiosk() {
         <div className="max-w-7xl mx-auto space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-foreground">Order Management</h1>
+              <h1 className="text-lg font-bold text-foreground">Order Management</h1>
               <p className="text-muted-foreground">View and manage all service orders</p>
             </div>
             <Button onClick={() => setShowOrdersList(false)} variant="outline">
@@ -116,7 +116,7 @@ export default function KWAYKiosk() {
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-5xl mx-auto space-y-6">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Service Order Kiosk</h1>
+          <h1 className="text-lg font-bold text-foreground">Service Order Kiosk</h1>
           <p className="text-muted-foreground">
             Configure and order accounting services for your business
           </p>
@@ -130,8 +130,8 @@ export default function KWAYKiosk() {
                   <FileText className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Total Orders</p>
-                  <p className="text-2xl font-bold">{orderStats.total}</p>
+                  <p className="text-xs font-medium text-muted-foreground">Total Orders</p>
+                  <p className="text-xs font-bold">{orderStats.total}</p>
                 </div>
               </div>
             </CardContent>
@@ -144,8 +144,8 @@ export default function KWAYKiosk() {
                   <CheckSquare className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Completed</p>
-                  <p className="text-2xl font-bold">{orderStats.completed}</p>
+                  <p className="text-xs font-medium text-muted-foreground">Completed</p>
+                  <p className="text-xs font-bold">{orderStats.completed}</p>
                 </div>
               </div>
             </CardContent>
@@ -158,8 +158,8 @@ export default function KWAYKiosk() {
                   <Building2 className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">In Progress</p>
-                  <p className="text-2xl font-bold">{orderStats.inProgress}</p>
+                  <p className="text-xs font-medium text-muted-foreground">In Progress</p>
+                  <p className="text-xs font-bold">{orderStats.inProgress}</p>
                 </div>
               </div>
             </CardContent>
@@ -170,7 +170,7 @@ export default function KWAYKiosk() {
           <div className="md:grid md:grid-cols-5">
             <div className="md:col-span-3 p-6 md:p-8">
               <div className="space-y-4">
-                <h2 className="text-2xl font-bold">Configure Your Accounting Services</h2>
+                <h2 className="text-xs font-bold">Configure Your Accounting Services</h2>
                 <p className="text-muted-foreground">
                   Use our self-service wizard to configure and order accounting, payroll, tax, and HR services
                   tailored to your business needs.
@@ -181,7 +181,7 @@ export default function KWAYKiosk() {
                     <CheckSquare className="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">8-Step Guided Process</p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs text-muted-foreground">
                         Simple questions to understand your needs
                       </p>
                     </div>
@@ -191,7 +191,7 @@ export default function KWAYKiosk() {
                     <CheckSquare className="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">Instant Pricing</p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs text-muted-foreground">
                         Get transparent pricing based on your selections
                       </p>
                     </div>
@@ -201,7 +201,7 @@ export default function KWAYKiosk() {
                     <CheckSquare className="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">Flexible Services</p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs text-muted-foreground">
                         Customized to your business requirements
                       </p>
                     </div>
@@ -225,8 +225,8 @@ export default function KWAYKiosk() {
             <div className="md:col-span-2 bg-muted p-6 md:p-8 flex items-center justify-center">
               <div className="space-y-6">
                 <div className="space-y-2 text-center">
-                  <h3 className="font-semibold text-lg">Services Available</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <h3 className="font-semibold text-xs">Services Available</h3>
+                  <p className="text-xs text-muted-foreground">
                     Configure your business services from these categories
                   </p>
                 </div>

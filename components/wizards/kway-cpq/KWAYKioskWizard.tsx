@@ -363,8 +363,8 @@ export default function KWAYKioskWizard({
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-semibold text-foreground">Service Order Kiosk</h1>
-              <p className="text-sm text-muted-foreground">
+              <h1 className="text-xs font-semibold text-foreground">Service Order Kiosk</h1>
+              <p className="text-xs text-muted-foreground">
                 {referenceId && <>Reference: {referenceId} · </>}
                 {autosaving && <span className="text-muted-foreground">Autosaving...</span>}
               </p>
@@ -387,7 +387,7 @@ export default function KWAYKioskWizard({
           <div className="col-span-3">
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Steps</CardTitle>
+                <CardTitle className="text-xs">Steps</CardTitle>
               </CardHeader>
               <CardContent className="p-0">
                 <div className="space-y-1">
@@ -411,7 +411,7 @@ export default function KWAYKioskWizard({
                       >
                         <div className="flex items-center gap-2">
                           {status === 'complete' && <Check className="h-4 w-4" />}
-                          <span className="text-sm">{step.id}. {step.title}</span>
+                          <span className="text-xs">{step.id}. {step.title}</span>
                         </div>
                       </button>
                     );

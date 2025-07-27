@@ -7,7 +7,7 @@ export const ExerciseMinutesChart = () => {
   return (
     <Card className="w-full">
       <CardHeader className="pb-3">
-        <CardTitle className="text-sm font-medium text-muted-foreground">
+        <CardTitle className="text-xs font-medium text-muted-foreground">
           Exercise Minutes
         </CardTitle>
         <p className="text-xs text-muted-foreground">

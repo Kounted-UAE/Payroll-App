@@ -112,7 +112,7 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
   return (
     <div className="space-y-6">
       <FormSection title="Service Packages">
-        <p className="text-sm text-muted-foreground mb-4">
+        <p className="text-xs text-muted-foreground mb-4">
           Based on your requirements, we recommend the following service packages:
         </p>
         
@@ -134,35 +134,35 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
                 onClick={() => updateField('selectedTier', 'standard')}
               >
                 <div className="flex items-center justify-between mb-1">
-                  <h3 className="font-semibold text-lg">Standard</h3>
+                  <h3 className="font-semibold text-xs">Standard</h3>
                   {data.selectedTier === 'standard' && <Check className="h-5 w-5" />}
                 </div>
-                <p className="text-sm opacity-90">Basic Compliance Package</p>
+                <p className="text-xs opacity-90">Basic Compliance Package</p>
               </div>
               
               <div className="p-4">
                 <div className="mb-4">
                   <div className="flex items-baseline justify-between mb-1">
-                    <span className="text-2xl font-bold">AED {PRICING_MATRIX.standard[getComplexity() as keyof typeof PRICING_MATRIX.standard].base.toLocaleString()}</span>
-                    <span className="text-sm text-muted-foreground">/month</span>
+                    <span className="text-xs font-bold">AED {PRICING_MATRIX.standard[getComplexity() as keyof typeof PRICING_MATRIX.standard].base.toLocaleString()}</span>
+                    <span className="text-xs text-muted-foreground">/month</span>
                   </div>
-                  <span className="text-sm text-muted-foreground">+ service fees</span>
+                  <span className="text-xs text-muted-foreground">+ service fees</span>
                 </div>
 
                 <ul className="space-y-2 mb-4">
-                  <li className="flex items-start gap-2 text-sm">
+                  <li className="flex items-start gap-2 text-xs">
                     <Check className="h-4 w-4 text-primary mt-0.5" />
                     <span>Basic Bookkeeping & Accounting</span>
                   </li>
-                  <li className="flex items-start gap-2 text-sm">
+                  <li className="flex items-start gap-2 text-xs">
                     <Check className="h-4 w-4 text-primary mt-0.5" />
                     <span>Quarterly Financial Statements</span>
                   </li>
-                  <li className="flex items-start gap-2 text-sm">
+                  <li className="flex items-start gap-2 text-xs">
                     <Check className="h-4 w-4 text-primary mt-0.5" />
                     <span>VAT & Tax Compliance</span>
                   </li>
-                  <li className="flex items-start gap-2 text-sm">
+                  <li className="flex items-start gap-2 text-xs">
                     <Check className="h-4 w-4 text-primary mt-0.5" />
                     <span>Basic Payroll Processing</span>
                   </li>
@@ -184,39 +184,39 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
                 onClick={() => updateField('selectedTier', 'premium')}
               >
                 <div className="flex items-center justify-between mb-1">
-                  <h3 className="font-semibold text-lg">Premium</h3>
+                  <h3 className="font-semibold text-xs">Premium</h3>
                   {data.selectedTier === 'premium' && <Check className="h-5 w-5" />}
                 </div>
-                <p className="text-sm opacity-90">Compliance + Advisory</p>
+                <p className="text-xs opacity-90">Compliance + Advisory</p>
               </div>
               
               <div className="p-4">
                 <div className="mb-4">
                   <div className="flex items-baseline justify-between mb-1">
-                    <span className="text-2xl font-bold">AED {PRICING_MATRIX.premium[getComplexity() as keyof typeof PRICING_MATRIX.premium].base.toLocaleString()}</span>
-                    <span className="text-sm text-muted-foreground">/month</span>
+                    <span className="text-xs font-bold">AED {PRICING_MATRIX.premium[getComplexity() as keyof typeof PRICING_MATRIX.premium].base.toLocaleString()}</span>
+                    <span className="text-xs text-muted-foreground">/month</span>
                   </div>
-                  <span className="text-sm text-muted-foreground">+ service fees</span>
+                  <span className="text-xs text-muted-foreground">+ service fees</span>
                 </div>
 
                 <ul className="space-y-2 mb-4">
-                  <li className="flex items-start gap-2 text-sm">
+                  <li className="flex items-start gap-2 text-xs">
                     <Check className="h-4 w-4 text-primary mt-0.5" />
                     <span>Full Bookkeeping & Accounting</span>
                   </li>
-                  <li className="flex items-start gap-2 text-sm">
+                  <li className="flex items-start gap-2 text-xs">
                     <Check className="h-4 w-4 text-primary mt-0.5" />
                     <span>Monthly Financial Statements</span>
                   </li>
-                  <li className="flex items-start gap-2 text-sm">
+                  <li className="flex items-start gap-2 text-xs">
                     <Check className="h-4 w-4 text-primary mt-0.5" />
                     <span>Advanced Tax Services</span>
                   </li>
-                  <li className="flex items-start gap-2 text-sm">
+                  <li className="flex items-start gap-2 text-xs">
                     <Check className="h-4 w-4 text-primary mt-0.5" />
                     <span>Complete Payroll & HR Services</span>
                   </li>
-                  <li className="flex items-start gap-2 text-sm">
+                  <li className="flex items-start gap-2 text-xs">
                     <Check className="h-4 w-4 text-primary mt-0.5" />
                     <span>Financial Advisory</span>
                   </li>
@@ -239,43 +239,43 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
                 onClick={() => updateField('selectedTier', 'enterprise')}
               >
                 <div className="flex items-center justify-between mb-1">
-                  <h3 className="font-semibold text-lg">Enterprise</h3>
+                  <h3 className="font-semibold text-xs">Enterprise</h3>
                   {data.selectedTier === 'enterprise' && <Check className="h-5 w-5" />}
                 </div>
-                <p className="text-sm opacity-90">Full Finance Department</p>
+                <p className="text-xs opacity-90">Full Finance Department</p>
               </div>
               
               <div className="p-4">
                 <div className="mb-4">
                   <div className="flex items-baseline justify-between mb-1">
-                    <span className="text-2xl font-bold">AED {PRICING_MATRIX.enterprise[getComplexity() as keyof typeof PRICING_MATRIX.enterprise].base.toLocaleString()}</span>
-                    <span className="text-sm text-muted-foreground">/month</span>
+                    <span className="text-xs font-bold">AED {PRICING_MATRIX.enterprise[getComplexity() as keyof typeof PRICING_MATRIX.enterprise].base.toLocaleString()}</span>
+                    <span className="text-xs text-muted-foreground">/month</span>
                   </div>
-                  <span className="text-sm text-muted-foreground">+ service fees</span>
+                  <span className="text-xs text-muted-foreground">+ service fees</span>
                 </div>
 
                 <ul className="space-y-2 mb-4">
-                  <li className="flex items-start gap-2 text-sm">
+                  <li className="flex items-start gap-2 text-xs">
                     <Check className="h-4 w-4 text-primary mt-0.5" />
                     <span>Comprehensive Finance Department</span>
                   </li>
-                  <li className="flex items-start gap-2 text-sm">
+                  <li className="flex items-start gap-2 text-xs">
                     <Check className="h-4 w-4 text-primary mt-0.5" />
                     <span>Dedicated Account Manager</span>
                   </li>
-                  <li className="flex items-start gap-2 text-sm">
+                  <li className="flex items-start gap-2 text-xs">
                     <Check className="h-4 w-4 text-primary mt-0.5" />
                     <span>CFO-Level Strategic Advisory</span>
                   </li>
-                  <li className="flex items-start gap-2 text-sm">
+                  <li className="flex items-start gap-2 text-xs">
                     <Check className="h-4 w-4 text-primary mt-0.5" />
                     <span>Complete Tax & Compliance</span>
                   </li>
-                  <li className="flex items-start gap-2 text-sm">
+                  <li className="flex items-start gap-2 text-xs">
                     <Check className="h-4 w-4 text-primary mt-0.5" />
                     <span>Full HR & Payroll Management</span>
                   </li>
-                  <li className="flex items-start gap-2 text-sm">
+                  <li className="flex items-start gap-2 text-xs">
                     <Check className="h-4 w-4 text-primary mt-0.5" />
                     <span>Custom Reporting & Analytics</span>
                   </li>
@@ -296,12 +296,12 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
         <div className="bg-accent/30 p-4 rounded-lg">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-lg font-medium">Estimated Monthly Cost</h3>
-              <p className="text-sm text-muted-foreground">Based on your requirements</p>
+              <h3 className="text-xs font-medium">Estimated Monthly Cost</h3>
+              <p className="text-xs text-muted-foreground">Based on your requirements</p>
             </div>
             <div className="text-right">
-              <div className="text-2xl font-bold">AED {pricing.monthlyPrice.toLocaleString()}</div>
-              <div className="text-sm text-muted-foreground">AED {pricing.annualPrice.toLocaleString()} annually</div>
+              <div className="text-xs font-bold">AED {pricing.monthlyPrice.toLocaleString()}</div>
+              <div className="text-xs text-muted-foreground">AED {pricing.annualPrice.toLocaleString()} annually</div>
             </div>
           </div>
         </div>

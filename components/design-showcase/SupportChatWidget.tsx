@@ -43,7 +43,7 @@ export const SupportChatWidget = () => {
               </AvatarFallback>
             </Avatar>
             <div>
-              <CardTitle className="text-sm">Sofia Davis</CardTitle>
+              <CardTitle className="text-xs">Sofia Davis</CardTitle>
               <p className="text-xs text-muted-foreground">m@example.com</p>
             </div>
             <Button variant="ghost" size="sm" className="ml-auto h-6 w-6 p-0">
@@ -103,7 +103,7 @@ export const SupportChatWidget = () => {
       {/* Report Issue Form */}
       <Card>
         <CardHeader className="pb-3">
-          <CardTitle className="text-sm">Report an issue</CardTitle>
+          <CardTitle className="text-xs">Report an issue</CardTitle>
           <p className="text-xs text-muted-foreground">
             What area are you having problems with?
           </p>
@@ -153,7 +153,7 @@ export const SupportChatWidget = () => {
       {/* Share Document */}
       <Card>
         <CardHeader className="pb-3">
-          <CardTitle className="text-sm">Share this document</CardTitle>
+          <CardTitle className="text-xs">Share this document</CardTitle>
           <p className="text-xs text-muted-foreground">
             Anyone with the link can view this document.
           </p>

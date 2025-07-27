@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -21,6 +21,7 @@ import {
   AlertCircle
 } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { createClient } from '@supabase/supabase-js';
 
 interface PayrunData {
   employer_id: string
@@ -30,6 +31,10 @@ interface PayrunData {
   selected_employees: string[]
   confirmation: boolean
 }
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const CreatePayrunWizard = () => {
   const router = useRouter()
@@ -43,19 +48,30 @@ const CreatePayrunWizard = () => {
     confirmation: false
   })
 
-  const employers = [
-    { id: "1", name: "Emirates Technology LLC", employees: 85 },
-    { id: "2", name: "Al Noor Industries PJSC", employees: 156 },
-    { id: "3", name: "Gulf Trading Company LLC", employees: 42 }
-  ]
+  const [employers, setEmployers] = useState<any[]>([]);
+  const [employees, setEmployees] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
 
-  const employees = [
-    { id: "1", name: "Ahmed Al-Mansouri", basic_salary: 15000, status: "Active" },
-    { id: "2", name: "Sarah Johnson", basic_salary: 12000, status: "Active" },
-    { id: "3", name: "Mohammed Hassan", basic_salary: 18000, status: "Active" },
-    { id: "4", name: "Priya Sharma", basic_salary: 8000, status: "Active" },
-    { id: "5", name: "Omar Al-Farisi", basic_salary: 22000, status: "Active" }
-  ]
+  useEffect(() => {
+    const fetchEmployers = async () => {
+      const { data, error } = await supabase.from('core_objects_entities').select('id, name');
+      if (!error) setEmployers(data || []);
+    };
+    fetchEmployers();
+  }, []);
+
+  useEffect(() => {
+    if (data.employer_id) {
+      const fetchEmployees = async () => {
+        const { data: empData, error } = await supabase
+          .from('core_objects_employees')
+          .select('id, name, basic_salary, status')
+          .eq('employer_id', data.employer_id);
+        if (!error) setEmployees(empData || []);
+      };
+      fetchEmployees();
+    }
+  }, [data.employer_id]);
 
   const steps = [
     { id: 1, title: "Select Employer", description: "Choose the employer company" },
@@ -68,12 +84,34 @@ const CreatePayrunWizard = () => {
   const selectedEmployees = employees.filter(e => data.selected_employees.includes(e.id))
   const totalGrossPay = selectedEmployees.reduce((sum, emp) => sum + emp.basic_salary, 0)
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (currentStep < 4) {
       setCurrentStep(currentStep + 1)
     } else {
-      // Create payrun
-      router.push("/backyard/payroll/payruns")
+      setLoading(true);
+      const { data: payrun, error } = await supabase
+        .from('payruns')
+        .insert([{
+          employer_id: data.employer_id,
+          pay_period_start: data.pay_period_start,
+          pay_period_end: data.pay_period_end,
+          payroll_month: data.payroll_month,
+          status: 'Draft'
+        }])
+        .select()
+        .single();
+      if (error) {
+        setLoading(false);
+        // handle error
+        return;
+      }
+      const payrunEmployees = data.selected_employees.map((empId: string) => ({
+        payrun_id: payrun.id,
+        employee_id: empId
+      }));
+      await supabase.from('payrun_employees').insert(payrunEmployees);
+      setLoading(false);
+      router.push("/backyard/payroll/payruns");
     }
   }
 
@@ -97,7 +135,7 @@ const CreatePayrunWizard = () => {
     <div className="flex-1 space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Create New Payrun</h1>
+          <h1 className="text-lg font-bold tracking-tight">Create New Payrun</h1>
           <p className="text-muted-foreground">
             Set up a new payroll run for processing employee salaries
           </p>
@@ -117,14 +155,14 @@ const CreatePayrunWizard = () => {
                 <div className={`flex items-center space-x-2 ${
                   currentStep >= step.id ? "text-primary" : "text-muted-foreground"
                 }`}>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${
                     currentStep >= step.id ? "bg-primary text-primary-foreground" : "bg-muted"
                   }`}>
                     {currentStep > step.id ? <CheckCircle className="h-4 w-4" /> : step.id}
                   </div>
                   <div>
                     <p className="font-medium">{step.title}</p>
-                    <p className="text-sm text-muted-foreground">{step.description}</p>
+                    <p className="text-xs text-muted-foreground">{step.description}</p>
                   </div>
                 </div>
                 {index < steps.length - 1 && (
@@ -144,7 +182,7 @@ const CreatePayrunWizard = () => {
           {currentStep === 1 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold mb-4">Select Employer Company</h3>
+                <h3 className="text-xs font-semibold mb-4">Select Employer Company</h3>
                 <p className="text-muted-foreground mb-6">Choose the employer for this payrun</p>
               </div>
               
@@ -164,7 +202,7 @@ const CreatePayrunWizard = () => {
                         <Building className="h-8 w-8 text-blue-600" />
                         <div>
                           <h4 className="font-medium">{employer.name}</h4>
-                          <p className="text-sm text-muted-foreground">{employer.employees} employees</p>
+                          <p className="text-xs text-muted-foreground">{employer.employees} employees</p>
                         </div>
                       </div>
                       {data.employer_id === employer.id && (
@@ -180,7 +218,7 @@ const CreatePayrunWizard = () => {
           {currentStep === 2 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold mb-4">Set Pay Period</h3>
+                <h3 className="text-xs font-semibold mb-4">Set Pay Period</h3>
                 <p className="text-muted-foreground mb-6">Define the payroll period dates</p>
               </div>
               
@@ -250,7 +288,7 @@ const CreatePayrunWizard = () => {
           {currentStep === 3 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold mb-4">Select Employees</h3>
+                <h3 className="text-xs font-semibold mb-4">Select Employees</h3>
                 <p className="text-muted-foreground mb-6">Choose employees to include in this payrun</p>
               </div>
               
@@ -298,7 +336,7 @@ const CreatePayrunWizard = () => {
                       <div className="flex items-center justify-between">
                         <div>
                           <p className="font-medium">{employee.name}</p>
-                          <p className="text-sm text-muted-foreground">Basic Salary: AED {employee.basic_salary.toLocaleString()}</p>
+                          <p className="text-xs text-muted-foreground">Basic Salary: AED {employee.basic_salary.toLocaleString()}</p>
                         </div>
                         <Badge variant="outline">{employee.status}</Badge>
                       </div>
@@ -312,14 +350,14 @@ const CreatePayrunWizard = () => {
           {currentStep === 4 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold mb-4">Review & Confirm</h3>
+                <h3 className="text-xs font-semibold mb-4">Review & Confirm</h3>
                 <p className="text-muted-foreground mb-6">Review the payrun details before creation</p>
               </div>
               
               <div className="grid md:grid-cols-2 gap-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle className="text-lg">Payrun Details</CardTitle>
+                    <CardTitle className="text-xs">Payrun Details</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex justify-between">
@@ -339,7 +377,7 @@ const CreatePayrunWizard = () => {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle className="text-lg">Employee Summary</CardTitle>
+                    <CardTitle className="text-xs">Employee Summary</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex justify-between">
@@ -348,7 +386,7 @@ const CreatePayrunWizard = () => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Estimated Gross:</span>
-                      <span className="font-medium text-green-600">AED {totalGrossPay.toLocaleString()}</span>
+                      <span className="font-medium text-primary">AED {totalGrossPay.toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Status:</span>
@@ -363,7 +401,7 @@ const CreatePayrunWizard = () => {
                   <AlertCircle className="h-5 w-5 text-yellow-600 mt-0.5" />
                   <div>
                     <p className="font-medium text-yellow-900">Important Notes</p>
-                    <ul className="text-yellow-800 text-sm mt-1 space-y-1">
+                    <ul className="text-yellow-800 text-xs mt-1 space-y-1">
                       <li>• The payrun will be created in draft status</li>
                       <li>• You can edit employee selections before processing</li>
                       <li>• Salary calculations will be based on current salary structures</li>
@@ -397,16 +435,16 @@ const CreatePayrunWizard = () => {
         </Button>
 
         <div className="flex items-center space-x-2">
-          <span className="text-sm text-muted-foreground">
+          <span className="text-xs text-muted-foreground">
             Step {currentStep} of {steps.length}
           </span>
         </div>
 
         <Button
           onClick={handleNext}
-          disabled={!canProceed()}
+          disabled={!canProceed() || loading}
         >
-          {currentStep === 4 ? "Create Payrun" : "Next"}
+          {loading ? "Saving..." : (currentStep === 4 ? "Create Payrun" : "Next")}
           {currentStep < 4 && <ArrowRight className="ml-2 h-4 w-4" />}
         </Button>
       </div>

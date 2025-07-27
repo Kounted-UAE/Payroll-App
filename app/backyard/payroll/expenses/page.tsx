@@ -1,6 +1,6 @@
 'use client'
 
-import PayrollExpenses from '@/components/dashboard-pages/PayrollExpenses';
+import PayrollExpenses from '@/components/dashboard-apps/PayrollExpenses';
 
 export default function ExpensesPage() {
   return <PayrollExpenses />;

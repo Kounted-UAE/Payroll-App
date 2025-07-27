@@ -132,7 +132,7 @@ export default function SOPResourceCenter() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">SOP Resource Center</h1>
+            <h1 className="text-lg font-bold text-foreground">SOP Resource Center</h1>
             <p className="text-muted-foreground">
               Comprehensive Standard Operating Procedures for Kounted's 7 Solution Groups
             </p>
@@ -158,8 +158,8 @@ export default function SOPResourceCenter() {
                   <FileText className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold">{totalSOPs}</p>
-                  <p className="text-sm text-muted-foreground">Total SOPs</p>
+                  <p className="text-xs font-bold">{totalSOPs}</p>
+                  <p className="text-xs text-muted-foreground">Total SOPs</p>
                 </div>
               </div>
             </CardContent>
@@ -169,11 +169,11 @@ export default function SOPResourceCenter() {
             <CardContent className="p-6">
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-green-500/10 rounded-lg">
-                  <TrendingUp className="h-6 w-6 text-green-600" />
+                  <TrendingUp className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold">7</p>
-                  <p className="text-sm text-muted-foreground">Solution Groups</p>
+                  <p className="text-xs font-bold">7</p>
+                  <p className="text-xs text-muted-foreground">Solution Groups</p>
                 </div>
               </div>
             </CardContent>
@@ -186,8 +186,8 @@ export default function SOPResourceCenter() {
                   <Clock className="h-6 w-6 text-blue-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold">4</p>
-                  <p className="text-sm text-muted-foreground">Recent Updates</p>
+                  <p className="text-xs font-bold">4</p>
+                  <p className="text-xs text-muted-foreground">Recent Updates</p>
                 </div>
               </div>
             </CardContent>
@@ -200,8 +200,8 @@ export default function SOPResourceCenter() {
                   <Star className="h-6 w-6 text-yellow-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold">12</p>
-                  <p className="text-sm text-muted-foreground">Most Popular</p>
+                  <p className="text-xs font-bold">12</p>
+                  <p className="text-xs text-muted-foreground">Most Popular</p>
                 </div>
               </div>
             </CardContent>
@@ -225,7 +225,7 @@ export default function SOPResourceCenter() {
 
         {/* Solution Groups Grid */}
         <div>
-          <h2 className="text-2xl font-semibold mb-6">Kounted Solution Groups</h2>
+          <h2 className="text-xs font-semibold mb-6">Kounted Solution Groups</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {categories.map((category) => {
               const Icon = category.icon;
@@ -247,7 +247,7 @@ export default function SOPResourceCenter() {
                         </Badge>
                       </div>
                     </div>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-xs text-muted-foreground">
                       {category.description}
                     </p>
                   </CardContent>
@@ -278,7 +278,7 @@ export default function SOPResourceCenter() {
                       </div>
                       <div>
                         <h4 className="font-medium">{sop.title}</h4>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="text-xs text-muted-foreground">
                           {category?.name} • Updated {sop.lastUpdated}
                         </p>
                       </div>

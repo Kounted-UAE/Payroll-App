@@ -25,7 +25,7 @@ export default function DashboardKPICards({ stats, variant = 'bordered' }: Props
   const isIcon = variant === 'icon'
 
   return (
-    <div className="rounded-xl bg-brand-lime/20 p-6">
+    <div className="px-6 py-0">
       <h3 className="text-xs font-semibold text-muted-foreground mb-4">Year-to-date: 2025 vs 2024 (For illustration purposes only)</h3>
       <dl
         className={clsx(
@@ -57,16 +57,16 @@ export default function DashboardKPICards({ stats, variant = 'bordered' }: Props
               </p>
             </dt>
             <dd className="ml-16 flex items-baseline pb-6 sm:pb-7">
-              <p className="text-2xl font-semibold text-foreground">{item.stat}</p>
+              <p className="text-xs font-semibold text-foreground">{item.stat}</p>
               {item.previousStat && (
-                <p className="ml-2 text-sm font-medium text-muted-foreground">
+                <p className="ml-2 text-xs font-medium text-muted-foreground">
                   from {item.previousStat}
                 </p>
               )}
               <p
                 className={clsx(
                   item.changeType === 'increase' ? 'text-green-600' : 'text-red-600',
-                  'ml-2 flex items-baseline text-sm font-semibold'
+                  'ml-2 flex items-baseline text-xs font-semibold'
                 )}
               >
                 {item.changeType === 'increase' ? (
@@ -81,7 +81,7 @@ export default function DashboardKPICards({ stats, variant = 'bordered' }: Props
               </p>
               {isIcon && (
                 <div className="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
-                  <div className="text-sm">
+                  <div className="text-xs">
                     <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
                       View all<span className="sr-only"> {item.name} stats</span>
                     </a>

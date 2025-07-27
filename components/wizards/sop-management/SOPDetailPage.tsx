@@ -145,7 +145,7 @@ export default function SOPDetailPage() {
           <Card>
             <CardContent className="p-8 text-center">
               <AlertTriangle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-              <h2 className="text-xl font-semibold mb-2">SOP Not Found</h2>
+              <h2 className="text-xs font-semibold mb-2">SOP Not Found</h2>
               <p className="text-muted-foreground mb-4">
                 The requested Standard Operating Procedure could not be found.
               </p>
@@ -200,7 +200,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
             Back to {category?.replace('-', ' ')}
           </Button>
           <div className="flex-1">
-            <h1 className="text-3xl font-bold text-foreground">{sopData.title}</h1>
+            <h1 className="text-lg font-bold text-foreground">{sopData.title}</h1>
             <p className="text-muted-foreground">Standard Operating Procedure</p>
           </div>
           <div className="flex gap-2">
@@ -225,9 +225,9 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
             <CardContent className="p-4">
               <div className="flex items-center gap-2 mb-2">
                 <Calendar className="h-4 w-4 text-primary" />
-                <span className="text-sm font-medium">Last Updated</span>
+                <span className="text-xs font-medium">Last Updated</span>
               </div>
-              <p className="text-sm text-muted-foreground">{sopData.lastUpdated}</p>
+              <p className="text-xs text-muted-foreground">{sopData.lastUpdated}</p>
             </CardContent>
           </Card>
           
@@ -235,7 +235,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
             <CardContent className="p-4">
               <div className="flex items-center gap-2 mb-2">
                 <FileText className="h-4 w-4 text-primary" />
-                <span className="text-sm font-medium">Category</span>
+                <span className="text-xs font-medium">Category</span>
               </div>
               <Badge>{category?.replace('-', ' ')}</Badge>
             </CardContent>
@@ -245,7 +245,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
             <CardContent className="p-4">
               <div className="flex items-center gap-2 mb-2">
                 <CheckCircle className="h-4 w-4 text-primary" />
-                <span className="text-sm font-medium">Status</span>
+                <span className="text-xs font-medium">Status</span>
               </div>
               <Badge variant={sopData.status === 'active' ? 'default' : 'secondary'}>
                 {sopData.status}
@@ -312,11 +312,11 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
             {sopData.processWorkflow.map((step, index) => (
               <div key={index} className="space-y-3">
                 <div className="flex items-start gap-3">
-                  <div className="flex items-center justify-center w-8 h-8 bg-primary text-primary-foreground rounded-full text-sm font-medium">
+                  <div className="flex items-center justify-center w-8 h-8 bg-primary text-primary-foreground rounded-full text-xs font-medium">
                     {step.step}
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-semibold text-lg">{step.title}</h4>
+                    <h4 className="font-semibold text-xs">{step.title}</h4>
                     <p className="text-muted-foreground mt-1">{step.description}</p>
                   </div>
                 </div>
@@ -325,7 +325,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
                   <div className="ml-11">
                     <ul className="space-y-1">
                       {step.details.map((detail, detailIndex) => (
-                        <li key={detailIndex} className="text-sm text-muted-foreground flex items-start gap-2">
+                        <li key={detailIndex} className="text-xs text-muted-foreground flex items-start gap-2">
                           <span className="text-primary mt-1">•</span>
                           <span>{detail}</span>
                         </li>
@@ -364,7 +364,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
                       </Button>
                     </div>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-3">{template.description}</p>
+                  <p className="text-xs text-muted-foreground mb-3">{template.description}</p>
                   <div>
                     <p className="text-xs font-medium mb-2">Required Fields:</p>
                     <div className="flex flex-wrap gap-1">

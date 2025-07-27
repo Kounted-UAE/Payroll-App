@@ -1,4 +1,4 @@
-//components/dashboard-pages/ComplianceCalendar.tsx
+//components/dashboard-apps/ComplianceCalendar.tsx
 
 'use client'
 
@@ -27,7 +27,7 @@ import {
   ArrowUpDown,
   Filter
 } from 'lucide-react';
-import ComplianceItemModal from '@/components/dashboard-pages/ComplianceItemModal';
+import ComplianceItemModal from '@/components/dashboard-apps/ComplianceItemModal';
 
 interface ComplianceItem {
   id: string;
@@ -407,12 +407,12 @@ export default function ComplianceCalendar() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">UAE Compliance Calendar</h1>
+            <h1 className="text-lg font-bold text-foreground">UAE Compliance Calendar</h1>
             <p className="text-muted-foreground">Comprehensive compliance obligations for UAE businesses (2025-2026)</p>
           </div>
           <div className="flex items-center gap-2">
             <Calendar className="h-5 w-5 text-primary" />
-            <span className="text-sm font-medium">Updated for 2025-2026</span>
+            <span className="text-xs font-medium">Updated for 2025-2026</span>
           </div>
         </div>
 
@@ -423,8 +423,8 @@ export default function ComplianceCalendar() {
               <div className="flex items-center">
                 <FileText className="h-8 w-8 text-primary mr-3" />
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Total Obligations</p>
-                  <p className="text-2xl font-bold">{complianceData.length}</p>
+                  <p className="text-xs font-medium text-muted-foreground">Total Obligations</p>
+                  <p className="text-xs font-bold">{complianceData.length}</p>
                 </div>
               </div>
             </CardContent>
@@ -435,8 +435,8 @@ export default function ComplianceCalendar() {
               <div className="flex items-center">
                 <DollarSign className="h-8 w-8 text-red-600 mr-3" />
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Tax Related</p>
-                  <p className="text-2xl font-bold">{complianceData.filter(item => item.category === 'tax').length}</p>
+                  <p className="text-xs font-medium text-muted-foreground">Tax Related</p>
+                  <p className="text-xs font-bold">{complianceData.filter(item => item.category === 'tax').length}</p>
                 </div>
               </div>
             </CardContent>
@@ -447,8 +447,8 @@ export default function ComplianceCalendar() {
               <div className="flex items-center">
                 <Users className="h-8 w-8 text-blue-600 mr-3" />
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Labor & HR</p>
-                  <p className="text-2xl font-bold">{complianceData.filter(item => item.category === 'labor').length}</p>
+                  <p className="text-xs font-medium text-muted-foreground">Labor & HR</p>
+                  <p className="text-xs font-bold">{complianceData.filter(item => item.category === 'labor').length}</p>
                 </div>
               </div>
             </CardContent>
@@ -459,8 +459,8 @@ export default function ComplianceCalendar() {
               <div className="flex items-center">
                 <AlertTriangle className="h-8 w-8 text-amber-600 mr-3" />
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Regulatory</p>
-                  <p className="text-2xl font-bold">{complianceData.filter(item => item.category === 'regulatory').length}</p>
+                  <p className="text-xs font-medium text-muted-foreground">Regulatory</p>
+                  <p className="text-xs font-bold">{complianceData.filter(item => item.category === 'regulatory').length}</p>
                 </div>
               </div>
             </CardContent>
@@ -478,7 +478,7 @@ export default function ComplianceCalendar() {
               className="pl-10"
             />
           </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <Filter className="h-4 w-4" />
             <span>{filteredData.length} of {complianceData.length} obligations</span>
           </div>
@@ -573,7 +573,7 @@ export default function ComplianceCalendar() {
                               >
                                 <p className="font-medium">{item.obligation}</p>
                               </button>
-                              <p className="text-sm text-muted-foreground">{item.subjectMatter}</p>
+                              <p className="text-xs text-muted-foreground">{item.subjectMatter}</p>
                             </div>
                           </TableCell>
                           <TableCell>
@@ -586,10 +586,10 @@ export default function ComplianceCalendar() {
                               {item.frequency.replace('-', ' ')}
                             </Badge>
                           </TableCell>
-                          <TableCell className="text-sm">{item.authority}</TableCell>
-                          <TableCell className="text-sm">{item.jurisdiction}</TableCell>
-                          <TableCell className="text-sm">{item.entities}</TableCell>
-                          <TableCell className="text-sm">
+                          <TableCell className="text-xs">{item.authority}</TableCell>
+                          <TableCell className="text-xs">{item.jurisdiction}</TableCell>
+                          <TableCell className="text-xs">{item.entities}</TableCell>
+                          <TableCell className="text-xs">
                             <div className="max-w-xs">
                               <p className="text-xs leading-relaxed">{item.penalties}</p>
                             </div>
@@ -616,10 +616,10 @@ export default function ComplianceCalendar() {
         {/* Legend */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">Legend & Notes</CardTitle>
+            <CardTitle className="text-xs">Legend & Notes</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
               <div>
                 <h4 className="font-semibold mb-2">Abbreviations</h4>
                 <ul className="space-y-1 text-muted-foreground">

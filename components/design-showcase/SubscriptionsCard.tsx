@@ -9,7 +9,7 @@ export const SubscriptionsCard = () => {
     <Card className="w-full max-w-sm">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-sm font-medium text-muted-foreground">
+          <CardTitle className="text-xs font-medium text-muted-foreground">
             Subscriptions
           </CardTitle>
           <Button variant="ghost" size="sm" className="text-xs h-6 px-2">
@@ -18,7 +18,7 @@ export const SubscriptionsCard = () => {
         </div>
       </CardHeader>
       <CardContent className="pt-0">
-        <div className="text-2xl font-bold">+2,350</div>
+        <div className="text-xs font-bold">+2,350</div>
         <p className="text-xs text-success flex items-center gap-1 mt-1">
           <span>+180.1% from last month</span>
         </p>

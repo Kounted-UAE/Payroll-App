@@ -109,7 +109,7 @@ export default function SOPCategoryPage() {
         <div className="max-w-4xl mx-auto">
           <Card>
             <CardContent className="p-8 text-center">
-              <h2 className="text-xl font-semibold mb-2">Category Not Found</h2>
+              <h2 className="text-xs font-semibold mb-2">Category Not Found</h2>
               <p className="text-muted-foreground mb-4">
                 The requested SOP category could not be found.
               </p>
@@ -142,7 +142,7 @@ export default function SOPCategoryPage() {
             Back to SOP Center
           </Button>
           <div className="flex-1">
-            <h1 className="text-3xl font-bold text-foreground">{categoryInfo.name}</h1>
+            <h1 className="text-lg font-bold text-foreground">{categoryInfo.name}</h1>
             <p className="text-muted-foreground">{categoryInfo.description}</p>
           </div>
           <Button onClick={() => goTo('/sop-resources/manage')}>
@@ -175,18 +175,18 @@ export default function SOPCategoryPage() {
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <CardTitle className="text-lg mb-2">{sop.title}</CardTitle>
+                    <CardTitle className="text-xs mb-2">{sop.title}</CardTitle>
                     <Badge variant={sop.status === 'active' ? 'default' : 'secondary'}>
                       {sop.status}
                     </Badge>
                   </div>
                 </div>
-                <p className="text-sm text-muted-foreground mt-2">
+                <p className="text-xs text-muted-foreground mt-2">
                   {sop.description}
                 </p>
               </CardHeader>
               <CardContent>
-                <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
+                <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
                   <span className="flex items-center gap-1">
                     <Clock className="h-4 w-4" />
                     {sop.lastUpdated}
@@ -197,7 +197,7 @@ export default function SOPCategoryPage() {
                   </span>
                 </div>
 
-                <div className="text-sm text-muted-foreground mb-4">
+                <div className="text-xs text-muted-foreground mb-4">
                   <span>{sop.templateCount} templates available</span>
                 </div>
 
@@ -231,7 +231,7 @@ export default function SOPCategoryPage() {
           <Card>
             <CardContent className="p-12 text-center">
               <FileText className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">No SOPs Found</h3>
+              <h3 className="text-xs font-semibold mb-2">No SOPs Found</h3>
               <p className="text-muted-foreground mb-4">
                 No SOPs have been created for {categoryInfo.name} yet.
               </p>

@@ -34,7 +34,7 @@ export default function LoginPage() {
           className="mx-auto py-2"
         />
           <h2 className=" max-w-3xl text-4xl mt-4 font-medium tracking-tight leading-tight text-white">
-                     We take <span className="text-brand-lime">complete ownership</span> of our client's compliance and operational requirements.
+                     We take <span className="text-lime-600">complete ownership</span> of our client's compliance and operational requirements.
           </h2>
           <br />        
         

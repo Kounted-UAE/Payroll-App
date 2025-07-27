@@ -7,7 +7,7 @@ import { SidebarProvider } from '@/components/ui/sidebar'
   return (
     <>      
       <SidebarProvider>
-        <DashboardLayout>{children}</DashboardLayout>
+        <DashboardLayout >{children}</DashboardLayout>
       </SidebarProvider>
     </>
   );

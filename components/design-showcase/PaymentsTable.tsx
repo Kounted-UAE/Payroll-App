@@ -39,8 +39,8 @@ export const PaymentsTable = () => {
       <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="text-lg">Payments</CardTitle>
-            <p className="text-sm text-muted-foreground">Manage your payments.</p>
+            <CardTitle className="text-xs">Payments</CardTitle>
+            <p className="text-xs text-muted-foreground">Manage your payments.</p>
           </div>
           <Button size="sm">Add Payment</Button>
         </div>
@@ -60,7 +60,7 @@ export const PaymentsTable = () => {
         {/* Table Rows */}
         <div className="space-y-0">
           {payments.map((payment, index) => (
-            <div key={index} className="grid grid-cols-12 gap-4 py-3 text-sm border-b last:border-b-0 hover:bg-muted/30">
+            <div key={index} className="grid grid-cols-12 gap-4 py-3 text-xs border-b last:border-b-0 hover:bg-muted/30">
               <div className="col-span-1 flex items-center">
                 <Checkbox />
               </div>

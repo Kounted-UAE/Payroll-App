@@ -1,6 +1,6 @@
 'use client'
 
-import PayrollEmployers from '@/components/dashboard-pages/PayrollEmployers';
+import PayrollEmployers from '@/components/dashboard-apps/PayrollEmployers';
 
 export default function EmployersPage() {
   return <PayrollEmployers />;

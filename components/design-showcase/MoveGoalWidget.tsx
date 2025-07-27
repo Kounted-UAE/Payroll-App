@@ -18,7 +18,7 @@ export const MoveGoalWidget = () => {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader className="pb-3">
-        <CardTitle className="text-sm font-medium text-muted-foreground">
+        <CardTitle className="text-xs font-medium text-muted-foreground">
           Move Goal
         </CardTitle>
         <p className="text-xs text-muted-foreground">
@@ -37,7 +37,7 @@ export const MoveGoalWidget = () => {
             <Minus className="h-3 w-3" />
           </Button>
           <div className="text-center">
-            <div className="text-3xl font-bold">{goal}</div>
+            <div className="text-lg font-bold">{goal}</div>
             <div className="text-xs text-muted-foreground">CALORIES/DAY</div>
           </div>
           <Button

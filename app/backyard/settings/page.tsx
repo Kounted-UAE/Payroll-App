@@ -1,5 +1,6 @@
 import React from 'react';
+import Settings from '@/components/dashboard-apps/Settings';
 
 export default function SettingsPage() {
-  return <div className="p-8">Settings Page (placeholder)</div>;
+  return <Settings />;
 } 

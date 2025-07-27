@@ -81,7 +81,7 @@ export default function AccountingScopeStep({ data, allData, onChange }: StepPro
 
       <FormSection title="Sales Channels">
         <div className="space-y-4">
-          <p className="text-sm text-muted-foreground">Select all sales channels that apply:</p>
+          <p className="text-xs text-muted-foreground">Select all sales channels that apply:</p>
           
           <div className="space-y-3">
             {SALES_CHANNELS.map(channel => (
@@ -95,7 +95,7 @@ export default function AccountingScopeStep({ data, allData, onChange }: StepPro
                 />
                 <Label
                   htmlFor={`channel-${channel.value}`}
-                  className="text-sm font-normal cursor-pointer"
+                  className="text-xs font-normal cursor-pointer"
                 >
                   {channel.label}
                 </Label>

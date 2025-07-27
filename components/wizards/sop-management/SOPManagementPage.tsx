@@ -133,7 +133,7 @@ export default function SOPManagementPage() {
             Back to SOP Center
           </Button>
           <div className="flex-1">
-            <h1 className="text-3xl font-bold text-foreground">Manage SOPs</h1>
+            <h1 className="text-lg font-bold text-foreground">Manage SOPs</h1>
             <p className="text-muted-foreground">Create, edit, and manage Standard Operating Procedures</p>
           </div>
           <Button onClick={() => setShowWizard(true)}>
@@ -187,7 +187,7 @@ export default function SOPManagementPage() {
                           {sop.category.replace('-', ' ')}
                         </Badge>
                       </div>
-                      <div className="flex items-center gap-6 text-sm text-muted-foreground">
+                      <div className="flex items-center gap-6 text-xs text-muted-foreground">
                         <span>Created: {sop.createdAt}</span>
                         <span>Updated: {sop.lastUpdated}</span>
                         <span>By: {sop.author}</span>

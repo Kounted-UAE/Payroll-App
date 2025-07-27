@@ -310,7 +310,7 @@ export function SOPWizard({ isOpen, onClose, editingSOP, categories }: SOPWizard
             {formData.processSteps.map((step, stepIndex) => (
               <Card key={stepIndex}>
                 <CardHeader>
-                  <CardTitle className="text-sm">Step {stepIndex + 1}</CardTitle>
+                  <CardTitle className="text-xs">Step {stepIndex + 1}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <Input
@@ -380,7 +380,7 @@ export function SOPWizard({ isOpen, onClose, editingSOP, categories }: SOPWizard
           <div className="space-y-6">
             <div className="text-center">
               <FileText className="h-16 w-16 text-primary mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Review Your SOP</h3>
+              <h3 className="text-xs font-semibold mb-2">Review Your SOP</h3>
               <p className="text-muted-foreground mb-6">
                 Please review the information below before saving.
               </p>
@@ -388,32 +388,32 @@ export function SOPWizard({ isOpen, onClose, editingSOP, categories }: SOPWizard
             
             <div className="space-y-4">
               <div>
-                <Label className="text-sm font-medium">Title:</Label>
-                <p className="text-sm text-muted-foreground">{formData.title}</p>
+                <Label className="text-xs font-medium">Title:</Label>
+                <p className="text-xs text-muted-foreground">{formData.title}</p>
               </div>
               <div>
-                <Label className="text-sm font-medium">Category:</Label>
+                <Label className="text-xs font-medium">Category:</Label>
                 <Badge variant="outline">{formData.category}</Badge>
               </div>
               <div>
-                <Label className="text-sm font-medium">Status:</Label>
+                <Label className="text-xs font-medium">Status:</Label>
                 <Badge>{formData.status}</Badge>
               </div>
               <div>
-                <Label className="text-sm font-medium">Who & When Items:</Label>
-                <p className="text-sm text-muted-foreground">{formData.whoAndWhen.length} items</p>
+                <Label className="text-xs font-medium">Who & When Items:</Label>
+                <p className="text-xs text-muted-foreground">{formData.whoAndWhen.length} items</p>
               </div>
               <div>
-                <Label className="text-sm font-medium">Data Document Sections:</Label>
-                <p className="text-sm text-muted-foreground">{formData.dataDocuments.length} sections</p>
+                <Label className="text-xs font-medium">Data Document Sections:</Label>
+                <p className="text-xs text-muted-foreground">{formData.dataDocuments.length} sections</p>
               </div>
               <div>
-                <Label className="text-sm font-medium">Process Steps:</Label>
-                <p className="text-sm text-muted-foreground">{formData.processSteps.length} steps</p>
+                <Label className="text-xs font-medium">Process Steps:</Label>
+                <p className="text-xs text-muted-foreground">{formData.processSteps.length} steps</p>
               </div>
               <div>
-                <Label className="text-sm font-medium">Templates:</Label>
-                <p className="text-sm text-muted-foreground">{formData.templates.length} templates</p>
+                <Label className="text-xs font-medium">Templates:</Label>
+                <p className="text-xs text-muted-foreground">{formData.templates.length} templates</p>
               </div>
             </div>
           </div>
@@ -437,7 +437,7 @@ export function SOPWizard({ isOpen, onClose, editingSOP, categories }: SOPWizard
         <div className="flex items-center justify-between mb-6 px-4">
           {steps.map((step, index) => (
             <div key={step.number} className="flex items-center">
-              <div className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium ${
+              <div className={`flex items-center justify-center w-8 h-8 rounded-full text-xs font-medium ${
                 currentStep >= step.number 
                   ? 'bg-primary text-primary-foreground' 
                   : 'bg-muted text-muted-foreground'
@@ -455,10 +455,10 @@ export function SOPWizard({ isOpen, onClose, editingSOP, categories }: SOPWizard
 
         {/* Step Content */}
         <div className="mb-6">
-          <h3 className="text-lg font-semibold mb-2">
+          <h3 className="text-xs font-semibold mb-2">
             {steps[currentStep - 1].title}
           </h3>
-          <p className="text-sm text-muted-foreground mb-4">
+          <p className="text-xs text-muted-foreground mb-4">
             {steps[currentStep - 1].description}
           </p>
           

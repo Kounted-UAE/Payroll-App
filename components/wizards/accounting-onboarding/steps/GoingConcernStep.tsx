@@ -49,7 +49,7 @@ export default function GoingConcernStep({ data, onChange }: StepProps) {
           {GOING_CONCERN_INDICATORS.map((indicator, index) => (
             <div key={index} className="p-4 border rounded-lg">
               <div className="mb-3">
-                <h4 className="font-medium text-sm mb-2">{indicator}</h4>
+                <h4 className="font-medium text-xs mb-2">{indicator}</h4>
               </div>
               
               <RadioField
@@ -122,7 +122,7 @@ export default function GoingConcernStep({ data, onChange }: StepProps) {
           <div className="p-4 border rounded-lg border-dashed">
             <div className="text-center">
               <Upload className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-              <p className="text-sm text-muted-foreground mb-2">
+              <p className="text-xs text-muted-foreground mb-2">
                 Upload Supporting Evidence
               </p>
               <p className="text-xs text-muted-foreground mb-3">

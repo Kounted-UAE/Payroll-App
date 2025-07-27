@@ -8,7 +8,7 @@ export function HeroSection() {
       <div className={'text-center w-full '}>
         <h1 className={'text-[48px] leading-[48px] md:text-[80px] md:leading-[80px] tracking-[-1.6px] font-medium'}>
           Kounted's Backyard </h1>
-          <h2 className="text-3xl sm:text-6xl font-medium sm:font-normal tracking-tight leading-tight text-brand-charcoal dark:text-white">
+          <h2 className="text-lg sm:text-6xl font-medium sm:font-normal tracking-tight leading-tight text-brand-charcoal dark:text-white">
             Where we take <span className="text-brand-green">complete ownership</span> of our operational and compliance requirements.
           </h2>
           <br />        

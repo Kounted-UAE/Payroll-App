@@ -94,7 +94,7 @@ const GeneratePayslipsWizard = () => {
     <div className="flex-1 space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Generate Payslips</h1>
+          <h1 className="text-lg font-bold tracking-tight">Generate Payslips</h1>
           <p className="text-muted-foreground">
             Create and distribute employee payslips from completed payruns
           </p>
@@ -114,14 +114,14 @@ const GeneratePayslipsWizard = () => {
                 <div className={`flex items-center space-x-2 ${
                   currentStep >= step.id ? "text-primary" : "text-muted-foreground"
                 }`}>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${
                     currentStep >= step.id ? "bg-primary text-primary-foreground" : "bg-muted"
                   }`}>
                     {currentStep > step.id ? <CheckCircle className="h-4 w-4" /> : step.id}
                   </div>
                   <div>
                     <p className="font-medium">{step.title}</p>
-                    <p className="text-sm text-muted-foreground">{step.description}</p>
+                    <p className="text-xs text-muted-foreground">{step.description}</p>
                   </div>
                 </div>
                 {index < steps.length - 1 && (
@@ -141,7 +141,7 @@ const GeneratePayslipsWizard = () => {
           {currentStep === 1 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold mb-4">Select Payrun</h3>
+                <h3 className="text-xs font-semibold mb-4">Select Payrun</h3>
                 <p className="text-muted-foreground mb-6">Choose a completed payrun to generate payslips from</p>
               </div>
               
@@ -161,7 +161,7 @@ const GeneratePayslipsWizard = () => {
                         <FileText className="h-8 w-8 text-blue-600" />
                         <div>
                           <h4 className="font-medium">{payrun.employer}</h4>
-                          <p className="text-sm text-muted-foreground">{payrun.period} • {payrun.employees} employees</p>
+                          <p className="text-xs text-muted-foreground">{payrun.period} • {payrun.employees} employees</p>
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
@@ -182,7 +182,7 @@ const GeneratePayslipsWizard = () => {
           {currentStep === 2 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold mb-4">Payslip Settings</h3>
+                <h3 className="text-xs font-semibold mb-4">Payslip Settings</h3>
                 <p className="text-muted-foreground mb-6">Configure language and delivery preferences</p>
               </div>
               
@@ -190,7 +190,7 @@ const GeneratePayslipsWizard = () => {
                 <div className="space-y-4">
                   <div>
                     <Label className="text-base font-medium">Language</Label>
-                    <p className="text-sm text-muted-foreground mb-3">Select the default language for payslips</p>
+                    <p className="text-xs text-muted-foreground mb-3">Select the default language for payslips</p>
                     <RadioGroup 
                       value={data.language} 
                       onValueChange={(value) => setData(prev => ({ ...prev, language: value }))}
@@ -214,7 +214,7 @@ const GeneratePayslipsWizard = () => {
                 <div className="space-y-4">
                   <div>
                     <Label className="text-base font-medium">Delivery Method</Label>
-                    <p className="text-sm text-muted-foreground mb-3">How should payslips be delivered?</p>
+                    <p className="text-xs text-muted-foreground mb-3">How should payslips be delivered?</p>
                     <RadioGroup 
                       value={data.delivery_method} 
                       onValueChange={(value) => setData(prev => ({ ...prev, delivery_method: value }))}
@@ -253,7 +253,7 @@ const GeneratePayslipsWizard = () => {
           {currentStep === 3 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold mb-4">Select Employees</h3>
+                <h3 className="text-xs font-semibold mb-4">Select Employees</h3>
                 <p className="text-muted-foreground mb-6">Choose employees to generate payslips for</p>
               </div>
               
@@ -301,10 +301,10 @@ const GeneratePayslipsWizard = () => {
                       <div className="flex items-center justify-between">
                         <div>
                           <p className="font-medium">{employee.name}</p>
-                          <p className="text-sm text-muted-foreground">{employee.email}</p>
+                          <p className="text-xs text-muted-foreground">{employee.email}</p>
                         </div>
                         <div className="text-right">
-                          <p className="font-medium text-green-600">AED {employee.net_salary.toLocaleString()}</p>
+                          <p className="font-medium text-primary">AED {employee.net_salary.toLocaleString()}</p>
                           <Badge variant="outline" className="text-xs">{employee.language}</Badge>
                         </div>
                       </div>
@@ -318,14 +318,14 @@ const GeneratePayslipsWizard = () => {
           {currentStep === 4 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold mb-4">Review & Generate</h3>
+                <h3 className="text-xs font-semibold mb-4">Review & Generate</h3>
                 <p className="text-muted-foreground mb-6">Review the payslip generation details</p>
               </div>
               
               <div className="grid md:grid-cols-2 gap-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle className="text-lg">Generation Settings</CardTitle>
+                    <CardTitle className="text-xs">Generation Settings</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex justify-between">
@@ -349,7 +349,7 @@ const GeneratePayslipsWizard = () => {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle className="text-lg">Employee Summary</CardTitle>
+                    <CardTitle className="text-xs">Employee Summary</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex justify-between">
@@ -358,7 +358,7 @@ const GeneratePayslipsWizard = () => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Total Net Pay:</span>
-                      <span className="font-medium text-green-600">
+                      <span className="font-medium text-primary">
                         AED {selectedEmployees.reduce((sum, emp) => sum + emp.net_salary, 0).toLocaleString()}
                       </span>
                     </div>
@@ -375,7 +375,7 @@ const GeneratePayslipsWizard = () => {
                   <AlertCircle className="h-5 w-5 text-yellow-600 mt-0.5" />
                   <div>
                     <p className="font-medium text-yellow-900">Generation Process</p>
-                    <ul className="text-yellow-800 text-sm mt-1 space-y-1">
+                    <ul className="text-yellow-800 text-xs mt-1 space-y-1">
                       <li>• Payslips will be generated in PDF format</li>
                       <li>• {data.delivery_method === "email" ? "Emails will be sent automatically to selected employees" : 
                            data.delivery_method === "download" ? "Files will be prepared for download" :
@@ -411,7 +411,7 @@ const GeneratePayslipsWizard = () => {
         </Button>
 
         <div className="flex items-center space-x-2">
-          <span className="text-sm text-muted-foreground">
+          <span className="text-xs text-muted-foreground">
             Step {currentStep} of {steps.length}
           </span>
         </div>

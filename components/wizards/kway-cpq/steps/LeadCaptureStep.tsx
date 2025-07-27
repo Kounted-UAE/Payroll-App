@@ -124,7 +124,7 @@ export default function LeadCaptureStep({ data, allData, onChange, referenceId }
 
       <FormSection title="Next Steps">
         <div className="space-y-4">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs text-muted-foreground">
             Thank you for completing the service request wizard. Your reference ID is <span className="font-semibold">{referenceId}</span>. 
             Please select your preferred next step:
           </p>

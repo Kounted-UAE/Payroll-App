@@ -29,8 +29,8 @@ type Props = {
 
 export default function DashboardEntityStats({ metrics }: Props) {
   return (
-    <div>
-      <h3 className="text-xs font-semibold text-muted-foreground mb-4">Year-to-date: 2025 vs 2024 (For illustration purposes only)</h3>
+    <div className="rounded-xl px-6 py-0">
+      <h3 className="text-xs font-semibold text-muted-foreground m-4">Year-to-date: 2025 vs 2024 (For illustration purposes only)</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
              
       {metrics.map((metric) => {
@@ -38,15 +38,15 @@ export default function DashboardEntityStats({ metrics }: Props) {
         return (
           <Card key={metric.label} className="relative overflow-hidden rounded-lg bg-white px-2 pt-2 pb-12 shadow-sm sm:px-6 sm:pt-6">
             <dt>
-              <div className="absolute rounded-md bg-brand-green p-2">
+              <div className="absolute rounded-md bg-green-500 p-2">
                 <Icon className="h-3 w-3 text-white" aria-hidden="true" />
               </div>
-              <p className="ml-12 truncate text-sm font-medium text-muted-foreground">
+              <p className="ml-12 truncate text-xs font-medium text-muted-foreground">
                 {metric.label}
               </p>
             </dt>
             <dd className="ml-12 flex flex-col">
-              <div className="text-2xl font-bold text-foreground">{metric.count}</div>
+              <div className="text-xs font-bold text-foreground">{metric.count}</div>
               {metric.description && (
                 <div className="text-xs text-muted-foreground mt-1 mb-2">
                   {metric.description}
@@ -54,9 +54,9 @@ export default function DashboardEntityStats({ metrics }: Props) {
               )}
             </dd>
             {metric.link && (
-              <div className="absolute inset-x-0 bottom-0 bg-green-50 px-4 py-4 sm:px-6">
-                <div className="text-sm">
-                  <a href={metric.link} className="font-medium text-brand-green hover:text-brand-dark">
+              <div className="absolute inset-x-0 bottom-0 bg-zinc-100 px-4 py-4 sm:px-6">
+                <div className="text-xs">
+                  <a href={metric.link} className="font-semibold text-zinc-500 hover:text-green-800 hover:underline underline-offset-2">
                     View all<span className="sr-only"> {metric.label}</span>
                   </a>
                 </div>

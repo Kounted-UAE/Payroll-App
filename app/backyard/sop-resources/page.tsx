@@ -1,4 +1,4 @@
-import SOPResourceCenter from '@/components/dashboard-pages/SOPResourceCenter';
+import SOPResourceCenter from '@/components/dashboard-apps/SOPResourceCenter';
 
 export default function Page() {
   return <SOPResourceCenter />;

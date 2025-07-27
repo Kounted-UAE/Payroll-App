@@ -1,4 +1,4 @@
-//components/dashboard-pages/ComplianceItemModal.tsx
+//components/dashboard-apps/ComplianceItemModal.tsx
 
 'use client'
 
@@ -130,7 +130,7 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
                 <Calendar className="h-4 w-4 text-primary" />
                 <span className="font-medium">Due Date</span>
               </div>
-              <p className="text-sm text-muted-foreground ml-6">{item.dueDate}</p>
+              <p className="text-xs text-muted-foreground ml-6">{item.dueDate}</p>
             </div>
 
             <div className="space-y-2">
@@ -138,7 +138,7 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
                 <Building2 className="h-4 w-4 text-primary" />
                 <span className="font-medium">Authority</span>
               </div>
-              <p className="text-sm text-muted-foreground ml-6">{item.authority}</p>
+              <p className="text-xs text-muted-foreground ml-6">{item.authority}</p>
             </div>
 
             <div className="space-y-2">
@@ -160,7 +160,7 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
                 <Users className="h-4 w-4 text-primary" />
                 <span className="font-medium">Subject Matter</span>
               </div>
-              <p className="text-sm text-muted-foreground ml-6">{item.subjectMatter}</p>
+              <p className="text-xs text-muted-foreground ml-6">{item.subjectMatter}</p>
             </div>
           </div>
 
@@ -169,19 +169,19 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
           {/* Jurisdiction */}
           <div>
             <h3 className="font-semibold mb-2">Jurisdiction</h3>
-            <p className="text-sm text-muted-foreground">{item.jurisdiction}</p>
+            <p className="text-xs text-muted-foreground">{item.jurisdiction}</p>
           </div>
 
           {/* Applicable Entities */}
           <div>
             <h3 className="font-semibold mb-2">Applicable Entities</h3>
-            <p className="text-sm text-muted-foreground">{item.entities}</p>
+            <p className="text-xs text-muted-foreground">{item.entities}</p>
           </div>
 
           {/* Requirements */}
           <div>
             <h3 className="font-semibold mb-2">Requirements & Documents</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">{item.requirements}</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">{item.requirements}</p>
           </div>
 
           {/* Penalties */}
@@ -190,7 +190,7 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
               <AlertTriangle className="h-4 w-4 text-destructive" />
               <h3 className="font-semibold text-destructive">Penalties for Non-Compliance</h3>
             </div>
-            <p className="text-sm text-destructive/80 leading-relaxed">{item.penalties}</p>
+            <p className="text-xs text-destructive/80 leading-relaxed">{item.penalties}</p>
           </div>
 
           {/* Action Buttons */}

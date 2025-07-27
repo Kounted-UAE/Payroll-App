@@ -2,7 +2,7 @@
 
 'use client'
 
-import { Bell, User, Settings, LogOut } from "lucide-react"
+import { Bell, User, Settings, LogOut, HomeIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -48,23 +48,23 @@ export function TopNavbar() {
   });
 
   return (
-    <header className="h-24 border-b border-border text-zinc-100 bg-zinc-900 backdrop-blur supports-[backdrop-filter]:bg-zince-900/60 sticky top-0 z-50">
+    <header className="h-24 border-b border-border text-zinc-100 bg-gradient-to-r from-[#022000] to-[#020000] font-semibold backdrop-blur supports-[backdrop-filter]:bg-zince-900/60 sticky top-0 z-50">
       <div className="h-full flex items-center justify-between px-4">
         {/* Left side - Sidebar trigger and breadcrumb */}
         <div className="flex items-center gap-3">
-          <SidebarTrigger className="h-8 w-8 hover:bg-zinc-800" />
-          <nav className="hidden md:flex items-center gap-2 text-sm" aria-label="Breadcrumb">
+          <SidebarTrigger className="h-12 w-12 rounded-r-full hover:bg-primary/50" />
+          <nav className="hidden md:flex items-center gap-2" aria-label="Breadcrumb">
             {breadcrumbs.length === 0 ? (
               <span className="text-zinc-300 font-medium">Kounted</span>
             ) : (
               <>
-                <span className="text-lime-400 font-bold">🚦</span>
+                <span className="text-primary font-bold">&#8759;</span>
                 {breadcrumbs.map((crumb, idx) => (
                   <span key={crumb.href} className="flex items-center gap-2">
                     {idx < breadcrumbs.length - 1 ? (
                       <>
-                        <Link href={crumb.href} className="text-lime-600 hover:underline">{crumb.name}</Link>
-                        <span className="text-muted-foreground">/</span>
+                        <Link href={crumb.href} className="text-primary hover:underline">{crumb.name}</Link>
+                        <span className="text-primary">/</span>
                       </>
                     ) : (
                       <span className="font-medium">{crumb.name}</span>
@@ -92,14 +92,14 @@ export function TopNavbar() {
                   <AvatarImage src="/team/kevin.webp" alt="User" />
                   <AvatarFallback>KC</AvatarFallback>
                 </Avatar>
-                <span className="hidden md:inline text-sm font-medium">Kevin Cashmore</span>
+                <span className="hidden md:inline font-medium">Kevin Cashmore</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">Kevin Cashmore</p>
-                  <p className="text-xs leading-none text-muted-foreground">
+                  <p className="font-medium leading-none">Kevin Cashmore</p>
+                  <p className="leading-none text-muted-foreground">
                     kevin@kounted.ae
                   </p>
                 </div>

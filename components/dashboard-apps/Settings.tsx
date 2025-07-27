@@ -1,4 +1,5 @@
-import { useState } from 'react';
+"use client"
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -10,15 +11,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { 
-  Settings as SettingsIcon, 
-  Users, 
-  Plus, 
-  MoreHorizontal, 
-  Edit, 
-  Archive, 
-  UserCheck, 
-  UserX, 
+import {
+  Settings as SettingsIcon,
+  Users,
+  Plus,
+  MoreHorizontal,
+  Edit,
+  Archive,
+  UserCheck,
+  UserX,
   Mail,
   Shield,
   User,
@@ -26,166 +27,143 @@ import {
   Lock
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { createClient } from '@supabase/supabase-js';
+import type { Database } from '@/lib/types/supabase';
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: 'admin' | 'manager' | 'employee' | 'client';
-  status: 'active' | 'inactive' | 'pending' | 'archived';
-  lastActive: string;
-  createdAt: string;
-}
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const supabase = createClient<Database>(supabaseUrl, supabaseKey);
 
-const mockUsers: User[] = [
-  {
-    id: '1',
-    name: 'John Smith',
-    email: 'john.smith@kounted.com',
-    role: 'admin',
-    status: 'active',
-    lastActive: '2024-01-22',
-    createdAt: '2024-01-15'
-  },
-  {
-    id: '2',
-    name: 'Sarah Johnson',
-    email: 'sarah.johnson@kounted.com',
-    role: 'manager',
-    status: 'active',
-    lastActive: '2024-01-21',
-    createdAt: '2024-01-16'
-  },
-  {
-    id: '3',
-    name: 'Mike Chen',
-    email: 'mike.chen@client.com',
-    role: 'client',
-    status: 'pending',
-    lastActive: 'Never',
-    createdAt: '2024-01-22'
-  },
-  {
-    id: '4',
-    name: 'Lisa Wang',
-    email: 'lisa.wang@kounted.com',
-    role: 'employee',
-    status: 'inactive',
-    lastActive: '2024-01-10',
-    createdAt: '2024-01-08'
-  }
-];
+type Profile = Database['public']['Tables']['public_user_profiles']['Row'];
+type Role = Database['public']['Tables']['public_user_roles']['Row'];
 
 const Settings = () => {
-  const [users, setUsers] = useState<User[]>(mockUsers);
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [users, setUsers] = useState<Profile[]>([]);
+  const [roles, setRoles] = useState<Role[]>([]);
+  const [selectedUser, setSelectedUser] = useState<Profile | null>(null);
   const [isInviteDialogOpen, setIsInviteDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [isImportDialogOpen, setIsImportDialogOpen] = useState(false);
   const [inviteForm, setInviteForm] = useState({
-    email: '',
-    role: 'employee' as User['role'],
+    first_name: '',
+    last_name: '',
+    user_role_slug: '',
     message: ''
   });
+  const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
-  const getStatusBadge = (status: User['status']) => {
-    const statusConfig: Record<User['status'], { variant: "default" | "secondary" | "destructive" | "outline", className: string }> = {
-      active: { variant: "outline", className: "bg-green-100 text-green-800 border-green-200" },
-      inactive: { variant: "secondary", className: "" },
-      pending: { variant: "outline", className: "bg-yellow-100 text-yellow-800 border-yellow-200" },
-      archived: { variant: "destructive", className: "" }
+  // Fetch users and roles from Supabase
+  useEffect(() => {
+    const fetchUsersAndRoles = async () => {
+      setLoading(true);
+      const { data: usersData, error: usersError } = await supabase.from('public_user_profiles').select('*');
+      const { data: rolesData, error: rolesError } = await supabase.from('public_user_roles').select('*');
+      if (usersError) {
+        toast({ title: 'Error', description: usersError.message, variant: 'destructive' });
+      } else if (usersData) {
+        setUsers(usersData);
+      }
+      if (rolesError) {
+        toast({ title: 'Error', description: rolesError.message, variant: 'destructive' });
+      } else if (rolesData) {
+        setRoles(rolesData);
+      }
+      setLoading(false);
     };
-    
-    const config = statusConfig[status];
-    return (
-      <Badge variant={config.variant} className={config.className}>
-        {status.charAt(0).toUpperCase() + status.slice(1)}
-      </Badge>
-    );
+    fetchUsersAndRoles();
+  }, []);
+
+  // CRUD Operations
+  // Fix: Use correct type for createUser (omit id, created_at, updated_at)
+  const createUser = async (profile: Omit<Profile, 'id' | 'created_at' | 'updated_at'>) => {
+    setLoading(true);
+    const { data, error } = await supabase.from('public_user_profiles').insert([profile]).select().single();
+    if (error) {
+      toast({ title: 'Error', description: error.message, variant: 'destructive' });
+    } else if (data) {
+      setUsers((prev) => [...prev, data]);
+      toast({ title: 'User Created', description: `User ${data.first_name} ${data.last_name} created.` });
+    }
+    setLoading(false);
   };
 
-  const getRoleBadge = (role: User['role']) => {
-    const colors: Record<User['role'], string> = {
-      admin: "bg-red-100 text-red-800 border-red-200",
-      manager: "bg-blue-100 text-blue-800 border-blue-200",
-      employee: "bg-green-100 text-green-800 border-green-200",
-      client: "bg-purple-100 text-purple-800 border-purple-200"
-    };
-    
-    return (
-      <Badge variant="outline" className={colors[role]}>
-        {role.charAt(0).toUpperCase() + role.slice(1)}
-      </Badge>
-    );
+  // Fix: Only send changed fields for updateUser
+  const updateUser = async (profile: Partial<Profile> & { id: string }) => {
+    setLoading(true);
+    const { data, error } = await supabase.from('public_user_profiles').update(profile).eq('id', profile.id).select().single();
+    if (error) {
+      toast({ title: 'Error', description: error.message, variant: 'destructive' });
+    } else if (data) {
+      setUsers((prev) => prev.map((u) => (u.id === profile.id ? data : u)));
+      toast({ title: 'User Updated', description: `User ${data.first_name} ${data.last_name} updated.` });
+    }
+    setLoading(false);
   };
 
-  const handleStatusChange = (userId: string, newStatus: User['status']) => {
-    setUsers(prevUsers => 
-      prevUsers.map(user => 
-        user.id === userId ? { ...user, status: newStatus } : user
-      )
-    );
-    
-    const statusLabels = {
-      active: 'activated',
-      inactive: 'deactivated',
-      archived: 'archived',
-      pending: 'set to pending'
-    };
-    
-    toast({
-      title: "User Status Updated",
-      description: `User has been ${statusLabels[newStatus]}.`
+  const deleteUser = async (userId: string) => {
+    setLoading(true);
+    const { error } = await supabase.from('public_user_profiles').delete().eq('id', userId);
+    if (error) {
+      toast({ title: 'Error', description: error.message, variant: 'destructive' });
+    } else {
+      setUsers((prev) => prev.filter((u) => u.id !== userId));
+      toast({ title: 'User Deleted', description: `User deleted.` });
+    }
+    setLoading(false);
+  };
+
+  // Invite user (create profile) with validation
+  const handleInviteUser = async () => {
+    if (!inviteForm.first_name || !inviteForm.last_name || !inviteForm.user_role_slug) {
+      toast({ title: 'Validation Error', description: 'All fields except message are required.', variant: 'destructive' });
+      return;
+    }
+    await createUser({
+      first_name: inviteForm.first_name,
+      last_name: inviteForm.last_name,
+      user_role_slug: inviteForm.user_role_slug,
+      is_active: true,
+      cpq_role: null,
+      department: null,
+      specialization: null
     });
-  };
-
-  const handleInviteUser = () => {
-    const newUser: User = {
-      id: (users.length + 1).toString(),
-      name: 'Pending User',
-      email: inviteForm.email,
-      role: inviteForm.role,
-      status: 'pending',
-      lastActive: 'Never',
-      createdAt: new Date().toISOString().split('T')[0]
-    };
-    
-    setUsers([...users, newUser]);
-    setInviteForm({ email: '', role: 'employee', message: '' });
+    setInviteForm({ first_name: '', last_name: '', user_role_slug: '', message: '' });
     setIsInviteDialogOpen(false);
-    
-    toast({
-      title: "Invitation Sent",
-      description: `Invitation sent to ${inviteForm.email}`
-    });
   };
 
-  const handleEditUser = () => {
+  // Edit user with validation
+  const handleEditUser = async () => {
     if (selectedUser) {
-      setUsers(prevUsers => 
-        prevUsers.map(user => 
-          user.id === selectedUser.id ? selectedUser : user
-        )
-      );
+      if (!selectedUser.first_name || !selectedUser.last_name || !selectedUser.user_role_slug) {
+        toast({ title: 'Validation Error', description: 'All fields are required.', variant: 'destructive' });
+        return;
+      }
+      await updateUser({
+        id: selectedUser.id,
+        first_name: selectedUser.first_name,
+        last_name: selectedUser.last_name,
+        user_role_slug: selectedUser.user_role_slug,
+      });
       setIsEditDialogOpen(false);
       setSelectedUser(null);
-      
-      toast({
-        title: "User Updated",
-        description: "User information has been updated successfully."
-      });
     }
+  };
+
+  // UI helpers
+  const getRoleLabel = (role_slug: string) => {
+    const role = roles.find((r) => r.role_slug === role_slug);
+    return role ? role.description || role.role_slug : role_slug;
   };
 
   return (
     <div className="container mx-auto p-6 space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Settings</h1>
+          <h1 className="text-lg font-bold">Settings</h1>
           <p className="text-muted-foreground">Manage your account settings and user permissions</p>
         </div>
       </div>
-
       <Tabs defaultValue="users" className="w-full">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="users" className="flex items-center gap-2">
@@ -205,7 +183,6 @@ const Settings = () => {
             General
           </TabsTrigger>
         </TabsList>
-
         <TabsContent value="users" className="space-y-6">
           <Card>
             <CardHeader>
@@ -235,29 +212,40 @@ const Settings = () => {
                     </DialogHeader>
                     <div className="space-y-4">
                       <div className="space-y-2">
-                        <Label htmlFor="email">Email Address</Label>
+                        <Label htmlFor="first_name">First Name</Label>
                         <Input
-                          id="email"
-                          type="email"
-                          placeholder="user@example.com"
-                          value={inviteForm.email}
-                          onChange={(e) => setInviteForm({ ...inviteForm, email: e.target.value })}
+                          id="first_name"
+                          value={inviteForm.first_name}
+                          onChange={(e) => setInviteForm({ ...inviteForm, first_name: e.target.value })}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="last_name">Last Name</Label>
+                        <Input
+                          id="last_name"
+                          value={inviteForm.last_name}
+                          onChange={(e) => setInviteForm({ ...inviteForm, last_name: e.target.value })}
                         />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="role">Role</Label>
                         <Select
-                          value={inviteForm.role}
-                          onValueChange={(value: User['role']) => setInviteForm({ ...inviteForm, role: value })}
+                          value={inviteForm.user_role_slug}
+                          onValueChange={(value) => setInviteForm({ ...inviteForm, user_role_slug: value })}
                         >
                           <SelectTrigger>
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="admin">Admin</SelectItem>
-                            <SelectItem value="manager">Manager</SelectItem>
-                            <SelectItem value="employee">Employee</SelectItem>
-                            <SelectItem value="client">Client</SelectItem>
+                            {roles.length === 0 ? (
+                              <SelectItem value="" disabled>No roles found</SelectItem>
+                            ) : (
+                              roles.map((role) => (
+                                <SelectItem key={role.role_slug} value={role.role_slug}>
+                                  {role.description || role.role_slug}
+                                </SelectItem>
+                              ))
+                            )}
                           </SelectContent>
                         </Select>
                       </div>
@@ -274,7 +262,7 @@ const Settings = () => {
                         <Button variant="outline" onClick={() => setIsInviteDialogOpen(false)}>
                           Cancel
                         </Button>
-                        <Button onClick={handleInviteUser}>
+                        <Button onClick={handleInviteUser} disabled={loading || !inviteForm.first_name || !inviteForm.last_name || !inviteForm.user_role_slug}>
                           <Mail className="mr-2 h-4 w-4" />
                           Send Invitation
                         </Button>
@@ -291,7 +279,7 @@ const Settings = () => {
                     <TableHead>User</TableHead>
                     <TableHead>Role</TableHead>
                     <TableHead>Status</TableHead>
-                    <TableHead>Last Active</TableHead>
+                    <TableHead>Created</TableHead>
                     <TableHead>Actions</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -304,14 +292,14 @@ const Settings = () => {
                             <User className="h-4 w-4" />
                           </div>
                           <div>
-                            <div className="font-medium">{user.name}</div>
-                            <div className="text-sm text-muted-foreground">{user.email}</div>
+                            <div className="font-medium">{user.first_name} {user.last_name}</div>
+                            {/* If you need email, join with auth.users or v_authenticated_profiles */}
                           </div>
                         </div>
                       </TableCell>
-                      <TableCell>{getRoleBadge(user.role)}</TableCell>
-                      <TableCell>{getStatusBadge(user.status)}</TableCell>
-                      <TableCell className="text-sm text-muted-foreground">{user.lastActive}</TableCell>
+                      <TableCell>{getRoleLabel(user.user_role_slug || '')}</TableCell>
+                      <TableCell>{user.is_active ? 'Active' : 'Inactive'}</TableCell>
+                      <TableCell className="text-xs text-muted-foreground">{user.created_at ? new Date(user.created_at).toLocaleDateString() : ''}</TableCell>
                       <TableCell>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
@@ -327,20 +315,9 @@ const Settings = () => {
                               <Edit className="mr-2 h-4 w-4" />
                               Edit User
                             </DropdownMenuItem>
-                            {user.status === 'active' ? (
-                              <DropdownMenuItem onClick={() => handleStatusChange(user.id, 'inactive')}>
-                                <UserX className="mr-2 h-4 w-4" />
-                                Deactivate
-                              </DropdownMenuItem>
-                            ) : (
-                              <DropdownMenuItem onClick={() => handleStatusChange(user.id, 'active')}>
-                                <UserCheck className="mr-2 h-4 w-4" />
-                                Activate
-                              </DropdownMenuItem>
-                            )}
-                            <DropdownMenuItem onClick={() => handleStatusChange(user.id, 'archived')}>
+                            <DropdownMenuItem onClick={() => deleteUser(user.id)}>
                               <Archive className="mr-2 h-4 w-4" />
-                              Archive
+                              Delete
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -352,7 +329,6 @@ const Settings = () => {
             </CardContent>
           </Card>
         </TabsContent>
-
         <TabsContent value="security" className="space-y-6">
           <Card>
             <CardHeader>
@@ -368,7 +344,7 @@ const Settings = () => {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label>Two-Factor Authentication</Label>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs text-muted-foreground">
                     Add an extra layer of security to your account
                   </p>
                 </div>
@@ -377,7 +353,7 @@ const Settings = () => {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label>Session Timeout</Label>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs text-muted-foreground">
                     Automatically log out inactive users
                   </p>
                 </div>
@@ -396,7 +372,6 @@ const Settings = () => {
             </CardContent>
           </Card>
         </TabsContent>
-
         <TabsContent value="notifications" className="space-y-6">
           <Card>
             <CardHeader>
@@ -412,7 +387,7 @@ const Settings = () => {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label>Email Notifications</Label>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs text-muted-foreground">
                     Receive email updates about important activities
                   </p>
                 </div>
@@ -421,7 +396,7 @@ const Settings = () => {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label>User Activity Alerts</Label>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs text-muted-foreground">
                     Get notified when users join or leave
                   </p>
                 </div>
@@ -430,7 +405,7 @@ const Settings = () => {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label>System Maintenance</Label>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs text-muted-foreground">
                     Receive notifications about system updates
                   </p>
                 </div>
@@ -439,7 +414,6 @@ const Settings = () => {
             </CardContent>
           </Card>
         </TabsContent>
-
         <TabsContent value="general" className="space-y-6">
           <Card>
             <CardHeader>
@@ -454,7 +428,7 @@ const Settings = () => {
             <CardContent className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="company-name">Company Name</Label>
-                <Input id="company-name" defaultValue="Kounted Accounting Firm" />
+                <Input id="company-name" defaultValue="Kounted Accounting and Management Solutions" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="timezone">Timezone</Label>
@@ -485,7 +459,6 @@ const Settings = () => {
           </Card>
         </TabsContent>
       </Tabs>
-
       {/* Edit User Dialog */}
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
         <DialogContent>
@@ -498,36 +471,36 @@ const Settings = () => {
           {selectedUser && (
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="edit-name">Name</Label>
+                <Label htmlFor="edit-first-name">First Name</Label>
                 <Input
-                  id="edit-name"
-                  value={selectedUser.name}
-                  onChange={(e) => setSelectedUser({ ...selectedUser, name: e.target.value })}
+                  id="edit-first-name"
+                  value={selectedUser.first_name || ''}
+                  onChange={(e) => setSelectedUser({ ...selectedUser, first_name: e.target.value })}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="edit-email">Email</Label>
+                <Label htmlFor="edit-last-name">Last Name</Label>
                 <Input
-                  id="edit-email"
-                  type="email"
-                  value={selectedUser.email}
-                  onChange={(e) => setSelectedUser({ ...selectedUser, email: e.target.value })}
+                  id="edit-last-name"
+                  value={selectedUser.last_name || ''}
+                  onChange={(e) => setSelectedUser({ ...selectedUser, last_name: e.target.value })}
                 />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="edit-role">Role</Label>
                 <Select
-                  value={selectedUser.role}
-                  onValueChange={(value: User['role']) => setSelectedUser({ ...selectedUser, role: value })}
+                  value={selectedUser.user_role_slug || ''}
+                  onValueChange={(value) => setSelectedUser({ ...selectedUser, user_role_slug: value })}
                 >
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="admin">Admin</SelectItem>
-                    <SelectItem value="manager">Manager</SelectItem>
-                    <SelectItem value="employee">Employee</SelectItem>
-                    <SelectItem value="client">Client</SelectItem>
+                    {roles.map((role) => (
+                      <SelectItem key={role.role_slug} value={role.role_slug}>
+                        {role.description || role.role_slug}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>
@@ -535,7 +508,7 @@ const Settings = () => {
                 <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
                   Cancel
                 </Button>
-                <Button onClick={handleEditUser}>
+                <Button onClick={handleEditUser} disabled={loading || !selectedUser?.first_name || !selectedUser?.last_name || !selectedUser?.user_role_slug}>
                   Save Changes
                 </Button>
               </div>

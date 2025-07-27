@@ -133,8 +133,8 @@ export default function ReviewConfirmStep({ data, allData, onChange, pricing, re
               </div>
               
               <div className="flex justify-between items-center pt-4 border-t">
-                <span className="text-lg font-semibold">Total Monthly Fee</span>
-                <span className="text-lg font-semibold">AED {pricing?.monthlyPrice?.toLocaleString() || '0'}</span>
+                <span className="text-xs font-semibold">Total Monthly Fee</span>
+                <span className="text-xs font-semibold">AED {pricing?.monthlyPrice?.toLocaleString() || '0'}</span>
               </div>
             </div>
           </CardContent>

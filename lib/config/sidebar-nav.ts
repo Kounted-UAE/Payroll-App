@@ -11,61 +11,58 @@ import {
       label: "Navigation",
       items: [
         { title: "Dashboard", url: "/backyard", icon: PieChart, status: "active" },
-        { title: "Reports", url: "#", icon: BarChart2, status: "coming-soon" },
+        { title: "Reports", url: "#", icon: BarChart2, status: "locked" },
       ],
       collapsible: false,
     },
     {
       label: "Client Profiles",
       items: [
-        { title: "Corporate Entities", url: "#", icon: Users, status: "coming-soon" },
-        { title: "Private Individuals", url: "#", icon: Users, status: "coming-soon" },      ],
+        { title: "Corporate Entities", url: "#", icon: Users, status: "locked" },
+        { title: "Private Individuals", url: "#", icon: Users, status: "locked" },      ],
     },
     {
       label: "Sales Tools",
       items: [
-        { title: "$KWAY CPQ", url: "/backyard/kway-cpq", icon: RocketIcon, status: "coming-soon" },
-        { title: "$KORP Kiosk", url: "/backyard/korp-kiosk", icon: ShoppingCart, status: "coming-soon" },
+        { title: "$KWAY CPQ", url: "/backyard/kway-cpq", icon: RocketIcon, status: "locked" },
+        { title: "$KORP Kiosk", url: "/backyard/korp-kiosk", icon: ShoppingCart, status: "locked" },
       ],
     },
     {
       label: "Payroll Tools",
       items: [
-        { title: "Payroll Dashboard", url: "/backyard/payroll", icon: BarChart3, status: "active" },
-            { title: "Employers", url: "/backyard/payroll/employers", icon: Building, status: "active" },
-            { title: "Employees", url: "/backyard/payroll/employees", icon: Users, status: "active" },
-            { title: "Salary Structures", url: "/backyard/payroll/salary-structures", icon: DollarSign, status: "active" },
-            { title: "Payruns", url: "/backyard/payroll/payruns", icon: Calendar, status: "active" },
-            { title: "Payslips", url: "/backyard/payroll/payslips", icon: FileText, status: "active" },
-            { title: "Expense Claims", url: "/backyard/payroll/expenses", icon: Receipt, status: "active" },
-            { title: "Reports", url: "/backyard/payroll/reports", icon: BarChart3, status: "active" },
+        { title: "Payroll Overview", url: "/backyard/payroll", icon: BarChart3, status: "active" },
+        { title: "Employers", url: "/backyard/payroll/employers", icon: Building, status: "active" },
+        { title: "Employees", url: "/backyard/payroll/employees", icon: Users, status: "active" },
+        { title: "Salary Structures", url: "/backyard/payroll/salary-structures", icon: DollarSign, status: "active" },
+        { title: "Payroll Payruns", url: "/backyard/payroll/payruns", icon: BarChart3, status: "active" },
+        { title: "Payslips", url: "/backyard/payroll/payslips", icon: FileText, status: "active" },
+        { title: "Expense Claims", url: "/backyard/payroll/expenses", icon: Receipt, status: "active" },
+        { title: "Payroll Reports", url: "/backyard/payroll/reports", icon: BarChart3, status: "active" },
       ],
-    },
-    
-    
+    },    
     {
       label: "Support Tools",
-      items: [{ title: "KYC Compliance", url: "#", icon: Briefcase, status: "coming-soon" }],
+      items: [{ title: "KYC Compliance", url: "#", icon: Briefcase, status: "locked" }],
     },
     {
       label: "Resource Centre",
       items: [
-        { title: "Guides", url: "/backyard/sop-resources", icon: BookOpen, status: "active" },
-        { title: "Manage SOPs", url: "/backyard/sop-resources/manage", icon: FolderOpen, status: "active" },
-        { title: "Compliance Calendar", url: "/backyard/compliance-calendar", icon: CheckSquare, status: "active" },
-        { title: "Templates", url: "#", icon: LayoutTemplate, status: "coming-soon" },
-        { title: "Quick Links", url: "#", icon: LinkIcon, status: "coming-soon" },
+        { title: "Key Dates", url: "/backyard/compliance-calendar", icon: Calendar, status: "active" },
+        { title: "Kounted SOPs", url: "/backyard/sop-resources", icon: BookOpen, status: "active" },         
+        { title: "Templates", url: "#", icon: LayoutTemplate, status: "locked" },
+        { title: "Info Links", url: "#", icon: LinkIcon, status: "locked" },
       ],
     },
     {
       label: "Admin",
       items: [
-        { title: "Component Library", url: "/backyard/admin/component-library", icon: PanelTopInactiveIcon, status: "coming-soon" },        
+        { title: "Component Library", url: "/backyard/admin/component-library", icon: PanelTopInactiveIcon, status: "locked" },        
       ],
     },
     {
       label: "Settings",
-      items: [{ title: "Settings", url: "#", icon: Settings, status: "active" }],
+      items: [{ title: "Settings", url: "/backyard/settings", icon: Settings, status: "active" }],
       collapsible: false,
     },
   ]

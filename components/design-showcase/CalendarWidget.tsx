@@ -66,7 +66,7 @@ export const CalendarWidget = () => {
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
-          <CardTitle className="text-sm font-medium">
+          <CardTitle className="text-xs font-medium">
             {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
           </CardTitle>
           <Button

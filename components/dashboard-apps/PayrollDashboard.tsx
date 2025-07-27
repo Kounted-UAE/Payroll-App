@@ -27,14 +27,14 @@ const PayrollDashboard = () => {
       value: loading ? <Skeleton className="h-8 w-16" /> : stats.totalEmployers.toString(),
       description: "Active clients",
       icon: Building,
-      trend: "+2 this month"
+      trend: "+52 this month"
     },
     {
       title: "Total Employees",
       value: loading ? <Skeleton className="h-8 w-16" /> : stats.totalEmployees.toString(),
       description: "Across all employers",
       icon: Users,
-      trend: "+23 this month"
+      trend: "+1 this month"
     },
     {
       title: "Monthly Payroll",
@@ -58,28 +58,28 @@ const PayrollDashboard = () => {
       description: "Onboard a new client company",
       icon: Building,
       href: "/backyard/payroll/employers/new",
-      color: "bg-blue-500"
+      color: "bg-primary"
     },
     {
       title: "Add Employee",
       description: "Register new employee",
       icon: Users,
       href: "/backyard/payroll/employees/new",
-      color: "bg-green-500"
+      color: "bg-primary"
     },
     {
       title: "Create Payrun",
       description: "Process monthly payroll",
       icon: FileText,
       href: "/backyard/payroll/payruns/new",
-      color: "bg-purple-500"
+      color: "bg-primary"
     },
     {
       title: "Review Claims",
       description: "Approve expense claims",
       icon: Receipt,
       href: "/backyard/payroll/expenses",
-      color: "bg-orange-500"
+      color: "bg-primary"
     }
   ]
 
@@ -115,7 +115,7 @@ const PayrollDashboard = () => {
       <div className="flex-1 space-y-6 p-6">
         <div className="flex items-center space-x-2 text-red-600">
           <AlertCircle className="h-5 w-5" />
-          <h1 className="text-2xl font-bold">Error Loading Dashboard</h1>
+          <h1 className="text-xs font-bold">Error Loading Dashboard</h1>
         </div>
         <Card>
           <CardContent className="p-6">
@@ -136,8 +136,8 @@ const PayrollDashboard = () => {
     <div className="flex-1 space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Payroll under Management</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-md font-bold tracking-tight">Payroll under Management</h1>
+          <p className="text-muted-foreground text-sm">
             Comprehensive payroll management for UAE businesses
           </p>
         </div>
@@ -161,14 +161,14 @@ const PayrollDashboard = () => {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {statsData.map((stat) => (
           <Card key={stat.title}>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 ">
+              <CardTitle className="text-xs font-medium">
                 {stat.title}
               </CardTitle>
               <stat.icon className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stat.value}</div>
+              <div className="text-xs font-bold">{stat.value}</div>
               <p className="text-xs text-muted-foreground">
                 {stat.description}
               </p>
@@ -184,27 +184,27 @@ const PayrollDashboard = () => {
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {/* Quick Actions */}
         <div className="lg:col-span-2">
-          <Card>
+          <Card className="border-none">
             <CardHeader>
-              <CardTitle>Quick Actions</CardTitle>
+              <CardTitle className="text-sm font-medium">Quick Actions</CardTitle>
               <CardDescription>
-                Common payroll tasks and workflows
+                Common payroll tasks and actions
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="text-sm text-zinc-100 grid gap-4 md:grid-cols-2 border-none">
                 {quickActions.map((action) => (
                   action.href ? (
                     <Link key={action.title} href={action.href}>
-                      <Card className="cursor-pointer hover:bg-accent transition-colors">
-                        <CardContent className="p-4">
+                      <Card className="cursor-pointer text-zinc-800 bg-zinc-100 hover:bg-primary hover:text-zinc-100 transition-colors border-none">
+                        <CardContent className="p-2">
                           <div className="flex items-center space-x-3">
                             <div className={`p-2 rounded-md ${action.color}`}>
                               <action.icon className="h-4 w-4 text-white" />
                             </div>
                             <div>
                               <h3 className="font-semibold">{action.title}</h3>
-                              <p className="text-sm text-muted-foreground">
+                              <p className="text-xs ">
                                 {action.description}
                               </p>
                             </div>
@@ -213,7 +213,7 @@ const PayrollDashboard = () => {
                       </Card>
                     </Link>
                   ) : (
-                    <Card key={action.title} className="opacity-50 cursor-not-allowed">
+                    <Card key={action.title} className="opacity-50 cursor-not-allowed border-none">
                       <CardContent className="p-4">
                         <div className="flex items-center space-x-3">
                           <div className={`p-2 rounded-md ${action.color}`}>
@@ -221,7 +221,7 @@ const PayrollDashboard = () => {
                           </div>
                           <div>
                             <h3 className="font-semibold">{action.title}</h3>
-                            <p className="text-sm text-muted-foreground">
+                            <p className="text-xs text-muted-foreground">
                               {action.description}
                             </p>
                           </div>
@@ -236,7 +236,7 @@ const PayrollDashboard = () => {
         </div>
 
         {/* Recent Activity */}
-        <Card>
+        <Card className="border-none">
           <CardHeader>
             <CardTitle>Recent Activity</CardTitle>
             <CardDescription>
@@ -248,18 +248,18 @@ const PayrollDashboard = () => {
               {recentActivity.map((activity, index) => (
                 <div key={index} className="flex flex-col space-y-1">
                   <div className="flex items-center justify-between">
-                    <p className="text-sm font-medium">{activity.action}</p>
+                    <p className="text-xs font-medium">{activity.action}</p>
                     <p className="text-xs text-muted-foreground">{activity.time}</p>
                   </div>
-                  <p className="text-sm text-muted-foreground">{activity.company}</p>
+                  <p className="text-xs text-muted-foreground">{activity.company}</p>
                   {activity.amount && (
-                    <p className="text-sm font-semibold text-green-600">{activity.amount}</p>
+                    <p className="text-xs font-semibold text-green-600">{activity.amount}</p>
                   )}
                   {activity.employee && (
-                    <p className="text-sm text-blue-600">{activity.employee}</p>
+                    <p className="text-xs text-blue-600">{activity.employee}</p>
                   )}
                   {activity.details && (
-                    <p className="text-sm text-orange-600">{activity.details}</p>
+                    <p className="text-xs text-orange-600">{activity.details}</p>
                   )}
                   {index < recentActivity.length - 1 && <div className="border-b" />}
                 </div>

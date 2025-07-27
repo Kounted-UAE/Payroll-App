@@ -254,7 +254,7 @@ export default function ClientManagement() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Client Management</h1>
+            <h1 className="text-lg font-bold text-foreground">Client Management</h1>
             <p className="text-muted-foreground">Manage clients and their onboarding progress</p>
           </div>
           
@@ -369,8 +369,8 @@ export default function ClientManagement() {
               <div className="flex items-center gap-2">
                 <Users className="h-4 w-4 text-primary" />
                 <div>
-                  <p className="text-sm font-medium">Total Clients</p>
-                  <p className="text-2xl font-bold">{clients.length}</p>
+                  <p className="text-xs font-medium">Total Clients</p>
+                  <p className="text-xs font-bold">{clients.length}</p>
                 </div>
               </div>
             </CardContent>
@@ -381,8 +381,8 @@ export default function ClientManagement() {
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-primary" />
                 <div>
-                  <p className="text-sm font-medium">Onboarded</p>
-                  <p className="text-2xl font-bold">
+                  <p className="text-xs font-medium">Onboarded</p>
+                  <p className="text-xs font-bold">
                     {onboardingProfiles.filter(p => p.status === 'complete').length}
                   </p>
                 </div>
@@ -420,7 +420,7 @@ export default function ClientManagement() {
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
                             <Building2 className="h-5 w-5 text-muted-foreground" />
-                            <h3 className="font-semibold text-lg">{client.name}</h3>
+                            <h3 className="font-semibold text-xs">{client.name}</h3>
                             <Badge variant={client.status === 'active' ? 'default' : 'secondary'}>
                               {client.status}
                             </Badge>
@@ -430,7 +430,7 @@ export default function ClientManagement() {
                             </Badge>
                           </div>
                           
-                          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm text-muted-foreground">
+                          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs text-muted-foreground">
                             <div className="flex items-center gap-2">
                               <Users className="h-4 w-4" />
                               {client.contact_person}
