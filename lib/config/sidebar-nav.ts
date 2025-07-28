@@ -57,7 +57,7 @@ import {
     {
       label: "Admin",
       items: [
-        { title: "Component Library", url: "/backyard/admin/component-library", icon: PanelTopInactiveIcon, status: "locked" },        
+        { title: "Historic Payruns", url: "/backyard/admin/temp-payrun-history", icon: PanelTopInactiveIcon, status: "active" },        
       ],
     },
     {
