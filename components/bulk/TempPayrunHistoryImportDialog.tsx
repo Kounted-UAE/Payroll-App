@@ -1,3 +1,5 @@
+// components/bulk/TempPayrunHistoryImportDialog.tsx
+
 'use client'
 
 import React, { useRef, useState, useEffect } from 'react'
@@ -8,20 +10,21 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Upload as UploadIcon } from 'lucide-react'
-import { z } from 'zod'
 import { createClient } from '@supabase/supabase-js'
 import { tempPayrunSchema } from '@/lib/validators/tempPayrunSchema'
 import { checkForTempPayrunDuplicates } from '@/lib/utils/tempPayrunCheckForDuplicates'
+import { flattenPayrunMatrix } from '@/lib/utils/flattenPayrunMatrix'
+
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 const supabase = createClient(supabaseUrl, supabaseKey)
 
+
 type Props = {
   open: boolean
   onOpenChange: (open: boolean) => void
 }
-
 
 export default function TempPayrunHistoryImportDialog({ open, onOpenChange }: Props) {
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -43,6 +46,9 @@ export default function TempPayrunHistoryImportDialog({ open, onOpenChange }: Pr
     if (open) resetState()
   }, [open])
 
+  
+
+
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
@@ -54,18 +60,19 @@ export default function TempPayrunHistoryImportDialog({ open, onOpenChange }: Pr
       skipEmptyLines: true,
       complete: async (results) => {
         const raw = results.data as any[]
-        setParsedRows(raw)
+        const flattened = flattenPayrunMatrix(raw, file.name)
+        setParsedRows(flattened)
 
         const validated: any[] = []
         const errors: { row: number; error: string }[] = []
 
-        raw.forEach((row, idx) => {
+        flattened.forEach((row, idx) => {
           const parsed = tempPayrunSchema.safeParse(row)
           if (parsed.success) {
-            validated.push({ ...parsed.data, __index: idx + 2 })
+            validated.push({ ...parsed.data, __index: row.row_number || idx + 2 })
           } else {
             errors.push({
-              row: idx + 2,
+              row: row.row_number || idx + 2,
               error: parsed.error.errors.map(e => e.message).join('; ')
             })
           }
@@ -193,37 +200,34 @@ export default function TempPayrunHistoryImportDialog({ open, onOpenChange }: Pr
                 <Badge variant="default">All rows valid</Badge>
               )}
 
-{errorRows.length > 0 && (
-  <div className="border rounded-lg p-3">
-    <div className="text-sm font-medium mb-2 text-destructive">
-      Validation Errors:
-    </div>
-    <div className="max-h-32 overflow-y-auto text-xs text-destructive">
-      <ul className="space-y-1">
-        {errorRows.map((err, i) => (
-          <li key={i} className="flex">
-            <span className="font-mono mr-2">Row {err.row}:</span>
-            <span>{err.error}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-    <div className="mt-2">
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={() => {
-          const text = errorRows.map(e => `Row ${e.row}: ${e.error}`).join('\n')
-          navigator.clipboard.writeText(text)
-          toast({ title: 'Copied', description: 'Error messages copied to clipboard.' })
-        }}
-      >
-        Copy Errors
-      </Button>
-    </div>
-  </div>
-)}
-
+              {errorRows.length > 0 && (
+                <div className="border rounded-lg p-3">
+                  <div className="text-sm font-medium mb-2 text-destructive">Validation Errors:</div>
+                  <div className="max-h-32 overflow-y-auto text-xs text-destructive">
+                    <ul className="space-y-1">
+                      {errorRows.map((err, i) => (
+                        <li key={i} className="flex">
+                          <span className="font-mono mr-2">Row {err.row}:</span>
+                          <span>{err.error}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="mt-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        const text = errorRows.map(e => `Row ${e.row}: ${e.error}`).join('\n')
+                        navigator.clipboard.writeText(text)
+                        toast({ title: 'Copied', description: 'Error messages copied to clipboard.' })
+                      }}
+                    >
+                      Copy Errors
+                    </Button>
+                  </div>
+                </div>
+              )}
 
               <div className="flex gap-3 pt-4 border-t">
                 <Button variant="outline" onClick={resetState} disabled={importing}>

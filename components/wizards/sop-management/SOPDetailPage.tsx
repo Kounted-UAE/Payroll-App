@@ -1,7 +1,7 @@
 
 'use client'
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -21,122 +21,63 @@ import {
   ClipboardCopy
 } from 'lucide-react';
 import { toast } from 'sonner';
-
-const sopDetailData = {
-  'corporate-tax-registration': {
-    title: 'Corporate Tax Registration',
-    category: 'taxation',
-    status: 'active',
-    lastUpdated: '3 days ago',
-    whoAndWhen: [
-      'All companies (mainland and free zone) are required to register for Corporate Tax with the FTA, even if they expect to be taxed at 0% (free zone) or have no profit, unless explicitly exempt.',
-      'The Ministry of Finance set staggered deadlines in 2024 for existing companies\' registration, depending on license issuance month.',
-      'For example, a company licensed Jan-Feb had to register by May 31, 2024; those licensed later by subsequent monthly deadlines up to Dec 31, 2024.',
-      'New companies (incorporated from 2024 onward) must register within 30 days of receiving their trade license or before earning any taxable income.'
-    ],
-    dataDocumentsRequired: [
-      {
-        category: 'Trade License Information',
-        items: [
-          'License number, license issue date, issuing authority (Emirate or free zone)'
-        ]
-      },
-      {
-        category: 'Company Details',
-        items: [
-          'Legal name in English (and Arabic if required)',
-          'Legal form (LLC, PJSC, branch, etc.)',
-          'Date of incorporation',
-          'Emirates where it operates'
-        ]
-      },
-      {
-        category: 'Authorized Signatory',
-        items: [
-          'Details of the person submitting (name, Emirates ID/passport, designation)',
-          'Proof of authorization if needed (board resolution or POA)',
-          'Note: Portal may not explicitly ask for upload unless person is not on license'
-        ]
-      },
-      {
-        category: 'Contact Details',
-        items: [
-          'Company address, phone, email'
-        ]
-      },
-      {
-        category: 'Financial Information',
-        items: [
-          'Financial year adopted by the company for tax purposes (e.g., Jan–Dec, or April–Mar, etc.)',
-          'Provide the year-end date'
-        ]
-      },
-      {
-        category: 'Business Activities',
-        items: [
-          'General description or sector selection for the company\'s activities'
-        ]
-      },
-      {
-        category: 'Ownership',
-        items: [
-          'Additional info may be required on parent company if part of multinational group',
-          'CT system may eventually handle group tax issues',
-          'Currently, registration is straightforward with basic info'
-        ]
-      }
-    ],
-    processWorkflow: [
-      {
-        step: 1,
-        title: 'Access EmaraTax',
-        description: 'The same FTA e-Services platform is used. If the company already has an account (e.g., for VAT), the CT registration can be done under the same login. Otherwise, create a new account.',
-        details: []
-      },
-      {
-        step: 2,
-        title: 'Fill Corporate Tax Registration Form',
-        description: 'After logging in, select "Register for Corporate Tax". Input all requested details. Key fields:',
-        details: [
-          'Identification: Are you an existing tax registrant (for VAT)? If yes, some info pre-fills. If no, fill fresh.',
-          'Legal Info: Enter license number and attach a copy of trade license. Enter the regulatory authority and license expiry date.',
-          'Financial Period: Choose the start and end month of the financial year. Commonly Jan 1 – Dec 31, but match company\'s actual fiscal year.',
-          'Contact Details: Company address (as per license or principal place of business), best contact number and email.',
-          'Authorized Signatory: Provide personal details. Upload ID/passport if required. If person is not licensee/manager, upload Letter of Authority.',
-          'Declaration: Confirm accuracy and submit.'
-        ]
-      },
-      {
-        step: 3,
-        title: 'Approval',
-        description: 'The FTA processes CT registrations. Once approved, the company is assigned a Tax Registration Number (TRN) for Corporate Tax.',
-        details: [
-          'TRN is distinct from VAT TRN',
-          'Download the CT Registration Certificate showing TRN and effective date'
-        ]
-      }
-    ],
-    templates: [
-      {
-        name: 'CT Registration Info Sheet',
-        description: 'Form to collect needed data from the client',
-        fields: ['Trade license details', 'All owners\' names', 'Financial year', 'Group information', 'Authorized signatory identification']
-      },
-      {
-        name: 'Board Resolution for Tax Registration',
-        description: 'Resolution authorizing company to register for CT',
-        fields: ['Company name', 'Resolution clauses', 'Authorized signatory appointment', 'Directors\' signatures']
-      }
-    ],
-    relatedSOPs: ['vat-registration', 'trade-license-renewal', 'ubo-registration']
-  }
-};
+import { useSOPs } from '@/hooks/useSOPs';
 
 export default function SOPDetailPage() {
   const { category, sopId } = useParams<{ category: string; sopId: string }>();
   const navigate = useRouter();
+  const { getSOPById, getCategoryById, incrementViewCount, loading, error } = useSOPs();
   
-  const sopData = sopDetailData[sopId as keyof typeof sopDetailData];
+  const sopData = getSOPById(sopId as string);
+  const categoryInfo = getCategoryById(category as string);
+
+  useEffect(() => {
+    if (sopId && !loading) {
+      incrementViewCount(sopId);
+    }
+  }, [sopId, loading, incrementViewCount]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background p-6">
+        <div className="max-w-6xl mx-auto space-y-6">
+          <div className="animate-pulse">
+            <div className="h-8 bg-muted rounded w-1/3 mb-4"></div>
+            <div className="h-4 bg-muted rounded w-1/2 mb-6"></div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="h-20 bg-muted rounded"></div>
+              ))}
+            </div>
+            <div className="space-y-6">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="h-48 bg-muted rounded"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-background p-6">
+        <div className="max-w-4xl mx-auto">
+          <Card>
+            <CardContent className="p-8 text-center">
+              <AlertTriangle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+              <h2 className="text-lg font-semibold mb-2">Error Loading SOP</h2>
+              <p className="text-muted-foreground mb-4">{error}</p>
+              <Button onClick={() => window.location.reload()}>
+                Retry
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
 
   if (!sopData) {
     return (
@@ -145,11 +86,11 @@ export default function SOPDetailPage() {
           <Card>
             <CardContent className="p-8 text-center">
               <AlertTriangle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-              <h2 className="text-xs font-semibold mb-2">SOP Not Found</h2>
+              <h2 className="text-lg font-semibold mb-2">SOP Not Found</h2>
               <p className="text-muted-foreground mb-4">
                 The requested Standard Operating Procedure could not be found.
               </p>
-              <Button onClick={() => navigate.push('/sop-resources')}>
+              <Button onClick={() => navigate.push('/backyard/sop-resources')}>
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to SOP Center
               </Button>
@@ -165,15 +106,15 @@ export default function SOPDetailPage() {
 ${sopData.title}
 
 Who & When:
-${sopData.whoAndWhen.map(item => `• ${item}`).join('\n')}
+${sopData.who_and_when.map(item => `• ${item}`).join('\n')}
 
 Data/Documents Required:
-${sopData.dataDocumentsRequired.map(section => `
+${sopData.data_documents_required.map(section => `
 ${section.category}:
 ${section.items.map(item => `• ${item}`).join('\n')}`).join('\n')}
 
 Process Workflow:
-${sopData.processWorkflow.map(step => `
+${sopData.process_workflow.map(step => `
 ${step.step}. ${step.title}
 ${step.description}
 ${step.details.map(detail => `• ${detail}`).join('\n')}`).join('\n')}
@@ -190,14 +131,26 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
     }
   };
 
+  const getTimeAgo = (date: Date): string => {
+    const now = new Date();
+    const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+    
+    if (diffInSeconds < 60) return 'just now';
+    if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`;
+    if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
+    if (diffInSeconds < 2592000) return `${Math.floor(diffInSeconds / 86400)} days ago`;
+    if (diffInSeconds < 31536000) return `${Math.floor(diffInSeconds / 2592000)} months ago`;
+    return `${Math.floor(diffInSeconds / 31536000)} years ago`;
+  };
+
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
-          <Button variant="outline" onClick={() => navigate.push(`/sop-resources/${category}`)}>
+          <Button variant="outline" onClick={() => navigate.push(`/backyard/sop-resources/${category}`)}>
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to {category?.replace('-', ' ')}
+            Back to {categoryInfo?.name || category?.replace('-', ' ')}
           </Button>
           <div className="flex-1">
             <h1 className="text-lg font-bold text-foreground">{sopData.title}</h1>
@@ -227,7 +180,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
                 <Calendar className="h-4 w-4 text-primary" />
                 <span className="text-xs font-medium">Last Updated</span>
               </div>
-              <p className="text-xs text-muted-foreground">{sopData.lastUpdated}</p>
+              <p className="text-xs text-muted-foreground">{getTimeAgo(new Date(sopData.updated_at))}</p>
             </CardContent>
           </Card>
           
@@ -237,7 +190,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
                 <FileText className="h-4 w-4 text-primary" />
                 <span className="text-xs font-medium">Category</span>
               </div>
-              <Badge>{category?.replace('-', ' ')}</Badge>
+              <Badge>{categoryInfo?.name || category?.replace('-', ' ')}</Badge>
             </CardContent>
           </Card>
           
@@ -264,7 +217,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
           </CardHeader>
           <CardContent>
             <ul className="space-y-2">
-              {sopData.whoAndWhen.map((item, index) => (
+              {sopData.who_and_when.map((item, index) => (
                 <li key={index} className="text-muted-foreground flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
                   <span>{item}</span>
@@ -283,7 +236,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
-            {sopData.dataDocumentsRequired.map((section, index) => (
+            {sopData.data_documents_required.map((section, index) => (
               <div key={index}>
                 <h4 className="font-semibold mb-2 text-primary">{section.category}</h4>
                 <ul className="space-y-1">
@@ -294,7 +247,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
                     </li>
                   ))}
                 </ul>
-                {index < sopData.dataDocumentsRequired.length - 1 && <Separator className="mt-4" />}
+                {index < sopData.data_documents_required.length - 1 && <Separator className="mt-4" />}
               </div>
             ))}
           </CardContent>
@@ -309,14 +262,14 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
-            {sopData.processWorkflow.map((step, index) => (
+            {sopData.process_workflow.map((step, index) => (
               <div key={index} className="space-y-3">
                 <div className="flex items-start gap-3">
                   <div className="flex items-center justify-center w-8 h-8 bg-primary text-primary-foreground rounded-full text-xs font-medium">
                     {step.step}
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-semibold text-xs">{step.title}</h4>
+                    <h4 className="font-semibold text-sm">{step.title}</h4>
                     <p className="text-muted-foreground mt-1">{step.description}</p>
                   </div>
                 </div>
@@ -334,7 +287,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
                   </div>
                 )}
                 
-                {index < sopData.processWorkflow.length - 1 && <Separator className="mt-6" />}
+                {index < sopData.process_workflow.length - 1 && <Separator className="mt-6" />}
               </div>
             ))}
           </CardContent>
@@ -382,7 +335,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
         </Card>
 
         {/* Related SOPs */}
-        {sopData.relatedSOPs.length > 0 && (
+        {sopData.related_sops.length > 0 && (
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -392,14 +345,14 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
-                {sopData.relatedSOPs.map((sopId, index) => (
+                {sopData.related_sops.map((relatedSopId, index) => (
                   <Button
                     key={index}
                     variant="outline"
                     size="sm"
-                    onClick={() => navigate.push(`/sop-resources/${category}/${sopId}`)}
+                    onClick={() => navigate.push(`/backyard/sop-resources/${category}/${relatedSopId}`)}
                   >
-                    {sopId.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                    {relatedSopId.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                     <ExternalLink className="ml-2 h-3 w-3" />
                   </Button>
                 ))}

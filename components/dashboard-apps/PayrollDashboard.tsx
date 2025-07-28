@@ -3,7 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
-import { usePayrollStats } from "@/hooks/usePayroll"
+import { usePayrollDashboardStats } from "@/hooks/usePayrollDashboardStats"
 import { 
   Users, 
   Building, 
@@ -14,41 +14,42 @@ import {
   Plus,
   Calendar,
   TrendingUp,
+  TrendingDown,
   AlertCircle
 } from "lucide-react"
 import Link from "next/link"
 
 const PayrollDashboard = () => {
-  const { stats, loading, error } = usePayrollStats()
+  const { stats, loading, error } = usePayrollDashboardStats()
 
   const statsData = [
     {
       title: "Total Employers",
-      value: loading ? <Skeleton className="h-8 w-16" /> : stats.totalEmployers.toString(),
+      value: loading ? <Skeleton className="h-8 w-16" /> : stats.totalEmployers.count.toString(),
       description: "Active clients",
       icon: Building,
-      trend: "+52 this month"
+      trend: stats.totalEmployers.trend
     },
     {
       title: "Total Employees",
-      value: loading ? <Skeleton className="h-8 w-16" /> : stats.totalEmployees.toString(),
+      value: loading ? <Skeleton className="h-8 w-16" /> : stats.totalEmployees.count.toString(),
       description: "Across all employers",
       icon: Users,
-      trend: "+1 this month"
+      trend: stats.totalEmployees.trend
     },
     {
       title: "Monthly Payroll",
-      value: loading ? <Skeleton className="h-8 w-20" /> : `AED ${(stats.monthlyPayroll / 1000).toFixed(1)}K`,
+      value: loading ? <Skeleton className="h-8 w-20" /> : `AED ${(stats.monthlyPayroll.amount / 1000).toFixed(1)}K`,
       description: "Current month total",
       icon: DollarSign,
-      trend: "+8.2% vs last month"
+      trend: stats.monthlyPayroll.trend
     },
     {
       title: "Pending Payruns",
-      value: loading ? <Skeleton className="h-8 w-8" /> : stats.activePayruns.toString(),
+      value: loading ? <Skeleton className="h-8 w-8" /> : stats.activePayruns.count.toString(),
       description: "Awaiting processing",
       icon: Calendar,
-      trend: "Due this week"
+      trend: stats.activePayruns.trend
     }
   ]
 
@@ -173,8 +174,20 @@ const PayrollDashboard = () => {
                 {stat.description}
               </p>
               <div className="flex items-center mt-2">
-                <TrendingUp className="h-3 w-3 text-green-500 mr-1" />
-                <span className="text-xs text-green-500">{stat.trend}</span>
+                {loading ? (
+                  <Skeleton className="h-3 w-20" />
+                ) : (
+                  <>
+                    {stat.trend.isPositive ? (
+                      <TrendingUp className="h-3 w-3 text-green-500 mr-1" />
+                    ) : (
+                      <TrendingDown className="h-3 w-3 text-red-500 mr-1" />
+                    )}
+                    <span className={`text-xs ${stat.trend.isPositive ? 'text-green-500' : 'text-red-500'}`}>
+                      {stat.trend.description}
+                    </span>
+                  </>
+                )}
               </div>
             </CardContent>
           </Card>

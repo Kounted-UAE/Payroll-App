@@ -20,55 +20,11 @@ import {
   Filter
 } from 'lucide-react';
 import { SOPWizard } from './SOPWizard';
-
-const managementSOPs = [
-  {
-    id: 'corporate-tax-registration',
-    title: 'Corporate Tax Registration',
-    category: 'taxation',
-    status: 'active',
-    createdAt: '2024-01-15',
-    lastUpdated: '3 days ago',
-    author: 'Admin User',
-    viewCount: 145,
-    templateCount: 3
-  },
-  {
-    id: 'trade-license-renewal',
-    title: 'Trade License Renewal',
-    category: 'company-registrations',
-    status: 'active',
-    createdAt: '2024-02-01',
-    lastUpdated: '2 days ago',
-    author: 'Admin User',
-    viewCount: 89,
-    templateCount: 2
-  },
-  {
-    id: 'employee-visa-process',
-    title: 'Employee Visa Processing',
-    category: 'hr-visas',
-    status: 'suspended',
-    createdAt: '2024-01-20',
-    lastUpdated: '1 week ago',
-    author: 'HR Manager',
-    viewCount: 67,
-    templateCount: 4
-  }
-];
-
-const categories = [
-  'hr-visas',
-  'accounting',
-  'payroll',
-  'taxation',
-  'corporate-support',
-  'company-formations',
-  'company-registrations'
-];
+import { useSOPs } from '@/hooks/useSOPs';
 
 export default function SOPManagementPage() {
   const navigate = useRouter();
+  const { sops, categories, searchSOPs, loading, error } = useSOPs();
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [categoryFilter, setCategoryFilter] = useState('all');
@@ -77,7 +33,7 @@ export default function SOPManagementPage() {
 
   const handleStatusChange = (sopId: string, newStatus: string) => {
     console.log(`Changing SOP ${sopId} status to ${newStatus}`);
-    // Implement status change logic
+    // TODO: Implement status change logic with database update
   };
 
   const handleEdit = (sopId: string) => {
@@ -86,7 +42,7 @@ export default function SOPManagementPage() {
   };
 
   const handleView = (sopId: string, category: string) => {
-    navigate.push(`/sop-resources/${category}/${sopId}`);
+    navigate.push(`/backyard/sop-resources/${category}/${sopId}`);
   };
 
   const getStatusColor = (status: string) => {
@@ -123,12 +79,66 @@ export default function SOPManagementPage() {
     }
   };
 
+  const filteredSOPs = searchSOPs({
+    category: categoryFilter === 'all' ? undefined : categoryFilter,
+    status: statusFilter === 'all' ? undefined : statusFilter,
+    search: searchQuery
+  });
+
+  const getTimeAgo = (date: Date): string => {
+    const now = new Date();
+    const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+    
+    if (diffInSeconds < 60) return 'just now';
+    if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`;
+    if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
+    if (diffInSeconds < 2592000) return `${Math.floor(diffInSeconds / 86400)} days ago`;
+    if (diffInSeconds < 31536000) return `${Math.floor(diffInSeconds / 2592000)} months ago`;
+    return `${Math.floor(diffInSeconds / 31536000)} years ago`;
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background p-6">
+        <div className="max-w-7xl mx-auto space-y-6">
+          <div className="animate-pulse">
+            <div className="h-8 bg-muted rounded w-1/3 mb-4"></div>
+            <div className="h-4 bg-muted rounded w-1/2 mb-6"></div>
+            <div className="space-y-4">
+              {[...Array(5)].map((_, i) => (
+                <div key={i} className="h-20 bg-muted rounded"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-background p-6">
+        <div className="max-w-7xl mx-auto">
+          <Card>
+            <CardContent className="p-8 text-center">
+              <h2 className="text-lg font-semibold mb-2">Error Loading SOPs</h2>
+              <p className="text-muted-foreground mb-4">{error}</p>
+              <Button onClick={() => window.location.reload()}>
+                Retry
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4 mb-6">
-          <Button variant="outline" onClick={() => navigate.push('/sop-resources')}>
+          <Button variant="outline" onClick={() => navigate.push('/backyard/sop-resources')}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to SOP Center
           </Button>
@@ -170,64 +180,86 @@ export default function SOPManagementPage() {
         {/* SOPs Table */}
         <Card>
           <CardHeader>
-            <CardTitle>All SOPs ({managementSOPs.length})</CardTitle>
+            <CardTitle>All SOPs ({filteredSOPs.length})</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {managementSOPs.map((sop) => (
-                <div key={sop.id} className="border rounded-lg p-4 hover:bg-muted/50 transition-colors">
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="font-semibold">{sop.title}</h3>
-                        <Badge variant={getStatusColor(sop.status)}>
-                          {sop.status}
-                        </Badge>
-                        <Badge variant="outline" className="text-xs">
-                          {sop.category.replace('-', ' ')}
-                        </Badge>
+              {filteredSOPs.map((sop) => {
+                const category = categories.find(c => c.id === sop.category);
+                return (
+                  <div key={sop.id} className="border rounded-lg p-4 hover:bg-muted/50 transition-colors">
+                    <div className="flex items-center justify-between">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <h3 className="font-semibold">{sop.title}</h3>
+                          <Badge variant={getStatusColor(sop.status)}>
+                            {sop.status}
+                          </Badge>
+                          <Badge variant="outline" className="text-xs">
+                            {category?.name || sop.category.replace('-', ' ')}
+                          </Badge>
+                        </div>
+                        <div className="flex items-center gap-6 text-xs text-muted-foreground">
+                          <span>Created: {getTimeAgo(new Date(sop.created_at))}</span>
+                          <span>Updated: {getTimeAgo(new Date(sop.updated_at))}</span>
+                          <span>{sop.view_count} views</span>
+                          <span>{sop.template_count} templates</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-2">
+                          {sop.description}
+                        </p>
                       </div>
-                      <div className="flex items-center gap-6 text-xs text-muted-foreground">
-                        <span>Created: {sop.createdAt}</span>
-                        <span>Updated: {sop.lastUpdated}</span>
-                        <span>By: {sop.author}</span>
-                        <span>{sop.viewCount} views</span>
-                        <span>{sop.templateCount} templates</span>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center gap-2">
-                      <Button size="sm" variant="outline" onClick={() => handleView(sop.id, sop.category)}>
-                        <Eye className="h-4 w-4" />
-                      </Button>
-                      <Button size="sm" variant="outline" onClick={() => handleEdit(sop.id)}>
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                      <Button size="sm" variant="outline">
-                        <Copy className="h-4 w-4" />
-                      </Button>
                       
-                      {/* Status Actions */}
-                      {getStatusActions(sop.status).map((action, index) => (
-                        <Button 
-                          key={index}
-                          size="sm" 
-                          variant="outline"
-                          onClick={() => handleStatusChange(sop.id, action.action)}
-                          title={action.label}
-                        >
-                          <action.icon className="h-4 w-4" />
+                      <div className="flex items-center gap-2">
+                        <Button size="sm" variant="outline" onClick={() => handleView(sop.id, sop.category)}>
+                          <Eye className="h-4 w-4" />
                         </Button>
-                      ))}
-                      
-                      <Button size="sm" variant="outline">
-                        <MoreHorizontal className="h-4 w-4" />
-                      </Button>
+                        <Button size="sm" variant="outline" onClick={() => handleEdit(sop.id)}>
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button size="sm" variant="outline">
+                          <Copy className="h-4 w-4" />
+                        </Button>
+                        
+                        {/* Status Actions */}
+                        {getStatusActions(sop.status).map((action, index) => (
+                          <Button 
+                            key={index}
+                            size="sm" 
+                            variant="outline"
+                            onClick={() => handleStatusChange(sop.id, action.action)}
+                            title={action.label}
+                          >
+                            <action.icon className="h-4 w-4" />
+                          </Button>
+                        ))}
+                        
+                        <Button size="sm" variant="outline">
+                          <MoreHorizontal className="h-4 w-4" />
+                        </Button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
+
+            {/* Empty State */}
+            {filteredSOPs.length === 0 && (
+              <div className="text-center py-12">
+                <h3 className="text-lg font-semibold mb-2">No SOPs Found</h3>
+                <p className="text-muted-foreground mb-4">
+                  {searchQuery || statusFilter !== 'all' || categoryFilter !== 'all'
+                    ? 'No SOPs match your current filters.'
+                    : 'No SOPs have been created yet.'
+                  }
+                </p>
+                <Button onClick={() => setShowWizard(true)}>
+                  <Plus className="mr-2 h-4 w-4" />
+                  Create First SOP
+                </Button>
+              </div>
+            )}
           </CardContent>
         </Card>
 
@@ -240,7 +272,7 @@ export default function SOPManagementPage() {
               setEditingSOP(null);
             }}
             editingSOP={editingSOP}
-            categories={categories}
+            categories={categories.map(c => c.id)}
           />
         )}
       </div>

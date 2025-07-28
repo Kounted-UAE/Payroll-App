@@ -21,110 +21,70 @@ import {
   Star
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useSOPs } from '@/hooks/useSOPs';
 
-const categories = [
-  {
-    id: 'hr-visas',
-    name: 'HR & Visas',
-    description: 'Employee relations, visa processing, work permits',
-    icon: Users,
-    color: 'bg-blue-500',
-    sopCount: 24
-  },
-  {
-    id: 'accounting',
-    name: 'Accounting',
-    description: 'Financial reporting, bookkeeping, auditing',
-    icon: Calculator,
-    color: 'bg-green-500',
-    sopCount: 18
-  },
-  {
-    id: 'payroll',
-    name: 'Payroll',
-    description: 'Salary processing, WPS, EOSB calculations',
-    icon: Receipt,
-    color: 'bg-purple-500',
-    sopCount: 15
-  },
-  {
-    id: 'taxation',
-    name: 'Taxation',
-    description: 'VAT, Corporate Tax, compliance reporting',
-    icon: FileText,
-    color: 'bg-red-500',
-    sopCount: 32
-  },
-  {
-    id: 'corporate-support',
-    name: 'Corporate Support',
-    description: 'Business setup, legal compliance, governance',
-    icon: Briefcase,
-    color: 'bg-orange-500',
-    sopCount: 21
-  },
-  {
-    id: 'company-formations',
-    name: 'Company Formations',
-    description: 'New company setup, licensing, registrations',
-    icon: Building2,
-    color: 'bg-cyan-500',
-    sopCount: 28
-  },
-  {
-    id: 'company-registrations',
-    name: 'Company Registrations',
-    description: 'Trade licenses, permits, regulatory filings',
-    icon: FileCheck,
-    color: 'bg-teal-500',
-    sopCount: 19
-  }
-];
-
-const recentSOPs = [
-  {
-    id: 'trade-license-renewal',
-    title: 'Trade License Renewal',
-    category: 'company-registrations',
-    lastUpdated: '2 days ago',
-    status: 'active'
-  },
-  {
-    id: 'ubo-registration',
-    title: 'Ultimate Beneficial Owner Registration',
-    category: 'taxation',
-    lastUpdated: '1 week ago',
-    status: 'active'
-  },
-  {
-    id: 'corporate-tax-registration',
-    title: 'Corporate Tax Registration',
-    category: 'taxation',
-    lastUpdated: '3 days ago',
-    status: 'active'
-  },
-  {
-    id: 'employee-visa-renewal',
-    title: 'Employee Visa Renewal Process',
-    category: 'hr-visas',
-    lastUpdated: '5 days ago',
-    status: 'active'
-  }
-];
+const categoryIcons = {
+  'hr-visas': Users,
+  'accounting': Calculator,
+  'payroll': Receipt,
+  'taxation': FileText,
+  'corporate-support': Briefcase,
+  'company-formations': Building2,
+  'company-registrations': FileCheck,
+};
 
 export default function SOPResourceCenter() {
   const navigate = useRouter();
+  const { categories, stats, getRecentSOPs, loading, error } = useSOPs();
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleCategoryClick = (categoryId: string) => {
-    navigate.push(`/sop-resources/${categoryId}`);
+    navigate.push(`/backyard/sop-resources/${categoryId}`);
   };
 
   const handleSOPClick = (categoryId: string, sopId: string) => {
-    navigate.push(`/sop-resources/${categoryId}/${sopId}`);
+    navigate.push(`/backyard/sop-resources/${categoryId}/${sopId}`);
   };
 
-  const totalSOPs = categories.reduce((sum, category) => sum + category.sopCount, 0);
+  const recentSOPs = getRecentSOPs(4);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background p-6">
+        <div className="max-w-7xl mx-auto space-y-8">
+          <div className="animate-pulse">
+            <div className="h-8 bg-muted rounded w-1/3 mb-2"></div>
+            <div className="h-4 bg-muted rounded w-1/2"></div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="animate-pulse">
+                <div className="h-24 bg-muted rounded"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-background p-6">
+        <div className="max-w-7xl mx-auto">
+          <Card>
+            <CardContent className="p-8 text-center">
+              <h2 className="text-lg font-semibold mb-2">Error Loading SOPs</h2>
+              <p className="text-muted-foreground mb-4">{error}</p>
+              <Button onClick={() => window.location.reload()}>
+                Retry
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background p-6">
@@ -138,11 +98,11 @@ export default function SOPResourceCenter() {
             </p>
           </div>
           <div className="flex gap-3">
-            <Button onClick={() => navigate.push('/sop-resources/manage')}>
+            <Button onClick={() => navigate.push('/backyard/sop-resources/manage')}>
               <Plus className="mr-2 h-4 w-4" />
               Add SOP
             </Button>
-            <Button variant="outline" onClick={() => navigate.push('/sop-resources/manage')}>
+            <Button variant="outline" onClick={() => navigate.push('/backyard/sop-resources/manage')}>
               <Settings className="mr-2 h-4 w-4" />
               Manage SOPs
             </Button>
@@ -158,7 +118,7 @@ export default function SOPResourceCenter() {
                   <FileText className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold">{totalSOPs}</p>
+                  <p className="text-xs font-bold">{stats.total_sops}</p>
                   <p className="text-xs text-muted-foreground">Total SOPs</p>
                 </div>
               </div>
@@ -172,7 +132,7 @@ export default function SOPResourceCenter() {
                   <TrendingUp className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold">7</p>
+                  <p className="text-xs font-bold">{stats.solution_groups}</p>
                   <p className="text-xs text-muted-foreground">Solution Groups</p>
                 </div>
               </div>
@@ -186,7 +146,7 @@ export default function SOPResourceCenter() {
                   <Clock className="h-6 w-6 text-blue-600" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold">4</p>
+                  <p className="text-xs font-bold">{stats.recent_updates}</p>
                   <p className="text-xs text-muted-foreground">Recent Updates</p>
                 </div>
               </div>
@@ -200,7 +160,7 @@ export default function SOPResourceCenter() {
                   <Star className="h-6 w-6 text-yellow-600" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold">12</p>
+                  <p className="text-xs font-bold">{stats.most_popular}</p>
                   <p className="text-xs text-muted-foreground">Most Popular</p>
                 </div>
               </div>
@@ -228,7 +188,7 @@ export default function SOPResourceCenter() {
           <h2 className="text-xs font-semibold mb-6">Kounted Solution Groups</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {categories.map((category) => {
-              const Icon = category.icon;
+              const Icon = categoryIcons[category.id as keyof typeof categoryIcons] || FileText;
               return (
                 <Card 
                   key={category.id}
@@ -243,7 +203,7 @@ export default function SOPResourceCenter() {
                       <div className="flex-1">
                         <h3 className="font-semibold">{category.name}</h3>
                         <Badge variant="secondary" className="text-xs">
-                          {category.sopCount} SOPs
+                          {category.sop_count} SOPs
                         </Badge>
                       </div>
                     </div>
@@ -266,6 +226,9 @@ export default function SOPResourceCenter() {
             <div className="space-y-4">
               {recentSOPs.map((sop) => {
                 const category = categories.find(c => c.id === sop.category);
+                const Icon = categoryIcons[sop.category as keyof typeof categoryIcons] || FileText;
+                const timeAgo = getTimeAgo(new Date(sop.updated_at));
+                
                 return (
                   <div 
                     key={sop.id}
@@ -274,12 +237,12 @@ export default function SOPResourceCenter() {
                   >
                     <div className="flex items-center gap-4">
                       <div className={`p-2 ${category?.color} rounded`}>
-                        <FileText className="h-4 w-4 text-white" />
+                        <Icon className="h-4 w-4 text-white" />
                       </div>
                       <div>
                         <h4 className="font-medium">{sop.title}</h4>
                         <p className="text-xs text-muted-foreground">
-                          {category?.name} • Updated {sop.lastUpdated}
+                          {category?.name} • Updated {timeAgo}
                         </p>
                       </div>
                     </div>
@@ -295,4 +258,16 @@ export default function SOPResourceCenter() {
       </div>
     </div>
   );
+}
+
+function getTimeAgo(date: Date): string {
+  const now = new Date();
+  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+  
+  if (diffInSeconds < 60) return 'just now';
+  if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`;
+  if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
+  if (diffInSeconds < 2592000) return `${Math.floor(diffInSeconds / 86400)} days ago`;
+  if (diffInSeconds < 31536000) return `${Math.floor(diffInSeconds / 2592000)} months ago`;
+  return `${Math.floor(diffInSeconds / 31536000)} years ago`;
 }
