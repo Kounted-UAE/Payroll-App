@@ -34,7 +34,6 @@ import {
         { title: "Kounted Payroll", url: "/backyard/payroll", icon: BarChart3, status: "active" },
         { title: "Employers", url: "/backyard/payroll/employers", icon: Building, status: "active" },
         { title: "Employees", url: "/backyard/payroll/employees", icon: Users, status: "active" },
-        { title: "Salary Structures", url: "/backyard/payroll/salary-structures", icon: DollarSign, status: "active" },
         { title: "Payroll Payruns", url: "/backyard/payroll/payruns", icon: BarChart3, status: "active" },
         { title: "Payslips", url: "/backyard/payroll/payslips", icon: FileText, status: "active" },
         { title: "Expense Claims", url: "/backyard/payroll/expenses", icon: Receipt, status: "active" },

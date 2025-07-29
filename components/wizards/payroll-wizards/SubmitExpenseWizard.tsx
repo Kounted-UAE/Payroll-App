@@ -151,7 +151,7 @@ const SubmitExpenseWizard = () => {
     } else {
       // Submit expense run
       // ... (implementation placeholder)
-      router.push('/payroll/expenses');
+      router.push('/backyard/payroll/expenses');
     }
   };
 

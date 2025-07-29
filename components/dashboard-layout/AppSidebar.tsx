@@ -34,7 +34,7 @@ export function AppSidebar() {
   const isActive = (path: string) => pathname === path
   const getNavCls = (path: string) =>
     isActive(path)
-      ? "bg-zinc-700 text-white font-bold rounded-r-xl"
+      ? "mx-6 bg-gradient-to-r to-primary/70 from-primary/50 to-primary/10 text-white font-bold"
       : "text-zinc-700 hover:bg-zinc-100"
 
   const toggle = (label: string) =>

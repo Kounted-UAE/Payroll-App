@@ -24,6 +24,7 @@ import {
   AlertCircle,
   LayoutGrid,
   List as ListIcon,
+  Trash2Icon,
 } from "lucide-react"
 import Link from "next/link"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -211,7 +212,7 @@ const PayrollEmployers = () => {
                         size="sm"
                         onClick={() => handleDeleteEmployer(employer.id, employer.legal_name)}
                       >
-                        <Upload className="h-4 w-4" />
+                        <Trash2Icon className="h-4 w-4" />
                       </Button>
                     </div>
                   </div>
@@ -308,7 +309,7 @@ const PayrollEmployers = () => {
                       size="sm"
                       onClick={() => handleDeleteEmployer(employer.id, employer.legal_name)}
                     >
-                      <Upload className="h-4 w-4" />
+                      <Trash2Icon className="text-red-700 h-4 w-4" />
                     </Button>
                   </div>
                 </TableCell>

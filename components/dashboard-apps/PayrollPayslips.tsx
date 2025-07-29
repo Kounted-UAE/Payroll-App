@@ -84,7 +84,7 @@ const PayrollPayslips = () => {
           <Button variant="outline" onClick={() => setDialogOpen(true)}>
             Bulk Import/Export
           </Button>
-          <Link href="/payroll/payslips/generate">
+          <Link href="/backyard/payroll/payslips/generate">
             <Button>
               <Plus className="mr-2 h-4 w-4" />
               Generate Payslips
@@ -211,7 +211,7 @@ const PayrollPayslips = () => {
             <p className="text-muted-foreground mb-4">
               {searchQuery ? "Try adjusting your search criteria" : "Generate payslips from completed payruns"}
             </p>
-            <Link href="/payroll/payslips/generate">
+            <Link href="/backyard/payroll/payslips/generate">
               <Button>
                 <Plus className="mr-2 h-4 w-4" />
                 Generate Payslips
