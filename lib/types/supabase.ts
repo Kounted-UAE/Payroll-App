@@ -2060,151 +2060,169 @@ export type Database = {
         }
         Relationships: []
       }
-      payroll_audit_logs: {
+      payroll_audit_log: {
         Row: {
           action: string
-          created_at: string | null
-          details: Json | null
+          changed_at: string | null
+          changed_by: string | null
           id: string
           ip_address: unknown | null
           new_values: Json | null
-          record_id: string | null
-          resource_id: string | null
-          resource_type: string
-          table_name: string | null
+          old_values: Json | null
+          reason: string | null
+          record_id: string
+          table_name: string
           user_agent: string | null
-          user_id: string | null
         }
         Insert: {
           action: string
-          created_at?: string | null
-          details?: Json | null
+          changed_at?: string | null
+          changed_by?: string | null
           id?: string
           ip_address?: unknown | null
           new_values?: Json | null
-          record_id?: string | null
-          resource_id?: string | null
-          resource_type: string
-          table_name?: string | null
+          old_values?: Json | null
+          reason?: string | null
+          record_id: string
+          table_name: string
           user_agent?: string | null
-          user_id?: string | null
         }
         Update: {
           action?: string
-          created_at?: string | null
-          details?: Json | null
+          changed_at?: string | null
+          changed_by?: string | null
           id?: string
           ip_address?: unknown | null
           new_values?: Json | null
-          record_id?: string | null
-          resource_id?: string | null
-          resource_type?: string
-          table_name?: string | null
+          old_values?: Json | null
+          reason?: string | null
+          record_id?: string
+          table_name?: string
           user_agent?: string | null
-          user_id?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "audit_logs_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "public_user_profiles"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "audit_logs_user_id_fkey"
-            columns: ["user_id"]
+            foreignKeyName: "payroll_audit_log_changed_by_fkey"
+            columns: ["changed_by"]
             isOneToOne: false
             referencedRelation: "v_authenticated_profiles"
-            referencedColumns: ["profile_id"]
+            referencedColumns: ["auth_user_id"]
           },
         ]
       }
-      payroll_expense_claims: {
+      payroll_ingest_excelpayrollimport: {
         Row: {
-          amount: number
-          approved_at: string | null
-          approver_id: string | null
-          category: string | null
-          claim_date: string
+          adhoc_expenses: number | null
+          bank_name: string | null
+          basic_salary: number | null
+          batch_id: string | null
+          bonus: number | null
           created_at: string | null
-          description: string | null
-          employee_id: string | null
+          currency: string
+          education_allowance: number | null
+          email_id: string | null
+          employee_mol: string | null
+          employee_name: string
+          employer_id: string | null
+          employer_name: string
+          flight_allowance: number | null
+          general_allowance: number | null
+          gratuity_eosb: number | null
+          housing_allowance: number | null
+          iban: string | null
           id: string
-          payrun_id: string | null
-          receipt_url: string | null
-          status: string | null
+          internet_reimbursements: number | null
+          leave_without_pay_days: number
+          other_allowance: number | null
+          overtime: number | null
+          pay_period_from: string | null
+          pay_period_to: string | null
+          reviewer_email: string | null
+          salary_in_arrears: number | null
+          school_reimbursements: number | null
+          total_fixed_salary: number | null
+          total_salary: number | null
+          total_to_transfer: number | null
+          total_variable_salary: number | null
+          wps_fees: number | null
         }
         Insert: {
-          amount: number
-          approved_at?: string | null
-          approver_id?: string | null
-          category?: string | null
-          claim_date: string
+          adhoc_expenses?: number | null
+          bank_name?: string | null
+          basic_salary?: number | null
+          batch_id?: string | null
+          bonus?: number | null
           created_at?: string | null
-          description?: string | null
-          employee_id?: string | null
+          currency?: string
+          education_allowance?: number | null
+          email_id?: string | null
+          employee_mol?: string | null
+          employee_name: string
+          employer_id?: string | null
+          employer_name: string
+          flight_allowance?: number | null
+          general_allowance?: number | null
+          gratuity_eosb?: number | null
+          housing_allowance?: number | null
+          iban?: string | null
           id?: string
-          payrun_id?: string | null
-          receipt_url?: string | null
-          status?: string | null
+          internet_reimbursements?: number | null
+          leave_without_pay_days?: number
+          other_allowance?: number | null
+          overtime?: number | null
+          pay_period_from?: string | null
+          pay_period_to?: string | null
+          reviewer_email?: string | null
+          salary_in_arrears?: number | null
+          school_reimbursements?: number | null
+          total_fixed_salary?: number | null
+          total_salary?: number | null
+          total_to_transfer?: number | null
+          total_variable_salary?: number | null
+          wps_fees?: number | null
         }
         Update: {
-          amount?: number
-          approved_at?: string | null
-          approver_id?: string | null
-          category?: string | null
-          claim_date?: string
+          adhoc_expenses?: number | null
+          bank_name?: string | null
+          basic_salary?: number | null
+          batch_id?: string | null
+          bonus?: number | null
           created_at?: string | null
-          description?: string | null
-          employee_id?: string | null
+          currency?: string
+          education_allowance?: number | null
+          email_id?: string | null
+          employee_mol?: string | null
+          employee_name?: string
+          employer_id?: string | null
+          employer_name?: string
+          flight_allowance?: number | null
+          general_allowance?: number | null
+          gratuity_eosb?: number | null
+          housing_allowance?: number | null
+          iban?: string | null
           id?: string
-          payrun_id?: string | null
-          receipt_url?: string | null
-          status?: string | null
+          internet_reimbursements?: number | null
+          leave_without_pay_days?: number
+          other_allowance?: number | null
+          overtime?: number | null
+          pay_period_from?: string | null
+          pay_period_to?: string | null
+          reviewer_email?: string | null
+          salary_in_arrears?: number | null
+          school_reimbursements?: number | null
+          total_fixed_salary?: number | null
+          total_salary?: number | null
+          total_to_transfer?: number | null
+          total_variable_salary?: number | null
+          wps_fees?: number | null
         }
         Relationships: [
           {
-            foreignKeyName: "expense_claims_employee_id_fkey"
-            columns: ["employee_id"]
+            foreignKeyName: "payroll_ingest_excelpayrollimport_employer_id_fkey"
+            columns: ["employer_id"]
             isOneToOne: false
-            referencedRelation: "payroll_objects_employees"
+            referencedRelation: "payroll_objects_employers"
             referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "expense_claims_employee_id_fkey"
-            columns: ["employee_id"]
-            isOneToOne: false
-            referencedRelation: "v_payroll_employees_with_employer"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "expense_claims_employee_id_fkey"
-            columns: ["employee_id"]
-            isOneToOne: false
-            referencedRelation: "v_wps_payslip_export"
-            referencedColumns: ["employee_id"]
-          },
-          {
-            foreignKeyName: "expense_claims_payrun_id_fkey"
-            columns: ["payrun_id"]
-            isOneToOne: false
-            referencedRelation: "payroll_payrun_records"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "expense_claims_payrun_id_fkey"
-            columns: ["payrun_id"]
-            isOneToOne: false
-            referencedRelation: "payrun_batch_status"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "expense_claims_payrun_id_fkey"
-            columns: ["payrun_id"]
-            isOneToOne: false
-            referencedRelation: "v_wps_payslip_export"
-            referencedColumns: ["payrun_id"]
           },
         ]
       }
@@ -2273,20 +2291,6 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "payroll_ingest_payrun_matrix_employee_id_fkey"
-            columns: ["employee_id"]
-            isOneToOne: false
-            referencedRelation: "v_payroll_employees_with_employer"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "payroll_ingest_payrun_matrix_employee_id_fkey"
-            columns: ["employee_id"]
-            isOneToOne: false
-            referencedRelation: "v_wps_payslip_export"
-            referencedColumns: ["employee_id"]
-          },
-          {
             foreignKeyName: "payroll_ingest_payrun_matrix_employer_id_fkey"
             columns: ["employer_id"]
             isOneToOne: false
@@ -2297,143 +2301,95 @@ export type Database = {
       }
       payroll_objects_employees: {
         Row: {
-          account_number: string | null
           address: string | null
           bank_name: string | null
-          base_salary: number | null
           contact_number: string | null
-          contract_duration: string | null
           contract_type: string | null
           created_at: string | null
+          created_by_user_id: string | null
           currency: string | null
           date_of_birth: string | null
-          department: string | null
           effective_from: string | null
           email: string | null
           emirates_id: string | null
+          employee_number: string | null
           employer_id: string | null
           eosb_applicable: boolean | null
           first_name: string | null
-          food_allowance: number | null
           full_name: string
-          gender: string | null
-          housing_allowance: number | null
           iban: string | null
           id: string
           individual_id: string | null
           job_title: string | null
           last_name: string | null
-          marital_status: string | null
-          mobile_allowance: number | null
           nationality: string | null
-          other_allowances: Json | null
           passport_number: string | null
-          probation_period: string | null
-          routing_code: string | null
           start_date: string
           status: string | null
-          swift_code: string | null
           termination_date: string | null
-          transport_allowance: number | null
           updated_at: string | null
-          visa_expiry: string | null
-          visa_info: Json | null
-          visa_type: string | null
-          work_permit_number: string | null
           wps_compliance_flag: boolean | null
           wps_flag: boolean | null
         }
         Insert: {
-          account_number?: string | null
           address?: string | null
           bank_name?: string | null
-          base_salary?: number | null
           contact_number?: string | null
-          contract_duration?: string | null
           contract_type?: string | null
           created_at?: string | null
+          created_by_user_id?: string | null
           currency?: string | null
           date_of_birth?: string | null
-          department?: string | null
           effective_from?: string | null
           email?: string | null
           emirates_id?: string | null
+          employee_number?: string | null
           employer_id?: string | null
           eosb_applicable?: boolean | null
           first_name?: string | null
-          food_allowance?: number | null
           full_name: string
-          gender?: string | null
-          housing_allowance?: number | null
           iban?: string | null
           id?: string
           individual_id?: string | null
           job_title?: string | null
           last_name?: string | null
-          marital_status?: string | null
-          mobile_allowance?: number | null
           nationality?: string | null
-          other_allowances?: Json | null
           passport_number?: string | null
-          probation_period?: string | null
-          routing_code?: string | null
           start_date: string
           status?: string | null
-          swift_code?: string | null
           termination_date?: string | null
-          transport_allowance?: number | null
           updated_at?: string | null
-          visa_expiry?: string | null
-          visa_info?: Json | null
-          visa_type?: string | null
-          work_permit_number?: string | null
           wps_compliance_flag?: boolean | null
           wps_flag?: boolean | null
         }
         Update: {
-          account_number?: string | null
           address?: string | null
           bank_name?: string | null
-          base_salary?: number | null
           contact_number?: string | null
-          contract_duration?: string | null
           contract_type?: string | null
           created_at?: string | null
+          created_by_user_id?: string | null
           currency?: string | null
           date_of_birth?: string | null
-          department?: string | null
           effective_from?: string | null
           email?: string | null
           emirates_id?: string | null
+          employee_number?: string | null
           employer_id?: string | null
           eosb_applicable?: boolean | null
           first_name?: string | null
-          food_allowance?: number | null
           full_name?: string
-          gender?: string | null
-          housing_allowance?: number | null
           iban?: string | null
           id?: string
           individual_id?: string | null
           job_title?: string | null
           last_name?: string | null
-          marital_status?: string | null
-          mobile_allowance?: number | null
           nationality?: string | null
-          other_allowances?: Json | null
           passport_number?: string | null
-          probation_period?: string | null
-          routing_code?: string | null
           start_date?: string
           status?: string | null
-          swift_code?: string | null
           termination_date?: string | null
-          transport_allowance?: number | null
           updated_at?: string | null
-          visa_expiry?: string | null
-          visa_info?: Json | null
-          visa_type?: string | null
-          work_permit_number?: string | null
           wps_compliance_flag?: boolean | null
           wps_flag?: boolean | null
         }
@@ -2451,6 +2407,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "core_objects_individuals"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payroll_objects_employees_created_by_user_id_fkey"
+            columns: ["created_by_user_id"]
+            isOneToOne: false
+            referencedRelation: "v_authenticated_profiles"
+            referencedColumns: ["auth_user_id"]
           },
         ]
       }
@@ -2470,30 +2433,40 @@ export type Database = {
           contact_person_phone: string | null
           contact_person_title: string | null
           created_at: string | null
+          created_by_user_id: string | null
+          default_currency: string | null
           email: string | null
           email_address: string | null
           emirate: string | null
           entity_id: string | null
           establishment_card: string | null
           fax_number: string | null
+          gratuity_calculation_method: string | null
           id: string
           jurisdiction: string | null
           legal_name: string
           license_expiry: string | null
           mohre_establishment_id: string | null
           mohre_id: string | null
+          payroll_contact_email: string | null
+          payroll_contact_name: string | null
+          payroll_cycle: string | null
           phone: string | null
           phone_number: string | null
           po_box: string | null
           routing_code: string | null
           routing_number: string | null
+          salary_payment_date: number | null
           salary_transfer_method: string | null
+          status: string | null
           trade_license: string | null
           trade_license_number: string | null
           trade_name: string | null
           updated_at: string
           website: string | null
+          working_days_per_month: number | null
           wps_employer_id: string | null
+          wps_enabled: boolean | null
           wps_registered: boolean | null
         }
         Insert: {
@@ -2511,30 +2484,40 @@ export type Database = {
           contact_person_phone?: string | null
           contact_person_title?: string | null
           created_at?: string | null
+          created_by_user_id?: string | null
+          default_currency?: string | null
           email?: string | null
           email_address?: string | null
           emirate?: string | null
           entity_id?: string | null
           establishment_card?: string | null
           fax_number?: string | null
+          gratuity_calculation_method?: string | null
           id?: string
           jurisdiction?: string | null
           legal_name: string
           license_expiry?: string | null
           mohre_establishment_id?: string | null
           mohre_id?: string | null
+          payroll_contact_email?: string | null
+          payroll_contact_name?: string | null
+          payroll_cycle?: string | null
           phone?: string | null
           phone_number?: string | null
           po_box?: string | null
           routing_code?: string | null
           routing_number?: string | null
+          salary_payment_date?: number | null
           salary_transfer_method?: string | null
+          status?: string | null
           trade_license?: string | null
           trade_license_number?: string | null
           trade_name?: string | null
           updated_at?: string
           website?: string | null
+          working_days_per_month?: number | null
           wps_employer_id?: string | null
+          wps_enabled?: boolean | null
           wps_registered?: boolean | null
         }
         Update: {
@@ -2552,30 +2535,40 @@ export type Database = {
           contact_person_phone?: string | null
           contact_person_title?: string | null
           created_at?: string | null
+          created_by_user_id?: string | null
+          default_currency?: string | null
           email?: string | null
           email_address?: string | null
           emirate?: string | null
           entity_id?: string | null
           establishment_card?: string | null
           fax_number?: string | null
+          gratuity_calculation_method?: string | null
           id?: string
           jurisdiction?: string | null
           legal_name?: string
           license_expiry?: string | null
           mohre_establishment_id?: string | null
           mohre_id?: string | null
+          payroll_contact_email?: string | null
+          payroll_contact_name?: string | null
+          payroll_cycle?: string | null
           phone?: string | null
           phone_number?: string | null
           po_box?: string | null
           routing_code?: string | null
           routing_number?: string | null
+          salary_payment_date?: number | null
           salary_transfer_method?: string | null
+          status?: string | null
           trade_license?: string | null
           trade_license_number?: string | null
           trade_name?: string | null
           updated_at?: string
           website?: string | null
+          working_days_per_month?: number | null
           wps_employer_id?: string | null
+          wps_enabled?: boolean | null
           wps_registered?: boolean | null
         }
         Relationships: [
@@ -2598,36 +2591,42 @@ export type Database = {
       payroll_pay_types: {
         Row: {
           code: string
-          created_at: string | null
+          core_type: string | null
+          created_at: string
           employer_id: string | null
           gl_account: string | null
           id: string
-          is_taxable: boolean | null
-          is_wps: boolean | null
+          is_taxable: boolean
+          is_wps: boolean
           label: string
           type: string
+          updated_at: string | null
         }
         Insert: {
           code: string
-          created_at?: string | null
+          core_type?: string | null
+          created_at?: string
           employer_id?: string | null
           gl_account?: string | null
           id?: string
-          is_taxable?: boolean | null
-          is_wps?: boolean | null
+          is_taxable?: boolean
+          is_wps?: boolean
           label: string
           type: string
+          updated_at?: string | null
         }
         Update: {
           code?: string
-          created_at?: string | null
+          core_type?: string | null
+          created_at?: string
           employer_id?: string | null
           gl_account?: string | null
           id?: string
-          is_taxable?: boolean | null
-          is_wps?: boolean | null
+          is_taxable?: boolean
+          is_wps?: boolean
           label?: string
           type?: string
+          updated_at?: string | null
         }
         Relationships: [
           {
@@ -2639,187 +2638,113 @@ export type Database = {
           },
         ]
       }
-      payroll_payrun_item_lines: {
-        Row: {
-          amount: number
-          id: string
-          is_manual: boolean | null
-          notes: string | null
-          pay_type_id: string | null
-          payrun_item_id: string | null
-        }
-        Insert: {
-          amount: number
-          id?: string
-          is_manual?: boolean | null
-          notes?: string | null
-          pay_type_id?: string | null
-          payrun_item_id?: string | null
-        }
-        Update: {
-          amount?: number
-          id?: string
-          is_manual?: boolean | null
-          notes?: string | null
-          pay_type_id?: string | null
-          payrun_item_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "payroll_payrun_item_lines_pay_type_id_fkey"
-            columns: ["pay_type_id"]
-            isOneToOne: false
-            referencedRelation: "payroll_pay_types"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "payroll_payrun_item_lines_payrun_item_id_fkey"
-            columns: ["payrun_item_id"]
-            isOneToOne: false
-            referencedRelation: "payroll_payrun_items"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "payroll_payrun_item_lines_payrun_item_id_fkey"
-            columns: ["payrun_item_id"]
-            isOneToOne: false
-            referencedRelation: "v_wps_payslip_export"
-            referencedColumns: ["payrun_item_id"]
-          },
-        ]
-      }
-      payroll_payrun_items: {
-        Row: {
-          base_salary: number | null
-          created_at: string | null
-          deductions: Json | null
-          employee_id: string | null
-          eosb_accrual: number | null
-          expense_reimbursements: number | null
-          fixed_allowances: Json | null
-          gross_pay: number | null
-          id: string
-          manual_adjustments: Json | null
-          net_pay: number | null
-          payrun_id: string | null
-          variable_allowances: Json | null
-        }
-        Insert: {
-          base_salary?: number | null
-          created_at?: string | null
-          deductions?: Json | null
-          employee_id?: string | null
-          eosb_accrual?: number | null
-          expense_reimbursements?: number | null
-          fixed_allowances?: Json | null
-          gross_pay?: number | null
-          id?: string
-          manual_adjustments?: Json | null
-          net_pay?: number | null
-          payrun_id?: string | null
-          variable_allowances?: Json | null
-        }
-        Update: {
-          base_salary?: number | null
-          created_at?: string | null
-          deductions?: Json | null
-          employee_id?: string | null
-          eosb_accrual?: number | null
-          expense_reimbursements?: number | null
-          fixed_allowances?: Json | null
-          gross_pay?: number | null
-          id?: string
-          manual_adjustments?: Json | null
-          net_pay?: number | null
-          payrun_id?: string | null
-          variable_allowances?: Json | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "payrun_items_employee_id_fkey"
-            columns: ["employee_id"]
-            isOneToOne: false
-            referencedRelation: "payroll_objects_employees"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "payrun_items_employee_id_fkey"
-            columns: ["employee_id"]
-            isOneToOne: false
-            referencedRelation: "v_payroll_employees_with_employer"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "payrun_items_employee_id_fkey"
-            columns: ["employee_id"]
-            isOneToOne: false
-            referencedRelation: "v_wps_payslip_export"
-            referencedColumns: ["employee_id"]
-          },
-          {
-            foreignKeyName: "payrun_items_payrun_id_fkey"
-            columns: ["payrun_id"]
-            isOneToOne: false
-            referencedRelation: "payroll_payrun_records"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "payrun_items_payrun_id_fkey"
-            columns: ["payrun_id"]
-            isOneToOne: false
-            referencedRelation: "payrun_batch_status"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "payrun_items_payrun_id_fkey"
-            columns: ["payrun_id"]
-            isOneToOne: false
-            referencedRelation: "v_wps_payslip_export"
-            referencedColumns: ["payrun_id"]
-          },
-        ]
-      }
       payroll_payrun_records: {
         Row: {
+          approval_required: boolean | null
+          approved_at: string | null
+          approved_by: string | null
+          completed_at: string | null
+          completed_by: string | null
           created_at: string | null
           created_by: string | null
+          currency: string | null
           employer_id: string | null
           id: string
+          locked_at: string | null
+          locked_by: string | null
+          notes: string | null
           pay_period_end: string
           pay_period_start: string
           payment_date: string | null
+          payroll_month: string | null
           payrun_name: string
           processed_at: string | null
           status: string | null
+          total_employees: number | null
+          total_gross_amount: number | null
+          total_net_amount: number | null
           updated_at: string | null
+          wps_file_generated: boolean | null
+          wps_file_path: string | null
         }
         Insert: {
+          approval_required?: boolean | null
+          approved_at?: string | null
+          approved_by?: string | null
+          completed_at?: string | null
+          completed_by?: string | null
           created_at?: string | null
           created_by?: string | null
+          currency?: string | null
           employer_id?: string | null
           id?: string
+          locked_at?: string | null
+          locked_by?: string | null
+          notes?: string | null
           pay_period_end: string
           pay_period_start: string
           payment_date?: string | null
+          payroll_month?: string | null
           payrun_name: string
           processed_at?: string | null
           status?: string | null
+          total_employees?: number | null
+          total_gross_amount?: number | null
+          total_net_amount?: number | null
           updated_at?: string | null
+          wps_file_generated?: boolean | null
+          wps_file_path?: string | null
         }
         Update: {
+          approval_required?: boolean | null
+          approved_at?: string | null
+          approved_by?: string | null
+          completed_at?: string | null
+          completed_by?: string | null
           created_at?: string | null
           created_by?: string | null
+          currency?: string | null
           employer_id?: string | null
           id?: string
+          locked_at?: string | null
+          locked_by?: string | null
+          notes?: string | null
           pay_period_end?: string
           pay_period_start?: string
           payment_date?: string | null
+          payroll_month?: string | null
           payrun_name?: string
           processed_at?: string | null
           status?: string | null
+          total_employees?: number | null
+          total_gross_amount?: number | null
+          total_net_amount?: number | null
           updated_at?: string | null
+          wps_file_generated?: boolean | null
+          wps_file_path?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "payroll_payrun_records_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "v_authenticated_profiles"
+            referencedColumns: ["auth_user_id"]
+          },
+          {
+            foreignKeyName: "payroll_payrun_records_completed_by_fkey"
+            columns: ["completed_by"]
+            isOneToOne: false
+            referencedRelation: "v_authenticated_profiles"
+            referencedColumns: ["auth_user_id"]
+          },
+          {
+            foreignKeyName: "payroll_payrun_records_locked_by_fkey"
+            columns: ["locked_by"]
+            isOneToOne: false
+            referencedRelation: "v_authenticated_profiles"
+            referencedColumns: ["auth_user_id"]
+          },
           {
             foreignKeyName: "payruns_employer_id_fkey"
             columns: ["employer_id"]
@@ -2829,130 +2754,48 @@ export type Database = {
           },
         ]
       }
-      payroll_payslip_records: {
+      payroll_salary_templates: {
         Row: {
-          created_at: string | null
-          email_sent: boolean | null
-          email_sent_at: string | null
-          employee_id: string | null
-          id: string
-          payrun_item_id: string | null
-          pdf_url: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          email_sent?: boolean | null
-          email_sent_at?: string | null
-          employee_id?: string | null
-          id?: string
-          payrun_item_id?: string | null
-          pdf_url?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          email_sent?: boolean | null
-          email_sent_at?: string | null
-          employee_id?: string | null
-          id?: string
-          payrun_item_id?: string | null
-          pdf_url?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "payslips_employee_id_fkey"
-            columns: ["employee_id"]
-            isOneToOne: false
-            referencedRelation: "payroll_objects_employees"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "payslips_employee_id_fkey"
-            columns: ["employee_id"]
-            isOneToOne: false
-            referencedRelation: "v_payroll_employees_with_employer"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "payslips_employee_id_fkey"
-            columns: ["employee_id"]
-            isOneToOne: false
-            referencedRelation: "v_wps_payslip_export"
-            referencedColumns: ["employee_id"]
-          },
-          {
-            foreignKeyName: "payslips_payrun_item_id_fkey"
-            columns: ["payrun_item_id"]
-            isOneToOne: false
-            referencedRelation: "payroll_payrun_items"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "payslips_payrun_item_id_fkey"
-            columns: ["payrun_item_id"]
-            isOneToOne: false
-            referencedRelation: "v_wps_payslip_export"
-            referencedColumns: ["payrun_item_id"]
-          },
-        ]
-      }
-      payroll_salary_setup: {
-        Row: {
-          base_salary: number
-          created_at: string | null
-          deductions: Json | null
+          amount: number
           effective_from: string
           effective_to: string | null
-          employee_id: string | null
-          eosb_accrual_method: string | null
-          fixed_allowances: Json | null
+          employee_id: string
           id: string
-          variable_allowances: Json | null
+          is_fixed: boolean
+          pay_type_id: string
         }
         Insert: {
-          base_salary: number
-          created_at?: string | null
-          deductions?: Json | null
+          amount: number
           effective_from: string
           effective_to?: string | null
-          employee_id?: string | null
-          eosb_accrual_method?: string | null
-          fixed_allowances?: Json | null
+          employee_id: string
           id?: string
-          variable_allowances?: Json | null
+          is_fixed?: boolean
+          pay_type_id: string
         }
         Update: {
-          base_salary?: number
-          created_at?: string | null
-          deductions?: Json | null
+          amount?: number
           effective_from?: string
           effective_to?: string | null
-          employee_id?: string | null
-          eosb_accrual_method?: string | null
-          fixed_allowances?: Json | null
+          employee_id?: string
           id?: string
-          variable_allowances?: Json | null
+          is_fixed?: boolean
+          pay_type_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "salary_structures_employee_id_fkey"
+            foreignKeyName: "payroll_salary_templates_employee_id_fkey"
             columns: ["employee_id"]
             isOneToOne: false
             referencedRelation: "payroll_objects_employees"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "salary_structures_employee_id_fkey"
-            columns: ["employee_id"]
+            foreignKeyName: "payroll_salary_templates_pay_type_id_fkey"
+            columns: ["pay_type_id"]
             isOneToOne: false
-            referencedRelation: "v_payroll_employees_with_employer"
+            referencedRelation: "payroll_pay_types"
             referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "salary_structures_employee_id_fkey"
-            columns: ["employee_id"]
-            isOneToOne: false
-            referencedRelation: "v_wps_payslip_export"
-            referencedColumns: ["employee_id"]
           },
         ]
       }
@@ -5350,39 +5193,6 @@ export type Database = {
       }
     }
     Views: {
-      payrun_batch_status: {
-        Row: {
-          created_at: string | null
-          id: string | null
-          pay_period_end: string | null
-          pay_period_start: string | null
-          payrun_name: string | null
-          processed_payslips: number | null
-          status: string | null
-          total_employees: number | null
-        }
-        Insert: {
-          created_at?: string | null
-          id?: string | null
-          pay_period_end?: string | null
-          pay_period_start?: string | null
-          payrun_name?: string | null
-          processed_payslips?: never
-          status?: string | null
-          total_employees?: never
-        }
-        Update: {
-          created_at?: string | null
-          id?: string | null
-          pay_period_end?: string | null
-          pay_period_start?: string | null
-          payrun_name?: string | null
-          processed_payslips?: never
-          status?: string | null
-          total_employees?: never
-        }
-        Relationships: []
-      }
       v_authenticated_profiles: {
         Row: {
           auth_user_id: string | null
@@ -5437,72 +5247,6 @@ export type Database = {
           },
         ]
       }
-      v_payroll_employees_with_employer: {
-        Row: {
-          account_number: string | null
-          address: string | null
-          bank_name: string | null
-          base_salary: number | null
-          contact_number: string | null
-          contract_duration: string | null
-          contract_type: string | null
-          created_at: string | null
-          currency: string | null
-          date_of_birth: string | null
-          department: string | null
-          effective_from: string | null
-          email: string | null
-          emirates_id: string | null
-          employer_id: string | null
-          employer_name: string | null
-          eosb_applicable: boolean | null
-          first_name: string | null
-          food_allowance: number | null
-          full_name: string | null
-          gender: string | null
-          housing_allowance: number | null
-          iban: string | null
-          id: string | null
-          individual_id: string | null
-          job_title: string | null
-          last_name: string | null
-          marital_status: string | null
-          mobile_allowance: number | null
-          nationality: string | null
-          other_allowances: Json | null
-          passport_number: string | null
-          probation_period: string | null
-          routing_code: string | null
-          start_date: string | null
-          status: string | null
-          swift_code: string | null
-          termination_date: string | null
-          transport_allowance: number | null
-          updated_at: string | null
-          visa_expiry: string | null
-          visa_info: Json | null
-          visa_type: string | null
-          work_permit_number: string | null
-          wps_compliance_flag: boolean | null
-          wps_flag: boolean | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "employees_employer_id_fkey"
-            columns: ["employer_id"]
-            isOneToOne: false
-            referencedRelation: "payroll_objects_employers"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "employees_individual_id_fkey"
-            columns: ["individual_id"]
-            isOneToOne: false
-            referencedRelation: "core_objects_individuals"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       v_ticket_revenue: {
         Row: {
           contact_name: string | null
@@ -5517,27 +5261,6 @@ export type Database = {
         }
         Relationships: []
       }
-      v_wps_payslip_export: {
-        Row: {
-          account_number: string | null
-          bank_name: string | null
-          emirates_id: string | null
-          employee_id: string | null
-          exported_at: string | null
-          full_name: string | null
-          iban: string | null
-          net_pay: number | null
-          pay_period_end: string | null
-          pay_period_start: string | null
-          payment_date: string | null
-          payrun_id: string | null
-          payrun_item_id: string | null
-          payrun_name: string | null
-          swift_code: string | null
-          wps_compliance_flag: boolean | null
-        }
-        Relationships: []
-      }
     }
     Functions: {
       archive_old_template_versions: {
@@ -5547,6 +5270,16 @@ export type Database = {
       assign_role_to_user: {
         Args: { user_id: string; role_name: string }
         Returns: undefined
+      }
+      calculate_employee_salary: {
+        Args: { employee_uuid: string }
+        Returns: {
+          basic_salary: number
+          total_allowances: number
+          total_deductions: number
+          gross_salary: number
+          net_salary: number
+        }[]
       }
       cleanup_expired_otps: {
         Args: Record<PropertyKey, never>

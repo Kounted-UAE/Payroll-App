@@ -229,18 +229,12 @@ const closeSalaryWizard = () => {
             emirates_id: row.emirates_id?.trim() || null,
             passport_number: row.passport_number?.trim() || null,
             nationality: row.nationality?.trim() || null,
-            job_title: row.job_title?.trim() || null,
-            contract_type: row.contract_type?.trim() || null,
+           
             employer_id: row.employer_id?.trim() || null,
             bank_name: row.bank_name?.trim() || null,
-            routing_code: row.routing_code?.trim() || null,
-            account_number: row.account_number?.trim() || null,
+           
             iban: row.iban?.trim() || null,
-            base_salary: row.base_salary ? Number(row.base_salary) : null,
-            housing_allowance: row.housing_allowance ? Number(row.housing_allowance) : null,
-            transport_allowance: row.transport_allowance ? Number(row.transport_allowance) : null,
-            food_allowance: row.food_allowance ? Number(row.food_allowance) : null,
-            currency: row.currency?.trim() || 'AED',
+           
             status: row.status?.trim() || 'Active',
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString()
@@ -485,16 +479,17 @@ const closeSalaryWizard = () => {
 
       {/* Salary Wizard Modal */}
       {salaryWizardOpen && (
-     <AddSalaryTemplateWizard
-     open={salaryWizardOpen}
-     onOpenChange={(open) => {
-       if (!open) closeSalaryWizard()
-     }}
-     employee={salaryWizardEmployee}
-   />
-   
-   
-      )}
+  <AddSalaryTemplateWizard
+    employeeId={salaryWizardEmployee?.id || ''}
+    onComplete={() => {
+      closeSalaryWizard()
+      // Optionally refresh employee data or show success message
+    }}
+    onCancel={() => {
+      closeSalaryWizard()
+    }}
+  />
+)}
 
       {!loading && filteredEmployees.length === 0 && (
         <Card>

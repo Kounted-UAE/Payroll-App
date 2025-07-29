@@ -57,6 +57,7 @@ import {
       label: "Admin",
       items: [
         { title: "Historic Payruns", url: "/backyard/admin/temp-payrun-history", icon: PanelTopInactiveIcon, status: "active" },        
+        { title: "Excel Payroll Import", url: "/backyard/admin/temp-excelpayrun-import", icon: PanelTopInactiveIcon, status: "active" },
       ],
     },
     {
