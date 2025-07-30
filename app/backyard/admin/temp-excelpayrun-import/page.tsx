@@ -1,228 +1,310 @@
-// app/backyard/admin/temp-excelpayrun-import/page.tsx
-
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 import { getSupabaseClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { Download, FileUp, Search, Eye, Trash2 } from 'lucide-react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { ExcelImportDialog } from '@/components/bulk/ExcelImportDialog'
 import { toast } from '@/hooks/use-toast'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+} from '@/components/ui/dialog'
+import JSZip from 'jszip'
+import { saveAs } from 'file-saver'
 
-const PayrollImportBatches = () => {
-  const router = useRouter()
-  const [batches, setBatches] = useState<any[]>([])
-  const [openDialog, setOpenDialog] = useState(false)
+
+type PayslipRow = {
+  id: string
+  employee_name: string
+  employer_name: string
+  reviewer_email: string
+  email_id: string
+  payslip_url: string
+  created_at: string
+}
+
+export default function SendPayslipsPage() {
+  const [rows, setRows] = useState<PayslipRow[]>([])
+  const [selected, setSelected] = useState<Set<string>>(new Set())
+  const [step, setStep] = useState<'select' | 'review'>('select')
+  const [confirmOpen, setConfirmOpen] = useState(false)
+  const [sendMode, setSendMode] = useState<'test' | 'reviewer' | 'live' | null>(null)
   const [search, setSearch] = useState('')
-  const [employerMap, setEmployerMap] = useState<Record<string, string>>({})
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const supabase = getSupabaseClient()
+  const downloadZip = async () => {
+    const zip = new JSZip()
+    const selectedRows = rows.filter(r => selected.has(r.id))
 
-      // Step 1: Get unique batch_ids
-      const { data: distinct, error: errorDistinct } = await supabase
-        .from('payroll_ingest_excelpayrollimport')
-        .select('batch_id') // No filter for nulls
-        .order('created_at', { ascending: false })
-        .limit(100)
-
-      if (errorDistinct || !distinct) return
-
-      const batchIds = [
-        ...new Set(distinct.map((b) => b.batch_id).filter((id): id is string => !!id))
-      ]
-      console.log('Distinct batch_ids:', distinct)
-
-
-      // Step 2: For each batch_id, fetch group meta
-      const { data: allRows, error: fetchError } = await supabase
-        .from('payroll_ingest_excelpayrollimport')
-        .select('batch_id, employer_name, employer_id, pay_period_from, pay_period_to, total_salary, created_at')
-
-      if (fetchError) {
-        console.error(fetchError)
-        toast({
-          title: 'Error loading batches',
-          description: fetchError.message,
-          variant: 'destructive',
-        })
-        return
-      }
-
-      const grouped = batchIds.map((batchId) => {
-        const rows = allRows.filter((r) => r.batch_id === batchId)
-        const totalEmployees = rows.length
-        const totalPay = rows.reduce((sum, r) => sum + (r.total_salary || 0), 0)
-        const payPeriodFrom = rows[0]?.pay_period_from
-        const payPeriodTo = rows[0]?.pay_period_to
-        const employerName = rows[0]?.employer_name || 'Unknown'
-        const createdAt = rows[0]?.created_at
-
-        return {
-          batch_id: batchId,
-          totalEmployees,
-          totalPay,
-          payPeriodFrom,
-          payPeriodTo,
-          employerName,
-          createdAt,
-        }
-      })
-
-      setBatches(grouped)
+    for (const row of selectedRows) {
+      if (!row.payslip_url) continue
+      const res = await fetch(row.payslip_url)
+      const blob = await res.blob()
+      const rawFilename = row.payslip_url?.split('/').pop()?.split('?')[0]
+      const filename = rawFilename?.endsWith('.pdf') ? rawFilename : `${rawFilename}.pdf`
+      zip.file(filename, blob)
     }
 
-    fetchData()
-  }, [])
-
-  const filtered = batches.filter((b) =>
-    b.employerName.toLowerCase().includes(search.toLowerCase()) ||
-    b.batch_id.toLowerCase().includes(search.toLowerCase())
-  )
-
-  const downloadTemplate = () => {
-    const headers = [
-      'employer_name',
-      'reviewer_email',
-      'employee_name',
-      'email_id',
-      'employee_mol',
-      'bank_name',
-      'iban',
-      'pay_period_from',
-      'pay_period_to',
-      'leave_without_pay_days',
-      'currency',
-      'basic_salary',
-      'housing_allowance',
-      'education_allowance',
-      'flight_allowance',
-      'general_allowance',
-      'gratuity_eosb',
-      'other_allowance',
-      'total_fixed_salary',
-      'bonus',
-      'overtime',
-      'salary_in_arrears',
-      'adhoc_expenses',
-      'school_reimbursements',
-      'internet_reimbursements',
-      'total_variable_salary',
-      'total_salary',
-      'wps_fees',
-      'total_to_transfer',
-    ]
-
-    const csv = [headers.join(',')].join('\n')
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'payroll-import-template.csv'
-    a.click()
-    URL.revokeObjectURL(url)
+    const zipBlob = await zip.generateAsync({ type: 'blob' })
+    saveAs(zipBlob, 'selected-payslips.zip')
   }
 
+  useEffect(() => {
+    const fetch = async () => {
+      const supabase = getSupabaseClient()
+      const { data, error } = await supabase
+        .from('payroll_ingest_excelpayrollimport')
+        .select('id, employer_name, employee_name, reviewer_email, email_id, payslip_url, created_at')
+        .order('created_at', { ascending: false })
+
+      if (error) {
+        toast({ title: 'Error loading rows', description: error.message, variant: 'destructive' })
+      } else {
+        setRows(data)
+      }
+    }
+
+    fetch()
+  }, [])
+
+  const toggle = (id: string) => {
+    setSelected(prev => {
+      const next = new Set(prev)
+      next.has(id) ? next.delete(id) : next.add(id)
+      return next
+    })
+  }
+
+  const sendEmails = async (mode: 'test' | 'reviewer' | 'live') => {
+    const filtered = rows.filter(r => selected.has(r.id))
+    const successLog: string[] = []
+
+    for (const row of filtered) {
+      const to =
+        mode === 'test'
+          ? 'payroll@kounted.ae'
+          : mode === 'reviewer'
+            ? row.reviewer_email
+            : row.email_id
+
+      if (!to || !row.payslip_url) {
+        toast({
+          title: `Skipping ${row.employee_name}`,
+          description: 'Missing email or payslip link',
+          variant: 'destructive',
+        })
+        continue
+      }
+
+      const res = await fetch('/api/send-payslip-email', {
+        method: 'POST',
+        body: JSON.stringify({
+          to,
+          name: row.employee_name,
+          url: row.payslip_url,
+        }),
+      })
+
+      if (res.ok) {
+        successLog.push(`${row.employee_name} → ${to}`)
+      } else {
+        toast({
+          title: `Failed to send to ${to}`,
+          description: await res.text(),
+          variant: 'destructive',
+        })
+      }
+    }
+
+    if (successLog.length) {
+      toast({
+        title: 'Emails sent',
+        description: `${successLog.length} emails delivered successfully.`,
+        action: (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() =>
+              navigator.clipboard.writeText(successLog.join('\n')).then(() =>
+                toast({ title: 'Copied to clipboard' })
+              )
+            }
+          >
+            Copy Log
+          </Button>
+        ),
+      })
+    }
+  }
+
+  const filtered = rows.filter(row =>
+    row.employee_name.toLowerCase().includes(search.toLowerCase()) ||
+    row.employer_name.toLowerCase().includes(search.toLowerCase()) ||
+    row.reviewer_email.toLowerCase().includes(search.toLowerCase()) ||
+    row.email_id.toLowerCase().includes(search.toLowerCase())
+  )
+
   return (
-    <div className="flex-1 space-y-6 p-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-lg font-bold tracking-tight">Payroll Import Batches</h1>
-          <p className="text-muted-foreground">
-            View and manage imported Excel payroll batch uploads.
-          </p>
+    <div className="p-6 space-y-6">
+      <h1 className="text-xl font-bold">Send Payslips</h1>
+
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <Input
+            type="text"
+            placeholder="Search employee, employer, or email..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full max-w-sm"
+          />
+          {search && (
+            <Button variant="ghost" size="sm" onClick={() => setSearch('')}>
+              Clear
+            </Button>
+          )}
         </div>
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={downloadTemplate} className='bg-white text-primary hover:bg-blue-100 hover:text-blue-500'>
-            <Download className="w-4 h-4 mr-2" />
-            Download Template
-          </Button>
-          <Button variant="outline" onClick={() => setOpenDialog(true)} className='bg-primary text-white hover:bg-primary/70'>
-            <FileUp className="w-4 h-4 mr-2" />
-            Import CSV
-          </Button>
-          
+        <div className="text-sm text-muted-foreground">
+          Showing {filtered.length} result{filtered.length !== 1 && 's'}
         </div>
       </div>
 
-      <Card>
-        <CardContent className="p-6">
-          <div className="flex items-center space-x-4">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Search by employer or batch ID..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="pl-9"
-              />
-            </div>
+      {/* Dialog for email preview */}
+      <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Confirm Payslip Emails</DialogTitle>
+          </DialogHeader>
+          <div className="text-sm text-muted-foreground space-y-2 max-h-[300px] overflow-auto">
+            {rows.filter(r => selected.has(r.id)).map(r => {
+              const to =
+                sendMode === 'test' ? 'payroll@kounted.ae' :
+                  sendMode === 'reviewer' ? r.reviewer_email :
+                    r.email_id
+
+              return (
+                <div key={r.id}>
+                  <strong>{r.employee_name}</strong> → {to || <em>Missing Email</em>}
+                </div>
+              )
+            })}
           </div>
-        </CardContent>
-      </Card>
+          <DialogFooter className="mt-4">
+            <Button variant="ghost" onClick={() => setConfirmOpen(false)}>
+              Cancel
+            </Button>
+            <Button
+              onClick={async () => {
+                if (!sendMode) return
+                await sendEmails(sendMode)
+                setConfirmOpen(false)
+                setStep('select')
+              }}
+            >
+              Confirm Send
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Recent Batches</CardTitle>
-        </CardHeader>
-        <CardContent className="p-0">
-          <Table>
-          <TableHeader>
-  <TableRow>
-    <TableHead>Batch ID</TableHead>
-    <TableHead>Employer</TableHead>
-    <TableHead>Employees</TableHead>
-    <TableHead>Pay Period</TableHead>
-    <TableHead>Total Salary</TableHead>
-    <TableHead>Created</TableHead>
-    <TableHead>Actions</TableHead>
-  </TableRow>
-</TableHeader>
-
-<TableBody>
-  {filtered.map((b) => (
-    <TableRow
-      key={b.batch_id}
-      className="cursor-pointer hover:bg-muted/50"
-      onClick={() => router.push(`/backyard/admin/payroll-preview/${b.batch_id}`)}
-    >
-      <TableCell className="font-mono text-xs">{b.batch_id}</TableCell>
-      <TableCell>{b.employerName}</TableCell>
-      <TableCell>{b.totalEmployees}</TableCell>
-      <TableCell>{b.payPeriodFrom} → {b.payPeriodTo}</TableCell>
-      <TableCell>AED {b.totalPay.toLocaleString()}</TableCell>
-      <TableCell>{new Date(b.createdAt).toLocaleDateString()}</TableCell>
-      <TableCell>
-        <div className="flex items-center gap-2">
-          <Button size="icon" variant="ghost" onClick={() => router.push(`/backyard/admin/payroll-preview/${b.batch_id}`)}>
-            <Eye className="w-4 h-4" />
-          </Button>
-          <Button size="icon" variant="ghost" onClick={() => console.log('TODO: Implement delete')}>
-            <Trash2 className="w-4 h-4" />
-          </Button>
-        </div>
-      </TableCell>
-    </TableRow>
-  ))}
-</TableBody>
-
+      {/* Selection table */}
+      {step === 'select' && (
+        <>
+          <Table className="mt-4">
+            <TableHeader>
+              <TableRow>
+                <TableHead>
+                  <Checkbox
+                    checked={filtered.every(r => selected.has(r.id))}
+                    indeterminate={
+                      filtered.some(r => selected.has(r.id)) &&
+                      !filtered.every(r => selected.has(r.id))
+                    }
+                    onCheckedChange={(checked) => {
+                      const next = new Set(selected)
+                      filtered.forEach(row => {
+                        if (checked) {
+                          next.add(row.id)
+                        } else {
+                          next.delete(row.id)
+                        }
+                      })
+                      setSelected(next)
+                    }}
+                  />
+                </TableHead>
+                <TableHead>Employee</TableHead>
+                <TableHead>Employer</TableHead>
+                <TableHead>Reviewer Email</TableHead>
+                <TableHead>Live Email</TableHead>
+                <TableHead>Payslip</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filtered.map(row => (
+                <TableRow key={row.id}>
+                  <TableCell>
+                    <Checkbox
+                      checked={selected.has(row.id)}
+                      onCheckedChange={() => toggle(row.id)}
+                    />
+                  </TableCell>
+                  <TableCell>{row.employee_name}</TableCell>
+                  <TableCell>{row.employer_name}</TableCell>
+                  <TableCell>{row.reviewer_email}</TableCell>
+                  <TableCell>{row.email_id}</TableCell>
+                  <TableCell>
+                    {row.payslip_url ? (
+                      <a href={row.payslip_url} target="_blank" className="text-blue-600 underline text-xs">
+                        View PDF
+                      </a>
+                    ) : (
+                      <span className="text-muted-foreground text-xs">Not available</span>
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
           </Table>
-        </CardContent>
-      </Card>
 
-      <ExcelImportDialog
-        open={openDialog}
-        onOpenChange={setOpenDialog}
-        employerId="REPLACE_ME"
-        onSuccess={(batchId) => router.push(`/backyard/admin/payroll-preview/${batchId}`)}
-      />
+          <Button className="mt-4" onClick={() => setStep('review')} disabled={!selected.size}>
+            Continue
+          </Button>
+          <Button
+            variant="outline"
+            onClick={downloadZip}
+            disabled={!rows.some(r => selected.has(r.id) && r.payslip_url)}
+          >
+            Download Selected (ZIP)
+          </Button>
+        </>
+      )}
+
+      {/* Review and send step */}
+      {step === 'review' && (
+        <>
+          <p className="text-muted-foreground text-sm">
+            Send payslips for <strong>{selected.size}</strong> selected employees.
+          </p>
+          <div className="flex gap-4 mt-4">
+            <Button variant="outline" onClick={() => { setSendMode('test'); setConfirmOpen(true) }}>
+              Send to Test Email
+            </Button>
+            <Button variant="outline" onClick={() => { setSendMode('reviewer'); setConfirmOpen(true) }}>
+              Send to Reviewer Email
+            </Button>
+            <Button variant="default" onClick={() => { setSendMode('live'); setConfirmOpen(true) }}>
+              Send to Live Email
+            </Button>
+            <Button variant="ghost" onClick={() => setStep('select')}>
+              Cancel
+            </Button>
+          </div>
+        </>
+      )}
     </div>
   )
 }
-
-export default PayrollImportBatches

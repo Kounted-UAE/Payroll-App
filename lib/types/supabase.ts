@@ -2118,13 +2118,13 @@ export type Database = {
           batch_id: string | null
           bonus: number | null
           created_at: string | null
-          currency: string
+          currency: string | null
           education_allowance: number | null
           email_id: string | null
           employee_mol: string | null
-          employee_name: string
+          employee_name: string | null
           employer_id: string | null
-          employer_name: string
+          employer_name: string | null
           flight_allowance: number | null
           general_allowance: number | null
           gratuity_eosb: number | null
@@ -2132,18 +2132,19 @@ export type Database = {
           iban: string | null
           id: string
           internet_reimbursements: number | null
-          leave_without_pay_days: number
+          leave_without_pay_days: number | null
+          net_salary: number | null
           other_allowance: number | null
           overtime: number | null
           pay_period_from: string | null
           pay_period_to: string | null
+          payslip_url: string | null
           reviewer_email: string | null
           salary_in_arrears: number | null
           school_reimbursements: number | null
-          total_fixed_salary: number | null
-          total_salary: number | null
+          total_adjustments: number | null
+          total_gross_salary: number | null
           total_to_transfer: number | null
-          total_variable_salary: number | null
           wps_fees: number | null
         }
         Insert: {
@@ -2153,13 +2154,13 @@ export type Database = {
           batch_id?: string | null
           bonus?: number | null
           created_at?: string | null
-          currency?: string
+          currency?: string | null
           education_allowance?: number | null
           email_id?: string | null
           employee_mol?: string | null
-          employee_name: string
+          employee_name?: string | null
           employer_id?: string | null
-          employer_name: string
+          employer_name?: string | null
           flight_allowance?: number | null
           general_allowance?: number | null
           gratuity_eosb?: number | null
@@ -2167,18 +2168,19 @@ export type Database = {
           iban?: string | null
           id?: string
           internet_reimbursements?: number | null
-          leave_without_pay_days?: number
+          leave_without_pay_days?: number | null
+          net_salary?: number | null
           other_allowance?: number | null
           overtime?: number | null
           pay_period_from?: string | null
           pay_period_to?: string | null
+          payslip_url?: string | null
           reviewer_email?: string | null
           salary_in_arrears?: number | null
           school_reimbursements?: number | null
-          total_fixed_salary?: number | null
-          total_salary?: number | null
+          total_adjustments?: number | null
+          total_gross_salary?: number | null
           total_to_transfer?: number | null
-          total_variable_salary?: number | null
           wps_fees?: number | null
         }
         Update: {
@@ -2188,13 +2190,13 @@ export type Database = {
           batch_id?: string | null
           bonus?: number | null
           created_at?: string | null
-          currency?: string
+          currency?: string | null
           education_allowance?: number | null
           email_id?: string | null
           employee_mol?: string | null
-          employee_name?: string
+          employee_name?: string | null
           employer_id?: string | null
-          employer_name?: string
+          employer_name?: string | null
           flight_allowance?: number | null
           general_allowance?: number | null
           gratuity_eosb?: number | null
@@ -2202,18 +2204,19 @@ export type Database = {
           iban?: string | null
           id?: string
           internet_reimbursements?: number | null
-          leave_without_pay_days?: number
+          leave_without_pay_days?: number | null
+          net_salary?: number | null
           other_allowance?: number | null
           overtime?: number | null
           pay_period_from?: string | null
           pay_period_to?: string | null
+          payslip_url?: string | null
           reviewer_email?: string | null
           salary_in_arrears?: number | null
           school_reimbursements?: number | null
-          total_fixed_salary?: number | null
-          total_salary?: number | null
+          total_adjustments?: number | null
+          total_gross_salary?: number | null
           total_to_transfer?: number | null
-          total_variable_salary?: number | null
           wps_fees?: number | null
         }
         Relationships: [

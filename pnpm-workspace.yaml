@@ -1,6 +1,7 @@
 onlyBuiltDependencies:
   - '@swc/core'
   - esbuild
+  - puppeteer
   - sharp
   - supabase
   - unrs-resolver

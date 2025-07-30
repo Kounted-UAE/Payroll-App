@@ -1,0 +1,63 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { Resend } from 'resend'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
+
+export async function POST(req: NextRequest) {
+  const { to, name, url } = await req.json()
+
+  if (!to || !name || !url) {
+    return new NextResponse('Missing required fields', { status: 400 })
+  }
+
+  console.log('📧 Sending to:', to)
+console.log('👤 Name:', name)
+console.log('📄 PDF:', url)
+
+
+  const subject = `Your latest payslip is now available`
+  const html = `
+  <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 24px; color: #111;">
+    <h2 style="font-size: 18px; font-weight: 600;">Hi ${name},</h2>
+    <p style="font-size: 14px; line-height: 1.5; margin: 16px 0;">
+      Your latest payslip is now ready to view. Please click the button below to securely access and download your payslip.
+    </p>
+
+    <a href="${url}" target="_blank" style="
+      display: inline-block;
+      background-color: #0d9488;
+      color: white;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      margin: 20px 0;
+    ">
+      View Payslip
+    </a>
+
+    <p style="font-size: 13px; color: #555;">
+      If you have any questions, please reach out to your payroll administrator at <a href="mailto:payroll@kounted.ae">payroll@kounted.ae</a>.
+    </p>
+
+    <p style="font-size: 12px; color: #888; margin-top: 32px;">
+      This message was sent by the Kounted Business Suite. Do not reply directly to this email.
+    </p>
+  </div>
+  `
+
+  try {
+    const result = await resend.emails.send({
+      from: 'Kounted Payroll Solutions <no-reply@resend.kounted.ae>',
+      to,
+      replyTo: 'no-reply@kounted.ae',
+      subject,
+      html,
+    })
+
+    return NextResponse.json({ success: true, result })
+  } catch (err: any) {
+    console.error('❌ Email send failed:', err)
+    return new NextResponse('Email send failed', { status: 500 })
+  }
+}

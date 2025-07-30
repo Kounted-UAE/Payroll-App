@@ -4,10 +4,14 @@ import { Check } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+interface CheckboxProps extends React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
+  indeterminate?: boolean
+}
+
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
->(({ className, ...props }, ref) => (
+  CheckboxProps
+>(({ className, indeterminate, ...props }, ref) => (
   <CheckboxPrimitive.Root
     ref={ref}
     className={cn(
