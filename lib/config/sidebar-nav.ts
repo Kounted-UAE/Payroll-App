@@ -57,6 +57,7 @@ import {
       items: [
         { title: "Historic Payruns", url: "/backyard/admin/temp-payrun-history", icon: PanelTopInactiveIcon, status: "active" },        
         { title: "Excel File Payslips", url: "/backyard/admin/temp-excelpayrun-import", icon: FileSpreadsheet, status: "active" },       
+        { title: "Xero Config", url: "/backyard/admin/xero-config", icon: FileSpreadsheet, status: "active" },       
       ],
     },
     {
