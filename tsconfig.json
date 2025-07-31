@@ -51,7 +51,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "components/admin/XeroTabSectionHeader.tsx "  ],
   "exclude": [
     "node_modules"
   ]

@@ -110,3 +110,4 @@ local.image.assets/
 + /local.image.assets/
 + .eslintrc.js         # Specific ESLint config ignored in legacy, missing in cleaned
 + *.mergeBackup        # Git conflict file
+generate-payslips.mjs

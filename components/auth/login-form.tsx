@@ -150,8 +150,8 @@ export default function LoginForm() {
       {/* Support info */}
       <p className="text-center text-xs text-zinc-400">
         Need help? Contact{' '}
-        <a href="mailto:app-accounts@advontier.com" className="text-blue-400 underline">
-          app-accounts@advontier.com
+        <a href="mailto:eben@advontier.com" className="text-blue-400 underline">
+          eben@advontier.com
         </a>
       </p>
     </div>

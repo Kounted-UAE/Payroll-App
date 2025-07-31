@@ -15,9 +15,9 @@ interface EmployeeData {
   bonus?: number
   overtime?: number
   salary_in_arrears?: number
-  adhoc_expenses?: number
-  school_reimbursements?: number
-  internet_reimbursements?: number
+  expenses_deductions?: number
+  other_reimbursements?: number
+  expense_reimbursements?: number
   total_variable_salary?: number
   total_salary?: number
   wps_fees?: number
@@ -205,9 +205,9 @@ export async function generatePayslipPDF({
     { label: 'Bonus', value: employee.bonus },
     { label: 'Overtime', value: employee.overtime },
     { label: 'Salary in Arrears', value: employee.salary_in_arrears },
-    { label: 'Adhoc Expenses', value: employee.adhoc_expenses },
-    { label: 'School Reimbursements', value: employee.school_reimbursements },
-    { label: 'Internet Reimbursements', value: employee.internet_reimbursements }
+    { label: 'Adhoc Expenses', value: employee.expenses_deductions },
+    { label: 'School Reimbursements', value: employee.other_reimbursements },
+    { label: 'Internet Reimbursements', value: employee.expense_reimbursements }
   ]
 
   page.drawText('Variable Salary Components:', {

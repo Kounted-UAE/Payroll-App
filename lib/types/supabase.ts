@@ -2112,7 +2112,6 @@ export type Database = {
       }
       payroll_ingest_excelpayrollimport: {
         Row: {
-          adhoc_expenses: number | null
           bank_name: string | null
           basic_salary: number | null
           batch_id: string | null
@@ -2125,30 +2124,31 @@ export type Database = {
           employee_name: string | null
           employer_id: string | null
           employer_name: string | null
+          expense_reimbursements: number | null
+          expenses_deductions: number | null
           flight_allowance: number | null
           general_allowance: number | null
           gratuity_eosb: number | null
           housing_allowance: number | null
           iban: string | null
           id: string
-          internet_reimbursements: number | null
           leave_without_pay_days: number | null
           net_salary: number | null
           other_allowance: number | null
+          other_reimbursements: number | null
           overtime: number | null
           pay_period_from: string | null
           pay_period_to: string | null
+          payslip_token: string | null
           payslip_url: string | null
           reviewer_email: string | null
           salary_in_arrears: number | null
-          school_reimbursements: number | null
           total_adjustments: number | null
           total_gross_salary: number | null
           total_to_transfer: number | null
           wps_fees: number | null
         }
         Insert: {
-          adhoc_expenses?: number | null
           bank_name?: string | null
           basic_salary?: number | null
           batch_id?: string | null
@@ -2161,30 +2161,31 @@ export type Database = {
           employee_name?: string | null
           employer_id?: string | null
           employer_name?: string | null
+          expense_reimbursements?: number | null
+          expenses_deductions?: number | null
           flight_allowance?: number | null
           general_allowance?: number | null
           gratuity_eosb?: number | null
           housing_allowance?: number | null
           iban?: string | null
           id?: string
-          internet_reimbursements?: number | null
           leave_without_pay_days?: number | null
           net_salary?: number | null
           other_allowance?: number | null
+          other_reimbursements?: number | null
           overtime?: number | null
           pay_period_from?: string | null
           pay_period_to?: string | null
+          payslip_token?: string | null
           payslip_url?: string | null
           reviewer_email?: string | null
           salary_in_arrears?: number | null
-          school_reimbursements?: number | null
           total_adjustments?: number | null
           total_gross_salary?: number | null
           total_to_transfer?: number | null
           wps_fees?: number | null
         }
         Update: {
-          adhoc_expenses?: number | null
           bank_name?: string | null
           basic_salary?: number | null
           batch_id?: string | null
@@ -2197,23 +2198,25 @@ export type Database = {
           employee_name?: string | null
           employer_id?: string | null
           employer_name?: string | null
+          expense_reimbursements?: number | null
+          expenses_deductions?: number | null
           flight_allowance?: number | null
           general_allowance?: number | null
           gratuity_eosb?: number | null
           housing_allowance?: number | null
           iban?: string | null
           id?: string
-          internet_reimbursements?: number | null
           leave_without_pay_days?: number | null
           net_salary?: number | null
           other_allowance?: number | null
+          other_reimbursements?: number | null
           overtime?: number | null
           pay_period_from?: string | null
           pay_period_to?: string | null
+          payslip_token?: string | null
           payslip_url?: string | null
           reviewer_email?: string | null
           salary_in_arrears?: number | null
-          school_reimbursements?: number | null
           total_adjustments?: number | null
           total_gross_salary?: number | null
           total_to_transfer?: number | null
@@ -4650,12 +4653,14 @@ export type Database = {
           subtotal: number | null
           synced_at: string | null
           tax_amount: number | null
+          tenant_id: string | null
           total: number | null
           tracking_name_1: string | null
           tracking_name_2: string | null
           tracking_option_1: string | null
           tracking_option_2: string | null
           type: string | null
+          xero_invoice_id: string | null
         }
         Insert: {
           contact_name?: string | null
@@ -4671,12 +4676,14 @@ export type Database = {
           subtotal?: number | null
           synced_at?: string | null
           tax_amount?: number | null
+          tenant_id?: string | null
           total?: number | null
           tracking_name_1?: string | null
           tracking_name_2?: string | null
           tracking_option_1?: string | null
           tracking_option_2?: string | null
           type?: string | null
+          xero_invoice_id?: string | null
         }
         Update: {
           contact_name?: string | null
@@ -4692,14 +4699,24 @@ export type Database = {
           subtotal?: number | null
           synced_at?: string | null
           tax_amount?: number | null
+          tenant_id?: string | null
           total?: number | null
           tracking_name_1?: string | null
           tracking_name_2?: string | null
           tracking_option_1?: string | null
           tracking_option_2?: string | null
           type?: string | null
+          xero_invoice_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "source_xero_invoices_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "xero_tenants"
+            referencedColumns: ["tenant_id"]
+          },
+        ]
       }
       source_xero_items: {
         Row: {
@@ -4859,8 +4876,10 @@ export type Database = {
           source_data: Json
           status: string | null
           synced_at: string | null
+          tenant_id: string | null
           total_amount: number | null
           vertical: string | null
+          xero_quote_id: string | null
         }
         Insert: {
           branding?: string | null
@@ -4875,8 +4894,10 @@ export type Database = {
           source_data: Json
           status?: string | null
           synced_at?: string | null
+          tenant_id?: string | null
           total_amount?: number | null
           vertical?: string | null
+          xero_quote_id?: string | null
         }
         Update: {
           branding?: string | null
@@ -4891,10 +4912,20 @@ export type Database = {
           source_data?: Json
           status?: string | null
           synced_at?: string | null
+          tenant_id?: string | null
           total_amount?: number | null
           vertical?: string | null
+          xero_quote_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "source_xero_quotes_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "xero_tenants"
+            referencedColumns: ["tenant_id"]
+          },
+        ]
       }
       source_xero_receipts: {
         Row: {
@@ -5108,6 +5139,30 @@ export type Database = {
         }
         Relationships: []
       }
+      temp_employee_email_updates: {
+        Row: {
+          email: string | null
+          employee_id: string
+          first_name: string | null
+          full_name: string | null
+          last_name: string | null
+        }
+        Insert: {
+          email?: string | null
+          employee_id: string
+          first_name?: string | null
+          full_name?: string | null
+          last_name?: string | null
+        }
+        Update: {
+          email?: string | null
+          employee_id?: string
+          first_name?: string | null
+          full_name?: string | null
+          last_name?: string | null
+        }
+        Relationships: []
+      }
       xero_auth_tokens: {
         Row: {
           access_token: string | null
@@ -5193,6 +5248,38 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      xero_tenants: {
+        Row: {
+          created_date_utc: string | null
+          id: string
+          tenant_id: string
+          tenant_name: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_date_utc?: string | null
+          id?: string
+          tenant_id: string
+          tenant_name?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_date_utc?: string | null
+          id?: string
+          tenant_id?: string
+          tenant_name?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "xero_tenants_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "v_authenticated_profiles"
+            referencedColumns: ["auth_user_id"]
+          },
+        ]
       }
     }
     Views: {

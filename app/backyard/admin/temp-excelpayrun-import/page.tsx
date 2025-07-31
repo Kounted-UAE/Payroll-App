@@ -17,6 +17,7 @@ import {
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 
+const SUPABASE_PUBLIC_URL = 'https://alryjvnddvrrgbuvednm.supabase.co/storage/v1/object/public/generated-pdfs/payslips'
 
 type PayslipRow = {
   id: string
@@ -25,6 +26,7 @@ type PayslipRow = {
   reviewer_email: string
   email_id: string
   payslip_url: string
+  payslip_token: string
   created_at: string
 }
 
@@ -41,12 +43,11 @@ export default function SendPayslipsPage() {
     const selectedRows = rows.filter(r => selected.has(r.id))
 
     for (const row of selectedRows) {
-      if (!row.payslip_url) continue
-      const res = await fetch(row.payslip_url)
+      if (!row.payslip_token) continue
+      const fileUrl = `${SUPABASE_PUBLIC_URL}/${row.payslip_token}.pdf`
+      const res = await fetch(fileUrl)
       const blob = await res.blob()
-      const rawFilename = row.payslip_url?.split('/').pop()?.split('?')[0]
-      const filename = rawFilename?.endsWith('.pdf') ? rawFilename : `${rawFilename}.pdf`
-      zip.file(filename, blob)
+      zip.file(`${row.payslip_token}.pdf`, blob)
     }
 
     const zipBlob = await zip.generateAsync({ type: 'blob' })
@@ -58,7 +59,7 @@ export default function SendPayslipsPage() {
       const supabase = getSupabaseClient()
       const { data, error } = await supabase
         .from('payroll_ingest_excelpayrollimport')
-        .select('id, employer_name, employee_name, reviewer_email, email_id, payslip_url, created_at')
+        .select('id, employer_name, employee_name, reviewer_email, email_id, payslip_url, payslip_token, created_at')
         .order('created_at', { ascending: false })
 
       if (error) {
@@ -91,10 +92,12 @@ export default function SendPayslipsPage() {
             ? row.reviewer_email
             : row.email_id
 
-      if (!to || !row.payslip_url) {
+      const url = `${SUPABASE_PUBLIC_URL}/${row.payslip_token}.pdf`
+
+      if (!to || !row.payslip_token) {
         toast({
           title: `Skipping ${row.employee_name}`,
-          description: 'Missing email or payslip link',
+          description: 'Missing email or payslip token',
           variant: 'destructive',
         })
         continue
@@ -105,7 +108,7 @@ export default function SendPayslipsPage() {
         body: JSON.stringify({
           to,
           name: row.employee_name,
-          url: row.payslip_url,
+          url,
         }),
       })
 
@@ -172,7 +175,6 @@ export default function SendPayslipsPage() {
         </div>
       </div>
 
-      {/* Dialog for email preview */}
       <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
         <DialogContent>
           <DialogHeader>
@@ -210,7 +212,6 @@ export default function SendPayslipsPage() {
         </DialogContent>
       </Dialog>
 
-      {/* Selection table */}
       {step === 'select' && (
         <>
           <Table className="mt-4">
@@ -257,8 +258,12 @@ export default function SendPayslipsPage() {
                   <TableCell>{row.reviewer_email}</TableCell>
                   <TableCell>{row.email_id}</TableCell>
                   <TableCell>
-                    {row.payslip_url ? (
-                      <a href={row.payslip_url} target="_blank" className="text-blue-600 underline text-xs">
+                    {row.payslip_token ? (
+                      <a
+                        href={`${SUPABASE_PUBLIC_URL}/${row.payslip_token}.pdf`}
+                        target="_blank"
+                        className="text-blue-600 underline text-xs"
+                      >
                         View PDF
                       </a>
                     ) : (
@@ -276,14 +281,13 @@ export default function SendPayslipsPage() {
           <Button
             variant="outline"
             onClick={downloadZip}
-            disabled={!rows.some(r => selected.has(r.id) && r.payslip_url)}
+            disabled={!rows.some(r => selected.has(r.id) && r.payslip_token)}
           >
             Download Selected (ZIP)
           </Button>
         </>
       )}
 
-      {/* Review and send step */}
       {step === 'review' && (
         <>
           <p className="text-muted-foreground text-sm">

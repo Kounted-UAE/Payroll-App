@@ -63,8 +63,8 @@ export function ExcelImportDialog({ open, onOpenChange, employerId, onSuccess }:
               [
                 'basic_salary', 'housing_allowance', 'education_allowance', 'flight_allowance',
                 'general_allowance', 'gratuity_eosb', 'other_allowance', 'total_fixed_salary',
-                'bonus', 'overtime', 'salary_in_arrears', 'adhoc_expenses', 'school_reimbursements',
-                'internet_reimbursements', 'total_variable_salary', 'total_salary',
+                'bonus', 'overtime', 'salary_in_arrears', 'expenses_deductions', 'other_reimbursements',
+                'expense_reimbursements', 'total_variable_salary', 'total_salary',
                 'wps_fees', 'total_to_transfer'
               ].includes(key)
             ) {

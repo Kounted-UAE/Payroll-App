@@ -3,6 +3,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import puppeteer from 'puppeteer'
 import { createClient } from '@supabase/supabase-js'
+import crypto from 'crypto'
 
 dotenv.config()
 
@@ -55,9 +56,9 @@ const injectTemplate = (template, row) => {
     .replace('{{bonus}}', inject('Bonuses', row.bonus))
     .replace('{{overtime}}', inject('Overtime', row.overtime))
     .replace('{{salary_in_arrears}}', inject('Arrears/Advances', row.salary_in_arrears))
-    .replace('{{adhoc_expenses}}', inject('Expenses', row.adhoc_expenses))
-    .replace('{{school_reimbursements}}', inject('Reimbursements', row.school_reimbursements))
-    .replace('{{internet_reimbursements}}', inject('Other Adjustments', row.internet_reimbursements))
+    .replace('{{expenses_deductions}}', inject('Expenses', row.expenses_deductions))
+    .replace('{{other_reimbursements}}', inject('Reimbursements', row.other_reimbursements))
+    .replace('{{expense_reimbursements}}', inject('Other Adjustments', row.expense_reimbursements))
     .replaceAll('{{total_adjustments}}', inject('TOTAL ADJUSTMENTS', row.total_variable_values))
 
     // Net Total
@@ -87,17 +88,17 @@ const main = async () => {
 
       await page.setContent(html, { waitUntil: 'networkidle0' })
 
-      const filename = `${sanitize(row.employer_name)}_${sanitize(row.employee_name)}_${row.pay_period_to}.pdf`
+      const token = crypto.randomUUID()
+      const filename = `${token}.pdf`
       const tempPath = path.join(OUTPUT_DIR, filename)
       const storagePath = `${STORAGE_FOLDER}/${filename}`
 
-      // Generate PDF locally first
+      // Generate PDF locally
       await page.pdf({ path: tempPath, format: 'A4', printBackground: true })
       await page.close()
 
       const fileBuffer = await fs.readFile(tempPath)
 
-      // Upload to Supabase Storage
       const { error: uploadError } = await supabase
         .storage
         .from(STORAGE_BUCKET)
@@ -118,10 +119,9 @@ const main = async () => {
 
       const publicUrl = publicUrlData?.publicUrl
 
-      // Update database record
       const { error: updateError } = await supabase
         .from(TABLE_NAME)
-        .update({ payslip_url: publicUrl })
+        .update({ payslip_url: publicUrl, payslip_token: token })
         .eq('id', row.id)
 
       if (updateError) {
