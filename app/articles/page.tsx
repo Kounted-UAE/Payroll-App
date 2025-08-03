@@ -10,6 +10,7 @@ import { PageIntro } from '@/components/advontier-ui/PageIntro'
 import { RootLayout } from '@/components/advontier-ui/RootLayout'
 import { formatDate } from '@/lib/formatDate'
 import { loadArticles } from '@/lib/mdx'
+import { ArticleIndex } from '@/components/articles'
 
 export const metadata: Metadata = {
   title: 'articles',
@@ -23,13 +24,22 @@ export default async function articles() {
   return (
     <RootLayout>
       <PageIntro eyebrow="Articles" title="Insights and perspectives on the future of practice management and two-sided professional services platforms.">
-        <p>
-        Discover how AI, digital transformation, and two-sided marketplace platforms are redefining practice management, client relationships, and the core identify of the accounting industry—both in the UAE and globally.
-        </p>
-      </PageIntro>
+  <p>
+    Discover how AI, digital transformation, and two-sided marketplace models are redefining practice management, client relationships, and the identity of the accounting industry—both in the UAE and worldwide.
+  </p>
+</PageIntro>
+
 
       <Container className="mt-24 sm:mt-32 lg:mt-40">
-        <div className="space-y-24 lg:space-y-32">
+        <div className="lg:grid lg:grid-cols-4 lg:gap-8">
+          {/* Article Index */}
+          <div className="hidden lg:block">
+            <ArticleIndex articles={articles} />
+          </div>
+
+          {/* Articles List */}
+          <div className="lg:col-span-3">
+            <div className="space-y-24 lg:space-y-32">
           {articles.map((article) => (
             <FadeIn key={article.href}>
               <article>
@@ -66,19 +76,21 @@ export default async function articles() {
                       <p className="mt-6 max-w-2xl text-base text-neutral-600">
                         {article.description}
                       </p>
-                      <Button
-                        href={article.href}
-                        aria-label={`Read more: ${article.title}`}
-                        className="mt-8"
-                      >
-                        Read more
-                      </Button>
-                    </div>
-                  </div>
-                </Border>
-              </article>
-            </FadeIn>
-          ))}
+                                    <Button
+                href={article.href}
+                aria-label={`Read more: ${article.title}`}
+                className="mt-8"
+              >
+                Read more
+              </Button>
+            </div>
+          </div>
+        </Border>
+      </article>
+    </FadeIn>
+  ))}
+            </div>
+          </div>
         </div>
       </Container>     
     </RootLayout>

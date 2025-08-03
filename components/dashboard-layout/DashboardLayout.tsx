@@ -15,8 +15,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <AppSidebar />
         </div>
 
-        {/* Content Area */}
-        <div className="flex flex-1 flex-col">
+        {/* Content Area - Use CSS custom properties for dynamic width */}
+        <div className="flex flex-1 flex-col transition-[margin-left] duration-200 ease-linear md:ml-[var(--sidebar-width,16rem)]">
           <TopNavbar />
           <main className="flex-1 p-2">{children}</main>
         </div>

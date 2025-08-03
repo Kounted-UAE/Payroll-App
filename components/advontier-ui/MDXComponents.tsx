@@ -5,7 +5,48 @@ import { Border } from '@/components/advontier-ui/Border'
 import { GrayscaleTransitionImage } from '@/components/advontier-ui/GrayscaleTransitionImage'
 import { StatList, StatListItem } from '@/components/advontier-ui/StatList'
 import { TagList, TagListItem } from '@/components/advontier-ui/TagList'
+
+// Helper function to generate slug from text
+function generateSlug(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
+}
+
 export const MDXComponents = {
+  h1: function H1({
+    className,
+    children,
+    ...props
+  }: React.ComponentPropsWithoutRef<'h1'>) {
+    const slug = typeof children === 'string' ? generateSlug(children) : ''
+    return (
+      <h1
+        id={slug}
+        className={clsx('font-display text-4xl font-bold tracking-tight text-neutral-950 [text-wrap:balance]', className)}
+        {...props}
+      >
+        {children}
+      </h1>
+    )
+  },
+  h2: function H2({
+    className,
+    children,
+    ...props
+  }: React.ComponentPropsWithoutRef<'h2'>) {
+    const slug = typeof children === 'string' ? generateSlug(children) : ''
+    return (
+      <h2
+        id={slug}
+        className={clsx('font-display text-2xl font-bold tracking-tight text-neutral-950 [text-wrap:balance]', className)}
+        {...props}
+      >
+        {children}
+      </h2>
+    )
+  },
   Blockquote({
     className,
     ...props

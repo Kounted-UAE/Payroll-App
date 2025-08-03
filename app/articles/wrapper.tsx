@@ -5,6 +5,7 @@ import { PageLinks } from '@/components/advontier-ui/PageLinks'
 import { RootLayout } from '@/components/advontier-ui/RootLayout'
 import { formatDate } from '@/lib/formatDate'
 import { type Article, type MDXEntry, loadArticles } from '@/lib/mdx'
+import { TableOfContents } from '@/components/articles'
 
 export default async function articlesArticleWrapper({
   article,
@@ -40,8 +41,18 @@ export default async function articlesArticleWrapper({
 
         <FadeIn>
           <div className="mt-24 sm:mt-32 lg:mt-40">
-            <div className="mx-auto max-w-3xl">
-              {children}
+            <div className="lg:grid lg:grid-cols-4 lg:gap-8">
+              {/* Table of Contents */}
+              <div className="hidden lg:block">
+                <TableOfContents />
+              </div>
+
+              {/* Article Content */}
+              <div className="lg:col-span-3">
+                <div className="mx-auto max-w-3xl">
+                  {children}
+                </div>
+              </div>
             </div>
           </div>
         </FadeIn>
