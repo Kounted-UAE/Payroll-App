@@ -3,33 +3,17 @@
 import React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarHeader,
-  SidebarFooter,
-  useSidebar,
-} from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { ChevronDown, Plus, HomeIcon } from "lucide-react"
 import clsx from "clsx"
 import { sidebarSections } from "@/lib/config/sidebar-nav"
-import { KountedLabelLogoLight } from "@/lib/assets/KountedLabelLogo_01"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
 
 export function AppSidebar() {
-  const { state } = useSidebar()
   const pathname = usePathname()
-  const collapsed = state === "collapsed"
-
+  const [collapsed, setCollapsed] = React.useState(false)
   const [expanded, setExpanded] = React.useState<Record<string, boolean>>({})
 
   const isActive = (path: string) => pathname === path
@@ -42,36 +26,22 @@ export function AppSidebar() {
     setExpanded((prev) => ({ ...prev, [label]: !prev[label] }))
 
   return (
-    <Sidebar
-      collapsible="icon"
-      className={clsx(
-        "flex flex-col h-screen transition-all duration-300",
-        collapsed ? "w-36 text-xs" : "w-64 text-xs"
-      )}
-    >
-      {/* Sticky Header */}
-      <SidebarHeader className="sticky top-0 z-100 h-24 border-b border-sidebar-border bg-sidebar text-sidebar-foreground shadow-sm">
-        {!collapsed ? (
-          <div className="flex items-center justify-center h-full px-4">
-            <KountedLabelLogoLight className="h-16 w-full" />
-          </div>
-        ) : (
-          <div className="h-full flex justify-center items-center">
-            <HomeIcon className="h-8 w-8 text-sidebar-foreground bg-sidebar-primary/50 rounded-md p-2" />
-          </div>
-        )}
-      </SidebarHeader>
+    <div className={clsx(
+      "flex flex-col h-full transition-all duration-300 bg-sidebar",
+      collapsed ? "w-36 text-xs" : "w-64 text-xs"
+    )}>
+     
 
       {/* Scrollable Content */}
       <ScrollArea className="flex-1 overflow-y-auto">
-        <SidebarContent className="bg-sidebar text-sidebar-foreground text-xs">
+        <div className="bg-sidebar text-sidebar-foreground text-xs p-2">
           {sidebarSections.map((section) => (
-            <SidebarGroup key={section.label}>
+            <div key={section.label} className="mb-4">
               {!collapsed && (
                 <div className="flex items-center justify-between px-3 py-2">
-                  <SidebarGroupLabel className="text-sidebar-primary text-xs font-semibold uppercase tracking-wide">
+                  <div className="text-sidebar-primary text-xs font-semibold uppercase tracking-wide">
                     {section.label}
-                  </SidebarGroupLabel>
+                  </div>
                   {section.collapsible !== false && (
                     <Button
                       variant="ghost"
@@ -90,14 +60,14 @@ export function AppSidebar() {
                 </div>
               )}
               {(section.collapsible === false || expanded[section.label] !== false) && (
-                <SidebarGroupContent>
+                <div>
                   {section.items && (
-                    <SidebarMenu>
+                    <div className="space-y-1">
                       {section.items.map((item) => {
                         const status = item.status || "active"
                         const isInactive = status === "locked" || status === "wip"
                         return (
-                          <SidebarMenuItem key={item.title}>
+                          <div key={item.title}>
                             {isInactive ? (
                               <div className="flex items-center gap-2 px-3 py-2 text-muted-foreground cursor-not-allowed">
                                 {item.icon && <item.icon className="h-4 w-4" />}
@@ -111,36 +81,33 @@ export function AppSidebar() {
                                 )}
                               </div>
                             ) : (
-                              <SidebarMenuButton asChild>
-                                <Link
-                                  href={item.url || "#"}
-                                  className={clsx(
-                                    "flex items-center gap-2 px-3 py-2 rounded-md transition-colors",
-                                    getNavCls(item.url || "")
-                                  )}
-                                >
-                                  {item.icon && <item.icon className="h-4 w-4" />}
-                                  {!collapsed && (
-                                    <span className="text-xs">{item.title}</span>
-                                  )}
-
-                                </Link>
-                              </SidebarMenuButton>
+                              <Link
+                                href={item.url || "#"}
+                                className={clsx(
+                                  "flex items-center gap-2 px-3 py-2 rounded-md transition-colors",
+                                  getNavCls(item.url || "")
+                                )}
+                              >
+                                {item.icon && <item.icon className="h-4 w-4" />}
+                                {!collapsed && (
+                                  <span className="text-xs">{item.title}</span>
+                                )}
+                              </Link>
                             )}
-                          </SidebarMenuItem>
+                          </div>
                         )
                       })}
-                    </SidebarMenu>
+                    </div>
                   )}
-                </SidebarGroupContent>
+                </div>
               )}
-            </SidebarGroup>
+            </div>
           ))}
-        </SidebarContent>
+        </div>
       </ScrollArea>
 
       {/* Footer */}
-      <SidebarFooter className="border-t border-sidebar-border p-4">
+      <div className="border-t border-sidebar-border p-4 flex-shrink-0">
         {!collapsed ? (
           <div className="flex items-center justify-between">
             <div className="text-xs text-sidebar-foreground">
@@ -158,7 +125,7 @@ export function AppSidebar() {
             </Button>
           </div>
         )}
-      </SidebarFooter>
-    </Sidebar>
+      </div>
+    </div>
   )
 }

@@ -16,12 +16,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         {/* Main content area with sidebar and page content */}
         <div className="flex flex-1">
           {/* Sidebar - Starts below navbar */}
-          <div className="hidden md:block">
+          <div className="hidden md:block w-64 flex-shrink-0 border-r border-border">
             <AppSidebar />
           </div>
 
           {/* Page content - To the right of sidebar */}
-          <main className="flex-1 p-2 transition-[margin-left] duration-200 ease-linear md:ml-[var(--sidebar-width,16rem)]">
+          <main className="flex-1 p-2">
             {children}
           </main>
         </div>
