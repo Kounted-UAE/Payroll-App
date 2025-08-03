@@ -114,8 +114,8 @@ export default function SOPResourceCenter() {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-blue-500/10 rounded-lg">
-                  <FileText className="h-6 w-6 text-blue-500" />
+                <div className="p-3 bg-primary/10 rounded-lg">
+                  <FileText className="h-6 w-6 text-primary" />
                 </div>
                 <div>
                   <p className="text-xs font-bold">{stats.total_sops}</p>
@@ -128,8 +128,8 @@ export default function SOPResourceCenter() {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-blue-500/10 rounded-lg">
-                  <TrendingUp className="h-6 w-6 text-blue-500" />
+                <div className="p-3 bg-primary/10 rounded-lg">
+                  <TrendingUp className="h-6 w-6 text-primary" />
                 </div>
                 <div>
                   <p className="text-xs font-bold">{stats.solution_groups}</p>
@@ -142,8 +142,8 @@ export default function SOPResourceCenter() {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-blue-500/10 rounded-lg">
-                  <Clock className="h-6 w-6 text-blue-600" />
+                <div className="p-3 bg-primary/10 rounded-lg">
+                  <Clock className="h-6 w-6 text-primary" />
                 </div>
                 <div>
                   <p className="text-xs font-bold">{stats.recent_updates}</p>
@@ -198,7 +198,7 @@ export default function SOPResourceCenter() {
                   <CardContent className="p-6">
                     <div className="flex items-center gap-4 mb-4">
                       <div className={`p-3 ${category.color} rounded-lg`}>
-                        <Icon className="h-6 w-6 text-white" />
+                        <Icon className="h-6 w-6 text-primary-foreground" />
                       </div>
                       <div className="flex-1">
                         <h3 className="font-semibold">{category.name}</h3>
@@ -237,7 +237,7 @@ export default function SOPResourceCenter() {
                   >
                     <div className="flex items-center gap-4">
                       <div className={`p-2 ${category?.color} rounded`}>
-                        <Icon className="h-4 w-4 text-white" />
+                        <Icon className="h-4 w-4 text-primary-foreground" />
                       </div>
                       <div>
                         <h4 className="font-medium">{sop.title}</h4>

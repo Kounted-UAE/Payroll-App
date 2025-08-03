@@ -36,10 +36,10 @@ export default function DashboardEntityStats({ metrics }: Props) {
       {metrics.map((metric) => {
         const Icon = metric.icon || iconsMap[metric.label.split(' ')[0]] || UsersIcon
         return (
-          <Card key={metric.label} className="relative overflow-hidden rounded-lg bg-white px-2 pt-2 pb-12 shadow-sm sm:px-6 sm:pt-6">
+          <Card key={metric.label} className="relative overflow-hidden rounded-lg bg-card px-2 pt-2 pb-12 shadow-sm sm:px-6 sm:pt-6">
             <dt>
-              <div className="absolute rounded-md bg-blue-500 p-2">
-                <Icon className="h-3 w-3 text-white" aria-hidden="true" />
+              <div className="absolute rounded-md bg-primary p-2">
+                <Icon className="h-3 w-3 text-primary-foreground" aria-hidden="true" />
               </div>
               <p className="ml-12 truncate text-xs font-medium text-muted-foreground">
                 {metric.label}
@@ -54,9 +54,9 @@ export default function DashboardEntityStats({ metrics }: Props) {
               )}
             </dd>
             {metric.link && (
-              <div className="absolute inset-x-0 bottom-0 bg-zinc-100 px-4 py-4 sm:px-6">
+              <div className="absolute inset-x-0 bottom-0 bg-muted px-4 py-4 sm:px-6">
                 <div className="text-xs">
-                  <a href={metric.link} className="font-semibold text-zinc-500 hover:text-blue-800 hover:underline underline-offset-2">
+                  <a href={metric.link} className="font-semibold text-muted-foreground hover:text-primary hover:underline underline-offset-2">
                     View all<span className="sr-only"> {metric.label}</span>
                   </a>
                 </div>

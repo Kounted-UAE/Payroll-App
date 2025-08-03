@@ -59,28 +59,28 @@ const PayrollDashboard = () => {
       description: "Onboard a new client company",
       icon: Building,
       href: "/backyard/payroll/employers/new",
-      color: "bg-blue-500"
+      color: "bg-primary"
     },
     {
       title: "Add Employee",
       description: "Register new employee",
       icon: Users,
       href: "/backyard/payroll/employees/new",
-      color: "bg-blue-500"
+      color: "bg-primary"
     },
     {
       title: "Create Payrun",
       description: "Process monthly payroll",
       icon: FileText,
       href: "/backyard/payroll/payruns/new",
-      color: "bg-blue-500"
+      color: "bg-primary"
     },
     {
       title: "Review Claims",
       description: "Approve expense claims",
       icon: Receipt,
       href: "/backyard/payroll/expenses",
-      color: "bg-blue-500"
+      color: "bg-primary"
     }
   ]
 
@@ -179,11 +179,11 @@ const PayrollDashboard = () => {
                 ) : (
                   <>
                     {stat.trend.isPositive ? (
-                      <TrendingUp className="h-3 w-3 text-blue-500 mr-1" />
+                      <TrendingUp className="h-3 w-3 text-primary mr-1" />
                     ) : (
-                      <TrendingDown className="h-3 w-3 text-red-500 mr-1" />
+                      <TrendingDown className="h-3 w-3 text-destructive mr-1" />
                     )}
-                    <span className={`text-xs ${stat.trend.isPositive ? 'text-blue-500' : 'text-red-500'}`}>
+                    <span className={`text-xs ${stat.trend.isPositive ? 'text-primary' : 'text-destructive'}`}>
                       {stat.trend.description}
                     </span>
                   </>
@@ -205,15 +205,15 @@ const PayrollDashboard = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="text-sm text-zinc-100 grid gap-4 md:grid-cols-2 border-none">
+              <div className="text-sm text-foreground grid gap-4 md:grid-cols-2 border-none">
                 {quickActions.map((action) => (
                   action.href ? (
                     <Link key={action.title} href={action.href}>
-                      <Card className="cursor-pointer text-zinc-800 bg-zinc-100 hover:bg-blue-500 hover:text-zinc-100 transition-colors border-none">
+                      <Card className="cursor-pointer text-foreground bg-muted hover:bg-primary hover:text-primary-foreground transition-colors border-none">
                         <CardContent className="p-2">
                           <div className="flex items-center space-x-3">
                             <div className={`p-2 rounded-md ${action.color}`}>
-                              <action.icon className="h-4 w-4 text-white" />
+                              <action.icon className="h-4 w-4 text-primary-foreground" />
                             </div>
                             <div>
                               <h3 className="font-semibold">{action.title}</h3>
@@ -230,7 +230,7 @@ const PayrollDashboard = () => {
                       <CardContent className="p-4">
                         <div className="flex items-center space-x-3">
                           <div className={`p-2 rounded-md ${action.color}`}>
-                            <action.icon className="h-4 w-4 text-white" />
+                            <action.icon className="h-4 w-4 text-primary-foreground" />
                           </div>
                           <div>
                             <h3 className="font-semibold">{action.title}</h3>
@@ -266,10 +266,10 @@ const PayrollDashboard = () => {
                   </div>
                   <p className="text-xs text-muted-foreground">{activity.company}</p>
                   {activity.amount && (
-                    <p className="text-xs font-semibold text-blue-600">{activity.amount}</p>
+                    <p className="text-xs font-semibold text-primary">{activity.amount}</p>
                   )}
                   {activity.employee && (
-                    <p className="text-xs text-blue-600">{activity.employee}</p>
+                    <p className="text-xs text-primary">{activity.employee}</p>
                   )}
                   {activity.details && (
                     <p className="text-xs text-orange-600">{activity.details}</p>

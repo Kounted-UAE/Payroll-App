@@ -132,8 +132,8 @@ const PayrollPayslips = () => {
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div className="flex items-start space-x-4">
-                      <div className="p-3 bg-blue-50 rounded-lg">
-                        <StatusIcon className="h-6 w-6 text-blue-600" />
+                      <div className="p-3 bg-primary/10 rounded-lg">
+                        <StatusIcon className="h-6 w-6 text-primary" />
                       </div>
                       <div>
                         <CardTitle className="text-xs">{p.employee_name}</CardTitle>

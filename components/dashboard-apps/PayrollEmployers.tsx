@@ -94,14 +94,14 @@ const PayrollEmployers = () => {
         </div>
         <div className="flex items-center space-x-2">
           <Button
-            className={`p-2 rounded ${view === 'grid' ? 'bg-blue-500 text-blue-500-foreground' : 'bg-muted'}`}
+            className={`p-2 rounded ${view === 'grid' ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
             onClick={() => setView('grid')}
             aria-label="Grid view"
           >
             <LayoutGrid className="h-5 w-5" />
           </Button>
           <Button
-            className={`p-2 rounded ${view === 'list' ? 'bg-blue-500 text-blue-500-foreground' : 'bg-muted'}`}
+            className={`p-2 rounded ${view === 'list' ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
             onClick={() => setView('list')}
             aria-label="List view"
           >
@@ -186,8 +186,8 @@ const PayrollEmployers = () => {
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex items-start space-x-4">
-                    <div className="p-3 bg-blue-50 rounded-lg">
-                      <Building className="h-6 w-6 text-blue-600" />
+                    <div className="p-3 bg-primary/10 rounded-lg">
+                      <Building className="h-6 w-6 text-primary" />
                     </div>
                     <div>
                       <CardTitle className="text-xs">{employer.legal_name}</CardTitle>

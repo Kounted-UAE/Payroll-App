@@ -139,10 +139,6 @@ function Navigation() {
   return (
     <nav className="mt-px font-display text-5xl font-medium tracking-tight text-white">
       <NavigationRow>
-      <div className="flex justify-end"></div>
-      <NavigationItem href="/auth/login">Login</NavigationItem>
-      </NavigationRow>
-      <NavigationRow>
       <NavigationItem href="/our-roadmap">Our Roadmap</NavigationItem>
         <NavigationItem href="/blog">Our Research</NavigationItem>
             </NavigationRow>

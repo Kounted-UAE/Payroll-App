@@ -370,7 +370,7 @@ export default function ClientManagement() {
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center gap-2">
-                <Users className="h-4 w-4 text-blue-500" />
+                <Users className="h-4 w-4 text-primary" />
                 <div>
                   <p className="text-xs font-medium">Total Clients</p>
                   <p className="text-xs font-bold">{clients.length}</p>
@@ -382,7 +382,7 @@ export default function ClientManagement() {
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-blue-500" />
+                <CheckCircle2 className="h-4 w-4 text-primary" />
                 <div>
                   <p className="text-xs font-medium">Onboarded</p>
                   <p className="text-xs font-bold">

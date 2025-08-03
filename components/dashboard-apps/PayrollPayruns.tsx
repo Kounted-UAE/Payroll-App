@@ -295,7 +295,7 @@ const PayrollPayruns = () => {
                 <span className="font-semibold text-xs">{payrun.payroll_objects_employers?.legal_name || 'Unknown Employer'}</span>
                 <span className="text-xs">{new Date(payrun.updated_at).toLocaleString()}</span>
                 <Badge variant={getStatusColor(payrun.status)}>{payrun.status}</Badge>
-                <Link href={`/backyard/payroll/payruns/${payrun.id}`} className="ml-auto text-blue-500 underline text-xs">View</Link>
+                <Link href={`/backyard/payroll/payruns/${payrun.id}`} className="ml-auto text-primary underline text-xs">View</Link>
               </li>
             ))}
           </ul>

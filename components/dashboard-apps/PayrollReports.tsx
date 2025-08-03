@@ -114,13 +114,13 @@ const PayrollReports = () => {
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case "Summary": return "bg-blue-50 text-blue-600"
-      case "EOSB": return "bg-purple-50 text-purple-600"
-      case "Cost Analysis": return "bg-blue-50 text-blue-500"
-      case "WPS": return "bg-orange-50 text-orange-600"
-      case "Demographics": return "bg-pink-50 text-pink-600"
-      case "Compliance": return "bg-indigo-50 text-indigo-600"
-      default: return "bg-gray-50 text-gray-600"
+      case "Summary": return "bg-primary/10 text-primary"
+      case "EOSB": return "bg-primary/10 text-primary"
+      case "Cost Analysis": return "bg-primary/10 text-primary"
+      case "WPS": return "bg-primary/10 text-primary"
+      case "Demographics": return "bg-primary/10 text-primary"
+      case "Compliance": return "bg-primary/10 text-primary"
+      default: return "bg-muted text-muted-foreground"
     }
   }
 
@@ -167,7 +167,7 @@ const PayrollReports = () => {
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center space-x-2">
-              <DollarSign className="h-5 w-5 text-blue-500" />
+                              <DollarSign className="h-5 w-5 text-primary" />
               <div>
                 <p className="text-xs font-bold">AED 892.5K</p>
                 <p className="text-xs text-muted-foreground">Total Payroll Cost</p>
@@ -178,7 +178,7 @@ const PayrollReports = () => {
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center space-x-2">
-              <Users className="h-5 w-5 text-blue-600" />
+                              <Users className="h-5 w-5 text-primary" />
               <div>
                 <p className="text-xs font-bold">283</p>
                 <p className="text-xs text-muted-foreground">Active Employees</p>
@@ -250,11 +250,11 @@ const PayrollReports = () => {
                     {report.type === "Summary" && (
                       <>
                         <div>
-                          <p className="text-xs font-bold text-blue-500">AED {(report.total_cost / 1000).toFixed(0)}K</p>
+                          <p className="text-xs font-bold text-primary">AED {(report.total_cost / 1000).toFixed(0)}K</p>
                           <p className="text-xs text-muted-foreground">Total Cost</p>
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-blue-600">{report.employee_count}</p>
+                          <p className="text-xs font-bold text-primary">{report.employee_count}</p>
                           <p className="text-xs text-muted-foreground">Employees</p>
                         </div>
                         <div>
@@ -271,7 +271,7 @@ const PayrollReports = () => {
                           <p className="text-xs text-muted-foreground">Total Liability</p>
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-blue-600">{report.employee_count}</p>
+                          <p className="text-xs font-bold text-primary">{report.employee_count}</p>
                           <p className="text-xs text-muted-foreground">Employees</p>
                         </div>
                         <div>
@@ -284,15 +284,15 @@ const PayrollReports = () => {
                     {report.type === "Cost Analysis" && (
                       <>
                         <div>
-                          <p className="text-xs font-bold text-blue-500">AED {(report.total_cost / 1000).toFixed(0)}K</p>
+                          <p className="text-xs font-bold text-primary">AED {(report.total_cost / 1000).toFixed(0)}K</p>
                           <p className="text-xs text-muted-foreground">Total Cost</p>
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-blue-500">+{report.cost_increase}%</p>
+                          <p className="text-xs font-bold text-primary">+{report.cost_increase}%</p>
                           <p className="text-xs text-muted-foreground">Month Growth</p>
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-blue-600">{report.employer_count}</p>
+                          <p className="text-xs font-bold text-primary">{report.employer_count}</p>
                           <p className="text-xs text-muted-foreground">Employers</p>
                         </div>
                       </>
@@ -305,7 +305,7 @@ const PayrollReports = () => {
                           <p className="text-xs text-muted-foreground">Transfers</p>
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-blue-600">{report.transfer_count}</p>
+                          <p className="text-xs font-bold text-primary">{report.transfer_count}</p>
                           <p className="text-xs text-muted-foreground">WPS Files</p>
                         </div>
                         <div>
@@ -322,11 +322,11 @@ const PayrollReports = () => {
                           <p className="text-xs text-muted-foreground">Employees</p>
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-blue-600">{report.nationality_count}</p>
+                          <p className="text-xs font-bold text-primary">{report.nationality_count}</p>
                           <p className="text-xs text-muted-foreground">Nationalities</p>
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-blue-500">{report.avg_tenure_months}m</p>
+                          <p className="text-xs font-bold text-primary">{report.avg_tenure_months}m</p>
                           <p className="text-xs text-muted-foreground">Avg. Tenure</p>
                         </div>
                       </>
@@ -335,7 +335,7 @@ const PayrollReports = () => {
                     {report.type === "Compliance" && (
                       <>
                         <div>
-                          <p className="text-xs font-bold text-blue-500">{report.compliance_score}%</p>
+                          <p className="text-xs font-bold text-primary">{report.compliance_score}%</p>
                           <p className="text-xs text-muted-foreground">Compliance</p>
                         </div>
                         <div>

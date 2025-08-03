@@ -66,14 +66,14 @@ export default function DashboardHome() {
   const { active, comingSoon } = groupRoadmap(sidebarSections)
 
   return (
-    <div className=" bg-transparent rounded-t-2xl">
+    <div className="bg-transparent rounded-t-2xl">
 
      {/* Quick Links Cards */}
 
   <section id="quicklinks">
       <div className="p-4 flex items-center justify-between py-2">
       <h1 className="text-xs font-semibold flex items-center gap-2 mb-1">
-        <AppWindowIcon className="h-5 w-5 text-blue-500" />
+        <AppWindowIcon className="h-5 w-5 text-primary" />
         Quick Links
       </h1>
       <Button variant="ghost" onClick={() => setOpen(true)} className="">
@@ -81,7 +81,7 @@ export default function DashboardHome() {
 <h1 className="text-md font-semibold flex items-center gap-2 mb-1">
 
   Platform Roadmap
-  <MapPin className="h-5 w-5 text-blue-500" />
+  <MapPin className="h-5 w-5 text-primary" />
 </h1>
 </Button>
     </div>
@@ -95,32 +95,31 @@ export default function DashboardHome() {
         <div className="p-4 flex items-center justify-between">
           <div>
             <h1 className="text-xs font-semibold flex items-center gap-2 mb-1">
-              <ChartBar className="h-5 w-5 text-blue-500" />
+              <ChartBar className="h-5 w-5 text-primary" />
               Performance Overview
             </h1>
+            <p className="text-xs text-muted-foreground">Key metrics and performance indicators</p>
           </div>
-         
         </div>
-        <DashboardKPICards stats={kpiStats} />
+        <DashboardKPICards kpis={kpiStats} />
       </section>
 
- 
-
-      {/* Object Summary Cards */}
-      <section id="records">
-      <div className="p-4 flex items-center justify-between py-12">
-      <h1 className="text-xs font-semibold flex items-center gap-2 mb-1">
-            <FileText className="h-5 w-5 text-blue-500" />
-            Managed Records
-          </h1>
+      {/* Entity Statistics */}
+      <section id="entities">
+        <div className="p-4 flex items-center justify-between">
+          <div>
+            <h1 className="text-xs font-semibold flex items-center gap-2 mb-1">
+              <Users className="h-5 w-5 text-primary" />
+              Entity Statistics
+            </h1>
+            <p className="text-xs text-muted-foreground">Overview of all system entities</p>
           </div>
+        </div>
         <DashboardEntityStats metrics={metrics} />
       </section>
-      
-    
 
-      {/* Slideout Drawer */}
-      <Transition show={open} as={Fragment}>
+      {/* Roadmap Modal */}
+      <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-50" onClose={setOpen}>
           <Transition.Child
             as={Fragment}
@@ -131,7 +130,7 @@ export default function DashboardHome() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" />
+            <div className="fixed inset-0 bg-background/80 backdrop-blur-sm" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-hidden">
@@ -139,57 +138,73 @@ export default function DashboardHome() {
               <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
                 <Transition.Child
                   as={Fragment}
-                  enter="transform transition ease-in-out duration-300"
+                  enter="transform transition ease-in-out duration-500 sm:duration-700"
                   enterFrom="translate-x-full"
                   enterTo="translate-x-0"
-                  leave="transform transition ease-in-out duration-300"
+                  leave="transform transition ease-in-out duration-500 sm:duration-700"
                   leaveFrom="translate-x-0"
                   leaveTo="translate-x-full"
                 >
-                  <Dialog.Panel className="pointer-events-auto w-screen max-w-md bg-white shadow-xl">
-                    <div className="flex h-full flex-col divide-y divide-gray-200">
-                      <img src="/images/Tour de Backyard_ Champion in Yellow.JPEG" alt="Backyard Logo" className="w-full" />
-                      <div className="flex items-center justify-between px-6 py-4 bg-yellow-300">
-                        <Dialog.Title className="rounded-2xl p-2 bg-yellow-500 text-xs font-medium text-gray-900 flex items-center gap-2">
-                          <p className="text-xs">🚴🏻💨...</p>
-                          <p className="text-xs font-bold text-yellow-50 font-italic">Development Roadmap</p>
-                        </Dialog.Title>
-                        <button
-                          type="button"
-                          className="text-yellow-800 bg-yellow-100 p-2 rounded-full hover:text-gray-500"
-                          onClick={() => setOpen(false)}
-                        >
-                          <span className="sr-only">Close</span>
-                          <XMarkIcon className="h-4 w-4" />
-                        </button>
-                      </div>
-                      <div className="flex-1 overflow-y-auto p-6 space-y-6">
-                        {/* Coming Soon */}
-                        <div>
-                          <h4 className="text-xs font-semibold text-yellow-700 mb-2">...stages ahead 🚧 🚴🏻</h4>
-                          <ul className="space-y-2">
-                            {comingSoon.map(item => (
-                              <li key={item.title} className="flex items-center text-xs gap-2 italic opacity-90">
-                                <item.icon className="h-4 w-4 text-yellow-600" />
-                                <span>{item.title}</span>
-                                <Badge className="ml-auto text-xs bg-yellow-100 text-yellow-700">{item.section}</Badge>
-                              </li>
-                            ))}
-                          </ul>
+                  <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
+                    <div className="flex h-full flex-col overflow-y-scroll bg-background py-6 shadow-xl">
+                      <div className="px-4 sm:px-6">
+                        <div className="flex items-start justify-between">
+                          <Dialog.Title className="text-base font-semibold leading-6 text-foreground">
+                            Platform Roadmap
+                          </Dialog.Title>
+                          <div className="ml-3 flex h-7 items-center">
+                            <button
+                              type="button"
+                              className="rounded-md bg-background text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                              onClick={() => setOpen(false)}
+                            >
+                              <span className="sr-only">Close panel</span>
+                              <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                            </button>
+                          </div>
                         </div>
-                        {/* Work in Progress */}
-                        <div>
-                          <h4 className="text-xs font-semibold text-blue-700 mb-2">✅ Routes in progress</h4>
-                          <ul className="space-y-2">
-                            {active.map(item => (
-                              <li key={item.title} className="flex items-center text-xs gap-2">
-                                <item.icon className="h-4 w-4 text-blue-500" />
-                                <span>{item.title}</span>
-                                <Badge className="ml-auto text-xs bg-blue-100 text-blue-700">{item.section}</Badge>
-                              </li>
-                            ))}
-                          </ul>
+                      </div>
+                      <div className="relative mt-6 flex-1 px-4 sm:px-6">
+                        <div className="space-y-6">
+                          {/* Active Features */}
+                          <div>
+                            <h3 className="text-sm font-medium text-foreground mb-3">Active Features</h3>
+                            <div className="space-y-2">
+                              {active.map((item) => (
+                                <div key={item.title} className="flex items-center justify-between p-3 rounded-lg bg-card border border-border">
+                                  <div className="flex items-center gap-3">
+                                    {item.icon && <item.icon className="h-5 w-5 text-primary" />}
+                                    <div>
+                                      <p className="text-sm font-medium text-foreground">{item.title}</p>
+                                      <p className="text-xs text-muted-foreground">{item.section}</p>
+                                    </div>
+                                  </div>
+                                  <Badge variant="default" className="text-xs">Active</Badge>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
 
+                          {/* Coming Soon */}
+                          <div>
+                            <h3 className="text-sm font-medium text-foreground mb-3">Coming Soon</h3>
+                            <div className="space-y-2">
+                              {comingSoon.map((item) => (
+                                <div key={item.title} className="flex items-center justify-between p-3 rounded-lg bg-muted/50 border border-border">
+                                  <div className="flex items-center gap-3">
+                                    {item.icon && <item.icon className="h-5 w-5 text-muted-foreground" />}
+                                    <div>
+                                      <p className="text-sm font-medium text-muted-foreground">{item.title}</p>
+                                      <p className="text-xs text-muted-foreground">{item.section}</p>
+                                    </div>
+                                  </div>
+                                  <Badge variant="secondary" className="text-xs">
+                                    {item.status === "locked" ? "🔒 Locked" : "🚧 WIP"}
+                                  </Badge>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -199,7 +214,7 @@ export default function DashboardHome() {
             </div>
           </div>
         </Dialog>
-      </Transition>
+      </Transition.Root>
     </div>
   )
 }

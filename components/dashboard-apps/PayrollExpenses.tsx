@@ -126,7 +126,7 @@ const PayrollExpenses = () => {
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-muted-foreground">Run Number:</span>
-                      <span className="text-xs font-bold text-blue-600">{run.run_number}</span>
+                      <span className="text-xs font-bold text-primary">{run.run_number}</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-muted-foreground">Employer:</span>

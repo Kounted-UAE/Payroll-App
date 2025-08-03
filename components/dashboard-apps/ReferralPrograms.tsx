@@ -180,7 +180,7 @@ export default function SalesMatchingDashboard() {
 
   const getConfidenceIcon = (confidence: 'high' | 'medium' | 'low') => {
     switch (confidence) {
-      case 'high': return <CheckCircle className="w-4 h-4 text-blue-600" />
+      case 'high': return <CheckCircle className="w-4 h-4 text-primary" />
       case 'medium': return <Clock className="w-4 h-4 text-yellow-600" />
       case 'low': return <AlertCircle className="w-4 h-4 text-red-600" />
     }
@@ -223,8 +223,8 @@ export default function SalesMatchingDashboard() {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-blue-500/10 rounded-lg">
-                  <FileText className="h-6 w-6 text-blue-500" />
+                <div className="p-3 bg-primary/10 rounded-lg">
+                  <FileText className="h-6 w-6 text-primary" />
                 </div>
                 <div>
                   <p className="text-xs font-bold">{totalMatches}</p>
@@ -236,8 +236,8 @@ export default function SalesMatchingDashboard() {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-blue-500/10 rounded-lg">
-                  <TrendingUp className="h-6 w-6 text-blue-500" />
+                <div className="p-3 bg-primary/10 rounded-lg">
+                  <TrendingUp className="h-6 w-6 text-primary" />
                 </div>
                 <div>
                   <p className="text-xs font-bold">{totalConfirmed}</p>
@@ -508,7 +508,7 @@ export default function SalesMatchingDashboard() {
                     <h3 className="font-semibold mb-2">Confidence Breakdown</h3>
                     <div className="space-y-1 text-sm">
                       <div className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-blue-600" />
+                        <CheckCircle className="w-4 h-4 text-primary" />
                         High: {stats.high_confidence_matches}
                       </div>
                       <div className="flex items-center gap-2">

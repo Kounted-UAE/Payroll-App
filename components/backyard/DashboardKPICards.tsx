@@ -17,11 +17,11 @@ export interface KPI {
 }
 
 interface Props {
-  stats: KPI[]
+  kpis: KPI[]
   variant?: 'icon' | 'bordered'
 }
 
-export default function DashboardKPICards({ stats, variant = 'bordered' }: Props) {
+export default function DashboardKPICards({ kpis, variant = 'bordered' }: Props) {
   const isIcon = variant === 'icon'
 
   return (
@@ -30,27 +30,27 @@ export default function DashboardKPICards({ stats, variant = 'bordered' }: Props
       <dl
         className={clsx(
           'grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3',
-          !isIcon && 'divide-y divide-border overflow-hidden rounded-lg bg-white shadow-sm md:divide-x md:divide-y-0'
+          !isIcon && 'divide-y divide-border overflow-hidden rounded-lg bg-card shadow-sm md:divide-x md:divide-y-0'
         )}
       >
-        {stats.map((item) => (
+        {kpis.map((item) => (
           <div
             key={item.kpi_id}
             className={clsx(
-              'relative rounded-lg bg-white px-4 pt-5 pb-8 shadow-sm sm:px-6 sm:pt-6',
+              'relative rounded-lg bg-card px-4 pt-5 pb-8 shadow-sm sm:px-6 sm:pt-6',
               !isIcon && 'px-4 py-5 sm:p-6 rounded-none shadow-none bg-transparent'
             )}
           >
             <dt>
               {isIcon && item.icon && (
-                <div className="absolute rounded-md bg-indigo-500 p-3">
-                  <item.icon aria-hidden="true" className="size-6 text-white" />
+                <div className="absolute rounded-md bg-primary p-3">
+                  <item.icon aria-hidden="true" className="size-6 text-primary-foreground" />
                 </div>
               )}
               <p
                 className={clsx(
                   'ml-16 truncate text-xs font-medium',
-                  isIcon ? 'text-gray-500' : 'text-muted-foreground'
+                  isIcon ? 'text-muted-foreground' : 'text-muted-foreground'
                 )}
               >
                 {item.name}
@@ -65,14 +65,14 @@ export default function DashboardKPICards({ stats, variant = 'bordered' }: Props
               )}
               <p
                 className={clsx(
-                  item.changeType === 'increase' ? 'text-blue-600' : 'text-red-600',
+                  item.changeType === 'increase' ? 'text-primary' : 'text-destructive',
                   'ml-2 flex items-baseline text-xs font-semibold'
                 )}
               >
                 {item.changeType === 'increase' ? (
-                  <ArrowUpIcon aria-hidden="true" className="size-5 shrink-0 self-center text-blue-500" />
+                  <ArrowUpIcon aria-hidden="true" className="size-5 shrink-0 self-center text-primary" />
                 ) : (
-                  <ArrowDownIcon aria-hidden="true" className="size-5 shrink-0 self-center text-red-500" />
+                  <ArrowDownIcon aria-hidden="true" className="size-5 shrink-0 self-center text-destructive" />
                 )}
                 <span className="sr-only">
                   {item.changeType === 'increase' ? 'Increased' : 'Decreased'} by
@@ -80,9 +80,9 @@ export default function DashboardKPICards({ stats, variant = 'bordered' }: Props
                 {item.change}
               </p>
               {isIcon && (
-                <div className="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
+                <div className="absolute inset-x-0 bottom-0 bg-muted px-4 py-4 sm:px-6">
                   <div className="text-xs">
-                    <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                    <a href="#" className="font-medium text-primary hover:text-primary/80">
                       View all<span className="sr-only"> {item.name} stats</span>
                     </a>
                   </div>
