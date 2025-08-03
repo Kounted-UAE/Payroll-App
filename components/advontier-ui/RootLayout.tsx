@@ -62,16 +62,15 @@ function Header({
 
   return (
     <Container>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-x-4">
         <Link
-          href="/backyard"
-          aria-label="Dashboard"
+          href="/"
+          aria-label="Advontier Home Page"
           onMouseEnter={() => setLogoHovered(true)}
           onMouseLeave={() => setLogoHovered(false)}
         >
-         
-          <Logo
-            className="hidden h-16 sm:block"
+                   <Logo
+            className="h-12 sm:h-32"
             invert={invert}
             filled={logoHovered}
           />
@@ -140,7 +139,7 @@ function Navigation() {
     <nav className="mt-px font-display text-5xl font-medium tracking-tight text-white">
       <NavigationRow>
       <NavigationItem href="/our-roadmap">Our Roadmap</NavigationItem>
-        <NavigationItem href="/articles">Our Articles</NavigationItem>
+        <NavigationItem href="/articles">Our Thesis</NavigationItem>
             </NavigationRow>
     </nav>
   )

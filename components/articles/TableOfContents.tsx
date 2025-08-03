@@ -17,21 +17,21 @@ export default function TableOfContents({ className = '' }: TableOfContentsProps
   const [activeId, setActiveId] = useState<string>('')
 
   useEffect(() => {
-    // Extract headings from the article content only (not the entire page)
     const articleContent = document.querySelector('article')
     if (!articleContent) return
 
     const articleHeadings = Array.from(
       articleContent.querySelectorAll('h1, h2')
-    ).map((heading) => ({
-      id: heading.id,
-      text: heading.textContent || '',
-      level: parseInt(heading.tagName.charAt(1)),
-    }))
+    )
+      .map((heading) => ({
+        id: heading.id,
+        text: heading.textContent || '',
+        level: parseInt(heading.tagName.charAt(1)),
+      }))
+      .filter((heading) => heading.id && heading.id.trim() !== '')
 
     setHeadings(articleHeadings)
 
-    // Set up intersection observer for active heading
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -44,8 +44,10 @@ export default function TableOfContents({ className = '' }: TableOfContentsProps
     )
 
     articleHeadings.forEach(({ id }) => {
-      const element = articleContent.querySelector(`#${id}`)
-      if (element) observer.observe(element)
+      if (id && id.trim() !== '') {
+        const element = articleContent.querySelector(`#${id}`)
+        if (element) observer.observe(element)
+      }
     })
 
     return () => observer.disconnect()
@@ -75,4 +77,4 @@ export default function TableOfContents({ className = '' }: TableOfContentsProps
       </nav>
     </div>
   )
-} 
+}

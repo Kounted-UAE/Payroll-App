@@ -1,98 +1,43 @@
-import { type Metadata } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
+// app/articles/page.tsx
 
-import { Border } from '@/components/advontier-ui/Border'
-import { Button } from '@/components/advontier-ui/Button'
-import { Container } from '@/components/advontier-ui/Container'
-import { FadeIn } from '@/components/advontier-ui/FadeIn'
-import { PageIntro } from '@/components/advontier-ui/PageIntro'
+import { getAllArticlePosts } from '@/lib/articleLoader'
+import ArticleIndex from '@/components/articles/ArticleIndex'
+import ArticleCards from '@/components/articles/ArticleCards'
 import { RootLayout } from '@/components/advontier-ui/RootLayout'
-import { formatDate } from '@/lib/formatDate'
-import { loadArticles } from '@/lib/mdx'
-import { ArticleIndex } from '@/components/articles'
+import { PageIntro } from '@/components/advontier-ui/PageIntro'
+import { Container } from '@/components/advontier-ui/Container'
 
-export const metadata: Metadata = {
-  title: 'articles',
-  description:
-    'Stay up-to-date with the latest industry news as our marketing teams finds new ways to re-purpose old CSS tricks articles.',
+export const metadata = {
+  title: 'Articles',
+  description: 'Daily insights and perspectives on UAE accounting, payroll, and compliance trends.',
 }
 
-export default async function articles() {
-  let articles = await loadArticles()
+export default async function ArticlePage() {
+  const posts = await getAllArticlePosts()
 
   return (
     <RootLayout>
-      <PageIntro eyebrow="Articles" title="Insights and perspectives on the future of practice management and two-sided professional services platforms.">
-  <p>
-    Discover how AI, digital transformation, and two-sided marketplace models are redefining practice management, client relationships, and the identity of the accounting industry—both in the UAE and worldwide.
-  </p>
-</PageIntro>
-
+      <PageIntro
+        eyebrow="Articles"
+        title="Daily insights and perspectives on UAE accounting, payroll, and compliance trends."
+      >
+        <p>
+          Discover the latest regulatory updates, market trends, and actionable insights for accounting firms and digital platforms in the UAE—delivered daily by our AI research system.
+        </p>
+      </PageIntro>
 
       <Container className="mt-24 sm:mt-32 lg:mt-40">
         <div className="lg:grid lg:grid-cols-4 lg:gap-8">
-          {/* Article Index */}
-          <div className="hidden lg:block">
-            <ArticleIndex articles={articles} />
-          </div>
-
-          {/* Articles List */}
           <div className="lg:col-span-3">
-            <div className="space-y-24 lg:space-y-32">
-          {articles.map((article) => (
-            <FadeIn key={article.href}>
-              <article>
-                <Border className="pt-16">
-                  <div className="relative lg:-mx-4 lg:flex lg:justify-end">
-                    <div className="pt-10 lg:w-2/3 lg:flex-none lg:px-4 lg:pt-0">
-                      <h2 className="font-display text-2xl font-semibold text-neutral-950">
-                        <Link href={article.href}>{article.title}</Link>
-                      </h2>
-                      <dl className="lg:absolute lg:top-0 lg:left-0 lg:w-1/3 lg:px-4">
-                        <dt className="sr-only">Published</dt>
-                        <dd className="absolute top-0 left-0 text-sm text-neutral-950 lg:static">
-                          <time dateTime={article.date}>
-                            {formatDate(article.date)}
-                          </time>
-                        </dd>
-                        <dt className="sr-only">Author</dt>
-                        <dd className="mt-6 flex gap-x-4">
-                          <div className="flex-none overflow-hidden rounded-xl bg-neutral-100">
-                            <Image
-                              alt=""
-                              {...article.author.image}
-                              className="h-12 w-12 object-cover grayscale"
-                            />
-                          </div>
-                          <div className="text-sm text-neutral-950">
-                            <div className="font-semibold">
-                              {article.author.name}
-                            </div>
-                            <div>{article.author.role}</div>
-                          </div>
-                        </dd>
-                      </dl>
-                      <p className="mt-6 max-w-2xl text-base text-neutral-600">
-                        {article.description}
-                      </p>
-                                    <Button
-                href={article.href}
-                aria-label={`Read more: ${article.title}`}
-                className="mt-8"
-              >
-                Read more
-              </Button>
-            </div>
+            <ArticleCards posts={posts} />
           </div>
-        </Border>
-      </article>
-    </FadeIn>
-  ))}
+          <div className="hidden lg:block">
+            <div className="sticky top-8">
+              <ArticleIndex posts={posts} />
             </div>
           </div>
         </div>
-      </Container>     
+      </Container>
     </RootLayout>
   )
 }

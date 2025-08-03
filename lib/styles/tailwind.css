@@ -41,4 +41,43 @@
   --font-display--font-variation-settings: 'wdth' 125;
 
   --font-display-length: 2;
+
+  /* Tailwind-aligned color tokens */
+  --background: #f8fafc;                /* zinc-50 */
+  --foreground: #18181b;                /* zinc-900 */
+  --card: #fff;                         /* white */
+  --card-foreground: #18181b;           /* zinc-900 */
+  --popover: #fff;
+  --popover-foreground: #18181b;
+  --primary: #2563eb;                   /* blue-600 */
+  --primary-foreground: #fff;           /* white */
+  --secondary: #f1f5f9;                 /* zinc-100 */
+  --secondary-foreground: #18181b;      /* zinc-900 */
+  --muted: #f1f5f9;                     /* zinc-100 */
+  --muted-foreground: #64748b;          /* zinc-400 */
+  --accent: #c7d2fe;                    /* indigo-200 */
+  --accent-foreground: #2563eb;         /* blue-600 */
+  --destructive: #ef4444;               /* red-500 */
+  --destructive-foreground: #fff;       /* white */
+  --border: #e4e4e7;                    /* zinc-200 */
+  --input: #e4e4e7;                     /* zinc-200 */
+  --ring: #2563eb;                      /* blue-600 */
+
+  /* Example chart colors */
+  --chart-1: #2563eb;    /* blue-600 */
+  --chart-2: #22d3ee;    /* cyan-400 */
+  --chart-3: #a21caf;    /* purple-800 */
+  --chart-4: #16a34a;    /* green-600 */
+  --chart-5: #f59e42;    /* orange-400 */
+
+  /* Sidebar example */
+  --sidebar: #60a5fa;                    /* zinc-100 */
+  --sidebar-foreground: #18181b;         /* zinc-900 */
+  --sidebar-primary: #2563eb;            /* blue-600 */
+  --sidebar-primary-foreground: #fff;    /* white */
+  --sidebar-accent: #c7d2fe;             /* indigo-200 */
+  --sidebar-accent-foreground: #2563eb;  /* blue-600 */
+  --sidebar-border: #e4e4e7;             /* zinc-200 */
+ --sidebar-ring: #2563eb;               /* blue-600 */
+
 }

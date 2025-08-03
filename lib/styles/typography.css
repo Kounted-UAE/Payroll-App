@@ -95,7 +95,7 @@
     vertical-align: top;
     padding-top: --spacing(6);
     padding-bottom: --spacing(6);
-    border-bottom: 1px solid --theme(--color-neutral-950 / 0.1);
+    border-bottom: 1px solid var(--color-neutral-950 / 0.1);
   }
 
   :where(:is(th, td):not(:last-child)) {
@@ -113,7 +113,7 @@
     margin-left: calc(-1 * (--spacing(6)));
     margin-right: calc(-1 * (--spacing(6)));
 
-    @media (width >= theme(--breakpoint-sm)) {
+    @media (min-width: 640px) {
       margin-left: auto;
       margin-right: auto;
     }
@@ -121,19 +121,19 @@
 
   :where(pre code) {
     flex: none;
-    padding: theme(padding.8) theme(padding.6);
+    padding: var(--spacing-8) var(--spacing-6);
     font-size: var(--text-base);
-    line-height: theme(lineHeight.8);
+    line-height: 2;
     color: var(--color-white);
 
-    @media (width >= theme(--breakpoint-sm)) {
-      padding: --spacing(10);
+    @media (min-width: 640px) {
+      padding: var(--spacing-10);
     }
   }
 
   /* <hr> */
   :where(hr) {
-    border-color: --theme(--color-neutral-950 / 0.1);
+    border-color: var(--color-neutral-950 / 0.1);
     margin-top: --spacing(24);
     margin-bottom: --spacing(24);
   }

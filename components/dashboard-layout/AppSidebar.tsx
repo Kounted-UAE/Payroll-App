@@ -19,7 +19,7 @@ export function AppSidebar() {
   const isActive = (path: string) => pathname === path
   const getNavCls = (path: string) =>
     isActive(path)
-      ? "mx-6 bg-gradient-to-r to-primary/70 from-primary/50 to-primary/10 text-primary-foreground font-bold"
+      ? "mx-6 bg-neutral-500 text-neutral-50 font-bold"
       : "text-sidebar-foreground hover:bg-sidebar-accent"
 
   const toggle = (label: string) =>

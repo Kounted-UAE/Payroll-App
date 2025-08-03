@@ -7,8 +7,9 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { CheckCircle, AlertCircle, ArrowRight, Mail } from 'lucide-react'
-import { Logo } from '@/components/advontier-ui/Logo'
+import { CheckCircle, Circle,AlertCircle, ArrowRight, Mail } from 'lucide-react'
+import { Logo, Logomark } from '@/components/advontier-ui/Logo'
+import { FadeIn } from '../advontier-ui/FadeIn'
 
 export default function LoginForm() {
   const router = useRouter()
@@ -18,6 +19,19 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
+
+
+  const features = [
+    { label: 'Payroll Processing', status: 'Live' },
+    { label: 'Compliance Tools', status: 'Coming soon' },
+    { label: 'Client Onboarding', status: 'Coming soon' },
+    { label: 'On-Demand Service Ordering', status: 'Coming soon' },
+    { label: 'Comprehensive Retainer Configuration', status: 'Coming soon' },
+    { label: 'Client Portal', status: 'Coming soon' },
+    { label: 'Knowledge Base', status: 'Coming soon' },
+    { label: 'Accounting CRM', status: 'Coming soon' },
+  ]
+  
 
   const handleOTPLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -50,21 +64,16 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="w-full max-w-md mx-auto bg-white rounded-2xl border border-zinc-200 px-8 py-10 flex flex-col gap-8">
-      {/* Optional: Advontier Logo for trust */}
-      <div className="flex justify-center mb-2">
-        <Logo className="h-8 w-auto" />
-      </div>
-
+    <div className="w-full max-w-md mx-auto bg-white rounded-2xl p-6 sm:p-8 flex flex-col gap-6 sm:gap-8">
       {/* Header */}
-      <div className="space-y-2 text-center">
-        <h2 className="font-display text-xl font-semibold text-neutral-900">
-          Sign in with your email
-        </h2>
-        <p className="text-sm text-zinc-500">
-          Secure one-time code login for Advontier Practice Manager.
+      <FadeIn className="font-display">
+        <h1 className="font-display text-2xl font-medium tracking-tight text-balance sm:text-4xl">
+          Sign in to our prototype
+        </h1>
+        <p className="mt-4 sm:mt-6 text-sm sm:text-md text-neutral-600">
+          A prototype for accountants and advisors. Access client records, compliance calendars, payroll, and more.
         </p>
-      </div>
+      </FadeIn>
 
       {/* Alert messages */}
       {error && (
@@ -82,13 +91,10 @@ export default function LoginForm() {
 
       {/* Email form or OTP form */}
       {!showOTPInput ? (
-        <form
-          onSubmit={handleOTPLogin}
-          className="space-y-5"
-        >
+        <form onSubmit={handleOTPLogin} className="space-y-4 sm:space-y-5">
           <div className="space-y-1">
-            <Label htmlFor="email" className="text-base text-neutral-900 font-medium">
-              Work Email Address
+            <Label htmlFor="email" className="text-sm sm:text-base text-neutral-900 font-medium">
+              Registered Email Address
             </Label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400" />
@@ -106,23 +112,20 @@ export default function LoginForm() {
           </div>
           <Button
             type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white text-base font-semibold rounded-xl shadow-sm"
+            className="w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white text-sm sm:text-base font-semibold rounded-xl shadow-sm"
             disabled={loading}
           >
             {loading ? 'Sending OTP...' : 'Send login code'}
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
-          <p className="text-xs text-zinc-400 text-center">
-            We’ll email you a secure 6-digit code.
+          <p className="text-start text-xs text-zinc-400">
+            We'll email you a secure 6-digit code.
           </p>
         </form>
       ) : (
-        <form
-          onSubmit={handleOTPVerification}
-          className="space-y-5"
-        >
+        <form onSubmit={handleOTPVerification} className="space-y-4 sm:space-y-5">
           <div className="space-y-1">
-            <Label htmlFor="otp" className="text-base text-neutral-900 font-medium">
+            <Label htmlFor="otp" className="text-sm sm:text-base text-neutral-900 font-medium">
               Enter your 6-digit code
             </Label>
             <Input
@@ -139,7 +142,7 @@ export default function LoginForm() {
           </div>
           <Button
             type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white text-base font-semibold rounded-xl shadow-sm"
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white text-sm sm:text-base font-semibold rounded-xl shadow-sm"
             disabled={loading}
           >
             {loading ? 'Verifying...' : 'Verify & Sign In'}
@@ -159,10 +162,39 @@ export default function LoginForm() {
       {/* Support info */}
       <p className="text-center text-xs text-zinc-400 mt-2">
         Need help?{' '}
-        <a href="mailto:info@advontier.com" className="text-blue-500 underline">
+        <a 
+          href="mailto:info@advontier.com" 
+          className="text-blue-500 underline hover:text-blue-600"
+        >
           Contact support
         </a>
       </p>
+
+      {/* Feature Rollout - Hidden on mobile, shown on larger screens */}
+      <div className="w-full max-w-2xl mx-auto bg-zinc-100 rounded-2xl px-4 sm:px-8 py-6 sm:py-8 flex flex-col gap-4 sm:gap-6">
+        <h2 className="text-base sm:text-lg font-semibold text-blue-600 mb-2 tracking-tight text-center">
+          Advontier Feature Rollout
+        </h2>
+        <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
+          {features.map(({ label, status }) => (
+            <li key={label} className="flex items-center gap-2">
+              {status === 'Live' ? (
+                <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-blue-500" />
+              ) : (
+                <Circle className="h-3 w-3 sm:h-4 sm:w-4 text-zinc-300" />
+              )}
+              <span className="text-zinc-700 flex-1">{label}</span>
+              <span className="text-xs font-medium rounded px-2 py-0.5">
+                {status === 'Live' ? (
+                  <span className="text-blue-500 bg-blue-50 px-2 rounded font-semibold">Live</span>
+                ) : (
+                  <span className="text-zinc-400">{status}</span>
+                )}
+              </span>
+            </li>
+          ))}
+        </ul>        
+      </div>
     </div>
   )
 }
