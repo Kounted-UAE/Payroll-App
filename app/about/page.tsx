@@ -186,7 +186,7 @@ export const metadata: Metadata = {
 }
 
 export default async function About() {
-  let blogArticles = (await loadArticles()).slice(0, 2)
+  let articlesArticles = (await loadArticles()).slice(0, 2)
 
   return (
     <RootLayout>
@@ -224,9 +224,9 @@ export default async function About() {
 
       <PageLinks
         className="mt-24 sm:mt-32 lg:mt-40"
-        title="From the blog"
+        title="From the articles"
         intro="Our team of experienced designers and developers has just one thing on their mind; working on your ideas to draw a smile on the face of your users worldwide. From conducting Brand Sprints to UX Design."
-        pages={blogArticles}
+        pages={articlesArticles}
       />
 
       <ContactSection />
