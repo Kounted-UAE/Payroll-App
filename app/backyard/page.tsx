@@ -66,7 +66,7 @@ export default function DashboardHome() {
   const { active, comingSoon } = groupRoadmap(sidebarSections)
 
   return (
-    <div className="bg-transparent rounded-t-2xl">
+    <div className="bg-primary/10 rounded-t-2xl">
 
      {/* Quick Links Cards */}
 
@@ -146,7 +146,7 @@ export default function DashboardHome() {
                   leaveTo="translate-x-full"
                 >
                   <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                    <div className="flex h-full flex-col overflow-y-scroll bg-background py-6 shadow-xl">
+                    <div className="flex h-full flex-col overflow-y-scroll bg-background py-6">
                       <div className="px-4 sm:px-6">
                         <div className="flex items-start justify-between">
                           <Dialog.Title className="text-base font-semibold leading-6 text-foreground">
@@ -233,7 +233,7 @@ function DropdownMenu({ deck }: { deck: any }) {
         <span className="sr-only">Open options</span>
       </button>
       {/* Simulated menu */}
-      <div className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+      <div className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white focus:outline-none">
         <div className="py-1 text-xs">
           <button onClick={() => alert('View')} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">View</button>
           <button onClick={handleInfo} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Info</button>

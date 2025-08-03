@@ -16,7 +16,7 @@ const features = [
 
 export default function LoginNotice() {
   return (
-    <div className="w-full max-w-md mx-auto bg-zinc-50 border border-zinc-100 rounded-2xl px-8 py-8 shadow flex flex-col gap-6">
+    <div className="w-full max-w-md mx-auto bg-zinc-50 border border-zinc-100 rounded-2xl px-8 py-8 flex flex-col gap-6">
       <h2 className="text-lg font-semibold text-blue-600 mb-2 tracking-tight text-center">
         Advontier Feature Rollout
       </h2>

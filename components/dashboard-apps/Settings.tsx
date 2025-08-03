@@ -428,7 +428,7 @@ const Settings = () => {
             <CardContent className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="company-name">Company Name</Label>
-                <Input id="company-name" defaultValue="Kounted Accounting and Management Solutions" />
+                <Input id="company-name" defaultValue="Advontier Accounting and Management Solutions" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="timezone">Timezone</Label>

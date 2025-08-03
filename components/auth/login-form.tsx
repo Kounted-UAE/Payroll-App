@@ -50,7 +50,7 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="w-full max-w-md mx-auto bg-white rounded-2xl shadow-xl border border-zinc-200 px-8 py-10 flex flex-col gap-8">
+    <div className="w-full max-w-md mx-auto bg-white rounded-2xl border border-zinc-200 px-8 py-10 flex flex-col gap-8">
       {/* Optional: Advontier Logo for trust */}
       <div className="flex justify-center mb-2">
         <Logo className="h-8 w-auto" />

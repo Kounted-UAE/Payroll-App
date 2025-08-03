@@ -16,6 +16,15 @@ import {
       collapsible: false,
     },
     {
+      label: "Admin",
+      items: [
+        { title: "Dev Progress", url: "/backyard/admin/dev-progress", icon: GitBranch, status: "active" },
+        { title: "Historic Payruns", url: "/backyard/admin/temp-payrun-history", icon: PanelTopInactiveIcon, status: "active" },        
+        { title: "Excel File Payslips", url: "/backyard/admin/temp-excelpayrun-import", icon: FileSpreadsheet, status: "active" },       
+        { title: "Xero Config", url: "/backyard/admin/xero-config", icon: FileSpreadsheet, status: "active" },       
+      ],
+    },
+    {
       label: "Client Profiles",
       items: [
               { title: "Airtable", url: "/backyard/clients", icon: Users, status: "active" },      ],
@@ -31,7 +40,7 @@ import {
     {
       label: "Payroll Tools",
       items: [
-        { title: "Kounted Payroll", url: "/backyard/payroll", icon: BarChart3, status: "active" },
+        { title: "Advontier Payroll", url: "/backyard/payroll", icon: BarChart3, status: "active" },
         { title: "Employers", url: "/backyard/payroll/employers", icon: Building, status: "active" },
         { title: "Employees", url: "/backyard/payroll/employees", icon: Users, status: "active" },
         { title: "Payroll Payruns", url: "/backyard/payroll/payruns", icon: BarChart3, status: "active" },
@@ -47,24 +56,16 @@ import {
     {
       label: "Resource Centre",
       items: [
-        { title: "Key Dates", url: "/backyard/compliance-calendar", icon: Calendar, status: "active" },
-        { title: "Kounted SOPs", url: "/backyard/sop-resources", icon: BookOpen, status: "active" },         
-        { title: "Templates", url: "#", icon: LayoutTemplate, status: "active" },
-        { title: "Info Links", url: "#", icon: LinkIcon, status: "active" },
+        { title: "Key Dates", url: "/backyard/compliance-calendar", icon: Calendar, status: "wip" },
+        { title: "Advontier SOPs", url: "/backyard/sop-resources", icon: BookOpen, status: "wip" },         
+        { title: "Templates", url: "#", icon: LayoutTemplate, status: "wip" },
+        { title: "Info Links", url: "#", icon: LinkIcon, status: "wip" },
       ],
     },
-    {
-      label: "Admin",
-      items: [
-        { title: "Dev Progress", url: "/backyard/dev-progress", icon: GitBranch, status: "active" },
-        { title: "Historic Payruns", url: "/backyard/admin/temp-payrun-history", icon: PanelTopInactiveIcon, status: "active" },        
-        { title: "Excel File Payslips", url: "/backyard/admin/temp-excelpayrun-import", icon: FileSpreadsheet, status: "active" },       
-        { title: "Xero Config", url: "/backyard/admin/xero-config", icon: FileSpreadsheet, status: "active" },       
-      ],
-    },
+   
     {
       label: "Settings",
-      items: [{ title: "Settings", url: "/backyard/settings", icon: Settings, status: "active" }],
+      items: [{ title: "Settings", url: "/backyard/settings", icon: Settings, status: "coming-soon" }],
       collapsible: false,
     },
   ]

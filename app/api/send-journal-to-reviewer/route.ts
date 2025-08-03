@@ -181,11 +181,11 @@ export async function POST(req: NextRequest) {
       To report errors or request support, please reply to payroll@kounted.ae.
 
       Warm regards,
-      Team Kounted
+      Team Advontier
 
       ---
       Powered by Advontier Web Forms.
-      This email was sent on behalf of Kounted Accounting and Management Solutions.
+      This email was sent on behalf of Advontier Accounting and Management Solutions.
     `
 
     // Send email with Resend

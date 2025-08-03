@@ -41,7 +41,7 @@ console.log('📄 PDF:', url)
     </p>
 
     <p style="font-size: 12px; color: #888; margin-top: 32px;">
-      This message was sent by the Kounted Business Suite. Do not reply directly to this email.
+      This message was sent by the Advontier Business Suite. Do not reply directly to this email.
     </p>
   </div>
   `

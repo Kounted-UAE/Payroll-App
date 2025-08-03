@@ -94,7 +94,7 @@ export default function SOPResourceCenter() {
           <div>
             <h1 className="text-lg font-bold text-foreground">SOP Resource Center</h1>
             <p className="text-muted-foreground">
-              Comprehensive Standard Operating Procedures for Kounted's 7 Solution Groups
+              Comprehensive Standard Operating Procedures for Advontier's 7 Solution Groups
             </p>
           </div>
           <div className="flex gap-3">
@@ -185,7 +185,7 @@ export default function SOPResourceCenter() {
 
         {/* Solution Groups Grid */}
         <div>
-          <h2 className="text-xs font-semibold mb-6">Kounted Solution Groups</h2>
+          <h2 className="text-xs font-semibold mb-6">Advontier Solution Groups</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {categories.map((category) => {
               const Icon = categoryIcons[category.id as keyof typeof categoryIcons] || FileText;

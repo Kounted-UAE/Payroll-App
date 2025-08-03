@@ -72,7 +72,7 @@ function DropdownMenu({ deck }: { deck: Deck }) {
         <EllipsisVerticalIcon className="h-5 w-5" />
         <span className="sr-only">Open options</span>
       </button>
-      <div className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-popover shadow-lg ring-1 ring-border focus:outline-none">
+      <div className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-popover focus:outline-none">
         <div className="py-1 text-xs">
           <button onClick={() => alert('View')} className="block w-full text-left px-4 py-2 text-popover-foreground hover:bg-accent">View</button>
           <button onClick={handleInfo} className="block w-full text-left px-4 py-2 text-popover-foreground hover:bg-accent">Info</button>

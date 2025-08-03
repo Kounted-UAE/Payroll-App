@@ -55,7 +55,7 @@ export function TopNavbar() {
           <SidebarTrigger className="h-12 w-12 rounded-r-full hover:bg-accent" />
           <nav className="hidden md:flex items-center gap-2" aria-label="Breadcrumb">
             {breadcrumbs.length === 0 ? (
-              <span className="text-muted-foreground font-medium">Kounted</span>
+              <span className="text-muted-foreground font-medium">Advontier</span>
             ) : (
               <>
                 <span className="text-primary font-bold">&#8759;</span>

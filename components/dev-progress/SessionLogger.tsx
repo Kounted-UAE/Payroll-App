@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Loader2, Brain, Save, Calendar } from 'lucide-react';
 import { toast } from 'sonner';
 import type { CreateSessionLogRequest, AISessionAnalysis, ProjectFeature } from '@/lib/types/dev-progress';
+import { DatePicker } from '@/components/ui/date-picker';
 
 interface SessionLoggerProps {
   features: ProjectFeature[];
@@ -29,11 +30,23 @@ export default function SessionLogger({ features, onSessionCreated, className }:
     features_worked_on: []
   });
 
+  // Add state for the date picker
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
+
   const handleInputChange = (field: keyof CreateSessionLogRequest, value: string | string[]) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
     }));
+  };
+
+  // Handle date change from DatePicker
+  const handleDateChange = (date: Date | undefined) => {
+    setSelectedDate(date);
+    if (date) {
+      const dateString = date.toISOString().split('T')[0];
+      handleInputChange('session_date', dateString);
+    }
   };
 
   const analyzeWithAI = async () => {
@@ -148,12 +161,10 @@ export default function SessionLogger({ features, onSessionCreated, className }:
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <Label htmlFor="session_date">Session Date</Label>
-              <Input
-                id="session_date"
-                type="date"
-                value={formData.session_date}
-                onChange={(e) => handleInputChange('session_date', e.target.value)}
-                required
+              <DatePicker
+                date={selectedDate}
+                onDateChange={handleDateChange}
+                placeholder="Select session date"
               />
             </div>
             <div>
