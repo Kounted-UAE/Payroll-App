@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Search, FileText, Calendar, DollarSign } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
+import { getSupabaseClient } from '@/lib/supabase/client';
 import { toast } from '@/hooks/use-toast';
 import { ActionButtons } from '@/components/ui/action-buttons';
 import OrderActionsDialog from '@/components/wizards/korp-kiosk/OrderActionsDialog';
@@ -32,6 +32,7 @@ export default function OrdersList() {
   const loadOrders = async () => {
     try {
       setLoading(true);
+      const supabase = getSupabaseClient();
       const { data, error } = await supabase
         .from('order_intakes')
         .select('*')
@@ -53,6 +54,7 @@ export default function OrdersList() {
 
   const handleDelete = async (orderId: string) => {
     try {
+      const supabase = getSupabaseClient();
       const { error } = await supabase
         .from('order_intakes')
         .delete()
@@ -77,6 +79,7 @@ export default function OrdersList() {
 
   const handleSendEmail = async (order: Order) => {
     try {
+      const supabase = getSupabaseClient();
       const { error } = await supabase.functions.invoke('send-order-email', {
         body: { orderId: order.id }
       });

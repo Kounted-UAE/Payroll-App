@@ -59,28 +59,28 @@ const PayrollDashboard = () => {
       description: "Onboard a new client company",
       icon: Building,
       href: "/backyard/payroll/employers/new",
-      color: "bg-primary"
+      color: "bg-blue-500"
     },
     {
       title: "Add Employee",
       description: "Register new employee",
       icon: Users,
       href: "/backyard/payroll/employees/new",
-      color: "bg-primary"
+      color: "bg-blue-500"
     },
     {
       title: "Create Payrun",
       description: "Process monthly payroll",
       icon: FileText,
       href: "/backyard/payroll/payruns/new",
-      color: "bg-primary"
+      color: "bg-blue-500"
     },
     {
       title: "Review Claims",
       description: "Approve expense claims",
       icon: Receipt,
       href: "/backyard/payroll/expenses",
-      color: "bg-primary"
+      color: "bg-blue-500"
     }
   ]
 
@@ -179,11 +179,11 @@ const PayrollDashboard = () => {
                 ) : (
                   <>
                     {stat.trend.isPositive ? (
-                      <TrendingUp className="h-3 w-3 text-green-500 mr-1" />
+                      <TrendingUp className="h-3 w-3 text-blue-500 mr-1" />
                     ) : (
                       <TrendingDown className="h-3 w-3 text-red-500 mr-1" />
                     )}
-                    <span className={`text-xs ${stat.trend.isPositive ? 'text-green-500' : 'text-red-500'}`}>
+                    <span className={`text-xs ${stat.trend.isPositive ? 'text-blue-500' : 'text-red-500'}`}>
                       {stat.trend.description}
                     </span>
                   </>
@@ -209,7 +209,7 @@ const PayrollDashboard = () => {
                 {quickActions.map((action) => (
                   action.href ? (
                     <Link key={action.title} href={action.href}>
-                      <Card className="cursor-pointer text-zinc-800 bg-zinc-100 hover:bg-primary hover:text-zinc-100 transition-colors border-none">
+                      <Card className="cursor-pointer text-zinc-800 bg-zinc-100 hover:bg-blue-500 hover:text-zinc-100 transition-colors border-none">
                         <CardContent className="p-2">
                           <div className="flex items-center space-x-3">
                             <div className={`p-2 rounded-md ${action.color}`}>
@@ -266,7 +266,7 @@ const PayrollDashboard = () => {
                   </div>
                   <p className="text-xs text-muted-foreground">{activity.company}</p>
                   {activity.amount && (
-                    <p className="text-xs font-semibold text-green-600">{activity.amount}</p>
+                    <p className="text-xs font-semibold text-blue-600">{activity.amount}</p>
                   )}
                   {activity.employee && (
                     <p className="text-xs text-blue-600">{activity.employee}</p>

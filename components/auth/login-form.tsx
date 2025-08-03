@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { CheckCircle, AlertCircle, ArrowRight, Mail } from 'lucide-react'
-
+import { Logomark } from '@/components/advontier-ui/Logo'
 export default function LoginForm() {
   const router = useRouter()
   const [email, setEmail] = useState('')
@@ -52,18 +52,8 @@ export default function LoginForm() {
   return (
     <div className="w-full max-w-md mx-auto space-y-6 text-white">
       {/* Header */}
-      <div className="space-y-3 text-center">
-        <Image
-          src="/icons/kounted_Icon_green_light.webp"
-          alt="Kounted Logo"
-          width={48}
-          height={48}
-          className="mx-auto py-2"
-        />
-        <p className={'mt-6 text-xs leading-6 font-semibold text-lime-600 '}>
-          Welcome to the Sheet Show
-        </p>
-        <p className="text-xs text-zinc-300">
+      <div className="space-y-3 text-center">       
+        <p className="text-md text-zinc-400">
           Enter your email to receive a secure one-time login code.
         </p>
       </div>
@@ -89,7 +79,7 @@ export default function LoginForm() {
           className="space-y-5 bg-white/5 backdrop-blur-md border border-border rounded-2xl p-6 shadow-lg"
         >
           <div className="space-y-1">
-            <Label htmlFor="email" className="text-xs text-lime-600">
+            <Label htmlFor="email" className="text-sm text-blue-600">
               Enter your Kounted email
             </Label>
             <div className="relative">
@@ -100,20 +90,20 @@ export default function LoginForm() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@kounted.ae"
-                className="pl-10 bg-white text-black text-xs"
+                className="pl-10 bg-white text-black text-sm"
                 required
               />
             </div>
           </div>
           <Button
             type="submit"
-            className="w-full bg-blue-600 text-white text-xs"
+            className="w-full bg-blue-600 text-white text-sm"
             disabled={loading}
           >
             {loading ? 'Sending OTP...' : 'Send OTP to Email'}
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
-          <p className="text-xs text-zinc-400">
+          <p className="text-sm text-zinc-400">
             We’ll send a 6-digit login code to your email address.
           </p>
         </form>
@@ -123,7 +113,7 @@ export default function LoginForm() {
           className="space-y-5 bg-white/5 backdrop-blur-md border border-border rounded-2xl p-6 shadow-lg"
         >
           <div className="space-y-1">
-            <Label htmlFor="otp" className="text-xs text-primary">
+            <Label htmlFor="otp" className="text-sm text-blue-500">
               Enter OTP Code
             </Label>
             <Input
@@ -132,7 +122,7 @@ export default function LoginForm() {
               value={otpToken}
               onChange={(e) => setOtpToken(e.target.value)}
               placeholder="123456"
-              className="text-center text-xs tracking-widest text-black bg-white"
+              className="text-center text-sm tracking-widest text-black bg-white"
               maxLength={6}
               required
             />
@@ -141,14 +131,14 @@ export default function LoginForm() {
             {loading ? 'Verifying...' : 'Verify & Sign In'}
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
-          <Button variant="ghost" onClick={resetOTPFlow} className="text-xs text-zinc-400">
+          <Button variant="ghost" onClick={resetOTPFlow} className="text-sm text-zinc-400">
             ← Back to email entry
           </Button>
         </form>
       )}
 
       {/* Support info */}
-      <p className="text-center text-xs text-zinc-400">
+      <p className="text-center text-sm text-zinc-400">
         Need help? Contact{' '}
         <a href="mailto:app-accounts@advontier.com" className="text-blue-400 underline">
           app-accounts@advontier.com

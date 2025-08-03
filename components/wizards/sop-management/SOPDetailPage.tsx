@@ -177,7 +177,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center gap-2 mb-2">
-                <Calendar className="h-4 w-4 text-primary" />
+                <Calendar className="h-4 w-4 text-blue-500" />
                 <span className="text-xs font-medium">Last Updated</span>
               </div>
               <p className="text-xs text-muted-foreground">{getTimeAgo(new Date(sopData.updated_at))}</p>
@@ -187,7 +187,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center gap-2 mb-2">
-                <FileText className="h-4 w-4 text-primary" />
+                <FileText className="h-4 w-4 text-blue-500" />
                 <span className="text-xs font-medium">Category</span>
               </div>
               <Badge>{categoryInfo?.name || category?.replace('-', ' ')}</Badge>
@@ -197,7 +197,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center gap-2 mb-2">
-                <CheckCircle className="h-4 w-4 text-primary" />
+                <CheckCircle className="h-4 w-4 text-blue-500" />
                 <span className="text-xs font-medium">Status</span>
               </div>
               <Badge variant={sopData.status === 'active' ? 'default' : 'secondary'}>
@@ -219,7 +219,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
             <ul className="space-y-2">
               {sopData.who_and_when.map((item, index) => (
                 <li key={index} className="text-muted-foreground flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-blue-500 mt-1">•</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -238,11 +238,11 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
           <CardContent className="space-y-6">
             {sopData.data_documents_required.map((section, index) => (
               <div key={index}>
-                <h4 className="font-semibold mb-2 text-primary">{section.category}</h4>
+                <h4 className="font-semibold mb-2 text-blue-500">{section.category}</h4>
                 <ul className="space-y-1">
                   {section.items.map((item, itemIndex) => (
                     <li key={itemIndex} className="text-muted-foreground flex items-start gap-2">
-                      <span className="text-primary mt-1">•</span>
+                      <span className="text-blue-500 mt-1">•</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -265,7 +265,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
             {sopData.process_workflow.map((step, index) => (
               <div key={index} className="space-y-3">
                 <div className="flex items-start gap-3">
-                  <div className="flex items-center justify-center w-8 h-8 bg-primary text-primary-foreground rounded-full text-xs font-medium">
+                  <div className="flex items-center justify-center w-8 h-8 bg-blue-500 text-blue-500-foreground rounded-full text-xs font-medium">
                     {step.step}
                   </div>
                   <div className="flex-1">
@@ -279,7 +279,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
                     <ul className="space-y-1">
                       {step.details.map((detail, detailIndex) => (
                         <li key={detailIndex} className="text-xs text-muted-foreground flex items-start gap-2">
-                          <span className="text-primary mt-1">•</span>
+                          <span className="text-blue-500 mt-1">•</span>
                           <span>{detail}</span>
                         </li>
                       ))}

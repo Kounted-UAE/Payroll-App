@@ -153,10 +153,10 @@ const CreatePayrunWizard = () => {
             {steps.map((step, index) => (
               <div key={step.id} className="flex items-center">
                 <div className={`flex items-center space-x-2 ${
-                  currentStep >= step.id ? "text-primary" : "text-muted-foreground"
+                  currentStep >= step.id ? "text-blue-500" : "text-muted-foreground"
                 }`}>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${
-                    currentStep >= step.id ? "bg-primary text-primary-foreground" : "bg-muted"
+                    currentStep >= step.id ? "bg-blue-500 text-blue-500-foreground" : "bg-muted"
                   }`}>
                     {currentStep > step.id ? <CheckCircle className="h-4 w-4" /> : step.id}
                   </div>
@@ -167,7 +167,7 @@ const CreatePayrunWizard = () => {
                 </div>
                 {index < steps.length - 1 && (
                   <div className={`h-px w-20 mx-4 ${
-                    currentStep > step.id ? "bg-primary" : "bg-muted"
+                    currentStep > step.id ? "bg-blue-500" : "bg-muted"
                   }`} />
                 )}
               </div>
@@ -192,8 +192,8 @@ const CreatePayrunWizard = () => {
                     key={employer.id}
                     className={`p-4 border rounded-lg cursor-pointer transition-all ${
                       data.employer_id === employer.id 
-                        ? "border-primary bg-primary/5" 
-                        : "border-border hover:border-primary/50"
+                        ? "border-blue-500 bg-blue-500/5" 
+                        : "border-border hover:border-blue-500/50"
                     }`}
                     onClick={() => setData(prev => ({ ...prev, employer_id: employer.id }))}
                   >
@@ -206,7 +206,7 @@ const CreatePayrunWizard = () => {
                         </div>
                       </div>
                       {data.employer_id === employer.id && (
-                        <CheckCircle className="h-5 w-5 text-primary" />
+                        <CheckCircle className="h-5 w-5 text-blue-500" />
                       )}
                     </div>
                   </div>
@@ -386,7 +386,7 @@ const CreatePayrunWizard = () => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Estimated Gross:</span>
-                      <span className="font-medium text-primary">AED {totalGrossPay.toLocaleString()}</span>
+                      <span className="font-medium text-blue-500">AED {totalGrossPay.toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Status:</span>

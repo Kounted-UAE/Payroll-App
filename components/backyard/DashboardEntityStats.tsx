@@ -38,7 +38,7 @@ export default function DashboardEntityStats({ metrics }: Props) {
         return (
           <Card key={metric.label} className="relative overflow-hidden rounded-lg bg-white px-2 pt-2 pb-12 shadow-sm sm:px-6 sm:pt-6">
             <dt>
-              <div className="absolute rounded-md bg-green-500 p-2">
+              <div className="absolute rounded-md bg-blue-500 p-2">
                 <Icon className="h-3 w-3 text-white" aria-hidden="true" />
               </div>
               <p className="ml-12 truncate text-xs font-medium text-muted-foreground">
@@ -56,7 +56,7 @@ export default function DashboardEntityStats({ metrics }: Props) {
             {metric.link && (
               <div className="absolute inset-x-0 bottom-0 bg-zinc-100 px-4 py-4 sm:px-6">
                 <div className="text-xs">
-                  <a href={metric.link} className="font-semibold text-zinc-500 hover:text-green-800 hover:underline underline-offset-2">
+                  <a href={metric.link} className="font-semibold text-zinc-500 hover:text-blue-800 hover:underline underline-offset-2">
                     View all<span className="sr-only"> {metric.label}</span>
                   </a>
                 </div>

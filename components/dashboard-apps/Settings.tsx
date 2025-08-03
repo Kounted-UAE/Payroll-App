@@ -288,7 +288,7 @@ const Settings = () => {
                     <TableRow key={user.id}>
                       <TableCell>
                         <div className="flex items-center gap-3">
-                          <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+                          <div className="h-8 w-8 rounded-full bg-blue-500/10 flex items-center justify-center">
                             <User className="h-4 w-4" />
                           </div>
                           <div>

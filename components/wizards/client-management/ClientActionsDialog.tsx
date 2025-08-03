@@ -20,8 +20,7 @@ interface Client {
   contact_person: string;
   email: string;
   phone?: string;
-  business_type: string;
-  status: string;
+  business_type?: string;
 }
 
 interface ClientActionsDialogProps {
@@ -44,8 +43,7 @@ export default function ClientActionsDialog({
     contact_person: '',
     email: '',
     phone: '',
-    business_type: '',
-    status: 'active'
+    business_type: ''
   });
   const [loading, setLoading] = useState(false);
 
@@ -57,8 +55,7 @@ export default function ClientActionsDialog({
           contact_person: client.contact_person,
           email: '',
           phone: client.phone || '',
-          business_type: client.business_type,
-          status: 'active'
+          business_type: client.business_type || ''
         });
       } else {
         setFormData({
@@ -66,8 +63,7 @@ export default function ClientActionsDialog({
           contact_person: client.contact_person,
           email: client.email,
           phone: client.phone || '',
-          business_type: client.business_type,
-          status: client.status
+          business_type: client.business_type || ''
         });
       }
     }

@@ -114,8 +114,8 @@ export default function SOPResourceCenter() {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-primary/10 rounded-lg">
-                  <FileText className="h-6 w-6 text-primary" />
+                <div className="p-3 bg-blue-500/10 rounded-lg">
+                  <FileText className="h-6 w-6 text-blue-500" />
                 </div>
                 <div>
                   <p className="text-xs font-bold">{stats.total_sops}</p>
@@ -128,8 +128,8 @@ export default function SOPResourceCenter() {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-green-500/10 rounded-lg">
-                  <TrendingUp className="h-6 w-6 text-primary" />
+                <div className="p-3 bg-blue-500/10 rounded-lg">
+                  <TrendingUp className="h-6 w-6 text-blue-500" />
                 </div>
                 <div>
                   <p className="text-xs font-bold">{stats.solution_groups}</p>

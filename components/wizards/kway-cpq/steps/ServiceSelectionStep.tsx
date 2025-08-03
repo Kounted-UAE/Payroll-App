@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import FormSection from '@/components/wizards/FormSection';
-import { RadioField } from '@/components/wizards/FormField';
+import FormSection from '@/components/forms/FormSection';
+import { RadioField } from '@/components/forms/FormField';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Check, ArrowRight } from 'lucide-react';
@@ -127,10 +127,10 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
           {/* Standard Tier */}
-          <Card className={`border-2 ${data.selectedTier === 'standard' ? 'border-primary' : 'border-border'}`}>
+          <Card className={`border-2 ${data.selectedTier === 'standard' ? 'border-blue-500' : 'border-border'}`}>
             <CardContent className="p-0">
               <div 
-                className={`p-4 ${data.selectedTier === 'standard' ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
+                className={`p-4 ${data.selectedTier === 'standard' ? 'bg-blue-500 text-blue-500-foreground' : 'bg-muted'}`}
                 onClick={() => updateField('selectedTier', 'standard')}
               >
                 <div className="flex items-center justify-between mb-1">
@@ -151,19 +151,19 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
 
                 <ul className="space-y-2 mb-4">
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
                     <span>Basic Bookkeeping & Accounting</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
                     <span>Quarterly Financial Statements</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
                     <span>VAT & Tax Compliance</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
                     <span>Basic Payroll Processing</span>
                   </li>
                 </ul>
@@ -177,10 +177,10 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
           </Card>
 
           {/* Premium Tier */}
-          <Card className={`border-2 ${data.selectedTier === 'premium' ? 'border-primary' : 'border-border'}`}>
+          <Card className={`border-2 ${data.selectedTier === 'premium' ? 'border-blue-500' : 'border-border'}`}>
             <CardContent className="p-0">
               <div 
-                className={`p-4 ${data.selectedTier === 'premium' ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
+                className={`p-4 ${data.selectedTier === 'premium' ? 'bg-blue-500 text-blue-500-foreground' : 'bg-muted'}`}
                 onClick={() => updateField('selectedTier', 'premium')}
               >
                 <div className="flex items-center justify-between mb-1">
@@ -201,23 +201,23 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
 
                 <ul className="space-y-2 mb-4">
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
                     <span>Full Bookkeeping & Accounting</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
                     <span>Monthly Financial Statements</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
                     <span>Advanced Tax Services</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
                     <span>Complete Payroll & HR Services</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
                     <span>Financial Advisory</span>
                   </li>
                 </ul>
@@ -232,10 +232,10 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
           </Card>
 
           {/* Enterprise Tier */}
-          <Card className={`border-2 ${data.selectedTier === 'enterprise' ? 'border-primary' : 'border-border'}`}>
+          <Card className={`border-2 ${data.selectedTier === 'enterprise' ? 'border-blue-500' : 'border-border'}`}>
             <CardContent className="p-0">
               <div 
-                className={`p-4 ${data.selectedTier === 'enterprise' ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
+                className={`p-4 ${data.selectedTier === 'enterprise' ? 'bg-blue-500 text-blue-500-foreground' : 'bg-muted'}`}
                 onClick={() => updateField('selectedTier', 'enterprise')}
               >
                 <div className="flex items-center justify-between mb-1">
@@ -256,27 +256,27 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
 
                 <ul className="space-y-2 mb-4">
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
                     <span>Comprehensive Finance Department</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
                     <span>Dedicated Account Manager</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
                     <span>CFO-Level Strategic Advisory</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
                     <span>Complete Tax & Compliance</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
                     <span>Full HR & Payroll Management</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
                     <span>Custom Reporting & Analytics</span>
                   </li>
                 </ul>

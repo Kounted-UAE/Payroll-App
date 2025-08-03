@@ -34,7 +34,7 @@ export function AppSidebar() {
   const isActive = (path: string) => pathname === path
   const getNavCls = (path: string) =>
     isActive(path)
-      ? "mx-6 bg-gradient-to-r to-primary/70 from-primary/50 to-primary/10 text-white font-bold"
+      ? "mx-6 bg-gradient-to-r to-blue-500/70 from-blue-500/50 to-blue-500/10 text-white font-bold"
       : "text-zinc-700 hover:bg-zinc-100"
 
   const toggle = (label: string) =>
@@ -56,7 +56,7 @@ export function AppSidebar() {
           </div>
         ) : (
           <div className="h-full flex justify-center items-center">
-            <HomeIcon className="h-8 w-8 text-zinc-100 bg-primary/50 rounded-md p-2" />
+            <HomeIcon className="h-8 w-8 text-zinc-100 bg-blue-500/50 rounded-md p-2" />
           </div>
         )}
       </SidebarHeader>
@@ -68,7 +68,7 @@ export function AppSidebar() {
             <SidebarGroup key={section.label}>
               {!collapsed && (
                 <div className="flex items-center justify-between px-3 py-2">
-                  <SidebarGroupLabel className="text-primary text-xs font-semibold uppercase tracking-wide">
+                  <SidebarGroupLabel className="text-blue-500 text-xs font-semibold uppercase tracking-wide">
                     {section.label}
                   </SidebarGroupLabel>
                   {section.collapsible !== false && (
@@ -99,7 +99,7 @@ export function AppSidebar() {
                           <SidebarMenuItem key={item.title}>
                             {isInactive ? (
                               <div className="flex items-center px-3 py-1.5 opacity-70 italic text-zinc-400 cursor-not-allowed select-none">
-                                <item.icon className="h-6 w-6 bg-zinc-400 text-green-100 rounded-full p-1 flex-shrink-0" />
+                                <item.icon className="h-6 w-6 bg-zinc-400 text-blue-100 rounded-full p-1 flex-shrink-0" />
 
                                 {!collapsed && (
                                   <>
@@ -119,7 +119,7 @@ export function AppSidebar() {
                                     getNavCls(item.url)
                                   )}
                                 >
-                                  <item.icon className="h-5 w-5 min-w-7 min-h-7 bg-primary text-green-100 rounded-full p-2 flex-shrink-0" />
+                                  <item.icon className="h-5 w-5 min-w-7 min-h-7 bg-blue-500 text-blue-100 rounded-full p-2 flex-shrink-0" />
 
 
 
@@ -147,7 +147,7 @@ export function AppSidebar() {
             <Button
               variant="outline"
               size="sm"
-              className="w-full bg-primary text-white flex items-center gap-2"
+              className="w-full bg-blue-500 text-white flex items-center gap-2"
             >
               <Plus className="h-3 w-3" />
               Quick Add
@@ -155,7 +155,7 @@ export function AppSidebar() {
           </div>
         ) : (
           <div className="p-2 flex justify-center">
-            <Button variant="outline" size="sm" className="bg-primary text-white">
+            <Button variant="outline" size="sm" className="bg-blue-500 text-white">
               <Plus className="h-4 w-4" />
             </Button>
           </div>

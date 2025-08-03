@@ -5,51 +5,40 @@
 import Image from 'next/image'
 import LoginForm from '@/components/auth/login-form'
 import LoginNotice from '@/components/auth/login-notice'
+import { Logo } from '@/components/advontier-ui/Logo'
+import { Container } from '@/components/advontier-ui/Container'
+import { FadeIn } from '@/components/advontier-ui/FadeIn'
+import { RootLayout } from '@/components/advontier-ui/RootLayout'
 
 export default function LoginPage() {
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-start px-4 py-4">
+    <RootLayout>
+      <Container className="mt-20 sm:mt-24 md:mt-32">
+        <FadeIn className="max-w-3xl font-display">
+          <h1 className="font-display text-xl font-medium tracking-tight text-balance sm:text-7xl">
+            If you're an accountant in the UAE, you're in the right place
+          </h1>
+          <p className="mt-6 text-md text-neutral-600">
+            Login to our practice management platform to access client data, compliance calendars, and more...
+          </p>
+        </FadeIn>
+      </Container>
+         
       
-       {/* Background pattern */}
-       <div className="absolute inset-0 -z-10 overflow-hidden  bg-zinc-900">
-        <Image
-          src="/backgrounds/kounted_bg_charcoal.webp"
-          alt="Dark background"
-          fill
-          className="object-cover opacity-10 block "
-          priority
-        />
-      </div>
+      {/* Login Section */}
+      <Container className="mt-24 sm:mt-32 lg:mt-40">
+        <div className="flex flex-col items-center justify-center mx-auto">
+              
+          <FadeIn >
+            <div className="w-full m-12 flex gap-24 flex-col-2 items-center justify-center">
+          
+             <LoginForm />
+             <LoginNotice />
+            </div>
+          </FadeIn>
 
-
-
-      {/* Hero */}
-      <section className='mx-auto max-w-7xl relative flex items-center justify-between mt-8 px-4'>
-      <div className='text-center w-full '>
-      <Image
-          src="/logos/kounted_logo_text_light.webp"
-          alt="Kounted Logo"
-          width={240}
-          height={60}
-          className="mx-auto py-2"
-        />
-          <h2 className=" max-w-3xl text-4xl mt-4 font-medium tracking-tight leading-tight text-white">
-                     We take <span className="text-lime-600">complete ownership</span> of our client's compliance and operational requirements.
-          </h2>
-          <br />        
-        
-      </div>
-    </section>
-
-      {/* Form */}
-      <div className="w-full max-w-md mt-2 backdrop-blur-sm border border-border rounded-2xl p-6 shadow-xl z-10">
-        <LoginForm />
-      </div>
-
-      {/* Notice */}
-      <div className="w-full max-w-md mt-2 backdrop-blur-sm">
-        <LoginNotice />
-      </div>
-    </div>
+        </div>
+      </Container>
+    </RootLayout>
   )
 }

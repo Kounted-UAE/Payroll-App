@@ -94,7 +94,7 @@ const Index = () => {
 <Card className="bg-card border-border">
   <CardHeader>
     <CardTitle className="text-xs font-semibold">Total Revenue</CardTitle>
-    <div className="text-xs font-bold text-primary">$45,231.89</div>
+    <div className="text-xs font-bold text-blue-500">$45,231.89</div>
     <p className="text-xs text-muted-foreground">+20.1% from last month</p>
   </CardHeader>
 </Card>`
@@ -109,7 +109,7 @@ const Index = () => {
 <Card className="bg-card border-border">
   <CardHeader>
     <CardTitle className="text-xs font-semibold">Subscriptions</CardTitle>
-    <div className="text-xs font-bold text-primary">+2350</div>
+    <div className="text-xs font-bold text-blue-500">+2350</div>
     <p className="text-xs text-muted-foreground">+180.1% from last month</p>
   </CardHeader>
 </Card>`
@@ -166,7 +166,7 @@ const Index = () => {
       <LineChart data={exerciseData}>
         <XAxis dataKey="day" />
         <YAxis />
-        <Line type="monotone" dataKey="minutes" stroke="hsl(var(--primary))" />
+        <Line type="monotone" dataKey="minutes" stroke="hsl(var(--blue-500))" />
       </LineChart>
     </ResponsiveContainer>
   </CardContent>
@@ -330,7 +330,7 @@ const Index = () => {
                 <div className="space-y-2">
                   <div className="text-xs font-medium">Building Your Application</div>
                   <div className="ml-4 space-y-1">
-                    <div className="text-xs text-primary bg-primary/10 px-2 py-1 rounded">Data Fetching</div>
+                    <div className="text-xs text-blue-500 bg-blue-500/10 px-2 py-1 rounded">Data Fetching</div>
                     <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Routing</div>
                     <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Rendering</div>
                   </div>
@@ -406,7 +406,7 @@ const Index = () => {
                       Building Your Application
                     </div>
                     <div className="ml-6 space-y-1">
-                      <div className="text-xs text-primary bg-primary/10 px-2 py-1 rounded">Data Fetching</div>
+                      <div className="text-xs text-blue-500 bg-blue-500/10 px-2 py-1 rounded">Data Fetching</div>
                       <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Routing</div>
                       <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Rendering</div>
                     </div>
@@ -449,12 +449,12 @@ const Index = () => {
         <div className="h-96 w-full border rounded-lg">
           <div className="flex h-full">
             <div className="w-16 border-r bg-muted/10 p-2 flex flex-col items-center space-y-4">
-              <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
-                <span className="text-primary-foreground text-xs font-bold">D</span>
+              <div className="w-8 h-8 bg-blue-500 rounded-md flex items-center justify-center">
+                <span className="text-blue-500-foreground text-xs font-bold">D</span>
               </div>
               <div className="space-y-2">
-                <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center cursor-pointer">
-                  <Home className="h-4 w-4 text-primary" />
+                <div className="w-8 h-8 rounded-md bg-blue-500/10 flex items-center justify-center cursor-pointer">
+                  <Home className="h-4 w-4 text-blue-500" />
                 </div>
                 <div className="w-8 h-8 rounded-md flex items-center justify-center cursor-pointer hover:bg-muted">
                   <FileText className="h-4 w-4" />
@@ -479,12 +479,12 @@ const Index = () => {
 <div className="h-96 w-full border rounded-lg">
   <div className="flex h-full">
     <div className="w-16 border-r bg-muted/10 p-2 flex flex-col items-center space-y-4">
-      <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
-        <span className="text-primary-foreground text-xs font-bold">D</span>
+      <div className="w-8 h-8 bg-blue-500 rounded-md flex items-center justify-center">
+        <span className="text-blue-500-foreground text-xs font-bold">D</span>
       </div>
       <div className="space-y-2">
-        <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center cursor-pointer">
-          <Home className="h-4 w-4 text-primary" />
+        <div className="w-8 h-8 rounded-md bg-blue-500/10 flex items-center justify-center cursor-pointer">
+          <Home className="h-4 w-4 text-blue-500" />
         </div>
         <div className="w-8 h-8 rounded-md flex items-center justify-center cursor-pointer hover:bg-muted">
           <FileText className="h-4 w-4" />
@@ -518,7 +518,7 @@ const Index = () => {
                       <span>ui</span>
                     </div>
                     <div className="ml-8 space-y-1">
-                      <div className="flex items-center gap-1 text-xs text-primary bg-primary/10 px-1 rounded">
+                      <div className="flex items-center gap-1 text-xs text-blue-500 bg-blue-500/10 px-1 rounded">
                         <FileText className="h-3 w-3" />
                         <span>button.tsx</span>
                       </div>
@@ -588,7 +588,7 @@ const Index = () => {
                     const isCurrentMonth = day > 0 && day <= 31;
                     return (
                       <div key={i} className={`text-center p-1 text-xs cursor-pointer rounded
-                        ${isToday ? 'bg-primary text-primary-foreground' : ''}
+                        ${isToday ? 'bg-blue-500 text-blue-500-foreground' : ''}
                         ${isCurrentMonth ? 'hover:bg-muted' : 'text-muted-foreground'}
                       `}>
                         {isCurrentMonth ? day : day <= 0 ? 30 + day : day - 31}
@@ -604,7 +604,7 @@ const Index = () => {
                       <span>Personal</span>
                     </div>
                     <div className="flex items-center gap-2 text-xs">
-                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                      <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
                       <span>Work</span>
                     </div>
                     <div className="flex items-center gap-2 text-xs">
@@ -755,7 +755,7 @@ const Index = () => {
               <h1 className="text-lg font-bold tracking-tight">Dashboard Components</h1>
               <p className="text-muted-foreground mt-1">Interactive component library showcase</p>
             </div>
-            <Badge variant="secondary" className="bg-primary/10 text-primary">
+            <Badge variant="secondary" className="bg-blue-500/10 text-blue-500">
               {allComponents.length} Components
             </Badge>
           </div>
@@ -788,7 +788,7 @@ const Index = () => {
             {/* Component Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
               {filteredComponents.map((comp) => (
-                <Card key={comp.id} className="group hover:shadow-lg transition-all duration-200 border-2 hover:border-primary/20">
+                <Card key={comp.id} className="group hover:shadow-lg transition-all duration-200 border-2 hover:border-blue-500/20">
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-xs">{comp.title}</CardTitle>

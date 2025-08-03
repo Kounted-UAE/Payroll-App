@@ -334,7 +334,7 @@ const closeSalaryWizard = () => {
                 {/* 'Add/Edit Salary' LINK */}
                 <Button
                   variant="link"
-                  className="p-0 text-xs font-medium text-primary hover:underline"
+                  className="p-0 text-xs font-medium text-blue-500 hover:underline"
                   onClick={() => openSalaryWizard(employee)}
                 >
                   add/edit salary
@@ -412,7 +412,7 @@ const closeSalaryWizard = () => {
                 <TableCell>
                   <Button
                     variant="link"
-                    className="p-0 text-xs font-medium text-primary hover:underline"
+                    className="p-0 text-xs font-medium text-blue-500 hover:underline"
                     onClick={() => openSalaryWizard(employee)}
                   >
                     add/edit salary

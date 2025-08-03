@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import FormSection from '@/components/wizards/FormSection';
-import { TextField } from '@/components/wizards/FormField';
+import FormSection from '@/components/forms/FormSection';
+import { TextField } from '@/components/forms/FormField';
 import { Button } from '@/components/ui/button';
 import { Calendar, Clock, User } from 'lucide-react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';

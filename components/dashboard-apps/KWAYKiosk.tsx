@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Building2, CheckSquare, FileText, ArrowRight, BarChart } from 'lucide-react';
-import { supabase } from '@/lib/supabase/client';
+import { getSupabaseClient } from '@/lib/supabase/client';
 import KWAYKioskWizard from '@/components/wizards/kway-cpq/KWAYKioskWizard';
 import OrdersList from '@/components/wizards/kway-cpq/OrdersList';
 
@@ -25,6 +25,7 @@ export default function KWAYKiosk() {
 
   const loadOrderStats = async () => {
     try {
+      const supabase = getSupabaseClient();
       const { data, error } = await supabase.from('order_intakes').select('status');
       if (error) throw error;
 
@@ -59,8 +60,8 @@ export default function KWAYKiosk() {
             </CardHeader>
             <CardContent className="space-y-6 text-center">
               <div className="flex justify-center">
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-                  <CheckSquare className="h-8 w-8 text-primary" />
+                <div className="w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center">
+                  <CheckSquare className="h-8 w-8 text-blue-500" />
                 </div>
               </div>
 
@@ -126,8 +127,8 @@ export default function KWAYKiosk() {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
-                  <FileText className="h-6 w-6 text-primary" />
+                <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mr-4">
+                  <FileText className="h-6 w-6 text-blue-500" />
                 </div>
                 <div>
                   <p className="text-xs font-medium text-muted-foreground">Total Orders</p>
@@ -140,8 +141,8 @@ export default function KWAYKiosk() {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
-                  <CheckSquare className="h-6 w-6 text-primary" />
+                <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mr-4">
+                  <CheckSquare className="h-6 w-6 text-blue-500" />
                 </div>
                 <div>
                   <p className="text-xs font-medium text-muted-foreground">Completed</p>
@@ -154,8 +155,8 @@ export default function KWAYKiosk() {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
-                  <Building2 className="h-6 w-6 text-primary" />
+                <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mr-4">
+                  <Building2 className="h-6 w-6 text-blue-500" />
                 </div>
                 <div>
                   <p className="text-xs font-medium text-muted-foreground">In Progress</p>
@@ -178,7 +179,7 @@ export default function KWAYKiosk() {
 
                 <div className="space-y-2">
                   <div className="flex items-start gap-2">
-                    <CheckSquare className="h-5 w-5 text-primary mt-0.5" />
+                    <CheckSquare className="h-5 w-5 text-blue-500 mt-0.5" />
                     <div>
                       <p className="font-medium">8-Step Guided Process</p>
                       <p className="text-xs text-muted-foreground">
@@ -188,7 +189,7 @@ export default function KWAYKiosk() {
                   </div>
 
                   <div className="flex items-start gap-2">
-                    <CheckSquare className="h-5 w-5 text-primary mt-0.5" />
+                    <CheckSquare className="h-5 w-5 text-blue-500 mt-0.5" />
                     <div>
                       <p className="font-medium">Instant Pricing</p>
                       <p className="text-xs text-muted-foreground">
@@ -198,7 +199,7 @@ export default function KWAYKiosk() {
                   </div>
 
                   <div className="flex items-start gap-2">
-                    <CheckSquare className="h-5 w-5 text-primary mt-0.5" />
+                    <CheckSquare className="h-5 w-5 text-blue-500 mt-0.5" />
                     <div>
                       <p className="font-medium">Flexible Services</p>
                       <p className="text-xs text-muted-foreground">
@@ -233,29 +234,29 @@ export default function KWAYKiosk() {
 
                 <div className="space-y-3">
                   <div className="bg-background rounded-lg p-3 flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                      <FileText className="h-4 w-4 text-primary" />
+                    <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center">
+                      <FileText className="h-4 w-4 text-blue-500" />
                     </div>
                     <span>Accounting & Bookkeeping</span>
                   </div>
 
                   <div className="bg-background rounded-lg p-3 flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                      <FileText className="h-4 w-4 text-primary" />
+                    <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center">
+                      <FileText className="h-4 w-4 text-blue-500" />
                     </div>
                     <span>Payroll Services</span>
                   </div>
 
                   <div className="bg-background rounded-lg p-3 flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                      <FileText className="h-4 w-4 text-primary" />
+                    <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center">
+                      <FileText className="h-4 w-4 text-blue-500" />
                     </div>
                     <span>Tax Compliance</span>
                   </div>
 
                   <div className="bg-background rounded-lg p-3 flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                      <FileText className="h-4 w-4 text-primary" />
+                    <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center">
+                      <FileText className="h-4 w-4 text-blue-500" />
                     </div>
                     <span>HR & Compliance</span>
                   </div>

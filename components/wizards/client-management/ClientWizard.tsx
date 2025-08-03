@@ -1,11 +1,16 @@
 import React from 'react';
-import ClientOnboardingWizard from '@/components/wizards/ClientOnboardingWizard';
+import ClientOnboardingWizard from '@/components/wizards/accounting-onboarding/ClientOnboardingWizard';
 
-export default function ClientWizard() {
+interface ClientWizardProps {
+  clientId: string;
+  clientName?: string;
+}
+
+export default function ClientWizard({ clientId, clientName = 'Client' }: ClientWizardProps) {
   return (
     <ClientOnboardingWizard 
-      clientId="demo-client-123"
-      clientName="Demo Company Ltd"
+      clientId={clientId}
+      clientName={clientName}
     />
   );
 }

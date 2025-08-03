@@ -1,6 +1,6 @@
 import React from 'react';
-import FormSection from '@/components/wizards/FormSection';
-import { TextField, SelectField, RadioField } from '@/components/wizards/FormField';
+import FormSection from '@/components/forms/FormSection';
+import { TextField, SelectField, RadioField } from '@/components/forms/FormField';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 

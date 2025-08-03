@@ -3,7 +3,7 @@
 import {
     Users, FileText, ShoppingCart, CheckSquare, Settings, PanelTopInactiveIcon, PieChart, 
      Calendar, DollarSign, Building, Receipt, BarChart3, BarChart2 , RocketIcon,
-    BookOpen, FolderOpen, Link as LinkIcon, LayoutTemplate, Briefcase, FileSpreadsheet
+    BookOpen, FolderOpen, Link as LinkIcon, LayoutTemplate, Briefcase, FileSpreadsheet, GitBranch
   } from "lucide-react"
   
   export const sidebarSections = [
@@ -23,6 +23,7 @@ import {
     {
       label: "Sales Tools",
       items: [
+        { title: "Referral Programs", url: "/backyard/referral-programs", icon: RocketIcon, status: "active" },
         { title: "$KWAY CPQ", url: "/backyard/kway-cpq", icon: RocketIcon, status: "active" },
         { title: "$KORP Kiosk", url: "/backyard/korp-kiosk", icon: ShoppingCart, status: "active" },
       ],
@@ -55,6 +56,7 @@ import {
     {
       label: "Admin",
       items: [
+        { title: "Dev Progress", url: "/backyard/dev-progress", icon: GitBranch, status: "active" },
         { title: "Historic Payruns", url: "/backyard/admin/temp-payrun-history", icon: PanelTopInactiveIcon, status: "active" },        
         { title: "Excel File Payslips", url: "/backyard/admin/temp-excelpayrun-import", icon: FileSpreadsheet, status: "active" },       
         { title: "Xero Config", url: "/backyard/admin/xero-config", icon: FileSpreadsheet, status: "active" },       

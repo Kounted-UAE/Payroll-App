@@ -112,10 +112,10 @@ const GeneratePayslipsWizard = () => {
             {steps.map((step, index) => (
               <div key={step.id} className="flex items-center">
                 <div className={`flex items-center space-x-2 ${
-                  currentStep >= step.id ? "text-primary" : "text-muted-foreground"
+                  currentStep >= step.id ? "text-blue-500" : "text-muted-foreground"
                 }`}>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${
-                    currentStep >= step.id ? "bg-primary text-primary-foreground" : "bg-muted"
+                    currentStep >= step.id ? "bg-blue-500 text-blue-500-foreground" : "bg-muted"
                   }`}>
                     {currentStep > step.id ? <CheckCircle className="h-4 w-4" /> : step.id}
                   </div>
@@ -126,7 +126,7 @@ const GeneratePayslipsWizard = () => {
                 </div>
                 {index < steps.length - 1 && (
                   <div className={`h-px w-20 mx-4 ${
-                    currentStep > step.id ? "bg-primary" : "bg-muted"
+                    currentStep > step.id ? "bg-blue-500" : "bg-muted"
                   }`} />
                 )}
               </div>
@@ -151,8 +151,8 @@ const GeneratePayslipsWizard = () => {
                     key={payrun.id}
                     className={`p-4 border rounded-lg cursor-pointer transition-all ${
                       data.payrun_id === payrun.id 
-                        ? "border-primary bg-primary/5" 
-                        : "border-border hover:border-primary/50"
+                        ? "border-blue-500 bg-blue-500/5" 
+                        : "border-border hover:border-blue-500/50"
                     }`}
                     onClick={() => setData(prev => ({ ...prev, payrun_id: payrun.id }))}
                   >
@@ -169,7 +169,7 @@ const GeneratePayslipsWizard = () => {
                           {payrun.status}
                         </Badge>
                         {data.payrun_id === payrun.id && (
-                          <CheckCircle className="h-5 w-5 text-primary" />
+                          <CheckCircle className="h-5 w-5 text-blue-500" />
                         )}
                       </div>
                     </div>
@@ -304,7 +304,7 @@ const GeneratePayslipsWizard = () => {
                           <p className="text-xs text-muted-foreground">{employee.email}</p>
                         </div>
                         <div className="text-right">
-                          <p className="font-medium text-primary">AED {employee.net_salary.toLocaleString()}</p>
+                          <p className="font-medium text-blue-500">AED {employee.net_salary.toLocaleString()}</p>
                           <Badge variant="outline" className="text-xs">{employee.language}</Badge>
                         </div>
                       </div>
@@ -358,7 +358,7 @@ const GeneratePayslipsWizard = () => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Total Net Pay:</span>
-                      <span className="font-medium text-primary">
+                      <span className="font-medium text-blue-500">
                         AED {selectedEmployees.reduce((sum, emp) => sum + emp.net_salary, 0).toLocaleString()}
                       </span>
                     </div>

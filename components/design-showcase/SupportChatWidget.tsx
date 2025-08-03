@@ -38,7 +38,7 @@ export const SupportChatWidget = () => {
           <div className="flex items-center gap-3">
             <Avatar className="h-8 w-8">
               <AvatarImage src="" />
-              <AvatarFallback className="text-xs bg-primary/10 text-primary">
+              <AvatarFallback className="text-xs bg-blue-500/10 text-blue-500">
                 SD
               </AvatarFallback>
             </Avatar>
@@ -57,14 +57,14 @@ export const SupportChatWidget = () => {
             {messages.map((msg, index) => (
               <div key={index} className={`flex gap-2 ${msg.isSupport ? '' : 'flex-row-reverse'}`}>
                 <Avatar className="h-6 w-6">
-                  <AvatarFallback className="text-xs bg-primary/10 text-primary">
+                  <AvatarFallback className="text-xs bg-blue-500/10 text-blue-500">
                     {msg.isSupport ? 'SD' : 'Y'}
                   </AvatarFallback>
                 </Avatar>
                 <div className={`max-w-[70%] p-2 rounded-lg text-xs ${
                   msg.isSupport 
                     ? 'bg-muted text-muted-foreground' 
-                    : 'bg-primary text-primary-foreground'
+                    : 'bg-blue-500 text-blue-500-foreground'
                 }`}>
                   {msg.message}
                 </div>

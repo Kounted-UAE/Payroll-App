@@ -1,6 +1,6 @@
 import React from 'react';
-import FormSection from '../FormSection';
-import { TextField, SelectField, TextareaField, CheckboxField } from '../FormField';
+import FormSection from '@/components/forms/FormSection';
+import { TextField, SelectField, TextareaField, CheckboxField } from '@/components/forms/FormField';
 
 interface StepProps {
   data: any;
