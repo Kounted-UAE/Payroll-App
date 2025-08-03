@@ -1,6 +1,6 @@
 import React from 'react';
-import FormSection from '../FormSection';
-import { TextField, TextareaField } from '../FormField';
+import FormSection from '@/components/forms/FormSection';
+import { TextField, TextareaField } from '@/components/forms/FormField';
 import { Button } from '@/components/ui/button';
 import { Plus, X, Upload } from 'lucide-react';
 

@@ -1,3 +1,5 @@
+//app/backyard/admin/temp-excelpayrun-import/page.tsx
+
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -16,6 +18,8 @@ import {
 } from '@/components/ui/dialog'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
+import { ExportXeroJournalsWizard } from '@/components/wizards/payroll-wizards/PayrunSummaryJournalExport'
+import { ExportDetailedXeroJournalsWizard } from '@/components/wizards/payroll-wizards/PayrunDetailedJournalExport'
 
 const SUPABASE_PUBLIC_URL = 'https://alryjvnddvrrgbuvednm.supabase.co/storage/v1/object/public/generated-pdfs/payslips'
 
@@ -37,6 +41,8 @@ export default function SendPayslipsPage() {
   const [confirmOpen, setConfirmOpen] = useState(false)
   const [sendMode, setSendMode] = useState<'test' | 'reviewer' | 'live' | null>(null)
   const [search, setSearch] = useState('')
+  const [journalWizardOpen, setJournalWizardOpen] = useState(false)
+  const [detailedWizardOpen, setDetailedWizardOpen] = useState(false)
 
   const downloadZip = async () => {
     const zip = new JSZip()
@@ -145,16 +151,46 @@ export default function SendPayslipsPage() {
   }
 
   const filtered = rows.filter(row =>
-    row.employee_name.toLowerCase().includes(search.toLowerCase()) ||
-    row.employer_name.toLowerCase().includes(search.toLowerCase()) ||
-    row.reviewer_email.toLowerCase().includes(search.toLowerCase()) ||
-    row.email_id.toLowerCase().includes(search.toLowerCase())
+    (row.employee_name?.toLowerCase() ?? '').includes(search.toLowerCase()) ||
+    (row.employer_name?.toLowerCase() ?? '').includes(search.toLowerCase()) ||
+    (row.reviewer_email?.toLowerCase() ?? '').includes(search.toLowerCase()) ||
+    (row.email_id?.toLowerCase() ?? '').includes(search.toLowerCase())
   )
+
 
   return (
     <div className="p-6 space-y-6">
-      <h1 className="text-xl font-bold">Send Payslips</h1>
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="text-xl font-bold">Send Payslips</h1>
+        <div className="flex items-center gap-2">
+          <Button onClick={() => setDetailedWizardOpen(true)} variant="default" className="bg-blue-600 mt-4">
+            Export Xero Detailed Journals
+          </Button>
+          <ExportDetailedXeroJournalsWizard
+            open={detailedWizardOpen}
+            onOpenChange={setDetailedWizardOpen}
+            payrollRows={rows}
+          />
 
+
+          <Button
+            className="bg-blue-600 mt-4" variant="default"
+            onClick={() => setJournalWizardOpen(true)}
+          >
+            Export Xero Summary Journals
+          </Button>
+
+          <ExportXeroJournalsWizard
+            open={journalWizardOpen}
+            onOpenChange={setJournalWizardOpen}
+            payrollRows={rows}
+          />
+
+        </div>
+
+
+
+      </div>
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <Input

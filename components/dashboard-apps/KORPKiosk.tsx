@@ -153,7 +153,7 @@ export default function KORPKiosk() {
             </div>
             <Badge variant="secondary">{sku.category}</Badge>
           </div>
-          <div className="text-xs font-bold text-primary">
+          <div className="text-xs font-bold text-blue-500">
             ${sku.basePrice.toLocaleString()}
           </div>
         </CardHeader>

@@ -52,19 +52,19 @@ export function TopNavbar() {
       <div className="h-full flex items-center justify-between px-4">
         {/* Left side - Sidebar trigger and breadcrumb */}
         <div className="flex items-center gap-3">
-          <SidebarTrigger className="h-12 w-12 rounded-r-full hover:bg-primary/50" />
+          <SidebarTrigger className="h-12 w-12 rounded-r-full hover:bg-blue-500/50" />
           <nav className="hidden md:flex items-center gap-2" aria-label="Breadcrumb">
             {breadcrumbs.length === 0 ? (
               <span className="text-zinc-300 font-medium">Kounted</span>
             ) : (
               <>
-                <span className="text-primary font-bold">&#8759;</span>
+                <span className="text-blue-500 font-bold">&#8759;</span>
                 {breadcrumbs.map((crumb, idx) => (
                   <span key={crumb.href} className="flex items-center gap-2">
                     {idx < breadcrumbs.length - 1 ? (
                       <>
-                        <Link href={crumb.href} className="text-primary hover:underline">{crumb.name}</Link>
-                        <span className="text-primary">/</span>
+                        <Link href={crumb.href} className="text-blue-500 hover:underline">{crumb.name}</Link>
+                        <span className="text-blue-500">/</span>
                       </>
                     ) : (
                       <span className="font-medium">{crumb.name}</span>

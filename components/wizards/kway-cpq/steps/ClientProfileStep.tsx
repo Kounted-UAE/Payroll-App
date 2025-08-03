@@ -212,7 +212,7 @@ export default function ClientProfileStep({ data, onChange }: StepProps) {
             {selectedClient && (
               <div className="bg-accent/20 p-3 rounded-md">
                 <div className="flex items-center gap-2">
-                  <Building className="h-5 w-5 text-primary" />
+                  <Building className="h-5 w-5 text-blue-500" />
                   <div>
                     <div className="font-medium">{selectedClient.name}</div>
                     {selectedClient.contact_person && (
@@ -338,7 +338,7 @@ export default function ClientProfileStep({ data, onChange }: StepProps) {
                 key={integration.value}
                 className={`p-3 border rounded-md cursor-pointer hover:bg-accent/50 flex items-center gap-2 ${
                   (data.integrationNeeds || []).includes(integration.value) 
-                    ? 'border-primary bg-primary/5' 
+                    ? 'border-blue-500 bg-blue-500/5' 
                     : 'border-border'
                 }`}
                 onClick={() => {
@@ -350,7 +350,7 @@ export default function ClientProfileStep({ data, onChange }: StepProps) {
                 }}
               >
                 {(data.integrationNeeds || []).includes(integration.value) && (
-                  <Check className="h-4 w-4 text-primary" />
+                  <Check className="h-4 w-4 text-blue-500" />
                 )}
                 <span>{integration.label}</span>
               </div>

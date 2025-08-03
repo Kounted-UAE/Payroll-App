@@ -1,16 +1,17 @@
 'use client'
 
 import { CheckCircle } from 'lucide-react'
+import { Logomark } from '../advontier-ui/Logo'
 
 export default function LoginNotice() {
   return (
     <div className="h-full w-full max-w-2xl mx-auto px-4 py-2 flex flex-col justify-center text-white">
       {/* Kounted Features */}
       <div>
-        <h2 className="text-xs font-semibold text-blue-100 mb-3">
-          Features
+        <h2 className="text-lg font-semibold text-blue-900 mb-3">
+          Features Launched
         </h2>
-        <ul className="space-y-3 text-xs text-blue-100">
+        <ul className="space-y-3 text-sm text-blue-400">
           {[
             { label: 'Payroll Processing', status: 'Live' },
             { label: 'KORP Kiosk', status: 'Coming soon' },
@@ -26,7 +27,7 @@ export default function LoginNotice() {
               <span>{label}</span>
               <span className="ml-auto text-xs font-medium text-right rounded px-2 py-0.5">
                 {status === 'Live' ? (
-                  <span className="text-lime-400">Live</span>
+                  <span className="text-blue-400">Live</span>
                 ) : (
                   <span className="text-zinc-400">{status}</span>
                 )}
@@ -34,6 +35,9 @@ export default function LoginNotice() {
             </li>
           ))}
         </ul>
+        <div className="flex justify-end mt-12">
+          <Logomark />
+        </div>
       </div>
 
     </div>

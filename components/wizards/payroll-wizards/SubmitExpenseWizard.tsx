@@ -178,15 +178,15 @@ const SubmitExpenseWizard = () => {
           <div className="flex items-center justify-between">
             {steps.map((step, index) => (
               <div key={step.id} className="flex items-center">
-                <div className={`flex items-center space-x-2 ${currentStep >= step.id ? "text-primary" : "text-muted-foreground"}`}>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${currentStep >= step.id ? "bg-primary text-primary-foreground" : "bg-muted"}`}>{step.id}</div>
+                <div className={`flex items-center space-x-2 ${currentStep >= step.id ? "text-blue-500" : "text-muted-foreground"}`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${currentStep >= step.id ? "bg-blue-500 text-blue-500-foreground" : "bg-muted"}`}>{step.id}</div>
                   <div>
                     <p className="font-medium">{step.title}</p>
                     <p className="text-xs text-muted-foreground">{step.description}</p>
                   </div>
                 </div>
                 {index < steps.length - 1 && (
-                  <div className={`h-px w-20 mx-4 ${currentStep > step.id ? "bg-primary" : "bg-muted"}`} />
+                  <div className={`h-px w-20 mx-4 ${currentStep > step.id ? "bg-blue-500" : "bg-muted"}`} />
                 )}
               </div>
             ))}
@@ -227,7 +227,7 @@ const SubmitExpenseWizard = () => {
               <Label>Select Employees *</Label>
               <div className="grid grid-cols-2 gap-4">
                 {employees.map(emp => (
-                  <div key={emp.id} className={`border rounded p-2 flex items-center space-x-2 cursor-pointer ${data.selected_employee_ids.includes(emp.id) ? 'bg-primary/10 border-primary' : 'border-muted'}`}
+                  <div key={emp.id} className={`border rounded p-2 flex items-center space-x-2 cursor-pointer ${data.selected_employee_ids.includes(emp.id) ? 'bg-blue-500/10 border-blue-500' : 'border-muted'}`}
                     onClick={() => handleEmployeeSelect(emp.id)}>
                     <Checkbox checked={data.selected_employee_ids.includes(emp.id)} />
                     <span>{emp.full_name}</span>

@@ -1,5 +1,5 @@
 import React from 'react';
-import FormSection from '@/components/wizards/FormSection';
+import FormSection from '@/components/forms/FormSection';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Check } from 'lucide-react';
@@ -106,7 +106,7 @@ export default function ReviewConfirmStep({ data, allData, onChange, pricing, re
         <div className="space-y-3">
           {getServiceSummary().map((item, index) => (
             <div key={index} className="flex items-start gap-2">
-              <Check className="h-4 w-4 text-primary mt-1" />
+              <Check className="h-4 w-4 text-blue-500 mt-1" />
               <span>{item}</span>
             </div>
           ))}
@@ -147,15 +147,15 @@ export default function ReviewConfirmStep({ data, allData, onChange, pricing, re
           
           <ul className="space-y-2">
             <li className="flex items-start gap-2">
-              <Check className="h-4 w-4 text-primary mt-0.5" />
+              <Check className="h-4 w-4 text-blue-500 mt-0.5" />
               <span>Our team will contact you within 24 hours</span>
             </li>
             <li className="flex items-start gap-2">
-              <Check className="h-4 w-4 text-primary mt-0.5" />
+              <Check className="h-4 w-4 text-blue-500 mt-0.5" />
               <span>Customized proposal based on your requirements</span>
             </li>
             <li className="flex items-start gap-2">
-              <Check className="h-4 w-4 text-primary mt-0.5" />
+              <Check className="h-4 w-4 text-blue-500 mt-0.5" />
               <span>Onboarding process and timeline discussion</span>
             </li>
           </ul>

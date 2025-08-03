@@ -65,12 +65,12 @@ export default function DashboardKPICards({ stats, variant = 'bordered' }: Props
               )}
               <p
                 className={clsx(
-                  item.changeType === 'increase' ? 'text-green-600' : 'text-red-600',
+                  item.changeType === 'increase' ? 'text-blue-600' : 'text-red-600',
                   'ml-2 flex items-baseline text-xs font-semibold'
                 )}
               >
                 {item.changeType === 'increase' ? (
-                  <ArrowUpIcon aria-hidden="true" className="size-5 shrink-0 self-center text-green-500" />
+                  <ArrowUpIcon aria-hidden="true" className="size-5 shrink-0 self-center text-blue-500" />
                 ) : (
                   <ArrowDownIcon aria-hidden="true" className="size-5 shrink-0 self-center text-red-500" />
                 )}

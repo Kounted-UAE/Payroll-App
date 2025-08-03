@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { ChevronLeft, ChevronRight, Save, Check } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
+import { getSupabaseClient } from '@/lib/supabase/client';
 import { toast } from '@/hooks/use-toast';
 
 // Import step components
@@ -59,6 +59,7 @@ export default function ClientOnboardingWizard({ clientId, clientName = 'Client'
 
   const loadProfileData = async () => {
     try {
+      const supabase = getSupabaseClient();
       const { data, error } = await supabase
         .from('client_operational_profiles')
         .select('*')
@@ -100,6 +101,7 @@ export default function ClientOnboardingWizard({ clientId, clientName = 'Client'
         last_updated_at: new Date().toISOString()
       };
 
+      const supabase = getSupabaseClient();
       const { error } = await supabase
         .from('client_operational_profiles')
         .upsert(updateData, {
@@ -192,9 +194,9 @@ export default function ClientOnboardingWizard({ clientId, clientName = 'Client'
                         onClick={() => setCurrentStep(step.id)}
                         className={`w-full text-left p-3 rounded-none border-l-2 transition-colors ${
                           status === 'complete'
-                            ? 'border-l-primary bg-primary/5 text-primary'
+                            ? 'border-l-blue-500 bg-blue-500/5 text-blue-500'
                             : status === 'current'
-                            ? 'border-l-primary bg-primary/10 text-primary font-medium'
+                            ? 'border-l-blue-500 bg-blue-500/10 text-blue-500 font-medium'
                             : status === 'visited'
                             ? 'border-l-muted-foreground bg-muted/30 text-foreground'
                             : 'border-l-transparent hover:bg-muted/50'

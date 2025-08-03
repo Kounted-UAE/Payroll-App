@@ -46,9 +46,11 @@ const injectTemplate = (template, row) => {
     // Monthly Earnings
     .replace('{{basic_salary}}', inject('Basic Salary & Wage', row.basic_salary))
     .replace('{{housing_allowance}}', inject('Housing Allowance', row.housing_allowance))
-    .replace('{{education_allowance}}', inject('Education Allowance', row.education_allowance))
+    .replace('{{transport_allowance}}', inject('Transport Allowance', row.transport_allowance))
     .replace('{{flight_allowance}}', inject('Flight Allowance', row.flight_allowance))
+    .replace('{{education_allowance}}', inject('Education Allowance', row.education_allowance))
     .replace('{{general_allowance}}', inject('General Allowance', row.general_allowance))
+    .replace('{{other_allowance}}', inject('Other Allowance', row.other_allowance))
     .replace('{{gratuity_eosb}}', inject('Gratuity/EOSB', row.gratuity_eosb))
     .replace('{{total_gross_salary}}', inject('TOTAL EARNINGS', row.total_gross_salary))
 

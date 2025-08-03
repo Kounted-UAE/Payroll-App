@@ -397,3 +397,67 @@ The AI agent demonstrated high precision in executing design and logic for the l
 
 GRADE: A– (91%)
 STATUS: Pass
+
+Below is a structured to‑do list to anchor our engagement as we prepare Advontier Practice Manager for scale. It aligns with the stated goals and ensures that each deliverable—pitch decks, roadmap, business plan, and product requirements—addresses the needs of investors, early‑adopter firms and strategic partners.
+
+### 1. Market & Competitive Research
+
+* **Size the UAE/GCC accounting and compliance market:** compile TAM/SAM/SOM estimates for small firms, independent contractors and boutique advisory practices.
+* **Competitor analysis:** benchmark existing practice‑management and compliance platforms (e.g. Teamwork, Karbon, TaxDome, Xero Practice Manager) on task management, client portals, KYC/AML, payroll, and pricing. Identify gaps that Advontier can exploit.
+* **Regulatory landscape:** map ADGM/DIFC/Mainland compliance requirements, WPS payroll mandates, KYC/AML obligations and upcoming corporate tax/VAT changes.
+
+### 2. Pitch Deck Development
+
+Develop three tailored pitch decks (investor, early‑adopter firm, strategic partner) with shared core narrative and audience‑specific emphasis:
+
+1. **Core narrative (common across decks):**
+
+   * Vision: multi‑tenant practice‑management platform built for UAE/GCC regulations.
+   * Reusable assets: existing Supabase auth, payroll engine, Xero integration, RLS architecture and multi‑entity schema.
+   * Product roadmap highlights (see section 3).
+2. **Investor deck:** focus on market size, business model, revenue projections, scalability, defensible IP and exit opportunities.
+3. **Early‑adopter firm deck:** emphasise pain points (manual compliance, fragmented tools), demonstration of MVP features (payroll widgets, KYC onboarding, document management), and benefits of beta partnership.
+4. **Strategic partner deck:** highlight integration capabilities (API/SDK), white‑label/branding options, and co‑go‑to‑market opportunities.
+
+### 3. Phased Product & Commercial Roadmap
+
+Create a high‑level timeline with the following phases:
+
+1. **Technical MVP (Q1–Q2):**
+
+   * Implement multi‑tenant architecture (organizations, org‑scoped routing, RLS updates).
+   * Deliver core modules: **UAE payroll** widget set; **KYC/AML onboarding**; **client profile & document management**; **CPQ/proposal builder**.
+   * Build foundation for chunk vectorisation and AI tax agent.
+2. **Commercialisation & Beta (Q2–Q3):**
+
+   * Develop pricing strategy and subscription tiers (starter, professional, enterprise) with features/capacity limits.
+   * Onboard Kounted Accounting & Management Solutions as pilot tenant to validate workflows and data isolation.
+   * Prepare demo workflows and training materials tailored to investors, early adopters and partners.
+3. **Market Launch (Q4):**
+
+   * Refine onboarding, support and billing processes.
+   * Roll out to selected early‑adopter firms; gather feedback for iterative improvements.
+   * Expand partner integrations (Xero, Teamwork, KYC vendors) and begin marketing campaigns targeting independent accountants and boutique firms.
+
+### 4. Business Plan & Monetisation Strategy
+
+* **Revenue model:** subscription‑based tiers with add‑on modules (payroll, KYC/AML, AI tax advisor). Consider per‑employee/payrun fees for payroll and per‑verification fees for KYC.
+* **Pricing:** define starter/professional/enterprise tiers by number of clients, users and advanced modules. Offer white‑label licensing for large partners.
+* **Go‑to‑market:** leverage Kounted’s network for pilot customers; engage accounting associations in UAE/GCC; co‑market with compliance/KYC vendors; run webinars and targeted content.
+* **Financial projections:** model 3‑year revenue/expense scenarios; include headcount plan, product development costs and marketing spend.
+* **Operational considerations:** support and onboarding resources, customer success team, compliance/audit processes.
+
+### 5. Detailed Product Requirements
+
+Prioritize the following modules/integrations and define functional/technical requirements for each:
+
+1. **UAE Compliance Payroll Widgets & Apps:** multi‑employer payroll, WPS file generation, EOSB accruals, salary structure management and audit trails.
+2. **KYC/AML Client Onboarding & Due‑Diligence Scoring:** configurable rulesets per client, document upload & OCR, third‑party KYC API integration, AI‑assisted compliance officer as described in your research.
+3. **Client Profile & Documentation Management:** centralised CRM for clients, entities and individuals; secure file storage with RLS and audit logs.
+4. **Chunk Vectorisation & Role‑Based Data Access:** develop services to chunk, embed and query documents and communications for retrieval‑augmented AI agents; enforce organisation and role‑scoped access control.
+5. **AI Tax Agent & Research Consultant:** integrate GPT‑based models to answer tax/compliance queries, produce risk summaries and support advisory services.
+6. **Comprehensive Client Engagement CPQ/Proposal Builder:** modular price lists, templated proposals and e‑signature integration; link proposals to billing systems.
+7. **Other Service‑Specific Apps/Widgets:** for each core specialisation—company formations, employer registrations/compliance, employee registrations/compliance/visa management, accounting/bookkeeping, payroll processing, tax preparation/filing, and corporate/compliance support—define minimum viable features, required data structures, and integration points.
+
+Each of these tasks will feed into the corresponding deliverables (pitch decks, roadmap visuals, business plan sections and product requirement documents). Let me know if you want to start fleshing out a specific module or begin drafting the first pitch deck.
+

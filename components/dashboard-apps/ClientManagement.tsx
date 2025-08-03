@@ -28,7 +28,7 @@ import {
   AlertCircle,
   Clock
 } from 'lucide-react';
-import { supabase } from '@/lib/supabase/client';
+import { getSupabaseClient } from '@/lib/supabase/client';
 import { toast } from '@/hooks/use-toast';
 import ClientOnboardingWizard from '@/components/wizards/accounting-onboarding/ClientOnboardingWizard';
 import { ActionButtons } from '@/components/ui/action-buttons';
@@ -40,10 +40,9 @@ interface Client {
   contact_person: string;
   email: string;
   phone?: string;
-  business_type: string;
-  status: string;
+  business_type?: string;
   created_at: string;
-  last_activity_date?: string;
+  updated_at?: string;
 }
 
 interface OnboardingProfile {
@@ -81,6 +80,7 @@ export default function ClientManagement() {
   const loadData = async () => {
     try {
       setLoading(true);
+      const supabase = getSupabaseClient();
       
       // Load clients and onboarding profiles in parallel
       const [clientsResult, profilesResult] = await Promise.all([
@@ -116,6 +116,7 @@ export default function ClientManagement() {
         return;
       }
 
+      const supabase = getSupabaseClient();
       const { data, error } = await supabase
         .from('clients')
         .insert([newClient])
@@ -174,6 +175,7 @@ export default function ClientManagement() {
 
   const handleDeleteClient = async (clientId: string) => {
     try {
+      const supabase = getSupabaseClient();
       const { error } = await supabase
         .from('clients')
         .delete()
@@ -198,6 +200,7 @@ export default function ClientManagement() {
 
   const handleSendClientEmail = async (client: Client) => {
     try {
+      const supabase = getSupabaseClient();
       const { error } = await supabase.functions.invoke('send-client-email', {
         body: { clientId: client.id }
       });
@@ -367,7 +370,7 @@ export default function ClientManagement() {
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center gap-2">
-                <Users className="h-4 w-4 text-primary" />
+                <Users className="h-4 w-4 text-blue-500" />
                 <div>
                   <p className="text-xs font-medium">Total Clients</p>
                   <p className="text-xs font-bold">{clients.length}</p>
@@ -379,7 +382,7 @@ export default function ClientManagement() {
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-primary" />
+                <CheckCircle2 className="h-4 w-4 text-blue-500" />
                 <div>
                   <p className="text-xs font-medium">Onboarded</p>
                   <p className="text-xs font-bold">
@@ -421,8 +424,8 @@ export default function ClientManagement() {
                           <div className="flex items-center gap-3 mb-2">
                             <Building2 className="h-5 w-5 text-muted-foreground" />
                             <h3 className="font-semibold text-xs">{client.name}</h3>
-                            <Badge variant={client.status === 'active' ? 'default' : 'secondary'}>
-                              {client.status}
+                            <Badge variant="default">
+                              Active
                             </Badge>
                             <Badge variant={onboardingStatus.color as any} className="gap-1">
                               <StatusIcon className="h-3 w-3" />

@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { supabase } from '@/integrations/supabase/client';
+import { getSupabaseClient } from '@/lib/supabase/client';
 import { toast } from '@/hooks/use-toast';
 
 interface Order {
@@ -69,6 +69,7 @@ export default function OrderActionsDialog({
     setLoading(true);
 
     try {
+      const supabase = getSupabaseClient();
       if (mode === 'edit' && order) {
         const { error } = await supabase
           .from('order_intakes')

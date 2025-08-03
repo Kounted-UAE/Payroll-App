@@ -1,6 +1,6 @@
-import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.52.0';
-import { Resend } from "npm:resend@2.0.0";
+import { NextRequest, NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
+import { Resend } from 'resend';
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -8,29 +8,26 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
-interface ClientEmailRequest {
-  clientId: string;
+// POST handler for Next.js API route
+export async function OPTIONS() {
+  // CORS preflight
+  return NextResponse.json({}, { headers: corsHeaders });
 }
 
-const handler = async (req: Request): Promise<Response> => {
-  // Handle CORS preflight requests
-  if (req.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders });
-  }
-
+export async function POST(req: NextRequest) {
   try {
-    const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
-    
+    const resend = new Resend(process.env.RESEND_API_KEY!);
+
     if (!resend) {
       throw new Error("Resend API key not configured");
     }
 
     const supabase = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+      process.env.SUPABASE_URL ?? '',
+      process.env.SUPABASE_SERVICE_ROLE_KEY ?? ''
     );
 
-    const { clientId }: ClientEmailRequest = await req.json();
+    const { clientId } = await req.json();
 
     // Fetch client details
     const { data: client, error: clientError } = await supabase
@@ -94,23 +91,21 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Client welcome email sent successfully:", emailResponse);
 
-    return new Response(JSON.stringify({ success: true, emailResponse }), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        ...corsHeaders,
-      },
-    });
+    return NextResponse.json(
+      { success: true, emailResponse },
+      {
+        status: 200,
+        headers: corsHeaders,
+      }
+    );
   } catch (error: any) {
     console.error("Error in send-client-email function:", error);
-    return new Response(
-      JSON.stringify({ error: error.message }),
+    return NextResponse.json(
+      { error: error.message ?? "Unknown error" },
       {
         status: 500,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
+        headers: corsHeaders,
       }
     );
   }
-};
-
-serve(handler);
+}

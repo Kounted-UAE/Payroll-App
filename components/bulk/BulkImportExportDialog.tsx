@@ -465,7 +465,7 @@ export function BulkImportExportDialog<T>({
               <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
                 {templateHeaders.map(h => (
                   <div key={h} className="flex items-center">
-                    <span className="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                    <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
                     {h}
                   </div>
                 ))}

@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useToast } from "@/hooks/use-toast"
-import { usePayrollPayruns, usePayrollStats } from "@/hooks/usePayroll"
+import { usePayrollPayruns } from "@/hooks/usePayroll"
 import {
   Calendar,
   Search,
@@ -93,7 +93,7 @@ const PayrollPayruns = () => {
     closePayrun,
   } = usePayrollPayruns()
 
-  const { stats, loading: statsLoading, error: statsError, refetch: refetchStats } = usePayrollStats()
+  // TODO: Implement usePayrollStats hook for dashboard statistics
 
   // Memoize columns and tableData for performance
   const columns = useMemo<ColumnDef<Payrun>[]>(() => [
@@ -251,7 +251,7 @@ const PayrollPayruns = () => {
           <CardContent className="p-6">
             <div className="flex flex-col items-center">
               <div className="text-xs text-muted-foreground">Total Employers</div>
-              <div className="text-2xl font-bold">{statsLoading ? <Skeleton className="h-6 w-16" /> : stats.totalEmployers}</div>
+              <div className="text-2xl font-bold">-</div>
             </div>
           </CardContent>
         </Card>
@@ -259,7 +259,7 @@ const PayrollPayruns = () => {
           <CardContent className="p-6">
             <div className="flex flex-col items-center">
               <div className="text-xs text-muted-foreground">Total Employees</div>
-              <div className="text-2xl font-bold">{statsLoading ? <Skeleton className="h-6 w-16" /> : stats.totalEmployees}</div>
+              <div className="text-2xl font-bold">-</div>
             </div>
           </CardContent>
         </Card>
@@ -267,7 +267,7 @@ const PayrollPayruns = () => {
           <CardContent className="p-6">
             <div className="flex flex-col items-center">
               <div className="text-xs text-muted-foreground">Active Payruns</div>
-              <div className="text-2xl font-bold">{statsLoading ? <Skeleton className="h-6 w-16" /> : stats.activePayruns}</div>
+              <div className="text-2xl font-bold">-</div>
             </div>
           </CardContent>
         </Card>
@@ -275,7 +275,7 @@ const PayrollPayruns = () => {
           <CardContent className="p-6">
             <div className="flex flex-col items-center">
               <div className="text-xs text-muted-foreground">Monthly Payroll</div>
-              <div className="text-2xl font-bold">{statsLoading ? <Skeleton className="h-6 w-24" /> : `AED ${stats.monthlyPayroll.toLocaleString()}`}</div>
+              <div className="text-2xl font-bold">-</div>
             </div>
           </CardContent>
         </Card>
@@ -295,7 +295,7 @@ const PayrollPayruns = () => {
                 <span className="font-semibold text-xs">{payrun.payroll_objects_employers?.legal_name || 'Unknown Employer'}</span>
                 <span className="text-xs">{new Date(payrun.updated_at).toLocaleString()}</span>
                 <Badge variant={getStatusColor(payrun.status)}>{payrun.status}</Badge>
-                <Link href={`/backyard/payroll/payruns/${payrun.id}`} className="ml-auto text-primary underline text-xs">View</Link>
+                <Link href={`/backyard/payroll/payruns/${payrun.id}`} className="ml-auto text-blue-500 underline text-xs">View</Link>
               </li>
             ))}
           </ul>

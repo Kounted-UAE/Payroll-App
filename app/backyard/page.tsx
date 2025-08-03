@@ -1,3 +1,5 @@
+// app/backyard/page.tsx
+
 'use client'
 
 import { useState, Fragment } from "react"
@@ -71,7 +73,7 @@ export default function DashboardHome() {
   <section id="quicklinks">
       <div className="p-4 flex items-center justify-between py-2">
       <h1 className="text-xs font-semibold flex items-center gap-2 mb-1">
-        <AppWindowIcon className="h-5 w-5 text-primary" />
+        <AppWindowIcon className="h-5 w-5 text-blue-500" />
         Quick Links
       </h1>
       <Button variant="ghost" onClick={() => setOpen(true)} className="">
@@ -79,7 +81,7 @@ export default function DashboardHome() {
 <h1 className="text-md font-semibold flex items-center gap-2 mb-1">
 
   Platform Roadmap
-  <MapPin className="h-5 w-5 text-primary" />
+  <MapPin className="h-5 w-5 text-blue-500" />
 </h1>
 </Button>
     </div>
@@ -93,7 +95,7 @@ export default function DashboardHome() {
         <div className="p-4 flex items-center justify-between">
           <div>
             <h1 className="text-xs font-semibold flex items-center gap-2 mb-1">
-              <ChartBar className="h-5 w-5 text-primary" />
+              <ChartBar className="h-5 w-5 text-blue-500" />
               Performance Overview
             </h1>
           </div>
@@ -108,7 +110,7 @@ export default function DashboardHome() {
       <section id="records">
       <div className="p-4 flex items-center justify-between py-12">
       <h1 className="text-xs font-semibold flex items-center gap-2 mb-1">
-            <FileText className="h-5 w-5 text-primary" />
+            <FileText className="h-5 w-5 text-blue-500" />
             Managed Records
           </h1>
           </div>
@@ -177,13 +179,13 @@ export default function DashboardHome() {
                         </div>
                         {/* Work in Progress */}
                         <div>
-                          <h4 className="text-xs font-semibold text-green-700 mb-2">✅ Routes in progress</h4>
+                          <h4 className="text-xs font-semibold text-blue-700 mb-2">✅ Routes in progress</h4>
                           <ul className="space-y-2">
                             {active.map(item => (
                               <li key={item.title} className="flex items-center text-xs gap-2">
-                                <item.icon className="h-4 w-4 text-primary" />
+                                <item.icon className="h-4 w-4 text-blue-500" />
                                 <span>{item.title}</span>
-                                <Badge className="ml-auto text-xs bg-green-100 text-green-700">{item.section}</Badge>
+                                <Badge className="ml-auto text-xs bg-blue-100 text-blue-700">{item.section}</Badge>
                               </li>
                             ))}
                           </ul>

@@ -40,7 +40,7 @@ export const TeamMembersWidget = () => {
             <div className="flex items-center gap-3">
               <Avatar className="h-8 w-8">
                 <AvatarImage src="" />
-                <AvatarFallback className="text-xs bg-primary/10 text-primary">
+                <AvatarFallback className="text-xs bg-blue-500/10 text-blue-500">
                   {member.avatar}
                 </AvatarFallback>
               </Avatar>

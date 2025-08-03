@@ -8,9 +8,9 @@ import { clsx } from 'clsx'
 const quicklinks = [
   { title: "Client Decks", initials: "CD", icon: null, members: 0, color: "bg-blue-600" },
   { title: "Sales Decks", initials: "SD", icon: null, members: 0, color: "bg-blue-600" },
-  { title: "Service Decks", initials: "SV", icon: null, members: 0, color: "bg-green-600" },
-  { title: "Accounting Onboarding", initials: "SV", icon: null, members: 0, color: "bg-green-600" },
-  { title: "Payroll Apps", initials: "PR", icon: null, members: 6, color: "bg-green-600" },
+  { title: "Service Decks", initials: "SV", icon: null, members: 0, color: "bg-blue-600" },
+  { title: "Accounting Onboarding", initials: "SV", icon: null, members: 0, color: "bg-blue-600" },
+  { title: "Payroll Apps", initials: "PR", icon: null, members: 6, color: "bg-blue-600" },
   { title: "Compliance Decks", initials: "XD", icon: null, members: 0, color: "bg-yellow-400" },  
 ]
 

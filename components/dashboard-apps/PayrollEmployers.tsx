@@ -94,14 +94,14 @@ const PayrollEmployers = () => {
         </div>
         <div className="flex items-center space-x-2">
           <Button
-            className={`p-2 rounded ${view === 'grid' ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
+            className={`p-2 rounded ${view === 'grid' ? 'bg-blue-500 text-blue-500-foreground' : 'bg-muted'}`}
             onClick={() => setView('grid')}
             aria-label="Grid view"
           >
             <LayoutGrid className="h-5 w-5" />
           </Button>
           <Button
-            className={`p-2 rounded ${view === 'list' ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
+            className={`p-2 rounded ${view === 'list' ? 'bg-blue-500 text-blue-500-foreground' : 'bg-muted'}`}
             onClick={() => setView('list')}
             aria-label="List view"
           >

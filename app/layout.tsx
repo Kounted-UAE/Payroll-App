@@ -1,50 +1,47 @@
+// app/layout.tsx
+
 import type { Metadata } from "next"
 import type React from "react"
-
-import { Geist, Geist_Mono } from "next/font/google"
+import { AppProviders } from './providers'
+import { Inter } from "next/font/google";
 import Script from "next/script"
+import AdvontierRibbon from "@/components/advontier-ribbon"
 import  AuthProvider  from "@/components/auth/auth-provider"
 import { Toaster } from "@/components/ui/sonner"
 
 import { cn } from "@/lib/utils"
 
-import "@/lib/styles/global.css"
+import "@/lib/styles/tailwind.css"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({ 
+  variable: "--font-geist-sans", 
   subsets: ["latin"],
-})
+  display: "swap" 
+});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-})
 
 export const metadata: Metadata = {
-  title: "Kounted Solutions",
-  description: "A Central Business Suite for Kounted",
+  title: "Advontier Digital Solutions",
+  description: "A Central Business Suite for UAE Accounting Practices",
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-      lang="en"
-      className={cn(geistSans.variable, geistMono.variable)}
-      suppressHydrationWarning
-    >
+    lang="en"
+    className={cn(inter.variable)}
+    suppressHydrationWarning
+  >
       <head>
-        <Script
-          src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
-          integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
-          crossOrigin="anonymous"
-          referrerPolicy="no-referrer"
-        />
+     
       </head>
-      <body className={cn("min-h-screen bg-background font-sans antialiased")}>
-      
+      <body className={cn("min-h-screen bg-background antialiased")}>
+        <AppProviders>
           <AuthProvider>{children}</AuthProvider>
-          <Toaster />          
-              </body>
+          <Toaster />
+          <AdvontierRibbon />
+        </AppProviders>
+      </body>
     </html>
   )
 }

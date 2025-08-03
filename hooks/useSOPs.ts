@@ -218,7 +218,7 @@ const mockCategories: SOPCategory[] = [
     id: 'accounting',
     name: 'Accounting',
     description: 'Financial reporting, bookkeeping, auditing',
-    color: 'bg-green-500',
+    color: 'bg-blue-500',
     sop_count: 18
   },
   {

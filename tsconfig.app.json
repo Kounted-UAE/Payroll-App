@@ -1,38 +1,12 @@
 {
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "isolatedModules": true,
-    "moduleDetection": "force",
-    "jsx": "react-jsx",
-    "strict": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noImplicitAny": false,
-    "noFallthroughCasesInSwitch": false,
-
-    // ✅ REQUIRED FOR PROJECT REFERENCE
-    "composite": true,
     "noEmit": false,
-
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"],
-      "@components/*": ["components/*"],
-      "@lib/*": ["lib/*"],
-      "@public/*": ["public/*"],
-      "@hooks/*": ["hooks/*"],
-      "@scripts/*": ["lib/scripts/*"]
-    }
+    "composite": true
   },
   "include": [
     "app",
-    "components",
+    "components", 
     "hooks",
     "lib",
     "middleware.ts"

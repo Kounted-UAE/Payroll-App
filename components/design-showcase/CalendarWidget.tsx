@@ -102,7 +102,7 @@ export const CalendarWidget = () => {
               className={cn(
                 "h-8 w-8 p-0 text-xs font-normal",
                 day === null && "invisible",
-                day === selectedDate && "bg-primary text-primary-foreground hover:bg-primary/90",
+                day === selectedDate && "bg-blue-500 text-blue-500-foreground hover:bg-blue-500/90",
                 day === 13 && day !== selectedDate && "bg-muted text-muted-foreground"
               )}
               onClick={() => day && setSelectedDate(day)}

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { ChevronLeft, ChevronRight, Save, Check } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
+import { getSupabaseClient } from '@/lib/supabase/client';
 import { toast } from '@/hooks/use-toast';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -89,6 +89,7 @@ export default function KWAYKioskWizard({
   const loadOrderData = async (orderId: string) => {
     try {
       setLoading(true);
+      const supabase = getSupabaseClient();
       const { data, error } = await supabase
         .from('order_intakes')
         .select('*')
@@ -149,6 +150,7 @@ export default function KWAYKioskWizard({
   const loadDraftData = async () => {
     try {
       setLoading(true);
+      const supabase = getSupabaseClient();
       const { data, error } = await supabase
         .from('order_drafts')
         .select('*')
@@ -186,6 +188,7 @@ export default function KWAYKioskWizard({
   const saveAsDraft = async () => {
     try {
       setAutosaving(true);
+      const supabase = getSupabaseClient();
       
       const { error } = await supabase
         .from('order_drafts')
@@ -209,6 +212,7 @@ export default function KWAYKioskWizard({
   const saveOrder = async (status = 'draft') => {
     setLoading(true);
     try {
+      const supabase = getSupabaseClient();
       const orderData = {
         order_data: formData,
         status,
@@ -401,9 +405,9 @@ export default function KWAYKioskWizard({
                         onClick={() => setCurrentStep(step.id)}
                         className={`w-full text-left p-3 rounded-none border-l-2 transition-colors ${
                           status === 'complete'
-                            ? 'border-l-primary bg-primary/5 text-primary'
+                            ? 'border-l-blue-500 bg-blue-500/5 text-blue-500'
                             : status === 'current'
-                            ? 'border-l-primary bg-primary/10 text-primary font-medium'
+                            ? 'border-l-blue-500 bg-blue-500/10 text-blue-500 font-medium'
                             : status === 'visited'
                             ? 'border-l-muted-foreground bg-muted/30 text-foreground'
                             : 'border-l-transparent hover:bg-muted/50'

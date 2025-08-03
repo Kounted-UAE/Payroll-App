@@ -332,7 +332,7 @@ export default function ComplianceCalendar() {
       case 'labor':
         return 'bg-blue-100 text-blue-800 border-blue-200';
       case 'corporate':
-        return 'bg-green-100 text-green-800 border-green-200';
+        return 'bg-blue-100 text-blue-800 border-blue-200';
       case 'licensing':
         return 'bg-yellow-100 text-yellow-800 border-yellow-200';
       case 'regulatory':
@@ -353,7 +353,7 @@ export default function ComplianceCalendar() {
       case 'semi-annual':
         return 'bg-yellow-100 text-yellow-800';
       case 'annual':
-        return 'bg-green-100 text-green-800';
+        return 'bg-blue-100 text-blue-800';
       default:
         return 'bg-gray-100 text-gray-800';
     }
@@ -411,7 +411,7 @@ export default function ComplianceCalendar() {
             <p className="text-muted-foreground">Comprehensive compliance obligations for UAE businesses (2025-2026)</p>
           </div>
           <div className="flex items-center gap-2">
-            <Calendar className="h-5 w-5 text-primary" />
+            <Calendar className="h-5 w-5 text-blue-500" />
             <span className="text-xs font-medium">Updated for 2025-2026</span>
           </div>
         </div>
@@ -421,7 +421,7 @@ export default function ComplianceCalendar() {
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center">
-                <FileText className="h-8 w-8 text-primary mr-3" />
+                <FileText className="h-8 w-8 text-blue-500 mr-3" />
                 <div>
                   <p className="text-xs font-medium text-muted-foreground">Total Obligations</p>
                   <p className="text-xs font-bold">{complianceData.length}</p>
@@ -559,7 +559,7 @@ export default function ComplianceCalendar() {
                               )}
                               <button
                                 onClick={() => handleItemClick(item)}
-                                className={`text-left hover:text-primary transition-colors ${item.isObsolete ? 'line-through' : ''}`}
+                                className={`text-left hover:text-blue-500 transition-colors ${item.isObsolete ? 'line-through' : ''}`}
                               >
                                 {item.dueDate}
                               </button>
@@ -569,7 +569,7 @@ export default function ComplianceCalendar() {
                             <div className="space-y-1">
                               <button
                                 onClick={() => handleItemClick(item)}
-                                className="text-left hover:text-primary transition-colors"
+                                className="text-left hover:text-blue-500 transition-colors"
                               >
                                 <p className="font-medium">{item.obligation}</p>
                               </button>

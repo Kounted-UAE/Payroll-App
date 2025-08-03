@@ -379,7 +379,7 @@ export function SOPWizard({ isOpen, onClose, editingSOP, categories }: SOPWizard
         return (
           <div className="space-y-6">
             <div className="text-center">
-              <FileText className="h-16 w-16 text-primary mx-auto mb-4" />
+              <FileText className="h-16 w-16 text-blue-500 mx-auto mb-4" />
               <h3 className="text-xs font-semibold mb-2">Review Your SOP</h3>
               <p className="text-muted-foreground mb-6">
                 Please review the information below before saving.
@@ -439,14 +439,14 @@ export function SOPWizard({ isOpen, onClose, editingSOP, categories }: SOPWizard
             <div key={step.number} className="flex items-center">
               <div className={`flex items-center justify-center w-8 h-8 rounded-full text-xs font-medium ${
                 currentStep >= step.number 
-                  ? 'bg-primary text-primary-foreground' 
+                  ? 'bg-blue-500 text-blue-500-foreground' 
                   : 'bg-muted text-muted-foreground'
               }`}>
                 {step.number}
               </div>
               {index < steps.length - 1 && (
                 <div className={`w-12 h-0.5 mx-2 ${
-                  currentStep > step.number ? 'bg-primary' : 'bg-muted'
+                  currentStep > step.number ? 'bg-blue-500' : 'bg-muted'
                 }`} />
               )}
             </div>

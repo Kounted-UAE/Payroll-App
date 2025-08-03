@@ -55,7 +55,7 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
       case 'labor':
         return 'bg-blue-100 text-blue-800 border-blue-200';
       case 'corporate':
-        return 'bg-green-100 text-green-800 border-green-200';
+        return 'bg-blue-100 text-blue-800 border-blue-200';
       case 'licensing':
         return 'bg-yellow-100 text-yellow-800 border-yellow-200';
       case 'regulatory':
@@ -76,7 +76,7 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
       case 'semi-annual':
         return 'bg-yellow-100 text-yellow-800';
       case 'annual':
-        return 'bg-green-100 text-green-800';
+        return 'bg-blue-100 text-blue-800';
       default:
         return 'bg-gray-100 text-gray-800';
     }
@@ -127,7 +127,7 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4 text-primary" />
+                <Calendar className="h-4 w-4 text-blue-500" />
                 <span className="font-medium">Due Date</span>
               </div>
               <p className="text-xs text-muted-foreground ml-6">{item.dueDate}</p>
@@ -135,7 +135,7 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
 
             <div className="space-y-2">
               <div className="flex items-center gap-2">
-                <Building2 className="h-4 w-4 text-primary" />
+                <Building2 className="h-4 w-4 text-blue-500" />
                 <span className="font-medium">Authority</span>
               </div>
               <p className="text-xs text-muted-foreground ml-6">{item.authority}</p>
@@ -157,7 +157,7 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
 
             <div className="space-y-2">
               <div className="flex items-center gap-2">
-                <Users className="h-4 w-4 text-primary" />
+                <Users className="h-4 w-4 text-blue-500" />
                 <span className="font-medium">Subject Matter</span>
               </div>
               <p className="text-xs text-muted-foreground ml-6">{item.subjectMatter}</p>
