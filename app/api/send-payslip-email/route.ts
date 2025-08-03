@@ -48,7 +48,7 @@ console.log('📄 PDF:', url)
 
   try {
     const result = await resend.emails.send({
-      from: 'Kounted Payroll Solutions <no-reply@resend.kounted.ae>',
+      from: 'Advontier Web Forms <no-reply@advontier.com>',
       to,
       replyTo: 'no-reply@kounted.ae',
       subject,

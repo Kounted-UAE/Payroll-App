@@ -45,11 +45,11 @@ export async function middleware(req: NextRequest) {
 
   const role = profile.role_slug
 
-  if (pathname.startsWith("/my-kounted/staff") && !role?.startsWith("kounted-")) {
+  if (pathname.startsWith("/my-advontier/staff") && !role?.startsWith("advontier-")) {
     return NextResponse.redirect(new URL("/unauthorized", req.url))
   }
 
-  if (pathname.startsWith("/my-kounted/client") && !role?.startsWith("client-")) {
+  if (pathname.startsWith("/my-advontier/client") && !role?.startsWith("client-")) {
     return NextResponse.redirect(new URL("/unauthorized", req.url))
   }
 
@@ -58,7 +58,7 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    "/my-kounted/:path*",
+    "/my-advontier/:path*",
     "/admin/:path*",
   ],
 }

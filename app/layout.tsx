@@ -5,7 +5,6 @@ import type React from "react"
 import { AppProviders } from './providers'
 import { Inter } from "next/font/google";
 import Script from "next/script"
-import AdvontierRibbon from "@/components/advontier-ribbon"
 import  AuthProvider  from "@/components/auth/auth-provider"
 import { Toaster } from "@/components/ui/sonner"
 
@@ -39,7 +38,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AppProviders>
           <AuthProvider>{children}</AuthProvider>
           <Toaster />
-          <AdvontierRibbon />
         </AppProviders>
       </body>
     </html>

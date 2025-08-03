@@ -13,20 +13,21 @@ import { RootLayout } from '@/components/advontier-ui/RootLayout'
 export default function LoginPage() {
   return (
     <RootLayout>
-      <Container className="mt-20 sm:mt-24 md:mt-32">
-        <FadeIn className="max-w-3xl font-display">
-          <h1 className="font-display text-xl font-medium tracking-tight text-balance sm:text-7xl">
-            If you're an accountant in the UAE, you're in the right place
-          </h1>
-          <p className="mt-6 text-md text-neutral-600">
-            Login to our practice management platform to access client data, compliance calendars, and more...
-          </p>
+      <Container className="items-center justify-center flex flex-col mt-20 sm:mt-24 md:mt-32">
+        <FadeIn className="font-display">
+          <h1 className="font-display text-xl font-medium tracking-tight text-balance sm:text-6xl">
+  Sign in to Advontier Practice Manager
+</h1>
+<p className="mt-6 text-md text-neutral-600">
+  Secure portal for UAE accountants and advisors. Access client records, compliance calendars, payroll, and more.
+</p>
+
         </FadeIn>
       </Container>
          
       
       {/* Login Section */}
-      <Container className="mt-24 sm:mt-32 lg:mt-40">
+      <Container className="mt-8 sm:mt-12 lg:mt-16">
         <div className="flex flex-col items-center justify-center mx-auto">
               
           <FadeIn >

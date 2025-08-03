@@ -91,16 +91,16 @@
       "/auth/callback",
       "/backyard",
       "/kyc",
-      "/my-kounted/client/**",
-      "/my-kounted/staff/**"
+      "/my-advontier/client/**",
+      "/my-advontier/staff/**"
     ],
     "authentication": {
       "method": "Supabase Magic Link",
       "sessionProvider": "auth-provider.tsx (SSR)",
       "userRoles": [
-        "kounted-superadmin",
-        "kounted-admin",
-        "kounted-staff",
+        "advontier-superadmin",
+        "advontier-admin",
+        "advontier-staff",
         "client-admin",
         "client-standard"
       ],

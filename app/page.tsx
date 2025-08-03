@@ -126,12 +126,14 @@ function Services() {
     <>
       <SectionIntro
         eyebrow="Services"
-        title="We help you identify, explore and respond to new opportunities."
+        title="We help accountants identify, explore and respond to new opportunities."
         className="mt-24 sm:mt-32 lg:mt-40"
       >
         <p>
-          As long as those opportunities involve giving us money to re-purpose
-          old projects — we can come up with an endless number of those.
+        Our platform and services are purpose-built to help accounting firms, independent advisors, and back-office teams manage work and resources centrally.
+        </p>
+        <p className="mt-4">
+        From seamless client onboarding to payroll, compliance, and document workflows—Advontier accelerates service delivery, removes manual bottlenecks, and unlocks new revenue opportunities for firms of all sizes.
         </p>
       </SectionIntro>
       <Container className="mt-16">
@@ -147,21 +149,16 @@ function Services() {
           </div>
           <List className="mt-16 lg:mt-0 lg:w-1/2 lg:min-w-132 lg:pl-4">
             <ListItem title="Web development">
-              We specialise in crafting beautiful, high quality marketing pages.
-              The rest of the website will be a s*** show that uses lorem ipsum
-              everywhere.
+            We build high-impact, scalable web platforms—from marketing sites to secure client portals—designed to meet modern expectations and regulatory requirements.
             </ListItem>
             <ListItem title="Application development">
-              We have a comprehensive team of 1 skilled developer that uses ChatGPT to build everything is twice the time it would take a monkey with a keyboard.
+            Our in-house engineering team combines best-in-class open source technologies and deep regional expertise to deliver robust, cloud-native business applications.
             </ListItem>
             <ListItem title="E-commerce">
-              We are at the forefront of modern e-commerce development. Which
-              mainly means adding your logo to the off the shelf Stripe template that we use for all our clients.
+            Integrated payment and invoicing workflows streamline how you collect, reconcile, and report—whether billing clients directly or managing complex, multi-party transactions.
             </ListItem>
             <ListItem title="Custom content management">
-              At Advontier we understand the importance of having a robust and
-              customised CMS and centralised Knowledge Base. That’s why we run all of our client projects out
-              of a Airtable database that is accessed via a single user login and password so everyone has the same experience.
+            Advontier centralizes your knowledge base, client records, and compliance documentation in a secure, permissioned environment. No more siloed data, lost emails, or version chaos.
             </ListItem>
           </List>
         </div>
@@ -213,24 +210,14 @@ function Discover() {
     <Section title="Discover" image={{ src: imageWhiteboard }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
-          We work closely with our clients to understand their{' '}
-          <strong className="font-semibold text-neutral-950">needs</strong> and
-          goals, embedding ourselves in their every day operations to understand
-          what makes their business tick.
+          We start by understanding your firm’s unique goals, challenges, and regulatory environment.
+          Through in-depth discovery workshops and detailed process mapping, we identify opportunities to streamline workflows, enhance compliance, and increase your team’s capacity—without increasing headcount.
         </p>
         <p>
-          Our team of private investigators shadow the company director’s for
-          several weeks while our account managers focus on going through their
-          trash. Our senior security experts then perform social engineering
-          hacks to gain access to their{' '}
-          <strong className="font-semibold text-neutral-950">business</strong>{' '}
-          accounts — handing that information over to our forensic accounting
-          team.
+          Our approach is hands-on and collaborative. We work closely with your partners and staff to map out every step of your current processes and highlight both strengths and bottlenecks. 
         </p>
         <p>
-          Once the full audit is complete, we report back with a comprehensive{' '}
-          <strong className="font-semibold text-neutral-950">plan</strong> and,
-          more importantly, a budget.
+          Once discovery is complete, we deliver a comprehensive action plan—prioritized for business impact, technical feasibility, and regulatory confidence.
         </p>
       </div>
 
@@ -238,12 +225,11 @@ function Discover() {
         Included in this phase
       </h3>
       <TagList className="mt-4">
-        <TagListItem>In-depth questionnaires</TagListItem>
+        <TagListItem>Needs analysis & workflow mapping</TagListItem>
         <TagListItem>Feasibility studies</TagListItem>
-        <TagListItem>Blood samples</TagListItem>
-        <TagListItem>Employee surveys</TagListItem>
+        <TagListItem>Stakeholder & employee surveys</TagListItem>
         <TagListItem>Proofs-of-concept</TagListItem>
-        <TagListItem>Forensic audit</TagListItem>
+        <TagListItem>Compliance & risk assessment</TagListItem>
       </TagList>
     </Section>
   )
@@ -254,23 +240,13 @@ function Build() {
     <Section title="Build" image={{ src: imageLaptop, shape: 1 }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
-          Based off of the discovery phase, we develop a comprehensive roadmap
-          for each product and start working towards delivery. The roadmap is an
-          intricately tangled mess of technical nonsense designed to drag the
-          project out as long as possible.
+          With requirements defined, we architect a tailored roadmap and begin iterative development. Each milestone is delivered with transparency, regular updates, and ongoing feedback.
         </p>
         <p>
-          Each client is assigned a key account manager to keep lines of
-          communication open and obscure the actual progress of the project.
-          They act as a buffer between the client’s incessant nagging and the
-          development team who are hard at work scouring open source projects
-          for code to re-purpose.
+          Our team leverages open standards, modular design, and best-in-class technologies to build solutions that scale and adapt as your business grows.
         </p>
         <p>
-          Our account managers are trained to only reply to client emails after
-          9pm, several days after the initial email. This reinforces the general
-          aura that we are very busy and dissuades clients from asking for
-          changes.
+          We believe in partnership, not just delivery—so you’re always in the loop and empowered to make informed decisions throughout the build process.
         </p>
       </div>
 
@@ -278,8 +254,7 @@ function Build() {
         author={{ name: 'Debra Fiscal', role: 'CEO of Unseal' }}
         className="mt-12"
       >
-        Studio were so regular with their progress updates we almost began to
-        think they were automated!
+        Advontier’s regular progress updates and open communication gave us total confidence throughout implementation.
       </Blockquote>
     </Section>
   )
@@ -290,31 +265,13 @@ function Deliver() {
     <Section title="Deliver" image={{ src: imageMeeting, shape: 2 }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
-          About halfway through the Build phase, we push each project out by 6
-          weeks due to a change in{' '}
-          <strong className="font-semibold text-neutral-950">
-            requirements
-          </strong>
-          . This allows us to increase the budget a final time before launch.
+          We deploy, test, and optimize your solution for real-world use. Every module is validated for regulatory compliance, security, and seamless integration with your existing systems.
         </p>
         <p>
-          Despite largely using pre-built components, most of the{' '}
-          <strong className="font-semibold text-neutral-950">progress</strong>{' '}
-          on each project takes place in the final 24 hours. The development
-          time allocated to each client is actually spent making augmented
-          reality demos that go viral on social media.
+          Our team provides comprehensive onboarding and live training for your staff, ensuring a smooth transition and rapid adoption.
         </p>
         <p>
-          We ensure that the main pages of the site are{' '}
-          <strong className="font-semibold text-neutral-950">
-            fully functional
-          </strong>{' '}
-          at launch — the auxiliary pages will, of course, be lorem ipusm shells
-          which get updated as part of our exorbitant{' '}
-          <strong className="font-semibold text-neutral-950">
-            maintenance
-          </strong>{' '}
-          retainer.
+          Advontier remains your partner post-launch—with ongoing support, transparent maintenance, and a continuous improvement roadmap designed to help your business stay ahead.
         </p>
       </div>
 
@@ -323,21 +280,19 @@ function Deliver() {
       </h3>
       <List className="mt-8">
         <ListItem title="Testing">
-          Our projects always have 100% test coverage, which would be impressive
-          if our tests weren’t as porous as a sieve.
+          Comprehensive system and user acceptance testing (UAT) to ensure quality and reliability.
         </ListItem>
         <ListItem title="Infrastructure">
-          To ensure reliability we only use the best Digital Ocean droplets that
-          $4 a month can buy.
+          Secure, scalable deployment—leveraging the latest cloud technologies and best practices.
         </ListItem>
         <ListItem title="Support">
-          Because we hold the API keys for every critical service your business
-          uses, you can expect a lifetime of support, and invoices, from us.
+          Ongoing technical support and continuous improvement to maximize value and uptime.
         </ListItem>
       </List>
     </Section>
   )
 }
+
 
 function Values() {
   return (
@@ -351,48 +306,40 @@ function Values() {
 
       <SectionIntro
         eyebrow="Our values"
-        title="Balancing reliability and innovation"
+        title="Built for trust, driven by innovation"
       >
         <p>
-          We strive to stay at the forefront of emerging trends and
-          technologies, while completely ignoring them and forking that old
-          Rails project we feel comfortable using. We stand by our core values
-          to justify that decision.
+          At Advontier, our values shape every partnership and every line of code. 
+          We believe in building tools that empower accounting firms and professionals to excel—through reliability, transparency, and continuous progress.
         </p>
       </SectionIntro>
 
       <Container className="mt-24">
         <GridList>
           <GridListItem title="Meticulous">
-            The first part of any partnership is getting our designer to put
-            your logo in our template. The second step is getting them to do the
-            colors.
+            Every workflow is crafted with attention to detail—from data integrity to regulatory compliance—so you can trust your platform every day.
           </GridListItem>
           <GridListItem title="Efficient">
-            We pride ourselves on never missing a deadline which is easy because
-            most of the work was done years ago.
+            We help firms do more with less. Advontier automates routine work and streamlines collaboration, freeing your team to focus on high-value client service.
           </GridListItem>
           <GridListItem title="Adaptable">
-            Every business has unique needs and our greatest challenge is
-            shoe-horning those needs into something we already built.
+            Our platform evolves with your business and the UAE’s regulatory landscape. We quickly respond to changing needs and emerging best practices.
           </GridListItem>
-          <GridListItem title="Honest">
-            We are transparent about all of our processes, banking on the simple
-            fact our clients never actually read anything.
+          <GridListItem title="Transparent">
+            We communicate openly, provide clear roadmaps, and deliver on promises—ensuring you’re always informed and in control.
           </GridListItem>
           <GridListItem title="Loyal">
-            We foster long-term relationships with our clients that go beyond
-            just delivering a product, allowing us to invoice them for decades.
+            We’re committed to building enduring partnerships. Our team supports your growth from day one, providing guidance, support, and proactive improvements.
           </GridListItem>
           <GridListItem title="Innovative">
-            The technological landscape is always evolving and so are we. We are
-            constantly on the lookout for new open source projects to clone.
+            Advontier invests in new technologies and AI to solve real problems for firms in the UAE—helping you stay ahead, securely and confidently.
           </GridListItem>
         </GridList>
       </Container>
     </div>
   )
 }
+
 
 export const metadata: Metadata = {
   description:
@@ -410,7 +357,7 @@ export default async function Home() {
             Designed for Accountants in the UAE
           </h1>
           <p className="mt-6 text-md text-neutral-600">
-            Advontier unifies commercial, compliance and professional service workflows in one platform, to better serve accounting and commercial backoffice operations for accounting firms and professionals in the UAE.
+          Empowering firms and independents to grow, adapt, and deliver better client outcomes—without the legacy overhead.
           </p>
         </FadeIn>
       </Container>
@@ -418,9 +365,8 @@ export default async function Home() {
       <Services />
       <PageIntro eyebrow="Our process" title="How we work">
         <p>
-          We believe in efficiency and maximizing our resources to provide the
-          best value to our clients. The primary way we do that is by re-using
-          the same five projects we’ve been developing for the past decade.
+        We turn your requirements into actionable roadmaps and tangible solutions.
+        Our team works iteratively—keeping you informed every step of the way—using modular design and open standards to ensure rapid delivery and future-proof architecture.
         </p>
       </PageIntro>
 
