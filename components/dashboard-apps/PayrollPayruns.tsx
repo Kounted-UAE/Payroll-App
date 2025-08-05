@@ -119,9 +119,9 @@ const PayrollPayruns = () => {
     employer_name: payrun.payroll_objects_employers?.legal_name || 'Unknown Employer',
     pay_period_start: payrun.pay_period_start,
     pay_period_end: payrun.pay_period_end,
-    created_at: payrun.created_at,
-    updated_at: payrun.updated_at,
-    processed_at: payrun.processed_at,
+    created_at: payrun.created_at || '',
+    updated_at: payrun.updated_at || '',
+    processed_at: payrun.processed_at || '',
     status: payrun.status as "draft" | "locked" | "processing" | "completed",
   })), [payruns])
 
@@ -184,7 +184,7 @@ const PayrollPayruns = () => {
   // Recent activity: last 5 payruns (sorted by updated_at)
   const recentActivity = useMemo(() =>
     [...payruns]
-      .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())
+      .sort((a, b) => new Date(b.updated_at || '').getTime() - new Date(a.updated_at || '').getTime())
       .slice(0, 5),
     [payruns]
   )
@@ -293,7 +293,7 @@ const PayrollPayruns = () => {
             {recentActivity.map((payrun) => (
               <li key={payrun.id} className="py-2 flex items-center gap-4">
                 <span className="font-semibold text-xs">{payrun.payroll_objects_employers?.legal_name || 'Unknown Employer'}</span>
-                <span className="text-xs">{new Date(payrun.updated_at).toLocaleString()}</span>
+                <span className="text-xs">{new Date(payrun.updated_at || '').toLocaleString()}</span>
                 <Badge variant={getStatusColor(payrun.status)}>{payrun.status}</Badge>
                 <Link href={`/backyard/payroll/payruns/${payrun.id}`} className="ml-auto text-primary underline text-xs">View</Link>
               </li>
@@ -351,7 +351,7 @@ const PayrollPayruns = () => {
                 <TableCell>
                   <Badge variant={getStatusColor(payrun.status)}>{payrun.status}</Badge>
                 </TableCell>
-                <TableCell>{new Date(payrun.created_at).toLocaleDateString()}</TableCell>
+                <TableCell>{new Date(payrun.created_at || '').toLocaleDateString()}</TableCell>
                 <TableCell>
                   <div className="flex space-x-1">
                     <Button variant="ghost" size="sm">

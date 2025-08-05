@@ -178,7 +178,7 @@ const PayrollEmployees = () => {
         templateHeaders={EMPLOYEE_CSV_TEMPLATE}
         exampleRow={EMPLOYEE_EXAMPLE_ROW}
         deduplicationKeys={['first_name', 'last_name', 'employer_id']} // Add this line
-        transform={(row) => {
+        transform={(row: any) => {
           // Construct full_name (REQUIRED by database)
           const fullName = (() => {
             if (row.full_name && row.full_name.trim()) {

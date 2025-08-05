@@ -55,7 +55,7 @@ export function ExportXeroJournalsWizard({ payrollRows, open, onOpenChange }: Ex
   const handleSendReview = async () => {
     for (const employer of Array.from(selected)) {
       const rows = payrollRows.filter(r => String(r.employer_name) === employer)
-      const reviewerEmail = rows[0]?.reviewer_email
+      const reviewerEmail = rows[0]?.reviewer_email ?? null;
       if (!reviewerEmail) {
         alert(`Reviewer email not found for ${employer}`)
         continue
@@ -147,16 +147,16 @@ function generateJournalCSV(employer: string, rows: any[]) {
 
   // Aggregate debits (per type)
   const debitRows = fields.map(field => {
-    const sum = rows.reduce((acc, r) => acc + (parseFloat(r[field]) || 0), 0);
+    const sum = rows.reduce((acc, r) => acc + (parseFloat(r?.[field] || '0') || 0), 0);
     if (!sum) return null;
     return [
       date, reference, field.replace(/_/g, ' ').toUpperCase(),
       '', '', employer, sum.toFixed(2), '', '', '', '', '', '', ''
     ];
-  }).filter(Boolean);
+  }).filter((row): row is string[] => row !== null);
 
   // Net pay as credit
-  const totalNet = rows.reduce((acc, r) => acc + (parseFloat(r.net_salary) || 0), 0);
+  const totalNet = rows.reduce((acc, r) => acc + (parseFloat(r?.net_salary || '0') || 0), 0);
   const creditRow = [
     date, reference, 'NET SALARY', '', '', employer, '', totalNet.toFixed(2),
     '', '', '', '', '', ''

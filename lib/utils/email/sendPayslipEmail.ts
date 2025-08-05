@@ -83,7 +83,7 @@ export async function sendBatchPayslipEmails(
     language?: 'english' | 'arabic'
   }>
 ): Promise<Array<{ success: boolean; email: string; error?: string }>> {
-  const results = []
+  const results: Array<{ success: boolean; email: string; error?: string }> = []
   
   for (const emailData of emails) {
     try {

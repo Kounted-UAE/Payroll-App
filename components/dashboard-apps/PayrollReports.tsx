@@ -250,15 +250,15 @@ const PayrollReports = () => {
                     {report.type === "Summary" && (
                       <>
                         <div>
-                          <p className="text-xs font-bold text-primary">AED {(report.total_cost / 1000).toFixed(0)}K</p>
+                          <p className="text-xs font-bold text-primary">AED {((report.total_cost ?? 0) / 1000).toFixed(0)}K</p>
                           <p className="text-xs text-muted-foreground">Total Cost</p>
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-primary">{report.employee_count}</p>
+                          <p className="text-xs font-bold text-primary">{report.employee_count ?? 0}</p>
                           <p className="text-xs text-muted-foreground">Employees</p>
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-purple-600">{report.employer_count}</p>
+                          <p className="text-xs font-bold text-purple-600">{report.employer_count ?? 0}</p>
                           <p className="text-xs text-muted-foreground">Employers</p>
                         </div>
                       </>
@@ -267,15 +267,15 @@ const PayrollReports = () => {
                     {report.type === "EOSB" && (
                       <>
                         <div>
-                          <p className="text-xs font-bold text-purple-600">AED {(report.total_liability / 1000000).toFixed(1)}M</p>
+                          <p className="text-xs font-bold text-purple-600">AED {((report.total_liability ?? 0) / 1000000).toFixed(1)}M</p>
                           <p className="text-xs text-muted-foreground">Total Liability</p>
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-primary">{report.employee_count}</p>
+                          <p className="text-xs font-bold text-primary">{report.employee_count ?? 0}</p>
                           <p className="text-xs text-muted-foreground">Employees</p>
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-orange-600">AED {Math.round(report.total_liability / report.employee_count).toLocaleString()}</p>
+                          <p className="text-xs font-bold text-orange-600">AED {Math.round((report.total_liability ?? 0) / ((report.employee_count ?? 1) || 1)).toLocaleString()}</p>
                           <p className="text-xs text-muted-foreground">Avg. per Employee</p>
                         </div>
                       </>
@@ -284,15 +284,15 @@ const PayrollReports = () => {
                     {report.type === "Cost Analysis" && (
                       <>
                         <div>
-                          <p className="text-xs font-bold text-primary">AED {(report.total_cost / 1000).toFixed(0)}K</p>
+                          <p className="text-xs font-bold text-primary">AED {((report.total_cost ?? 0) / 1000).toFixed(0)}K</p>
                           <p className="text-xs text-muted-foreground">Total Cost</p>
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-primary">+{report.cost_increase}%</p>
+                          <p className="text-xs font-bold text-primary">+{report.cost_increase ?? 0}%</p>
                           <p className="text-xs text-muted-foreground">Month Growth</p>
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-primary">{report.employer_count}</p>
+                          <p className="text-xs font-bold text-primary">{report.employer_count ?? 0}</p>
                           <p className="text-xs text-muted-foreground">Employers</p>
                         </div>
                       </>
@@ -301,15 +301,15 @@ const PayrollReports = () => {
                     {report.type === "WPS" && (
                       <>
                         <div>
-                          <p className="text-xs font-bold text-orange-600">AED {(report.total_transfers / 1000).toFixed(0)}K</p>
+                          <p className="text-xs font-bold text-orange-600">AED {((report.total_transfers ?? 0) / 1000).toFixed(0)}K</p>
                           <p className="text-xs text-muted-foreground">Transfers</p>
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-primary">{report.transfer_count}</p>
+                          <p className="text-xs font-bold text-primary">{report.transfer_count ?? 0}</p>
                           <p className="text-xs text-muted-foreground">WPS Files</p>
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-purple-600">{report.employer_count}</p>
+                          <p className="text-xs font-bold text-purple-600">{report.employer_count ?? 0}</p>
                           <p className="text-xs text-muted-foreground">Employers</p>
                         </div>
                       </>
@@ -318,15 +318,15 @@ const PayrollReports = () => {
                     {report.type === "Demographics" && (
                       <>
                         <div>
-                          <p className="text-xs font-bold text-pink-600">{report.employee_count}</p>
+                          <p className="text-xs font-bold text-pink-600">{report.employee_count ?? 0}</p>
                           <p className="text-xs text-muted-foreground">Employees</p>
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-primary">{report.nationality_count}</p>
+                          <p className="text-xs font-bold text-primary">{report.nationality_count ?? 0}</p>
                           <p className="text-xs text-muted-foreground">Nationalities</p>
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-primary">{report.avg_tenure_months}m</p>
+                          <p className="text-xs font-bold text-primary">{report.avg_tenure_months ?? 0}m</p>
                           <p className="text-xs text-muted-foreground">Avg. Tenure</p>
                         </div>
                       </>
@@ -335,7 +335,7 @@ const PayrollReports = () => {
                     {report.type === "Compliance" && (
                       <>
                         <div>
-                          <p className="text-xs font-bold text-primary">{report.compliance_score}%</p>
+                          <p className="text-xs font-bold text-primary">{report.compliance_score ?? 0}%</p>
                           <p className="text-xs text-muted-foreground">Compliance</p>
                         </div>
                         <div>
@@ -395,12 +395,12 @@ const PayrollReports = () => {
                     <div className="flex items-center space-x-4">
                       <div className="text-right">
                         <div className="text-sm font-medium">
-                          {report.type === "Summary" && `AED ${(report.total_cost / 1000).toFixed(0)}K`}
-                          {report.type === "EOSB" && `AED ${(report.total_liability / 1000000).toFixed(1)}M`}
-                          {report.type === "Cost Analysis" && `AED ${(report.total_cost / 1000).toFixed(0)}K`}
-                          {report.type === "WPS" && `AED ${(report.total_transfers / 1000).toFixed(0)}K`}
-                          {report.type === "Demographics" && `${report.employee_count} employees`}
-                          {report.type === "Compliance" && `${report.compliance_score}% compliance`}
+                          {report.type === "Summary" && `AED ${((report.total_cost ?? 0) / 1000).toFixed(0)}K`}
+                          {report.type === "EOSB" && `AED ${((report.total_liability ?? 0) / 1000000).toFixed(1)}M`}
+                          {report.type === "Cost Analysis" && `AED ${((report.total_cost ?? 0) / 1000).toFixed(0)}K`}
+                          {report.type === "WPS" && `AED ${((report.total_transfers ?? 0) / 1000).toFixed(0)}K`}
+                          {report.type === "Demographics" && `${report.employee_count ?? 0} employees`}
+                          {report.type === "Compliance" && `${report.compliance_score ?? 0}% compliance`}
                         </div>
                         <div className="text-xs text-muted-foreground">
                           Generated: {report.generated_date}

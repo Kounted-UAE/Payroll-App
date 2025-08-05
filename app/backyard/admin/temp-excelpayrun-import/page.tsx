@@ -71,7 +71,7 @@ export default function SendPayslipsPage() {
       if (error) {
         toast({ title: 'Error loading rows', description: error.message, variant: 'destructive' })
       } else {
-        setRows(data)
+        setRows(data as any)
       }
     }
 

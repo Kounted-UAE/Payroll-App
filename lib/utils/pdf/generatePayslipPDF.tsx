@@ -503,7 +503,13 @@ export async function generatePayslipPDF(data: PayslipInput): Promise<Blob> {
   // Convert stream to blob
   const chunks: Uint8Array[] = []
   for await (const chunk of stream) {
-    chunks.push(chunk)
+    if (typeof chunk === 'string') {
+      chunks.push(new TextEncoder().encode(chunk))
+    } else if (chunk instanceof Buffer) {
+      chunks.push(new Uint8Array(chunk))
+    } else {
+      chunks.push(chunk as Uint8Array)
+    }
   }
   
   const blob = new Blob(chunks, { type: 'application/pdf' })

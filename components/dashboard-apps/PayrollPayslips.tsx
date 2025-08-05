@@ -23,20 +23,22 @@ import {
 import Link from "next/link"
 import { ViewToggle } from "@/components/ui/ViewToggle"
 import { BulkImportExportDialog } from "@/components/bulk/BulkImportExportDialog"
-import {
-  payslipCsvSchema,
-  PAYSLIP_CSV_TEMPLATE,
-  PAYSLIP_EXAMPLE_ROW
-} from "@/lib/validators/payslipCsvSchema"
+import { z } from "zod"
+import { payslipCsvSchema, PAYSLIP_CSV_TEMPLATE, PAYSLIP_EXAMPLE_ROW } from "@/lib/validators/payslipCsvSchema"
 
 const PayrollPayslips = () => {
   const [searchQuery, setSearchQuery] = useState("")
   const [view, setView] = useState<'list' | 'grid'>('list');
   const [dialogOpen, setDialogOpen] = useState(false)
 
-  const payslips = [/* static mock data as before */]
+  type Payslip = z.infer<typeof payslipCsvSchema> & {
+    // The following fields are for UI/demo only
+    id?: string;
+    email_status?: string;
+  };
+  const payslips: Payslip[] = [/* static mock data as before */]
 
-  const filteredPayslips = payslips.filter(p =>
+  const filteredPayslips: Payslip[] = payslips.filter(p =>
     p.employee_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     p.employer.toLowerCase().includes(searchQuery.toLowerCase()) ||
     p.pay_period.toLowerCase().includes(searchQuery.toLowerCase())
@@ -146,7 +148,7 @@ const PayrollPayslips = () => {
                     </div>
                     <div className="flex items-center space-x-2">
                       <Badge variant={getStatusColor(p.status)}>{p.status}</Badge>
-                      <Badge variant={getEmailStatusColor(p.email_status)}>{p.email_status}</Badge>
+                      <Badge variant={getEmailStatusColor(p.email_status ?? 'Not Sent')}>{p.email_status ?? 'Not Sent'}</Badge>
                       <div className="flex space-x-1">
                         <Button variant="ghost" size="sm"><Eye className="h-4 w-4" /></Button>
                         <Button variant="ghost" size="sm"><Download className="h-4 w-4" /></Button>
@@ -185,7 +187,7 @@ const PayrollPayslips = () => {
                     <td>{p.employer}</td>
                     <td>{p.pay_period}</td>
                     <td><Badge variant={getStatusColor(p.status)}>{p.status}</Badge></td>
-                    <td><Badge variant={getEmailStatusColor(p.email_status)}>{p.email_status}</Badge></td>
+                    <td><Badge variant={getEmailStatusColor(p.email_status ?? 'Not Sent')}>{p.email_status ?? 'Not Sent'}</Badge></td>
                     <td>AED {p.gross_salary.toLocaleString()}</td>
                     <td>AED {p.net_salary.toLocaleString()}</td>
                     <td className="flex space-x-1">

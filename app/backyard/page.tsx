@@ -47,9 +47,9 @@ const kpiStats: KPI[] = [
   { kpi_id: 3, name: 'Payroll Processed', stat: 'AED 3.4M', previousStat: 'AED 2.9M', change: '17%', changeType: 'increase' },
 ]
 
-function groupRoadmap(sections) {
-  const active = []
-  const comingSoon = []
+function groupRoadmap(sections: any) {
+  const active: any[] = []
+  const comingSoon: any[] = []
   sections.forEach(section => {
     section.items?.forEach(item => {
       if (!item.title) return

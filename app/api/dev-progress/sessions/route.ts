@@ -122,16 +122,16 @@ export async function POST(request: NextRequest) {
       created_by_user_id: user?.id,
       
       // Include AI analysis if available
-      ...(aiAnalysis && {
-        ai_estimated_hours: aiAnalysis.estimated_hours,
-        ai_confidence_score: aiAnalysis.confidence_score,
-        features_worked_on: aiAnalysis.features_worked_on.length > 0 
-          ? aiAnalysis.features_worked_on 
+      ...(aiAnalysis ? {
+        ai_estimated_hours: (aiAnalysis as any).estimated_hours,
+        ai_confidence_score: (aiAnalysis as any).confidence_score,
+        features_worked_on: (aiAnalysis as any).features_worked_on.length > 0 
+          ? (aiAnalysis as any).features_worked_on 
           : sessionData.features_worked_on || [],
-        key_achievements: aiAnalysis.achievements,
-        blockers_identified: aiAnalysis.blockers,
-        tech_debt_notes: aiAnalysis.technical_notes
-      })
+        key_achievements: (aiAnalysis as any).achievements,
+        blockers_identified: (aiAnalysis as any).blockers,
+        tech_debt_notes: (aiAnalysis as any).technical_notes
+      } : {})
     };
 
     // Insert new session log
@@ -147,7 +147,7 @@ export async function POST(request: NextRequest) {
 
     // Update feature progress based on session
     if (sessionLogData.features_worked_on.length > 0) {
-      await updateFeatureProgress(supabase, sessionLogData.features_worked_on, aiAnalysis?.estimated_hours);
+      await updateFeatureProgress(supabase, sessionLogData.features_worked_on, (aiAnalysis as any)?.estimated_hours);
     }
 
     return NextResponse.json({

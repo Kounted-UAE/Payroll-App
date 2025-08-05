@@ -6,7 +6,7 @@ import type { AISessionAnalysis } from '@/lib/types/dev-progress';
 import { getAllFeatures } from '@/lib/utils/extract-features';
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env['OPENAI_API_KEY'],
 });
 
 export async function POST(request: NextRequest) {
@@ -122,13 +122,13 @@ function validateAnalysis(analysis: any): AISessionAnalysis {
     estimated_hours: Math.min(Math.max(Number(analysis.estimated_hours) || 1, 0.5), 40),
     confidence_score: Math.min(Math.max(Number(analysis.confidence_score) || 0.5, 0), 1),
     features_worked_on: Array.isArray(analysis.features_worked_on) 
-      ? analysis.features_worked_on.filter(f => typeof f === 'string')
+      ? analysis.features_worked_on.filter((f: any) => typeof f === 'string')
       : [],
     achievements: Array.isArray(analysis.achievements)
-      ? analysis.achievements.filter(a => typeof a === 'string')
+      ? analysis.achievements.filter((a: any) => typeof a === 'string')
       : [],
     blockers: Array.isArray(analysis.blockers)
-      ? analysis.blockers.filter(b => typeof b === 'string')
+      ? analysis.blockers.filter((b: any) => typeof b === 'string')
       : [],
     technical_notes: typeof analysis.technical_notes === 'string' 
       ? analysis.technical_notes.substring(0, 500) // Limit length

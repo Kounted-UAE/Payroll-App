@@ -5,7 +5,7 @@ import { MatchResult } from '@/lib/matching/matchTicketsQuotes'
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
+    const supabase = createClient(process.env['NEXT_PUBLIC_SUPABASE_URL']!, process.env['SUPABASE_SERVICE_ROLE_KEY']!)
     
     // Handle both old and new match formats
     const match: Partial<MatchResult> & {
@@ -49,11 +49,11 @@ export async function POST(req: NextRequest) {
 
     // Optionally update temp tables with matched references
     // This helps with future matching and audit trails
-    const updates = []
+    const updates: any[] = []
 
     if (match.quote_number) {
       updates.push(
-        supabase
+        (supabase as any)
           .from('temp_quotes')
           .update({ matched_ticketid: match.ticketid })
           .eq('Number', match.quote_number)
@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
 
     if (match.invoice_number) {
       updates.push(
-        supabase
+        (supabase as any)
           .from('temp_invoices')
           .update({ 
             matched_ticketid: match.ticketid,

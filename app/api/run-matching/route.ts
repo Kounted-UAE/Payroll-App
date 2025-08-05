@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
     const matches = await findTicketQuoteMatches(minScore || 0.3)
     
     // Optionally include statistics
-    let stats = null
+    let stats: any = null
     if (includeStats) {
       stats = await getMatchingStats()
     }

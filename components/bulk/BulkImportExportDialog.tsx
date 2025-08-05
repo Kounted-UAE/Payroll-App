@@ -18,7 +18,7 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-export type BulkImportExportDialogProps<T> = {
+export type BulkImportExportDialogProps<T extends Record<string, any>> = {
   open: boolean
   onOpenChange: (open: boolean) => void
   objectName: string
@@ -31,7 +31,7 @@ export type BulkImportExportDialogProps<T> = {
   deduplicationKeys?: (keyof T)[]
 }
 
-export function BulkImportExportDialog<T>({
+export function BulkImportExportDialog<T extends Record<string, any>>({
   open,
   onOpenChange,
   objectName,
@@ -116,7 +116,7 @@ export function BulkImportExportDialog<T>({
 
           const { unique, duplicates } = checkForDuplicates<T>(
             transformedRows,
-            existingRows as T[],
+            existingRows as unknown as T[],
             deduplicationKeys
           )
 

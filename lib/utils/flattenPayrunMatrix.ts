@@ -37,14 +37,14 @@ export type FlattenedPayrunRow = {
   
         const [, code, dateStr] = match
         const dateParsed = new Date(dateStr)
-        const payrunDate = isNaN(dateParsed.getTime()) ? null : dateParsed.toISOString().split('T')[0]
+        const payrunDate = isNaN(dateParsed.getTime()) ? '' : dateParsed.toISOString().split('T')[0]
   
         flattened.push({
           employer_id: Employer,
           employee_id: Employee,
           temp_paytype_name: PaytypeItem.trim(),
           payrun_code: `PR-${code}`,
-          temp_payrun_date: payrunDate || null,
+          temp_payrun_date: payrunDate,
           amount,
           currency: 'AED',
           row_number: i + 2 // matches CSV visual row

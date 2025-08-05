@@ -16,17 +16,17 @@ export async function OPTIONS() {
 
 export async function POST(req: NextRequest) {
   try {
-    const resend = new Resend(process.env.RESEND_API_KEY!);
+    const resend = new Resend(process.env['RESEND_API_KEY'] ?? '');
 
     if (!resend) {
       throw new Error("Resend API key not configured");
     }
 
     const supabase = createClient(
-      process.env.SUPABASE_URL ?? '',
-      process.env.SUPABASE_SERVICE_ROLE_KEY ?? ''
+      process.env['SUPABASE_URL'] ?? '',
+      process.env['SUPABASE_SERVICE_ROLE_KEY'] ?? ''
     );
-
+    
     const { clientId } = await req.json();
 
     // Fetch client details

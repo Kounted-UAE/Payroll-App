@@ -2,62 +2,30 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "@components/*": [
-        "components/*"
-      ],
-      "@lib/*": [
-        "lib/*"
-      ],
-      "@public/*": [
-        "public/*"
-      ],
-      "@/assets/*": [
-        "public/assets/*"
-      ],
-      "@/backgrounds/*": [
-        "public/backgrounds/*"
-      ],
-      "@/clients/*": [
-        "public/clients/*"
-      ],
-      "@/fonts/*": [
-        "public/fonts/*"
-      ],
-      "@icons/*": [
-        "public/icons/*"
-      ],
-      "@images/*": [
-        "public/images/*"
-      ],       
-      "@logos/*": [
-        "public/logos/*"
-      ],
-      "@team/*": [
-        "public/team/*"
-      ],
-      "@hooks/*": [
-        "hooks/*"
-      ],
-      "@scripts/*": [
-        "lib/scripts/*"
-      ]
+      "@/*": ["./*"],
+      "@components/*": ["components/*"],
+      "@lib/*": ["lib/*"],
+      "@hooks/*": ["hooks/*"],
+      "@scripts/*": ["lib/scripts/*"],
+      "@public/*": ["public/*"],
+      "@assets/*": ["public/assets/*"],
+      "@backgrounds/*": ["public/backgrounds/*"],
+      "@clients/*": ["public/clients/*"],
+      "@fonts/*": ["public/fonts/*"],
+      "@icons/*": ["public/icons/*"],
+      "@images/*": ["public/images/*"],
+      "@logos/*": ["public/logos/*"],
+      "@team/*": ["public/team/*"]
     },
-    "noImplicitAny": false,
+    "target": "ES2020",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
     "skipLibCheck": true,
-    "strictNullChecks": false,
-    "target": "ES2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "strict": true,
     "noEmit": true,
     "incremental": true,
-    "module": "esnext",
     "esModuleInterop": true,
+    "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -67,18 +35,44 @@
         "name": "next"
       }
     ],
-    "allowJs": true,
-    "strict": false,
-    "allowImportingTsExtensions": false
+    "allowImportingTsExtensions": false,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": false,
+    "exactOptionalPropertyTypes": false,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false,
+    "removeComments": false,
+    "importHelpers": true,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "components/admin/XeroTabSectionHeader.tsx "  ],
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx"
+  ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    ".next",
+    "dist",
+    "build",
+    "*.config.js",
+    "*.config.mjs",
+    "*.config.ts"
   ]
 }
 

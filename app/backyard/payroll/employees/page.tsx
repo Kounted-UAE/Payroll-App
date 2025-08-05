@@ -218,23 +218,20 @@ const closeSalaryWizard = () => {
           return {
             full_name: fullName,
             start_date: startDate,
-            first_name: row.first_name?.trim() || null,
-            last_name: row.last_name?.trim() || null,
+            first_name: row.first_name?.trim() || '',
+            last_name: row.last_name?.trim() || '',
             email: (() => {
-              if (!row.email || row.email.trim() === '') return null;
+              if (!row.email || row.email.trim() === '') return '';
               const cleanEmail = row.email.trim().toLowerCase();
               const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-              return emailRegex.test(cleanEmail) ? cleanEmail : null;
+              return emailRegex.test(cleanEmail) ? cleanEmail : '';
             })(),
-            emirates_id: row.emirates_id?.trim() || null,
-            passport_number: row.passport_number?.trim() || null,
-            nationality: row.nationality?.trim() || null,
-           
-            employer_id: row.employer_id?.trim() || null,
-            bank_name: row.bank_name?.trim() || null,
-           
-            iban: row.iban?.trim() || null,
-           
+            emirates_id: row.emirates_id?.trim() || '',
+            passport_number: row.passport_number?.trim() || '',
+            nationality: row.nationality?.trim() || '',
+            employer_id: row.employer_id?.trim() || '',
+            bank_name: row.bank_name?.trim() || '',
+            iban: row.iban?.trim() || '',
             status: row.status?.trim() || 'Active',
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString()

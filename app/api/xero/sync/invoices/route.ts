@@ -29,8 +29,8 @@ export async function GET(req: NextRequest) {
     }
 
     await xero.setTokenSet({
-      access_token: tokenRow.access_token,
-      refresh_token: tokenRow.refresh_token,
+      access_token: tokenRow.access_token ?? '',
+      refresh_token: tokenRow.refresh_token ?? '',
       expires_at: 0, // force refresh
     })
     await xero.updateTenants()
