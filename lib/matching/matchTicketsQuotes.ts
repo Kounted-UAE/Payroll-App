@@ -1,11 +1,28 @@
 // /lib/matching/matchTicketsQuotes.ts
 
-import { createClient } from '@supabase/supabase-js'
+import { createServerClient } from '@supabase/ssr'
+import type { Database } from '@/lib/types/supabase'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+// Add a function to get the server client
+function getSupabaseServerClient() {
+  return createServerClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name: string) {
+          return undefined // We'll handle cookies differently for API routes
+        },
+        set(name: string, value: string, options: any) {
+          // Not needed for this use case
+        },
+        remove(name: string, options: any) {
+          // Not needed for this use case
+        },
+      },
+    }
+  )
+}
 
 // === FUZZY MATCHING UTILITIES ===
 
@@ -343,6 +360,8 @@ export interface MatchResult {
 }
 
 export async function findTicketQuoteMatches(minScore = 0.3): Promise<MatchResult[]> {
+  const supabase = getSupabaseServerClient()
+  
   // Fetch all data with comprehensive field selection
   const [ticketsResult, quotesResult, invoicesResult] = await Promise.all([
     supabase.from('temp_tickets').select('ticketid,subject,firstmessage,customerid,createdat,tags'),
@@ -480,6 +499,8 @@ export async function findTicketQuoteMatches(minScore = 0.3): Promise<MatchResul
  * Get match statistics for analysis
  */
 export async function getMatchingStats() {
+  const supabase = getSupabaseServerClient()
+  
   const [ticketsResult, quotesResult, invoicesResult] = await Promise.all([
     supabase.from('temp_tickets').select('ticketid', { count: 'exact' }),
     supabase.from('temp_quotes').select('Number', { count: 'exact' }),

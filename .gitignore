@@ -112,3 +112,4 @@ local.image.assets/
 + *.mergeBackup        # Git conflict file
 generate-payslips.mjs
 payslip-template.html
+.vercel
