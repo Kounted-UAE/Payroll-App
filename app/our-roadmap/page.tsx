@@ -16,9 +16,9 @@ import { TagList, TagListItem } from '@/components/advontier-ui/TagList'
 import { RootLayout } from '@/components/advontier-ui/RootLayout'
 
 // All image paths reference files in /public/backgrounds/
-const imageLaptop = '/background/laptop.jpg'
-const imageMeeting = '/background/meeting.jpg'
-const imageWhiteboard = '/background/whiteboard.jpg'
+const imageLaptop = '/backgrounds/laptop.jpg'
+const imageMeeting = '/backgrounds/meeting.jpg'
+const imageWhiteboard = '/backgrounds/whiteboard.jpg'
 
 
 function Section({
