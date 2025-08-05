@@ -135,7 +135,7 @@ export default function SendPayslipsPage() {
         description: `${successLog.length} emails delivered successfully.`,
         action: (
           <Button
-            variant="ghost"
+            variant="default"
             size="sm"
             onClick={() =>
               navigator.clipboard.writeText(successLog.join('\n')).then(() =>
@@ -163,7 +163,7 @@ export default function SendPayslipsPage() {
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-xl font-bold">Send Payslips</h1>
         <div className="flex items-center gap-2">
-          <Button onClick={() => setDetailedWizardOpen(true)} variant="default" className="bg-blue-600 mt-4">
+          <Button onClick={() => setDetailedWizardOpen(true)} variant="default">
             Export Xero Detailed Journals
           </Button>
           <ExportDetailedXeroJournalsWizard
@@ -174,8 +174,7 @@ export default function SendPayslipsPage() {
 
 
           <Button
-            className="bg-blue-600 mt-4" variant="default"
-            onClick={() => setJournalWizardOpen(true)}
+            variant="default" onClick={() => setJournalWizardOpen(true)}            
           >
             Export Xero Summary Journals
           </Button>

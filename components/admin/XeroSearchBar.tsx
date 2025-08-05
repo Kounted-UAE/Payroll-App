@@ -18,7 +18,7 @@ export default function XeroSearchBar({ value, onChange }: XeroSearchBarProps) {
   )
 
   return (
-    <div className="w-full sm:max-w-md">
+    <div className="w-full sm:max-w-md bg-zinc-100">
       <Input
         placeholder="Search invoices or quotes..."
         value={value}

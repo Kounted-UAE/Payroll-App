@@ -47,7 +47,7 @@ export default function XeroStatCards() {
   ]
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 bg-zinc-100">
       {stats.map((stat, i) => (
         <Card key={i} className="shadow-sm">
           <CardHeader className="pb-2">

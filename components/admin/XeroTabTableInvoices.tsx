@@ -69,7 +69,7 @@ export default function XeroTabTableInvoices({ search }: XeroTabTableInvoicesPro
     })
 
   return (
-    <div className="border rounded-md overflow-x-auto">
+    <div className="border rounded-md overflow-x-auto bg-zinc-100">
       <Table>
         <TableHeader>
           <TableRow>

@@ -79,7 +79,7 @@ export function EmployeeSelectionStep({
   ).length
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-zinc-100">
       <div>
         <h3 className="text-lg font-semibold mb-2">Select Employees</h3>
         <p className="text-muted-foreground">

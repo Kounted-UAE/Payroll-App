@@ -10,26 +10,25 @@ import clsx from "clsx"
 import { sidebarSections } from "@/lib/config/sidebar-nav"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
+import { useSidebar } from "@/components/ui/sidebar"
 
 export function AppSidebar() {
   const pathname = usePathname()
-  const [collapsed, setCollapsed] = React.useState(false)
+  const { state } = useSidebar()
+  const collapsed = state === "collapsed"
   const [expanded, setExpanded] = React.useState<Record<string, boolean>>({})
 
   const isActive = (path: string) => pathname === path
   const getNavCls = (path: string) =>
     isActive(path)
-      ? "mx-6 bg-neutral-500 text-neutral-50 font-bold"
+      ? "bg-neutral-500 text-neutral-50 font-bold"
       : "text-sidebar-foreground hover:bg-sidebar-accent"
 
   const toggle = (label: string) =>
     setExpanded((prev) => ({ ...prev, [label]: !prev[label] }))
 
   return (
-    <div className={clsx(
-      "flex flex-col h-full transition-all duration-300 bg-sidebar",
-      collapsed ? "w-36 text-xs" : "w-64 text-xs"
-    )}>
+    <div className="flex flex-col h-full bg-sidebar text-xs">
      
 
       {/* Scrollable Content */}
@@ -38,7 +37,7 @@ export function AppSidebar() {
           {sidebarSections.map((section) => (
             <div key={section.label} className="mb-4">
               {!collapsed && (
-                <div className="flex items-center justify-between px-3 py-2">
+                <div className="flex items-center justify-between px-2 py-2">
                   <div className="text-sidebar-primary text-xs font-semibold uppercase tracking-wide">
                     {section.label}
                   </div>
@@ -69,7 +68,7 @@ export function AppSidebar() {
                         return (
                           <div key={item.title}>
                             {isInactive ? (
-                              <div className="flex items-center gap-2 px-3 py-2 text-muted-foreground cursor-not-allowed">
+                              <div className="flex items-center gap-2 px-2 py-2 mx-1 text-muted-foreground cursor-not-allowed">
                                 {item.icon && <item.icon className="h-4 w-4" />}
                                 {!collapsed && (
                                   <span className="text-xs">{item.title}</span>
@@ -84,7 +83,7 @@ export function AppSidebar() {
                               <Link
                                 href={item.url || "#"}
                                 className={clsx(
-                                  "flex items-center gap-2 px-3 py-2 rounded-md transition-colors",
+                                  "flex items-center gap-2 px-2 py-2 rounded-md transition-colors mx-1",
                                   getNavCls(item.url || "")
                                 )}
                               >

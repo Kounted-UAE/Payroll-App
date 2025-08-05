@@ -141,7 +141,7 @@ export function PayslipWizard({ batchData }: PayslipWizardProps) {
   const progress = (currentStep / STEPS.length) * 100
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto bg-zinc-100">
       <div className="grid grid-cols-12 gap-6">
         {/* Sidebar */}
         <div className="col-span-3">

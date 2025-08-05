@@ -18,6 +18,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { sidebarSections } from "@/lib/config/sidebar-nav"
+import { Logo, Logomark } from '@/components/advontier-ui/Logo'
 
 export function TopNavbar() {
   const pathname = usePathname();
@@ -48,10 +49,11 @@ export function TopNavbar() {
   });
 
   return (
-    <header className="text-sm h-24 border-b border-border text-foreground bg-background font-semibold backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-      <div className="h-full flex items-center justify-between px-4">
-        {/* Left side - Sidebar trigger and breadcrumb */}
+    <header className="text-sm h-24 text-zinc-100 bg-zinc-900 shadow-sm shadow-zinc-100 font-semibold backdrop-blur supports-[backdrop-filter]:bg-zinc-900 top-0 z-50 sticky overflow-hidden">
+      <div className="h-full flex items-center justify-between px-4 relative z-10">
+      {/* Left side - Sidebar trigger and breadcrumb */}
         <div className="flex items-center gap-3">
+          <Logomark invert={false} className="h-4 w-4 rounded-full" />
           <SidebarTrigger className="h-12 w-12 rounded-r-full hover:bg-accent" />
           <nav className="hidden md:flex items-center gap-2" aria-label="Breadcrumb">
             {breadcrumbs.length === 0 ? (
