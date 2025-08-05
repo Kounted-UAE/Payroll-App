@@ -36,13 +36,14 @@ const nextConfig = {
   experimental: {
     // Enable modern React features
     optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react'],
-    // Enable modern bundling
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
+  },
+  
+  // Turbopack configuration (moved from experimental.turbo)
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
       },
     },
   },

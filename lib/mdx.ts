@@ -63,5 +63,5 @@ export function loadArticles() {
 }
 
 export function loadCaseStudies() {
-  return loadEntries<CaseStudy>('our-results', 'caseStudy')
+  return loadEntries<CaseStudy>('our-solutions', 'caseStudy')
 }

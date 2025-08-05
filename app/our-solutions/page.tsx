@@ -1,4 +1,4 @@
-// app/our-results/page.tsx
+// app/our-solutions/page.tsx
 
 import { type Metadata } from 'next'
 import Image from 'next/image'
