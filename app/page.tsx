@@ -12,20 +12,23 @@ import { SectionIntro } from '@/components/advontier-ui/SectionIntro'
 import { StylizedImage } from '@/components/advontier-ui/StylizedImage'
 import { Testimonial, TestimonialBody } from '@/components/advontier-ui/Testimonial'
 import { type CaseStudy, type MDXEntry, loadCaseStudies } from '@/lib/mdx'
-import { ContactSection } from '@/components/advontier-ui/ContactSection'
+import { ContactSection } from '@/components/advontier-ui/ContactSection' 
 import { RootLayout } from '@/components/advontier-ui/RootLayout'
 import { Blockquote } from '@/components/advontier-ui/Blockquote'
 import { GridList, GridListItem } from '@/components/advontier-ui/GridList'
 import { GridPattern } from '@/components/advontier-ui/GridPattern'
 import { PageIntro } from '@/components/advontier-ui/PageIntro'
 import { TagList, TagListItem } from '@/components/advontier-ui/TagList'
-import imageMeeting from '@images/meeting.jpg'
-import imageWhiteboard from '@images/whiteboard.jpg'
 
+const imageServices = '/team/pexels-yankrukov-7793702.jpg'
 
-const imageLaptop = '/images/laptop.jpg'
-const murrayPhoto = '/images/team/murray-baker.JPG'
-const logoKountedDark = '/images/clients/kounted/logo-dark.webp'
+const imageMeeting = '/backgrounds/meeting.jpg'
+const imageWhiteboard = '/backgrounds/whiteboard.jpg'
+const imageLaptop = '/backgrounds/laptop.jpg'
+
+const testimonialPhoto = '/team/murray-baker.JPG'
+const testimonialLogo = '/clients/kounted/logomark-light.webp'
+
 
 
 const logoNext = 'https://simpleicons.org/icons/nextdotjs.svg';
@@ -54,7 +57,7 @@ const integrationLogos = [
 
 function LogoWall() {
   return (
-    <div className="mt-12 rounded-r-4xl bg-neutral-950 py-12 sm:mt-24 sm:py-20 lg:mt-24">
+    <div className="mt-12 rounded-r-4xl bg-neutral-950 max-w-7xl mx-auto py-12 sm:mt-24 sm:py-20 lg:mt-24">
       <Container>
         {/* Section for Core Technologies */}
         <FadeIn className="flex items-center gap-x-4">
@@ -133,7 +136,7 @@ function Services() {
         Our platform and services are purpose-built to help accounting firms, independent advisors, and back-office teams manage work and resources centrally.
         </p>
         <p className="mt-4">
-        From seamless client onboarding to payroll, compliance, and document workflows—Advontier accelerates service delivery, removes manual bottlenecks, and unlocks new revenue opportunities for firms of all sizes.
+        From seamless client onboarding to payroll, compliance, and document workflows—Advontier accelerates service delivery, removes workflow bottlenecks, and unlocks new revenue opportunities for firms of all sizes.
         </p>
       </SectionIntro>
       <Container className="mt-16">
@@ -141,7 +144,7 @@ function Services() {
           <div className="flex justify-center lg:w-1/2 lg:justify-end lg:pr-12">
             <FadeIn className="w-135 flex-none lg:w-180">
               <StylizedImage
-                src={imageLaptop}
+                src={imageServices}
                 sizes="(min-width: 1024px) 41rem, 31rem"
                 className="justify-center lg:justify-end"
               />
@@ -351,10 +354,10 @@ export default async function Home() {
 
   return (
     <RootLayout>
-      <Container className="mt-20 sm:mt-24 md:mt-32">
-        <FadeIn className="max-w-3xl font-display">
+      <Container className="mt-20 sm:mt-40 md:mt-56">
+        <FadeIn className="max-w-3xl lg:max-w-5xl font-display">
           <h1 className="font-display text-xl font-medium tracking-tight text-balance sm:text-7xl">
-            Designed for Accountants in the UAE
+            Designed for Accountants!
           </h1>
           <p className="mt-6 text-md text-neutral-600">
           Empowering firms and independents to grow, adapt, and deliver better client outcomes—without the legacy overhead.
@@ -378,15 +381,15 @@ export default async function Home() {
 
       <Values />
       <Testimonial className="mt-24 sm:mt-32 lg:mt-40">
-        <TestimonialBody photo={murrayPhoto} alt="Murray Baker – CEO of Kounted" >
+        <TestimonialBody photo={testimonialPhoto} alt="Murray Baker – CEO of Kounted" >
           <blockquote className="font-display text-4xl sm:text-3xl md:text-4xl font-medium tracking-tight text-neutral-950">
             <p>
-              Partnering with <span className="text-zinc-900">advontier</span><span className="text-blue-500">.</span> has been great for my physical and mental wellbeing.
+              Partnering with <span className="text-zinc-900">advontier</span><span className="text-blue-500">.</span> has been amazing for my physical and mental wellbeing.
             </p>
             <p className="mt-4 text-neutral-600 text-base">
               Murray Baker, aspiring Olympic triathlete and CEO of Kounted Accounting and Management Solutions.
             </p>
-            <Image src={logoKountedDark} alt="Kounted logo" width={240} height={480} unoptimized className="mt-4" />
+            <Image src={testimonialLogo} alt="Kounted logo" width={48} height={48} unoptimized className="mt-4 bg-white rounded-full" />
           </blockquote>
         </TestimonialBody>
       </Testimonial>      

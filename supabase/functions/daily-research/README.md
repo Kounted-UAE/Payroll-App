@@ -87,7 +87,7 @@ from: 'Your Company <research@yourdomain.com>'
 The function generates MDX articles with this structure:
 
 ```mdx
-import imageOfTheDay from '@images/insight/2025-01-15-image.jpg'
+import imageOfTheDay from '@/insight/2025-01-15-image.jpg'
 
 export const article = {
   date: '2025-01-15',

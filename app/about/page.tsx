@@ -1,188 +1,111 @@
+// app/about/page.tsx
+
 import { type Metadata } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { Border } from '@/components/advontier-ui/Border'
 import { ContactSection } from '@/components/advontier-ui/ContactSection'
 import { Container } from '@/components/advontier-ui/Container'
-import { FadeIn, FadeInStagger } from '@/components/advontier-ui/FadeIn'
-import { GridList, GridListItem } from '@/components/advontier-ui/GridList'
+import { FadeIn } from '@/components/advontier-ui/FadeIn'
 import { PageIntro } from '@/components/advontier-ui/PageIntro'
 import { PageLinks } from '@/components/advontier-ui/PageLinks'
 import { SectionIntro } from '@/components/advontier-ui/SectionIntro'
 import { StatList, StatListItem } from '@/components/advontier-ui/StatList'
-import imageAngelaFisher from '@images/team/angela-fisher.jpg'
-import imageBenjaminRussel from '@images/team/benjamin-russel.jpg'
-import imageBlakeReid from '@images/team/blake-reid.jpg'
-import imageChelseaHagon from '@images/team/chelsea-hagon.jpg'
-import imageDriesVincent from '@images/team/dries-vincent.jpg'
-import imageEmmaDorsey from '@images/team/emma-dorsey.jpg'
-import imageJeffreyWebb from '@images/team/jeffrey-webb.jpg'
-import imageKathrynMurphy from '@images/team/kathryn-murphy.jpg'
-import imageLeonardKrasner from '@images/team/leonard-krasner.jpg'
-import imageLeslieAlexander from '@images/team/leslie-alexander.jpg'
-import imageMichaelFoster from '@images/team/michael-foster.jpg'
-import imageWhitneyFrancis from '@images/team/whitney-francis.jpg'
 import { loadArticles } from '@/lib/mdx'
 import { RootLayout } from '@/components/advontier-ui/RootLayout'
+
+export const metadata: Metadata = {
+  title: 'About Eben Johansen',
+  description:
+    "A once effective Financial Director at multi-national software developer, Albatros Golf Solutions, today Eben Johansen finds himself as COO of Kounted (UAE), and founder of accounting practice management- and client engagement platform, Advontier.",
+}
+
+
+function Profile() {
+  return (
+    <Container className="mt-24 sm:mt-32 lg:mt-40">
+      <FadeIn>
+        <div className="flex flex-col lg:flex-row items-center gap-10">
+          <div className="flex-shrink-0">
+            <Image
+              src="/team/eben_johansen_01.jpg"
+              alt="Eben Johansen"
+              width={240}
+              height={240}
+              className="rounded-3xl object-cover grayscale border border-neutral-200"
+              priority
+            />
+          </div>
+          <div>
+            <h2 className="font-display text-3xl font-bold text-neutral-950 mb-2">
+              Eben Johansen
+            </h2>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="inline-block bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">
+                Founder, Advontier
+              </span>
+              <Link
+                href="https://www.linkedin.com/in/ebenjohansen/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline text-xs font-medium flex items-center"
+              >
+                <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-9h3v9zm-1.5-10.29c-.97 0-1.75-.78-1.75-1.75s.78-1.75 1.75-1.75 1.75.78 1.75 1.75-.78 1.75-1.75 1.75zm13.5 10.29h-3v-4.5c0-1.08-.02-2.48-1.51-2.48-1.51 0-1.74 1.18-1.74 2.4v4.58h-3v-9h2.88v1.23h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.59v4.74z" />
+                </svg>
+                LinkedIn
+              </Link>
+            </div>
+            <div className="text-base text-neutral-700 bg-blue-200/20 p-4 rounded-lg space-y-2">
+            
+            <p>A career void of any straight lines. My journey includes valuable academic failures in the fields of Law, Accounting, and Business Administration. </p>
+             <p>I founded Advontier (adventures in the digital frontier) because I’m driven by a restless need to find and fix problems at their source.</p>
+            </div>
+          </div>
+        </div>
+      </FadeIn>
+    </Container>
+  )
+}
+
 
 function Culture() {
   return (
     <div className="mt-24 rounded-4xl bg-neutral-950 py-24 sm:mt-32 lg:mt-40 lg:py-32">
       <SectionIntro
-        eyebrow="Our culture"
-        title="Balance your passion with your passion for life."
+        eyebrow="Personal Philosophy"
+        title="Solving problems at the root, not just treating symptoms."
         invert
       >
         <p>
-          We are a group of like-minded people who share the same core values.
+          I believe the best solutions are those you only need to implement once. My work is driven by the desire to eliminate recurring headaches for business owners and teams—through creative, robust, and scalable systems.
         </p>
       </SectionIntro>
       <Container className="mt-16">
-        <GridList>
-          <GridListItem title="Loyalty" invert>
-            Our team has been with us since the beginning because none of them
-            are allowed to have LinkedIn profiles.
-          </GridListItem>
-          <GridListItem title="Trust" invert>
-            We don’t care when our team works just as long as they are working
-            every waking second.
-          </GridListItem>
-          <GridListItem title="Compassion" invert>
-            You never know what someone is going through at home and we make
-            sure to never find out.
-          </GridListItem>
-        </GridList>
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+          <div>
+            <h3 className="text-lg font-semibold text-white">Creativity</h3>
+            <p className="mt-2 text-neutral-300">
+              True value comes from building solutions that automate, streamline, or permanently resolve repetitive pain points.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold text-white">Ownership</h3>
+            <p className="mt-2 text-neutral-300">
+              Every problem is personal—clients have my direct attention and benefit from my experience at every step.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold text-white">Committed to Change</h3>
+            <p className="mt-2 text-neutral-300">
+              The landscape is always changing. Adapting to the challenge means constant adventures into accounting, software and automation.
+            </p>
+          </div>
+        </div>
       </Container>
     </div>
   )
-}
-
-const team = [
-  {
-    title: 'Leadership',
-    people: [
-      {
-        name: 'Leslie Alexander',
-        role: 'Co-Founder / CEO',
-        image: { src: imageLeslieAlexander },
-      },
-      {
-        name: 'Michael Foster',
-        role: 'Co-Founder / CTO',
-        image: { src: imageMichaelFoster },
-      },
-      {
-        name: 'Dries Vincent',
-        role: 'Partner & Business Relations',
-        image: { src: imageDriesVincent },
-      },
-    ],
-  },
-  {
-    title: 'Team',
-    people: [
-      {
-        name: 'Chelsea Hagon',
-        role: 'Senior Developer',
-        image: { src: imageChelseaHagon },
-      },
-      {
-        name: 'Emma Dorsey',
-        role: 'Senior Designer',
-        image: { src: imageEmmaDorsey },
-      },
-      {
-        name: 'Leonard Krasner',
-        role: 'VP, User Experience',
-        image: { src: imageLeonardKrasner },
-      },
-      {
-        name: 'Blake Reid',
-        role: 'Junior Copywriter',
-        image: { src: imageBlakeReid },
-      },
-      {
-        name: 'Kathryn Murphy',
-        role: 'VP, Human Resources',
-        image: { src: imageKathrynMurphy },
-      },
-      {
-        name: 'Whitney Francis',
-        role: 'Content Specialist',
-        image: { src: imageWhitneyFrancis },
-      },
-      {
-        name: 'Jeffrey Webb',
-        role: 'Account Coordinator',
-        image: { src: imageJeffreyWebb },
-      },
-      {
-        name: 'Benjamin Russel',
-        role: 'Senior Developer',
-        image: { src: imageBenjaminRussel },
-      },
-      {
-        name: 'Angela Fisher',
-        role: 'Front-end Developer',
-        image: { src: imageAngelaFisher },
-      },
-    ],
-  },
-]
-
-function Team() {
-  return (
-    <Container className="mt-24 sm:mt-32 lg:mt-40">
-      <div className="space-y-24">
-        {team.map((group) => (
-          <FadeInStagger key={group.title}>
-            <Border as={FadeIn} />
-            <div className="grid grid-cols-1 gap-6 pt-12 sm:pt-16 lg:grid-cols-4 xl:gap-8">
-              <FadeIn>
-                <h2 className="font-display text-2xl font-semibold text-neutral-950">
-                  {group.title}
-                </h2>
-              </FadeIn>
-              <div className="lg:col-span-3">
-                <ul
-                  role="list"
-                  className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-8"
-                >
-                  {group.people.map((person) => (
-                    <li key={person.name}>
-                      <FadeIn>
-                        <div className="group relative overflow-hidden rounded-3xl bg-neutral-100">
-                          <Image
-                            alt=""
-                            {...person.image}
-                            className="h-96 w-full object-cover grayscale transition duration-500 motion-safe:group-hover:scale-105"
-                          />
-                          <div className="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black to-black/0 to-40% p-6">
-                            <p className="font-display text-base/6 font-semibold tracking-wide text-white">
-                              {person.name}
-                            </p>
-                            <p className="mt-2 text-sm text-white">
-                              {person.role}
-                            </p>
-                          </div>
-                        </div>
-                      </FadeIn>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </FadeInStagger>
-        ))}
-      </div>
-    </Container>
-  )
-}
-
-export const metadata: Metadata = {
-  title: 'About Us',
-  description:
-    'We believe that our strength lies in our collaborative approach, which puts our clients at the center of everything we do.',
 }
 
 export default async function About() {
@@ -190,42 +113,32 @@ export default async function About() {
 
   return (
     <RootLayout>
-      <PageIntro eyebrow="About us" title="Our strength is collaboration">
-        <p>
-          We believe that our strength lies in our collaborative approach, which
-          puts our clients at the center of everything we do.
+     <PageIntro
+        eyebrow="About Us"
+        title="Solutions through digital transformation."
+      >
+        <p className="text-neutral-700">
+        <span className='font-bold'>The mission is simple: </span>Build a back-office platform that also serves as a two-sided marketplace—connecting accountants, clients, and centralized accounting resources for the modern profession.
         </p>
-        <div className="mt-10 max-w-2xl space-y-6 text-base">
-          <p>
-            Studio was started by three friends who noticed that developer
-            studios were charging clients double what an in-house team would
-            cost. Since the beginning, we have been committed to doing things
-            differently by charging triple instead.
-          </p>
-          <p>
-            At Studio, we’re more than just colleagues — we’re a family. This
-            means we pay very little and expect people to work late. We want our
-            employees to bring their whole selves to work. In return, we just
-            ask that they keep themselves there until at least 6:30pm.
-          </p>
-        </div>
       </PageIntro>
+
+
+      <Profile />
+
       <Container className="mt-16">
         <StatList>
-          <StatListItem value="35" label="Underpaid employees" />
-          <StatListItem value="52" label="Placated clients" />
-          <StatListItem value="$25M" label="Invoices billed" />
+          <StatListItem value="18+ years" label="Professional Experience" />
+          <StatListItem value="20+" label="Organisations Supported" />
+          <StatListItem value="1" label="Team of 1! Accountable for Everything." />
         </StatList>
       </Container>
 
       <Culture />
 
-      <Team />
-
       <PageLinks
         className="mt-24 sm:mt-32 lg:mt-40"
-        title="From the articles"
-        intro="Our team of experienced designers and developers has just one thing on their mind; working on your ideas to draw a smile on the face of your users worldwide. From conducting Brand Sprints to UX Design."
+        title="Insights & Articles"
+        intro="Occasional perspectives on automation, creative problem-solving, and the future of professional services."
         pages={articlesArticles}
       />
 

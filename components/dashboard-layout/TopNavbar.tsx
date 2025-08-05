@@ -94,13 +94,13 @@ export function TopNavbar() {
                   <AvatarImage src="/team/kevin.webp" alt="User" />
                   <AvatarFallback>KC</AvatarFallback>
                 </Avatar>
-                <span className="hidden md:inline font-medium">Kevin Cashmore</span>
+                <span className="hidden md:inline font-medium">Ben Jacobs</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">Kevin Cashmore</p>
+                  <p className="text-sm font-medium leading-none">Ben Jacobs</p>
                   <p className="text-xs leading-none text-muted-foreground">
                     kevin@kounted.ae
                   </p>

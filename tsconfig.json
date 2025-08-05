@@ -14,26 +14,29 @@
       "@public/*": [
         "public/*"
       ],
-      "@images/*": [
-        "public/images/*"
-      ],
-      "@logos/*": [
-        "public/logos/*"
-      ],
-      "@assets/*": [
+      "@/assets/*": [
         "public/assets/*"
       ],
-      "@backgrounds/*": [
+      "@/backgrounds/*": [
         "public/backgrounds/*"
       ],
-      "@team/*": [
-        "public/team/*"
+      "@/clients/*": [
+        "public/clients/*"
       ],
-      "@fonts/*": [
+      "@/fonts/*": [
         "public/fonts/*"
       ],
       "@icons/*": [
         "public/icons/*"
+      ],
+      "@images/*": [
+        "public/images/*"
+      ],       
+      "@logos/*": [
+        "public/logos/*"
+      ],
+      "@team/*": [
+        "public/team/*"
       ],
       "@hooks/*": [
         "hooks/*"

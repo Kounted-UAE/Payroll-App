@@ -49,7 +49,7 @@ export async function getArticlePost(slug: string): Promise<ArticlePost | null> 
           // Handle image properly - it could be a string or an object with src
           image: typeof supabaseArticle.meta.author.image === 'string' 
             ? supabaseArticle.meta.author.image 
-            : supabaseArticle.meta.author.image?.src || '/images/team/ai-analyst.jpg'
+            : supabaseArticle.meta.author.image?.src || '/team/ai-analyst.jpg'
         }
       },
       Content: () => null, // We'll handle rendering separately
@@ -78,7 +78,7 @@ export async function getAllArticlePosts(): Promise<ArticlePost[]> {
             // Handle image properly - it could be a string or an object with src
             image: typeof article.meta.author.image === 'string' 
               ? article.meta.author.image 
-              : article.meta.author.image?.src || '/images/team/ai-analyst.jpg'
+              : article.meta.author.image?.src || '/team/ai-analyst.jpg'
           }
         },
         Content: () => null, // We'll handle rendering separately

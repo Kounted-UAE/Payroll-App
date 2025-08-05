@@ -110,7 +110,7 @@ serve(async (req) => {
     const researchPrompt = `
 Summarize today's most relevant news, regulatory updates, and trends in the UAE accounting, payroll, and compliance space. Focus on actionable insights for Advontier and similar digital accounting platforms. Write the result as a .mdx article post, using the following format (including the import, article, and metadata blocks at the top):
 
-import imageOfTheDay from '@images/insight/${dateString}-image.jpg'
+import imageOfTheDay from '@/insight/${dateString}-image.jpg'
 
 export const article = {
 date: '${dateString}',

@@ -29,7 +29,6 @@ export function Testimonial({
   className,
 }: {
   children: React.ReactNode
- 
   className?: string
 }) {
   return (
@@ -39,19 +38,20 @@ export function Testimonial({
         className,
       )}
     >
-    <GridPattern
-          className="absolute inset-0 h-full w-full mask-[linear-gradient(to_top_right,white_30%,transparent_70%)] fill-neutral-100 stroke-neutral-950/10"
-          yOffset={-270}
-        />
+      {/* Background grid: z-0 */}
+      <GridPattern
+        className="absolute inset-0 h-full w-full z-0 mask-[linear-gradient(to_top_right,white_30%,transparent_70%)] fill-neutral-100 stroke-neutral-950/10"
+        yOffset={-270}
+      />
       <Container>
         <FadeIn>
-          <figure className="mx-auto max-w-4xl">
-            <div className="w-full">
-              {children}
-            </div>
-            </figure>
+          {/* Content: z-10 */}
+          <figure className="relative mx-auto max-w-4xl rounded-xl z-10">
+            <div className="w-full">{children}</div>
+          </figure>
         </FadeIn>
       </Container>
     </div>
   )
 }
+

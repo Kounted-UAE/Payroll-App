@@ -8,8 +8,8 @@ import { PageIntro } from '@/components/advontier-ui/PageIntro'
 import { Container } from '@/components/advontier-ui/Container'
 
 export const metadata = {
-  title: 'Articles',
-  description: 'Daily insights and perspectives on UAE accounting, payroll, and compliance trends.',
+  title: 'Our Theses',
+  description: 'Why we are committed to building a better accounting practice management system.',
 }
 
 export default async function ArticlePage() {
@@ -18,11 +18,11 @@ export default async function ArticlePage() {
   return (
     <RootLayout>
       <PageIntro
-        eyebrow="Articles"
-        title="Daily insights and perspectives on UAE accounting, payroll, and compliance trends."
+        eyebrow="Our Theses"
+        title="Why we are committed to building a better accounting practice management system."
       >
         <p>
-          Discover the latest regulatory updates, market trends, and actionable insights for accounting firms and digital platforms in the UAE—delivered daily by our AI research system.
+          Wee believe client and contractors deserve a better experience. Here are some of the reasons why we're committed to providing them just that.
         </p>
       </PageIntro>
 

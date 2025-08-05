@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import matter from 'gray-matter'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -108,32 +109,38 @@ export async function fetchSupabaseArticleContent(filename: string): Promise<Sup
  */
 function parseMdxMetadata(content: string, filename: string): SupabaseArticleMeta {
   try {
-    // More robust: match with or without semicolon and ignore whitespace
-    const articleMatch = content.match(/export const article = ({[\s\S]*?})\s*;?/)
-    if (!articleMatch) {
-      throw new Error('No article metadata found')
-    }
-
-    const metadataMatch = content.match(/export const metadata = ({[\s\S]*?})\s*;?/)
-    const articleStr = articleMatch[1]
-    const metadataStr = metadataMatch ? metadataMatch[1] : '{}'
-
-    // Parse safely (assume trusted source, not user input)
-    const article = eval(`(${articleStr})`) as any
-    const metadata = metadataMatch ? eval(`(${metadataStr})`) as any : {}
-
-    return {
-      title: article.title || metadata.title || filename.replace(/\.mdx$/, ''),
-      date: article.date || new Date().toISOString().split('T')[0],
-      description: article.description || metadata.description || 'Daily industry insight article',
-      author: {
-        name: article.author?.name || 'Advontier AI Analyst',
-        role: article.author?.role || 'Research Agent',
-        image: article.author?.image || { src: '/images/team/ai-analyst.jpg' }
+    const { data } = matter(content)
+    console.log('GRAY-MATTER:', data)
+    let author: { name: string; role: string; image: { src: string } }
+    if (typeof data.author === 'string') {
+      author = {
+        name: data.author,
+        role: 'Research Agent',
+        image: { src: '/team/ai-analyst.jpg' }
+      }
+    } else if (typeof data.author === 'object' && data.author !== null) {
+      author = {
+        name: data.author.name || 'Advontier AI Analyst',
+        role: data.author.role || 'Research Agent',
+        image: (typeof data.author.image === 'string'
+          ? { src: data.author.image }
+          : data.author.image || { src: '/team/ai-analyst.jpg' })
+      }
+    } else {
+      author = {
+        name: 'Advontier AI Analyst',
+        role: 'Research Agent',
+        image: { src: '/team/ai-analyst.jpg' }
       }
     }
+    return {
+      title: data.title || filename.replace(/\.mdx$/, ''),
+      date: data.date || new Date().toISOString().split('T')[0],
+      description: data.description || data.summary || 'Daily industry insight article',
+      author
+    }
   } catch (error) {
-    console.error('Error parsing MDX metadata:', error)
+    console.error('Error parsing MDX frontmatter:', error)
     // Return fallback metadata
     return {
       title: filename.replace(/\.mdx$/, '').replace(/-/g, ' '),
@@ -142,11 +149,12 @@ function parseMdxMetadata(content: string, filename: string): SupabaseArticleMet
       author: {
         name: 'Advontier AI Analyst',
         role: 'Research Agent',
-        image: { src: '/images/team/ai-analyst.jpg' }
+        image: { src: '/team/ai-analyst.jpg' }
       }
     }
   }
 }
+
 
 
 /**

@@ -1,3 +1,5 @@
+// app/roadmap/page.tsx
+
 import { type Metadata } from 'next'
 
 import { Blockquote } from '@/components/advontier-ui/Blockquote'
@@ -11,10 +13,13 @@ import { PageIntro } from '@/components/advontier-ui/PageIntro'
 import { SectionIntro } from '@/components/advontier-ui/SectionIntro'
 import { StylizedImage } from '@/components/advontier-ui/StylizedImage'
 import { TagList, TagListItem } from '@/components/advontier-ui/TagList'
-import imageLaptop from '@images/laptop.jpg'
-import imageMeeting from '@images/meeting.jpg'
-import imageWhiteboard from '@images/whiteboard.jpg'
 import { RootLayout } from '@/components/advontier-ui/RootLayout'
+
+// All image paths reference files in /public/backgrounds/
+const imageLaptop = '/background/laptop.jpg'
+const imageMeeting = '/background/meeting.jpg'
+const imageWhiteboard = '/background/whiteboard.jpg'
+
 
 function Section({
   title,
