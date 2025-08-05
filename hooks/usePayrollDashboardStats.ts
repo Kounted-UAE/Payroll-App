@@ -172,23 +172,27 @@ export function usePayrollDashboardStats() {
       ])
 
       // Calculate monthly payroll (simplified - using current active salary structures)
-      const { data: salaryStructures } = await supabase
-        .from('payroll_salary_structures')
-        .select('base_salary, fixed_allowances, variable_allowances')
+      // TODO: payroll_salary_structures table doesn't exist in current schema
+      // const { data: salaryStructures } = await supabase
+      //   .from('payroll_salary_structures')
+      //   .select('base_salary, fixed_allowances, variable_allowances')
 
-      const monthlyPayroll = salaryStructures?.reduce((total, structure) => {
-        const base = structure.base_salary || 0
-        
-        // Parse fixed allowances from JSON
-        const fixedAllowances = structure.fixed_allowances as Record<string, number> || {}
-        const fixedTotal = Object.values(fixedAllowances).reduce((sum, amount) => sum + (amount || 0), 0)
-        
-        // Parse variable allowances from JSON
-        const variableAllowances = structure.variable_allowances as Record<string, number> || {}
-        const variableTotal = Object.values(variableAllowances).reduce((sum, amount) => sum + (amount || 0), 0)
-        
-        return total + base + fixedTotal + variableTotal
-      }, 0) || 0
+      // const monthlyPayroll = salaryStructures?.reduce((total, structure) => {
+      //   const base = structure.base_salary || 0
+      //   
+      //   // Parse fixed allowances from JSON
+      //   const fixedAllowances = structure.fixed_allowances as Record<string, number> || {}
+      //   const fixedTotal = Object.values(fixedAllowances).reduce((sum, amount) => sum + (amount || 0), 0)
+      //   
+      //   // Parse variable allowances from JSON
+      //   const variableAllowances = structure.variable_allowances as Record<string, number> || {}
+      //   const variableTotal = Object.values(variableAllowances).reduce((sum, amount) => sum + (amount || 0), 0)
+      //   
+      //   return total + base + fixedTotal + variableTotal
+      // }, 0) || 0
+
+      // Set placeholder monthly payroll for now
+      const monthlyPayroll = 0
 
       // Calculate trends
       const employersTrend = calculateTrend(

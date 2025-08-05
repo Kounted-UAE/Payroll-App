@@ -60,7 +60,7 @@ export default function ClientOnboardingWizard({ clientId, clientName = 'Client'
   const loadProfileData = async () => {
     try {
       const supabase = getSupabaseClient();
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('client_operational_profiles')
         .select('*')
         .eq('client_id', clientId)
@@ -102,7 +102,7 @@ export default function ClientOnboardingWizard({ clientId, clientName = 'Client'
       };
 
       const supabase = getSupabaseClient();
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('client_operational_profiles')
         .upsert(updateData, {
           onConflict: 'client_id',

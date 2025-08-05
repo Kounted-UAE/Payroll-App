@@ -3,6 +3,9 @@ import { createServerClient } from '@supabase/ssr'
 import type { Database } from '@/lib/types/supabase'
 import type { NextRequest, NextResponse } from 'next/server'
 
+// Type for the v_authenticated_profiles view
+export type VAuthenticatedProfile = Database['public']['Views']['v_authenticated_profiles']['Row']
+
 export function getSupabaseServerClientFromRequest(
   req: NextRequest,
   res: NextResponse

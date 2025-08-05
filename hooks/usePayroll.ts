@@ -8,10 +8,10 @@ import type { Database } from '@/lib/types/supabase'
 type PayrollEmployee = Database['public']['Tables']['payroll_objects_employees']['Row']
 type PayrollEmployer = Database['public']['Tables']['payroll_objects_employers']['Row']
 type PayrollPayrunRecord = Database['public']['Tables']['payroll_payrun_records']['Row']
-type PayrollPayrunItem = Database['public']['Tables']['payroll_payrun_items']['Row']
-type PayrollPayslipRecord = Database['public']['Tables']['payroll_payslip_records']['Row']
-type PayrollExpenseClaim = Database['public']['Tables']['payroll_expense_claims']['Row']
-type PayrollSalaryStructure = Database['public']['Tables']['payroll_salary_structures']['Row']
+// type PayrollPayrunItem = Database['public']['Tables']['payroll_payrun_items']['Row'] // TODO: Table doesn't exist
+// type PayrollPayslipRecord = Database['public']['Tables']['payroll_payslip_records']['Row'] // TODO: Table doesn't exist
+// type PayrollExpenseClaim = Database['public']['Tables']['payroll_expense_claims']['Row'] // TODO: Table doesn't exist
+// type PayrollSalaryStructure = Database['public']['Tables']['payroll_salary_structures']['Row'] // TODO: Table doesn't exist
 
 // Extended types with joined data
 type PayrollPayrunRecordWithEmployer = PayrollPayrunRecord & {
@@ -22,17 +22,17 @@ type PayrollEmployeeWithEmployer = PayrollEmployee & {
   payroll_objects_employers: Pick<PayrollEmployer, 'legal_name'> | null
 }
 
-type PayrollSalaryStructureWithEmployee = PayrollSalaryStructure & {
-  payroll_objects_employees: Pick<PayrollEmployee, 'full_name'> & {
-    payroll_objects_employers: Pick<PayrollEmployer, 'legal_name'> | null
-  } | null
-}
+// type PayrollSalaryStructureWithEmployee = PayrollSalaryStructure & {
+//   payroll_objects_employees: Pick<PayrollEmployee, 'full_name'> & {
+//     payroll_objects_employers: Pick<PayrollEmployer, 'legal_name'> | null
+//   } | null
+// }
 
-type PayrollExpenseClaimWithEmployee = PayrollExpenseClaim & {
-  payroll_objects_employees: Pick<PayrollEmployee, 'full_name'> & {
-    payroll_objects_employers: Pick<PayrollEmployer, 'legal_name'> | null
-  } | null
-}
+// type PayrollExpenseClaimWithEmployee = PayrollExpenseClaim & {
+//   payroll_objects_employees: Pick<PayrollEmployee, 'full_name'> & {
+//     payroll_objects_employers: Pick<PayrollEmployer, 'legal_name'> | null
+//   } | null
+// }
 
 // Helper function to get Supabase client
 const getClient = () => {
@@ -372,369 +372,17 @@ export function usePayrollPayruns(employerId?: string) {
   }
 }
 
-// Salary Structures Hooks
-export function usePayrollSalaryStructures(employeeId?: string) {
-  const [salaryStructures, setSalaryStructures] = useState<PayrollSalaryStructureWithEmployee[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+// Salary Structures Hooks - TODO: payroll_salary_structures table doesn't exist
+// export function usePayrollSalaryStructures(employeeId?: string) {
+//   // Function disabled - table doesn't exist in current schema
+// }
 
-  const fetchSalaryStructures = async () => {
-    try {
-      setLoading(true)
-      const supabase = getClient()
-      if (!supabase) return
-      
-      let query = supabase
-        .from('payroll_salary_structures')
-        .select(`
-          *,
-          payroll_objects_employees!inner(
-            full_name,
-            payroll_objects_employers!inner(legal_name)
-          )
-        `)
-        .order('created_at', { ascending: false })
+// Expense Claims Hooks - TODO: payroll_expense_claims table doesn't exist
+// export function usePayrollExpenseClaims(employeeId?: string) {
+//   // Function disabled - table doesn't exist in current schema
+// }
 
-      if (employeeId) {
-        query = query.eq('employee_id', employeeId)
-      }
-
-      const { data, error } = await query
-
-      if (error) throw error
-      setSalaryStructures(data || [])
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch salary structures')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const createSalaryStructure = async (structure: Omit<PayrollSalaryStructure, 'id' | 'created_at'>) => {
-    try {
-      const supabase = getClient()
-      if (!supabase) throw new Error('Supabase client not available')
-      
-      const { data, error } = await supabase
-        .from('payroll_salary_structures')
-        .insert(structure)
-        .select()
-        .single()
-
-      if (error) throw error
-      await fetchSalaryStructures() // Refetch to get the joined data
-      return data
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create salary structure')
-      throw err
-    }
-  }
-
-  const updateSalaryStructure = async (id: string, updates: Partial<PayrollSalaryStructure>) => {
-    try {
-      const supabase = getClient()
-      if (!supabase) throw new Error('Supabase client not available')
-      
-      const { data, error } = await supabase
-        .from('payroll_salary_structures')
-        .update(updates)
-        .eq('id', id)
-        .select()
-        .single()
-
-      if (error) throw error
-      await fetchSalaryStructures() // Refetch to get the joined data
-      return data
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to update salary structure')
-      throw err
-    }
-  }
-
-  const deleteSalaryStructure = async (id: string) => {
-    try {
-      const supabase = getClient()
-      if (!supabase) throw new Error('Supabase client not available')
-      
-      const { error } = await supabase
-        .from('payroll_salary_structures')
-        .delete()
-        .eq('id', id)
-
-      if (error) throw error
-      setSalaryStructures(prev => prev.filter(structure => structure.id !== id))
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to delete salary structure')
-      throw err
-    }
-  }
-
-  useEffect(() => {
-    fetchSalaryStructures()
-  }, [employeeId])
-
-  return {
-    salaryStructures,
-    loading,
-    error,
-    createSalaryStructure,
-    updateSalaryStructure,
-    deleteSalaryStructure,
-    refetch: fetchSalaryStructures
-  }
-}
-
-// Expense Claims Hooks
-export function usePayrollExpenseClaims(employeeId?: string) {
-  const [expenseClaims, setExpenseClaims] = useState<PayrollExpenseClaimWithEmployee[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
-  const fetchExpenseClaims = async () => {
-    try {
-      setLoading(true)
-      const supabase = getClient()
-      if (!supabase) return
-      
-      let query = supabase
-        .from('payroll_expense_claims')
-        .select(`
-          *,
-          payroll_objects_employees!inner(
-            full_name,
-            payroll_objects_employers!inner(legal_name)
-          )
-        `)
-        .order('created_at', { ascending: false })
-
-      if (employeeId) {
-        query = query.eq('employee_id', employeeId)
-      }
-
-      const { data, error } = await query
-
-      if (error) throw error
-      setExpenseClaims(data || [])
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch expense claims')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const createExpenseClaim = async (claim: Omit<PayrollExpenseClaim, 'id' | 'created_at'>) => {
-    try {
-      const supabase = getClient()
-      if (!supabase) throw new Error('Supabase client not available')
-      
-      const { data, error } = await supabase
-        .from('payroll_expense_claims')
-        .insert(claim)
-        .select()
-        .single()
-
-      if (error) throw error
-      await fetchExpenseClaims() // Refetch to get the joined data
-      return data
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create expense claim')
-      throw err
-    }
-  }
-
-  const approveExpenseClaim = async (id: string, approverId: string) => {
-    try {
-      const supabase = getClient()
-      if (!supabase) throw new Error('Supabase client not available')
-      
-      const { data, error } = await supabase
-        .from('payroll_expense_claims')
-        .update({
-          status: 'approved',
-          approved_at: new Date().toISOString(),
-          approved_by: approverId
-        })
-        .eq('id', id)
-        .select()
-        .single()
-
-      if (error) throw error
-      await fetchExpenseClaims() // Refetch to get the joined data
-      return data
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to approve expense claim')
-      throw err
-    }
-  }
-
-  const rejectExpenseClaim = async (id: string, approverId: string) => {
-    try {
-      const supabase = getClient()
-      if (!supabase) throw new Error('Supabase client not available')
-      
-      const { data, error } = await supabase
-        .from('payroll_expense_claims')
-        .update({
-          status: 'rejected',
-          rejected_at: new Date().toISOString(),
-          rejected_by: approverId
-        })
-        .eq('id', id)
-        .select()
-        .single()
-
-      if (error) throw error
-      await fetchExpenseClaims() // Refetch to get the joined data
-      return data
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to reject expense claim')
-      throw err
-    }
-  }
-
-  const deleteExpenseClaim = async (id: string) => {
-    try {
-      const supabase = getClient()
-      if (!supabase) throw new Error('Supabase client not available')
-      
-      const { error } = await supabase
-        .from('payroll_expense_claims')
-        .delete()
-        .eq('id', id)
-
-      if (error) throw error
-      setExpenseClaims(prev => prev.filter(claim => claim.id !== id))
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to delete expense claim')
-      throw err
-    }
-  }
-
-  useEffect(() => {
-    fetchExpenseClaims()
-  }, [employeeId])
-
-  return {
-    expenseClaims,
-    loading,
-    error,
-    createExpenseClaim,
-    approveExpenseClaim,
-    rejectExpenseClaim,
-    deleteExpenseClaim,
-    refetch: fetchExpenseClaims
-  }
-}
-
-// Payslips Hooks
-export function usePayrollPayslips(payrunId?: string) {
-  const [payslips, setPayslips] = useState<PayrollPayslipRecord[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
-  const fetchPayslips = async () => {
-    try {
-      setLoading(true)
-      const supabase = getClient()
-      if (!supabase) return
-      
-      let query = supabase
-        .from('payroll_payslip_records')
-        .select('*')
-        .order('created_at', { ascending: false })
-
-      if (payrunId) {
-        query = query.eq('payrun_id', payrunId)
-      }
-
-      const { data, error } = await query
-
-      if (error) throw error
-      setPayslips(data || [])
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch payslips')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const generatePayslip = async (employeeId: string, payrunItemId: string) => {
-    try {
-      const supabase = getClient()
-      if (!supabase) throw new Error('Supabase client not available')
-      
-      const { data, error } = await supabase
-        .from('payroll_payslip_records')
-        .insert({
-          employee_id: employeeId,
-          payrun_item_id: payrunItemId,
-          email_sent: false
-        })
-        .select()
-        .single()
-
-      if (error) throw error
-      await fetchPayslips() // Refetch to get the updated data
-      return data
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to generate payslip')
-      throw err
-    }
-  }
-
-  const sendPayslipEmail = async (id: string) => {
-    try {
-      const supabase = getClient()
-      if (!supabase) throw new Error('Supabase client not available')
-      
-      const { data, error } = await supabase
-        .from('payroll_payslip_records')
-        .update({
-          email_sent: true,
-          email_sent_at: new Date().toISOString()
-        })
-        .eq('id', id)
-        .select()
-        .single()
-
-      if (error) throw error
-      await fetchPayslips() // Refetch to get the updated data
-      return data
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to send payslip email')
-      throw err
-    }
-  }
-
-  const deletePayslip = async (id: string) => {
-    try {
-      const supabase = getClient()
-      if (!supabase) throw new Error('Supabase client not available')
-      
-      const { error } = await supabase
-        .from('payroll_payslip_records')
-        .delete()
-        .eq('id', id)
-
-      if (error) throw error
-      setPayslips(prev => prev.filter(payslip => payslip.id !== id))
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to delete payslip')
-      throw err
-    }
-  }
-
-  useEffect(() => {
-    fetchPayslips()
-  }, [payrunId])
-
-  return {
-    payslips,
-    loading,
-    error,
-    generatePayslip,
-    sendPayslipEmail,
-    deletePayslip,
-    refetch: fetchPayslips
-  }
-} 
+// Payslips Hooks - TODO: payroll_payslip_records table doesn't exist
+// export function usePayrollPayslips(payrunId?: string) {
+//   // Function disabled - table doesn't exist in current schema
+// } 

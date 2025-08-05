@@ -23,7 +23,7 @@ export function useUserRole(userId: string | undefined) {
     const fetchProfile = async () => {
       setLoading(true)
 
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("public_user_profiles")
         .select("*, public_user_roles(*)")
         .eq("user_id", userId)

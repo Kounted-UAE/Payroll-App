@@ -148,17 +148,19 @@ export function EmployeeDrawer({ open, onOpenChange, employee, mode, onSave, onD
             {renderField('Passport Number', 'passport_number')}
             {renderField('Nationality', 'nationality')}
             {renderField('Job Title', 'job_title')}
-            {renderField('Contract Type', 'contract_type')}
             {renderField('Start Date', 'start_date')}
             {renderField('Bank Name', 'bank_name')}
-            {renderField('Routing Code', 'routing_code')}
-            {renderField('Account Number', 'account_number')}
             {renderField('IBAN', 'iban')}
             {renderField('Currency', 'currency')}
+            {/* TODO: These fields don't exist in current schema
+            {renderField('Contract Type', 'contract_type')}
+            {renderField('Routing Code', 'routing_code')}
+            {renderField('Account Number', 'account_number')}
             {renderField('Base Salary', 'base_salary', true)}
             {renderField('Housing Allowance', 'housing_allowance', true)}
             {renderField('Transport Allowance', 'transport_allowance', true)}
             {renderField('Food Allowance', 'food_allowance', true)}
+            */}
           </div>
         </div>
 

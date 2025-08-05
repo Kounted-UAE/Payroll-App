@@ -69,34 +69,14 @@ export default function OrderActionsDialog({
     setLoading(true);
 
     try {
-      const supabase = getSupabaseClient();
-      if (mode === 'edit' && order) {
-        const { error } = await supabase
-          .from('order_intakes')
-          .update(formData)
-          .eq('id', order.id);
-
-        if (error) throw error;
-
-        toast({
-          title: 'Success',
-          description: 'Order updated successfully'
-        });
-      } else if (mode === 'duplicate' && order) {
-        const { error } = await supabase
-          .from('order_intakes')
-          .insert([{
-            ...formData,
-            order_data: order.order_data
-          }]);
-
-        if (error) throw error;
-
-        toast({
-          title: 'Success',
-          description: 'Order duplicated successfully'
-        });
-      }
+      // TODO: order_intakes table doesn't exist in current schema
+      // This needs to be updated when the backend is properly converted
+      console.log('Order operations disabled - table not available');
+      
+      toast({
+        title: 'Info',
+        description: 'Order operations are currently disabled during migration'
+      });
 
       onUpdate();
       onClose();

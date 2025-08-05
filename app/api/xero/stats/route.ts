@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
   // Fetch last connected from xero_auth_tokens
   const { data: tokenRow } = await supabase
     .from('xero_auth_tokens')
-    .select('updated_at')
+    .select('updated_at, tenant_id')
     .eq('user_id', user.id)
     .order('updated_at', { ascending: false })
     .limit(1)

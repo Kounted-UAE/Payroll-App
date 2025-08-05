@@ -82,11 +82,9 @@ export default function ClientManagement() {
       setLoading(true);
       const supabase = getSupabaseClient();
       
-      // Load clients and onboarding profiles in parallel
-      const [clientsResult, profilesResult] = await Promise.all([
-        supabase.from('clients').select('*').order('created_at', { ascending: false }),
-        supabase.from('client_operational_profiles').select('id, client_id, status, last_updated_at')
-      ]);
+      // Load clients and onboarding profiles separately to avoid type inference issues
+      const clientsResult = await (supabase as any).from('clients').select('*').order('created_at', { ascending: false });
+      const profilesResult = await (supabase as any).from('client_operational_profiles').select('id, client_id, status, last_updated_at');
 
       if (clientsResult.error) throw clientsResult.error;
       if (profilesResult.error) throw profilesResult.error;
@@ -117,7 +115,7 @@ export default function ClientManagement() {
       }
 
       const supabase = getSupabaseClient();
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('clients')
         .insert([newClient])
         .select()
@@ -176,7 +174,7 @@ export default function ClientManagement() {
   const handleDeleteClient = async (clientId: string) => {
     try {
       const supabase = getSupabaseClient();
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('clients')
         .delete()
         .eq('id', clientId);
@@ -201,7 +199,7 @@ export default function ClientManagement() {
   const handleSendClientEmail = async (client: Client) => {
     try {
       const supabase = getSupabaseClient();
-      const { error } = await supabase.functions.invoke('send-client-email', {
+      const { error } = await (supabase as any).functions.invoke('send-client-email', {
         body: { clientId: client.id }
       });
 

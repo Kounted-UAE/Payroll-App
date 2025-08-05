@@ -14,6 +14,7 @@ import { getSupabaseClient } from '@/lib/supabase/client'
 
 export default function XeroConfigPage() {
   const [dialogOpen, setDialogOpen] = useState(false)
+  const [searchValue, setSearchValue] = useState('')
 
   return (
     <div className="p-6">
@@ -74,9 +75,11 @@ export default function XeroConfigPage() {
           </TabsContent>
           
           <TabsContent value="invoices">
-            <XeroSectionHeader title="Invoice Management" />
-            <XeroSearchBar />
-            <XeroTabTableInvoices />
+            <div className="mb-4">
+              <h3 className="text-lg font-semibold">Invoice Management</h3>
+            </div>
+            <XeroSearchBar value={searchValue} onChange={setSearchValue} />
+            <XeroTabTableInvoices search={searchValue} />
           </TabsContent>
           
           <TabsContent value="settings">

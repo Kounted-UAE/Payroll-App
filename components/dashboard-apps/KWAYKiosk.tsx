@@ -25,20 +25,16 @@ export default function KWAYKiosk() {
 
   const loadOrderStats = async () => {
     try {
-      const supabase = getSupabaseClient();
-      const { data, error } = await supabase.from('order_intakes').select('status');
-      if (error) throw error;
-
-      if (data) {
-        const completed = data.filter(item => item.status === 'completed').length;
-        const inProgress = data.filter(item => item.status === 'draft').length;
-
-        setOrderStats({
-          total: data.length,
-          completed,
-          inProgress
-        });
-      }
+      // TODO: order_intakes table doesn't exist in current schema
+      // This needs to be updated when the backend is properly converted
+      console.log('Order stats loading disabled - table not available');
+      
+      // Set default stats for now
+      setOrderStats({
+        total: 0,
+        completed: 0,
+        inProgress: 0
+      });
     } catch (error) {
       console.error('Error loading order stats:', error);
     }

@@ -352,5 +352,5 @@ export async function generatePayslipPDF({
   const pdfBytes = await pdfDoc.save()
   
   // Convert to Blob
-  return new Blob([pdfBytes], { type: 'application/pdf' })
+  return new Blob([pdfBytes as any], { type: 'application/pdf' })
 } 

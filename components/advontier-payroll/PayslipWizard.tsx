@@ -259,7 +259,7 @@ export function PayslipWizard({ batchData }: PayslipWizardProps) {
                       // Handle delivery based on selected mode
                       if (wizardData.delivery_mode === 'download' || wizardData.delivery_mode === 'both') {
                         // Create and download ZIP file
-                        const zipBlob = await createPayslipsZip(payslips, batchData.batch_id, batchData.employer_name)
+                        const zipBlob = await createPayslipsZip(payslips)
                         
                         // Download the ZIP file
                         const url = URL.createObjectURL(zipBlob)
@@ -287,7 +287,7 @@ export function PayslipWizard({ batchData }: PayslipWizardProps) {
                             employerName: batchData.employer_name,
                             payPeriodFrom: batchData.pay_period_from,
                             payPeriodTo: batchData.pay_period_to,
-                            language: wizardData.language
+                            language: wizardData.language === 'mixed' ? 'english' : wizardData.language
                           }
                         }).filter(Boolean) // Remove null entries
 

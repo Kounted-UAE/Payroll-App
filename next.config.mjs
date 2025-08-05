@@ -26,6 +26,7 @@ const nextConfig = {
       test: /\.(woff|woff2|eot|ttf|otf)$/,
       type: 'asset/resource',
     })
+    
     config.resolve.alias = {
       ...config.resolve.alias,
       '@images': resolve(__dirname, 'public/images'),
@@ -36,6 +37,7 @@ const nextConfig = {
       '@fonts': resolve(__dirname, 'public/fonts'),
       '@icons': resolve(__dirname, 'public/icons'),
     }
+    
     return config
   },
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],

@@ -43,7 +43,8 @@ export default function ClientActionsDialog({
     contact_person: '',
     email: '',
     phone: '',
-    business_type: ''
+    business_type: '',
+    status: 'active'
   });
   const [loading, setLoading] = useState(false);
 
@@ -55,7 +56,8 @@ export default function ClientActionsDialog({
           contact_person: client.contact_person,
           email: '',
           phone: client.phone || '',
-          business_type: client.business_type || ''
+          business_type: client.business_type || '',
+          status: 'active'
         });
       } else {
         setFormData({
@@ -63,7 +65,8 @@ export default function ClientActionsDialog({
           contact_person: client.contact_person,
           email: client.email,
           phone: client.phone || '',
-          business_type: client.business_type || ''
+          business_type: client.business_type || '',
+          status: 'active'
         });
       }
     }
@@ -84,7 +87,7 @@ export default function ClientActionsDialog({
     try {
       const supabase = getSupabaseClient();
       if (mode === 'edit' && client) {
-        const { error } = await supabase
+        const { error } = await (supabase as any)
           .from('clients')
           .update(formData)
           .eq('id', client.id);
@@ -96,7 +99,7 @@ export default function ClientActionsDialog({
           description: 'Client updated successfully'
         });
       } else if (mode === 'duplicate') {
-        const { error } = await supabase
+        const { error } = await (supabase as any)
           .from('clients')
           .insert([formData]);
 

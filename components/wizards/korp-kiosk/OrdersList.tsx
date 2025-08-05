@@ -32,14 +32,12 @@ export default function OrdersList() {
   const loadOrders = async () => {
     try {
       setLoading(true);
-      const supabase = getSupabaseClient();
-      const { data, error } = await supabase
-        .from('order_intakes')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      setOrders(data || []);
+      // TODO: order_intakes table doesn't exist in current schema
+      // This needs to be updated when the backend is properly converted
+      console.log('Orders loading disabled - table not available');
+      
+      // Set empty orders for now
+      setOrders([]);
     } catch (error) {
       console.error('Error loading orders:', error);
       toast({
@@ -54,18 +52,13 @@ export default function OrdersList() {
 
   const handleDelete = async (orderId: string) => {
     try {
-      const supabase = getSupabaseClient();
-      const { error } = await supabase
-        .from('order_intakes')
-        .delete()
-        .eq('id', orderId);
-
-      if (error) throw error;
-
-      setOrders(prev => prev.filter(order => order.id !== orderId));
+      // TODO: order_intakes table doesn't exist in current schema
+      // This needs to be updated when the backend is properly converted
+      console.log('Order deletion disabled - table not available');
+      
       toast({
-        title: 'Success',
-        description: 'Order deleted successfully'
+        title: 'Info',
+        description: 'Order deletion is currently disabled during migration'
       });
     } catch (error) {
       console.error('Error deleting order:', error);
@@ -79,16 +72,13 @@ export default function OrdersList() {
 
   const handleSendEmail = async (order: Order) => {
     try {
-      const supabase = getSupabaseClient();
-      const { error } = await supabase.functions.invoke('send-order-email', {
-        body: { orderId: order.id }
-      });
-
-      if (error) throw error;
-
+      // TODO: order email function doesn't exist in current schema
+      // This needs to be updated when the backend is properly converted
+      console.log('Order email sending disabled - function not available');
+      
       toast({
-        title: 'Success',
-        description: 'Order email sent successfully'
+        title: 'Info',
+        description: 'Order email sending is currently disabled during migration'
       });
     } catch (error) {
       console.error('Error sending email:', error);

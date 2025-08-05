@@ -26,7 +26,7 @@ import {
 } from 'lucide-react'
 import { useState } from 'react'
 import { generatePayslipPDF } from '@/lib/utils/pdf/generatePayslipPDF'
-import { generateZip } from '@/lib/utils/pdf/generateZip'
+import { createPayslipsZip } from '@/lib/utils/pdf/generateZip'
 import { sendPayslipEmail } from '@/lib/utils/email/sendPayslipEmail'
 import { toast } from '@/hooks/use-toast'
 
@@ -159,7 +159,7 @@ export function ReviewGenerateStep({
         employerName: batchData.employer_name,
         payPeriodFrom: batchData.pay_period_from,
         payPeriodTo: batchData.pay_period_to,
-        language: wizardData.language
+        language: wizardData.language === 'mixed' ? 'english' : wizardData.language
       })
       
       toast({

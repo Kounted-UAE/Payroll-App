@@ -55,7 +55,7 @@ export const EMPLOYER_EXAMPLE_ROW = {
   routing_code: "EBILAEAD",
   wps_registered: true,
   wps_employer_id: "WPS123456",
-  salary_transfer_method: "WPS",
+  salary_transfer_method: "WPS" as const,
   jurisdiction: "Dubai Mainland",
   emirate: "Dubai",
   city: "Dubai",
