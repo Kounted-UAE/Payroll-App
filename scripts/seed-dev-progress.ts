@@ -56,7 +56,7 @@ async function seedDevProgressData() {
             completion_percentage: feature.feature_key === 'dashboard' ? 95 :
                                  feature.feature_key.includes('payroll') ? 65 :
                                  feature.feature_key.includes('cpq') ? 40 :
-                                 feature.feature_key.includes('korp') ? 30 : 15
+                                 feature.feature_key.includes('kwiver') ? 30 : 15
           })
           .select()
           .single();
@@ -97,7 +97,7 @@ async function seedDevProgressData() {
         session_date: '2025-01-14',
         session_title: 'CPQ System Development',
         summary_text: 'Built the foundation for the Configure-Price-Quote system. Created the quote builder interface and integrated with the pricing engine. Still need to add approval workflows.',
-        features_worked_on: ['kway-cpq'],
+        features_worked_on: ['kwiver-cpq'],
         ai_estimated_hours: 8.0,
         ai_confidence_score: 0.90,
         key_achievements: [
@@ -174,7 +174,7 @@ async function seedDevProgressData() {
     // 5. Create sample milestones
     console.log('🎯 Creating sample milestones...');
     const payrollFeature = insertedFeatures.find(f => f.feature_key === 'payroll-tools');
-    const cpqFeature = insertedFeatures.find(f => f.feature_key === 'kway-cpq');
+    const cpqFeature = insertedFeatures.find(f => f.feature_key === 'kwiver-cpq');
 
     if (payrollFeature) {
       const milestones = [

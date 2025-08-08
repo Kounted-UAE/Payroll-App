@@ -57,7 +57,7 @@ UpgradeSubscriptionForm,
 CreateAccountForm,
 PaymentsTable,
 TeamMembersWidget,
-SupportChatWidget } from '@/components/design-showcase';
+SupportChatWidget } from '@/components/admin/design-showcase';
 
 const Index = () => {
   const [selectedComponent, setSelectedComponent] = useState<string | null>(null);

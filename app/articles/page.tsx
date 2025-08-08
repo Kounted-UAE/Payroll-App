@@ -3,7 +3,7 @@
 import { getAllArticlePosts } from '@/lib/articleLoader'
 import ArticleIndex from '@/components/advontier-website/articles/ArticleIndex'
 import ArticleCards from '@/components/advontier-website/articles/ArticleCards'
-import { RootLayout } from '@/components/advontier-website/RootLayout'
+import { RootLayout } from '@/components/advontier-website/layout/RootLayout'
 import { PageIntro } from '@/components/advontier-website/PageIntro'
 import { Container } from '@/components/advontier-website/Container'
 

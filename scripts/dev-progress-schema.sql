@@ -4,7 +4,7 @@
 -- Project features tracking (derived from sidebar navigation and project goals)
 CREATE TABLE IF NOT EXISTS dev_project_features (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  feature_key TEXT UNIQUE NOT NULL, -- Unique identifier (e.g., "kway-cpq", "payroll-payruns")
+  feature_key TEXT UNIQUE NOT NULL, -- Unique identifier (e.g., "kwiver-cpq", "payroll-payruns")
   category TEXT NOT NULL, -- "Sales Tools", "Payroll Tools", etc.
   title TEXT NOT NULL,
   description TEXT,

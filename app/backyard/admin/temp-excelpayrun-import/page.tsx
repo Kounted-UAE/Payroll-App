@@ -18,8 +18,8 @@ import {
 } from '@/components/ui/dialog'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
-import { ExportXeroJournalsWizard } from '@/components/wizards/payroll-wizards/PayrunSummaryJournalExport'
-import { ExportDetailedXeroJournalsWizard } from '@/components/wizards/payroll-wizards/PayrunDetailedJournalExport'
+import { ExportXeroJournalsWizard } from '@/components/advontier-payroll/actions/PayrunSummaryJournalExport'
+import { ExportDetailedXeroJournalsWizard } from '@/components/advontier-payroll/actions/PayrunDetailedJournalExport'
 
 const SUPABASE_PUBLIC_URL = 'https://alryjvnddvrrgbuvednm.supabase.co/storage/v1/object/public/generated-pdfs/payslips'
 

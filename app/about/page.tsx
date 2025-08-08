@@ -13,7 +13,7 @@ import { PageLinks } from '@/components/advontier-website/PageLinks'
 import { SectionIntro } from '@/components/advontier-website/SectionIntro'
 import { StatList, StatListItem } from '@/components/advontier-website/StatList'
 import { loadArticles } from '@/lib/mdx'
-import { RootLayout } from '@/components/advontier-website/RootLayout'
+import { RootLayout } from '@/components/advontier-website/layout/RootLayout'
 
 export const metadata: Metadata = {
   title: 'About Eben Johansen',

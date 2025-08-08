@@ -8,7 +8,7 @@ import Script from "next/script"
 import  AuthProvider  from "@/components/advontier-auth/auth-provider"
 import { Toaster } from "@/components/ui/sonner"
 import { CookieConsentBanner } from "@/components/ui/cookie-consent"
-import { Footer } from "@/components/advontier-website/Footer"
+import { Footer } from "@/components/advontier-website/layout/Footer"
 
 import { cn } from "@/lib/utils"
 

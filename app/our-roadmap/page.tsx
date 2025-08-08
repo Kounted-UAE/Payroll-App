@@ -13,7 +13,7 @@ import { PageIntro } from '@/components/advontier-website/PageIntro'
 import { SectionIntro } from '@/components/advontier-website/SectionIntro'
 import { StylizedImage } from '@/components/advontier-website/StylizedImage'
 import { TagList, TagListItem } from '@/components/advontier-website/TagList'
-import { RootLayout } from '@/components/advontier-website/RootLayout'
+import { RootLayout } from '@/components/advontier-website/layout/RootLayout'
 
 // All image paths reference files in /public/backgrounds/
 const imageLaptop = '/backgrounds/laptop.jpg'
@@ -143,9 +143,9 @@ function SalesTools() {
         <p>
           Our sales tools are designed to streamline the{' '}
           <strong className="font-semibold text-neutral-950">client acquisition process</strong>{' '}
-          for accounting firms. The KWAY CPQ (Configure, Price, Quote) system enables 
+          for accounting firms. The Kwiver CPQ (Configure, Price, Quote) system enables 
           complex service bundling with dynamic pricing based on client requirements, 
-          while the KORP Kiosk provides a POS-style interface for quick service ordering.
+          while the Kwiver Kiosk provides a POS-style interface for quick service ordering.
         </p>
         <p>
           The{' '}
@@ -167,11 +167,11 @@ function SalesTools() {
         Sales Tools Features
       </h3>
       <List className="mt-8">
-        <ListItem title="KWAY CPQ Engine">
+        <ListItem title="Kwiver CPQ Engine">
           Multi-step wizard for complex service bundling with dynamic pricing based on 
           client requirements and compliance needs.
         </ListItem>
-        <ListItem title="KORP Kiosk">
+        <ListItem title="Kwiver Kiosk">
           POS-style interface for quick service ordering with real-time pricing and 
           instant quote generation for standard services.
         </ListItem>

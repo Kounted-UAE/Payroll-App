@@ -29,7 +29,7 @@ import {
   EMPLOYEE_EXAMPLE_ROW
 } from "@/lib/validators/employeeCsvSchema"
 import { ViewToggle } from "@/components/ui/ViewToggle"
-import { EmployeeDrawer } from "@/components/drawers/EmployeeDrawer"
+import { EmployeeDrawer } from "@/components/ui/drawers/EmployeeDrawer"
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -38,7 +38,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { ScrollArea } from "@/components/ui/scroll-area"
 // IMPORT the salary wizard
-import AddSalaryTemplateWizard from "@/components/wizards/payroll-wizards/AddSalaryTemplateWizard"
+import AddSalaryTemplateWizard from "@/components/advontier-payroll/actions/AddSalaryTemplateWizard"
 
 const PayrollEmployees = () => {
   const [searchQuery, setSearchQuery] = useState('');

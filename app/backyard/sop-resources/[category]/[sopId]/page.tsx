@@ -1,4 +1,4 @@
-import SOPDetailPage from '@/components/wizards/sop-management/SOPDetailPage';
+import SOPDetailPage from '@/components/advontier-resources/sop-management/SOPDetailPage';
 
 export default function Page() {
   return <SOPDetailPage />;

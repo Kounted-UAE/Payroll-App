@@ -1,6 +1,6 @@
 'use client'
 
-import AddEmployerWizard from '@/components/wizards/payroll-wizards/AddEmployerWizard';
+import AddEmployerWizard from '@/components/advontier-payroll/actions/AddEmployerWizard';
 
 export default function AddEmployerPage() {
   return <AddEmployerWizard />;

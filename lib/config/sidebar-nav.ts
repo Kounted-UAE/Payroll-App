@@ -33,8 +33,8 @@ import {
       label: "Sales Tools",
       items: [
         { title: "Referral Programs", url: "/backyard/referral-programs", icon: RocketIcon, status: "active" },
-        { title: "$KWAY CPQ", url: "/backyard/kway-cpq", icon: RocketIcon, status: "active" },
-        { title: "$KORP Kiosk", url: "/backyard/korp-kiosk", icon: ShoppingCart, status: "active" },
+        { title: "$Kwiver CPQ", url: "/backyard/kwiver-cpq", icon: RocketIcon, status: "active" },
+        { title: "$Kwiver Kiosk", url: "/backyard/kwiver-kiosk", icon: ShoppingCart, status: "active" },
       ],
     },
     {

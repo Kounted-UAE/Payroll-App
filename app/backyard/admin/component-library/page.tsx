@@ -10,7 +10,7 @@ import {
   MoveGoalWidget,
   ExerciseMinutesChart,
   UpgradeSubscriptionForm,
-} from '@/components/design-showcase';
+} from '@/components/admin/design-showcase';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';

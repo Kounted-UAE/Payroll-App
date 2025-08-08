@@ -30,9 +30,9 @@ import {
 } from 'lucide-react';
 import { getSupabaseClient } from '@/lib/supabase/client';
 import { toast } from '@/hooks/use-toast';
-import ClientOnboardingWizard from '@/components/wizards/accounting-onboarding/ClientOnboardingWizard';
+import ClientOnboardingWizard from '@/components/advontier-finance/accounting-onboarding/ClientOnboardingWizard';
 import { ActionButtons } from '@/components/ui/action-buttons';
-import ClientActionsDialog from '@/components/wizards/client-management/ClientActionsDialog';
+import ClientActionsDialog from '@/components/advontier-crm/client-management/ClientActionsDialog';
 
 interface Client {
   id: string;

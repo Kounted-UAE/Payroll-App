@@ -3,7 +3,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import ClientWizard from "@/components/wizards/client-management/ClientWizard";
+import ClientWizard from "@/components/advontier-crm/client-management/ClientWizard";
 
 export default function ClientWizardPage() {
   const { clientId } = useParams();

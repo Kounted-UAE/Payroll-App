@@ -5,7 +5,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { getSupabaseClient } from '@/lib/supabase/client'
-import { PayslipWizard } from '@/components/advontier-payroll/PayslipWizard'
+import { PayslipWizard } from '@/components/advontier-payroll/interfaces/PayslipWizard'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, Loader2 } from 'lucide-react'

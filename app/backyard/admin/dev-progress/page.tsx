@@ -16,9 +16,9 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 
-import ProjectTimeline from '@/components/dev-progress/ProjectTimeline';
-import SessionLogger from '@/components/dev-progress/SessionLogger';
-import FeatureDetailModal from '@/components/dev-progress/FeatureDetailModal';
+import ProjectTimeline from '@/components/admin/dev-progress/ProjectTimeline';
+import SessionLogger from '@/components/admin/dev-progress/SessionLogger';
+import FeatureDetailModal from '@/components/admin/dev-progress/FeatureDetailModal';
 
 import type { ProjectFeature, SessionLog, ProgressDashboardData } from '@/lib/types/dev-progress';
 import { getAllFeatures } from '@/lib/utils/extract-features';

@@ -36,7 +36,7 @@
         "status": "Partial implementation — schema and payrun engine in place"
       },
       {
-        "title": "🛒 KORP Kiosk (POS-style Service Ordering)",
+        "title": "🛒 Kwiver Kiosk (POS-style Service Ordering)",
         "details": [
           "Multi-item cart with dynamic SKUs and configuration",
           "Modal-based form wizard with matrix-driven pricing",
@@ -46,7 +46,7 @@
         "status": "MVP in progress"
       },
       {
-        "title": "📊 KWAY CPQ (Quoting Engine)",
+        "title": "📊 Kwiver CPQ (Quoting Engine)",
         "details": [
           "Multi-step wizard for SoW and bundle config",
           "SKU logic via quote_template_library",

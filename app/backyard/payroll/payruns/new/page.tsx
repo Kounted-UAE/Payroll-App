@@ -1,6 +1,6 @@
 'use client'
 
-import CreatePayrunWizard from '@/components/wizards/payroll-wizards/CreatePayrunWizard';
+import CreatePayrunWizard from '@/components/advontier-payroll/actions/CreatePayrunWizard';
 
 export default function CreatePayrunPage() {
   return <CreatePayrunWizard />;

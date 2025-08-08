@@ -185,7 +185,7 @@ Never offer module transitions (e.g., “Would you like to move to Payroll?”) 
 - Rewrite `lib/actions/cpq.ts` into modular structure and validate type usage  
 - Normalize Supabase table names for consistency  
 - Generate role-aware session utilities and authentication infrastructure  
-- Introduce structure for KORP/KWAY quoting workflows  
+- Introduce structure for Kwiver/Kwiver quoting workflows  
 - Prepare groundwork for scoped quoting, audit trails, and quote lifecycle logic
 
 ---
@@ -205,7 +205,7 @@ Never offer module transitions (e.g., “Would you like to move to Payroll?”) 
   - `quote_items` → `quote_line_entries` (new table)  
 - ✅ Refreshed Supabase types after schema changes  
 - ✅ Rebuilt internal schema references using `quote_ref` and `ticket_id`  
-- ✅ Deferred CPQ scoping to KORP/KWAY framework for future sessions  
+- ✅ Deferred CPQ scoping to Kwiver/Kwiver framework for future sessions  
 
 ---
 
@@ -227,7 +227,7 @@ Never offer module transitions (e.g., “Would you like to move to Payroll?”) 
 - ✅ Auth context implemented and integrated cleanly  
 - ✅ Next CPQ scoping tasks and middleware deferred and documented  
 - ✅ Full Supabase type sync complete  
-- ✅ All future quoting workflows to follow KORP/KWAY structure  
+- ✅ All future quoting workflows to follow Kwiver/Kwiver structure  
 
 
 // session.01.20250721.log
@@ -300,7 +300,7 @@ session.02.20250721 — To continue with app-wide styling normalization, onboard
 
 * Successfully executed type-safe Supabase integration across renamed CPQ schema tables
 * Refactored legacy `cpq.ts` into modular `createQuote.ts` pattern with minimal assumption risk
-* Aligned actions with KORP/KWAY CPQ workflow principles for future roadmap compliance
+* Aligned actions with Kwiver/Kwiver CPQ workflow principles for future roadmap compliance
 * Implemented `useSession`, `useUserRole`, `lib/auth.ts`, and `auth-provider.tsx` with Supabase v2 compatibility
 * Preserved role safety during user creation using void/null defaults and deferred escalation
 * Introduced view-based abstraction (`v_authenticated_profiles`) and Supabase-safe triggers

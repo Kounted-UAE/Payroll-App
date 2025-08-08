@@ -2,10 +2,10 @@ import { ContactSection } from '@/components/advontier-website/ContactSection'
 import { Container } from '@/components/advontier-website/Container'
 import { FadeIn } from '@/components/advontier-website/FadeIn'
 import { GrayscaleTransitionImage } from '@/components/advontier-website/GrayscaleTransitionImage'
-import { MDXComponents } from '@/components/advontier-website/MDXComponents'
+import { MDXComponents } from '@/components/advontier-website/articles/MDXComponents'
 import { PageIntro } from '@/components/advontier-website/PageIntro'
 import { PageLinks } from '@/components/advontier-website/PageLinks'
-import { RootLayout } from '@/components/advontier-website/RootLayout'
+import { RootLayout } from '@/components/advontier-website/layout/RootLayout'
 import { type CaseStudy, type MDXEntry, loadCaseStudies } from '@/lib/mdx'
 
 export default async function CaseStudyLayout({
