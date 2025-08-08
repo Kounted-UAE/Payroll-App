@@ -30,11 +30,11 @@ export default async function PerspectivesPage() {
       <Container className="mt-24 sm:mt-32 lg:mt-40">
         <div className="lg:grid lg:grid-cols-4 lg:gap-8">
           <div className="lg:col-span-3">
-            <ArticleCards posts={posts} />
+            <ArticleCards posts={posts} basePath="/perspectives" />
           </div>
           <div className="hidden lg:block">
             <div className="sticky top-8">
-              <ArticleIndex posts={posts} />
+              <ArticleIndex posts={posts} basePath="/perspectives" />
             </div>
           </div>
         </div>

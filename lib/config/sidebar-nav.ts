@@ -38,6 +38,12 @@ import {
       ],
     },
     {
+      label: "Specialist Agents",
+      items: [
+        { title: "Agents", url: "/backyard/agents", icon: Briefcase, status: "active" },
+      ],
+    },
+    {
       label: "Payroll Tools",
       items: [
         { title: "Advontier Payroll", url: "/backyard/payroll", icon: BarChart3, status: "active" },

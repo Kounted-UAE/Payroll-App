@@ -3,9 +3,13 @@ import { createClient } from '@supabase/supabase-js';
 import { Resend } from 'resend';
 
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Origin": process.env.NODE_ENV === 'production' 
+    ? "https://www.advontier.com" 
+    : "http://localhost:3000",
   "Access-Control-Allow-Headers":
     "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Credentials": "true",
 };
 
 interface OrderEmailRequest {

@@ -2,7 +2,7 @@
 -- Creates an articles table for MDX content or a compatibility view mapping to existing docs_articles
 
 -- If docs_articles already exists, create a view named articles to avoid duplication
-DO $$
+DO $outer$
 BEGIN
   IF EXISTS (
     SELECT 1 FROM information_schema.tables 
@@ -13,13 +13,13 @@ BEGIN
       SELECT 1 FROM information_schema.views 
       WHERE table_schema = 'public' AND table_name = 'articles'
     ) THEN
-      EXECUTE $$
+      EXECUTE $view$
         CREATE VIEW public.articles AS
         SELECT
           id,
           slug,
           title,
-          description,
+          NULL::text AS description,
           content,
           category,
           subcategory,
@@ -33,7 +33,7 @@ BEGIN
           NULL::text AS author_role,
           NULL::text AS author_image
         FROM public.docs_articles
-      $$;
+      $view$;
     END IF;
   ELSE
     -- Create a dedicated articles table with MDX content storage
@@ -63,23 +63,28 @@ BEGIN
       CREATE INDEX IF NOT EXISTS articles_visibility_idx ON public.articles (visibility);
     END IF;
   END IF;
-END$$;
+END$outer$;
 
--- Optional RLS policies (enable and allow read for anon; writes for authenticated or via service role)
-ALTER TABLE public.articles ENABLE ROW LEVEL SECURITY;
-
-DO $$
+-- Optional RLS policies (only apply if articles is a BASE TABLE)
+DO $rls$
 BEGIN
-  IF NOT EXISTS (
-    SELECT 1 FROM pg_policies WHERE schemaname = 'public' AND tablename = 'articles' AND policyname = 'Allow read to all'
+  IF EXISTS (
+    SELECT 1 FROM information_schema.tables 
+    WHERE table_schema = 'public' AND table_name = 'articles' AND table_type = 'BASE TABLE'
   ) THEN
-    CREATE POLICY "Allow read to all" ON public.articles FOR SELECT USING (true);
-  END IF;
+    EXECUTE 'ALTER TABLE public.articles ENABLE ROW LEVEL SECURITY';
 
-  IF NOT EXISTS (
-    SELECT 1 FROM pg_policies WHERE schemaname = 'public' AND tablename = 'articles' AND policyname = 'Allow writes to authenticated'
-  ) THEN
-    CREATE POLICY "Allow writes to authenticated" ON public.articles FOR ALL TO authenticated USING (true) WITH CHECK (true);
+    IF NOT EXISTS (
+      SELECT 1 FROM pg_policies WHERE schemaname = 'public' AND tablename = 'articles' AND policyname = 'Allow read to all'
+    ) THEN
+      CREATE POLICY "Allow read to all" ON public.articles FOR SELECT USING (true);
+    END IF;
+
+    IF NOT EXISTS (
+      SELECT 1 FROM pg_policies WHERE schemaname = 'public' AND tablename = 'articles' AND policyname = 'Allow writes to authenticated'
+    ) THEN
+      CREATE POLICY "Allow writes to authenticated" ON public.articles FOR ALL TO authenticated USING (true) WITH CHECK (true);
+    END IF;
   END IF;
-END$$;
+END$rls$;
 

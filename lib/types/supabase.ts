@@ -1391,6 +1391,144 @@ export type Database = {
           },
         ]
       }
+      help_attachments: {
+        Row: {
+          file_name: string | null
+          file_url: string
+          id: string
+          resource_id: string | null
+          uploaded_at: string | null
+          uploaded_by: string | null
+        }
+        Insert: {
+          file_name?: string | null
+          file_url: string
+          id?: string
+          resource_id?: string | null
+          uploaded_at?: string | null
+          uploaded_by?: string | null
+        }
+        Update: {
+          file_name?: string | null
+          file_url?: string
+          id?: string
+          resource_id?: string | null
+          uploaded_at?: string | null
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "help_attachments_resource_id_fkey"
+            columns: ["resource_id"]
+            isOneToOne: false
+            referencedRelation: "help_resources"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "help_attachments_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "v_authenticated_profiles"
+            referencedColumns: ["auth_user_id"]
+          },
+        ]
+      }
+      help_links: {
+        Row: {
+          link_type: string | null
+          source_id: string
+          target_id: string
+        }
+        Insert: {
+          link_type?: string | null
+          source_id: string
+          target_id: string
+        }
+        Update: {
+          link_type?: string | null
+          source_id?: string
+          target_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "help_links_source_id_fkey"
+            columns: ["source_id"]
+            isOneToOne: false
+            referencedRelation: "help_resources"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "help_links_target_id_fkey"
+            columns: ["target_id"]
+            isOneToOne: false
+            referencedRelation: "help_resources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      help_resources: {
+        Row: {
+          category: string | null
+          content: Json | null
+          created_at: string | null
+          created_by: string | null
+          id: string
+          status: string | null
+          summary: string | null
+          tags: string[] | null
+          title: string
+          type: string
+          updated_at: string | null
+          updated_by: string | null
+          view_count: number | null
+        }
+        Insert: {
+          category?: string | null
+          content?: Json | null
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          status?: string | null
+          summary?: string | null
+          tags?: string[] | null
+          title: string
+          type: string
+          updated_at?: string | null
+          updated_by?: string | null
+          view_count?: number | null
+        }
+        Update: {
+          category?: string | null
+          content?: Json | null
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          status?: string | null
+          summary?: string | null
+          tags?: string[] | null
+          title?: string
+          type?: string
+          updated_at?: string | null
+          updated_by?: string | null
+          view_count?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "help_resources_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "v_authenticated_profiles"
+            referencedColumns: ["auth_user_id"]
+          },
+          {
+            foreignKeyName: "help_resources_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "v_authenticated_profiles"
+            referencedColumns: ["auth_user_id"]
+          },
+        ]
+      }
       kounted_catalogue_items: {
         Row: {
           created_at: string
@@ -5308,6 +5446,384 @@ export type Database = {
         }
         Relationships: []
       }
+      tax_assessment_messages: {
+        Row: {
+          assessment_id: string
+          content: string
+          created_at: string | null
+          id: string
+          role: string
+        }
+        Insert: {
+          assessment_id: string
+          content: string
+          created_at?: string | null
+          id?: string
+          role: string
+        }
+        Update: {
+          assessment_id?: string
+          content?: string
+          created_at?: string | null
+          id?: string
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tax_assessment_messages_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "tax_assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tax_assessment_sources: {
+        Row: {
+          assessment_id: string
+          created_at: string | null
+          id: string
+          source_id: string
+          source_table: string | null
+          source_type: string
+          summary: string | null
+        }
+        Insert: {
+          assessment_id: string
+          created_at?: string | null
+          id?: string
+          source_id: string
+          source_table?: string | null
+          source_type: string
+          summary?: string | null
+        }
+        Update: {
+          assessment_id?: string
+          created_at?: string | null
+          id?: string
+          source_id?: string
+          source_table?: string | null
+          source_type?: string
+          summary?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tax_assessment_sources_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "tax_assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tax_assessment_template_sections: {
+        Row: {
+          guidance_text: string | null
+          id: string
+          order: number
+          parent_section_id: string | null
+          template_id: string
+          title: string
+        }
+        Insert: {
+          guidance_text?: string | null
+          id?: string
+          order: number
+          parent_section_id?: string | null
+          template_id: string
+          title: string
+        }
+        Update: {
+          guidance_text?: string | null
+          id?: string
+          order?: number
+          parent_section_id?: string | null
+          template_id?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tax_assessment_template_sections_parent_section_id_fkey"
+            columns: ["parent_section_id"]
+            isOneToOne: false
+            referencedRelation: "tax_assessment_template_sections"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tax_assessment_template_sections_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "tax_assessment_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tax_assessment_templates: {
+        Row: {
+          created_at: string | null
+          created_by_user_id: string | null
+          description: string | null
+          id: string
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          created_by_user_id?: string | null
+          description?: string | null
+          id?: string
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          created_by_user_id?: string | null
+          description?: string | null
+          id?: string
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tax_assessment_templates_created_by_user_id_fkey"
+            columns: ["created_by_user_id"]
+            isOneToOne: false
+            referencedRelation: "v_authenticated_profiles"
+            referencedColumns: ["auth_user_id"]
+          },
+        ]
+      }
+      tax_assessments: {
+        Row: {
+          client_entity_id: string | null
+          client_individual_id: string | null
+          created_at: string | null
+          created_by_user_id: string | null
+          final_report: Json | null
+          id: string
+          status: string
+          template_id: string | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          client_entity_id?: string | null
+          client_individual_id?: string | null
+          created_at?: string | null
+          created_by_user_id?: string | null
+          final_report?: Json | null
+          id?: string
+          status?: string
+          template_id?: string | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          client_entity_id?: string | null
+          client_individual_id?: string | null
+          created_at?: string | null
+          created_by_user_id?: string | null
+          final_report?: Json | null
+          id?: string
+          status?: string
+          template_id?: string | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_template_id"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "tax_assessment_templates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tax_assessments_client_entity_id_fkey"
+            columns: ["client_entity_id"]
+            isOneToOne: false
+            referencedRelation: "core_objects_entities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tax_assessments_client_individual_id_fkey"
+            columns: ["client_individual_id"]
+            isOneToOne: false
+            referencedRelation: "core_objects_individuals"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tax_assessments_created_by_user_id_fkey"
+            columns: ["created_by_user_id"]
+            isOneToOne: false
+            referencedRelation: "v_authenticated_profiles"
+            referencedColumns: ["auth_user_id"]
+          },
+        ]
+      }
+      tax_config_documents: {
+        Row: {
+          created_at: string | null
+          created_by_user_id: string | null
+          description: string | null
+          file_name: string
+          file_type: string | null
+          id: string
+          storage_path: string
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          created_by_user_id?: string | null
+          description?: string | null
+          file_name: string
+          file_type?: string | null
+          id?: string
+          storage_path: string
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          created_by_user_id?: string | null
+          description?: string | null
+          file_name?: string
+          file_type?: string | null
+          id?: string
+          storage_path?: string
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tax_config_documents_created_by_user_id_fkey"
+            columns: ["created_by_user_id"]
+            isOneToOne: false
+            referencedRelation: "v_authenticated_profiles"
+            referencedColumns: ["auth_user_id"]
+          },
+        ]
+      }
+      tax_config_links: {
+        Row: {
+          created_at: string | null
+          created_by_user_id: string | null
+          description: string | null
+          id: string
+          title: string
+          updated_at: string | null
+          url: string
+        }
+        Insert: {
+          created_at?: string | null
+          created_by_user_id?: string | null
+          description?: string | null
+          id?: string
+          title: string
+          updated_at?: string | null
+          url: string
+        }
+        Update: {
+          created_at?: string | null
+          created_by_user_id?: string | null
+          description?: string | null
+          id?: string
+          title?: string
+          updated_at?: string | null
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tax_config_links_created_by_user_id_fkey"
+            columns: ["created_by_user_id"]
+            isOneToOne: false
+            referencedRelation: "v_authenticated_profiles"
+            referencedColumns: ["auth_user_id"]
+          },
+        ]
+      }
+      tax_onboarding_notes: {
+        Row: {
+          content: string | null
+          created_at: string | null
+          created_by_user_id: string | null
+          id: string
+          note_type: string | null
+          onboarding_session_id: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string | null
+          created_by_user_id?: string | null
+          id?: string
+          note_type?: string | null
+          onboarding_session_id?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string | null
+          created_by_user_id?: string | null
+          id?: string
+          note_type?: string | null
+          onboarding_session_id?: string | null
+        }
+        Relationships: []
+      }
+      tax_onboarding_sessions: {
+        Row: {
+          ai_disclaimer: string | null
+          assessment_result: Json | null
+          client_acceptance: Json | null
+          client_disclosures: Json | null
+          client_object_id: string | null
+          completed_at: string | null
+          completeness_score: number | null
+          created_by_user_id: string | null
+          entity_id: string | null
+          id: string
+          individual_id: string | null
+          quality_score: number | null
+          started_at: string | null
+          status: string
+          template_id: string | null
+        }
+        Insert: {
+          ai_disclaimer?: string | null
+          assessment_result?: Json | null
+          client_acceptance?: Json | null
+          client_disclosures?: Json | null
+          client_object_id?: string | null
+          completed_at?: string | null
+          completeness_score?: number | null
+          created_by_user_id?: string | null
+          entity_id?: string | null
+          id?: string
+          individual_id?: string | null
+          quality_score?: number | null
+          started_at?: string | null
+          status?: string
+          template_id?: string | null
+        }
+        Update: {
+          ai_disclaimer?: string | null
+          assessment_result?: Json | null
+          client_acceptance?: Json | null
+          client_disclosures?: Json | null
+          client_object_id?: string | null
+          completed_at?: string | null
+          completeness_score?: number | null
+          created_by_user_id?: string | null
+          entity_id?: string | null
+          id?: string
+          individual_id?: string | null
+          quality_score?: number | null
+          started_at?: string | null
+          status?: string
+          template_id?: string | null
+        }
+        Relationships: []
+      }
       teamwork_connections: {
         Row: {
           access_token: string
@@ -5416,6 +5932,8 @@ export type Database = {
         Row: {
           email: string | null
           employee_id: string
+          employer_id: string | null
+          employer_legal_name: string | null
           first_name: string | null
           full_name: string | null
           last_name: string | null
@@ -5424,6 +5942,8 @@ export type Database = {
         Insert: {
           email?: string | null
           employee_id: string
+          employer_id?: string | null
+          employer_legal_name?: string | null
           first_name?: string | null
           full_name?: string | null
           last_name?: string | null
@@ -5432,6 +5952,8 @@ export type Database = {
         Update: {
           email?: string | null
           employee_id?: string
+          employer_id?: string | null
+          employer_legal_name?: string | null
           first_name?: string | null
           full_name?: string | null
           last_name?: string | null
@@ -5723,6 +6245,71 @@ export type Database = {
       }
     }
     Views: {
+      articles: {
+        Row: {
+          author_image: string | null
+          author_name: string | null
+          author_role: string | null
+          category: string | null
+          collection: string | null
+          content: string | null
+          created_at: string | null
+          created_by_user_id: string | null
+          description: string | null
+          id: string | null
+          slug: string | null
+          subcategory: string | null
+          tags: string[] | null
+          title: string | null
+          updated_at: string | null
+          visibility: string | null
+        }
+        Insert: {
+          author_image?: never
+          author_name?: never
+          author_role?: never
+          category?: string | null
+          collection?: string | null
+          content?: string | null
+          created_at?: string | null
+          created_by_user_id?: string | null
+          description?: never
+          id?: string | null
+          slug?: string | null
+          subcategory?: string | null
+          tags?: string[] | null
+          title?: string | null
+          updated_at?: string | null
+          visibility?: string | null
+        }
+        Update: {
+          author_image?: never
+          author_name?: never
+          author_role?: never
+          category?: string | null
+          collection?: string | null
+          content?: string | null
+          created_at?: string | null
+          created_by_user_id?: string | null
+          description?: never
+          id?: string | null
+          slug?: string | null
+          subcategory?: string | null
+          tags?: string[] | null
+          title?: string | null
+          updated_at?: string | null
+          visibility?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "docs_articles_created_by_user_id_fkey"
+            columns: ["created_by_user_id"]
+            isOneToOne: false
+            referencedRelation: "v_authenticated_profiles"
+            referencedColumns: ["auth_user_id"]
+          },
+        ]
+      }
       v_authenticated_profiles: {
         Row: {
           auth_user_id: string | null
