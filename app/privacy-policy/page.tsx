@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { RootLayout } from '@/components/advontier-website/layout/RootLayout'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | Advontier',
@@ -7,9 +8,10 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="min-h-screen bg-background py-12">
-      <div className="container mx-auto max-w-4xl px-4">
-        <div className="prose prose-gray dark:prose-invert max-w-none">
+    <RootLayout>
+      <div className="min-h-screen bg-background py-12">
+        <div className="container mx-auto max-w-4xl px-4">
+          <div className="prose prose-gray dark:prose-invert max-w-none">
           <h1 className="text-4xl font-bold mb-8">Privacy Policy</h1>
           
           <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg mb-8">
@@ -192,15 +194,16 @@ export default function PrivacyPolicyPage() {
             <li>European Data Protection Board (for EU residents)</li>
           </ul>
 
-          <div className="bg-yellow-50 dark:bg-yellow-900/20 p-6 rounded-lg mt-8">
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 p-6 rounded-lg mt-8">
             <h3 className="text-yellow-800 dark:text-yellow-200 font-semibold mb-2">Important Notice</h3>
             <p className="text-sm text-yellow-800 dark:text-yellow-200">
               This Privacy Policy is part of our terms of service. By using our services, 
               you acknowledge that you have read, understood, and agree to this Privacy Policy.
             </p>
           </div>
+          </div>
         </div>
       </div>
-    </div>
+    </RootLayout>
   )
 }

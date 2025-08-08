@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { RootLayout } from '@/components/advontier-website/layout/RootLayout'
 
 export const metadata: Metadata = {
   title: 'Terms of Service | Advontier',
@@ -7,9 +8,10 @@ export const metadata: Metadata = {
 
 export default function TermsOfServicePage() {
   return (
-    <div className="min-h-screen bg-background py-12">
-      <div className="container mx-auto max-w-4xl px-4">
-        <div className="prose prose-gray dark:prose-invert max-w-none">
+    <RootLayout>
+      <div className="min-h-screen bg-background py-12">
+        <div className="container mx-auto max-w-4xl px-4">
+          <div className="prose prose-gray dark:prose-invert max-w-none">
           <h1 className="text-4xl font-bold mb-8">Terms of Service</h1>
           
           <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg mb-8">
@@ -271,7 +273,7 @@ export default function TermsOfServicePage() {
             <li><strong>Subject Line:</strong> "Legal Notice - Terms of Service"</li>
           </ul>
 
-          <div className="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg mt-8">
+            <div className="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg mt-8">
             <h3 className="text-red-800 dark:text-red-200 font-semibold mb-2">Important Legal Notice</h3>
             <p className="text-sm text-red-800 dark:text-red-200">
               These terms constitute a legally binding agreement. Please read them carefully and contact us 
@@ -279,8 +281,9 @@ export default function TermsOfServicePage() {
               that you have read, understood, and agree to be bound by these terms.
             </p>
           </div>
+          </div>
         </div>
       </div>
-    </div>
+    </RootLayout>
   )
 }
