@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
-import { notFound } from "next/navigation"
+import { notFound, useParams } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -35,8 +35,11 @@ const agentCatalog: Record<string, { title: string; description: string; tags: s
   },
 }
 
-export default function AgentRuntimePage({ params }: { params: { agent: string } }) {
-  const config = useMemo(() => agentCatalog[params.agent], [params.agent])
+export default function AgentRuntimePage() {
+  const params = useParams()
+  const agent = (params?.agent as string) || ""
+
+  const config = useMemo(() => agentCatalog[agent], [agent])
   if (!config) return notFound()
 
   const { supabase } = useAuth() as any
@@ -86,8 +89,8 @@ export default function AgentRuntimePage({ params }: { params: { agent: string }
         )
       }
     }
-    load()
-  }, [params.agent, supabase])
+    if (agent) load()
+  }, [agent, supabase])
 
   return (
     <div className="space-y-6">
@@ -98,7 +101,7 @@ export default function AgentRuntimePage({ params }: { params: { agent: string }
         </div>
         <div className="flex items-center gap-2">
           <Button asChild size="sm" variant="outline">
-            <Link href={`/backyard/agents/${params.agent}/configure`}>Configure</Link>
+            <Link href={`/backyard/agents/${agent}/configure`}>Configure</Link>
           </Button>
         </div>
       </div>

@@ -3,24 +3,28 @@
 "use client"
 
 import { useEffect, useMemo, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { getSupabaseClient } from '@/lib/supabase/client'
 
-export default function HelpCentreDetail({ params }: { params: { id: string } }) {
+export default function HelpCentreDetail() {
+  const params = useParams()
+  const id = params?.id as string
+
   const supabase = useMemo(() => getSupabaseClient(), [])
   const router = useRouter()
   const [row, setRow] = useState<any>(null)
 
   useEffect(() => {
-    supabase.from('articles' as any).select('*').eq('id', params.id).single().then(({ data }) => setRow(data))
-  }, [params.id])
+    if (!id) return
+    supabase.from('articles' as any).select('*').eq('id', id).single().then(({ data }) => setRow(data))
+  }, [id, supabase])
 
   async function save() {
-    if (!row) return
-    const { error } = await supabase.from('articles' as any).update(row).eq('id', params.id)
+    if (!row || !id) return
+    const { error } = await supabase.from('articles' as any).update(row).eq('id', id)
     if (!error) router.back()
   }
 

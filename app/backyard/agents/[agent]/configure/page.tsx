@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
-import { notFound, useRouter } from "next/navigation"
+import { notFound, useParams, useRouter } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -42,18 +42,19 @@ function storageKey(agent: string) {
   return `advontier.agent.config.${agent}`
 }
 
-export default function AgentConfigurePage({ params }: { params: { agent: string } }) {
+export default function AgentConfigurePage() {
   const router = useRouter()
   const { roleSlug, supabase, session } = useAuth() as any
   const isAdmin = !!roleSlug && (roleSlug.startsWith("advontier-") || roleSlug.endsWith("admin"))
 
-  const agent = params.agent
+  const params = useParams()
+  const agent = (params?.agent as string) || ""
   const valid = useMemo(() => allowedAgents.has(agent), [agent])
   const [config, setConfig] = useState<AgentConfig>(DEFAULT_CONFIG)
   const [configId, setConfigId] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!valid) return
+    if (!valid || !agent) return
     const load = async () => {
       // Load agent config from kyc_knowledge_base (category=agent-config, tag agent:<slug>)
       const { data: cfg, error: cfgErr } = await (supabase as any)
