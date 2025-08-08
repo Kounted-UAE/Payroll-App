@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
-import { Container } from '@/components/advontier-ui/Container'
-import { FadeIn } from '@/components/advontier-ui/FadeIn'
+import { Container } from '@/components/advontier-website/Container'
+import { FadeIn } from '@/components/advontier-website/FadeIn'
 
 export default function NotFound() {
   return (

@@ -3,11 +3,11 @@
 'use client'
 
 import Image from 'next/image'
-import LoginForm from '@/components/auth/login-form'
-import { Logo } from '@/components/advontier-ui/Logo'
-import { Container } from '@/components/advontier-ui/Container'
-import { FadeIn } from '@/components/advontier-ui/FadeIn'
-import { RootLayout } from '@/components/advontier-ui/RootLayout'
+import LoginForm from '@/components/advontier-auth/login-form'
+import { Logo } from '@/components/advontier-website/Logo'
+import { Container } from '@/components/advontier-website/Container'
+import { FadeIn } from '@/components/advontier-website/FadeIn'
+import { RootLayout } from '@/components/advontier-website/RootLayout'
 
 export default function LoginPage() {
   return (

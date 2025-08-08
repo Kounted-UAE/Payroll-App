@@ -18,7 +18,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { sidebarSections } from "@/lib/config/sidebar-nav"
-import { Logo, Logomark } from '@/components/advontier-ui/Logo'
+import { Logo, Logomark } from '@/components/advontier-website/Logo'
 
 export function TopNavbar() {
   const pathname = usePathname();

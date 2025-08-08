@@ -1,10 +1,10 @@
 // app/perspectives/page.tsx
 
-import { RootLayout } from '@/components/advontier-ui/RootLayout'
-import { PageIntro } from '@/components/advontier-ui/PageIntro'
-import { Container } from '@/components/advontier-ui/Container'
-import ArticleCards from '@/components/articles/ArticleCards'
-import ArticleIndex from '@/components/articles/ArticleIndex'
+import { RootLayout } from '@/components/advontier-website/RootLayout'
+import { PageIntro } from '@/components/advontier-website/PageIntro'
+import { Container } from '@/components/advontier-website/Container'
+import ArticleCards from '@/components/advontier-website/articles/ArticleCards'
+import ArticleIndex from '@/components/advontier-website/articles/ArticleIndex'
 import { listPerspectives, toArticlePostShape } from '@/lib/supabase/perspectives'
 
 export const metadata = {

@@ -2,7 +2,7 @@
 
 import { type MDXComponents as MDXComponentsType } from 'mdx/types'
 
-import { MDXComponents } from '@/components/advontier-ui/MDXComponents'
+import { MDXComponents } from '@/components/advontier-website/MDXComponents'
 
 export function useMDXComponents(components: MDXComponentsType) {
   return {

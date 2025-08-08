@@ -87,7 +87,7 @@ export default function ComponentLibraryPage() {
       : COMPONENTS.filter((c) => c.category === activeCategory || c.tags.includes(activeCategory));
 
   return (
-    <div className="min-h-screen bg-background p-6">
+    <div className="min-h-screen bg-white p-6">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">

@@ -1,6 +1,6 @@
 'use client'
 
-import PayrollPayslips from '@/components/dashboard-apps/PayrollPayslips';
+import PayrollPayslips from '@/components/advontier-payroll/PayrollPayslips';
 
 export default function PayslipsPage() {
   return <PayrollPayslips />;

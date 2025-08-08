@@ -50,7 +50,7 @@ export default function SOPResourceCenter() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background p-6">
+      <div className="min-h-screen bg-white p-6">
         <div className="max-w-7xl mx-auto space-y-8">
           <div className="animate-pulse">
             <div className="h-8 bg-muted rounded w-1/3 mb-2"></div>
@@ -70,7 +70,7 @@ export default function SOPResourceCenter() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-background p-6">
+      <div className="min-h-screen bg-white p-6">
         <div className="max-w-7xl mx-auto">
           <Card>
             <CardContent className="p-8 text-center">
@@ -87,7 +87,7 @@ export default function SOPResourceCenter() {
   }
 
   return (
-    <div className="min-h-screen bg-background p-6">
+    <div className="min-h-screen bg-white p-6">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
         <div className="flex items-center justify-between">

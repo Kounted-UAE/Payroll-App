@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { useAuth } from "@/components/auth/auth-provider"
+import { useAuth } from "@/components/advontier-auth/auth-provider"
 import { Shield, FileText, Database } from "lucide-react"
 
 const agents = [

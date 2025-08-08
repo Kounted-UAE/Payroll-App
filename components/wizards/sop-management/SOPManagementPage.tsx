@@ -99,7 +99,7 @@ export default function SOPManagementPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background p-6">
+      <div className="min-h-screen bg-white p-6">
         <div className="max-w-7xl mx-auto space-y-6">
           <div className="animate-pulse">
             <div className="h-8 bg-muted rounded w-1/3 mb-4"></div>
@@ -117,7 +117,7 @@ export default function SOPManagementPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-background p-6">
+      <div className="min-h-screen bg-white p-6">
         <div className="max-w-7xl mx-auto">
           <Card>
             <CardContent className="p-8 text-center">
@@ -134,7 +134,7 @@ export default function SOPManagementPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background p-6">
+    <div className="min-h-screen bg-white p-6">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4 mb-6">

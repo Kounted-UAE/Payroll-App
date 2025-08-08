@@ -1,10 +1,10 @@
 import clsx from 'clsx'
 
-import { Blockquote } from '@/components/advontier-ui/Blockquote'
-import { Border } from '@/components/advontier-ui/Border'
-import { GrayscaleTransitionImage } from '@/components/advontier-ui/GrayscaleTransitionImage'
-import { StatList, StatListItem } from '@/components/advontier-ui/StatList'
-import { TagList, TagListItem } from '@/components/advontier-ui/TagList'
+import { Blockquote } from '@/components/advontier-website/Blockquote'
+import { Border } from '@/components/advontier-website/Border'
+import { GrayscaleTransitionImage } from '@/components/advontier-website/GrayscaleTransitionImage'
+import { StatList, StatListItem } from '@/components/advontier-website/StatList'
+import { TagList, TagListItem } from '@/components/advontier-website/TagList'
 
 export const MDXComponents = {
   Blockquote({

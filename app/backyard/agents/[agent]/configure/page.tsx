@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Plus, Trash2, Shield } from "lucide-react"
-import { useAuth } from "@/components/auth/auth-provider"
+import { useAuth } from "@/components/advontier-auth/auth-provider"
 
 type TemplateItem = { id: string; name: string; description?: string }
 type SourceRef = { id: string; title: string; url?: string; notes?: string }

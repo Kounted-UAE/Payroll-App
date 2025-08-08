@@ -130,7 +130,7 @@ export default function DashboardHome() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-background/80 backdrop-blur-sm" />
+            <div className="fixed inset-0 bg-white/80 backdrop-blur-sm" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-hidden">
@@ -146,7 +146,7 @@ export default function DashboardHome() {
                   leaveTo="translate-x-full"
                 >
                   <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                    <div className="flex h-full flex-col overflow-y-scroll bg-background py-6">
+                    <div className="flex h-full flex-col overflow-y-scroll bg-white py-6">
                       <div className="px-4 sm:px-6">
                         <div className="flex items-start justify-between">
                           <Dialog.Title className="text-base font-semibold leading-6 text-foreground">
@@ -155,7 +155,7 @@ export default function DashboardHome() {
                           <div className="ml-3 flex h-7 items-center">
                             <button
                               type="button"
-                              className="rounded-md bg-background text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                              className="rounded-md bg-white text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                               onClick={() => setOpen(false)}
                             >
                               <span className="sr-only">Close panel</span>

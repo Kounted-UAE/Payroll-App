@@ -59,7 +59,7 @@ export default function XeroTabSectionHeader({
           id={selectId}
           defaultValue={activeTab}
           onChange={(e) => onTabChange(e.target.value)}
-          className="appearance-none rounded-md bg-background border px-3 py-2 text-base text-foreground focus:outline focus:outline-ring"
+          className="appearance-none rounded-md bg-white border px-3 py-2 text-base text-foreground focus:outline focus:outline-ring"
         >
           {tabs.map((tab) => (
             <option key={tab.value} value={tab.value}>

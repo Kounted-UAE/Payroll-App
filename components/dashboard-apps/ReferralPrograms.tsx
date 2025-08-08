@@ -195,7 +195,7 @@ export default function SalesMatchingDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-background p-6">
+    <div className="min-h-screen bg-white p-6">
       <div className="max-w-7xl mx-auto space-y-8">
 
         {/* Header */}

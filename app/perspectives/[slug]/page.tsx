@@ -1,10 +1,10 @@
 // app/perspectives/[slug]/page.tsx
 
 import { notFound } from 'next/navigation'
-import { Container } from '@/components/advontier-ui/Container'
+import { Container } from '@/components/advontier-website/Container'
 import ArticleWrapper from '@/app/articles/wrapper'
-import ServerMDXRenderer from '@/components/articles/ServerMDXRenderer'
-import ClientTableOfContents from '@/components/articles/ClientTableOfContents'
+import ServerMDXRenderer from '@/components/advontier-website/articles/ServerMDXRenderer'
+import ClientTableOfContents from '@/components/advontier-website/articles/ClientTableOfContents'
 import { getPerspectiveBySlug, toArticlePostShape } from '@/lib/supabase/perspectives'
 
 export default async function PerspectiveSlugPage({ params }: { params: { slug: string } }) {

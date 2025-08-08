@@ -5,9 +5,10 @@ import type React from "react"
 import { AppProviders } from './providers'
 import { Inter } from "next/font/google";
 import Script from "next/script"
-import  AuthProvider  from "@/components/auth/auth-provider"
+import  AuthProvider  from "@/components/advontier-auth/auth-provider"
 import { Toaster } from "@/components/ui/sonner"
 import { CookieConsentBanner } from "@/components/ui/cookie-consent"
+import { Footer } from "@/components/advontier-website/Footer"
 
 import { cn } from "@/lib/utils"
 
@@ -35,9 +36,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
      
       </head>
-      <body className={cn("min-h-screen bg-background antialiased")}>
+      <body className={cn("min-h-screen bg-white antialiased")}>
         <AppProviders>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            {children}
+            <Footer />
+          </AuthProvider>
           <Toaster />
           <CookieConsentBanner />
         </AppProviders>

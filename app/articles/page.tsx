@@ -1,11 +1,11 @@
 // app/articles/page.tsx
 
 import { getAllArticlePosts } from '@/lib/articleLoader'
-import ArticleIndex from '@/components/articles/ArticleIndex'
-import ArticleCards from '@/components/articles/ArticleCards'
-import { RootLayout } from '@/components/advontier-ui/RootLayout'
-import { PageIntro } from '@/components/advontier-ui/PageIntro'
-import { Container } from '@/components/advontier-ui/Container'
+import ArticleIndex from '@/components/advontier-website/articles/ArticleIndex'
+import ArticleCards from '@/components/advontier-website/articles/ArticleCards'
+import { RootLayout } from '@/components/advontier-website/RootLayout'
+import { PageIntro } from '@/components/advontier-website/PageIntro'
+import { Container } from '@/components/advontier-website/Container'
 
 export const metadata = {
   title: 'Our Theses',

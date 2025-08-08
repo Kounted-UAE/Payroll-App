@@ -5,7 +5,7 @@ import { notFound } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { useAuth } from "@/components/auth/auth-provider"
+import { useAuth } from "@/components/advontier-auth/auth-provider"
 
 const agentCatalog: Record<string, { title: string; description: string; tags: string[] }> = {
   "accounting": {
