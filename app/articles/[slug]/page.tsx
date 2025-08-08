@@ -8,8 +8,9 @@ import ServerMDXRenderer from '@/components/advontier-website/articles/ServerMDX
 import { Container } from "@/components/advontier-website/Container"
 import ClientTableOfContents from '@/components/advontier-website/articles/ClientTableOfContents'
 
-export default async function ArticleSlugPage({ params }: { params: { slug: string } }) {
-  const post = await getArticlePost(params.slug)
+export default async function ArticleSlugPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const post = await getArticlePost(slug)
   if (!post) return notFound()
 
   return (

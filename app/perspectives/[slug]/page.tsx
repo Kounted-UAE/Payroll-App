@@ -7,8 +7,9 @@ import ServerMDXRenderer from '@/components/advontier-website/articles/ServerMDX
 import ClientTableOfContents from '@/components/advontier-website/articles/ClientTableOfContents'
 import { getPerspectiveBySlug, toArticlePostShape } from '@/lib/supabase/perspectives'
 
-export default async function PerspectiveSlugPage({ params }: { params: { slug: string } }) {
-  const row = await getPerspectiveBySlug(params.slug)
+export default async function PerspectiveSlugPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const row = await getPerspectiveBySlug(slug)
   if (!row) return notFound()
   const post = toArticlePostShape(row)
 
