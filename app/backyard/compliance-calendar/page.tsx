@@ -1,6 +1,6 @@
 'use client'
 
-import ComplianceCalendar from '@/components/dashboard-apps/ComplianceCalendar'
+import ComplianceCalendar from '@/components/advontier-calendar/ComplianceCalendar'
 
 export default function ComplianceCalendarPage() {
   return <ComplianceCalendar />
