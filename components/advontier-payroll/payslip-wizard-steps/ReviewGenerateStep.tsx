@@ -8,17 +8,12 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
-import { Separator } from '@/components/ui/separator'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { 
   FileText, 
   Users, 
   DollarSign, 
   Globe, 
-  Mail, 
-  Download, 
   AlertCircle,
-  CheckCircle,
   Loader2,
   Settings,
   Eye,
@@ -26,7 +21,6 @@ import {
 } from 'lucide-react'
 import { useState } from 'react'
 import { generatePayslipPDF } from '@/lib/utils/pdf/generatePayslipPDF'
-import { createPayslipsZip } from '@/lib/utils/pdf/generateZip'
 import { sendPayslipEmail } from '@/lib/utils/email/sendPayslipEmail'
 import { toast } from '@/hooks/use-toast'
 

@@ -38,6 +38,33 @@ export async function GET(req: NextRequest) {
     const tenantId = tokenRow.tenant_id
     const { body: { invoices = [] } } = await xero.accountingApi.getInvoices(tenantId)
 
+    // Persist refreshed tokens (if any) after API call
+    try {
+      const tokenSet = xero.readTokenSet()
+      const now = new Date().toISOString()
+      const expiresAt = tokenSet.expires_in
+        ? new Date(Date.now() + tokenSet.expires_in * 1000).toISOString()
+        : null
+
+      await supabase
+        .from('xero_auth_tokens')
+        .upsert(
+          {
+            user_id: user.id,
+            tenant_id: tenantId,
+            access_token: tokenSet.access_token ?? tokenRow.access_token ?? null,
+            refresh_token: tokenSet.refresh_token ?? tokenRow.refresh_token ?? null,
+            expires_in_seconds: tokenSet.expires_in ?? null,
+            expires_at: expiresAt,
+            updated_at: now,
+          },
+          { onConflict: 'tenant_id' }
+        )
+    } catch (e) {
+      // Do not fail the sync if token write fails
+      console.error('⚠️ Failed to persist refreshed Xero tokens:', e)
+    }
+
     const mapped = invoices.map((inv: any) => ({
       xero_invoice_id: inv.invoiceID,
       invoice_number: inv.invoiceNumber,

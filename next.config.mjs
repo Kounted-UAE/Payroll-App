@@ -145,7 +145,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: https: blob:",
-              "connect-src 'self' https://*.supabase.co https://api.openai.com https://api.resend.com https://api.xero.com",
+              "connect-src 'self' https://*.supabase.co https://api.openai.com https://api.resend.com https://api.xero.com https://*.teamwork.com https://*.eu.teamwork.com",
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",

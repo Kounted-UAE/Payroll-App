@@ -8,20 +8,20 @@ import { getSupabaseClient } from '@/lib/supabase/client';
 import { toast } from '@/hooks/use-toast';
 
 // Import step components
-import CompanyProfileStep from './steps/CompanyProfileStep';
-import BusinessOperationsStep from './steps/BusinessOperationsStep';
-import ManagementGovernanceStep from './steps/ManagementGovernanceStep';
-import FinancialControlsStep from './steps/FinancialControlsStep';
-import FraudEthicsStep from './steps/FraudEthicsStep';
-import GoingConcernStep from './steps/GoingConcernStep';
-import RevenueDebtorsStep from './steps/RevenueDebtorsStep';
-import PurchasesCreditorsStep from './steps/PurchasesCreditorsStep';
-import PayrollHRStep from './steps/PayrollHRStep';
-import InventoryAssetsStep from './steps/InventoryAssetsStep';
-import BankingTreasuryStep from './steps/BankingTreasuryStep';
-import ComplianceReportingStep from './steps/ComplianceReportingStep';
-import RiskContinuityStep from './steps/RiskContinuityStep';
-import TechnologyIntegrationsStep from './steps/TechnologyIntegrationsStep';
+import CompanyProfileStep from '../accounting-onboarding-steps/CompanyProfileStep';
+import BusinessOperationsStep from '../accounting-onboarding-steps/BusinessOperationsStep';
+import ManagementGovernanceStep from '../accounting-onboarding-steps/ManagementGovernanceStep';
+import FinancialControlsStep from '../accounting-onboarding-steps/FinancialControlsStep';
+import FraudEthicsStep from '../accounting-onboarding-steps/FraudEthicsStep';
+import GoingConcernStep from '../accounting-onboarding-steps/GoingConcernStep';
+import RevenueDebtorsStep from '../accounting-onboarding-steps/RevenueDebtorsStep';
+import PurchasesCreditorsStep from '../accounting-onboarding-steps/PurchasesCreditorsStep';
+import PayrollHRStep from '../accounting-onboarding-steps/PayrollHRStep';
+import InventoryAssetsStep from '../accounting-onboarding-steps/InventoryAssetsStep';
+import BankingTreasuryStep from '../accounting-onboarding-steps/BankingTreasuryStep';
+import ComplianceReportingStep from '../accounting-onboarding-steps/ComplianceReportingStep';
+import RiskContinuityStep from '../accounting-onboarding-steps/RiskContinuityStep';
+import TechnologyIntegrationsStep from '../accounting-onboarding-steps/TechnologyIntegrationsStep';
 
 const STEPS = [
   { id: 1, title: 'Company Profile', component: CompanyProfileStep },

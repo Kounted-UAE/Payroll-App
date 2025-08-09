@@ -6,10 +6,10 @@ import { useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import XeroStatCards from '@/components/admin/XeroStatCards'
-import XeroSectionHeader from '@/components/admin/XeroTabSectionHeader'
-import XeroTabTableInvoices from '@/components/admin/XeroTabTableInvoices'
-import XeroSearchBar from '@/components/admin/XeroSearchBar'
+import XeroStatCards from '@/components/admin/xero-config/XeroStatCards'
+import XeroSectionHeader from '@/components/admin/xero-config/XeroTabSectionHeader'
+import XeroTabTableInvoices from '@/components/admin/xero-config/XeroTabTableInvoices'
+import XeroSearchBar from '@/components/admin/xero-config/XeroSearchBar'
 import { getSupabaseClient } from '@/lib/supabase/client'
 
 export default function XeroConfigPage() {
@@ -25,8 +25,8 @@ export default function XeroConfigPage() {
           <Button
             className="bg-green-500 hover:bg-green-600"
             onClick={async () => {
-              const res = await fetch('/api/xero/sync-invoices', {
-                method: 'POST'
+              const res = await fetch('/api/xero/sync/invoices', {
+                method: 'GET'
               })
               const result = await res.json()
               if (result.success) {

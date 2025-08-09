@@ -52,11 +52,14 @@ const Settings = () => {
   });
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const [authUserId, setAuthUserId] = useState<string | null>(null);
 
   // Fetch users and roles from Supabase
   useEffect(() => {
     const fetchUsersAndRoles = async () => {
       setLoading(true);
+      const { data: authData } = await supabase.auth.getUser();
+      setAuthUserId(authData?.user?.id ?? null);
       const { data: usersData, error: usersError } = await supabase.from('public_user_profiles').select('*');
       const { data: rolesData, error: rolesError } = await supabase.from('public_user_roles').select('*');
       if (usersError) {
@@ -424,6 +427,20 @@ const Settings = () => {
               <CardDescription>
                 Configure general application preferences
               </CardDescription>
+            <div className="mt-4">
+              <Button
+                variant="secondary"
+                onClick={async () => {
+                  if (!authUserId) {
+                    toast({ title: 'Not logged in', description: 'Please log in to connect Teamwork', variant: 'destructive' });
+                    return;
+                  }
+                  window.location.href = `/api/teamwork/connect?user_id=${encodeURIComponent(authUserId)}`
+                }}
+              >
+                Connect Teamwork
+              </Button>
+            </div>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-2">

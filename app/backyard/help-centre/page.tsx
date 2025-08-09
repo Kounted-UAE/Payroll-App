@@ -27,7 +27,7 @@ type ArticleRow = {
 }
 
 export default function HelpCentreAdminPage() {
-  const supabase = useMemo(() => getSupabaseClient(), [])
+  const supabase = useMemo(() => (typeof window !== 'undefined' ? getSupabaseClient() : null), []) as any
   const [rows, setRows] = useState<ArticleRow[]>([])
   const [loading, setLoading] = useState(true)
   const [editing, setEditing] = useState<ArticleRow | null>(null)
@@ -35,6 +35,10 @@ export default function HelpCentreAdminPage() {
 
   async function load() {
     setLoading(true)
+    if (!supabase) {
+      setLoading(false)
+      return
+    }
     const { data, error } = await supabase.from('articles' as any).select('*').order('created_at', { ascending: false })
     if (!error) setRows((data as unknown as ArticleRow[]) || [])
     setLoading(false)
@@ -53,7 +57,7 @@ export default function HelpCentreAdminPage() {
   }
 
   async function save(row: ArticleRow) {
-    if (!row.slug || !row.title) return
+    if (!supabase || !row.slug || !row.title) return
     if (!row.id) {
       const { data, error } = await supabase.from('articles' as any).insert({
         slug: row.slug,
@@ -97,6 +101,7 @@ export default function HelpCentreAdminPage() {
   }
 
   async function remove(id: string) {
+    if (!supabase) return
     const { error } = await supabase.from('articles' as any).delete().eq('id', id)
     if (!error) load()
   }

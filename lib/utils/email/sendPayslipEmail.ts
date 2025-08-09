@@ -1,5 +1,4 @@
 import { getPayslipEmailTemplate } from './templates/payslipEmailHTML'
-import { generatePayslipPDF } from '../pdf/generatePayslipPDF'
 
 interface SendPayslipEmailParams {
   to: string
@@ -101,5 +100,4 @@ export async function sendBatchPayslipEmails(
   return results
 }
 
-// Export the PDF generation function for convenience
-export { generatePayslipPDF } 
+// Note: Keep PDF generation concerns separate; this module only sends emails

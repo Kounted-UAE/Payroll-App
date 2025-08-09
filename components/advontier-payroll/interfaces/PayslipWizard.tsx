@@ -12,10 +12,10 @@ import { getSupabaseClient } from '@/lib/supabase/client'
 import { toast } from '@/hooks/use-toast'
 
 // Import step components
-import { BatchOverviewStep } from '../steps/BatchOverviewStep'
-import { PayslipSettingsStep } from '../steps/PayslipSettingsStep'
-import { EmployeeSelectionStep } from '../steps/EmployeeSelectionStep'
-import { ReviewGenerateStep } from '../steps/ReviewGenerateStep'
+import { BatchOverviewStep } from '../payslip-wizard-steps/BatchOverviewStep'
+import { PayslipSettingsStep } from '../payslip-wizard-steps/PayslipSettingsStep'
+import { EmployeeSelectionStep } from '../payslip-wizard-steps/EmployeeSelectionStep'
+import { ReviewGenerateStep } from '../payslip-wizard-steps/ReviewGenerateStep'
 
 // Add these imports at the top
 import { generatePayslipPDF } from '@/lib/utils/pdf/generatePayslipPDF'
@@ -243,7 +243,7 @@ export function PayslipWizard({ batchData }: PayslipWizardProps) {
                       const selectedEmployees = employees.filter(emp => wizardData.selected_employees.includes(emp.id))
                       
                       // Generate PDFs for all selected employees
-                      const payslips = []
+                      const payslips: { employeeName: string; pdfBlob: Blob }[] = []
                       for (const employee of selectedEmployees) {
                         const pdfBlob = await generatePayslipPDF({
                           employee,
@@ -274,22 +274,22 @@ export function PayslipWizard({ batchData }: PayslipWizardProps) {
 
                       if (wizardData.delivery_mode === 'email' || wizardData.delivery_mode === 'both') {
                         // Send emails to employees
-                        const emailData = selectedEmployees.map((employee, index) => {
-                          if (!employee.email_id) {
-                            return null // Skip employees without email
+                        type BatchEmailItem = Parameters<typeof sendBatchPayslipEmails>[0][number]
+                        const emailData = selectedEmployees.reduce<BatchEmailItem[]>((acc, employee, index) => {
+                          if (employee.email_id) {
+                            acc.push({
+                              to: employee.email_id,
+                              subject: wizardData.email_subject,
+                              employeeName: employee.employee_name,
+                              pdfBlob: payslips[index].pdfBlob,
+                              employerName: batchData.employer_name,
+                              payPeriodFrom: batchData.pay_period_from,
+                              payPeriodTo: batchData.pay_period_to,
+                              language: wizardData.language === 'mixed' ? 'english' : wizardData.language
+                            })
                           }
-                          
-                          return {
-                            to: employee.email_id,
-                            subject: wizardData.email_subject,
-                            employeeName: employee.employee_name,
-                            pdfBlob: payslips[index].pdfBlob,
-                            employerName: batchData.employer_name,
-                            payPeriodFrom: batchData.pay_period_from,
-                            payPeriodTo: batchData.pay_period_to,
-                            language: wizardData.language === 'mixed' ? 'english' : wizardData.language
-                          }
-                        }).filter(Boolean) // Remove null entries
+                          return acc
+                        }, [])
 
                         if (emailData.length > 0) {
                           const emailResults = await sendBatchPayslipEmails(emailData)

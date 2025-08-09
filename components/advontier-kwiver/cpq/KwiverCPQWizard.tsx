@@ -9,14 +9,14 @@ import { toast } from '@/hooks/use-toast';
 import { v4 as uuidv4 } from 'uuid';
 
 // Import step components
-import ClientProfileStep from './steps/ClientProfileStep';
-import AccountingScopeStep from './steps/AccountingScopeStep';
-import PayrollScopeStep from './steps/PayrollScopeStep';
-import HRComplianceStep from './steps/HRComplianceStep';
-import TaxServicesStep from './steps/TaxServicesStep';
-import ServiceSelectionStep from './steps/ServiceSelectionStep';
-import ReviewConfirmStep from './steps/ReviewConfirmStep';
-import LeadCaptureStep from './steps/LeadCaptureStep';
+import ClientProfileStep from './KwiverCPQSteps/ClientProfileStep';
+import AccountingScopeStep from './KwiverCPQSteps/AccountingScopeStep';
+import PayrollScopeStep from './KwiverCPQSteps/PayrollScopeStep';
+import HRComplianceStep from './KwiverCPQSteps/HRComplianceStep';
+import TaxServicesStep from './KwiverCPQSteps/TaxServicesStep';
+import ServiceSelectionStep from './KwiverCPQSteps/ServiceSelectionStep';
+import ReviewConfirmStep from './KwiverCPQSteps/ReviewConfirmStep';
+import LeadCaptureStep from './KwiverCPQSteps/LeadCaptureStep';
 
 const STEPS = [
   { id: 1, title: 'Client Profile', component: ClientProfileStep },

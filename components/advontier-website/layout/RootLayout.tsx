@@ -15,7 +15,7 @@ import { motion, MotionConfig, useReducedMotion } from 'framer-motion'
 
 import { Button } from '@/components/advontier-website/Button'
 import { Container } from '@/components/advontier-website/Container'
-import { Footer } from '@/components/advontier-website/Footer'
+import { Footer } from '@/components/advontier-website/layout/Footer'
 import { GridPattern } from '@/components/advontier-website/GridPattern'
 import { Logo, Logomark } from '@/components/advontier-website/Logo'
 import { Offices } from '@/components/advontier-website/Offices'
