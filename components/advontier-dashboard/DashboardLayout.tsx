@@ -11,7 +11,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const collapsed = state === "collapsed";
 
   return (
-      <div className="flex min-h-screen w-full flex-col">
+      <div className="flex min-h-screen w-full flex-col bg-gradient-to-r from-slate-900 to-slate-600 ">
         {/* Top Navbar - Full width across the top */}
         <TopNavbar />
         
@@ -28,7 +28,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
 
           {/* Page content - To the right of sidebar */}
-          <main className="flex-1 p-2 m-2 bg-gradient-to-br from-blue-50 via-zinc-50 to-zinc-100 rounded-2xl">
+          <main className="flex-1 p-2 m-2 bg-gradient-to-br from-white via-zinc-100 to-zinc-50 rounded-2xl">
             {children}
           </main>
         </div>

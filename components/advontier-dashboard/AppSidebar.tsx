@@ -21,7 +21,7 @@ export function AppSidebar() {
   const isActive = (path: string) => pathname === path
   const getNavCls = (path: string) =>
     isActive(path)
-      ? "bg-blue-500 text-neutral-100 font-bold"
+      ? "bg-gradient-to-l from-blue-300 to-slate-600 text-neutral-100 font-bold"
       : "text-neutral-900 hover:bg-blue-100 hover:text-blue-600"
 
   const toggle = (label: string) =>
@@ -33,12 +33,12 @@ export function AppSidebar() {
 
       {/* Scrollable Content */}
       <ScrollArea className="flex-1 overflow-y-auto">
-        <div className="rounded-2xl m-2 bg-gradient-to-l from-blue-100 to-blue-50 text-blue-600 text-xs p-2">
+        <div className="rounded-2xl m-2 bg-gradient-to-l from-white to-blue-50 text-blue-600 text-xs p-2">
           {sidebarSections.map((section) => (
             <div key={section.label} className="mb-4">
               {!collapsed && (
                 <div className="flex items-center justify-between px-2 py-2 border-b-2 m-2 border-white">
-                  <div className="text-blue-500 text-xs font-bold uppercase tracking-normal">
+                  <div className="text-slate-800 text-xs font-bold uppercase tracking-normal">
                     {section.label}
                   </div>
                   {section.collapsible !== false && (
@@ -106,10 +106,10 @@ export function AppSidebar() {
       </ScrollArea>
 
       {/* Footer */}
-      <div className="bg-gradient-to-l from-neutral-300 to-neutral-200 p-4 flex-shrink-0 rounded-2xl">
+      <div className="p-4 flex-shrink-0">
         {!collapsed ? (
           <div className="flex items-center justify-between ">
-            <div className="text-xs text-zinc-600">
+            <div className="text-xs text-white">
               <div className="font-medium">Advontier</div>
               <div className="text-blue-400">v2.0.0</div>
             </div>
