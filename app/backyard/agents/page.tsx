@@ -22,7 +22,7 @@ export default function AgentsIndexPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold">Specialist Agents</h1>
+        <h1 className="text-lg text-zinc-600 font-bold">Specialist Agents</h1>
           <p className="text-sm text-muted-foreground">UAE/GCC focused, aligned with international frameworks such as IFRS, CRS and AML.</p>
         </div>
         {isAdmin && (

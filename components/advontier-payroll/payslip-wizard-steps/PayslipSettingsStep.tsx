@@ -25,7 +25,7 @@ export function PayslipSettingsStep({ data, onChange }: PayslipSettingsStepProps
     <div className="space-y-6">
       <div>
         <h3 className="text-lg font-semibold mb-2">Payslip Settings</h3>
-        <p className="text-muted-foreground">
+        <p className="text-blue-400">
           Configure language preferences and delivery options for the payslips
         </p>
       </div>
@@ -34,7 +34,7 @@ export function PayslipSettingsStep({ data, onChange }: PayslipSettingsStepProps
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
-            <Languages className="h-5 w-5" />
+            <Languages className="h-4 w-4" />
             <span>Language Settings</span>
           </CardTitle>
         </CardHeader>
@@ -97,7 +97,7 @@ export function PayslipSettingsStep({ data, onChange }: PayslipSettingsStepProps
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
-            <Mail className="h-5 w-5" />
+            <Mail className="h-4 w-4" />
             <span>Delivery Method</span>
           </CardTitle>
         </CardHeader>
@@ -120,7 +120,7 @@ export function PayslipSettingsStep({ data, onChange }: PayslipSettingsStepProps
                         <div className="font-medium">Download Only</div>
                         <div className="text-sm text-muted-foreground">Generate PDF files for manual distribution</div>
                       </div>
-                      <Download className="h-5 w-5 text-blue-600" />
+                      <Download className="h-4 w-4 text-blue-600" />
                     </div>
                   </Label>
                 </div>
@@ -133,7 +133,7 @@ export function PayslipSettingsStep({ data, onChange }: PayslipSettingsStepProps
                         <div className="font-medium">Email to Employees</div>
                         <div className="text-sm text-muted-foreground">Send payslips directly to employee email addresses</div>
                       </div>
-                      <Mail className="h-5 w-5 text-blue-600" />
+                      <Mail className="h-4 w-4 text-blue-600" />
                     </div>
                   </Label>
                 </div>
@@ -147,8 +147,8 @@ export function PayslipSettingsStep({ data, onChange }: PayslipSettingsStepProps
                         <div className="text-sm text-muted-foreground">Generate files and send emails to employees</div>
                       </div>
                       <div className="flex space-x-1">
-                        <Download className="h-5 w-5 text-blue-600" />
-                        <Mail className="h-5 w-5 text-blue-600" />
+                        <Download className="h-4 w-4 text-blue-600" />
+                        <Mail className="h-4 w-4 text-blue-600" />
                       </div>
                     </div>
                   </Label>

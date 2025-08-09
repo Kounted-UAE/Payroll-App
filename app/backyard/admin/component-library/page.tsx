@@ -93,7 +93,7 @@ export default function ComponentLibraryPage() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-lg font-bold text-foreground">Dashboard Components</h1>
-            <p className="text-muted-foreground">Interactive component library showcase</p>
+            <p className="text-blue-400">Interactive component library showcase</p>
           </div>
           <Badge variant="secondary" className="text-xs font-medium">
             {COMPONENTS.length} Components

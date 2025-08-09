@@ -115,12 +115,12 @@ const PayrollDashboard = () => {
     return (
       <div className="flex-1 space-y-6 p-6">
         <div className="flex items-center space-x-2 text-red-600">
-          <AlertCircle className="h-5 w-5" />
+          <AlertCircle className="h-4 w-4" />
           <h1 className="text-xs font-bold">Error Loading Dashboard</h1>
         </div>
         <Card>
           <CardContent className="p-6">
-            <p className="text-muted-foreground">{error}</p>
+            <p className="text-blue-400">{error}</p>
             <Button 
               onClick={() => window.location.reload()} 
               className="mt-4"

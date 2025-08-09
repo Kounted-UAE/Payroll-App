@@ -169,7 +169,7 @@ export default function DevProgressPage() {
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
             <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
-            <p className="text-muted-foreground">Loading development progress...</p>
+            <p className="text-blue-400">Loading development progress...</p>
           </div>
         </div>
       </div>
@@ -181,8 +181,8 @@ export default function DevProgressPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Development Progress</h1>
-          <p className="text-muted-foreground mt-1">
+        <h1 className="text-lg text-zinc-600 font-bold">Development Progress</h1>
+          <p className="text-blue-400 mt-1">
             Track features, sessions, and project milestones
           </p>
         </div>

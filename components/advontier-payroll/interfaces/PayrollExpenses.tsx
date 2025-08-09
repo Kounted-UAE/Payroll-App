@@ -59,8 +59,8 @@ const PayrollExpenses = () => {
     <div className="flex-1 space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-bold tracking-tight">Expense Runs</h1>
-          <p className="text-muted-foreground">
+        <h1 className="text-lg text-zinc-600 font-bold">Expense Runs</h1>
+          <p className="text-blue-400">
             Manage and process employee expense runs for payroll
           </p>
         </div>

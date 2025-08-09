@@ -752,7 +752,7 @@ const Index = () => {
         <div className="container px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-lg font-bold tracking-tight">Dashboard Components</h1>
+              <h1 className="text-lg text-zinc-600 font-bold">Dashboard Components</h1>
               <p className="text-muted-foreground mt-1">Interactive component library showcase</p>
             </div>
             <Badge variant="secondary" className="bg-primary/10 text-primary">
@@ -972,7 +972,7 @@ const Index = () => {
                       {playgroundComponents.length === 0 ? (
                         <div className="flex items-center justify-center h-full text-center">
                           <div className="space-y-2">
-                            <p className="text-muted-foreground">
+                            <p className="text-blue-400">
                               No components added yet
                             </p>
                             <p className="text-xs text-muted-foreground">

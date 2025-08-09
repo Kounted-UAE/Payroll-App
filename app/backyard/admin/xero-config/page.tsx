@@ -19,7 +19,7 @@ export default function XeroConfigPage() {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Xero Config</h1>
+      <h1 className="text-lg text-zinc-600 font-bold">Xero Config</h1>
 
         <div className="flex gap-2">
           <Button

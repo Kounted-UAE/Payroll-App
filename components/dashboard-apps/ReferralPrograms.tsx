@@ -201,8 +201,8 @@ export default function SalesMatchingDashboard() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-lg font-bold text-foreground">Advanced Sales Matching</h1>
-            <p className="text-muted-foreground">
+          <h1 className="text-lg text-zinc-600 font-bold">Advanced Sales Matching</h1>
+            <p className="text-blue-400">
               AI-powered fuzzy matching for Tickets, Quotes, and Invoices
             </p>
           </div>

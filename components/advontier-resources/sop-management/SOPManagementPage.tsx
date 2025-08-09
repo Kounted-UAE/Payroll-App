@@ -143,8 +143,8 @@ export default function SOPManagementPage() {
             Back to SOP Center
           </Button>
           <div className="flex-1">
-            <h1 className="text-lg font-bold text-foreground">Manage SOPs</h1>
-            <p className="text-muted-foreground">Create, edit, and manage Standard Operating Procedures</p>
+          <h1 className="text-lg text-zinc-600 font-bold">Manage SOPs</h1>
+            <p className="text-blue-400">Create, edit, and manage Standard Operating Procedures</p>
           </div>
           <Button onClick={() => setShowWizard(true)}>
             <Plus className="mr-2 h-4 w-4" />

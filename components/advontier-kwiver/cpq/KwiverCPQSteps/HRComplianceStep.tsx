@@ -40,7 +40,7 @@ export default function HRComplianceStep({ data, allData, onChange }: StepProps)
   if (allData?.step1?.employeeCount === 0) {
     return (
       <div className="text-center py-8">
-        <p className="text-muted-foreground">No employees indicated. Skipping HR & Compliance section.</p>
+        <p className="text-blue-400">No employees indicated. Skipping HR & Compliance section.</p>
       </div>
     );
   }

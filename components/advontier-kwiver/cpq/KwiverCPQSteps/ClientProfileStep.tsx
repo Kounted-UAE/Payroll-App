@@ -212,7 +212,7 @@ export default function ClientProfileStep({ data, onChange }: StepProps) {
             {selectedClient && (
               <div className="bg-accent/20 p-3 rounded-md">
                 <div className="flex items-center gap-2">
-                  <Building className="h-5 w-5 text-blue-500" />
+                  <Building className="h-4 w-4 text-blue-500" />
                   <div>
                     <div className="font-medium">{selectedClient.name}</div>
                     {selectedClient.contact_person && (

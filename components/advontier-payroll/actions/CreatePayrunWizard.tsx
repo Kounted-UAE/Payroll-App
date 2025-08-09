@@ -135,8 +135,8 @@ const CreatePayrunWizard = () => {
     <div className="flex-1 space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-bold tracking-tight">Create New Payrun</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-lg text-zinc-600 font-bold">Create New Payrun</h1>
+          <p className="text-blue-400">
             Set up a new payroll run for processing employee salaries
           </p>
         </div>
@@ -206,7 +206,7 @@ const CreatePayrunWizard = () => {
                         </div>
                       </div>
                       {data.employer_id === employer.id && (
-                        <CheckCircle className="h-5 w-5 text-blue-500" />
+                        <CheckCircle className="h-4 w-4 text-blue-500" />
                       )}
                     </div>
                   </div>
@@ -272,7 +272,7 @@ const CreatePayrunWizard = () => {
               {data.pay_period_start && data.pay_period_end && (
                 <div className="p-4 bg-blue-50 rounded-lg">
                   <div className="flex items-center space-x-2">
-                    <Calendar className="h-5 w-5 text-blue-600" />
+                    <Calendar className="h-4 w-4 text-blue-600" />
                     <div>
                       <p className="font-medium text-blue-900">Pay Period Summary</p>
                       <p className="text-blue-700">
@@ -331,7 +331,7 @@ const CreatePayrunWizard = () => {
                         }))
                       }}
                     />
-                    <Users className="h-5 w-5 text-blue-600" />
+                    <Users className="h-4 w-4 text-blue-600" />
                     <div className="flex-1">
                       <div className="flex items-center justify-between">
                         <div>
@@ -398,7 +398,7 @@ const CreatePayrunWizard = () => {
 
               <div className="p-4 bg-yellow-50 rounded-lg">
                 <div className="flex items-start space-x-3">
-                  <AlertCircle className="h-5 w-5 text-yellow-600 mt-0.5" />
+                  <AlertCircle className="h-4 w-4 text-yellow-600 mt-0.5" />
                   <div>
                     <p className="font-medium text-yellow-900">Important Notes</p>
                     <ul className="text-yellow-800 text-xs mt-1 space-y-1">

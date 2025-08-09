@@ -115,7 +115,7 @@ function StarRating({ rating }: { rating: Review['rating'] }) {
         <StarIcon
           key={index}
           className={clsx(
-            'h-5 w-5',
+            'h-4 w-4',
             rating > index ? 'fill-cyan-500' : 'fill-gray-300',
           )}
         />

@@ -42,7 +42,7 @@ export function BatchOverviewStep({ batchData, employees }: BatchOverviewStepPro
     <div className="space-y-6 bg-zinc-100">
       <div>
         <h3 className="text-lg font-semibold mb-2">Batch Overview</h3>
-        <p className="text-muted-foreground">
+        <p className="text-blue-400">
           Review the imported payroll data before generating payslips
         </p>
       </div>
@@ -52,7 +52,7 @@ export function BatchOverviewStep({ batchData, employees }: BatchOverviewStepPro
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
-              <Building className="h-5 w-5 text-blue-600" />
+              <Building className="h-4 w-4 text-blue-600" />
               <div>
                 <p className="text-sm font-medium">Employer</p>
                 <p className="text-lg font-bold">{batchData.employer_name}</p>
@@ -64,7 +64,7 @@ export function BatchOverviewStep({ batchData, employees }: BatchOverviewStepPro
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
-              <Calendar className="h-5 w-5 text-blue-600" />
+              <Calendar className="h-4 w-4 text-blue-600" />
               <div>
                 <p className="text-sm font-medium">Pay Period</p>
                 <p className="text-lg font-bold">
@@ -78,7 +78,7 @@ export function BatchOverviewStep({ batchData, employees }: BatchOverviewStepPro
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
-              <Users className="h-5 w-5 text-purple-600" />
+              <Users className="h-4 w-4 text-purple-600" />
               <div>
                 <p className="text-sm font-medium">Employees</p>
                 <p className="text-lg font-bold">{batchData.total_employees}</p>
@@ -90,7 +90,7 @@ export function BatchOverviewStep({ batchData, employees }: BatchOverviewStepPro
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
-              <DollarSign className="h-5 w-5 text-orange-600" />
+              <DollarSign className="h-4 w-4 text-orange-600" />
               <div>
                 <p className="text-sm font-medium">Total Salary</p>
                 <p className="text-lg font-bold">
@@ -106,7 +106,7 @@ export function BatchOverviewStep({ batchData, employees }: BatchOverviewStepPro
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
-            <FileText className="h-5 w-5" />
+            <FileText className="h-4 w-4" />
             <span>Employee Records ({employees.length})</span>
           </CardTitle>
         </CardHeader>

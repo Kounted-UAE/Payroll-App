@@ -153,8 +153,8 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
             Back to {categoryInfo?.name || category?.replace('-', ' ')}
           </Button>
           <div className="flex-1">
-            <h1 className="text-lg font-bold text-foreground">{sopData.title}</h1>
-            <p className="text-muted-foreground">Standard Operating Procedure</p>
+          <h1 className="text-lg text-zinc-600 font-bold">{sopData.title}</h1>
+            <p className="text-blue-400">Standard Operating Procedure</p>
           </div>
           <div className="flex gap-2">
             <Button variant="outline" onClick={handleCopyToClipboard}>
@@ -211,7 +211,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Building2 className="h-5 w-5" />
+              <Building2 className="h-4 w-4" />
               Who & When
             </CardTitle>
           </CardHeader>
@@ -231,7 +231,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <FileText className="h-5 w-5" />
+              <FileText className="h-4 w-4" />
               Data/Documents Required
             </CardTitle>
           </CardHeader>
@@ -257,7 +257,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <CheckCircle className="h-5 w-5" />
+              <CheckCircle className="h-4 w-4" />
               Process Workflow
             </CardTitle>
           </CardHeader>
@@ -297,7 +297,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Download className="h-5 w-5" />
+              <Download className="h-4 w-4" />
               Templates & Forms
             </CardTitle>
           </CardHeader>
@@ -339,7 +339,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <ExternalLink className="h-5 w-5" />
+                <ExternalLink className="h-4 w-4" />
                 Related SOPs
               </CardTitle>
             </CardHeader>

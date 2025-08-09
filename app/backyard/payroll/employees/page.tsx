@@ -145,8 +145,8 @@ const closeSalaryWizard = () => {
     <div className="flex-1 space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-bold tracking-tight">Employees</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-lg text-zinc-600 font-bold">Employees</h1>
+          <p className="text-blue-400">
             Manage employee profiles and their employment details
           </p>
         </div>

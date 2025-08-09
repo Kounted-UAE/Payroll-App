@@ -78,8 +78,8 @@ const PayrollPayslips = () => {
     <div className="flex-1 space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-bold tracking-tight">Payslips</h1>
-          <p className="text-muted-foreground">Generate and distribute employee payslips</p>
+          <h1 className="text-lg text-zinc-600 font-bold">Payslips</h1>
+          <p className="text-blue-400">Generate and distribute employee payslips</p>
         </div>
         <div className="flex items-center space-x-2">
           <ViewToggle view={view} setView={setView} />

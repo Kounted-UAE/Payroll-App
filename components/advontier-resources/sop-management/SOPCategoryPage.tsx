@@ -124,8 +124,8 @@ export default function SOPCategoryPage() {
             Back to SOP Center
           </Button>
           <div className="flex-1">
-            <h1 className="text-lg font-bold text-foreground">{categoryInfo.name}</h1>
-            <p className="text-muted-foreground">{categoryInfo.description}</p>
+          <h1 className="text-lg text-zinc-600 font-bold">{categoryInfo.name}</h1>
+            <p className="text-blue-400">{categoryInfo.description}</p>
           </div>
           <Button onClick={() => goTo('/backyard/sop-resources/manage')}>
             <Plus className="mr-2 h-4 w-4" />

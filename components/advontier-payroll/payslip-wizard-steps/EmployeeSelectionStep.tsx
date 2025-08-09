@@ -82,7 +82,7 @@ export function EmployeeSelectionStep({
     <div className="space-y-6 bg-zinc-100">
       <div>
         <h3 className="text-lg font-semibold mb-2">Select Employees</h3>
-        <p className="text-muted-foreground">
+        <p className="text-blue-400">
           Choose which employees to generate payslips for
         </p>
       </div>
@@ -173,7 +173,7 @@ export function EmployeeSelectionStep({
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
-            <Users className="h-5 w-5" />
+            <Users className="h-4 w-4" />
             <span>Employee List</span>
             {selectedEmployees.length > 0 && (
               <Badge variant="default">

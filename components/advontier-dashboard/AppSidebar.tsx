@@ -37,8 +37,8 @@ export function AppSidebar() {
           {sidebarSections.map((section) => (
             <div key={section.label} className="mb-4">
               {!collapsed && (
-                <div className="flex items-center justify-between px-2 py-2">
-                  <div className="text-gradient-to-l from-blue-300 to-blue-500 text-xs font-bold uppercase tracking-wide">
+                <div className="flex items-center justify-between px-2 py-2 border-b-2 m-2 border-white">
+                  <div className="text-blue-500 text-xs font-bold uppercase tracking-normal">
                     {section.label}
                   </div>
                   {section.collapsible !== false && (
@@ -109,9 +109,9 @@ export function AppSidebar() {
       <div className="bg-gradient-to-l from-neutral-300 to-neutral-200 p-4 flex-shrink-0 rounded-2xl">
         {!collapsed ? (
           <div className="flex items-center justify-between ">
-            <div className="text-xs text-neutral-600">
+            <div className="text-xs text-zinc-600">
               <div className="font-medium">Advontier</div>
-              <div className="text-neutral-400">v2.0.0</div>
+              <div className="text-blue-400">v2.0.0</div>
             </div>
             <Button variant="default" size="sm" className="h-8 w-8 p-0">
               <Plus className="h-4 w-4" />

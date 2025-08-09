@@ -53,6 +53,8 @@ const Settings = () => {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const [authUserId, setAuthUserId] = useState<string | null>(null);
+  const [teamworkStatus, setTeamworkStatus] = useState<{ name: string; token_expires_at: string | null } | null>(null)
+  const [twLoading, setTwLoading] = useState(false)
 
   // Fetch users and roles from Supabase
   useEffect(() => {
@@ -76,6 +78,22 @@ const Settings = () => {
     };
     fetchUsersAndRoles();
   }, []);
+
+  useEffect(() => {
+    const loadTeamworkStatus = async () => {
+      try {
+        setTwLoading(true)
+        const res = await fetch('/api/teamwork/status')
+        if (res.ok) {
+          const json = await res.json()
+          setTeamworkStatus(json.connection)
+        }
+      } finally {
+        setTwLoading(false)
+      }
+    }
+    loadTeamworkStatus()
+  }, [])
 
   // CRUD Operations
   // Fix: Use correct type for createUser (omit id, created_at, updated_at)
@@ -160,7 +178,7 @@ const Settings = () => {
   };
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
+    <div className="container mx-auto p-8 space-y-4">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-lg text-zinc-600 font-bold">Settings</h1>
@@ -168,7 +186,7 @@ const Settings = () => {
         </div>
       </div>
       <Tabs defaultValue="users" className="w-full">
-        <TabsList className="grid w-full grid-cols-4 bg-blue-300">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="users" className="flex items-center gap-2">
             <Users className="h-4 w-4" />
             User Management
@@ -186,13 +204,13 @@ const Settings = () => {
             General
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="users" className="space-y-6 bg-white rounded-2xl border-transparent">
+        <TabsContent value="users" className="space-y-6 rounded-2xl border-transparent">
           <Card>
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="flex items-center gap-2">
-                    <Users className="h-5 w-5" />
+                    <Users className="h-4 w-4" />
                     User Management
                   </CardTitle>
                   <CardDescription>
@@ -336,7 +354,7 @@ const Settings = () => {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Lock className="h-5 w-5" />
+                <Lock className="h-4 w-4" />
                 Security Settings
               </CardTitle>
               <CardDescription>
@@ -379,7 +397,7 @@ const Settings = () => {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Bell className="h-5 w-5" />
+                <Bell className="h-4 w-4" />
                 Notification Preferences
               </CardTitle>
               <CardDescription>
@@ -417,39 +435,86 @@ const Settings = () => {
             </CardContent>
           </Card>
         </TabsContent>
-        <TabsContent value="general" className="space-y-6 bg-white">
+        <TabsContent value="general" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 bg-white text-black">
-                <SettingsIcon className="h-5 w-5 text-blue-500" />
+              <CardTitle className="flex items-center gap-2 text-black">
+                <SettingsIcon className="h-4 w-4 text-blue-500" />
                 General Settings
               </CardTitle>
               <CardDescription>
                 Configure general application preferences
               </CardDescription>
-            <div className="mt-4">
-              <Button
-                variant="default"
-                onClick={() => {
-                  window.location.href = `/api/teamwork/connect`
-                }}
-              >
-                Connect Teamwork
-              </Button>
-            </div>
+            {teamworkStatus ? (
+              <div className="mt-2 flex items-center gap-3">
+                <Badge variant="secondary">Connected to Teamwork</Badge>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  disabled={twLoading}
+                  onClick={async () => {
+                    setTwLoading(true)
+                    try {
+                      const res = await fetch('/api/teamwork/refresh', { method: 'POST' })
+                      if (res.ok) {
+                        toast({ title: 'Teamwork token refreshed' })
+                      } else {
+                        toast({ title: 'Refresh failed', description: 'See server logs', variant: 'destructive' })
+                      }
+                    } finally {
+                      setTwLoading(false)
+                    }
+                  }}
+                >
+                  Refresh token
+                </Button>
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  disabled={twLoading}
+                  onClick={async () => {
+                    setTwLoading(true)
+                    try {
+                      const res = await fetch('/api/teamwork/disconnect', { method: 'POST' })
+                      if (res.ok) {
+                        setTeamworkStatus(null)
+                        toast({ title: 'Teamwork disconnected' })
+                      } else {
+                        toast({ title: 'Disconnect failed', description: 'See server logs', variant: 'destructive' })
+                      }
+                    } finally {
+                      setTwLoading(false)
+                    }
+                  }}
+                >
+                  Disconnect
+                </Button>
+              </div>
+            ) : (
+              <div className="mt-4">
+                <Button
+                  variant="default"
+                  onClick={() => {
+                    window.location.href = `/api/teamwork/connect`
+                  }}
+                >
+                  Connect Teamwork
+                </Button>
+              </div>
+            )}
             </CardHeader>
-            <CardContent className="space-y-6 bg-white">
+            <CardContent className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="company-name">Company Name</Label>
-                <Input id="company-name" defaultValue="Advontier Digital Solutions" className="bg-blue-50" />
+                <Input id="company-name" defaultValue="Advontier Digital Solutions" className="bg-white" />
               </div>
               <div className="space-y-2 ">
                 <Label htmlFor="timezone">Timezone</Label>
                 <Select defaultValue="uae">
-                  <SelectTrigger className="bg-blue-50">
+                  <SelectTrigger className="bg-white">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="bg-blue-50">
+                  <SelectContent className="bg-white">
                     <SelectItem value="uae">UAE Standard Time (UTC+4)</SelectItem>
                     <SelectItem value="utc">UTC</SelectItem>
                     <SelectItem value="est">Eastern Time (UTC-5)</SelectItem>
@@ -459,10 +524,10 @@ const Settings = () => {
               <div className="space-y-2">
                 <Label htmlFor="language">Language</Label>
                 <Select defaultValue="en">
-                  <SelectTrigger className="bg-blue-50">
+                  <SelectTrigger className="bg-white">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="bg-blue-50">
+                  <SelectContent className="bg-white">
                     <SelectItem value="en">English</SelectItem>
                     <SelectItem value="ar">Arabic</SelectItem>
                   </SelectContent>

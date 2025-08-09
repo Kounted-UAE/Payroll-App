@@ -128,8 +128,8 @@ const PayrollReports = () => {
     <div className="flex-1 space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-bold tracking-tight">Payroll Reports</h1>
-          <p className="text-muted-foreground">
+        <h1 className="text-lg text-zinc-600 font-bold">Payroll Reports</h1>
+          <p className="text-blue-400">
             Generate and download comprehensive payroll analytics
           </p>
         </div>
@@ -147,7 +147,7 @@ const PayrollReports = () => {
         <CardContent className="p-6">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <Calendar className="h-5 w-5 text-muted-foreground" />
+              <Calendar className="h-4 w-4 text-muted-foreground" />
               <span className="font-medium">Reporting Period:</span>
             </div>
             <Input
@@ -167,7 +167,7 @@ const PayrollReports = () => {
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center space-x-2">
-                              <DollarSign className="h-5 w-5 text-primary" />
+                              <DollarSign className="h-4 w-4 text-primary" />
               <div>
                 <p className="text-xs font-bold">AED 892.5K</p>
                 <p className="text-xs text-muted-foreground">Total Payroll Cost</p>
@@ -178,7 +178,7 @@ const PayrollReports = () => {
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center space-x-2">
-                              <Users className="h-5 w-5 text-primary" />
+                              <Users className="h-4 w-4 text-primary" />
               <div>
                 <p className="text-xs font-bold">283</p>
                 <p className="text-xs text-muted-foreground">Active Employees</p>
@@ -189,7 +189,7 @@ const PayrollReports = () => {
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center space-x-2">
-              <Calendar className="h-5 w-5 text-purple-600" />
+              <Calendar className="h-4 w-4 text-purple-600" />
               <div>
                 <p className="text-xs font-bold">AED 4.76M</p>
                 <p className="text-xs text-muted-foreground">EOSB Liability</p>
@@ -200,7 +200,7 @@ const PayrollReports = () => {
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center space-x-2">
-              <Building className="h-5 w-5 text-orange-600" />
+              <Building className="h-4 w-4 text-orange-600" />
               <div>
                 <p className="text-xs font-bold">15</p>
                 <p className="text-xs text-muted-foreground">Employers</p>

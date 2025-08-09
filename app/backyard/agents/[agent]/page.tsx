@@ -96,7 +96,7 @@ export default function AgentRuntimePage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold">{config.title}</h1>
+        <h1 className="text-lg text-zinc-600 font-bold">{config.title}</h1>
           <p className="text-sm text-muted-foreground">{config.description}</p>
         </div>
         <div className="flex items-center gap-2">

@@ -11,7 +11,7 @@ export function ViewToggle({ view, setView }: { view: 'grid' | 'list'; setView: 
         aria-label="Grid view"
         type="button"
       >
-        <LayoutGrid className="h-5 w-5" />
+        <LayoutGrid className="h-4 w-4" />
       </button>
       <button
         className={`p-2 rounded ${view === 'list' ? 'bg-blue-500 text-blue-500-foreground' : 'bg-muted'}`}
@@ -19,7 +19,7 @@ export function ViewToggle({ view, setView }: { view: 'grid' | 'list'; setView: 
         aria-label="List view"
         type="button"
       >
-        <ListIcon className="h-5 w-5" />
+        <ListIcon className="h-4 w-4" />
       </button>
     </div>
   );

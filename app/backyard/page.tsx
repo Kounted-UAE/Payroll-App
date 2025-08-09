@@ -73,7 +73,7 @@ export default function DashboardHome() {
   <section id="quicklinks">
       <div className="p-4 flex items-center justify-between py-2">
       <h1 className="text-xs font-semibold flex items-center gap-2 mb-1">
-        <AppWindowIcon className="h-5 w-5 text-primary" />
+        <AppWindowIcon className="h-4 w-4 text-primary" />
         Quick Links
       </h1>
       <Button variant="ghost" onClick={() => setOpen(true)} className="">
@@ -81,7 +81,7 @@ export default function DashboardHome() {
 <h1 className="text-md font-semibold flex items-center gap-2 mb-1">
 
   Platform Roadmap
-  <MapPin className="h-5 w-5 text-primary" />
+  <MapPin className="h-4 w-4 text-primary" />
 </h1>
 </Button>
     </div>
@@ -95,7 +95,7 @@ export default function DashboardHome() {
         <div className="p-4 flex items-center justify-between">
           <div>
             <h1 className="text-xs font-semibold flex items-center gap-2 mb-1">
-              <ChartBar className="h-5 w-5 text-primary" />
+              <ChartBar className="h-4 w-4 text-primary" />
               Performance Overview
             </h1>
             <p className="text-xs text-muted-foreground">Key metrics and performance indicators</p>
@@ -109,7 +109,7 @@ export default function DashboardHome() {
         <div className="p-4 flex items-center justify-between">
           <div>
             <h1 className="text-xs font-semibold flex items-center gap-2 mb-1">
-              <Users className="h-5 w-5 text-primary" />
+              <Users className="h-4 w-4 text-primary" />
               Entity Statistics
             </h1>
             <p className="text-xs text-muted-foreground">Overview of all system entities</p>
@@ -173,7 +173,7 @@ export default function DashboardHome() {
                               {active.map((item) => (
                                 <div key={item.title} className="flex items-center justify-between p-3 rounded-lg bg-card ">
                                   <div className="flex items-center gap-3">
-                                    {item.icon && <item.icon className="h-5 w-5 text-primary" />}
+                                    {item.icon && <item.icon className="h-4 w-4 text-primary" />}
                                     <div>
                                       <p className="text-sm font-medium text-foreground">{item.title}</p>
                                       <p className="text-xs text-muted-foreground">{item.section}</p>
@@ -192,7 +192,7 @@ export default function DashboardHome() {
                               {comingSoon.map((item) => (
                                 <div key={item.title} className="flex items-center justify-between p-3 rounded-lg bg-muted/50 ">
                                   <div className="flex items-center gap-3">
-                                    {item.icon && <item.icon className="h-5 w-5 text-muted-foreground" />}
+                                    {item.icon && <item.icon className="h-4 w-4 text-muted-foreground" />}
                                     <div>
                                       <p className="text-sm font-medium text-muted-foreground">{item.title}</p>
                                       <p className="text-xs text-muted-foreground">{item.section}</p>
@@ -229,7 +229,7 @@ function DropdownMenu({ deck }: { deck: any }) {
         type="button"
         className="inline-flex size-8 items-center justify-center rounded-full text-gray-400 hover:text-gray-500 focus:outline-none"
       >
-        <EllipsisVerticalIcon className="h-5 w-5" />
+        <EllipsisVerticalIcon className="h-4 w-4" />
         <span className="sr-only">Open options</span>
       </button>
       {/* Simulated menu */}

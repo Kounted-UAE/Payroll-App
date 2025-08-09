@@ -161,7 +161,10 @@ export default function SendPayslipsPage() {
   return (
     <div className="p-6 space-y-6">
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-xl font-bold">Send Payslips</h1>
+        <h1 className="text-lg text-zinc-600 font-bold">Send Payslips</h1>
+        <p className="text-blue-400">
+          Send payslips to employees and reviewers
+        </p>
         <div className="flex items-center gap-2">
           <Button onClick={() => setDetailedWizardOpen(true)} variant="default">
             Export Xero Detailed Journals

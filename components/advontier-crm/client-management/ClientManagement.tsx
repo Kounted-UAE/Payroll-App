@@ -256,7 +256,7 @@ export default function ClientManagement() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-lg font-bold text-foreground">Client Management</h1>
-            <p className="text-muted-foreground">Manage clients and their onboarding progress</p>
+            <p className="text-blue-400">Manage clients and their onboarding progress</p>
           </div>
           
           <Dialog open={showNewClientDialog} onOpenChange={setShowNewClientDialog}>
@@ -400,12 +400,12 @@ export default function ClientManagement() {
           <CardContent>
             {loading ? (
               <div className="text-center py-8">
-                <p className="text-muted-foreground">Loading clients...</p>
+                <p className="text-blue-400">Loading clients...</p>
               </div>
             ) : filteredClients.length === 0 ? (
               <div className="text-center py-8">
                 <Building2 className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <p className="text-muted-foreground">
+                <p className="text-blue-400">
                   {searchTerm ? 'No clients found matching your search.' : 'No clients yet. Create your first client to get started.'}
                 </p>
               </div>
@@ -420,7 +420,7 @@ export default function ClientManagement() {
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <Building2 className="h-5 w-5 text-muted-foreground" />
+                            <Building2 className="h-4 w-4 text-muted-foreground" />
                             <h3 className="font-semibold text-xs">{client.name}</h3>
                             <Badge variant="default">
                               Active

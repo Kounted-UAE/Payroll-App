@@ -165,8 +165,8 @@ const SubmitExpenseWizard = () => {
     <div className="flex-1 space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-bold tracking-tight">Start Expense Run</h1>
-          <p className="text-muted-foreground">
+        <h1 className="text-lg text-zinc-600 font-bold">Start Expense Run</h1>
+          <p className="text-blue-400">
             Process and record employee expenses for a payroll period
           </p>
         </div>

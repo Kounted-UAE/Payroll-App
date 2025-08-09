@@ -68,12 +68,12 @@ const PayrollEmployers = () => {
     return (
       <div className="flex-1 space-y-6 p-6">
         <div className="flex items-center space-x-2 text-red-600">
-          <AlertCircle className="h-5 w-5" />
-          <h1 className="text-xs font-bold">Error Loading Employers</h1>
+          <AlertCircle className="h-4 w-4" />
+          <h1 className="text-lg text-zinc-600 font-bold">Error Loading Employers</h1>
         </div>
         <Card>
           <CardContent className="p-6">
-            <p className="text-muted-foreground">{error}</p>
+            <p className="text-blue-400">{error}</p>
             <Button onClick={() => window.location.reload()} className="mt-4">
               Retry
             </Button>
@@ -87,8 +87,8 @@ const PayrollEmployers = () => {
     <div className="flex-1 space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-bold tracking-tight">Employers</h1>
-          <p className="text-md text-muted-foreground">
+        <h1 className="text-lg text-zinc-600 font-bold">Employers</h1>
+          <p className="text-blue-400">
             Manage client companies and their payroll setup
           </p>
         </div>
@@ -98,14 +98,14 @@ const PayrollEmployers = () => {
             onClick={() => setView('grid')}
             aria-label="Grid view"
           >
-            <LayoutGrid className="h-5 w-5" />
+            <LayoutGrid className="h-4 w-4" />
           </Button>
           <Button
             className={`p-2 rounded ${view === 'list' ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
             onClick={() => setView('list')}
             aria-label="List view"
           >
-            <ListIcon className="h-5 w-5" />
+            <ListIcon className="h-4 w-4" />
           </Button>
           <Button variant="outline" onClick={() => setDialogOpen(true)}>
             Bulk Import/Export

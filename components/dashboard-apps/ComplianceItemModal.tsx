@@ -112,7 +112,7 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <FileText className="h-5 w-5" />
+            <FileText className="h-4 w-4" />
             {item.obligation}
             {item.isObsolete && (
               <Badge variant="destructive" className="ml-2">

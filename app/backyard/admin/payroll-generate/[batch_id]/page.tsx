@@ -98,8 +98,8 @@ export default function PayslipGenerationPage() {
       <div className="flex-1 space-y-6 p-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-lg font-bold tracking-tight">Payslip Generation</h1>
-            <p className="text-muted-foreground">
+          <h1 className="text-lg text-zinc-600 font-bold">Payslip Generation</h1>
+            <p className="text-blue-400">
               Generate payslips from imported payroll data
             </p>
           </div>
@@ -127,8 +127,8 @@ export default function PayslipGenerationPage() {
     <div className="flex-1 space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-bold tracking-tight">Generate Payslips</h1>
-          <p className="text-muted-foreground">
+        <h1 className="text-lg text-zinc-600 font-bold">Generate Payslips</h1>
+          <p className="text-blue-400">
             Create and distribute employee payslips from batch: {batchId}
           </p>
         </div>

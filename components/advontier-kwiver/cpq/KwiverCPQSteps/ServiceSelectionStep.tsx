@@ -135,7 +135,7 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
               >
                 <div className="flex items-center justify-between mb-1">
                   <h3 className="font-semibold text-xs">Standard</h3>
-                  {data.selectedTier === 'standard' && <Check className="h-5 w-5" />}
+                  {data.selectedTier === 'standard' && <Check className="h-4 w-4" />}
                 </div>
                 <p className="text-xs opacity-90">Basic Compliance Package</p>
               </div>
@@ -185,7 +185,7 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
               >
                 <div className="flex items-center justify-between mb-1">
                   <h3 className="font-semibold text-xs">Premium</h3>
-                  {data.selectedTier === 'premium' && <Check className="h-5 w-5" />}
+                  {data.selectedTier === 'premium' && <Check className="h-4 w-4" />}
                 </div>
                 <p className="text-xs opacity-90">Compliance + Advisory</p>
               </div>
@@ -240,7 +240,7 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
               >
                 <div className="flex items-center justify-between mb-1">
                   <h3 className="font-semibold text-xs">Enterprise</h3>
-                  {data.selectedTier === 'enterprise' && <Check className="h-5 w-5" />}
+                  {data.selectedTier === 'enterprise' && <Check className="h-4 w-4" />}
                 </div>
                 <p className="text-xs opacity-90">Full Finance Department</p>
               </div>

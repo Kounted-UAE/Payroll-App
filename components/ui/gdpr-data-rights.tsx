@@ -135,7 +135,7 @@ export function GDPRDataRights() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-2 mb-4">
-        <Shield className="h-5 w-5 text-primary" />
+        <Shield className="h-4 w-4 text-primary" />
         <h2 className="text-xl font-semibold">Your Data Rights</h2>
         <Badge variant="outline">GDPR Compliant</Badge>
       </div>
@@ -145,7 +145,7 @@ export function GDPRDataRights() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Download className="h-5 w-5 text-blue-600" />
+              <Download className="h-4 w-4 text-blue-600" />
               Export Your Data
             </CardTitle>
           </CardHeader>
@@ -198,7 +198,7 @@ export function GDPRDataRights() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Trash2 className="h-5 w-5 text-red-600" />
+              <Trash2 className="h-4 w-4 text-red-600" />
               Delete Your Account
             </CardTitle>
           </CardHeader>
@@ -244,7 +244,7 @@ export function GDPRDataRights() {
               <DialogContent className="max-w-md">
                 <DialogHeader>
                   <DialogTitle className="flex items-center gap-2 text-red-600">
-                    <AlertTriangle className="h-5 w-5" />
+                    <AlertTriangle className="h-4 w-4" />
                     Delete Account
                   </DialogTitle>
                 </DialogHeader>
@@ -341,7 +341,7 @@ export function GDPRDataRights() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Database className="h-5 w-5 text-green-600" />
+            <Database className="h-4 w-4 text-green-600" />
             Other Data Rights
           </CardTitle>
         </CardHeader>

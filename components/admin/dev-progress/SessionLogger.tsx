@@ -150,7 +150,7 @@ export default function SessionLogger({ features, onSessionCreated, className }:
     <Card className={className}>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Calendar className="h-5 w-5" />
+          <Calendar className="h-4 w-4" />
           Log Development Session
         </CardTitle>
       </CardHeader>

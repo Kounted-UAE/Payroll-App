@@ -94,8 +94,8 @@ const GeneratePayslipsWizard = () => {
     <div className="flex-1 space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-bold tracking-tight">Generate Payslips</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-lg text-zinc-600 font-bold">Generate Payslips</h1>
+          <p className="text-blue-400">
             Create and distribute employee payslips from completed payruns
           </p>
         </div>
@@ -169,7 +169,7 @@ const GeneratePayslipsWizard = () => {
                           {payrun.status}
                         </Badge>
                         {data.payrun_id === payrun.id && (
-                          <CheckCircle className="h-5 w-5 text-blue-500" />
+                          <CheckCircle className="h-4 w-4 text-blue-500" />
                         )}
                       </div>
                     </div>
@@ -239,7 +239,7 @@ const GeneratePayslipsWizard = () => {
               {selectedPayrun && (
                 <div className="p-4 bg-blue-50 rounded-lg">
                   <div className="flex items-center space-x-2">
-                    <FileText className="h-5 w-5 text-blue-600" />
+                    <FileText className="h-4 w-4 text-blue-600" />
                     <div>
                       <p className="font-medium text-blue-900">Selected Payrun</p>
                       <p className="text-blue-700">{selectedPayrun.employer} - {selectedPayrun.period}</p>
@@ -296,7 +296,7 @@ const GeneratePayslipsWizard = () => {
                         }))
                       }}
                     />
-                    <Users className="h-5 w-5 text-blue-600" />
+                    <Users className="h-4 w-4 text-blue-600" />
                     <div className="flex-1">
                       <div className="flex items-center justify-between">
                         <div>
@@ -372,7 +372,7 @@ const GeneratePayslipsWizard = () => {
 
               <div className="p-4 bg-yellow-50 rounded-lg">
                 <div className="flex items-start space-x-3">
-                  <AlertCircle className="h-5 w-5 text-yellow-600 mt-0.5" />
+                  <AlertCircle className="h-4 w-4 text-yellow-600 mt-0.5" />
                   <div>
                     <p className="font-medium text-yellow-900">Generation Process</p>
                     <ul className="text-yellow-800 text-xs mt-1 space-y-1">

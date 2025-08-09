@@ -195,12 +195,12 @@ const PayrollPayruns = () => {
     return (
       <div className="flex-1 space-y-6 p-6">
         <div className="flex items-center space-x-2 text-red-600">
-          <AlertCircle className="h-5 w-5" />
-          <h1 className="text-xs font-bold">Error Loading Payruns</h1>
+          <AlertCircle className="h-4 w-4" />
+          <h1 className="text-lg text-zinc-600 font-bold">Error Loading Payruns</h1>
         </div>
         <Card>
           <CardContent className="p-6">
-            <p className="text-muted-foreground">{error}</p>
+            <p className="text-blue-400">{error}</p>
             <Button 
               onClick={() => window.location.reload()} 
               className="mt-4"
@@ -217,8 +217,8 @@ const PayrollPayruns = () => {
     <div className="flex-1 space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-bold tracking-tight">Payruns</h1>
-          <p className="text-md text-muted-foreground">
+        <h1 className="text-lg text-zinc-600 font-bold">Payruns</h1>
+          <p className="text-blue-400">
             Process and manage monthly payroll calculations
           </p>
         </div>

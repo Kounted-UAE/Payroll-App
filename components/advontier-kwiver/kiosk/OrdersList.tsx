@@ -129,12 +129,12 @@ export default function OrdersList() {
         <CardContent>
           {loading ? (
             <div className="text-center py-8">
-              <p className="text-muted-foreground">Loading orders...</p>
+              <p className="text-blue-400">Loading orders...</p>
             </div>
           ) : filteredOrders.length === 0 ? (
             <div className="text-center py-8">
               <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-              <p className="text-muted-foreground">
+              <p className="text-blue-400">
                 {searchTerm ? 'No orders found matching your search.' : 'No orders yet.'}
               </p>
             </div>
@@ -145,7 +145,7 @@ export default function OrdersList() {
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <FileText className="h-5 w-5 text-muted-foreground" />
+                        <FileText className="h-4 w-4 text-muted-foreground" />
                         <h3 className="font-semibold text-xs">
                           {order.reference_id || `Order ${order.id.slice(0, 8)}`}
                         </h3>

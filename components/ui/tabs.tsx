@@ -11,7 +11,7 @@ const TabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      "flex w-full -mb-px rounded-2xl bg-black/20 p-1",
+      "flex w-full h-14 -mb-px rounded-2xl bg-blue-300 p-1",
       className
     )}
     {...props}
@@ -28,10 +28,10 @@ const TabsTrigger = React.forwardRef<
     className={cn(
       "flex-1 text-center rounded-xl px-3 py-3 text-sm font-medium transition-colors duration-150",
       // Inactive
-      "text-white hover:text-white/50",
+      "text-zinc-700 hover:text-zinc-700/50",
       // Active
       "data-[state=active]:text-white data-[state=active]:bg-gradient-to-br from-blue-500 to-blue-400",
-      "data-[state=active]:hover:from-blue-700 data-[state=active]:hover:to-blue-500",
+      "data-[state=active]:hover:from-blue-500 data-[state=active]:hover:to-blue-500",
       // Remove the thick focus outline/ring completely
       "focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0",
       // Disabled

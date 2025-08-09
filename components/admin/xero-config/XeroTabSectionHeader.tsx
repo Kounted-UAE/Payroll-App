@@ -68,7 +68,7 @@ export default function XeroTabSectionHeader({
           ))}
         </select>
         <ChevronDownIcon
-          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground"
+          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
           aria-hidden="true"
         />
       </div>

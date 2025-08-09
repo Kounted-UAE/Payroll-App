@@ -407,11 +407,11 @@ export default function ComplianceCalendar() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-lg font-bold text-foreground">UAE Compliance Calendar</h1>
-            <p className="text-muted-foreground">Comprehensive compliance obligations for UAE businesses (2025-2026)</p>
+          <h1 className="text-lg text-zinc-600 font-bold">UAE Compliance Calendar</h1>
+            <p className="text-blue-400">Comprehensive compliance obligations for UAE businesses (2025-2026)</p>
           </div>
           <div className="flex items-center gap-2">
-            <Calendar className="h-5 w-5 text-primary" />
+            <Calendar className="h-4 w-4 text-primary" />
             <span className="text-xs font-medium">Updated for 2025-2026</span>
           </div>
         </div>
@@ -505,7 +505,7 @@ export default function ComplianceCalendar() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <FileText className="h-5 w-5" />
+                  <FileText className="h-4 w-4" />
                   Compliance Obligations
                   {activeTab !== 'all' && (
                     <Badge className={getCategoryColor(activeTab)}>
@@ -603,7 +603,7 @@ export default function ComplianceCalendar() {
                 {filteredData.length === 0 && (
                   <div className="text-center py-8">
                     <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                    <p className="text-muted-foreground">
+                    <p className="text-blue-400">
                       No compliance obligations found matching your criteria.
                     </p>
                   </div>

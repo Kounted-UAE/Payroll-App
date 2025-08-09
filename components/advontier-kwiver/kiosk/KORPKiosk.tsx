@@ -237,13 +237,13 @@ export default function KwiverKiosk() {
     <Card className="sticky top-4">
       <CardHeader>
         <CardTitle className="flex items-center">
-          <ShoppingCart className="mr-2 h-5 w-5" />
+          <ShoppingCart className="mr-2 h-4 w-4" />
           Cart ({cart.length})
         </CardTitle>
       </CardHeader>
       <CardContent>
         {cart.length === 0 ? (
-          <p className="text-muted-foreground">Your cart is empty</p>
+          <p className="text-blue-400">Your cart is empty</p>
         ) : (
           <div className="space-y-4">
             {cart.map((item) => (
@@ -295,7 +295,7 @@ export default function KwiverKiosk() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
-                <User className="mr-2 h-5 w-5" />
+                <User className="mr-2 h-4 w-4" />
                 Customer Details
               </CardTitle>
             </CardHeader>
@@ -352,7 +352,7 @@ export default function KwiverKiosk() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
-                <CreditCard className="mr-2 h-5 w-5" />
+                <CreditCard className="mr-2 h-4 w-4" />
                 Payment Options
               </CardTitle>
             </CardHeader>
@@ -418,7 +418,7 @@ export default function KwiverKiosk() {
         <div className="max-w-2xl mx-auto">
           <div className="mb-6">
             <h1 className="text-lg font-bold">Checkout</h1>
-            <p className="text-muted-foreground">Complete your service order</p>
+            <p className="text-blue-400">Complete your service order</p>
           </div>
           <CheckoutFlow />
         </div>
@@ -430,7 +430,7 @@ export default function KwiverKiosk() {
     <div className="container mx-auto px-6 py-8">
       <div className="mb-8">
         <h1 className="text-lg font-bold">$Kwiver Kiosk</h1>
-        <p className="text-muted-foreground">Self-service ordering for ad hoc professional services</p>
+        <p className="text-blue-400">Self-service ordering for ad hoc professional services</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">

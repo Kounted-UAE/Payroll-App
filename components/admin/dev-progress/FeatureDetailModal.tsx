@@ -126,8 +126,8 @@ export default function FeatureDetailModal({
           </div>
         </DialogHeader>
 
-        <Tabs defaultValue="overview" className="mt-6">
-          <TabsList className="grid w-full grid-cols-4">
+        <Tabs defaultValue="overview" className="w-full">
+        <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="sessions">Sessions</TabsTrigger>
             <TabsTrigger value="milestones">Milestones</TabsTrigger>
@@ -142,7 +142,7 @@ export default function FeatureDetailModal({
                   <CardTitle className="text-lg">Description</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">{feature.description}</p>
+                  <p className="text-blue-400">{feature.description}</p>
                 </CardContent>
               </Card>
             )}
@@ -152,7 +152,7 @@ export default function FeatureDetailModal({
               <Card>
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <Target className="h-5 w-5" />
+                    <Target className="h-4 w-4" />
                     Objectives
                   </CardTitle>
                 </CardHeader>

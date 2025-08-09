@@ -63,7 +63,7 @@ export default function KwiverCPQ() {
 
               <div className="space-y-2">
                 <p className="text-xs font-medium">Thank you for your order!</p>
-                <p className="text-muted-foreground">
+                <p className="text-blue-400">
                   Our team will contact you shortly to discuss the next steps.
                 </p>
               </div>
@@ -97,7 +97,7 @@ export default function KwiverCPQ() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-lg font-bold text-foreground">Order Management</h1>
-              <p className="text-muted-foreground">View and manage all service orders</p>
+              <p className="text-blue-400">View and manage all service orders</p>
             </div>
             <Button onClick={() => setShowOrdersList(false)} variant="outline">
               ← Back to Kiosk
@@ -114,7 +114,7 @@ export default function KwiverCPQ() {
       <div className="max-w-5xl mx-auto space-y-6">
         <div>
           <h1 className="text-lg font-bold text-foreground">Service Order Kiosk</h1>
-          <p className="text-muted-foreground">
+          <p className="text-blue-400">
             Configure and order accounting services for your business
           </p>
         </div>
@@ -168,14 +168,14 @@ export default function KwiverCPQ() {
             <div className="md:col-span-3 p-6 md:p-8">
               <div className="space-y-4">
                 <h2 className="text-xs font-bold">Configure Your Accounting Services</h2>
-                <p className="text-muted-foreground">
+                <p className="text-blue-400">
                   Use our self-service wizard to configure and order accounting, payroll, tax, and HR services
                   tailored to your business needs.
                 </p>
 
                 <div className="space-y-2">
                   <div className="flex items-start gap-2">
-                    <CheckSquare className="h-5 w-5 text-primary mt-0.5" />
+                    <CheckSquare className="h-4 w-4 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">8-Step Guided Process</p>
                       <p className="text-xs text-muted-foreground">
@@ -185,7 +185,7 @@ export default function KwiverCPQ() {
                   </div>
 
                   <div className="flex items-start gap-2">
-                    <CheckSquare className="h-5 w-5 text-primary mt-0.5" />
+                    <CheckSquare className="h-4 w-4 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">Instant Pricing</p>
                       <p className="text-xs text-muted-foreground">
@@ -195,7 +195,7 @@ export default function KwiverCPQ() {
                   </div>
 
                   <div className="flex items-start gap-2">
-                    <CheckSquare className="h-5 w-5 text-primary mt-0.5" />
+                    <CheckSquare className="h-4 w-4 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">Flexible Services</p>
                       <p className="text-xs text-muted-foreground">

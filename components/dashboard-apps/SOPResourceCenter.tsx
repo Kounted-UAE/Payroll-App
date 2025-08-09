@@ -92,8 +92,8 @@ export default function SOPResourceCenter() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-lg font-bold text-foreground">SOP Resource Center</h1>
-            <p className="text-muted-foreground">
+          <h1 className="text-lg text-zinc-600 font-bold">SOP Resource Center</h1>
+            <p className="text-blue-400">
               Comprehensive Standard Operating Procedures for Advontier's 7 Solution Groups
             </p>
           </div>

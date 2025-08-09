@@ -176,7 +176,7 @@ export function ReviewGenerateStep({
     <div className="space-y-6">
       <div>
         <h3 className="text-lg font-semibold mb-2">Review & Generate Payslips</h3>
-        <p className="text-muted-foreground">
+        <p className="text-blue-400">
           Review your settings and generate payslips for the selected employees
         </p>
       </div>
@@ -186,7 +186,7 @@ export function ReviewGenerateStep({
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
-              <FileText className="h-5 w-5 text-blue-600" />
+              <FileText className="h-4 w-4 text-blue-600" />
               <div>
                 <p className="text-sm font-medium">Batch ID</p>
                 <p className="text-lg font-bold font-mono">{batchData.batch_id}</p>
@@ -198,7 +198,7 @@ export function ReviewGenerateStep({
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
-              <Users className="h-5 w-5 text-blue-600" />
+              <Users className="h-4 w-4 text-blue-600" />
               <div>
                 <p className="text-sm font-medium">Employees</p>
                 <p className="text-lg font-bold">{employees.length}</p>
@@ -210,7 +210,7 @@ export function ReviewGenerateStep({
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
-              <Globe className="h-5 w-5 text-purple-600" />
+              <Globe className="h-4 w-4 text-purple-600" />
               <div>
                 <p className="text-sm font-medium">Language</p>
                 <p className="text-lg font-bold">{getLanguageLabel(wizardData.language)}</p>
@@ -222,7 +222,7 @@ export function ReviewGenerateStep({
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
-              <DollarSign className="h-5 w-5 text-orange-600" />
+              <DollarSign className="h-4 w-4 text-orange-600" />
               <div>
                 <p className="text-sm font-medium">Total Salary</p>
                 <p className="text-lg font-bold">
@@ -240,7 +240,7 @@ export function ReviewGenerateStep({
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
-              <FileText className="h-5 w-5" />
+              <FileText className="h-4 w-4" />
               <span>Batch Information</span>
             </CardTitle>
           </CardHeader>
@@ -266,7 +266,7 @@ export function ReviewGenerateStep({
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
-              <Settings className="h-5 w-5" />
+              <Settings className="h-4 w-4" />
               <span>Generation Settings</span>
             </CardTitle>
           </CardHeader>
@@ -293,7 +293,7 @@ export function ReviewGenerateStep({
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
-            <AlertCircle className="h-5 w-5 text-yellow-600" />
+            <AlertCircle className="h-4 w-4 text-yellow-600" />
             <span>Test Options</span>
           </CardTitle>
         </CardHeader>
@@ -419,12 +419,12 @@ export function ReviewGenerateStep({
         >
           {loading ? (
             <>
-              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               Generating Payslips...
             </>
           ) : (
             <>
-              <FileText className="mr-2 h-5 w-5" />
+              <FileText className="mr-2 h-4 w-4" />
               Generate Payslips
             </>
           )}

@@ -146,7 +146,7 @@ export function CookieConsentBanner() {
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
-                <Shield className="h-5 w-5 text-primary" />
+                <Shield className="h-4 w-4 text-primary" />
                 <h3 className="font-semibold">Cookie Consent</h3>
               </div>
               <p className="text-sm text-muted-foreground">
@@ -191,7 +191,7 @@ export function CookieConsentBanner() {
         <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Settings className="h-5 w-5" />
+              <Settings className="h-4 w-4" />
               Cookie Preferences
             </DialogTitle>
           </DialogHeader>
@@ -209,7 +209,7 @@ export function CookieConsentBanner() {
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Shield className="h-5 w-5 text-green-600" />
+                    <Shield className="h-4 w-4 text-green-600" />
                     <CardTitle className="text-base">Essential Cookies</CardTitle>
                     <Badge variant="secondary">Required</Badge>
                   </div>
@@ -236,7 +236,7 @@ export function CookieConsentBanner() {
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Settings className="h-5 w-5 text-blue-600" />
+                    <Settings className="h-4 w-4 text-blue-600" />
                     <CardTitle className="text-base">Functional Cookies</CardTitle>
                     <Badge variant="outline">Optional</Badge>
                   </div>
@@ -265,7 +265,7 @@ export function CookieConsentBanner() {
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <BarChart3 className="h-5 w-5 text-purple-600" />
+                    <BarChart3 className="h-4 w-4 text-purple-600" />
                     <CardTitle className="text-base">Analytics Cookies</CardTitle>
                     <Badge variant="outline">Optional</Badge>
                   </div>
@@ -294,7 +294,7 @@ export function CookieConsentBanner() {
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Target className="h-5 w-5 text-orange-600" />
+                    <Target className="h-4 w-4 text-orange-600" />
                     <CardTitle className="text-base">Marketing Cookies</CardTitle>
                     <Badge variant="outline">Optional</Badge>
                   </div>
