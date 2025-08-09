@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Building2, CheckSquare, FileText, ArrowRight, BarChart } from 'lucide-react';
 import { getSupabaseClient } from '@/lib/supabase/client';
 import KwiverKioskWizard from '@/components/advontier-kwiver/cpq/KwiverCPQWizard';
-import OrdersList from '@/components/advontier-kwiver/cpq/KwiverCPQWOrdersList';
+import OrdersList from '@/components/advontier-kwiver/cpq/KwiverCPQOrdersList';
 
 export default function KwiverCPQ() {
   const [orderStarted, setOrderStarted] = useState(false);

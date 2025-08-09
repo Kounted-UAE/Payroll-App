@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSupabaseServerClientFromRequest } from '@/lib/supabase/server'
+import { TEAMWORK_CLIENT_ID, TEAMWORK_CLIENT_SECRET, TEAMWORK_TOKEN_URL, TEAMWORK_REDIRECT_URI } from '@/lib/teamwork/client'
 
 export async function GET(req: NextRequest) {
   const res = new NextResponse()
@@ -11,25 +12,48 @@ export async function GET(req: NextRequest) {
   const userId = state?.user_id
   if (!code || !userId) return NextResponse.json({ error: 'Missing code or state' }, { status: 400 })
 
-  // Exchange code for token (Teamwork docs: App Login Flow; token endpoint varies; expecting JSON response)
-  // Implement once exact endpoints are confirmed via env
-  // Placeholder: mark connection created without token exchange for now
+  try {
+    const body = new URLSearchParams()
+    body.set('grant_type', 'authorization_code')
+    body.set('code', code)
+    body.set('client_id', TEAMWORK_CLIENT_ID)
+    body.set('client_secret', TEAMWORK_CLIENT_SECRET)
+    body.set('redirect_uri', TEAMWORK_REDIRECT_URI)
 
-  const now = new Date().toISOString()
-  await supabase.from('teamwork_connections').upsert(
-    {
-      id: userId, // or a generated id; storing by user simplifies 1:1
-      user_id: userId,
-      name: 'Teamwork Connection',
-      email: '',
-      access_token: '',
-      refresh_token: null,
-      token_expires_at: null,
-      created_at: now,
-      updated_at: now,
-    },
-    { onConflict: 'id' }
-  )
+    const resp = await fetch(TEAMWORK_TOKEN_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body.toString(),
+    })
+    if (!resp.ok) {
+      const text = await resp.text()
+      console.error('Teamwork token exchange failed:', resp.status, text)
+      return NextResponse.redirect(`${req.nextUrl.origin}/backyard/settings?teamwork_error=token_exchange_failed`)
+    }
+    const tokenJson: any = await resp.json()
+    const accessToken: string | null = tokenJson.access_token ?? null
+    const refreshToken: string | null = tokenJson.refresh_token ?? null
+    const expiresIn: number | null = tokenJson.expires_in ?? null
+    const now = new Date()
+    const expiresAt = expiresIn ? new Date(now.getTime() + expiresIn * 1000).toISOString() : null
 
-  return NextResponse.redirect(`${req.nextUrl.origin}/backyard/settings`)
+    await supabase.from('teamwork_connections').upsert(
+      {
+        id: userId,
+        user_id: userId,
+        name: 'Teamwork Connection',
+        email: '',
+        access_token: accessToken,
+        refresh_token: refreshToken,
+        token_expires_at: expiresAt,
+        updated_at: now.toISOString(),
+      },
+      { onConflict: 'id' }
+    )
+  } catch (e) {
+    console.error('Teamwork callback error:', e)
+    return NextResponse.redirect(`${req.nextUrl.origin}/backyard/settings?teamwork_error=callback_failed`)
+  }
+
+  return NextResponse.redirect(`${req.nextUrl.origin}/backyard/settings?teamwork_connected=1`)
 }

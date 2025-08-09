@@ -34,7 +34,7 @@ import DashboardQuicklinks from '@/components/backyard/DashboardQuicklinks'
 const metrics = [
   { label: "Active Customers", count: 128, description: "Companies with ongoing engagement", link: "/backyard/clients" },
   { label: "Kwiver Retainers", count: 62, description: "Ongoing fractional support agreements", link: "#" },
-  { label: "Kwiver Retainers", count: 21, description: "Modular or ad hoc engagement types", link: "#" },
+  { label: "Kwiver Quotes", count: 21, description: "Once-off or ad hoc engagement types", link: "#" },
   { label: "Corporate Profiles", count: 434, description: "Incorporated entities on file", link: "#" },
   { label: "Personal Profiles", count: 85, description: "Verified private individuals in CRM", link: "#" },
   { label: "Visas", count: 55, description: "Active and historical visa records", link: "#" },

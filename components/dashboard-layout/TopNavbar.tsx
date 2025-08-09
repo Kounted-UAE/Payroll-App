@@ -91,7 +91,7 @@ export function TopNavbar() {
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm" className="flex items-center gap-2 px-2">
                 <Avatar className="h-8 w-8">
-                  <AvatarImage src="/team/kevin.webp" alt="User" />
+                  <AvatarImage src="/team/ben_jacob.png" alt="User" />
                   <AvatarFallback>KC</AvatarFallback>
                 </Avatar>
                 <span className="hidden md:inline font-medium">Ben Jacobs</span>
