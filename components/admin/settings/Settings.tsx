@@ -417,11 +417,11 @@ const Settings = () => {
             </CardContent>
           </Card>
         </TabsContent>
-        <TabsContent value="general" className="space-y-6">
+        <TabsContent value="general" className="space-y-6 bg-white">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <SettingsIcon className="h-5 w-5" />
+              <CardTitle className="flex items-center gap-2 bg-white text-black">
+                <SettingsIcon className="h-5 w-5 text-blue-500" />
                 General Settings
               </CardTitle>
               <CardDescription>
@@ -429,31 +429,27 @@ const Settings = () => {
               </CardDescription>
             <div className="mt-4">
               <Button
-                variant="secondary"
-                onClick={async () => {
-                  if (!authUserId) {
-                    toast({ title: 'Not logged in', description: 'Please log in to connect Teamwork', variant: 'destructive' });
-                    return;
-                  }
-                  window.location.href = `/api/teamwork/connect?user_id=${encodeURIComponent(authUserId)}`
+                variant="default"
+                onClick={() => {
+                  window.location.href = `/api/teamwork/connect`
                 }}
               >
                 Connect Teamwork
               </Button>
             </div>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-6 bg-white">
               <div className="space-y-2">
                 <Label htmlFor="company-name">Company Name</Label>
-                <Input id="company-name" defaultValue="Advontier Accounting and Management Solutions" />
+                <Input id="company-name" defaultValue="Advontier Digital Solutions" className="bg-blue-50" />
               </div>
-              <div className="space-y-2">
+              <div className="space-y-2 ">
                 <Label htmlFor="timezone">Timezone</Label>
                 <Select defaultValue="uae">
-                  <SelectTrigger>
+                  <SelectTrigger className="bg-blue-50">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-blue-50">
                     <SelectItem value="uae">UAE Standard Time (UTC+4)</SelectItem>
                     <SelectItem value="utc">UTC</SelectItem>
                     <SelectItem value="est">Eastern Time (UTC-5)</SelectItem>
@@ -463,10 +459,10 @@ const Settings = () => {
               <div className="space-y-2">
                 <Label htmlFor="language">Language</Label>
                 <Select defaultValue="en">
-                  <SelectTrigger>
+                  <SelectTrigger className="bg-blue-50">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-blue-50">
                     <SelectItem value="en">English</SelectItem>
                     <SelectItem value="ar">Arabic</SelectItem>
                   </SelectContent>
