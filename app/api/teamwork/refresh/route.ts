@@ -23,14 +23,19 @@ export async function POST(req: NextRequest) {
   body.set('client_id', TEAMWORK_CLIENT_ID)
   body.set('client_secret', TEAMWORK_CLIENT_SECRET)
 
+  const originToSend = req.nextUrl.origin
   const resp = await fetch(TEAMWORK_TOKEN_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json',
+      'Origin': originToSend,
+    },
     body: body.toString(),
   })
   if (!resp.ok) {
     const text = await resp.text()
-    console.error('Teamwork token refresh failed:', resp.status, text)
+    console.error('Teamwork token refresh failed:', resp.status, text, 'origin:', originToSend)
     return NextResponse.json({ error: 'refresh_failed' }, { status: 500 })
   }
   const tokenJson: any = await resp.json()

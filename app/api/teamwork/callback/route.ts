@@ -20,14 +20,26 @@ export async function GET(req: NextRequest) {
     body.set('client_secret', TEAMWORK_CLIENT_SECRET)
     body.set('redirect_uri', TEAMWORK_REDIRECT_URI)
 
+    const originToSend = (() => {
+      try {
+        return new URL(TEAMWORK_REDIRECT_URI).origin
+      } catch {
+        return req.nextUrl.origin
+      }
+    })()
+
     const resp = await fetch(TEAMWORK_TOKEN_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json',
+        'Origin': originToSend,
+      },
       body: body.toString(),
     })
     if (!resp.ok) {
       const text = await resp.text()
-      console.error('Teamwork token exchange failed:', resp.status, text)
+      console.error('Teamwork token exchange failed:', resp.status, text, 'origin:', originToSend, 'token_url:', TEAMWORK_TOKEN_URL)
       return NextResponse.redirect(`${req.nextUrl.origin}/backyard/settings?teamwork_error=token_exchange_failed`)
     }
     const tokenJson: any = await resp.json()

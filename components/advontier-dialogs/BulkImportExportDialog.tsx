@@ -289,7 +289,7 @@ export function BulkImportExportDialog<T extends Record<string, any>>({
               <div className="relative inline-block">
                 <label
                   htmlFor="csv-upload"
-                  className="flex items-center gap-2 px-4 py-2 text-xs font-medium text-blue-700 border border-border rounded-md bg-white cursor-pointer transition-colors duration-150 hover:bg-accent hover:text-accent-foreground"
+                  className="flex items-center gap-2 px-4 py-2 text-xs font-medium text-blue-700  rounded-md bg-white cursor-pointer transition-colors duration-150 hover:bg-accent hover:text-accent-foreground"
                 >
                   <UploadIcon className="w-4 h-4" />
                   {csvFile ? csvFile.name : 'Upload CSV File'}

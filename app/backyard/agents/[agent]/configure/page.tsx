@@ -255,7 +255,7 @@ export default function AgentConfigurePage() {
             </div>
             <div className="space-y-3">
               {config.templates.map((t) => (
-                <div key={t.id} className="p-3 border rounded space-y-2">
+                <div key={t.id} className="p-3  rounded space-y-2">
                   <Input value={t.name} onChange={(e) => updateTemplate(t.id, { name: e.target.value })} placeholder="Template name" />
                   <Textarea rows={2} value={t.description || ""} onChange={(e) => updateTemplate(t.id, { description: e.target.value })} placeholder="Description" />
                   <div className="flex justify-end">
@@ -277,7 +277,7 @@ export default function AgentConfigurePage() {
             </div>
             <div className="space-y-3">
               {config.sources.map((s) => (
-                <div key={s.id} className="p-3 border rounded space-y-2">
+                <div key={s.id} className="p-3  rounded space-y-2">
                   <Input value={s.title} onChange={(e) => updateSource(s.id, { title: e.target.value })} placeholder="Title (e.g., UAE CT Law Art. 20)" />
                   <Input value={s.url || ""} onChange={(e) => updateSource(s.id, { url: e.target.value })} placeholder="URL (optional)" />
                   <Textarea rows={2} value={s.notes || ""} onChange={(e) => updateSource(s.id, { notes: e.target.value })} placeholder="Notes (scope, citation)" />

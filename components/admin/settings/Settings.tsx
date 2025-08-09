@@ -163,12 +163,12 @@ const Settings = () => {
     <div className="container mx-auto p-6 space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-bold">Settings</h1>
-          <p className="text-muted-foreground">Manage your account settings and user permissions</p>
+          <h1 className="text-lg text-zinc-600 font-bold">Settings</h1>
+          <p className="text-blue-400">Manage your account settings and user permissions</p>
         </div>
       </div>
       <Tabs defaultValue="users" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-4 bg-blue-300">
           <TabsTrigger value="users" className="flex items-center gap-2">
             <Users className="h-4 w-4" />
             User Management
@@ -186,7 +186,7 @@ const Settings = () => {
             General
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="users" className="space-y-6">
+        <TabsContent value="users" className="space-y-6 bg-white rounded-2xl border-transparent">
           <Card>
             <CardHeader>
               <div className="flex items-center justify-between">

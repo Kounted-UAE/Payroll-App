@@ -279,7 +279,7 @@ export default function DevProgressPage() {
               {recentSessions.length > 0 ? (
                 <div className="space-y-4">
                   {recentSessions.map((session) => (
-                    <div key={session.id} className="border rounded-lg p-4">
+                    <div key={session.id} className=" rounded-lg p-4">
                       <div className="flex items-start justify-between mb-2">
                         <div>
                           <h3 className="font-medium">

@@ -43,7 +43,7 @@ export default function DashboardQuicklinks() {
             >
               {quicklink.initials}
             </div>
-            <div className="flex-1 flex items-center justify-between truncate rounded-r-md border border-border bg-card">
+            <div className="flex-1 flex items-center justify-between truncate rounded-r-md  bg-card">
               <div className="flex-1 truncate px-4 py-2 text-xs">
                 <span className="font-medium text-card-foreground">{quicklink.title}</span>
                 <p className="text-muted-foreground">{quicklink.members} Users Assigned</p>

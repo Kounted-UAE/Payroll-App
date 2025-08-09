@@ -122,7 +122,7 @@ export default function HelpCentreAdminPage() {
       ) : (
         <div className="grid grid-cols-1 gap-3">
           {rows.map((row) => (
-            <div key={row.id} className="border border-border rounded-lg p-3 bg-card">
+            <div key={row.id} className=" rounded-lg p-3 bg-card">
               <div className="flex items-center justify-between">
                 <div className="space-y-1">
                   <div className="text-sm font-medium">{row.title}</div>
@@ -148,7 +148,7 @@ export default function HelpCentreAdminPage() {
 
 function Editor({ row, onChange, onCancel, onSave }: { row: ArticleRow, onChange: (r: ArticleRow) => void, onCancel: () => void, onSave: () => void }) {
   return (
-    <div className="rounded-lg border border-border p-3 bg-card space-y-3">
+    <div className="rounded-lg  p-3 bg-card space-y-3">
       <div className="grid grid-cols-2 gap-3">
         <div>
           <label className="text-xs text-muted-foreground">Slug</label>

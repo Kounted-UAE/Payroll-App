@@ -1,5 +1,5 @@
 // app/backyard/layout.tsx
-import DashboardLayout from "@/components/dashboard-layout/DashboardLayout";
+import DashboardLayout from "@/components/advontier-dashboard/DashboardLayout";
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { AppProviders } from '../providers'
 

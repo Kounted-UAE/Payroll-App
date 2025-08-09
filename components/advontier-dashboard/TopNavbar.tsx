@@ -49,7 +49,7 @@ export function TopNavbar() {
   });
 
   return (
-    <header className="text-sm h-24 text-zinc-100 bg-zinc-900 shadow-sm shadow-zinc-100 font-semibold backdrop-blur supports-[backdrop-filter]:bg-zinc-900 top-0 z-50 sticky overflow-hidden">
+    <header className="text-sm h-24 text-zinc-100 bg-gradient-to-br from-blue-500 to-blue-400 shadow-sm shadow-zinc-100 font-semibold backdrop-blur supports-[backdrop-filter]:bg-zinc-900 top-0 z-50 sticky overflow-hidden">
       <div className="h-full flex items-center justify-between px-4 relative z-10">
       {/* Left side - Sidebar trigger and breadcrumb */}
         <div className="flex items-center gap-3">
