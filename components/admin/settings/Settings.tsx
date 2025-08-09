@@ -55,6 +55,8 @@ const Settings = () => {
   const [authUserId, setAuthUserId] = useState<string | null>(null);
   const [teamworkStatus, setTeamworkStatus] = useState<{ name: string; token_expires_at: string | null } | null>(null)
   const [twLoading, setTwLoading] = useState(false)
+  const [xeroStatus, setXeroStatus] = useState<{ tenant_name: string | null; token_expires_at: string | null } | null>(null)
+  const [xeroLoading, setXeroLoading] = useState(false)
 
   // Fetch users and roles from Supabase
   useEffect(() => {
@@ -93,6 +95,19 @@ const Settings = () => {
       }
     }
     loadTeamworkStatus()
+    const loadXeroStatus = async () => {
+      try {
+        setXeroLoading(true)
+        const res = await fetch('/api/xero/status')
+        if (res.ok) {
+          const json = await res.json()
+          setXeroStatus({ tenant_name: json.tenant_name, token_expires_at: json.token_expires_at })
+        }
+      } finally {
+        setXeroLoading(false)
+      }
+    }
+    loadXeroStatus()
   }, [])
 
   // CRUD Operations
@@ -449,7 +464,7 @@ const Settings = () => {
               <div className="mt-2 flex items-center gap-3">
                 <Badge variant="secondary">Connected to Teamwork</Badge>
                 <Button
-                  variant="outline"
+                  variant="default"
                   size="sm"
                   disabled={twLoading}
                   onClick={async () => {
@@ -499,6 +514,41 @@ const Settings = () => {
                   }}
                 >
                   Connect Teamwork
+                </Button>
+              </div>
+            )}
+
+            {/* Xero */}
+            {xeroStatus ? (
+              <div className="mt-3 flex items-center gap-3">
+                <Badge variant="secondary">Connected to Xero{ xeroStatus.tenant_name ? ` (${xeroStatus.tenant_name})` : ''}</Badge>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  disabled={xeroLoading}
+                  onClick={async () => {
+                    setXeroLoading(true)
+                    try {
+                      const res = await fetch('/api/xero/sync/invoices')
+                      if (res.ok) toast({ title: 'Xero sync started' })
+                      else toast({ title: 'Xero sync failed', variant: 'destructive' })
+                    } finally {
+                      setXeroLoading(false)
+                    }
+                  }}
+                >
+                  Sync invoices
+                </Button>
+              </div>
+            ) : (
+              <div className="mt-3">
+                <Button
+                  variant="default"
+                  onClick={() => {
+                    window.location.href = `/api/xero/connect`
+                  }}
+                >
+                  Connect Xero
                 </Button>
               </div>
             )}

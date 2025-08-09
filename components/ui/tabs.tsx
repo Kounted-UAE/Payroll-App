@@ -11,7 +11,7 @@ const TabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      "flex w-full h-12 -mb-px rounded-2xl bg-slate-200 p-1",
+      "flex w-full h-10 -mb-px rounded-2xl bg-slate-200",
       className
     )}
     {...props}
@@ -26,12 +26,12 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex-1 text-center rounded-xl px-4 py-1 text-sm font-medium transition-colors duration-150",
+      "flex-1 text-center rounded-xl px-4 py-1 text-xs font-medium transition-colors duration-150",
       // Inactive
       "text-zinc-700 hover:text-zinc-700/50",
       // Active
-      "data-[state=active]:text-white data-[state=active]:bg-gradient-to-br from-slate-500 to-slate-400",
-      "data-[state=active]:hover:from-slate-500 data-[state=active]:hover:to-slate-500",
+      "data-[state=active]:text-white m-1 data-[state=active]:bg-gradient-to-br from-blue-500 to-blue-400",
+      "data-[state=active]:hover:from-blue-500 data-[state=active]:hover:to-blue-500",
       // Remove the thick focus outline/ring completely
       "focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0",
       // Disabled
@@ -50,7 +50,7 @@ const TabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      "mt-4",
+      "mt-4 bg-white rounded-2xl",
       // Also remove any content focus ring
       "focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0",
       className

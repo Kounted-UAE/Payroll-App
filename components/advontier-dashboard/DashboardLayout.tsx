@@ -28,7 +28,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
 
           {/* Page content - To the right of sidebar */}
-          <main className="flex-1 p-2 m-2 bg-gradient-to-br from-white via-zinc-100 to-zinc-50 rounded-2xl">
+          <main className="flex-1 p-2 m-2 bg-gradient-to-br from-white via-slate-200 to-slate-300 rounded-2xl">
             {children}
           </main>
         </div>
