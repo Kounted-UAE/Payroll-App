@@ -484,7 +484,7 @@ const Settings = () => {
                   Refresh token
                 </Button>
                 <Button
-                  variant="destructive"
+                  variant="outline"
                   size="sm"
                   disabled={twLoading}
                   onClick={async () => {
@@ -523,7 +523,7 @@ const Settings = () => {
               <div className="mt-3 flex items-center gap-3">
                 <Badge variant="secondary">Connected to Xero{ xeroStatus.tenant_name ? ` (${xeroStatus.tenant_name})` : ''}</Badge>
                 <Button
-                  variant="outline"
+                  variant="default"
                   size="sm"
                   disabled={xeroLoading}
                   onClick={async () => {
