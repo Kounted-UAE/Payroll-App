@@ -153,7 +153,7 @@ export default function ClientOnboardingWizard({ clientId, clientName = 'Client'
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="border-b bg-card p-4">
         <div className="max-w-6xl mx-auto">
@@ -161,7 +161,7 @@ export default function ClientOnboardingWizard({ clientId, clientName = 'Client'
             <div>
               <h1 className="text-xs font-semibold text-foreground">{clientName} - Client Onboarding</h1>
               {lastUpdated && (
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-blue-200">
                   Last updated: {lastUpdated.toLocaleString()}
                 </p>
               )}
@@ -198,8 +198,8 @@ export default function ClientOnboardingWizard({ clientId, clientName = 'Client'
                             : status === 'current'
                             ? 'border-l-blue-500 bg-blue-500/10 text-blue-500 font-medium'
                             : status === 'visited'
-                            ? 'border-l-muted-foreground bg-muted/30 text-foreground'
-                            : 'border-l-transparent hover:bg-muted/50'
+                            ? 'border-l-muted-foreground bg-blue-100/30 text-foreground'
+                            : 'border-l-transparent hover:bg-blue-100/50'
                         }`}
                       >
                         <div className="flex items-center gap-2">

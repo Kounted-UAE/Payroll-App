@@ -2,13 +2,13 @@ import Link from 'next/link'
 
 import { Container } from '@/components/advontier-website/Container'
 import { FadeIn } from '@/components/advontier-website/FadeIn'
-import { Logo, Logomark } from '@/components/advontier-website/Logo'
+import { Logo, LogoMark } from '@/components/advontier-website/Logo'
 
 const navigation = [
   {
     title: 'Business Suite',
     links: [
-      { title: 'Dashboard', href: '/backyard' },
+      { title: 'Advontier', href: '/backyard' },
       { title: 'Payroll', href: '/backyard/payroll' },
       { title: 'Compliance Calendar', href: '/backyard/compliance-calendar' },
       { title: 'Knowledge Base', href: 'backyard/sop-resources' },
@@ -126,7 +126,7 @@ export function Footer() {
         </div>
         <div className="mt-24 mb-20 flex flex-wrap items-center justify-between gap-x-6 gap-y-4 border-t border-neutral-950/10 pt-12">
           <Link href="/" aria-label="Advontier Home Page">
-            <Logomark className="h-8" invert={true} />
+            <LogoMark className="h-8" invert={true} />
           </Link>
           <div className="flex items-center gap-4 text-xs sm:text-sm text-neutral-700">
             <Link href="/privacy-policy" className="hover:underline">

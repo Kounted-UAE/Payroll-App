@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { CheckCircle, Circle,AlertCircle, ArrowRight, Mail } from 'lucide-react'
-import { Logo, Logomark } from '@/components/advontier-website/Logo'
+import { Logo, LogoMark } from '@/components/advontier-website/Logo'
 import { FadeIn } from '../advontier-website/FadeIn'
 
 export default function LoginForm() {

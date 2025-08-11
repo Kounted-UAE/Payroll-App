@@ -25,7 +25,7 @@ export * from './toggle-group';
 export * from './toggle';
 export * from './tooltip';
 export * from './action-buttons';
-export * from './sidebar';
+export * from '../advontier-layout/Breadcrumb';
 export * from './skeleton';
 export * from './table';
 export * from './tabs';

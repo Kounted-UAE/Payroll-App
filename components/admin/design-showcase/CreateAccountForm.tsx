@@ -18,7 +18,7 @@ export const CreateAccountForm = () => {
     <Card className="w-full max-w-md">
       <CardHeader className="pb-4">
         <CardTitle className="text-xs">Create an account</CardTitle>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-blue-200">
           Enter your email below to create your account
         </p>
       </CardHeader>
@@ -57,7 +57,7 @@ export const CreateAccountForm = () => {
             <Separator />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">
+            <span className="bg-white px-2 text-blue-200">
               OR CONTINUE WITH
             </span>
           </div>

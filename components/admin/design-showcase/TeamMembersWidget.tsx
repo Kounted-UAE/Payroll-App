@@ -29,7 +29,7 @@ export const TeamMembersWidget = () => {
     <Card className="w-full max-w-md">
       <CardHeader className="pb-4">
         <CardTitle className="text-xs">Team Members</CardTitle>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-blue-200">
           Invite your team members to collaborate.
         </p>
       </CardHeader>
@@ -46,7 +46,7 @@ export const TeamMembersWidget = () => {
               </Avatar>
               <div>
                 <p className="text-xs font-medium">{member.name}</p>
-                <p className="text-xs text-muted-foreground">{member.email}</p>
+                <p className="text-xs text-blue-200">{member.email}</p>
               </div>
             </div>
             <Select defaultValue={member.role.toLowerCase()}>

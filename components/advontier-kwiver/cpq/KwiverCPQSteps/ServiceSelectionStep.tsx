@@ -112,7 +112,7 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
   return (
     <div className="space-y-6">
       <FormSection title="Service Packages">
-        <p className="text-xs text-muted-foreground mb-4">
+        <p className="text-xs text-blue-200 mb-4">
           Based on your requirements, we recommend the following service packages:
         </p>
         
@@ -130,7 +130,7 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
           <Card className={`border-2 ${data.selectedTier === 'standard' ? 'border-blue-500' : 'border-border'}`}>
             <CardContent className="p-0">
               <div 
-                className={`p-4 ${data.selectedTier === 'standard' ? 'bg-blue-500 text-blue-500-foreground' : 'bg-muted'}`}
+                className={`p-4 ${data.selectedTier === 'standard' ? 'bg-blue-500 text-blue-500-foreground' : 'bg-blue-100'}`}
                 onClick={() => updateField('selectedTier', 'standard')}
               >
                 <div className="flex items-center justify-between mb-1">
@@ -144,9 +144,9 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
                 <div className="mb-4">
                   <div className="flex items-baseline justify-between mb-1">
                     <span className="text-xs font-bold">AED {PRICING_MATRIX.standard[getComplexity() as keyof typeof PRICING_MATRIX.standard].base.toLocaleString()}</span>
-                    <span className="text-xs text-muted-foreground">/month</span>
+                    <span className="text-xs text-blue-200">/month</span>
                   </div>
-                  <span className="text-xs text-muted-foreground">+ service fees</span>
+                  <span className="text-xs text-blue-200">+ service fees</span>
                 </div>
 
                 <ul className="space-y-2 mb-4">
@@ -180,7 +180,7 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
           <Card className={`border-2 ${data.selectedTier === 'premium' ? 'border-blue-500' : 'border-border'}`}>
             <CardContent className="p-0">
               <div 
-                className={`p-4 ${data.selectedTier === 'premium' ? 'bg-blue-500 text-blue-500-foreground' : 'bg-muted'}`}
+                className={`p-4 ${data.selectedTier === 'premium' ? 'bg-blue-500 text-blue-500-foreground' : 'bg-blue-100'}`}
                 onClick={() => updateField('selectedTier', 'premium')}
               >
                 <div className="flex items-center justify-between mb-1">
@@ -194,9 +194,9 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
                 <div className="mb-4">
                   <div className="flex items-baseline justify-between mb-1">
                     <span className="text-xs font-bold">AED {PRICING_MATRIX.premium[getComplexity() as keyof typeof PRICING_MATRIX.premium].base.toLocaleString()}</span>
-                    <span className="text-xs text-muted-foreground">/month</span>
+                    <span className="text-xs text-blue-200">/month</span>
                   </div>
-                  <span className="text-xs text-muted-foreground">+ service fees</span>
+                  <span className="text-xs text-blue-200">+ service fees</span>
                 </div>
 
                 <ul className="space-y-2 mb-4">
@@ -235,7 +235,7 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
           <Card className={`border-2 ${data.selectedTier === 'enterprise' ? 'border-blue-500' : 'border-border'}`}>
             <CardContent className="p-0">
               <div 
-                className={`p-4 ${data.selectedTier === 'enterprise' ? 'bg-blue-500 text-blue-500-foreground' : 'bg-muted'}`}
+                className={`p-4 ${data.selectedTier === 'enterprise' ? 'bg-blue-500 text-blue-500-foreground' : 'bg-blue-100'}`}
                 onClick={() => updateField('selectedTier', 'enterprise')}
               >
                 <div className="flex items-center justify-between mb-1">
@@ -249,9 +249,9 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
                 <div className="mb-4">
                   <div className="flex items-baseline justify-between mb-1">
                     <span className="text-xs font-bold">AED {PRICING_MATRIX.enterprise[getComplexity() as keyof typeof PRICING_MATRIX.enterprise].base.toLocaleString()}</span>
-                    <span className="text-xs text-muted-foreground">/month</span>
+                    <span className="text-xs text-blue-200">/month</span>
                   </div>
-                  <span className="text-xs text-muted-foreground">+ service fees</span>
+                  <span className="text-xs text-blue-200">+ service fees</span>
                 </div>
 
                 <ul className="space-y-2 mb-4">
@@ -297,11 +297,11 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-xs font-medium">Estimated Monthly Cost</h3>
-              <p className="text-xs text-muted-foreground">Based on your requirements</p>
+              <p className="text-xs text-blue-200">Based on your requirements</p>
             </div>
             <div className="text-right">
               <div className="text-xs font-bold">AED {pricing.monthlyPrice.toLocaleString()}</div>
-              <div className="text-xs text-muted-foreground">AED {pricing.annualPrice.toLocaleString()} annually</div>
+              <div className="text-xs text-blue-200">AED {pricing.annualPrice.toLocaleString()} annually</div>
             </div>
           </div>
         </div>

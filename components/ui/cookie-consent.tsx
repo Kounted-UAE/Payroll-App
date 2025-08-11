@@ -141,7 +141,7 @@ export function CookieConsentBanner() {
   return (
     <>
       {/* Cookie Consent Banner */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t shadow-lg">
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t shadow-lg">
         <div className="container mx-auto p-4">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="flex-1">
@@ -149,7 +149,7 @@ export function CookieConsentBanner() {
                 <Shield className="h-4 w-4 text-primary" />
                 <h3 className="font-semibold">Cookie Consent</h3>
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-blue-200">
                 We use cookies to enhance your experience, analyze site usage, and provide personalized content. 
                 By clicking "Accept All", you consent to our use of cookies as described in our{' '}
                 <Link href="/privacy-policy" className="text-primary hover:underline">
@@ -197,7 +197,7 @@ export function CookieConsentBanner() {
           </DialogHeader>
 
           <div className="space-y-6">
-            <div className="text-sm text-muted-foreground">
+            <div className="text-sm text-blue-200">
               <p>
                 Choose which cookies you want to accept. You can change these settings at any time. 
                 Please note that disabling some cookies may impact your experience on our site.
@@ -221,11 +221,11 @@ export function CookieConsentBanner() {
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-blue-200">
                   These cookies are necessary for the website to function and cannot be disabled. 
                   They include authentication, security, and basic functionality cookies.
                 </p>
-                <div className="mt-2 text-xs text-muted-foreground">
+                <div className="mt-2 text-xs text-blue-200">
                   <strong>Examples:</strong> Session management, CSRF protection, user preferences
                 </div>
               </CardContent>
@@ -250,11 +250,11 @@ export function CookieConsentBanner() {
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-blue-200">
                   These cookies enable enhanced functionality and personalization, such as 
                   remembering your preferences and settings.
                 </p>
-                <div className="mt-2 text-xs text-muted-foreground">
+                <div className="mt-2 text-xs text-blue-200">
                   <strong>Examples:</strong> Language preferences, theme settings, saved filters
                 </div>
               </CardContent>
@@ -279,11 +279,11 @@ export function CookieConsentBanner() {
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-blue-200">
                   These cookies help us understand how visitors interact with our website 
                   by collecting and reporting information anonymously.
                 </p>
-                <div className="mt-2 text-xs text-muted-foreground">
+                <div className="mt-2 text-xs text-blue-200">
                   <strong>Examples:</strong> Google Analytics, usage statistics, performance monitoring
                 </div>
               </CardContent>
@@ -308,11 +308,11 @@ export function CookieConsentBanner() {
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-blue-200">
                   These cookies are used to deliver relevant advertisements and track 
                   the effectiveness of marketing campaigns.
                 </p>
-                <div className="mt-2 text-xs text-muted-foreground">
+                <div className="mt-2 text-xs text-blue-200">
                   <strong>Examples:</strong> Ad targeting, conversion tracking, social media integration
                 </div>
               </CardContent>
@@ -336,7 +336,7 @@ export function CookieConsentBanner() {
               </Button>
             </div>
 
-            <div className="text-xs text-muted-foreground pt-4 border-t">
+            <div className="text-xs text-blue-200 pt-4 border-t">
               <p>
                 You can withdraw your consent or modify your preferences at any time by visiting our{' '}
                 <Link href="/privacy-policy" className="text-primary hover:underline">

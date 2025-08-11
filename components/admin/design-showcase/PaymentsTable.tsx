@@ -40,14 +40,14 @@ export const PaymentsTable = () => {
         <div className="flex items-center justify-between">
           <div>
             <CardTitle className="text-xs">Payments</CardTitle>
-            <p className="text-xs text-muted-foreground">Manage your payments.</p>
+            <p className="text-xs text-blue-200">Manage your payments.</p>
           </div>
           <Button size="sm">Add Payment</Button>
         </div>
       </CardHeader>
       <CardContent className="pt-0">
         {/* Table Header */}
-        <div className="grid grid-cols-12 gap-4 pb-3 text-xs font-medium text-muted-foreground border-b">
+        <div className="grid grid-cols-12 gap-4 pb-3 text-xs font-medium text-blue-200 border-b">
           <div className="col-span-1">
             <Checkbox />
           </div>
@@ -60,7 +60,7 @@ export const PaymentsTable = () => {
         {/* Table Rows */}
         <div className="space-y-0">
           {payments.map((payment, index) => (
-            <div key={index} className="grid grid-cols-12 gap-4 py-3 text-xs border-b last:border-b-0 hover:bg-muted/30">
+            <div key={index} className="grid grid-cols-12 gap-4 py-3 text-xs border-b last:border-b-0 hover:bg-blue-100/30">
               <div className="col-span-1 flex items-center">
                 <Checkbox />
               </div>
@@ -72,7 +72,7 @@ export const PaymentsTable = () => {
                   {payment.status}
                 </Badge>
               </div>
-              <div className="col-span-4 flex items-center text-muted-foreground">
+              <div className="col-span-4 flex items-center text-blue-200">
                 {payment.email}
               </div>
               <div className="col-span-3 flex items-center font-medium">
@@ -88,7 +88,7 @@ export const PaymentsTable = () => {
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between pt-4 text-xs text-muted-foreground">
+        <div className="flex items-center justify-between pt-4 text-xs text-blue-200">
           <span>0 of 6 row(s) selected.</span>
           <div className="flex items-center gap-2">
             <Button variant="outline" size="sm" disabled>

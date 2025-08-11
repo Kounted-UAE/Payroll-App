@@ -20,8 +20,10 @@ export const MDXComponents = {
   h1: function H1({
     className,
     children,
+    searchParams,
+    params,
     ...props
-  }: React.ComponentPropsWithoutRef<'h1'>) {
+  }: React.ComponentPropsWithoutRef<'h1'> & { searchParams?: any; params?: any }) {
     const slug = typeof children === 'string' ? generateSlug(children) : ''
     return (
       <h1
@@ -36,8 +38,10 @@ export const MDXComponents = {
   h2: function H2({
     className,
     children,
+    searchParams,
+    params,
     ...props
-  }: React.ComponentPropsWithoutRef<'h2'>) {
+  }: React.ComponentPropsWithoutRef<'h2'> & { searchParams?: any; params?: any }) {
     const slug = typeof children === 'string' ? generateSlug(children) : ''
     return (
       <h2
@@ -57,8 +61,10 @@ export const MDXComponents = {
   },
   img: function Img({
     className,
+    searchParams,
+    params,
     ...props
-  }: React.ComponentPropsWithoutRef<typeof GrayscaleTransitionImage>) {
+  }: React.ComponentPropsWithoutRef<typeof GrayscaleTransitionImage> & { searchParams?: any; params?: any }) {
     return (
       <div
         className={clsx(
@@ -85,8 +91,10 @@ export const MDXComponents = {
   StatListItem,
   table: function Table({
     className,
+    searchParams,
+    params,
     ...props
-  }: React.ComponentPropsWithoutRef<'table'>) {
+  }: React.ComponentPropsWithoutRef<'table'> & { searchParams?: any; params?: any }) {
     return (
       <div
         className={clsx(
@@ -123,10 +131,10 @@ export const MDXComponents = {
       </Border>
     )
   },
-  Typography({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
+  Typography({ className, searchParams, params, ...props }: React.ComponentPropsWithoutRef<'div'> & { searchParams?: any; params?: any }) {
     return <div className={clsx('typography', className)} {...props} />
   },
-  wrapper({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
+  wrapper({ className, searchParams, params, ...props }: React.ComponentPropsWithoutRef<'div'> & { searchParams?: any; params?: any }) {
     return (
       <div
         className={clsx(

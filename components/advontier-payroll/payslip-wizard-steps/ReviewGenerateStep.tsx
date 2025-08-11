@@ -246,17 +246,17 @@ export function ReviewGenerateStep({
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Employer:</span>
+              <span className="text-blue-200">Employer:</span>
               <span className="font-medium">{batchData.employer_name}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Pay Period:</span>
+              <span className="text-blue-200">Pay Period:</span>
               <span className="font-medium">
                 {formatDate(batchData.pay_period_from)} - {formatDate(batchData.pay_period_to)}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Currency:</span>
+              <span className="text-blue-200">Currency:</span>
               <Badge variant="outline">{batchData.currency}</Badge>
             </div>
           </CardContent>
@@ -272,16 +272,16 @@ export function ReviewGenerateStep({
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Language:</span>
+              <span className="text-blue-200">Language:</span>
               <Badge variant="outline">{getLanguageLabel(wizardData.language)}</Badge>
             </div>
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Delivery:</span>
+              <span className="text-blue-200">Delivery:</span>
               <Badge variant="outline">{getDeliveryLabel(wizardData.delivery_mode)}</Badge>
             </div>
             {(wizardData.delivery_mode === 'email' || wizardData.delivery_mode === 'both') && (
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Email Subject:</span>
+                <span className="text-blue-200">Email Subject:</span>
                 <span className="font-medium text-sm max-w-xs truncate">{wizardData.email_subject}</span>
               </div>
             )}
@@ -301,7 +301,7 @@ export function ReviewGenerateStep({
           <div className="flex items-center justify-between">
             <div>
               <p className="font-medium">Preview and Test</p>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-blue-200">
                 Test the payslip generation before processing all employees
               </p>
             </div>
@@ -314,7 +314,7 @@ export function ReviewGenerateStep({
           </div>
 
           {showTestOptions && (
-            <div className="space-y-4 p-4 border rounded-lg bg-muted/30">
+            <div className="space-y-4 p-4 border rounded-lg bg-blue-100/30">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="test-email">Test Email Address</Label>
@@ -338,7 +338,7 @@ export function ReviewGenerateStep({
                       )}
                     </Button>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-1">
+                  <p className="text-xs text-blue-200 mt-1">
                     Send a test payslip to verify email delivery
                   </p>
                 </div>
@@ -360,7 +360,7 @@ export function ReviewGenerateStep({
                       Download Preview
                     </Button>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-1">
+                  <p className="text-xs text-blue-200 mt-1">
                     Download a sample payslip for review
                   </p>
                 </div>

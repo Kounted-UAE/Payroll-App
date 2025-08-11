@@ -251,7 +251,7 @@ export default function KwiverKiosk() {
                 <div className="flex justify-between items-start">
                   <div className="flex-1">
                     <h4 className="font-medium">{item.name}</h4>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-blue-200">
                       Qty: {item.quantity}
                       {item.selectedDate && ` • Date: ${item.selectedDate}`}
                       {item.selectedDuration && ` • Duration: ${item.selectedDuration}`}

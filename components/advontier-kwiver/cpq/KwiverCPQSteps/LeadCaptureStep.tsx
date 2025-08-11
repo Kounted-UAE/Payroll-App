@@ -124,7 +124,7 @@ export default function LeadCaptureStep({ data, allData, onChange, referenceId }
 
       <FormSection title="Next Steps">
         <div className="space-y-4">
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-blue-200">
             Thank you for completing the service request wizard. Your reference ID is <span className="font-semibold">{referenceId}</span>. 
             Please select your preferred next step:
           </p>
@@ -138,7 +138,7 @@ export default function LeadCaptureStep({ data, allData, onChange, referenceId }
             >
               <Calendar className="h-6 w-6 mb-2" />
               <span className="font-medium mb-1">Request Detailed Proposal</span>
-              <span className="text-xs text-muted-foreground">Receive a customized proposal by email</span>
+              <span className="text-xs text-blue-200">Receive a customized proposal by email</span>
             </Button>
             
             <Button 
@@ -149,7 +149,7 @@ export default function LeadCaptureStep({ data, allData, onChange, referenceId }
             >
               <Clock className="h-6 w-6 mb-2" />
               <span className="font-medium mb-1">Book a Meeting</span>
-              <span className="text-xs text-muted-foreground">Schedule a consultation with our team</span>
+              <span className="text-xs text-blue-200">Schedule a consultation with our team</span>
             </Button>
             
             <Button 
@@ -160,7 +160,7 @@ export default function LeadCaptureStep({ data, allData, onChange, referenceId }
             >
               <User className="h-6 w-6 mb-2" />
               <span className="font-medium mb-1">Accept & Proceed</span>
-              <span className="text-xs text-muted-foreground">Move directly to contract signing</span>
+              <span className="text-xs text-blue-200">Move directly to contract signing</span>
             </Button>
           </div>
         </div>

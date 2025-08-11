@@ -112,7 +112,7 @@ export default function OrdersList() {
     <div className="space-y-6">
       <div className="flex items-center gap-4">
         <div className="relative flex-1 max-w-sm">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-200 h-4 w-4" />
           <Input
             placeholder="Search orders..."
             value={searchTerm}
@@ -133,7 +133,7 @@ export default function OrdersList() {
             </div>
           ) : filteredOrders.length === 0 ? (
             <div className="text-center py-8">
-              <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+              <FileText className="h-12 w-12 text-blue-200 mx-auto mb-4" />
               <p className="text-blue-400">
                 {searchTerm ? 'No orders found matching your search.' : 'No orders yet.'}
               </p>
@@ -141,11 +141,11 @@ export default function OrdersList() {
           ) : (
             <div className="space-y-4">
               {filteredOrders.map((order) => (
-                <div key={order.id} className="border rounded-lg p-4 hover:bg-muted/50 transition-colors">
+                <div key={order.id} className="border rounded-lg p-4 hover:bg-blue-100/50 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <FileText className="h-4 w-4 text-muted-foreground" />
+                        <FileText className="h-4 w-4 text-blue-200" />
                         <h3 className="font-semibold text-xs">
                           {order.reference_id || `Order ${order.id.slice(0, 8)}`}
                         </h3>
@@ -154,7 +154,7 @@ export default function OrdersList() {
                         </Badge>
                       </div>
                       
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-muted-foreground">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-blue-200">
                         <div className="flex items-center gap-2">
                           <Calendar className="h-4 w-4" />
                           {new Date(order.created_at).toLocaleDateString()}

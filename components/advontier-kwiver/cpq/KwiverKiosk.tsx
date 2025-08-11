@@ -127,7 +127,7 @@ export default function KwiverCPQ() {
                   <FileText className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground">Total Orders</p>
+                  <p className="text-xs font-medium text-blue-200">Total Orders</p>
                   <p className="text-xs font-bold">{orderStats.total}</p>
                 </div>
               </div>
@@ -141,7 +141,7 @@ export default function KwiverCPQ() {
                   <CheckSquare className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground">Completed</p>
+                  <p className="text-xs font-medium text-blue-200">Completed</p>
                   <p className="text-xs font-bold">{orderStats.completed}</p>
                 </div>
               </div>
@@ -155,7 +155,7 @@ export default function KwiverCPQ() {
                   <Building2 className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground">In Progress</p>
+                  <p className="text-xs font-medium text-blue-200">In Progress</p>
                   <p className="text-xs font-bold">{orderStats.inProgress}</p>
                 </div>
               </div>
@@ -178,7 +178,7 @@ export default function KwiverCPQ() {
                     <CheckSquare className="h-4 w-4 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">8-Step Guided Process</p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-xs text-blue-200">
                         Simple questions to understand your needs
                       </p>
                     </div>
@@ -188,7 +188,7 @@ export default function KwiverCPQ() {
                     <CheckSquare className="h-4 w-4 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">Instant Pricing</p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-xs text-blue-200">
                         Get transparent pricing based on your selections
                       </p>
                     </div>
@@ -198,7 +198,7 @@ export default function KwiverCPQ() {
                     <CheckSquare className="h-4 w-4 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">Flexible Services</p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-xs text-blue-200">
                         Customized to your business requirements
                       </p>
                     </div>
@@ -219,38 +219,38 @@ export default function KwiverCPQ() {
               </div>
             </div>
 
-            <div className="md:col-span-2 bg-muted p-6 md:p-8 flex items-center justify-center">
+            <div className="md:col-span-2 bg-blue-100 p-6 md:p-8 flex items-center justify-center">
               <div className="space-y-6">
                 <div className="space-y-2 text-center">
                   <h3 className="font-semibold text-xs">Services Available</h3>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-blue-200">
                     Configure your business services from these categories
                   </p>
                 </div>
 
                 <div className="space-y-3">
-                  <div className="bg-background rounded-lg p-3 flex items-center gap-3">
+                  <div className="bg-white rounded-lg p-3 flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                       <FileText className="h-4 w-4 text-primary" />
                     </div>
                     <span>Accounting & Bookkeeping</span>
                   </div>
 
-                  <div className="bg-background rounded-lg p-3 flex items-center gap-3">
+                  <div className="bg-white rounded-lg p-3 flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                       <FileText className="h-4 w-4 text-primary" />
                     </div>
                     <span>Payroll Services</span>
                   </div>
 
-                  <div className="bg-background rounded-lg p-3 flex items-center gap-3">
+                  <div className="bg-white rounded-lg p-3 flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                       <FileText className="h-4 w-4 text-primary" />
                     </div>
                     <span>Tax Compliance</span>
                   </div>
 
-                  <div className="bg-background rounded-lg p-3 flex items-center gap-3">
+                  <div className="bg-white rounded-lg p-3 flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                       <FileText className="h-4 w-4 text-primary" />
                     </div>

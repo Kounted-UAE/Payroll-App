@@ -134,7 +134,7 @@ export default function ComponentLibraryPage() {
                         {comp.category}
                       </Badge>
                     </div>
-                    <p className="text-xs text-muted-foreground mb-4">{comp.description}</p>
+                    <p className="text-xs text-blue-200 mb-4">{comp.description}</p>
                     <div className="flex-1 flex items-center justify-center mb-4">
                       {comp.component}
                     </div>
@@ -148,7 +148,7 @@ export default function ComponentLibraryPage() {
           </TabsContent>
 
           <TabsContent value="playground">
-            <div className="text-center text-muted-foreground py-16">
+            <div className="text-center text-blue-200 py-16">
               <p>Component playground coming soon...</p>
             </div>
           </TabsContent>

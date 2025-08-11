@@ -335,7 +335,7 @@ const Settings = () => {
                       </TableCell>
                       <TableCell>{getRoleLabel(user.user_role_slug || '')}</TableCell>
                       <TableCell>{user.is_active ? 'Active' : 'Inactive'}</TableCell>
-                      <TableCell className="text-xs text-muted-foreground">{user.created_at ? new Date(user.created_at).toLocaleDateString() : ''}</TableCell>
+                      <TableCell className="text-xs text-blue-200">{user.created_at ? new Date(user.created_at).toLocaleDateString() : ''}</TableCell>
                       <TableCell>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
@@ -380,7 +380,7 @@ const Settings = () => {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label>Two-Factor Authentication</Label>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-blue-200">
                     Add an extra layer of security to your account
                   </p>
                 </div>
@@ -389,7 +389,7 @@ const Settings = () => {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label>Session Timeout</Label>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-blue-200">
                     Automatically log out inactive users
                   </p>
                 </div>
@@ -423,7 +423,7 @@ const Settings = () => {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label>Email Notifications</Label>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-blue-200">
                     Receive email updates about important activities
                   </p>
                 </div>
@@ -432,7 +432,7 @@ const Settings = () => {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label>User Activity Alerts</Label>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-blue-200">
                     Get notified when users join or leave
                   </p>
                 </div>
@@ -441,7 +441,7 @@ const Settings = () => {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label>System Maintenance</Label>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-blue-200">
                     Receive notifications about system updates
                   </p>
                 </div>

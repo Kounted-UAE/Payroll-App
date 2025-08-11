@@ -271,7 +271,7 @@ export default function SessionLogger({ features, onSessionCreated, className }:
           {/* Features worked on */}
           <div>
             <Label>Features Worked On</Label>
-            <p className="text-sm text-muted-foreground mb-3">
+            <p className="text-sm text-blue-200 mb-3">
               Select the features you worked on in this session:
             </p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2 max-h-60 overflow-y-auto border rounded-md p-3">
@@ -282,7 +282,7 @@ export default function SessionLogger({ features, onSessionCreated, className }:
                     p-2 rounded border cursor-pointer transition-colors text-sm
                     ${formData.features_worked_on.includes(feature.feature_key)
                       ? 'bg-blue-500 text-blue-500-foreground border-blue-500'
-                      : 'bg-background hover:bg-muted border-border'
+                      : 'bg-white hover:bg-blue-100'
                     }
                   `}
                   onClick={() => toggleFeature(feature.feature_key)}
@@ -292,7 +292,7 @@ export default function SessionLogger({ features, onSessionCreated, className }:
                 </div>
               ))}
             </div>
-            <p className="text-xs text-muted-foreground mt-2">
+            <p className="text-xs text-blue-200 mt-2">
               Selected: {formData.features_worked_on.length} feature{formData.features_worked_on.length !== 1 ? 's' : ''}
             </p>
           </div>

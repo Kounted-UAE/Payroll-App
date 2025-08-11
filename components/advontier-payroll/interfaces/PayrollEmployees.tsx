@@ -268,7 +268,7 @@ const PayrollEmployees = () => {
         <CardContent className="p-6">
           <div className="flex items-center space-x-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-blue-200" />
               <Input
                 placeholder="Search by name, Emirates ID, or job title..."
                 value={searchQuery}
@@ -356,7 +356,7 @@ const PayrollEmployees = () => {
             <Card key={employee.id}>
               <CardHeader>
                 <CardTitle className="text-sm">{employee.full_name}</CardTitle>
-                <CardDescription className="text-xs text-muted-foreground">
+                <CardDescription className="text-xs text-blue-200">
                   {employee.job_title} • {employee.emirates_id}
                 </CardDescription>
               </CardHeader>
@@ -492,9 +492,9 @@ const PayrollEmployees = () => {
       {!loading && filteredEmployees.length === 0 && (
         <Card>
           <CardContent className="p-12 text-center">
-            <Users className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+            <Users className="h-12 w-12 text-blue-200 mx-auto mb-4" />
             <h3 className="text-xs font-semibold mb-2">No employees found</h3>
-            <p className="text-muted-foreground mb-4">
+            <p className="text-blue-200 mb-4">
               {searchQuery ? "Try adjusting your search criteria" : "Get started by adding your first employee"}
             </p>
             <Link href="/backyard/payroll/employees/new">

@@ -11,7 +11,7 @@ import {
       label: "Navigation",
       items: [
         { title: "Dashboard", url: "/backyard", icon: PieChart, status: "active" },
-        { title: "Reports", url: "#", icon: BarChart2, status: "active" },
+        { title: "Reports", url: "#", icon: BarChart2, status: "wip" },
       ],
       collapsible: false,
     },
@@ -19,15 +19,14 @@ import {
       label: "Admin",
       items: [
         { title: "Dev Progress", url: "/backyard/admin/dev-progress", icon: GitBranch, status: "active" },
-        { title: "Historic Payruns", url: "/backyard/admin/temp-payrun-history", icon: PanelTopInactiveIcon, status: "active" },        
         { title: "Excel File Payslips", url: "/backyard/admin/temp-excelpayrun-import", icon: FileSpreadsheet, status: "active" },       
-        { title: "Xero Config", url: "/backyard/admin/xero-config", icon: FileSpreadsheet, status: "active" },       
+        { title: "Xero Config", url: "/backyard/admin/xero-config", icon: FileSpreadsheet, status: "wip" },       
       ],
     },
     {
       label: "Client Profiles",
       items: [
-              { title: "Airtable", url: "/backyard/clients", icon: Users, status: "active" },      ],
+              { title: "Airtable", url: "/backyard/clients", icon: Users, status: "wip" },      ],
     },
     {
       label: "Sales Tools",
@@ -40,7 +39,7 @@ import {
     {
       label: "Specialist Agents",
       items: [
-        { title: "Agents", url: "/backyard/agents", icon: Briefcase, status: "active" },
+        { title: "Agents", url: "/backyard/agents", icon: Briefcase, status: "wip" },
       ],
     },
     {
@@ -57,7 +56,7 @@ import {
     },    
     {
       label: "Support Tools",
-      items: [{ title: "KYC Compliance", url: "#", icon: Briefcase, status: "active" }],
+      items: [{ title: "KYC Compliance", url: "#", icon: Briefcase, status: "wip" }],
     },
     {
       label: "Resource Centre",

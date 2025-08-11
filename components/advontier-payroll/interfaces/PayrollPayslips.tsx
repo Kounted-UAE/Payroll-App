@@ -110,7 +110,7 @@ const PayrollPayslips = () => {
         <CardContent className="p-6">
           <div className="flex items-center space-x-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-blue-200" />
               <Input
                 placeholder="Search by employee, employer, or pay period..."
                 value={searchQuery}
@@ -208,9 +208,9 @@ const PayrollPayslips = () => {
       {filteredPayslips.length === 0 && (
         <Card>
           <CardContent className="p-12 text-center">
-            <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+            <FileText className="h-12 w-12 text-blue-200 mx-auto mb-4" />
             <h3 className="text-xs font-semibold mb-2">No payslips found</h3>
-            <p className="text-muted-foreground mb-4">
+            <p className="text-blue-200 mb-4">
               {searchQuery ? "Try adjusting your search criteria" : "Generate payslips from completed payruns"}
             </p>
             <Link href="/backyard/payroll/payslips/generate">

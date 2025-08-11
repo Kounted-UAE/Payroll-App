@@ -150,14 +150,14 @@ export function GDPRDataRights() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-blue-200">
               Download a complete copy of all personal data we have about you in a structured, 
               machine-readable format.
             </p>
             
             <div className="space-y-2">
               <h4 className="font-medium text-sm">Included Data:</h4>
-              <ul className="text-xs text-muted-foreground space-y-1">
+              <ul className="text-xs text-blue-200 space-y-1">
                 <li>• Personal profile information</li>
                 <li>• Business and client data</li>
                 <li>• Payroll and financial records</li>
@@ -203,7 +203,7 @@ export function GDPRDataRights() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-blue-200">
               Permanently delete your account and personal data. This action cannot be undone.
             </p>
 
@@ -217,7 +217,7 @@ export function GDPRDataRights() {
 
             <div className="space-y-2">
               <h4 className="font-medium text-sm">What will be deleted:</h4>
-              <ul className="text-xs text-muted-foreground space-y-1">
+              <ul className="text-xs text-blue-200 space-y-1">
                 <li>• Personal profile and contact information</li>
                 <li>• Draft documents and non-financial records</li>
                 <li>• Session logs and usage analytics</li>
@@ -227,7 +227,7 @@ export function GDPRDataRights() {
 
             <div className="space-y-2">
               <h4 className="font-medium text-sm">What will be anonymized:</h4>
-              <ul className="text-xs text-muted-foreground space-y-1">
+              <ul className="text-xs text-blue-200 space-y-1">
                 <li>• Completed payroll records (legal requirement)</li>
                 <li>• Financial transaction records</li>
                 <li>• Compliance and audit logs</li>
@@ -346,35 +346,35 @@ export function GDPRDataRights() {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-blue-200">
             Under GDPR and UAE data protection laws, you have additional rights regarding your personal data:
           </p>
 
           <div className="grid gap-3 sm:grid-cols-2">
             <div className="space-y-1">
               <h4 className="font-medium text-sm">Right to Rectification</h4>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-blue-200">
                 Update or correct inaccurate personal information through your account settings.
               </p>
             </div>
 
             <div className="space-y-1">
               <h4 className="font-medium text-sm">Right to Restrict Processing</h4>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-blue-200">
                 Limit how we process your data in certain circumstances.
               </p>
             </div>
 
             <div className="space-y-1">
               <h4 className="font-medium text-sm">Right to Object</h4>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-blue-200">
                 Object to processing based on legitimate interests or direct marketing.
               </p>
             </div>
 
             <div className="space-y-1">
               <h4 className="font-medium text-sm">Right to Lodge a Complaint</h4>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-blue-200">
                 Contact data protection authorities if you believe your rights have been violated.
               </p>
             </div>

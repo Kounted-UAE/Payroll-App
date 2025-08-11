@@ -195,11 +195,11 @@ export default function ClientProfileStep({ data, onChange }: StepProps) {
                         className="p-2 hover:bg-accent cursor-pointer flex items-center gap-2"
                         onClick={() => handleSelectClient(client)}
                       >
-                        <Building2 className="h-4 w-4 text-muted-foreground" />
+                        <Building2 className="h-4 w-4 text-blue-200" />
                         <div>
                           <div className="font-medium">{client.name}</div>
                           {client.contact_person && (
-                            <div className="text-xs text-muted-foreground">{client.contact_person}</div>
+                            <div className="text-xs text-blue-200">{client.contact_person}</div>
                           )}
                         </div>
                       </div>
@@ -216,7 +216,7 @@ export default function ClientProfileStep({ data, onChange }: StepProps) {
                   <div>
                     <div className="font-medium">{selectedClient.name}</div>
                     {selectedClient.contact_person && (
-                      <div className="text-xs text-muted-foreground">{selectedClient.contact_person}</div>
+                      <div className="text-xs text-blue-200">{selectedClient.contact_person}</div>
                     )}
                   </div>
                   {selectedClient.business_type && (
@@ -330,7 +330,7 @@ export default function ClientProfileStep({ data, onChange }: StepProps) {
 
       <FormSection title="Integration Needs">
         <div className="space-y-3">
-          <p className="text-xs text-muted-foreground">Select the systems you need to integrate with:</p>
+          <p className="text-xs text-blue-200">Select the systems you need to integrate with:</p>
           
           <div className="grid grid-cols-2 gap-2">
             {INTEGRATION_NEEDS.map(integration => (

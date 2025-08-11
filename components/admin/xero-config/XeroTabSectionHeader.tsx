@@ -43,7 +43,7 @@ export default function XeroTabSectionHeader({
               type="button"
               className={
                 action.variant === 'secondary'
-                  ? 'inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-foreground shadow-sm ring-1 ring-muted hover:bg-muted/50'
+                  ? 'inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-foreground shadow-sm ring-1 ring-muted hover:bg-blue-100/50'
                   : 'inline-flex items-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500'
               }
             >
@@ -68,7 +68,7 @@ export default function XeroTabSectionHeader({
           ))}
         </select>
         <ChevronDownIcon
-          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
+          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-blue-200"
           aria-hidden="true"
         />
       </div>
@@ -83,7 +83,7 @@ export default function XeroTabSectionHeader({
               className={`border-b-2 px-1 pb-2 text-sm font-medium whitespace-nowrap ${
                 tab.value === activeTab
                   ? 'border-green-600 text-green-600'
-                  : 'border-transparent text-muted-foreground hover:border-muted hover:text-foreground'
+                  : 'border-transparent text-blue-200 hover:border-muted hover:text-foreground'
               }`}
             >
               {tab.name}

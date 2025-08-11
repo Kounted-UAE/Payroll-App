@@ -6,7 +6,7 @@ import clsx from 'clsx'
 
 import { Button } from '@/components/advontier-website/Button'
 import { Container } from '@/components/advontier-website/Container'
-import { Logomark } from '@/components/advontier-website/Logo'
+import { LogoMark } from '@/components/advontier-website/Logo'
 
 const plans = [
   {
@@ -25,7 +25,7 @@ const plans = [
       'One tip every day',
       'Invest up to $1,500 each month',
     ],
-    logomarkClassName: 'fill-gray-300',
+    LogoMarkClassName: 'fill-gray-300',
   },
   {
     name: 'Investor',
@@ -44,7 +44,7 @@ const plans = [
       'Invest up to $15,000 each month',
       'Basic transaction anonymization',
     ],
-    logomarkClassName: 'fill-gray-500',
+    LogoMarkClassName: 'fill-gray-500',
   },
   {
     name: 'VIP',
@@ -64,7 +64,7 @@ const plans = [
       'Advanced transaction anonymization',
       'Automated tax-loss harvesting',
     ],
-    logomarkClassName: 'fill-cyan-500',
+    LogoMarkClassName: 'fill-cyan-500',
   },
 ]
 
@@ -96,7 +96,7 @@ function Plan({
   button,
   features,
   activePeriod,
-  logomarkClassName,
+  LogoMarkClassName,
   featured = false,
 }: {
   name: string
@@ -111,7 +111,7 @@ function Plan({
   }
   features: Array<string>
   activePeriod: 'Monthly' | 'Annually'
-  logomarkClassName?: string
+  LogoMarkClassName?: string
   featured?: boolean
 }) {
   return (
@@ -127,7 +127,7 @@ function Plan({
           featured ? 'text-white' : 'text-gray-900',
         )}
       >
-        <Logomark className={clsx('h-6 w-6 flex-none', logomarkClassName)} />
+        <LogoMark className={clsx('h-6 w-6 flex-none', LogoMarkClassName)} />
         <span className="ml-4">{name}</span>
       </h3>
       <p

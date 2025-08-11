@@ -206,37 +206,37 @@ export default function DevProgressPage() {
         <Card>
           <CardContent className="p-4">
             <div className="text-2xl font-bold">{stats.totalFeatures}</div>
-            <p className="text-xs text-muted-foreground">Total Features</p>
+            <p className="text-xs text-blue-200">Total Features</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
             <div className="text-2xl font-bold text-blue-600">{stats.completedFeatures}</div>
-            <p className="text-xs text-muted-foreground">Completed</p>
+            <p className="text-xs text-blue-200">Completed</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
             <div className="text-2xl font-bold text-blue-600">{stats.inProgressFeatures}</div>
-            <p className="text-xs text-muted-foreground">In Progress</p>
+            <p className="text-xs text-blue-200">In Progress</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
             <div className="text-2xl font-bold text-gray-600">{stats.plannedFeatures}</div>
-            <p className="text-xs text-muted-foreground">Planned</p>
+            <p className="text-xs text-blue-200">Planned</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
             <div className="text-2xl font-bold">{stats.overallCompletion.toFixed(0)}%</div>
-            <p className="text-xs text-muted-foreground">Overall Progress</p>
+            <p className="text-xs text-blue-200">Overall Progress</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
             <div className="text-2xl font-bold">{stats.hoursSpent.toFixed(0)}h</div>
-            <p className="text-xs text-muted-foreground">Hours Logged</p>
+            <p className="text-xs text-blue-200">Hours Logged</p>
           </CardContent>
         </Card>
       </div>
@@ -285,7 +285,7 @@ export default function DevProgressPage() {
                           <h3 className="font-medium">
                             {session.session_title || 'Development Session'}
                           </h3>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-sm text-blue-200">
                             {new Date(session.session_date).toLocaleDateString()}
                           </p>
                         </div>
@@ -310,7 +310,7 @@ export default function DevProgressPage() {
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-8 text-muted-foreground">
+                <div className="text-center py-8 text-blue-200">
                   <FileText className="h-12 w-12 mx-auto mb-4 opacity-50" />
                   <p>No sessions logged yet</p>
                   <p className="text-sm">Start by logging your first development session</p>

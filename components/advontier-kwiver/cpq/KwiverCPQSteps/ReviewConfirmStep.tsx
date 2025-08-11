@@ -87,7 +87,7 @@ export default function ReviewConfirmStep({ data, allData, onChange, pricing, re
   return (
     <div className="space-y-6">
       <FormSection title="Order Summary">
-        <div className="bg-muted p-4 rounded-lg mb-4">
+        <div className="bg-blue-100 p-4 rounded-lg mb-4">
           <div className="flex justify-between items-center mb-2">
             <h3 className="font-medium">Reference ID</h3>
             <Badge variant="outline">{referenceId}</Badge>

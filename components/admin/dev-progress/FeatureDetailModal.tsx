@@ -177,15 +177,15 @@ export default function FeatureDetailModal({
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex items-center gap-2 text-sm">
-                    <Clock className="h-4 w-4 text-muted-foreground" />
+                    <Clock className="h-4 w-4 text-blue-200" />
                     <span>Estimated: {feature.estimated_hours} hours</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
-                    <Calendar className="h-4 w-4 text-muted-foreground" />
+                    <Calendar className="h-4 w-4 text-blue-200" />
                     <span>Created: {new Date(feature.created_at).toLocaleDateString()}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
-                    <Calendar className="h-4 w-4 text-muted-foreground" />
+                    <Calendar className="h-4 w-4 text-blue-200" />
                     <span>Updated: {new Date(feature.updated_at).toLocaleDateString()}</span>
                   </div>
                 </CardContent>
@@ -213,7 +213,7 @@ export default function FeatureDetailModal({
 
           <TabsContent value="sessions" className="space-y-4">
             {loading ? (
-              <div className="text-center py-8 text-muted-foreground">
+              <div className="text-center py-8 text-blue-200">
                 Loading sessions...
               </div>
             ) : recentSessions.length > 0 ? (
@@ -226,7 +226,7 @@ export default function FeatureDetailModal({
                           <CardTitle className="text-lg">
                             {session.session_title || 'Development Session'}
                           </CardTitle>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-sm text-blue-200">
                             {new Date(session.session_date).toLocaleDateString()}
                           </p>
                         </div>
@@ -272,7 +272,7 @@ export default function FeatureDetailModal({
                 ))}
               </div>
             ) : (
-              <div className="text-center py-8 text-muted-foreground">
+              <div className="text-center py-8 text-blue-200">
                 <MessageCircle className="h-12 w-12 mx-auto mb-4 opacity-50" />
                 <p>No sessions recorded for this feature yet</p>
               </div>
@@ -280,7 +280,7 @@ export default function FeatureDetailModal({
           </TabsContent>
 
           <TabsContent value="milestones" className="space-y-4">
-            <div className="text-center py-8 text-muted-foreground">
+            <div className="text-center py-8 text-blue-200">
               <Target className="h-12 w-12 mx-auto mb-4 opacity-50" />
               <p>Milestone tracking coming soon</p>
             </div>

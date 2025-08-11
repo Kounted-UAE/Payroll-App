@@ -77,7 +77,7 @@ const PayrollExpenses = () => {
         <CardContent className="p-6">
           <div className="flex items-center space-x-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-blue-200" />
               <Input
                 placeholder="Search by run number or employer..."
                 value={searchQuery}
@@ -120,31 +120,31 @@ const PayrollExpenses = () => {
             <CardContent>
               <div className="grid md:grid-cols-4 gap-6">
                 <div className="space-y-3">
-                  <h4 className="font-semibold text-xs text-muted-foreground uppercase tracking-wide">
+                  <h4 className="font-semibold text-xs text-blue-200 uppercase tracking-wide">
                     Run Details
                   </h4>
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-muted-foreground">Run Number:</span>
+                      <span className="text-xs text-blue-200">Run Number:</span>
                       <span className="text-xs font-bold text-primary">{run.run_number}</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-muted-foreground">Employer:</span>
+                      <span className="text-xs text-blue-200">Employer:</span>
                       <span className="text-xs font-medium">{run.payroll_objects_employers?.legal_name}</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-muted-foreground">Period:</span>
+                      <span className="text-xs text-blue-200">Period:</span>
                       <span className="text-xs font-medium">{run.period_start} to {run.period_end}</span>
                     </div>
                   </div>
                 </div>
                 <div className="space-y-3">
-                  <h4 className="font-semibold text-xs text-muted-foreground uppercase tracking-wide">
+                  <h4 className="font-semibold text-xs text-blue-200 uppercase tracking-wide">
                     Status
                   </h4>
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-muted-foreground">Status:</span>
+                      <span className="text-xs text-blue-200">Status:</span>
                       <Badge variant="outline">{run.status || 'Draft'}</Badge>
                     </div>
                   </div>
@@ -158,9 +158,9 @@ const PayrollExpenses = () => {
       {!loading && filteredRuns.length === 0 && (
         <Card>
           <CardContent className="p-12 text-center">
-            <Receipt className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+            <Receipt className="h-12 w-12 text-blue-200 mx-auto mb-4" />
             <h3 className="text-xs font-semibold mb-2">No expense runs found</h3>
-            <p className="text-muted-foreground mb-4">
+            <p className="text-blue-200 mb-4">
               {searchQuery ? "Try adjusting your search criteria" : "Get started by starting your first expense run"}
             </p>
             <Link href="/backyard/payroll/expenses/new">

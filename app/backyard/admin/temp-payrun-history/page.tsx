@@ -14,7 +14,7 @@ export default function TempPayrunHistoryPage() {
       <h1 className="text-lg text-zinc-600 font-bold">Import Historical Payruns</h1>
 
         <button
-          className=" rounded bg-red-400 text-white px-4 py-2 text-sm hover:bg-muted"
+          className=" rounded bg-red-400 text-white px-4 py-2 text-sm hover:bg-blue-100"
           onClick={() => setDialogOpen(true)}
         >
           Import Payrun CSV

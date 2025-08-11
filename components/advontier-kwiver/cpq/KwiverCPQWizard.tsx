@@ -258,16 +258,16 @@ export default function KwiverKioskWizard({
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="border-b bg-card p-4">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-xs font-semibold text-foreground">Service Order Kiosk</h1>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-blue-200">
                 {referenceId && <>Reference: {referenceId} · </>}
-                {autosaving && <span className="text-muted-foreground">Autosaving...</span>}
+                {autosaving && <span className="text-blue-200">Autosaving...</span>}
               </p>
             </div>
             <Badge variant={pricing.monthlyPrice > 0 ? 'default' : 'secondary'}>
@@ -306,8 +306,8 @@ export default function KwiverKioskWizard({
                             : status === 'current'
                             ? 'border-l-blue-500 bg-blue-500/10 text-blue-500 font-medium'
                             : status === 'visited'
-                            ? 'border-l-muted-foreground bg-muted/30 text-foreground'
-                            : 'border-l-transparent hover:bg-muted/50'
+                            ? 'border-l-muted-foreground bg-blue-100/30 text-foreground'
+                            : 'border-l-transparent hover:bg-blue-100/50'
                         }`}
                       >
                         <div className="flex items-center gap-2">

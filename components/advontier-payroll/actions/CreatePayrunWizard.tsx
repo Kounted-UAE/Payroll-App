@@ -153,21 +153,21 @@ const CreatePayrunWizard = () => {
             {steps.map((step, index) => (
               <div key={step.id} className="flex items-center">
                 <div className={`flex items-center space-x-2 ${
-                  currentStep >= step.id ? "text-blue-500" : "text-muted-foreground"
+                  currentStep >= step.id ? "text-blue-500" : "text-blue-200"
                 }`}>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${
-                    currentStep >= step.id ? "bg-blue-500 text-blue-500-foreground" : "bg-muted"
+                    currentStep >= step.id ? "bg-blue-500 text-blue-500-foreground" : "bg-blue-100"
                   }`}>
                     {currentStep > step.id ? <CheckCircle className="h-4 w-4" /> : step.id}
                   </div>
                   <div>
                     <p className="font-medium">{step.title}</p>
-                    <p className="text-xs text-muted-foreground">{step.description}</p>
+                    <p className="text-xs text-blue-200">{step.description}</p>
                   </div>
                 </div>
                 {index < steps.length - 1 && (
                   <div className={`h-px w-20 mx-4 ${
-                    currentStep > step.id ? "bg-blue-500" : "bg-muted"
+                    currentStep > step.id ? "bg-blue-500" : "bg-blue-100"
                   }`} />
                 )}
               </div>
@@ -183,7 +183,7 @@ const CreatePayrunWizard = () => {
             <div className="space-y-6">
               <div>
                 <h3 className="text-xs font-semibold mb-4">Select Employer Company</h3>
-                <p className="text-muted-foreground mb-6">Choose the employer for this payrun</p>
+                <p className="text-blue-200 mb-6">Choose the employer for this payrun</p>
               </div>
               
               <div className="grid gap-4">
@@ -202,7 +202,7 @@ const CreatePayrunWizard = () => {
                         <Building className="h-8 w-8 text-blue-600" />
                         <div>
                           <h4 className="font-medium">{employer.name}</h4>
-                          <p className="text-xs text-muted-foreground">{employer.employees} employees</p>
+                          <p className="text-xs text-blue-200">{employer.employees} employees</p>
                         </div>
                       </div>
                       {data.employer_id === employer.id && (
@@ -219,7 +219,7 @@ const CreatePayrunWizard = () => {
             <div className="space-y-6">
               <div>
                 <h3 className="text-xs font-semibold mb-4">Set Pay Period</h3>
-                <p className="text-muted-foreground mb-6">Define the payroll period dates</p>
+                <p className="text-blue-200 mb-6">Define the payroll period dates</p>
               </div>
               
               <div className="grid md:grid-cols-2 gap-6">
@@ -241,7 +241,7 @@ const CreatePayrunWizard = () => {
                 
                 <div className="space-y-2">
                   <Label>Selected Employer</Label>
-                  <div className="p-3 bg-muted rounded-md">
+                  <div className="p-3 bg-blue-100 rounded-md">
                     <p className="font-medium">{selectedEmployer?.name}</p>
                   </div>
                 </div>
@@ -289,7 +289,7 @@ const CreatePayrunWizard = () => {
             <div className="space-y-6">
               <div>
                 <h3 className="text-xs font-semibold mb-4">Select Employees</h3>
-                <p className="text-muted-foreground mb-6">Choose employees to include in this payrun</p>
+                <p className="text-blue-200 mb-6">Choose employees to include in this payrun</p>
               </div>
               
               <div className="flex items-center justify-between mb-4">
@@ -336,7 +336,7 @@ const CreatePayrunWizard = () => {
                       <div className="flex items-center justify-between">
                         <div>
                           <p className="font-medium">{employee.name}</p>
-                          <p className="text-xs text-muted-foreground">Basic Salary: AED {employee.basic_salary.toLocaleString()}</p>
+                          <p className="text-xs text-blue-200">Basic Salary: AED {employee.basic_salary.toLocaleString()}</p>
                         </div>
                         <Badge variant="outline">{employee.status}</Badge>
                       </div>
@@ -351,7 +351,7 @@ const CreatePayrunWizard = () => {
             <div className="space-y-6">
               <div>
                 <h3 className="text-xs font-semibold mb-4">Review & Confirm</h3>
-                <p className="text-muted-foreground mb-6">Review the payrun details before creation</p>
+                <p className="text-blue-200 mb-6">Review the payrun details before creation</p>
               </div>
               
               <div className="grid md:grid-cols-2 gap-6">
@@ -361,15 +361,15 @@ const CreatePayrunWizard = () => {
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Employer:</span>
+                      <span className="text-blue-200">Employer:</span>
                       <span className="font-medium">{selectedEmployer?.name}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Pay Period:</span>
+                      <span className="text-blue-200">Pay Period:</span>
                       <span className="font-medium">{data.pay_period_start} - {data.pay_period_end}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Month:</span>
+                      <span className="text-blue-200">Month:</span>
                       <span className="font-medium">{data.payroll_month}</span>
                     </div>
                   </CardContent>
@@ -381,15 +381,15 @@ const CreatePayrunWizard = () => {
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Total Employees:</span>
+                      <span className="text-blue-200">Total Employees:</span>
                       <span className="font-medium">{selectedEmployees.length}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Estimated Gross:</span>
+                      <span className="text-blue-200">Estimated Gross:</span>
                       <span className="font-medium text-blue-500">AED {totalGrossPay.toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Status:</span>
+                      <span className="text-blue-200">Status:</span>
                       <Badge variant="outline">Draft</Badge>
                     </div>
                   </CardContent>
@@ -435,7 +435,7 @@ const CreatePayrunWizard = () => {
         </Button>
 
         <div className="flex items-center space-x-2">
-          <span className="text-xs text-muted-foreground">
+          <span className="text-xs text-blue-200">
             Step {currentStep} of {steps.length}
           </span>
         </div>

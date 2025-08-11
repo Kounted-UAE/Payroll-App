@@ -53,7 +53,7 @@ export function TextField({ label, name, value = '', onChange, required, descrip
         placeholder={placeholder}
         required={required}
       />
-      {description && <p className="text-xs text-muted-foreground">{description}</p>}
+      {description && <p className="text-xs text-blue-200">{description}</p>}
     </div>
   );
 }
@@ -81,7 +81,7 @@ export function SelectField({ label, name, value = '', onChange, required, descr
           ))}
         </SelectContent>
       </Select>
-      {description && <p className="text-xs text-muted-foreground">{description}</p>}
+      {description && <p className="text-xs text-blue-200">{description}</p>}
     </div>
   );
 }
@@ -101,7 +101,7 @@ export function TextareaField({ label, name, value = '', onChange, required, des
         rows={rows}
         required={required}
       />
-      {description && <p className="text-xs text-muted-foreground">{description}</p>}
+      {description && <p className="text-xs text-blue-200">{description}</p>}
     </div>
   );
 }
@@ -118,7 +118,7 @@ export function CheckboxField({ label, name, checked = false, onChange, descript
         <Label htmlFor={name} className="text-xs font-medium cursor-pointer">
           {label}
         </Label>
-        {description && <p className="text-xs text-muted-foreground">{description}</p>}
+        {description && <p className="text-xs text-blue-200">{description}</p>}
       </div>
     </div>
   );
@@ -142,7 +142,7 @@ export function RadioField({ label, name, value = '', onChange, options, descrip
           </div>
         ))}
       </RadioGroup>
-      {description && <p className="text-xs text-muted-foreground">{description}</p>}
+      {description && <p className="text-xs text-blue-200">{description}</p>}
     </div>
   );
 }

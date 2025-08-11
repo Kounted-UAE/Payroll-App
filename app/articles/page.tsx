@@ -1,8 +1,8 @@
 // app/articles/page.tsx
 
 import { getAllArticlePosts } from '@/lib/articleLoader'
-import ArticleIndex from '@/components/advontier-website/articles/ArticleIndex'
-import ArticleCards from '@/components/advontier-website/articles/ArticleCards'
+import ArticleIndex from '@/components/advontier-website/articles-dynamic/ArticleIndex'
+import ArticleCards from '@/components/advontier-website/articles-dynamic/ArticleCards'
 import { RootLayout } from '@/components/advontier-website/layout/RootLayout'
 import { PageIntro } from '@/components/advontier-website/PageIntro'
 import { Container } from '@/components/advontier-website/Container'

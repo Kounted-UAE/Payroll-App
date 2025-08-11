@@ -250,7 +250,7 @@ const PayrollPayruns = () => {
         <Card>
           <CardContent className="p-6">
             <div className="flex flex-col items-center">
-              <div className="text-xs text-muted-foreground">Total Employers</div>
+              <div className="text-xs text-blue-200">Total Employers</div>
               <div className="text-2xl font-bold">-</div>
             </div>
           </CardContent>
@@ -258,7 +258,7 @@ const PayrollPayruns = () => {
         <Card>
           <CardContent className="p-6">
             <div className="flex flex-col items-center">
-              <div className="text-xs text-muted-foreground">Total Employees</div>
+              <div className="text-xs text-blue-200">Total Employees</div>
               <div className="text-2xl font-bold">-</div>
             </div>
           </CardContent>
@@ -266,7 +266,7 @@ const PayrollPayruns = () => {
         <Card>
           <CardContent className="p-6">
             <div className="flex flex-col items-center">
-              <div className="text-xs text-muted-foreground">Active Payruns</div>
+              <div className="text-xs text-blue-200">Active Payruns</div>
               <div className="text-2xl font-bold">-</div>
             </div>
           </CardContent>
@@ -274,7 +274,7 @@ const PayrollPayruns = () => {
         <Card>
           <CardContent className="p-6">
             <div className="flex flex-col items-center">
-              <div className="text-xs text-muted-foreground">Monthly Payroll</div>
+              <div className="text-xs text-blue-200">Monthly Payroll</div>
               <div className="text-2xl font-bold">-</div>
             </div>
           </CardContent>
@@ -289,7 +289,7 @@ const PayrollPayruns = () => {
         </CardHeader>
         <CardContent>
           <ul className="divide-y divide-border">
-            {recentActivity.length === 0 && <li className="py-2 text-muted-foreground text-xs">No recent activity</li>}
+            {recentActivity.length === 0 && <li className="py-2 text-blue-200 text-xs">No recent activity</li>}
             {recentActivity.map((payrun) => (
               <li key={payrun.id} className="py-2 flex items-center gap-4">
                 <span className="font-semibold text-xs">{payrun.payroll_objects_employers?.legal_name || 'Unknown Employer'}</span>
@@ -307,7 +307,7 @@ const PayrollPayruns = () => {
         <CardContent className="p-6">
           <div className="flex items-center space-x-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-blue-200" />
               <Input
                 placeholder="Search by employer or status..."
                 value={searchValue}

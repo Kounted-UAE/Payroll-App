@@ -136,7 +136,7 @@ export function BatchOverviewStep({ batchData, employees }: BatchOverviewStepPro
                 ))}
                 {employees.length > 10 && (
                   <TableRow>
-                    <TableCell colSpan={5} className="text-center text-muted-foreground">
+                    <TableCell colSpan={5} className="text-center text-blue-200">
                       ... and {employees.length - 10} more employees
                     </TableCell>
                   </TableRow>

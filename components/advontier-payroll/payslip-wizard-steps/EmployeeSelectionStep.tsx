@@ -125,7 +125,7 @@ export function EmployeeSelectionStep({
         <CardContent className="p-4">
           <div className="flex items-center space-x-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-blue-200" />
               <Input
                 placeholder="Search employees by name, email, or MOL ID..."
                 value={searchTerm}
@@ -139,7 +139,7 @@ export function EmployeeSelectionStep({
                 checked={showOnlyWithEmail}
                 onCheckedChange={(checked) => setShowOnlyWithEmail(checked as boolean)}
               />
-              <label htmlFor="email-filter" className="text-sm text-muted-foreground">
+              <label htmlFor="email-filter" className="text-sm text-blue-200">
                 Show only employees with email
               </label>
             </div>
@@ -241,7 +241,7 @@ export function EmployeeSelectionStep({
                 ))}
                 {filteredEmployees.length === 0 && (
                   <TableRow>
-                    <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
+                    <TableCell colSpan={7} className="text-center text-blue-200 py-8">
                       {searchTerm ? 'No employees found matching your search' : 'No employees available'}
                     </TableCell>
                   </TableRow>
@@ -282,9 +282,9 @@ export function EmployeeSelectionStep({
       {employees.length === 0 && (
         <Card className="border-dashed">
           <CardContent className="p-8 text-center">
-            <Users className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-muted-foreground mb-2">No Employees Found</h3>
-            <p className="text-sm text-muted-foreground">
+            <Users className="h-12 w-12 text-blue-200 mx-auto mb-4" />
+            <h3 className="text-lg font-medium text-blue-200 mb-2">No Employees Found</h3>
+            <p className="text-sm text-blue-200">
               No employee data is available for this batch. Please check the batch import.
             </p>
           </CardContent>

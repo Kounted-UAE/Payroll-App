@@ -18,10 +18,10 @@ export const MoveGoalWidget = () => {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader className="pb-3">
-        <CardTitle className="text-xs font-medium text-muted-foreground">
+        <CardTitle className="text-xs font-medium text-blue-200">
           Move Goal
         </CardTitle>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-blue-200">
           Set your daily activity goal.
         </p>
       </CardHeader>
@@ -38,7 +38,7 @@ export const MoveGoalWidget = () => {
           </Button>
           <div className="text-center">
             <div className="text-lg font-bold">{goal}</div>
-            <div className="text-xs text-muted-foreground">CALORIES/DAY</div>
+            <div className="text-xs text-blue-200">CALORIES/DAY</div>
           </div>
           <Button
             variant="outline"

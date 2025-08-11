@@ -200,9 +200,9 @@ export default function AgentConfigurePage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-lg text-zinc-600 font-bold">Configure Agent</h1>
-          <p className="text-sm text-muted-foreground">Manage prompts, frameworks, templates, and source references.</p>
+          <p className="text-sm text-blue-200">Manage prompts, frameworks, templates, and source references.</p>
         </div>
-        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+        <div className="flex items-center gap-2 text-xs text-blue-200">
           <Shield className="h-4 w-4" /> Admin only
         </div>
       </div>

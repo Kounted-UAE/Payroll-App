@@ -27,7 +27,7 @@ const imageWhiteboard = '/backgrounds/whiteboard.jpg'
 const imageLaptop = '/backgrounds/laptop.jpg'
 
 const testimonialPhoto = '/team/murray-baker.JPG'
-const testimonialLogo = '/clients/kounted/logomark-light.webp'
+const testimonialLogo = '/clients/kounted/LogoMark-light.webp'
 
 
 

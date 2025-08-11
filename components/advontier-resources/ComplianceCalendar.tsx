@@ -27,7 +27,7 @@ import {
   ArrowUpDown,
   Filter
 } from 'lucide-react';
-import ComplianceItemModal from '@/components/dashboard-apps/ComplianceItemModal';
+import ComplianceItemModal from '@/components/advontier-dashboard/ComplianceItemModal';
 
 interface ComplianceItem {
   id: string;
@@ -338,14 +338,14 @@ export default function ComplianceCalendar() {
       case 'regulatory':
         return 'bg-purple-100 text-purple-800 border-purple-200';
       default:
-        return 'bg-muted text-muted-foreground border-border';
+        return 'bg-blue-100 text-blue-200 border-border';
     }
   };
 
   const getFrequencyColor = (frequency: string) => {
     switch (frequency) {
       case 'one-time':
-        return 'bg-muted text-muted-foreground';
+        return 'bg-blue-100 text-blue-200';
       case 'monthly':
         return 'bg-primary/10 text-primary';
       case 'quarterly':
@@ -355,7 +355,7 @@ export default function ComplianceCalendar() {
       case 'annual':
         return 'bg-primary/10 text-primary';
       default:
-        return 'bg-muted text-muted-foreground';
+        return 'bg-blue-100 text-blue-200';
     }
   };
 
@@ -423,7 +423,7 @@ export default function ComplianceCalendar() {
               <div className="flex items-center">
                 <FileText className="h-8 w-8 text-primary mr-3" />
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground">Total Obligations</p>
+                  <p className="text-xs font-medium text-blue-200">Total Obligations</p>
                   <p className="text-xs font-bold">{complianceData.length}</p>
                 </div>
               </div>
@@ -435,7 +435,7 @@ export default function ComplianceCalendar() {
               <div className="flex items-center">
                 <DollarSign className="h-8 w-8 text-red-600 mr-3" />
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground">Tax Related</p>
+                  <p className="text-xs font-medium text-blue-200">Tax Related</p>
                   <p className="text-xs font-bold">{complianceData.filter(item => item.category === 'tax').length}</p>
                 </div>
               </div>
@@ -447,7 +447,7 @@ export default function ComplianceCalendar() {
               <div className="flex items-center">
                 <Users className="h-8 w-8 text-primary mr-3" />
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground">Labor & HR</p>
+                  <p className="text-xs font-medium text-blue-200">Labor & HR</p>
                   <p className="text-xs font-bold">{complianceData.filter(item => item.category === 'labor').length}</p>
                 </div>
               </div>
@@ -459,7 +459,7 @@ export default function ComplianceCalendar() {
               <div className="flex items-center">
                 <AlertTriangle className="h-8 w-8 text-amber-600 mr-3" />
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground">Regulatory</p>
+                  <p className="text-xs font-medium text-blue-200">Regulatory</p>
                   <p className="text-xs font-bold">{complianceData.filter(item => item.category === 'regulatory').length}</p>
                 </div>
               </div>
@@ -470,7 +470,7 @@ export default function ComplianceCalendar() {
         {/* Search and Filter */}
         <div className="flex items-center gap-4">
           <div className="relative flex-1 max-w-sm">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-200 h-4 w-4" />
             <Input
               placeholder="Search compliance obligations..."
               value={searchTerm}
@@ -478,7 +478,7 @@ export default function ComplianceCalendar() {
               className="pl-10"
             />
           </div>
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <div className="flex items-center gap-2 text-xs text-blue-200">
             <Filter className="h-4 w-4" />
             <span>{filteredData.length} of {complianceData.length} obligations</span>
           </div>
@@ -573,7 +573,7 @@ export default function ComplianceCalendar() {
                               >
                                 <p className="font-medium">{item.obligation}</p>
                               </button>
-                              <p className="text-xs text-muted-foreground">{item.subjectMatter}</p>
+                              <p className="text-xs text-blue-200">{item.subjectMatter}</p>
                             </div>
                           </TableCell>
                           <TableCell>
@@ -602,7 +602,7 @@ export default function ComplianceCalendar() {
                 
                 {filteredData.length === 0 && (
                   <div className="text-center py-8">
-                    <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                    <FileText className="h-12 w-12 text-blue-200 mx-auto mb-4" />
                     <p className="text-blue-400">
                       No compliance obligations found matching your criteria.
                     </p>
@@ -622,7 +622,7 @@ export default function ComplianceCalendar() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
               <div>
                 <h4 className="font-semibold mb-2">Abbreviations</h4>
-                <ul className="space-y-1 text-muted-foreground">
+                <ul className="space-y-1 text-blue-200">
                   <li><strong>MoE:</strong> Ministry of Economy</li>
                   <li><strong>FTA:</strong> Federal Tax Authority</li>
                   <li><strong>MOHRE:</strong> Ministry of Human Resources & Emiratisation</li>
@@ -635,7 +635,7 @@ export default function ComplianceCalendar() {
               </div>
               <div>
                 <h4 className="font-semibold mb-2">Important Notes</h4>
-                <ul className="space-y-1 text-muted-foreground">
+                <ul className="space-y-1 text-blue-200">
                   <li>• All penalties are subject to change based on updated regulations</li>
                   <li>• Some free zones may have different requirements</li>
                   <li>• Consult with legal/tax advisors for specific situations</li>

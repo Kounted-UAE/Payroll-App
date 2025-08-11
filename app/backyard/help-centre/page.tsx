@@ -118,7 +118,7 @@ export default function HelpCentreAdminPage() {
       )}
 
       {loading ? (
-        <div className="text-xs text-muted-foreground">Loading…</div>
+        <div className="text-xs text-blue-200">Loading…</div>
       ) : (
         <div className="grid grid-cols-1 gap-3">
           {rows.map((row) => (
@@ -126,7 +126,7 @@ export default function HelpCentreAdminPage() {
               <div className="flex items-center justify-between">
                 <div className="space-y-1">
                   <div className="text-sm font-medium">{row.title}</div>
-                  <div className="text-xs text-muted-foreground">/{row.slug}</div>
+                  <div className="text-xs text-blue-200">/{row.slug}</div>
                 </div>
                 <div className="flex gap-2">
                   <Button variant="outline" onClick={() => setEditing(row)}>Edit</Button>
@@ -151,51 +151,51 @@ function Editor({ row, onChange, onCancel, onSave }: { row: ArticleRow, onChange
     <div className="rounded-lg  p-3 bg-card space-y-3">
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label className="text-xs text-muted-foreground">Slug</label>
+          <label className="text-xs text-blue-200">Slug</label>
           <Input value={row.slug} onChange={e => onChange({ ...row, slug: e.target.value })} />
         </div>
         <div>
-          <label className="text-xs text-muted-foreground">Title</label>
+          <label className="text-xs text-blue-200">Title</label>
           <Input value={row.title} onChange={e => onChange({ ...row, title: e.target.value })} />
         </div>
         <div className="col-span-2">
-          <label className="text-xs text-muted-foreground">Description</label>
+          <label className="text-xs text-blue-200">Description</label>
           <Input value={row.description || ''} onChange={e => onChange({ ...row, description: e.target.value })} />
         </div>
         <div className="col-span-2">
-          <label className="text-xs text-muted-foreground">MDX Content</label>
+          <label className="text-xs text-blue-200">MDX Content</label>
           <Textarea className="min-h-[200px] font-mono" value={row.content || ''} onChange={e => onChange({ ...row, content: e.target.value })} />
         </div>
         <div>
-          <label className="text-xs text-muted-foreground">Category</label>
+          <label className="text-xs text-blue-200">Category</label>
           <Input value={row.category || ''} onChange={e => onChange({ ...row, category: e.target.value })} />
         </div>
         <div>
-          <label className="text-xs text-muted-foreground">Subcategory</label>
+          <label className="text-xs text-blue-200">Subcategory</label>
           <Input value={row.subcategory || ''} onChange={e => onChange({ ...row, subcategory: e.target.value })} />
         </div>
         <div>
-          <label className="text-xs text-muted-foreground">Collection</label>
+          <label className="text-xs text-blue-200">Collection</label>
           <Input value={row.collection || ''} onChange={e => onChange({ ...row, collection: e.target.value })} />
         </div>
         <div>
-          <label className="text-xs text-muted-foreground">Tags (comma-separated)</label>
+          <label className="text-xs text-blue-200">Tags (comma-separated)</label>
           <Input value={(row.tags || []).join(',')} onChange={e => onChange({ ...row, tags: e.target.value.split(',').map(s => s.trim()).filter(Boolean) })} />
         </div>
         <div>
-          <label className="text-xs text-muted-foreground">Visibility</label>
+          <label className="text-xs text-blue-200">Visibility</label>
           <Input value={row.visibility || 'public'} onChange={e => onChange({ ...row, visibility: e.target.value })} />
         </div>
         <div>
-          <label className="text-xs text-muted-foreground">Author Name</label>
+          <label className="text-xs text-blue-200">Author Name</label>
           <Input value={row.author_name || ''} onChange={e => onChange({ ...row, author_name: e.target.value })} />
         </div>
         <div>
-          <label className="text-xs text-muted-foreground">Author Role</label>
+          <label className="text-xs text-blue-200">Author Role</label>
           <Input value={row.author_role || ''} onChange={e => onChange({ ...row, author_role: e.target.value })} />
         </div>
         <div>
-          <label className="text-xs text-muted-foreground">Author Image URL</label>
+          <label className="text-xs text-blue-200">Author Image URL</label>
           <Input value={row.author_image || ''} onChange={e => onChange({ ...row, author_image: e.target.value })} />
         </div>
       </div>

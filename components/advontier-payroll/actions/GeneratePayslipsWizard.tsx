@@ -112,21 +112,21 @@ const GeneratePayslipsWizard = () => {
             {steps.map((step, index) => (
               <div key={step.id} className="flex items-center">
                 <div className={`flex items-center space-x-2 ${
-                  currentStep >= step.id ? "text-blue-500" : "text-muted-foreground"
+                  currentStep >= step.id ? "text-blue-500" : "text-blue-200"
                 }`}>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${
-                    currentStep >= step.id ? "bg-blue-500 text-blue-500-foreground" : "bg-muted"
+                    currentStep >= step.id ? "bg-blue-500 text-blue-500-foreground" : "bg-blue-100"
                   }`}>
                     {currentStep > step.id ? <CheckCircle className="h-4 w-4" /> : step.id}
                   </div>
                   <div>
                     <p className="font-medium">{step.title}</p>
-                    <p className="text-xs text-muted-foreground">{step.description}</p>
+                    <p className="text-xs text-blue-200">{step.description}</p>
                   </div>
                 </div>
                 {index < steps.length - 1 && (
                   <div className={`h-px w-20 mx-4 ${
-                    currentStep > step.id ? "bg-blue-500" : "bg-muted"
+                    currentStep > step.id ? "bg-blue-500" : "bg-blue-100"
                   }`} />
                 )}
               </div>
@@ -142,7 +142,7 @@ const GeneratePayslipsWizard = () => {
             <div className="space-y-6">
               <div>
                 <h3 className="text-xs font-semibold mb-4">Select Payrun</h3>
-                <p className="text-muted-foreground mb-6">Choose a completed payrun to generate payslips from</p>
+                <p className="text-blue-200 mb-6">Choose a completed payrun to generate payslips from</p>
               </div>
               
               <div className="grid gap-4">
@@ -161,7 +161,7 @@ const GeneratePayslipsWizard = () => {
                         <FileText className="h-8 w-8 text-blue-600" />
                         <div>
                           <h4 className="font-medium">{payrun.employer}</h4>
-                          <p className="text-xs text-muted-foreground">{payrun.period} • {payrun.employees} employees</p>
+                          <p className="text-xs text-blue-200">{payrun.period} • {payrun.employees} employees</p>
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
@@ -183,14 +183,14 @@ const GeneratePayslipsWizard = () => {
             <div className="space-y-6">
               <div>
                 <h3 className="text-xs font-semibold mb-4">Payslip Settings</h3>
-                <p className="text-muted-foreground mb-6">Configure language and delivery preferences</p>
+                <p className="text-blue-200 mb-6">Configure language and delivery preferences</p>
               </div>
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <div>
                     <Label className="text-base font-medium">Language</Label>
-                    <p className="text-xs text-muted-foreground mb-3">Select the default language for payslips</p>
+                    <p className="text-xs text-blue-200 mb-3">Select the default language for payslips</p>
                     <RadioGroup 
                       value={data.language} 
                       onValueChange={(value) => setData(prev => ({ ...prev, language: value }))}
@@ -214,7 +214,7 @@ const GeneratePayslipsWizard = () => {
                 <div className="space-y-4">
                   <div>
                     <Label className="text-base font-medium">Delivery Method</Label>
-                    <p className="text-xs text-muted-foreground mb-3">How should payslips be delivered?</p>
+                    <p className="text-xs text-blue-200 mb-3">How should payslips be delivered?</p>
                     <RadioGroup 
                       value={data.delivery_method} 
                       onValueChange={(value) => setData(prev => ({ ...prev, delivery_method: value }))}
@@ -254,7 +254,7 @@ const GeneratePayslipsWizard = () => {
             <div className="space-y-6">
               <div>
                 <h3 className="text-xs font-semibold mb-4">Select Employees</h3>
-                <p className="text-muted-foreground mb-6">Choose employees to generate payslips for</p>
+                <p className="text-blue-200 mb-6">Choose employees to generate payslips for</p>
               </div>
               
               <div className="flex items-center justify-between mb-4">
@@ -301,7 +301,7 @@ const GeneratePayslipsWizard = () => {
                       <div className="flex items-center justify-between">
                         <div>
                           <p className="font-medium">{employee.name}</p>
-                          <p className="text-xs text-muted-foreground">{employee.email}</p>
+                          <p className="text-xs text-blue-200">{employee.email}</p>
                         </div>
                         <div className="text-right">
                           <p className="font-medium text-blue-500">AED {employee.net_salary.toLocaleString()}</p>
@@ -319,7 +319,7 @@ const GeneratePayslipsWizard = () => {
             <div className="space-y-6">
               <div>
                 <h3 className="text-xs font-semibold mb-4">Review & Generate</h3>
-                <p className="text-muted-foreground mb-6">Review the payslip generation details</p>
+                <p className="text-blue-200 mb-6">Review the payslip generation details</p>
               </div>
               
               <div className="grid md:grid-cols-2 gap-6">
@@ -329,19 +329,19 @@ const GeneratePayslipsWizard = () => {
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Payrun:</span>
+                      <span className="text-blue-200">Payrun:</span>
                       <span className="font-medium">{selectedPayrun?.employer}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Period:</span>
+                      <span className="text-blue-200">Period:</span>
                       <span className="font-medium">{selectedPayrun?.period}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Language:</span>
+                      <span className="text-blue-200">Language:</span>
                       <span className="font-medium capitalize">{data.language}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Delivery:</span>
+                      <span className="text-blue-200">Delivery:</span>
                       <span className="font-medium capitalize">{data.delivery_method}</span>
                     </div>
                   </CardContent>
@@ -353,17 +353,17 @@ const GeneratePayslipsWizard = () => {
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Total Employees:</span>
+                      <span className="text-blue-200">Total Employees:</span>
                       <span className="font-medium">{selectedEmployees.length}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Total Net Pay:</span>
+                      <span className="text-blue-200">Total Net Pay:</span>
                       <span className="font-medium text-blue-500">
                         AED {selectedEmployees.reduce((sum, emp) => sum + emp.net_salary, 0).toLocaleString()}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Format:</span>
+                      <span className="text-blue-200">Format:</span>
                       <Badge variant="outline">PDF</Badge>
                     </div>
                   </CardContent>
@@ -411,7 +411,7 @@ const GeneratePayslipsWizard = () => {
         </Button>
 
         <div className="flex items-center space-x-2">
-          <span className="text-xs text-muted-foreground">
+          <span className="text-xs text-blue-200">
             Step {currentStep} of {steps.length}
           </span>
         </div>

@@ -310,13 +310,13 @@ export function BulkImportExportDialog<T extends Record<string, any>>({
               <div className="space-y-4">
                 {/* Preview Table */}
                 <div>
-                  <div className="mb-2 text-sm font-medium text-muted-foreground">
+                  <div className="mb-2 text-sm font-medium text-blue-200">
                     Preview ({parsedRows.length} rows):
                   </div>
                   <div className="overflow-x-auto border rounded-lg">
                     <table className="text-xs w-full">
                       <thead>
-                        <tr className="bg-muted">
+                        <tr className="bg-blue-100">
                           {templateHeaders.map(h => (
                             <th key={h} className="px-3 py-2 text-left font-medium">
                               {h}
@@ -340,7 +340,7 @@ export function BulkImportExportDialog<T extends Record<string, any>>({
                 </div>
 
                 {/* Validation Status */}
-                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                <div className="flex items-center justify-between p-3 bg-blue-100/50 rounded-lg">
                   {validationResults.errors.length > 0 ? (
                     <>
                       <Badge variant="destructive" className="text-sm">
@@ -415,8 +415,8 @@ export function BulkImportExportDialog<T extends Record<string, any>>({
         {/* Export Tab */}
         {tab === 'export' && (
           <div className="space-y-4">
-            <div className="p-4 bg-muted/50 rounded-lg">
-              <div className="text-sm text-muted-foreground mb-4">
+            <div className="p-4 bg-blue-100/50 rounded-lg">
+              <div className="text-sm text-blue-200 mb-4">
                 Export all or filtered {objectName}s as CSV.
               </div>
               <Button
@@ -440,8 +440,8 @@ export function BulkImportExportDialog<T extends Record<string, any>>({
         {/* Template Tab */}
         {tab === 'template' && (
           <div className="space-y-4">
-            <div className="p-4 bg-muted/50 rounded-lg">
-              <div className="text-sm text-muted-foreground mb-4">
+            <div className="p-4 bg-blue-100/50 rounded-lg">
+              <div className="text-sm text-blue-200 mb-4">
                 Download a sample CSV template for {objectName}s.
               </div>
               <Button
@@ -462,7 +462,7 @@ export function BulkImportExportDialog<T extends Record<string, any>>({
 
             <div className="border rounded-lg p-4">
               <div className="text-sm font-medium mb-3">Template Fields:</div>
-              <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
+              <div className="grid grid-cols-2 gap-2 text-xs text-blue-200">
                 {templateHeaders.map(h => (
                   <div key={h} className="flex items-center">
                     <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>

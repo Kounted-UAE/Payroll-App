@@ -19,7 +19,7 @@ export function Button({
     'inline-flex rounded-full px-4 py-1.5 text-sm font-semibold transition',
     invert
       ? 'bg-gradient-to-br from-white to-neutral-200 text-neutral-950 hover:from-neutral-100 hover:to-neutral-300'
-      : 'bg-gradient-to-br from-blue-500 to-blue-300 text-white hover:from-blue-600 hover:to-blue-700',
+      : 'bg-gradient-to-br from-blue-500 to-blue-400 text-white hover:from-blue-600 hover:to-blue-700',
   )
 
   let inner = <span className="relative top-px">{children}</span>

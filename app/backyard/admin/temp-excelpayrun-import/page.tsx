@@ -208,7 +208,7 @@ export default function SendPayslipsPage() {
             </Button>
           )}
         </div>
-        <div className="text-sm text-muted-foreground">
+        <div className="text-sm text-blue-200">
           Showing {filtered.length} result{filtered.length !== 1 && 's'}
         </div>
       </div>
@@ -218,7 +218,7 @@ export default function SendPayslipsPage() {
           <DialogHeader>
             <DialogTitle>Confirm Payslip Emails</DialogTitle>
           </DialogHeader>
-          <div className="text-sm text-muted-foreground space-y-2 max-h-[300px] overflow-auto">
+          <div className="text-sm text-blue-200 space-y-2 max-h-[300px] overflow-auto">
             {rows.filter(r => selected.has(r.id)).map(r => {
               const to =
                 sendMode === 'test' ? 'payroll@kounted.ae' :
@@ -305,7 +305,7 @@ export default function SendPayslipsPage() {
                         View PDF
                       </a>
                     ) : (
-                      <span className="text-muted-foreground text-xs">Not available</span>
+                      <span className="text-blue-200 text-xs">Not available</span>
                     )}
                   </TableCell>
                 </TableRow>
@@ -328,7 +328,7 @@ export default function SendPayslipsPage() {
 
       {step === 'review' && (
         <>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-blue-200 text-sm">
             Send payslips for <strong>{selected.size}</strong> selected employees.
           </p>
           <div className="flex gap-4 mt-4">

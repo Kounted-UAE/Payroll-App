@@ -94,14 +94,14 @@ const PayrollEmployers = () => {
         </div>
         <div className="flex items-center space-x-2">
           <Button
-            className={`p-2 rounded ${view === 'grid' ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
+            className={`p-2 rounded ${view === 'grid' ? 'bg-primary text-primary-foreground' : 'bg-blue-100'}`}
             onClick={() => setView('grid')}
             aria-label="Grid view"
           >
             <LayoutGrid className="h-4 w-4" />
           </Button>
           <Button
-            className={`p-2 rounded ${view === 'list' ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
+            className={`p-2 rounded ${view === 'list' ? 'bg-primary text-primary-foreground' : 'bg-blue-100'}`}
             onClick={() => setView('list')}
             aria-label="List view"
           >
@@ -134,7 +134,7 @@ const PayrollEmployers = () => {
         <CardContent className="p-6">
           <div className="flex items-center space-x-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-blue-200" />
               <Input
                 placeholder="Search employers by name or license..."
                 value={searchQuery}
@@ -222,7 +222,7 @@ const PayrollEmployers = () => {
                 <div className="grid md:grid-cols-3 gap-6">
                   {/* Contact Info */}
                   <div className="space-y-3">
-                    <h4 className="font-semibold text-xs text-muted-foreground uppercase tracking-wide">
+                    <h4 className="font-semibold text-xs text-blue-200 uppercase tracking-wide">
                       Contact Information
                     </h4>
                     <div className="space-y-2">
@@ -235,7 +235,7 @@ const PayrollEmployers = () => {
 
                   {/* Compliance */}
                   <div className="space-y-3">
-                    <h4 className="font-semibold text-xs text-muted-foreground uppercase tracking-wide">
+                    <h4 className="font-semibold text-xs text-blue-200 uppercase tracking-wide">
                       Compliance Details
                     </h4>
                     <div className="space-y-1 text-xs">
@@ -248,7 +248,7 @@ const PayrollEmployers = () => {
 
                   {/* Actions */}
                   <div className="space-y-3">
-                    <h4 className="font-semibold text-xs text-muted-foreground uppercase tracking-wide">
+                    <h4 className="font-semibold text-xs text-blue-200 uppercase tracking-wide">
                       Actions
                     </h4>
                     <div className="space-y-2">

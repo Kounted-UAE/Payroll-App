@@ -165,8 +165,8 @@ export function PayslipWizard({ batchData }: PayslipWizardProps) {
                           : status === 'current'
                           ? 'border-l-blue-500 bg-blue-500/10 text-blue-500 font-medium'
                           : status === 'visited'
-                          ? 'border-l-muted-foreground bg-muted/30 text-foreground'
-                          : 'border-l-transparent hover:bg-muted/50'
+                          ? 'border-l-muted-foreground bg-blue-100/30 text-foreground'
+                          : 'border-l-transparent hover:bg-blue-100/50'
                       }`}
                     >
                       <div className="flex items-center gap-2">
@@ -174,7 +174,7 @@ export function PayslipWizard({ batchData }: PayslipWizardProps) {
                         <Icon className="h-4 w-4" />
                         <div className="flex-1">
                           <div className="text-xs font-medium">{step.id}. {step.title}</div>
-                          <div className="text-xs text-muted-foreground">{step.description}</div>
+                          <div className="text-xs text-blue-200">{step.description}</div>
                         </div>
                       </div>
                     </button>
@@ -194,7 +194,7 @@ export function PayslipWizard({ batchData }: PayslipWizardProps) {
                   <CardTitle className="text-lg">
                     Step {currentStep}: {STEPS.find(s => s.id === currentStep)?.title}
                   </CardTitle>
-                  <p className="text-sm text-muted-foreground mt-1">
+                  <p className="text-sm text-blue-200 mt-1">
                     {STEPS.find(s => s.id === currentStep)?.description}
                   </p>
                 </div>
@@ -343,7 +343,7 @@ export function PayslipWizard({ batchData }: PayslipWizardProps) {
                 </Button>
 
                 <div className="flex items-center space-x-2">
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-xs text-blue-200">
                     Step {currentStep} of {STEPS.length}
                   </span>
                 </div>

@@ -178,15 +178,15 @@ const SubmitExpenseWizard = () => {
           <div className="flex items-center justify-between">
             {steps.map((step, index) => (
               <div key={step.id} className="flex items-center">
-                <div className={`flex items-center space-x-2 ${currentStep >= step.id ? "text-blue-500" : "text-muted-foreground"}`}>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${currentStep >= step.id ? "bg-blue-500 text-blue-500-foreground" : "bg-muted"}`}>{step.id}</div>
+                <div className={`flex items-center space-x-2 ${currentStep >= step.id ? "text-blue-500" : "text-blue-200"}`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${currentStep >= step.id ? "bg-blue-500 text-blue-500-foreground" : "bg-blue-100"}`}>{step.id}</div>
                   <div>
                     <p className="font-medium">{step.title}</p>
-                    <p className="text-xs text-muted-foreground">{step.description}</p>
+                    <p className="text-xs text-blue-200">{step.description}</p>
                   </div>
                 </div>
                 {index < steps.length - 1 && (
-                  <div className={`h-px w-20 mx-4 ${currentStep > step.id ? "bg-blue-500" : "bg-muted"}`} />
+                  <div className={`h-px w-20 mx-4 ${currentStep > step.id ? "bg-blue-500" : "bg-blue-100"}`} />
                 )}
               </div>
             ))}
@@ -327,7 +327,7 @@ const SubmitExpenseWizard = () => {
       <div className="flex items-center justify-between">
         <Button variant="outline" onClick={handlePrevious} disabled={currentStep === 1}>Previous</Button>
         <div className="flex items-center space-x-2">
-          <span className="text-xs text-muted-foreground">Step {currentStep} of {steps.length}</span>
+          <span className="text-xs text-blue-200">Step {currentStep} of {steps.length}</span>
         </div>
         <Button onClick={handleNext} disabled={!canProceed()}>
           {currentStep === 4 ? "Submit Expense Run" : "Next"}

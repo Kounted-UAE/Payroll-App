@@ -7,10 +7,10 @@ export const ExerciseMinutesChart = () => {
   return (
     <Card className="w-full">
       <CardHeader className="pb-3">
-        <CardTitle className="text-xs font-medium text-muted-foreground">
+        <CardTitle className="text-xs font-medium text-blue-200">
           Exercise Minutes
         </CardTitle>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-blue-200">
           Your exercise minutes are ahead of where you normally are.
         </p>
       </CardHeader>
@@ -78,7 +78,7 @@ export const ExerciseMinutesChart = () => {
         </div>
 
         {/* Week days labels */}
-        <div className="flex justify-between text-xs text-muted-foreground">
+        <div className="flex justify-between text-xs text-blue-200">
           {weekDays.map((day) => (
             <span key={day}>{day}</span>
           ))}

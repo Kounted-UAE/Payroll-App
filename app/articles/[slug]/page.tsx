@@ -3,10 +3,10 @@
 import { notFound } from "next/navigation"
 import { getArticlePost } from "@/lib/articleLoader"
 import ArticleWrapper from "../wrapper"
-import TableOfContents from '@/components/advontier-website/articles/TableOfContents'
-import ServerMDXRenderer from '@/components/advontier-website/articles/ServerMDXRenderer'
+import TableOfContents from '@/components/advontier-website/articles-dynamic/TableOfContents'
+import ServerMDXRenderer from '@/components/advontier-website/articles-dynamic/ServerMDXRenderer'
 import { Container } from "@/components/advontier-website/Container"
-import ClientTableOfContents from '@/components/advontier-website/articles/ClientTableOfContents'
+import ClientTableOfContents from '@/components/advontier-website/articles-dynamic/ClientTableOfContents'
 
 export default async function ArticleSlugPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params

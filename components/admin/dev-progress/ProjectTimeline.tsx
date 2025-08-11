@@ -213,7 +213,7 @@ function TimelineFeatureNode({ feature, position, recentActivity, onClick }: Tim
           <div className="flex items-start justify-between">
             <div>
               <CardTitle className="text-lg">{feature.title}</CardTitle>
-              <p className="text-sm text-muted-foreground mt-1">{feature.category}</p>
+              <p className="text-sm text-blue-200 mt-1">{feature.category}</p>
             </div>
             <div className="flex items-center gap-2">
               <Badge variant={getStatusVariant(feature.status)}>
@@ -229,7 +229,7 @@ function TimelineFeatureNode({ feature, position, recentActivity, onClick }: Tim
         <CardContent className="space-y-3">
           {/* Description */}
           {feature.description && (
-            <p className="text-sm text-muted-foreground">{feature.description}</p>
+            <p className="text-sm text-blue-200">{feature.description}</p>
           )}
           
           {/* Progress bar */}
@@ -242,7 +242,7 @@ function TimelineFeatureNode({ feature, position, recentActivity, onClick }: Tim
           </div>
           
           {/* Metadata */}
-          <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
+          <div className="flex flex-wrap gap-4 text-xs text-blue-200">
             <div className="flex items-center gap-1">
               <Clock className="h-3 w-3" />
               <span>{feature.estimated_hours}h estimated</span>
@@ -258,7 +258,7 @@ function TimelineFeatureNode({ feature, position, recentActivity, onClick }: Tim
           {/* Dependencies */}
           {feature.dependencies.length > 0 && (
             <div className="text-xs">
-              <span className="text-muted-foreground">Depends on: </span>
+              <span className="text-blue-200">Depends on: </span>
               <span className="text-blue-500">{feature.dependencies.join(', ')}</span>
             </div>
           )}
@@ -281,7 +281,7 @@ function StatCard({ title, value, icon }: { title: string; value: number; icon: 
       <CardContent className="p-4">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm text-muted-foreground">{title}</p>
+            <p className="text-sm text-blue-200">{title}</p>
             <p className="text-2xl font-bold">{value}</p>
           </div>
           {icon}

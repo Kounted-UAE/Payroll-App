@@ -97,7 +97,7 @@ export default function AgentRuntimePage() {
       <div className="flex items-center justify-between">
         <div>
         <h1 className="text-lg text-zinc-600 font-bold">{config.title}</h1>
-          <p className="text-sm text-muted-foreground">{config.description}</p>
+          <p className="text-sm text-blue-200">{config.description}</p>
         </div>
         <div className="flex items-center gap-2">
           <Button asChild size="sm" variant="outline">
@@ -131,7 +131,7 @@ export default function AgentRuntimePage() {
                 {templates.map((t) => (
                   <li key={t.id}>{t.name}</li>
                 ))}
-                {templates.length === 0 && <li className="list-none text-muted-foreground">No templates yet</li>}
+                {templates.length === 0 && <li className="list-none text-blue-200">No templates yet</li>}
               </ul>
             </div>
             <div>
@@ -148,7 +148,7 @@ export default function AgentRuntimePage() {
                     )}
                   </li>
                 ))}
-                {sources.length === 0 && <li className="list-none text-muted-foreground">No sources yet</li>}
+                {sources.length === 0 && <li className="list-none text-blue-200">No sources yet</li>}
               </ul>
             </div>
           </div>

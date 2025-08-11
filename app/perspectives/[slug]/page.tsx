@@ -3,8 +3,8 @@
 import { notFound } from 'next/navigation'
 import { Container } from '@/components/advontier-website/Container'
 import ArticleWrapper from '@/app/articles/wrapper'
-import ServerMDXRenderer from '@/components/advontier-website/articles/ServerMDXRenderer'
-import ClientTableOfContents from '@/components/advontier-website/articles/ClientTableOfContents'
+import ServerMDXRenderer from '@/components/advontier-website/articles-dynamic/ServerMDXRenderer'
+import ClientTableOfContents from '@/components/advontier-website/articles-dynamic/ClientTableOfContents'
 import { getPerspectiveBySlug, toArticlePostShape } from '@/lib/supabase/perspectives'
 
 export default async function PerspectiveSlugPage({ params }: { params: Promise<{ slug: string }> }) {

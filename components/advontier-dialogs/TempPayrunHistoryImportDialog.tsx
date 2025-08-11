@@ -167,14 +167,14 @@ export default function TempPayrunHistoryImportDialog({ open, onOpenChange }: Pr
 
           {parsedRows.length > 0 && (
             <div className="space-y-4">
-              <div className="text-sm text-muted-foreground">
+              <div className="text-sm text-blue-200">
                 Previewing {parsedRows.length} rows.
               </div>
 
               <div className="overflow-x-auto border rounded">
                 <table className="text-xs w-full">
                   <thead>
-                    <tr className="bg-muted">
+                    <tr className="bg-blue-100">
                       {Object.keys(parsedRows[0]).map((col) => (
                         <th key={col} className="px-3 py-2 text-left font-medium">{col}</th>
                       ))}
@@ -193,7 +193,7 @@ export default function TempPayrunHistoryImportDialog({ open, onOpenChange }: Pr
               </div>
 
               {errorRows.length > 0 ? (
-                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                <div className="flex items-center justify-between p-3 bg-blue-100/50 rounded-lg">
                   <Badge variant="destructive">{errorRows.length} row(s) with errors</Badge>
                 </div>
               ) : (

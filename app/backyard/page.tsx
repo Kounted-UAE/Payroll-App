@@ -26,10 +26,10 @@ import {
   Settings,
   BarChart3,
 } from "lucide-react"
-import DashboardEntityStats from '@/components/backyard/DashboardEntityStats'
-import DashboardKPICards from '@/components/backyard/DashboardKPICards'
-import type { KPI } from "@/components/backyard/DashboardKPICards"
-import DashboardQuicklinks from '@/components/backyard/DashboardQuicklinks'
+import DashboardEntityStats from '@/components/advontier-dashboard/DashboardEntityStats'
+import DashboardKPICards from '@/components/advontier-dashboard/DashboardKPICards'
+import type { KPI } from "@/components/advontier-dashboard/DashboardKPICards"
+import DashboardQuicklinks from '@/components/advontier-dashboard/DashboardQuicklinks'
 
 const metrics = [
   { label: "Active Customers", count: 128, description: "Companies with ongoing engagement", link: "/backyard/clients" },
@@ -98,7 +98,7 @@ export default function DashboardHome() {
               <ChartBar className="h-4 w-4 text-primary" />
               Performance Overview
             </h1>
-            <p className="text-xs text-muted-foreground">Key metrics and performance indicators</p>
+            <p className="text-xs text-blue-200">Key metrics and performance indicators</p>
           </div>
         </div>
         <DashboardKPICards kpis={kpiStats} />
@@ -112,7 +112,7 @@ export default function DashboardHome() {
               <Users className="h-4 w-4 text-primary" />
               Entity Statistics
             </h1>
-            <p className="text-xs text-muted-foreground">Overview of all system entities</p>
+            <p className="text-xs text-blue-200">Overview of all system entities</p>
           </div>
         </div>
         <DashboardEntityStats metrics={metrics} />
@@ -155,7 +155,7 @@ export default function DashboardHome() {
                           <div className="ml-3 flex h-7 items-center">
                             <button
                               type="button"
-                              className="rounded-md bg-white text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                              className="rounded-md bg-white text-blue-200 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                               onClick={() => setOpen(false)}
                             >
                               <span className="sr-only">Close panel</span>
@@ -176,7 +176,7 @@ export default function DashboardHome() {
                                     {item.icon && <item.icon className="h-4 w-4 text-primary" />}
                                     <div>
                                       <p className="text-sm font-medium text-foreground">{item.title}</p>
-                                      <p className="text-xs text-muted-foreground">{item.section}</p>
+                                      <p className="text-xs text-blue-200">{item.section}</p>
                                     </div>
                                   </div>
                                   <Badge variant="default" className="text-xs">Active</Badge>
@@ -190,12 +190,12 @@ export default function DashboardHome() {
                             <h3 className="text-sm font-medium text-foreground mb-3">Coming Soon</h3>
                             <div className="space-y-2">
                               {comingSoon.map((item) => (
-                                <div key={item.title} className="flex items-center justify-between p-3 rounded-lg bg-muted/50 ">
+                                <div key={item.title} className="flex items-center justify-between p-3 rounded-lg bg-blue-100/50 ">
                                   <div className="flex items-center gap-3">
-                                    {item.icon && <item.icon className="h-4 w-4 text-muted-foreground" />}
+                                    {item.icon && <item.icon className="h-4 w-4 text-blue-200" />}
                                     <div>
-                                      <p className="text-sm font-medium text-muted-foreground">{item.title}</p>
-                                      <p className="text-xs text-muted-foreground">{item.section}</p>
+                                      <p className="text-sm font-medium text-blue-200">{item.title}</p>
+                                      <p className="text-xs text-blue-200">{item.section}</p>
                                     </div>
                                   </div>
                                   <Badge variant="secondary" className="text-xs">

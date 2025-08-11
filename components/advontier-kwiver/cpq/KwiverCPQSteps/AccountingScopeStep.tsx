@@ -81,7 +81,7 @@ export default function AccountingScopeStep({ data, allData, onChange }: StepPro
 
       <FormSection title="Sales Channels">
         <div className="space-y-4">
-          <p className="text-xs text-muted-foreground">Select all sales channels that apply:</p>
+          <p className="text-xs text-blue-200">Select all sales channels that apply:</p>
           
           <div className="space-y-3">
             {SALES_CHANNELS.map(channel => (

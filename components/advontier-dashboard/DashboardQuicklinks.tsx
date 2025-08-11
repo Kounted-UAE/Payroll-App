@@ -67,7 +67,7 @@ function DropdownMenu({ deck }: { deck: Deck }) {
     <div className="relative inline-block text-left">
       <button
         type="button"
-        className="inline-flex size-8 items-center justify-center rounded-full text-muted-foreground hover:text-foreground focus:outline-none"
+        className="inline-flex size-8 items-center justify-center rounded-full text-blue-200 hover:text-foreground focus:outline-none"
       >
         <EllipsisVerticalIcon className="h-4 w-4" />
         <span className="sr-only">Open options</span>

@@ -26,7 +26,7 @@ export default function DashboardKPICards({ kpis, variant = 'bordered' }: Props)
 
   return (
     <div className="px-6 py-0">
-      <h3 className="text-xs font-semibold text-muted-foreground mb-4">Year-to-date: 2025 vs 2024 (For illustration purposes only)</h3>
+      <h3 className="text-xs font-semibold text-blue-200 mb-4">Year-to-date: 2025 vs 2024 (For illustration purposes only)</h3>
       <dl
         className={clsx(
           'grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3',
@@ -50,7 +50,7 @@ export default function DashboardKPICards({ kpis, variant = 'bordered' }: Props)
               <p
                 className={clsx(
                   'ml-16 truncate text-xs font-medium',
-                  isIcon ? 'text-muted-foreground' : 'text-muted-foreground'
+                  isIcon ? 'text-blue-200' : 'text-blue-200'
                 )}
               >
                 {item.name}
@@ -59,7 +59,7 @@ export default function DashboardKPICards({ kpis, variant = 'bordered' }: Props)
             <dd className="ml-16 flex items-baseline pb-6 sm:pb-7">
               <p className="text-xs font-semibold text-foreground">{item.stat}</p>
               {item.previousStat && (
-                <p className="ml-2 text-xs font-medium text-muted-foreground">
+                <p className="ml-2 text-xs font-medium text-blue-200">
                   from {item.previousStat}
                 </p>
               )}
@@ -80,7 +80,7 @@ export default function DashboardKPICards({ kpis, variant = 'bordered' }: Props)
                 {item.change}
               </p>
               {isIcon && (
-                <div className="absolute inset-x-0 bottom-0 bg-muted px-4 py-4 sm:px-6">
+                <div className="absolute inset-x-0 bottom-0 bg-blue-100 px-4 py-4 sm:px-6">
                   <div className="text-xs">
                     <a href="#" className="font-medium text-primary hover:text-primary/80">
                       View all<span className="sr-only"> {item.name} stats</span>

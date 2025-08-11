@@ -138,7 +138,7 @@ const PayrollDashboard = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-md font-bold tracking-tight">Payroll under Management</h1>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-blue-200 text-sm">
             Comprehensive payroll management for UAE businesses
           </p>
         </div>
@@ -166,11 +166,11 @@ const PayrollDashboard = () => {
               <CardTitle className="text-xs font-medium">
                 {stat.title}
               </CardTitle>
-              <stat.icon className="h-4 w-4 text-muted-foreground" />
+              <stat.icon className="h-4 w-4 text-blue-200" />
             </CardHeader>
             <CardContent>
               <div className="text-xs font-bold">{stat.value}</div>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-blue-200">
                 {stat.description}
               </p>
               <div className="flex items-center mt-2">
@@ -209,7 +209,7 @@ const PayrollDashboard = () => {
                 {quickActions.map((action) => (
                   action.href ? (
                     <Link key={action.title} href={action.href}>
-                      <Card className="cursor-pointer text-foreground bg-muted hover:bg-primary hover:text-primary-foreground transition-colors border-none">
+                      <Card className="cursor-pointer text-foreground bg-blue-100 hover:bg-primary hover:text-primary-foreground transition-colors border-none">
                         <CardContent className="p-2">
                           <div className="flex items-center space-x-3">
                             <div className={`p-2 rounded-md ${action.color}`}>
@@ -234,7 +234,7 @@ const PayrollDashboard = () => {
                           </div>
                           <div>
                             <h3 className="font-semibold">{action.title}</h3>
-                            <p className="text-xs text-muted-foreground">
+                            <p className="text-xs text-blue-200">
                               {action.description}
                             </p>
                           </div>
@@ -262,9 +262,9 @@ const PayrollDashboard = () => {
                 <div key={index} className="flex flex-col space-y-1">
                   <div className="flex items-center justify-between">
                     <p className="text-xs font-medium">{activity.action}</p>
-                    <p className="text-xs text-muted-foreground">{activity.time}</p>
+                    <p className="text-xs text-blue-200">{activity.time}</p>
                   </div>
-                  <p className="text-xs text-muted-foreground">{activity.company}</p>
+                  <p className="text-xs text-blue-200">{activity.company}</p>
                   {activity.amount && (
                     <p className="text-xs font-semibold text-primary">{activity.amount}</p>
                   )}

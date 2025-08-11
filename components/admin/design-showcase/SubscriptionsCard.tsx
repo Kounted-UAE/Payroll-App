@@ -9,7 +9,7 @@ export const SubscriptionsCard = () => {
     <Card className="w-full max-w-sm">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-xs font-medium text-muted-foreground">
+          <CardTitle className="text-xs font-medium text-blue-200">
             Subscriptions
           </CardTitle>
           <Button variant="ghost" size="sm" className="text-xs h-6 px-2">

@@ -23,10 +23,10 @@ export default function AgentsIndexPage() {
       <div className="flex items-center justify-between">
         <div>
         <h1 className="text-lg text-zinc-600 font-bold">Specialist Agents</h1>
-          <p className="text-sm text-muted-foreground">UAE/GCC focused, aligned with international frameworks such as IFRS, CRS and AML.</p>
+          <p className="text-sm text-blue-200">UAE/GCC focused, aligned with international frameworks such as IFRS, CRS and AML.</p>
         </div>
         {isAdmin && (
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <div className="flex items-center gap-2 text-xs text-blue-200">
             <Shield className="h-4 w-4" /> Admin configurable
           </div>
         )}
@@ -39,7 +39,7 @@ export default function AgentsIndexPage() {
               <CardTitle className="text-base">{agent.title}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              <p className="text-sm text-muted-foreground">{agent.description}</p>
+              <p className="text-sm text-blue-200">{agent.description}</p>
               <div className="flex items-center gap-2">
                 <Button asChild size="sm">
                   <Link href={`/backyard/agents/${agent.slug}`}>Open Agent</Link>
@@ -53,7 +53,7 @@ export default function AgentsIndexPage() {
                 )}
               </div>
               {isAdmin && (
-                <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                <div className="flex items-center gap-3 text-xs text-blue-200">
                   <span className="inline-flex items-center gap-1"><FileText className="h-3 w-3" /> Templates</span>
                   <span className="inline-flex items-center gap-1"><Database className="h-3 w-3" /> Sources</span>
                 </div>

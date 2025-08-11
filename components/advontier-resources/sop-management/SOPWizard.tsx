@@ -381,7 +381,7 @@ export function SOPWizard({ isOpen, onClose, editingSOP, categories }: SOPWizard
             <div className="text-center">
               <FileText className="h-16 w-16 text-blue-500 mx-auto mb-4" />
               <h3 className="text-xs font-semibold mb-2">Review Your SOP</h3>
-              <p className="text-muted-foreground mb-6">
+              <p className="text-blue-200 mb-6">
                 Please review the information below before saving.
               </p>
             </div>
@@ -389,7 +389,7 @@ export function SOPWizard({ isOpen, onClose, editingSOP, categories }: SOPWizard
             <div className="space-y-4">
               <div>
                 <Label className="text-xs font-medium">Title:</Label>
-                <p className="text-xs text-muted-foreground">{formData.title}</p>
+                <p className="text-xs text-blue-200">{formData.title}</p>
               </div>
               <div>
                 <Label className="text-xs font-medium">Category:</Label>
@@ -401,19 +401,19 @@ export function SOPWizard({ isOpen, onClose, editingSOP, categories }: SOPWizard
               </div>
               <div>
                 <Label className="text-xs font-medium">Who & When Items:</Label>
-                <p className="text-xs text-muted-foreground">{formData.whoAndWhen.length} items</p>
+                <p className="text-xs text-blue-200">{formData.whoAndWhen.length} items</p>
               </div>
               <div>
                 <Label className="text-xs font-medium">Data Document Sections:</Label>
-                <p className="text-xs text-muted-foreground">{formData.dataDocuments.length} sections</p>
+                <p className="text-xs text-blue-200">{formData.dataDocuments.length} sections</p>
               </div>
               <div>
                 <Label className="text-xs font-medium">Process Steps:</Label>
-                <p className="text-xs text-muted-foreground">{formData.processSteps.length} steps</p>
+                <p className="text-xs text-blue-200">{formData.processSteps.length} steps</p>
               </div>
               <div>
                 <Label className="text-xs font-medium">Templates:</Label>
-                <p className="text-xs text-muted-foreground">{formData.templates.length} templates</p>
+                <p className="text-xs text-blue-200">{formData.templates.length} templates</p>
               </div>
             </div>
           </div>
@@ -440,13 +440,13 @@ export function SOPWizard({ isOpen, onClose, editingSOP, categories }: SOPWizard
               <div className={`flex items-center justify-center w-8 h-8 rounded-full text-xs font-medium ${
                 currentStep >= step.number 
                   ? 'bg-blue-500 text-blue-500-foreground' 
-                  : 'bg-muted text-muted-foreground'
+                  : 'bg-blue-100 text-blue-200'
               }`}>
                 {step.number}
               </div>
               {index < steps.length - 1 && (
                 <div className={`w-12 h-0.5 mx-2 ${
-                  currentStep > step.number ? 'bg-blue-500' : 'bg-muted'
+                  currentStep > step.number ? 'bg-blue-500' : 'bg-blue-100'
                 }`} />
               )}
             </div>
@@ -458,7 +458,7 @@ export function SOPWizard({ isOpen, onClose, editingSOP, categories }: SOPWizard
           <h3 className="text-xs font-semibold mb-2">
             {steps[currentStep - 1].title}
           </h3>
-          <p className="text-xs text-muted-foreground mb-4">
+          <p className="text-xs text-blue-200 mb-4">
             {steps[currentStep - 1].description}
           </p>
           

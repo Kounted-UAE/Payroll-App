@@ -77,7 +77,7 @@ const Index = () => {
     <CardTitle className="text-xs font-semibold">New Component</CardTitle>
   </CardHeader>
   <CardContent>
-    <p className="text-xs text-muted-foreground">Component content goes here</p>
+    <p className="text-xs text-blue-200">Component content goes here</p>
   </CardContent>
 </Card>`
   });
@@ -95,7 +95,7 @@ const Index = () => {
   <CardHeader>
     <CardTitle className="text-xs font-semibold">Total Revenue</CardTitle>
     <div className="text-xs font-bold text-primary">$45,231.89</div>
-    <p className="text-xs text-muted-foreground">+20.1% from last month</p>
+    <p className="text-xs text-blue-200">+20.1% from last month</p>
   </CardHeader>
 </Card>`
     },
@@ -110,7 +110,7 @@ const Index = () => {
   <CardHeader>
     <CardTitle className="text-xs font-semibold">Subscriptions</CardTitle>
     <div className="text-xs font-bold text-primary">+2350</div>
-    <p className="text-xs text-muted-foreground">+180.1% from last month</p>
+    <p className="text-xs text-blue-200">+180.1% from last month</p>
   </CardHeader>
 </Card>`
     },
@@ -140,12 +140,12 @@ const Index = () => {
 <Card className="bg-card border-border">
   <CardHeader>
     <CardTitle className="text-xs font-semibold">Move Goal</CardTitle>
-    <p className="text-xs text-muted-foreground">Daily activity tracker</p>
+    <p className="text-xs text-blue-200">Daily activity tracker</p>
   </CardHeader>
   <CardContent>
     <div className="space-y-2">
       <Progress value={70} className="h-2" />
-      <p className="text-xs text-muted-foreground">70% of daily goal completed</p>
+      <p className="text-xs text-blue-200">70% of daily goal completed</p>
     </div>
   </CardContent>
 </Card>`
@@ -278,7 +278,7 @@ const Index = () => {
         </Avatar>
         <div>
           <p className="text-xs font-medium">John Doe</p>
-          <p className="text-xs text-muted-foreground">Administrator</p>
+          <p className="text-xs text-blue-200">Administrator</p>
         </div>
       </div>
     </div>
@@ -298,7 +298,7 @@ const Index = () => {
   </CardHeader>
   <CardContent>
     <div className="space-y-3">
-      <div className="bg-muted p-3 rounded-lg">
+      <div className="bg-blue-100 p-3 rounded-lg">
         <p className="text-xs">How can we help you today?</p>
       </div>
       <div className="flex space-x-2">
@@ -317,29 +317,29 @@ const Index = () => {
       component: (
         <div className="h-96 w-full border rounded-lg">
           <div className="flex h-full">
-            <div className="w-60 border-r bg-muted/10 p-4">
+            <div className="w-60 border-r bg-blue-100/10 p-4">
               <div className="space-y-4">
                 <div className="font-semibold text-xs">Documentation</div>
                 <div className="space-y-2">
                   <div className="text-xs font-medium">Getting Started</div>
                   <div className="ml-4 space-y-1">
-                    <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Installation</div>
-                    <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Project Structure</div>
+                    <div className="text-xs text-blue-200 cursor-pointer hover:text-foreground">Installation</div>
+                    <div className="text-xs text-blue-200 cursor-pointer hover:text-foreground">Project Structure</div>
                   </div>
                 </div>
                 <div className="space-y-2">
                   <div className="text-xs font-medium">Building Your Application</div>
                   <div className="ml-4 space-y-1">
                     <div className="text-xs text-primary bg-primary/10 px-2 py-1 rounded">Data Fetching</div>
-                    <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Routing</div>
-                    <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Rendering</div>
+                    <div className="text-xs text-blue-200 cursor-pointer hover:text-foreground">Routing</div>
+                    <div className="text-xs text-blue-200 cursor-pointer hover:text-foreground">Rendering</div>
                   </div>
                 </div>
               </div>
             </div>
             <div className="flex-1 p-4">
-              <div className="h-full bg-muted/50 rounded-lg flex items-center justify-center">
-                <span className="text-muted-foreground">Main Content Area</span>
+              <div className="h-full bg-blue-100/50 rounded-lg flex items-center justify-center">
+                <span className="text-blue-200">Main Content Area</span>
               </div>
             </div>
           </div>
@@ -348,21 +348,21 @@ const Index = () => {
       code: `// Simple Sidebar Component
 <div className="h-96 w-full border rounded-lg">
   <div className="flex h-full">
-    <div className="w-60 border-r bg-muted/10 p-4">
+    <div className="w-60 border-r bg-blue-100/10 p-4">
       <div className="space-y-4">
         <div className="font-semibold text-xs">Documentation</div>
         <div className="space-y-2">
           <div className="text-xs font-medium">Getting Started</div>
           <div className="ml-4 space-y-1">
-            <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Installation</div>
-            <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Project Structure</div>
+            <div className="text-xs text-blue-200 cursor-pointer hover:text-foreground">Installation</div>
+            <div className="text-xs text-blue-200 cursor-pointer hover:text-foreground">Project Structure</div>
           </div>
         </div>
       </div>
     </div>
     <div className="flex-1 p-4">
-      <div className="h-full bg-muted/50 rounded-lg flex items-center justify-center">
-        <span className="text-muted-foreground">Main Content Area</span>
+      <div className="h-full bg-blue-100/50 rounded-lg flex items-center justify-center">
+        <span className="text-blue-200">Main Content Area</span>
       </div>
     </div>
   </div>
@@ -376,17 +376,17 @@ const Index = () => {
       component: (
         <div className="h-96 w-full border rounded-lg">
           <div className="flex h-full">
-            <div className="w-60 border-r bg-muted/10 p-4">
+            <div className="w-60 border-r bg-blue-100/10 p-4">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="font-semibold text-xs">Documentation</div>
-                  <div className="text-xs bg-muted px-2 py-1 rounded">v1.0.1</div>
+                  <div className="text-xs bg-blue-100 px-2 py-1 rounded">v1.0.1</div>
                 </div>
                 <div className="relative">
-                  <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Search className="absolute left-2 top-2.5 h-4 w-4 text-blue-200" />
                   <input
                     placeholder="Search"
-                    className="w-full pl-8 pr-4 py-2 text-xs border rounded-md bg-background"
+                    className="w-full pl-8 pr-4 py-2 text-xs border rounded-md bg-white"
                   />
                 </div>
                 <div className="space-y-3">
@@ -396,8 +396,8 @@ const Index = () => {
                       Getting Started
                     </div>
                     <div className="ml-6 space-y-1">
-                      <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Installation</div>
-                      <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Project Structure</div>
+                      <div className="text-xs text-blue-200 cursor-pointer hover:text-foreground">Installation</div>
+                      <div className="text-xs text-blue-200 cursor-pointer hover:text-foreground">Project Structure</div>
                     </div>
                   </div>
                   <div className="space-y-2">
@@ -407,16 +407,16 @@ const Index = () => {
                     </div>
                     <div className="ml-6 space-y-1">
                       <div className="text-xs text-primary bg-primary/10 px-2 py-1 rounded">Data Fetching</div>
-                      <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Routing</div>
-                      <div className="text-xs text-muted-foreground cursor-pointer hover:text-foreground">Rendering</div>
+                      <div className="text-xs text-blue-200 cursor-pointer hover:text-foreground">Routing</div>
+                      <div className="text-xs text-blue-200 cursor-pointer hover:text-foreground">Rendering</div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <div className="flex-1 p-4">
-              <div className="h-full bg-muted/50 rounded-lg flex items-center justify-center">
-                <span className="text-muted-foreground">Main Content Area</span>
+              <div className="h-full bg-blue-100/50 rounded-lg flex items-center justify-center">
+                <span className="text-blue-200">Main Content Area</span>
               </div>
             </div>
           </div>
@@ -425,15 +425,15 @@ const Index = () => {
       code: `// Collapsible Sidebar Component with Search
 <div className="h-96 w-full border rounded-lg">
   <div className="flex h-full">
-    <div className="w-60 border-r bg-muted/10 p-4">
+    <div className="w-60 border-r bg-blue-100/10 p-4">
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div className="font-semibold text-xs">Documentation</div>
-          <div className="text-xs bg-muted px-2 py-1 rounded">v1.0.1</div>
+          <div className="text-xs bg-blue-100 px-2 py-1 rounded">v1.0.1</div>
         </div>
         <div className="relative">
-          <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-          <input placeholder="Search" className="w-full pl-8 pr-4 py-2 text-xs border rounded-md bg-background" />
+          <Search className="absolute left-2 top-2.5 h-4 w-4 text-blue-200" />
+          <input placeholder="Search" className="w-full pl-8 pr-4 py-2 text-xs border rounded-md bg-white" />
         </div>
       </div>
     </div>
@@ -448,7 +448,7 @@ const Index = () => {
       component: (
         <div className="h-96 w-full border rounded-lg">
           <div className="flex h-full">
-            <div className="w-16 border-r bg-muted/10 p-2 flex flex-col items-center space-y-4">
+            <div className="w-16 border-r bg-blue-100/10 p-2 flex flex-col items-center space-y-4">
               <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
                 <span className="text-primary-foreground text-xs font-bold">D</span>
               </div>
@@ -456,20 +456,20 @@ const Index = () => {
                 <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center cursor-pointer">
                   <Home className="h-4 w-4 text-primary" />
                 </div>
-                <div className="w-8 h-8 rounded-md flex items-center justify-center cursor-pointer hover:bg-muted">
+                <div className="w-8 h-8 rounded-md flex items-center justify-center cursor-pointer hover:bg-blue-100">
                   <FileText className="h-4 w-4" />
                 </div>
-                <div className="w-8 h-8 rounded-md flex items-center justify-center cursor-pointer hover:bg-muted">
+                <div className="w-8 h-8 rounded-md flex items-center justify-center cursor-pointer hover:bg-blue-100">
                   <Settings className="h-4 w-4" />
                 </div>
-                <div className="w-8 h-8 rounded-md flex items-center justify-center cursor-pointer hover:bg-muted">
+                <div className="w-8 h-8 rounded-md flex items-center justify-center cursor-pointer hover:bg-blue-100">
                   <Users className="h-4 w-4" />
                 </div>
               </div>
             </div>
             <div className="flex-1 p-4">
-              <div className="h-full bg-muted/50 rounded-lg flex items-center justify-center">
-                <span className="text-muted-foreground">Collapsed Sidebar Content</span>
+              <div className="h-full bg-blue-100/50 rounded-lg flex items-center justify-center">
+                <span className="text-blue-200">Collapsed Sidebar Content</span>
               </div>
             </div>
           </div>
@@ -478,7 +478,7 @@ const Index = () => {
       code: `// Icon Collapsible Sidebar Component
 <div className="h-96 w-full border rounded-lg">
   <div className="flex h-full">
-    <div className="w-16 border-r bg-muted/10 p-2 flex flex-col items-center space-y-4">
+    <div className="w-16 border-r bg-blue-100/10 p-2 flex flex-col items-center space-y-4">
       <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
         <span className="text-primary-foreground text-xs font-bold">D</span>
       </div>
@@ -486,7 +486,7 @@ const Index = () => {
         <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center cursor-pointer">
           <Home className="h-4 w-4 text-primary" />
         </div>
-        <div className="w-8 h-8 rounded-md flex items-center justify-center cursor-pointer hover:bg-muted">
+        <div className="w-8 h-8 rounded-md flex items-center justify-center cursor-pointer hover:bg-blue-100">
           <FileText className="h-4 w-4" />
         </div>
       </div>
@@ -502,7 +502,7 @@ const Index = () => {
       component: (
         <div className="h-96 w-full border rounded-lg">
           <div className="flex h-full">
-            <div className="w-64 border-r bg-muted/10 p-4">
+            <div className="w-64 border-r bg-blue-100/10 p-4">
               <div className="space-y-2">
                 <div className="font-semibold text-xs">Explorer</div>
                 <div className="space-y-1">
@@ -522,11 +522,11 @@ const Index = () => {
                         <FileText className="h-3 w-3" />
                         <span>button.tsx</span>
                       </div>
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground cursor-pointer">
+                      <div className="flex items-center gap-1 text-xs text-blue-200 hover:text-foreground cursor-pointer">
                         <FileText className="h-3 w-3" />
                         <span>input.tsx</span>
                       </div>
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground cursor-pointer">
+                      <div className="flex items-center gap-1 text-xs text-blue-200 hover:text-foreground cursor-pointer">
                         <FileText className="h-3 w-3" />
                         <span>card.tsx</span>
                       </div>
@@ -536,8 +536,8 @@ const Index = () => {
               </div>
             </div>
             <div className="flex-1 p-4">
-              <div className="h-full bg-muted/50 rounded-lg flex items-center justify-center">
-                <span className="text-muted-foreground">File Editor Area</span>
+              <div className="h-full bg-blue-100/50 rounded-lg flex items-center justify-center">
+                <span className="text-blue-200">File Editor Area</span>
               </div>
             </div>
           </div>
@@ -546,7 +546,7 @@ const Index = () => {
       code: `// File Tree Sidebar Component
 <div className="h-96 w-full border rounded-lg">
   <div className="flex h-full">
-    <div className="w-64 border-r bg-muted/10 p-4">
+    <div className="w-64 border-r bg-blue-100/10 p-4">
       <div className="space-y-2">
         <div className="font-semibold text-xs">Explorer</div>
         <div className="space-y-1">
@@ -569,7 +569,7 @@ const Index = () => {
       component: (
         <div className="h-96 w-full border rounded-lg">
           <div className="flex h-full">
-            <div className="w-72 border-r bg-muted/10 p-4">
+            <div className="w-72 border-r bg-blue-100/10 p-4">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="font-semibold">July 2025</div>
@@ -580,7 +580,7 @@ const Index = () => {
                 </div>
                 <div className="grid grid-cols-7 gap-1 text-xs">
                   {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
-                    <div key={day} className="text-center text-muted-foreground p-1">{day}</div>
+                    <div key={day} className="text-center text-blue-200 p-1">{day}</div>
                   ))}
                   {Array.from({length: 35}, (_, i) => {
                     const day = i - 2;
@@ -589,7 +589,7 @@ const Index = () => {
                     return (
                       <div key={i} className={`text-center p-1 text-xs cursor-pointer rounded
                         ${isToday ? 'bg-primary text-primary-foreground' : ''}
-                        ${isCurrentMonth ? 'hover:bg-muted' : 'text-muted-foreground'}
+                        ${isCurrentMonth ? 'hover:bg-blue-100' : 'text-blue-200'}
                       `}>
                         {isCurrentMonth ? day : day <= 0 ? 30 + day : day - 31}
                       </div>
@@ -616,8 +616,8 @@ const Index = () => {
               </div>
             </div>
             <div className="flex-1 p-4">
-              <div className="h-full bg-muted/50 rounded-lg flex items-center justify-center">
-                <span className="text-muted-foreground">Calendar Events View</span>
+              <div className="h-full bg-blue-100/50 rounded-lg flex items-center justify-center">
+                <span className="text-blue-200">Calendar Events View</span>
               </div>
             </div>
           </div>
@@ -626,7 +626,7 @@ const Index = () => {
       code: `// Calendar Sidebar Component
 <div className="h-96 w-full border rounded-lg">
   <div className="flex h-full">
-    <div className="w-72 border-r bg-muted/10 p-4">
+    <div className="w-72 border-r bg-blue-100/10 p-4">
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div className="font-semibold">July 2025</div>
@@ -637,7 +637,7 @@ const Index = () => {
         </div>
         <div className="grid grid-cols-7 gap-1 text-xs">
           {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
-            <div key={day} className="text-center text-muted-foreground p-1">{day}</div>
+            <div key={day} className="text-center text-blue-200 p-1">{day}</div>
           ))}
         </div>
       </div>
@@ -680,13 +680,13 @@ const Index = () => {
       // Simple JSX to React element conversion for basic cases
       // This is a simplified version - in a real app you'd use a proper JSX parser
       return (
-        <div className="border rounded-lg p-4 bg-muted/20">
+        <div className="border rounded-lg p-4 bg-blue-100/20">
           <div dangerouslySetInnerHTML={{ __html: code.replace(/^\/\/.*$/gm, '') }} />
         </div>
       );
     } catch (error) {
       return (
-        <div className="border rounded-lg p-4 bg-muted/20 text-red-500">
+        <div className="border rounded-lg p-4 bg-blue-100/20 text-red-500">
           Error rendering component
         </div>
       );
@@ -707,7 +707,7 @@ const Index = () => {
       <div 
         className="bg-card p-4 border rounded-lg"
         dangerouslySetInnerHTML={{ 
-          __html: `<div class="text-xs text-muted-foreground">Custom Component: ${newComponent.title}</div><div class="mt-2 p-2 bg-muted/30 rounded text-xs">Preview of custom component</div>` 
+          __html: `<div class="text-xs text-blue-200">Custom Component: ${newComponent.title}</div><div class="mt-2 p-2 bg-blue-100/30 rounded text-xs">Preview of custom component</div>` 
         }}
       />
     );
@@ -734,7 +734,7 @@ const Index = () => {
     <CardTitle className="text-xs font-semibold">New Component</CardTitle>
   </CardHeader>
   <CardContent>
-    <p className="text-xs text-muted-foreground">Component content goes here</p>
+    <p className="text-xs text-blue-200">Component content goes here</p>
   </CardContent>
 </Card>`
     });
@@ -746,14 +746,14 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="border-b bg-card/50 backdrop-blur supports-[backdrop-filter]:bg-card/20">
         <div className="container px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-lg text-zinc-600 font-bold">Dashboard Components</h1>
-              <p className="text-muted-foreground mt-1">Interactive component library showcase</p>
+              <p className="text-blue-200 mt-1">Interactive component library showcase</p>
             </div>
             <Badge variant="secondary" className="bg-primary/10 text-primary">
               {allComponents.length} Components
@@ -799,7 +799,7 @@ const Index = () => {
                     <CardDescription>{comp.description}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="border rounded-lg p-4 bg-muted/20">
+                    <div className="border rounded-lg p-4 bg-blue-100/20">
                       {comp.component}
                     </div>
                     <Button 
@@ -810,9 +810,9 @@ const Index = () => {
                       {selectedComponent === comp.id ? 'Hide Details' : 'View Details'}
                     </Button>
                     {selectedComponent === comp.id && (
-                      <div className="mt-4 p-4 bg-muted/50 rounded-lg">
+                      <div className="mt-4 p-4 bg-blue-100/50 rounded-lg">
                         <h4 className="font-semibold mb-2">Component Details</h4>
-                        <p className="text-xs text-muted-foreground mb-3">{comp.description}</p>
+                        <p className="text-xs text-blue-200 mb-3">{comp.description}</p>
                         <div className="flex flex-wrap gap-2">
                           <Badge variant="secondary">React</Badge>
                           <Badge variant="secondary">TypeScript</Badge>
@@ -840,7 +840,7 @@ const Index = () => {
                   {/* Component Palette */}
                   <div className="lg:col-span-1 space-y-4">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="font-semibold text-xs text-muted-foreground uppercase tracking-wider">
+                      <h3 className="font-semibold text-xs text-blue-200 uppercase tracking-wider">
                         Components
                       </h3>
                       <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
@@ -929,7 +929,7 @@ const Index = () => {
                           <div className="flex flex-col items-start">
                             <span className="font-medium text-xs">{comp.title}</span>
                             <div className="flex items-center gap-1">
-                              <span className="text-xs text-muted-foreground">{comp.category}</span>
+                              <span className="text-xs text-blue-200">{comp.category}</span>
                               {comp.isCustom && <Badge variant="secondary" className="text-xs px-1 py-0">Custom</Badge>}
                             </div>
                           </div>
@@ -941,7 +941,7 @@ const Index = () => {
                   {/* Playground Canvas */}
                   <div className="lg:col-span-3">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="font-semibold text-xs text-muted-foreground uppercase tracking-wider">
+                      <h3 className="font-semibold text-xs text-blue-200 uppercase tracking-wider">
                         Canvas ({playgroundComponents.length} components)
                       </h3>
                       <div className="flex items-center gap-4">
@@ -975,7 +975,7 @@ const Index = () => {
                             <p className="text-blue-400">
                               No components added yet
                             </p>
-                            <p className="text-xs text-muted-foreground">
+                            <p className="text-xs text-blue-200">
                               Click on components from the left panel to add them here
                             </p>
                           </div>
@@ -1002,7 +1002,7 @@ const Index = () => {
                                 <div className="grid grid-cols-2 gap-4">
                                   {/* Code Editor */}
                                   <div className="space-y-2">
-                                    <div className="text-xs text-muted-foreground mb-2 font-medium flex items-center gap-2">
+                                    <div className="text-xs text-blue-200 mb-2 font-medium flex items-center gap-2">
                                       <Code className="w-3 h-3" />
                                       {comp.title} - Code
                                     </div>
@@ -1027,18 +1027,18 @@ const Index = () => {
                                   
                                   {/* Live Preview */}
                                   <div className="space-y-2">
-                                    <div className="text-xs text-muted-foreground mb-2 font-medium flex items-center gap-2">
+                                    <div className="text-xs text-blue-200 mb-2 font-medium flex items-center gap-2">
                                       <Eye className="w-3 h-3" />
                                       {comp.title} - Preview
                                     </div>
-                                    <div className="border rounded-lg p-4 bg-muted/20 min-h-[200px]">
+                                    <div className="border rounded-lg p-4 bg-blue-100/20 min-h-[200px]">
                                       {comp.component}
                                     </div>
                                   </div>
                                 </div>
                               ) : (
                                 <div>
-                                  <div className="text-xs text-muted-foreground mb-2 font-medium">
+                                  <div className="text-xs text-blue-200 mb-2 font-medium">
                                     {comp.title}
                                   </div>
                                   {comp.component}

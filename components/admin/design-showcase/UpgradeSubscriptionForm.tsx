@@ -24,7 +24,7 @@ export const UpgradeSubscriptionForm = () => {
     <Card className="w-full max-w-md">
       <CardHeader className="pb-4">
         <CardTitle className="text-xs">Upgrade your subscription</CardTitle>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-blue-200">
           You are currently on the free plan. Upgrade to the pro plan to get access to all features.
         </p>
       </CardHeader>
@@ -87,7 +87,7 @@ export const UpgradeSubscriptionForm = () => {
         {/* Plan Selection */}
         <div className="space-y-3">
           <Label className="text-xs">Plan</Label>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-blue-200">
             Select the plan that best fits your needs.
           </p>
           <RadioGroup value={selectedPlan} onValueChange={setSelectedPlan}>
@@ -95,14 +95,14 @@ export const UpgradeSubscriptionForm = () => {
               <RadioGroupItem value="starter" id="starter" />
               <div className="flex-1">
                 <Label htmlFor="starter" className="text-xs font-medium">Starter Plan</Label>
-                <p className="text-xs text-muted-foreground">Perfect for small businesses.</p>
+                <p className="text-xs text-blue-200">Perfect for small businesses.</p>
               </div>
             </div>
             <div className="flex items-center space-x-2 p-3 border rounded-lg">
               <RadioGroupItem value="pro" id="pro" />
               <div className="flex-1">
                 <Label htmlFor="pro" className="text-xs font-medium">Pro Plan</Label>
-                <p className="text-xs text-muted-foreground">More features and storage.</p>
+                <p className="text-xs text-blue-200">More features and storage.</p>
               </div>
             </div>
           </RadioGroup>
