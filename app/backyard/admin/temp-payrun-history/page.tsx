@@ -3,7 +3,7 @@
 'use client'
 
 import { useState } from 'react'
-import TempPayrunHistoryImportDialog from '@/components/advontier-dialogs/TempPayrunHistoryImportDialog'
+import TempPayrunHistoryImportDialog from '@/components/admin/TempPayrunHistoryImportDialog'
 
 export default function TempPayrunHistoryPage() {
   const [dialogOpen, setDialogOpen] = useState(false)

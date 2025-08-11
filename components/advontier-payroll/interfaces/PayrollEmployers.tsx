@@ -28,7 +28,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { BulkImportExportDialog } from '@/components/advontier-dialogs/BulkImportExportDialog'
+import { BulkImportExportDialog } from '@/components/admin/BulkImportExportDialog'
 import { employerCsvSchema, EMPLOYER_CSV_TEMPLATE, EMPLOYER_EXAMPLE_ROW } from '@/lib/validators/employerCsvSchema'
 
 const PayrollEmployers = () => {

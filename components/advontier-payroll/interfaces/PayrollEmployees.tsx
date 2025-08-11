@@ -24,7 +24,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { BulkImportExportDialog } from "@/components/advontier-dialogs/BulkImportExportDialog"
+import { BulkImportExportDialog } from "@/components/admin/BulkImportExportDialog"
 import {
   employeeCsvSchema,
   EMPLOYEE_CSV_TEMPLATE,

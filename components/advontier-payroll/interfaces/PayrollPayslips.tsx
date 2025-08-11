@@ -22,7 +22,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { ViewToggle } from "@/components/ui/ViewToggle"
-import { BulkImportExportDialog } from "@/components/advontier-dialogs/BulkImportExportDialog"
+import { BulkImportExportDialog } from "@/components/admin/BulkImportExportDialog"
 import { z } from "zod"
 import { payslipCsvSchema, PAYSLIP_CSV_TEMPLATE, PAYSLIP_EXAMPLE_ROW } from "@/lib/validators/payslipCsvSchema"
 

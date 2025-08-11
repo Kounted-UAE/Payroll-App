@@ -59,7 +59,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { ViewToggle } from "@/components/ui/ViewToggle";
-import { BulkImportExportDialog } from '@/components/advontier-dialogs/BulkImportExportDialog';
+import { BulkImportExportDialog } from '@/components/admin/BulkImportExportDialog';
 import { payrunCsvSchema, PAYRUN_CSV_TEMPLATE, PAYRUN_EXAMPLE_ROW } from '@/lib/validators/payrunCsvSchema';
 import { useState as useClientState } from 'react';
 

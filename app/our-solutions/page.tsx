@@ -15,6 +15,7 @@ import { Testimonial, TestimonialBody } from '@/components/advontier-website/Tes
 import { formatDate } from '@/lib/formatDate'
 import { type CaseStudy, type MDXEntry, loadCaseStudies } from '@/lib/mdx'
 import { RootLayout } from '@/components/advontier-website/layout/RootLayout'
+import { GridPattern } from '@/components/advontier-website/GridPattern'
 
 // Use string paths for public images/logos
 const logoBrightPath = '/clients/bright-path/logo-dark.svg'
