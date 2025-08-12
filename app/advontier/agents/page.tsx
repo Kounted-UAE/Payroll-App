@@ -42,11 +42,11 @@ export default function AgentsIndexPage() {
               <p className="text-sm text-blue-200">{agent.description}</p>
               <div className="flex items-center gap-2">
                 <Button asChild size="sm">
-                  <Link href={`/backyard/agents/${agent.slug}`}>Open Agent</Link>
+                  <Link href={`/advontier/agents/${agent.slug}`}>Open Agent</Link>
                 </Button>
                 {isAdmin && (
                   <Button variant="outline" size="sm" asChild>
-                    <Link href={`/backyard/agents/${agent.slug}/configure`}>
+                    <Link href={`/advontier/agents/${agent.slug}/configure`}>
                       Configure
                     </Link>
                   </Button>

@@ -58,28 +58,28 @@ const PayrollDashboard = () => {
       title: "Add New Employer",
       description: "Onboard a new client company",
       icon: Building,
-      href: "/backyard/payroll/employers/new",
+      href: "/advontier/payroll/employers/new",
       color: "bg-primary"
     },
     {
       title: "Add Employee",
       description: "Register new employee",
       icon: Users,
-      href: "/backyard/payroll/employees/new",
+      href: "/advontier/payroll/employees/new",
       color: "bg-primary"
     },
     {
       title: "Create Payrun",
       description: "Process monthly payroll",
       icon: FileText,
-      href: "/backyard/payroll/payruns/new",
+      href: "/advontier/payroll/payruns/new",
       color: "bg-primary"
     },
     {
       title: "Review Claims",
       description: "Approve expense claims",
       icon: Receipt,
-      href: "/backyard/payroll/expenses",
+      href: "/advontier/payroll/expenses",
       color: "bg-primary"
     }
   ]
@@ -143,13 +143,13 @@ const PayrollDashboard = () => {
           </p>
         </div>
         <div className="flex gap-2">
-          <Link href="/backyard/payroll/reports">
+          <Link href="/advontier/payroll/reports">
             <Button variant="outline">
               <BarChart3 className="mr-2 h-4 w-4" />
               Reports
             </Button>
           </Link>
-          <Link href="/backyard/payroll/payruns/new">
+          <Link href="/advontier/payroll/payruns/new">
             <Button>
               <Plus className="mr-2 h-4 w-4" />
               New Payrun

@@ -42,7 +42,7 @@ export default function SOPManagementPage() {
   };
 
   const handleView = (sopId: string, category: string) => {
-    navigate.push(`/backyard/sop-resources/${category}/${sopId}`);
+    navigate.push(`/advontier/sop-resources/${category}/${sopId}`);
   };
 
   const getStatusColor = (status: string) => {
@@ -138,7 +138,7 @@ export default function SOPManagementPage() {
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4 mb-6">
-          <Button variant="outline" onClick={() => navigate.push('/backyard/sop-resources')}>
+          <Button variant="outline" onClick={() => navigate.push('/advontier/sop-resources')}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to SOP Center
           </Button>

@@ -119,7 +119,7 @@ export default function AgentConfigurePage() {
   }, [agent, valid, supabase])
 
   if (!valid) return notFound()
-  if (!isAdmin) router.push(`/backyard/agents/${agent}`)
+  if (!isAdmin) router.push(`/advontier/agents/${agent}`)
 
   const save = async () => {
     // Upsert agent config into kyc_knowledge_base
@@ -293,7 +293,7 @@ export default function AgentConfigurePage() {
 
       <div className="flex justify-end gap-2">
         <Button variant="outline" asChild>
-          <a href={`/backyard/agents/${agent}`}>Cancel</a>
+          <a href={`/advontier/agents/${agent}`}>Cancel</a>
         </Button>
         <Button onClick={save}>Save</Button>
       </div>

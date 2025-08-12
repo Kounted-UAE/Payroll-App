@@ -236,7 +236,7 @@ const PayrollPayruns = () => {
           <Button variant="outline" onClick={() => setDialogOpen(true)}>
             Bulk Import/Export
           </Button>
-          <Link href="/backyard/payroll/payruns/new">
+          <Link href="/advontier/payroll/payruns/new">
             <Button>
               <Plus className="mr-2 h-4 w-4" />
               Create Payrun
@@ -295,7 +295,7 @@ const PayrollPayruns = () => {
                 <span className="font-semibold text-xs">{payrun.payroll_objects_employers?.legal_name || 'Unknown Employer'}</span>
                 <span className="text-xs">{new Date(payrun.updated_at || '').toLocaleString()}</span>
                 <Badge variant={getStatusColor(payrun.status)}>{payrun.status}</Badge>
-                <Link href={`/backyard/payroll/payruns/${payrun.id}`} className="ml-auto text-primary underline text-xs">View</Link>
+                <Link href={`/advontier/payroll/payruns/${payrun.id}`} className="ml-auto text-primary underline text-xs">View</Link>
               </li>
             ))}
           </ul>

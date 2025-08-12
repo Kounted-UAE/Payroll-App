@@ -1,4 +1,4 @@
-// app/backyard/page.tsx
+// app/advontier/page.tsx
 
 'use client'
 
@@ -32,7 +32,7 @@ import type { KPI } from "@/components/advontier-dashboard/DashboardKPICards"
 import DashboardQuicklinks from '@/components/advontier-dashboard/DashboardQuicklinks'
 
 const metrics = [
-  { label: "Active Customers", count: 128, description: "Companies with ongoing engagement", link: "/backyard/clients" },
+  { label: "Active Customers", count: 128, description: "Companies with ongoing engagement", link: "/advontier/clients" },
   { label: "Kwiver Retainers", count: 62, description: "Ongoing fractional support agreements", link: "#" },
   { label: "Kwiver Quotes", count: 21, description: "Once-off or ad hoc engagement types", link: "#" },
   { label: "Corporate Profiles", count: 434, description: "Incorporated entities on file", link: "#" },

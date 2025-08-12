@@ -47,7 +47,7 @@ function generateFeatureKey(url: string, title: string): string {
     // Extract from URL path
     const pathParts = url.split('/').filter(Boolean);
     if (pathParts.length > 1) {
-      return pathParts.slice(1).join('-'); // Remove 'backyard' prefix
+      return pathParts.slice(1).join('-'); // Remove 'advontier' prefix
     }
   }
   

@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
   
 
     await resend.emails.send({
-      from: 'Advontier Web Forms <no-reply@advontier.com>',
+      from: 'Online Notifications <notifications@kounted.ae>',
       to: 'info@advontier.com',
       subject: 'New Feature Request',
       html,

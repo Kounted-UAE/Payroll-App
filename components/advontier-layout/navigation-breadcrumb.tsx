@@ -15,8 +15,8 @@ export function NavigationBreadcrumb() {
   const pathname = usePathname()
   const segments = pathname.split("/").filter(Boolean)
   
-  // Remove 'backyard' from segments since it's our dashboard base
-  const dashboardSegments = segments[0] === 'backyard' ? segments.slice(1) : segments
+  // Remove 'advontier' from segments since it's our dashboard base
+  const dashboardSegments = segments[0] === 'advontier' ? segments.slice(1) : segments
 
   function getBreadcrumbName(segment: string, fullPath: string): string {
     for (const section of sidebarSections) {
@@ -30,7 +30,7 @@ export function NavigationBreadcrumb() {
   }
 
   const breadcrumbs: BreadcrumbItem[] = dashboardSegments.map((segment, idx) => {
-    const href = "/backyard/" + dashboardSegments.slice(0, idx + 1).join("/")
+    const href = "/advontier/" + dashboardSegments.slice(0, idx + 1).join("/")
     return { name: getBreadcrumbName(segment, href), href }
   })
 
@@ -42,7 +42,7 @@ export function NavigationBreadcrumb() {
           <span className="text-blue-100 font-semibold">Home</span>
         ) : (
           <>
-            <Link href="/backyard" className="text-blue-100 hover:underline font-bold">
+            <Link href="/advontier" className="text-blue-100 hover:underline font-bold">
               Home
             </Link>
             <span className="text-blue-200 font-normal">/</span>

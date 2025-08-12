@@ -51,7 +51,7 @@ export default function LoginForm() {
     if (authError) setError(authError.message)
     else if (user && session) {
       setSuccess('Login successful! Redirecting...')
-      setTimeout(() => router.push('/backyard'), 1000)
+      setTimeout(() => router.push('/advontier'), 1000)
     }
     setLoading(false)
   }

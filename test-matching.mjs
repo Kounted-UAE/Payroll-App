@@ -281,7 +281,7 @@ async function main() {
     console.log('   - Check if ticket IDs appear in quote/invoice references')
   }
   
-  console.log('   - Use the UI at /backyard/referral-programs to review matches')
+  console.log('   - Use the UI at /advontier/referral-programs to review matches')
   console.log('   - Monitor match quality over time as data patterns change')
 }
 

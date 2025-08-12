@@ -1,6 +1,6 @@
 /**
  * Admin route PDF generator using @react-pdf/renderer.
- * Intended for admin/manual workflows under `app/backyard/admin/...`.
+ * Intended for admin/manual workflows under `app/advontier/admin/...`.
  * Exported as `generatePayslipPDFAdmin` to avoid collisions with the payroll generator.
  */
 import React from 'react'

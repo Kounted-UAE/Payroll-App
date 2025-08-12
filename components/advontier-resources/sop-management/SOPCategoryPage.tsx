@@ -84,7 +84,7 @@ export default function SOPCategoryPage() {
               <p className="text-blue-200 mb-4">
                 The requested SOP category could not be found.
               </p>
-              <Button onClick={() => goTo('/backyard/sop-resources')}>
+              <Button onClick={() => goTo('/advontier/sop-resources')}>
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to SOP Center
               </Button>
@@ -97,7 +97,7 @@ export default function SOPCategoryPage() {
 
   const handleSOPClick = async (sopId: string) => {
     await incrementViewCount(sopId)
-    goTo(`/backyard/sop-resources/${categoryId}/${sopId}`)
+    goTo(`/advontier/sop-resources/${categoryId}/${sopId}`)
   }
 
   const handleCopyToClipboard = (sopId: string) => {
@@ -119,7 +119,7 @@ export default function SOPCategoryPage() {
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4 mb-6">
-          <Button variant="outline" onClick={() => goTo('/backyard/sop-resources')}>
+          <Button variant="outline" onClick={() => goTo('/advontier/sop-resources')}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to SOP Center
           </Button>
@@ -127,7 +127,7 @@ export default function SOPCategoryPage() {
           <h1 className="text-lg text-zinc-600 font-bold">{categoryInfo.name}</h1>
             <p className="text-blue-400">{categoryInfo.description}</p>
           </div>
-          <Button onClick={() => goTo('/backyard/sop-resources/manage')}>
+          <Button onClick={() => goTo('/advontier/sop-resources/manage')}>
             <Plus className="mr-2 h-4 w-4" />
             Add SOP
           </Button>
@@ -220,7 +220,7 @@ export default function SOPCategoryPage() {
                   : `No SOPs have been created for ${categoryInfo.name} yet.`
                 }
               </p>
-              <Button onClick={() => goTo('/backyard/sop-resources/manage')}>
+              <Button onClick={() => goTo('/advontier/sop-resources/manage')}>
                 <Plus className="mr-2 h-4 w-4" />
                 Create First SOP
               </Button>

@@ -8,17 +8,17 @@ const navigation = [
   {
     title: 'Business Suite',
     links: [
-      { title: 'Advontier', href: '/backyard' },
-      { title: 'Payroll', href: '/backyard/payroll' },
-      { title: 'Compliance Calendar', href: '/backyard/compliance-calendar' },
-      { title: 'Knowledge Base', href: 'backyard/sop-resources' },
+      { title: 'Advontier', href: '/advontier' },
+      { title: 'Payroll', href: '/advontier/payroll' },
+      { title: 'Compliance Calendar', href: '/advontier/compliance-calendar' },
+      { title: 'Knowledge Base', href: 'advontier/sop-resources' },
       {
         title: (
           <>
             See all <span aria-hidden="true">&rarr;</span>
           </>
         ),
-        href: '/backyard',
+        href: '/advontier',
       },
     ],
   },

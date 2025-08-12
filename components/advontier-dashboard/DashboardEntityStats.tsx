@@ -1,4 +1,4 @@
-// components/backyard/DashboardEntityStats.tsx
+// components/advontier/DashboardEntityStats.tsx
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { UsersIcon, BuildingOffice2Icon, BriefcaseIcon, CurrencyDollarIcon, DocumentDuplicateIcon } from "@heroicons/react/24/solid"

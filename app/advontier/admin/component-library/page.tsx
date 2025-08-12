@@ -1,4 +1,4 @@
-// app/backyard/admin/component-library/page.tsx
+// app/advontier/admin/component-library/page.tsx
 
 'use client'
 

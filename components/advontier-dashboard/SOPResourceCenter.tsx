@@ -39,11 +39,11 @@ export default function SOPResourceCenter() {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleCategoryClick = (categoryId: string) => {
-    navigate.push(`/backyard/sop-resources/${categoryId}`);
+    navigate.push(`/advontier/sop-resources/${categoryId}`);
   };
 
   const handleSOPClick = (categoryId: string, sopId: string) => {
-    navigate.push(`/backyard/sop-resources/${categoryId}/${sopId}`);
+    navigate.push(`/advontier/sop-resources/${categoryId}/${sopId}`);
   };
 
   const recentSOPs = getRecentSOPs(4);
@@ -98,11 +98,11 @@ export default function SOPResourceCenter() {
             </p>
           </div>
           <div className="flex gap-3">
-            <Button onClick={() => navigate.push('/backyard/sop-resources/manage')}>
+            <Button onClick={() => navigate.push('/advontier/sop-resources/manage')}>
               <Plus className="mr-2 h-4 w-4" />
               Add SOP
             </Button>
-            <Button variant="outline" onClick={() => navigate.push('/backyard/sop-resources/manage')}>
+            <Button variant="outline" onClick={() => navigate.push('/advontier/sop-resources/manage')}>
               <Settings className="mr-2 h-4 w-4" />
               Manage SOPs
             </Button>

@@ -64,7 +64,7 @@ const PayrollExpenses = () => {
             Manage and process employee expense runs for payroll
           </p>
         </div>
-        <Link href="/backyard/payroll/expenses/new">
+        <Link href="/advontier/payroll/expenses/new">
           <Button>
             <Plus className="mr-2 h-4 w-4" />
             Start Expense Run
@@ -163,7 +163,7 @@ const PayrollExpenses = () => {
             <p className="text-blue-200 mb-4">
               {searchQuery ? "Try adjusting your search criteria" : "Get started by starting your first expense run"}
             </p>
-            <Link href="/backyard/payroll/expenses/new">
+            <Link href="/advontier/payroll/expenses/new">
               <Button>
                 <Plus className="mr-2 h-4 w-4" />
                 Start First Expense Run

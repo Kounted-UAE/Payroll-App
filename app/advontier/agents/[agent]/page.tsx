@@ -101,7 +101,7 @@ export default function AgentRuntimePage() {
         </div>
         <div className="flex items-center gap-2">
           <Button asChild size="sm" variant="outline">
-            <Link href={`/backyard/agents/${agent}/configure`}>Configure</Link>
+            <Link href={`/advontier/agents/${agent}/configure`}>Configure</Link>
           </Button>
         </div>
       </div>

@@ -90,7 +90,7 @@ export default function SOPDetailPage() {
               <p className="text-blue-200 mb-4">
                 The requested Standard Operating Procedure could not be found.
               </p>
-              <Button onClick={() => navigate.push('/backyard/sop-resources')}>
+              <Button onClick={() => navigate.push('/advontier/sop-resources')}>
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to SOP Center
               </Button>
@@ -148,7 +148,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
-          <Button variant="outline" onClick={() => navigate.push(`/backyard/sop-resources/${category}`)}>
+          <Button variant="outline" onClick={() => navigate.push(`/advontier/sop-resources/${category}`)}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to {categoryInfo?.name || category?.replace('-', ' ')}
           </Button>
@@ -350,7 +350,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
                     key={index}
                     variant="outline"
                     size="sm"
-                    onClick={() => navigate.push(`/backyard/sop-resources/${category}/${relatedSopId}`)}
+                    onClick={() => navigate.push(`/advontier/sop-resources/${category}/${relatedSopId}`)}
                   >
                     {relatedSopId.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                     <ExternalLink className="ml-2 h-3 w-3" />

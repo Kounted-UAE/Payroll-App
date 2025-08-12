@@ -1,4 +1,4 @@
-//app/backyard/admin/temp-excelpayrun-import/page.tsx
+//app/advontier/admin/temp-excelpayrun-import/page.tsx
 
 'use client'
 
@@ -7,8 +7,8 @@ import { getSupabaseClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { toast } from '@/hooks/use-toast'
+import PayslipSelectionTable, { type PayslipRow } from '@/components/advontier-payroll/actions/PayslipSelectionTable'
 import {
   Dialog,
   DialogContent,
@@ -22,17 +22,6 @@ import { ExportXeroJournalsWizard } from '@/components/advontier-payroll/actions
 import { ExportDetailedXeroJournalsWizard } from '@/components/advontier-payroll/actions/PayrunDetailedJournalExport'
 
 const SUPABASE_PUBLIC_URL = 'https://alryjvnddvrrgbuvednm.supabase.co/storage/v1/object/public/generated-pdfs/payslips'
-
-type PayslipRow = {
-  id: string
-  employee_name: string
-  employer_name: string
-  reviewer_email: string
-  email_id: string
-  payslip_url: string
-  payslip_token: string
-  created_at: string
-}
 
 export default function SendPayslipsPage() {
   const [rows, setRows] = useState<PayslipRow[]>([])
@@ -84,6 +73,18 @@ export default function SendPayslipsPage() {
       next.has(id) ? next.delete(id) : next.add(id)
       return next
     })
+  }
+
+  const toggleAll = (checked: boolean) => {
+    const next = new Set(selected)
+    filtered.forEach(row => {
+      if (checked) {
+        next.add(row.id)
+      } else {
+        next.delete(row.id)
+      }
+    })
+    setSelected(next)
   }
 
   const sendEmails = async (mode: 'test' | 'reviewer' | 'live') => {
@@ -252,66 +253,13 @@ export default function SendPayslipsPage() {
 
       {step === 'select' && (
         <>
-          <Table className="mt-4">
-            <TableHeader>
-              <TableRow>
-                <TableHead>
-                  <Checkbox
-                    checked={filtered.every(r => selected.has(r.id))}
-                    indeterminate={
-                      filtered.some(r => selected.has(r.id)) &&
-                      !filtered.every(r => selected.has(r.id))
-                    }
-                    onCheckedChange={(checked) => {
-                      const next = new Set(selected)
-                      filtered.forEach(row => {
-                        if (checked) {
-                          next.add(row.id)
-                        } else {
-                          next.delete(row.id)
-                        }
-                      })
-                      setSelected(next)
-                    }}
-                  />
-                </TableHead>
-                <TableHead>Employee</TableHead>
-                <TableHead>Employer</TableHead>
-                <TableHead>Reviewer Email</TableHead>
-                <TableHead>Live Email</TableHead>
-                <TableHead>Payslip</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filtered.map(row => (
-                <TableRow key={row.id}>
-                  <TableCell>
-                    <Checkbox
-                      checked={selected.has(row.id)}
-                      onCheckedChange={() => toggle(row.id)}
-                    />
-                  </TableCell>
-                  <TableCell>{row.employee_name}</TableCell>
-                  <TableCell>{row.employer_name}</TableCell>
-                  <TableCell>{row.reviewer_email}</TableCell>
-                  <TableCell>{row.email_id}</TableCell>
-                  <TableCell>
-                    {row.payslip_token ? (
-                      <a
-                        href={`${SUPABASE_PUBLIC_URL}/${row.payslip_token}.pdf`}
-                        target="_blank"
-                        className="text-blue-600 underline text-xs"
-                      >
-                        View PDF
-                      </a>
-                    ) : (
-                      <span className="text-blue-200 text-xs">Not available</span>
-                    )}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <PayslipSelectionTable
+            rows={rows}
+            filteredRows={filtered}
+            selectedIds={selected}
+            onToggleSelection={toggle}
+            onToggleAll={toggleAll}
+          />
 
           <Button className="mt-4" onClick={() => setStep('review')} disabled={!selected.size}>
             Continue

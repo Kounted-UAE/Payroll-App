@@ -111,7 +111,7 @@ const CreatePayrunWizard = () => {
       }));
       await supabase.from('payrun_employees').insert(payrunEmployees);
       setLoading(false);
-      router.push("/backyard/payroll/payruns");
+      router.push("/advontier/payroll/payruns");
     }
   }
 
@@ -140,7 +140,7 @@ const CreatePayrunWizard = () => {
             Set up a new payroll run for processing employee salaries
           </p>
         </div>
-        <Button variant="outline" onClick={() => router.push("/backyard/payroll/payruns")}>
+        <Button variant="outline" onClick={() => router.push("/advontier/payroll/payruns")}>
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Payruns
         </Button>

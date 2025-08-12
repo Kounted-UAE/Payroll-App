@@ -89,7 +89,7 @@
     "keyRoutes": [
       "/login",
       "/auth/callback",
-      "/backyard",
+      "/advontier",
       "/kyc",
       "/my-advontier/client/**",
       "/my-advontier/staff/**"

@@ -1,4 +1,4 @@
-// app/backyard/layout.tsx
+// app/advontier/layout.tsx
 import DashboardLayout from "@/components/advontier-layout/DashboardLayout";
 import { SidebarProvider } from '@/components/advontier-layout/sidebar-context'
 import { AppProviders } from '../providers'

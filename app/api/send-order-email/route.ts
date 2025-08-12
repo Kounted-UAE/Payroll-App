@@ -90,7 +90,7 @@ export async function POST(req: NextRequest) {
     const orderSummaryHtml = generateOrderSummary(order.order_data || {});
 
     const emailResponse = await resend.emails.send({
-      from: "Advontier Web Forms <no-reply@advontier.com>",
+      from: 'Kounted Online <notifications@kounted.ae>',
       to: [recipientEmail],
       subject: `Order Summary - ${order.reference_id || `#${order.id.slice(0, 8)}`}`,
       html: `

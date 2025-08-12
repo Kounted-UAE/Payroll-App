@@ -160,7 +160,7 @@ const closeSalaryWizard = () => {
             <Edit className="mr-2 h-4 w-4" />
             Edit Salaries
           </Button>
-          <Link href="/backyard/payroll/employees/new">
+          <Link href="/advontier/payroll/employees/new">
             <Button>
               <Plus className="mr-2 h-4 w-4" />
               Add Employee
@@ -496,7 +496,7 @@ const closeSalaryWizard = () => {
             <p className="text-blue-200 mb-4">
               {searchQuery ? "Try adjusting your search criteria" : "Get started by adding your first employee"}
             </p>
-            <Link href="/backyard/payroll/employees/new">
+            <Link href="/advontier/payroll/employees/new">
               <Button>
                 <Plus className="mr-2 h-4 w-4" />
                 Add First Employee

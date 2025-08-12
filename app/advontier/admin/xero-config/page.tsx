@@ -1,4 +1,4 @@
-// app/backyard/admin/xero-config/page.tsx
+// app/advontier/admin/xero-config/page.tsx
 
 'use client'
 

@@ -1,4 +1,4 @@
-// app/backyard/admin/payroll-generate/[batch_id]/page.tsx
+// app/advontier/admin/payroll-generate/[batch_id]/page.tsx
 
 'use client'
 
@@ -103,7 +103,7 @@ export default function PayslipGenerationPage() {
               Generate payslips from imported payroll data
             </p>
           </div>
-          <Button variant="outline" onClick={() => router.push('/backyard/admin/temp-excelpayrun-import')}>
+          <Button variant="outline" onClick={() => router.push('/advontier/admin/temp-excelpayrun-import')}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Batches
           </Button>
@@ -113,7 +113,7 @@ export default function PayslipGenerationPage() {
           <CardContent className="p-6">
             <div className="text-center">
               <p className="text-destructive mb-4">{error || 'Batch not found'}</p>
-              <Button onClick={() => router.push('/backyard/admin/temp-excelpayrun-import')}>
+              <Button onClick={() => router.push('/advontier/admin/temp-excelpayrun-import')}>
                 Return to Batches
               </Button>
             </div>
@@ -132,7 +132,7 @@ export default function PayslipGenerationPage() {
             Create and distribute employee payslips from batch: {batchId}
           </p>
         </div>
-        <Button variant="outline" onClick={() => router.push('/backyard/admin/temp-excelpayrun-import')}>
+        <Button variant="outline" onClick={() => router.push('/advontier/admin/temp-excelpayrun-import')}>
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Batches
         </Button>

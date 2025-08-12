@@ -190,9 +190,9 @@ export async function POST(req: NextRequest) {
 
     // Send email with Resend
     const result = await resend.emails.send({
-      from: 'Advontier Web Forms <no-reply@advontier.com>',
+      from: 'Kounted Payroll <payroll@kounted.ae>',
       to,
-      replyTo: 'no-reply@kounted.ae',
+      replyTo: 'Kounted Payroll <payroll@kounted.ae>',
       subject: emailSubject,
       html: htmlContent,
       text: textContent,

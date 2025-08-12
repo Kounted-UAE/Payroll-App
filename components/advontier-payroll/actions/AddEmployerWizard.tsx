@@ -1,4 +1,4 @@
-// app/backyard/payroll/employers/AddEmployerWizard.tsx
+// app/advontier/payroll/employers/AddEmployerWizard.tsx
 'use client'
 
 import React, { useState } from 'react'
@@ -84,7 +84,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: {
 
       toast({ title: 'Success', description: 'Employer created successfully.' })
       onComplete?.(data)
-      router.push('/backyard/payroll/employers')
+      router.push('/advontier/payroll/employers')
     } catch (err: any) {
       toast({
         title: 'Error',
@@ -145,7 +145,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: {
       </Card>
 
       <div className="flex justify-between">
-        <Button variant="outline" onClick={onCancel || (() => router.push('/backyard/payroll/employers'))}>Cancel</Button>
+        <Button variant="outline" onClick={onCancel || (() => router.push('/advontier/payroll/employers'))}>Cancel</Button>
         <div className="flex gap-2">
           {currentStep > 1 && (
             <Button variant="outline" onClick={() => setCurrentStep(s => s - 1)}>

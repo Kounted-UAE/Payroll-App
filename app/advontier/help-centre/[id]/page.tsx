@@ -1,4 +1,4 @@
-// app/backyard/help-centre/[id]/page.tsx
+// app/advontier/help-centre/[id]/page.tsx
 
 "use client"
 

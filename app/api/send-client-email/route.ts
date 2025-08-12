@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
     console.log('Sending welcome email to client:', client.name);
 
     const emailResponse = await resend.emails.send({
-      from: "Advontier Web Forms <no-reply@advontier.com>",
+      from: 'Online Notifications <notifications@kounted.ae>',
       to: [client.email],
       cc: [client.contact_person !== client.email ? client.contact_person : ''].filter(Boolean),
       subject: `Welcome to Our Accounting Services - ${client.name}`,
