@@ -20,10 +20,17 @@ import {
 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-)
+// Function to create Supabase client
+function createSupabaseClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error('Supabase configuration is missing. Please check your environment variables.')
+  }
+
+  return createClient(supabaseUrl, supabaseAnonKey)
+}
 
 const STEPS = [
   { id: 1, title: 'Employment Details' },
@@ -56,6 +63,7 @@ export default function AddEmployeeWizard({ onComplete, onCancel }: {
   })
 
   useEffect(() => {
+    const supabase = createSupabaseClient()
     supabase.from('payroll_objects_employers')
       .select('id, legal_name')
       .then(({ data }) => data && setEmployers(data))
@@ -69,6 +77,7 @@ export default function AddEmployeeWizard({ onComplete, onCancel }: {
     try {
       const full_name = `${formData.first_name} ${formData.last_name}`.trim()
 
+      const supabase = createSupabaseClient()
       const { data: employee, error } = await supabase
         .from('payroll_objects_employees')
         .insert([{

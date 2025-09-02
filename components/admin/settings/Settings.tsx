@@ -30,9 +30,17 @@ import { useToast } from "@/hooks/use-toast";
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from '@/lib/types/supabase';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-const supabase = createClient<Database>(supabaseUrl, supabaseKey);
+// Function to create Supabase client
+function createSupabaseClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('Supabase configuration is missing. Please check your environment variables.')
+  }
+
+  return createClient<Database>(supabaseUrl, supabaseKey)
+}
 
 type Profile = Database['public']['Tables']['public_user_profiles']['Row'];
 type Role = Database['public']['Tables']['public_user_roles']['Row'];

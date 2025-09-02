@@ -16,9 +16,17 @@ import { checkForTempPayrunDuplicates } from '@/lib/utils/tempPayrunCheckForDupl
 import { flattenPayrunMatrix } from '@/lib/utils/flattenPayrunMatrix'
 
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-const supabase = createClient(supabaseUrl, supabaseKey)
+// Function to create Supabase client
+function createSupabaseClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('Supabase configuration is missing. Please check your environment variables.')
+  }
+
+  return createClient(supabaseUrl, supabaseKey)
+}
 
 
 type Props = {
@@ -79,6 +87,7 @@ export default function TempPayrunHistoryImportDialog({ open, onOpenChange }: Pr
         })
 
         try {
+          const supabase = createSupabaseClient()
           const { data: existingRows, error } = await supabase
             .from('payroll_ingest_payrun_matrix')
             .select('employee_id, payrun_code, temp_paytype_name')
@@ -116,6 +125,7 @@ export default function TempPayrunHistoryImportDialog({ open, onOpenChange }: Pr
   const handleImport = async () => {
     setImporting(true)
     try {
+      const supabase = createSupabaseClient()
       const cleanRows = validRows.map(({ __index, ...rest }) => rest)
       const { error } = await supabase
         .from('payroll_ingest_payrun_matrix')

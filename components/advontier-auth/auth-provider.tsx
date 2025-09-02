@@ -10,7 +10,7 @@ import type { VAuthenticatedProfile } from "@/lib/supabase/server"
 
 type AuthContextType = {
   session: Session | null
-  supabase: SupabaseClient<Database>
+  supabase: SupabaseClient<Database> | null
   profile: VAuthenticatedProfile | null
   loading: boolean
   roleSlug: string | null
@@ -19,25 +19,30 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [supabase] = useState(() =>
-    createBrowserClient<Database>(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    )
-  )
-
+  const [supabase, setSupabase] = useState<SupabaseClient<Database> | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const [profile, setProfile] = useState<VAuthenticatedProfile | null>(null)
   const [loading, setLoading] = useState(true)
 
+  // Initialize Supabase client on mount
   useEffect(() => {
+    const client = createBrowserClient<Database>(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    )
+    setSupabase(client)
+  }, [])
+
+  useEffect(() => {
+    if (!supabase) return
+
     const getSessionAndProfile = async () => {
       const {
         data: { session: currentSession },
       } = await supabase.auth.getSession()
 
       setSession(currentSession)
-      
+
       if (currentSession?.user?.id) {
         const { data, error } = await (supabase as any)
           .from("v_authenticated_profiles")

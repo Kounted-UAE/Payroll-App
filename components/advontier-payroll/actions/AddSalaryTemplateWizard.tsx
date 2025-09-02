@@ -11,10 +11,17 @@ import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Save } from 'lucide-react'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-)
+// Function to create Supabase client
+function createSupabaseClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('Supabase configuration is missing. Please check your environment variables.')
+  }
+
+  return createClient(supabaseUrl, supabaseKey)
+}
 
 export default function AddSalaryTemplateWizard({ employeeId, onComplete, onCancel }: {
   employeeId: string
@@ -27,6 +34,7 @@ export default function AddSalaryTemplateWizard({ employeeId, onComplete, onCanc
   const [saving, setSaving] = useState(false)
 
   useEffect(() => {
+    const supabase = createSupabaseClient()
     supabase.from('payroll_pay_types')
       .select('id, name, core_type')
       .then(({ data }) => {
@@ -60,6 +68,7 @@ export default function AddSalaryTemplateWizard({ employeeId, onComplete, onCanc
         created_at: new Date().toISOString()
       }))
 
+      const supabase = createSupabaseClient()
       const { error } = await supabase.from('payroll_salary_templates').insert(insertData)
       if (error) throw error
 

@@ -2,11 +2,17 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import type { Database } from '@/lib/types/supabase'
 
-// Use service role key for admin operations
-const supabaseAdmin = createClient<Database>(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+// Function to create Supabase admin client
+function createSupabaseAdmin() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+  if (!supabaseUrl || !serviceRoleKey) {
+    throw new Error('Supabase configuration is missing. Please check your environment variables.')
+  }
+
+  return createClient<Database>(supabaseUrl, serviceRoleKey)
+}
 
 interface DeletionRequest {
   reason: string
@@ -38,6 +44,9 @@ export async function POST(request: NextRequest) {
         { status: 401 }
       )
     }
+
+    // Create Supabase client
+    const supabaseAdmin = createSupabaseAdmin()
 
     // Verify user session
     const { data: { user }, error: userError } = await supabaseAdmin.auth.getUser(
@@ -125,6 +134,8 @@ export async function POST(request: NextRequest) {
 // Check what data can be deleted vs what must be retained
 async function checkDataRetentionRequirements(userId: string) {
   try {
+    const supabaseAdmin = createSupabaseAdmin()
+
     const retentionDetails = {
       hasLegalObligations: false,
       details: [],
@@ -221,8 +232,10 @@ async function checkDataRetentionRequirements(userId: string) {
 // Perform the actual data deletion
 async function performDataDeletion(userId: string, reason: string) {
   const deletionId = `del_${Date.now()}_${userId.slice(0, 8)}`
-  
+
   try {
+    const supabaseAdmin = createSupabaseAdmin()
+
     const deletionSummary = {
       success: true,
       deletionId,
@@ -430,8 +443,10 @@ async function performDataDeletion(userId: string, reason: string) {
 // Get deletion request status (for users who want to check deletion process)
 export async function GET(request: NextRequest) {
   try {
+    const supabaseAdmin = createSupabaseAdmin()
+
     const deletionId = request.nextUrl.searchParams.get('deletion_id')
-    
+
     if (!deletionId) {
       return NextResponse.json(
         { error: 'Deletion ID required' },

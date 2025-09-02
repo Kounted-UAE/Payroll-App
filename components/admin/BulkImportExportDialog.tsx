@@ -14,9 +14,17 @@ import { toast } from '@/hooks/use-toast'
 import { Upload as UploadIcon } from 'lucide-react'
 import { checkForDuplicates } from '@/lib/utils/checkForDuplicates'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-const supabase = createClient(supabaseUrl, supabaseKey)
+// Function to create Supabase client
+function createSupabaseClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('Supabase configuration is missing. Please check your environment variables.')
+  }
+
+  return createClient(supabaseUrl, supabaseKey)
+}
 
 export type BulkImportExportDialogProps<T extends Record<string, any>> = {
   open: boolean

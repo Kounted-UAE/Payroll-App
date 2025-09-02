@@ -23,9 +23,17 @@ import { useRouter } from "next/navigation"
 import { useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-const supabase = createClient(supabaseUrl, supabaseKey);
+// Function to create Supabase client
+function createSupabaseClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('Supabase configuration is missing. Please check your environment variables.')
+  }
+
+  return createClient(supabaseUrl, supabaseKey)
+}
 
 interface ExpenseRunData {
   employer_id: string;
@@ -56,6 +64,7 @@ const SubmitExpenseWizard = () => {
   // Fetch employers on mount
   useEffect(() => {
     async function fetchEmployers() {
+      const supabase = createSupabaseClient()
       const { data: emps } = await supabase.from('payroll_objects_employers').select('id, legal_name');
       if (emps) setEmployers(emps);
     }

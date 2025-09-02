@@ -15,10 +15,17 @@ import { Progress } from '@/components/ui/progress'
 import { Save, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-)
+// Function to create Supabase client
+function createSupabaseClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('Supabase configuration is missing. Please check your environment variables.')
+  }
+
+  return createClient(supabaseUrl, supabaseKey)
+}
 
 const STEPS = [
   { id: 1, title: 'Company Details' },
@@ -57,6 +64,7 @@ export default function AddEmployerWizard({ onComplete, onCancel }: {
   const handleComplete = async () => {
     setLoading(true)
     try {
+      const supabase = createSupabaseClient()
       const { data, error } = await supabase
         .from('payroll_objects_employers')
         .insert([{

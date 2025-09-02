@@ -6,11 +6,6 @@ import { useEffect, useState } from "react"
 import { createBrowserClient } from "@supabase/ssr"
 import type { Database } from "@/lib/types/supabase"
 
-const supabase = createBrowserClient<Database>(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
-
 export function useUserRole(userId: string | undefined) {
   const [role, setRole] = useState<string | null>(null)
   const [profile, setProfile] = useState<any>(null)
@@ -22,6 +17,12 @@ export function useUserRole(userId: string | undefined) {
 
     const fetchProfile = async () => {
       setLoading(true)
+
+      // Create Supabase client inside the effect
+      const supabase = createBrowserClient<Database>(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+      )
 
       const { data, error } = await (supabase as any)
         .from("public_user_profiles")

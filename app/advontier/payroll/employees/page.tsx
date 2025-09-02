@@ -56,6 +56,9 @@ const PayrollEmployees = () => {
 
   useEffect(() => {
     const fetchEmployers = async () => {
+      // Only run on client side
+      if (typeof window === 'undefined') return
+
       const supabase = getSupabaseClient()
       const { data, error } = await supabase
         .from("payroll_objects_employers")

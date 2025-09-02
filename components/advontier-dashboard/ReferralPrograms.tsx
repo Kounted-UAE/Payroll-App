@@ -15,10 +15,17 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+// Function to create Supabase client
+function createSupabaseClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('Supabase configuration is missing. Please check your environment variables.')
+  }
+
+  return createClient(supabaseUrl, supabaseKey)
+}
 
 type MatchRow = {
   id: number
@@ -58,6 +65,7 @@ export default function SalesMatchingDashboard() {
   // Fetch matches from DB on load
   useEffect(() => {
     setLoading(true)
+    const supabase = createSupabaseClient()
     supabase
       .from('matches')
       .select('*')
@@ -102,6 +110,7 @@ export default function SalesMatchingDashboard() {
   // Approve or reject matches in batch
   const updateStatus = async (ids: number[], status: 'confirmed' | 'rejected') => {
     setLoading(true)
+    const supabase = createSupabaseClient()
     await supabase
       .from('matches')
       .update({ status })
@@ -168,6 +177,7 @@ export default function SalesMatchingDashboard() {
       
       setModalOpen(false)
       // Refresh matches from DB
+      const supabase = createSupabaseClient()
       const { data: refreshedMatches } = await supabase.from('matches').select('*')
       setMatches(refreshedMatches ?? [])
     } catch (error) {

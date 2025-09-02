@@ -24,9 +24,17 @@ import Link from "next/link"
 import { useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-const supabase = createClient(supabaseUrl, supabaseKey);
+// Function to create Supabase client
+function createSupabaseClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('Supabase configuration is missing. Please check your environment variables.')
+  }
+
+  return createClient(supabaseUrl, supabaseKey)
+}
 
 const PayrollExpenses = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -37,6 +45,7 @@ const PayrollExpenses = () => {
     async function fetchExpenseRuns() {
       setLoading(true);
       // Fetch expense runs with employer info
+      const supabase = createSupabaseClient()
       const { data: runs, error } = await supabase
         .from('payroll_expense_runs')
         .select('*, payroll_objects_employers(legal_name)')

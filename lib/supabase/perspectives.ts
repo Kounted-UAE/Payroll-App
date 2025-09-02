@@ -26,33 +26,53 @@ export type Perspective = {
   author_image?: string | null
 }
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey)
+// Function to create Supabase client
+function createSupabaseClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error('Supabase configuration is missing. Please check your environment variables.')
+  }
+
+  return createClient<Database>(supabaseUrl, supabaseAnonKey)
+}
 
 export async function listPerspectives(): Promise<Perspective[]> {
-  const { data, error } = await supabase
+  try {
+    const supabase = createSupabaseClient()
+    const { data, error } = await supabase
     .from('articles' as any)
     .select('*')
     .order('created_at', { ascending: false })
-  if (error) {
+    if (error) {
+      console.error('listPerspectives error', error)
+      return []
+    }
+    return (data as unknown as Perspective[]) || []
+  } catch (error) {
     console.error('listPerspectives error', error)
     return []
   }
-  return (data as unknown as Perspective[]) || []
 }
 
 export async function getPerspectiveBySlug(slug: string): Promise<Perspective | null> {
-  const { data, error } = await supabase
+  try {
+    const supabase = createSupabaseClient()
+    const { data, error } = await supabase
     .from('articles' as any)
     .select('*')
     .eq('slug', slug)
     .single()
-  if (error) {
+    if (error) {
+      console.error('getPerspectiveBySlug error', error)
+      return null
+    }
+    return (data as unknown as Perspective) || null
+  } catch (error) {
     console.error('getPerspectiveBySlug error', error)
     return null
   }
-  return (data as unknown as Perspective) || null
 }
 
 export function toArticlePostShape(p: Perspective) {

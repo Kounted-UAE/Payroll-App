@@ -4,8 +4,19 @@ import { MatchResult } from '@/lib/matching/matchTicketsQuotes'
 
 export async function POST(req: NextRequest) {
   try {
+    // Create Supabase client with environment variable validation
+    const supabaseUrl = process.env['NEXT_PUBLIC_SUPABASE_URL']
+    const serviceRoleKey = process.env['SUPABASE_SERVICE_ROLE_KEY']
+
+    if (!supabaseUrl || !serviceRoleKey) {
+      return NextResponse.json(
+        { error: 'Supabase configuration is missing' },
+        { status: 500 }
+      )
+    }
+
+    const supabase = createClient(supabaseUrl, serviceRoleKey)
     const body = await req.json()
-    const supabase = createClient(process.env['NEXT_PUBLIC_SUPABASE_URL']!, process.env['SUPABASE_SERVICE_ROLE_KEY']!)
     
     // Handle both old and new match formats
     const match: Partial<MatchResult> & {

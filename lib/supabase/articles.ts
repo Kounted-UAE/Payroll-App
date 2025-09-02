@@ -1,9 +1,17 @@
 import { createClient } from '@supabase/supabase-js'
 import matter from 'gray-matter'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-const supabase = createClient(supabaseUrl, supabaseAnonKey)
+// Function to create Supabase client
+function createSupabaseClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error('Supabase configuration is missing. Please check your environment variables.')
+  }
+
+  return createClient(supabaseUrl, supabaseAnonKey)
+}
 
 export interface SupabaseArticleMeta {
   title: string
@@ -29,6 +37,8 @@ export interface SupabaseArticle {
  */
 export async function getAllSupabaseArticles(): Promise<SupabaseArticle[]> {
   try {
+    const supabase = createSupabaseClient()
+
     // List all files inside the 'research-articles' folder in the bucket
     const { data, error } = await supabase.storage
       .from('research-articles')
@@ -70,6 +80,8 @@ export async function getAllSupabaseArticles(): Promise<SupabaseArticle[]> {
  */
 export async function fetchSupabaseArticleContent(filename: string): Promise<SupabaseArticle> {
   try {
+    const supabase = createSupabaseClient()
+
     // THE KEY: use folder + filename for signed url and fetch
     const storagePath = `research-articles/${filename}`
 
@@ -175,6 +187,8 @@ export async function getSupabaseArticle(slug: string): Promise<SupabaseArticle 
  */
 export async function articleExistsInSupabase(slug: string): Promise<boolean> {
   try {
+    const supabase = createSupabaseClient()
+
     const filename = `${slug}.mdx`
     // Note: Use 'research-articles' as the path here as well!
     const { data, error } = await supabase.storage
