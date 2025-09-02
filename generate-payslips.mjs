@@ -8,8 +8,8 @@ import crypto from 'crypto'
 dotenv.config()
 
 // === CONFIGURATION ===
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL
-const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
+const SUPABASE_URL = process.env.SUPABASE_URL?.trim()
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim()
 const OUTPUT_DIR = './payslips'
 const TEMPLATE_FILE = './payslip-template.html'
 const TABLE_NAME = 'payroll_ingest_excelpayrollimport'
@@ -61,7 +61,7 @@ const injectTemplate = (template, row) => {
     .replace('{{expenses_deductions}}', inject('Expense Deductions', row.expenses_deductions))
     .replace('{{expense_reimbursements}}', inject('Expense Reimbursements', row.expense_reimbursements))
     .replace('{{other_reimbursements}}', inject('Other Reimbursements', row.other_reimbursements))
-    .replaceAll('{{total_adjustments}}', inject('TOTAL ADJUSTMENTS', row.total_variable_values))
+    .replaceAll('{{total_adjustments}}', inject('TOTAL ADJUSTMENTS', row.total_adjustments))
 
     // Net Total
     .replace('{{net_salary}}', inject('NET', row.net_salary));
@@ -69,74 +69,100 @@ const injectTemplate = (template, row) => {
 
 const main = async () => {
   try {
+    // Debug environment variables
+    console.log('🔍 Environment check:')
+    console.log('SUPABASE_URL:', SUPABASE_URL ? '✅ Set' : '❌ Missing')
+    console.log('SERVICE_ROLE_KEY:', SUPABASE_SERVICE_ROLE_KEY ? '✅ Set' : '❌ Missing')
+    
+    if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
+      console.error('❌ Missing required environment variables')
+      process.exit(1)
+    }
+
     await fs.ensureDir(OUTPUT_DIR)
     const template = await fs.readFile(TEMPLATE_FILE, 'utf8')
 
-    const { data: rows, error } = await supabase
-      .from(TABLE_NAME)
-      .select('*')
-
-    if (error) throw new Error(`Supabase query failed: ${error.message}`)
-    if (!rows?.length) {
-      console.warn('⚠️ No rows found. Exiting.')
-      return
-    }
-
-    const browser = await puppeteer.launch()
-
-    for (const row of rows) {
-      const page = await browser.newPage()
-      const html = injectTemplate(template, row)
-
-      await page.setContent(html, { waitUntil: 'networkidle0' })
-
-      const token = crypto.randomUUID()
-      const filename = `${token}.pdf`
-      const tempPath = path.join(OUTPUT_DIR, filename)
-      const storagePath = `${STORAGE_FOLDER}/${filename}`
-
-      // Generate PDF locally
-      await page.pdf({ path: tempPath, format: 'A4', printBackground: true })
-      await page.close()
-
-      const fileBuffer = await fs.readFile(tempPath)
-
-      const { error: uploadError } = await supabase
-        .storage
-        .from(STORAGE_BUCKET)
-        .upload(storagePath, fileBuffer, {
-          contentType: 'application/pdf',
-          upsert: true,
-        })
-
-      if (uploadError) {
-        console.error(`❌ Upload failed for ${filename}:`, uploadError.message)
-        continue
-      }
-
-      const { data: publicUrlData } = supabase
-        .storage
-        .from(STORAGE_BUCKET)
-        .getPublicUrl(storagePath)
-
-      const publicUrl = publicUrlData?.publicUrl
-
-      const { error: updateError } = await supabase
+    console.log('🔍 Querying Supabase table:', TABLE_NAME)
+    console.log('🔍 Using URL:', SUPABASE_URL)
+    
+    try {
+      const { data: rows, error } = await supabase
         .from(TABLE_NAME)
-        .update({ payslip_url: publicUrl, payslip_token: token })
-        .eq('batch_id', row.batch_id)
+        .select('*')
+        .or('payslip_url.is.null,payslip_url.eq.')
 
-      if (updateError) {
-        console.error(`❌ Failed to update row for ${row.employee_name}:`, updateError.message)
-      } else {
-        console.log(`✅ Uploaded + linked PDF for ${row.employee_name}`)
+      if (error) {
+        console.error('❌ Supabase error details:', error)
+        throw new Error(`Supabase query failed: ${error.message}`)
+      }
+      
+      console.log(`✅ Query successful, found ${rows?.length || 0} rows`)
+      
+      if (!rows?.length) {
+        console.warn('⚠️ No rows found without payslip URLs. Exiting.')
+        return
       }
 
-      await fs.remove(tempPath)
-    }
+      const browser = await puppeteer.launch()
 
-    await browser.close()
-    console.log('🎉 All payslips uploaded and linked.')
+      for (const row of rows) {
+        const page = await browser.newPage()
+        const html = injectTemplate(template, row)
+
+        await page.setContent(html, { waitUntil: 'networkidle0' })
+
+        const token = crypto.randomUUID()
+        const filename = `${token}.pdf`
+        const tempPath = path.join(OUTPUT_DIR, filename)
+        const storagePath = `${STORAGE_FOLDER}/${filename}`
+
+        // Generate PDF locally
+        await page.pdf({ path: tempPath, format: 'A4', printBackground: true })
+        await page.close()
+
+        const fileBuffer = await fs.readFile(tempPath)
+
+        const { error: uploadError } = await supabase
+          .storage
+          .from(STORAGE_BUCKET)
+          .upload(storagePath, fileBuffer, {
+            contentType: 'application/pdf',
+            upsert: true,
+          })
+
+        if (uploadError) {
+          console.error(`❌ Upload failed for ${filename}:`, uploadError.message)
+          continue
+        }
+
+        const { data: publicUrlData } = supabase
+          .storage
+          .from(STORAGE_BUCKET)
+          .getPublicUrl(storagePath)
+
+        const publicUrl = publicUrlData?.publicUrl
+
+        const { error: updateError } = await supabase
+          .from(TABLE_NAME)
+          .update({ payslip_url: publicUrl, payslip_token: token })
+          .eq('batch_id', row.batch_id)
+
+        if (updateError) {
+          console.error(`❌ Failed to update row for ${row.employee_name}:`, updateError.message)
+        } else {
+          console.log(`✅ Uploaded + linked PDF for ${row.employee_name}`)
+        }
+
+        await fs.remove(tempPath)
+      }
+
+      await browser.close()
+      console.log('🎉 All payslips uploaded and linked.')
+    } catch (fetchError) {
+      console.error('❌ Network/Connection error:', fetchError.message)
+      console.error('❌ Full error:', fetchError)
+      throw fetchError
+    }
   } catch (err) {
     console.error('❌ Script failed:', err.message)
     process.exit(1)
