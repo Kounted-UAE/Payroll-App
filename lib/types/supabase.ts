@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.3 (519615d)"
@@ -2522,12 +2522,13 @@ export type Database = {
         Row: {
           bank_name: string | null
           basic_salary: number | null
-          batch_id: string | null
+          batch_id: string
           bonus: number | null
           created_at: string | null
           currency: string | null
           education_allowance: number | null
           email_id: string | null
+          employee_id: string
           employee_mol: string | null
           employee_name: string | null
           employer_id: string | null
@@ -2539,7 +2540,6 @@ export type Database = {
           gratuity_eosb: number | null
           housing_allowance: number | null
           iban: string | null
-          id: string
           leave_without_pay_days: number | null
           net_salary: number | null
           other_allowance: number | null
@@ -2560,12 +2560,13 @@ export type Database = {
         Insert: {
           bank_name?: string | null
           basic_salary?: number | null
-          batch_id?: string | null
+          batch_id?: string
           bonus?: number | null
           created_at?: string | null
           currency?: string | null
           education_allowance?: number | null
           email_id?: string | null
+          employee_id?: string
           employee_mol?: string | null
           employee_name?: string | null
           employer_id?: string | null
@@ -2577,7 +2578,6 @@ export type Database = {
           gratuity_eosb?: number | null
           housing_allowance?: number | null
           iban?: string | null
-          id?: string
           leave_without_pay_days?: number | null
           net_salary?: number | null
           other_allowance?: number | null
@@ -2598,12 +2598,13 @@ export type Database = {
         Update: {
           bank_name?: string | null
           basic_salary?: number | null
-          batch_id?: string | null
+          batch_id?: string
           bonus?: number | null
           created_at?: string | null
           currency?: string | null
           education_allowance?: number | null
           email_id?: string | null
+          employee_id?: string
           employee_mol?: string | null
           employee_name?: string | null
           employer_id?: string | null
@@ -2615,7 +2616,6 @@ export type Database = {
           gratuity_eosb?: number | null
           housing_allowance?: number | null
           iban?: string | null
-          id?: string
           leave_without_pay_days?: number | null
           net_salary?: number | null
           other_allowance?: number | null
@@ -6381,21 +6381,21 @@ export type Database = {
     }
     Functions: {
       archive_old_template_versions: {
-        Args: { template_id: string; keep_versions?: number }
+        Args: { keep_versions?: number; template_id: string }
         Returns: number
       }
       assign_role_to_user: {
-        Args: { user_id: string; role_name: string }
+        Args: { role_name: string; user_id: string }
         Returns: undefined
       }
       calculate_employee_salary: {
         Args: { employee_uuid: string }
         Returns: {
           basic_salary: number
-          total_allowances: number
-          total_deductions: number
           gross_salary: number
           net_salary: number
+          total_allowances: number
+          total_deductions: number
         }[]
       }
       cleanup_expired_otps: {
@@ -6404,10 +6404,10 @@ export type Database = {
       }
       create_template_version: {
         Args: {
-          original_template_id: string
-          new_name: string
           new_description?: string
+          new_name: string
           new_template_data?: Json
+          original_template_id: string
         }
         Returns: string
       }
@@ -6418,25 +6418,25 @@ export type Database = {
       get_mirrored_tables: {
         Args: Record<PropertyKey, never>
         Returns: {
-          id: string
-          external_table_id: string
-          supabase_table_name: string
-          schema_definition: Json
-          record_count: number
-          last_synced: string
           created_at: string
-          updated_at: string
+          external_table_id: string
+          id: string
           is_active: boolean
+          last_synced: string
+          record_count: number
+          schema_definition: Json
+          supabase_table_name: string
+          updated_at: string
         }[]
       }
       get_template_history: {
         Args: { template_id: string }
         Returns: {
+          created_at: string
+          created_by_name: string
           id: string
           name: string
           version: number
-          created_at: string
-          created_by_name: string
         }[]
       }
       increment_template_usage: {
@@ -6454,11 +6454,11 @@ export type Database = {
       safe_log_audit_trail: {
         Args: {
           p_action: string
-          p_table_name: string
-          p_record_id: string
-          p_user_id: string
-          p_old_values?: Json
           p_new_values?: Json
+          p_old_values?: Json
+          p_record_id: string
+          p_table_name: string
+          p_user_id: string
         }
         Returns: undefined
       }

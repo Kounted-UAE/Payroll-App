@@ -1,0 +1,63 @@
+{
+  "timestamp": "2025-08-28T08:09:40.561Z",
+  "summary": {
+    "totalErrors": 13,
+    "updated": 0,
+    "skipped": 0,
+    "totalProcessed": 13
+  },
+  "errors": [
+    {
+      "taskId": 44188385,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00eb6-45a09b4953642d8d0fae49f2\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"content\\\"\"}]}\n"
+    },
+    {
+      "taskId": 44239390,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00eb7-10c325915b88f8bd43b1bf80\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"content\\\"\"}]}\n"
+    },
+    {
+      "taskId": 44243155,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00eb8-637f9785013e15081462812f\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"content\\\"\"}]}\n"
+    },
+    {
+      "taskId": 44243157,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00eb9-5f2a57c571faa32c5fbb8402\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"content\\\"\"}]}\n"
+    },
+    {
+      "taskId": 44243159,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00eba-4e5501f1400c2cc056f386e3\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"content\\\"\"}]}\n"
+    },
+    {
+      "taskId": 44243161,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00ebb-091bd1c57b23a75f1fdf7482\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"content\\\"\"}]}\n"
+    },
+    {
+      "taskId": 43289306,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00ebc-1896469155f64975541a24ba\",\"title\":\"invalid data\",\"detail\":\"invalid type 'number' into field 'task.priority', expected 'enum.TaskPriority'\"}]}\n"
+    },
+    {
+      "taskId": 43289300,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00ebd-72be2e422d5218f66f8d440e\",\"title\":\"invalid data\",\"detail\":\"invalid type 'number' into field 'task.priority', expected 'enum.TaskPriority'\"}]}\n"
+    },
+    {
+      "taskId": 45478319,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00ebe-7c34023c02521d963cd070f4\",\"title\":\"invalid data\",\"detail\":\"invalid type 'number' into field 'task.priority', expected 'enum.TaskPriority'\"}]}\n"
+    },
+    {
+      "taskId": 45478129,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00ec0-0283323d050130377abbdc28\",\"title\":\"invalid data\",\"detail\":\"invalid type 'number' into field 'task.priority', expected 'enum.TaskPriority'\"}]}\n"
+    },
+    {
+      "taskId": 45478826,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00ec2-42f7305479c64afb103e91d6\",\"title\":\"invalid data\",\"detail\":\"invalid type 'number' into field 'task.priority', expected 'enum.TaskPriority'\"}]}\n"
+    },
+    {
+      "taskId": 35119255,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00ec3-78f8c7f87214861f7311b730\",\"title\":\"invalid data\",\"detail\":\"invalid type 'number' into field 'task.priority', expected 'enum.TaskPriority'\"}]}\n"
+    },
+    {
+      "taskId": 43952142,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00ec4-7bb2c1d6468637842183c5e8\",\"title\":\"invalid data\",\"detail\":\"invalid type 'number' into field 'task.priority', expected 'enum.TaskPriority'\"}]}\n"
+    }
+  ]
+}

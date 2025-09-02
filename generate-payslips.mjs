@@ -51,16 +51,16 @@ const injectTemplate = (template, row) => {
     .replace('{{education_allowance}}', inject('Education Allowance', row.education_allowance))
     .replace('{{general_allowance}}', inject('General Allowance', row.general_allowance))
     .replace('{{other_allowance}}', inject('Other Allowance', row.other_allowance))
-    .replace('{{gratuity_eosb}}', inject('Gratuity/EOSB', row.gratuity_eosb))
+    .replace('{{gratuity_eosb}}', inject('ESOP Adjustment', row.gratuity_eosb))
     .replace('{{total_gross_salary}}', inject('TOTAL EARNINGS', row.total_gross_salary))
 
     // Adjustments
     .replace('{{bonus}}', inject('Bonuses', row.bonus))
     .replace('{{overtime}}', inject('Overtime', row.overtime))
     .replace('{{salary_in_arrears}}', inject('Arrears/Advances', row.salary_in_arrears))
-    .replace('{{expenses_deductions}}', inject('Expenses', row.expenses_deductions))
-    .replace('{{other_reimbursements}}', inject('Reimbursements', row.other_reimbursements))
-    .replace('{{expense_reimbursements}}', inject('Other Adjustments', row.expense_reimbursements))
+    .replace('{{expenses_deductions}}', inject('Expense Deductions', row.expenses_deductions))
+    .replace('{{expense_reimbursements}}', inject('Expense Reimbursements', row.expense_reimbursements))
+    .replace('{{other_reimbursements}}', inject('Other Reimbursements', row.other_reimbursements))
     .replaceAll('{{total_adjustments}}', inject('TOTAL ADJUSTMENTS', row.total_variable_values))
 
     // Net Total
@@ -124,7 +124,7 @@ const main = async () => {
       const { error: updateError } = await supabase
         .from(TABLE_NAME)
         .update({ payslip_url: publicUrl, payslip_token: token })
-        .eq('id', row.id)
+        .eq('batch_id', row.batch_id)
 
       if (updateError) {
         console.error(`❌ Failed to update row for ${row.employee_name}:`, updateError.message)

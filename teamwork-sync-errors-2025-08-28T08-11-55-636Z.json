@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-08-28T08:11:55.636Z",
+  "summary": {
+    "totalErrors": 10,
+    "updated": 3,
+    "skipped": 0,
+    "totalProcessed": 13
+  },
+  "errors": [
+    {
+      "taskId": 44188385,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00f3c-3542184768871c2950524835\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"tagNames\\\"\"}]}\n"
+    },
+    {
+      "taskId": 44239390,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00f3d-54cb925c6481a74f765c74a7\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"tagNames\\\"\"}]}\n"
+    },
+    {
+      "taskId": 44243155,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00f3e-4d3883d90f92f509208cfc38\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"tagNames\\\"\"}]}\n"
+    },
+    {
+      "taskId": 44243157,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00f3f-029d452c5c9920cc0819e3b3\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"tagNames\\\"\"}]}\n"
+    },
+    {
+      "taskId": 44243159,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00f40-0781e38c22ef9c742a8fbd1a\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"tagNames\\\"\"}]}\n"
+    },
+    {
+      "taskId": 44243161,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00f40-4b40e52b52e8c53136d62d1e\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"dueDate\\\"\"}]}\n"
+    },
+    {
+      "taskId": 43289306,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00f41-047f91d5427713711ff087f5\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"tagNames\\\"\"}]}\n"
+    },
+    {
+      "taskId": 43289300,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00f43-03e0c9f86cd4020a4c04a278\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"tagNames\\\"\"}]}\n"
+    },
+    {
+      "taskId": 35119255,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00f4a-2f7577676b939b9f62a6074d\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"tagNames\\\"\"}]}\n"
+    },
+    {
+      "taskId": 43952142,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00f4b-0ac1a9101358505f17b94206\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"tagNames\\\"\"}]}\n"
+    }
+  ]
+}

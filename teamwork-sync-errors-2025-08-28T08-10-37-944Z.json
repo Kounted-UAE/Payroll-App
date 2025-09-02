@@ -1,0 +1,63 @@
+{
+  "timestamp": "2025-08-28T08:10:37.944Z",
+  "summary": {
+    "totalErrors": 13,
+    "updated": 0,
+    "skipped": 0,
+    "totalProcessed": 13
+  },
+  "errors": [
+    {
+      "taskId": 44188385,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00ef0-322cfc112bf268c242c3f1b3\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"due-date\\\"\"}]}\n"
+    },
+    {
+      "taskId": 44239390,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00ef1-027e6f75660ec4e376854189\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"tags\\\"\"}]}\n"
+    },
+    {
+      "taskId": 44243155,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00ef2-483a63261d5aa09200612eec\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"tags\\\"\"}]}\n"
+    },
+    {
+      "taskId": 44243157,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00ef2-7d28c98953aabbbc30026dfd\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"tags\\\"\"}]}\n"
+    },
+    {
+      "taskId": 44243159,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00ef3-67651b6978de91135629a1d0\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"tags\\\"\"}]}\n"
+    },
+    {
+      "taskId": 44243161,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00ef4-02338e3c1b515200224da29c\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"due-date\\\"\"}]}\n"
+    },
+    {
+      "taskId": 43289306,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00ef5-0dd9bc0f6a1c89df061bb5fe\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"due-date\\\"\"}]}\n"
+    },
+    {
+      "taskId": 43289300,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00ef6-6ba006d06c644c587563a2f7\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"due-date\\\"\"}]}\n"
+    },
+    {
+      "taskId": 45478319,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00ef7-3fed7f477c4032e77c5e17c9\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"due-date\\\"\"}]}\n"
+    },
+    {
+      "taskId": 45478129,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00ef7-26b712e55fc37bba7708c66f\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"due-date\\\"\"}]}\n"
+    },
+    {
+      "taskId": 45478826,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00efb-1f1467ca1b8cdafc47587ca4\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"due-date\\\"\"}]}\n"
+    },
+    {
+      "taskId": 35119255,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00efc-4930d5f63cc73e0542d68818\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"due-date\\\"\"}]}\n"
+    },
+    {
+      "taskId": 43952142,
+      "error": "HTTP 400: {\"errors\":[{\"id\":\"1-68b00efd-72317d551e92805c0ab792e7\",\"title\":\"invalid data\",\"detail\":\"unknown field \\\"due-date\\\"\"}]}\n"
+    }
+  ]
+}
