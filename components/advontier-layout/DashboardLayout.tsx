@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const collapsed = state === "collapsed";
 
   return (
-      <div className="flex min-h-screen w-full flex-col rounded-b-2xl bg-white ">
+      <div className="flex min-h-screen w-full flex-col bg-white ">
         {/* Top Navbar - Full width across the top */}
         <TopNavbar />
         
@@ -20,7 +20,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <div className="flex flex-1 bg-white">
           {/* Sidebar - Starts below navbar */}
           <div className={React.useMemo(() => 
-            `hidden md:block flex-shrink-0 rounded-xl transition-all duration-300 ${
+            `hidden md:block flex-shrink-0 transition-all duration-300 ${
               collapsed ? 'w-20' : 'w-64'
             }`, 
             [collapsed]
@@ -29,7 +29,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
 
           {/* Page content area with breadcrumbs */}
-          <div className="flex-1 flex flex-col py-1 pr-2 h-20">
+          <div className="flex-1 flex flex-col ">
             {/* Breadcrumb section above page content */}
             <NavigationBreadcrumb />
 

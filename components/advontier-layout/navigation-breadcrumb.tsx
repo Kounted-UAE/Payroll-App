@@ -35,7 +35,7 @@ export function NavigationBreadcrumb() {
   })
 
   return (
-    <div className="text-lowercase text-xs flex items-center gap-3 px-4 mb-2 bg-gradient-to-l from-slate-800 to-slate-900 backdrop-blur rounded-t-xl shadow-sm">
+    <div className="text-lowercase text-xs flex items-center gap-3 px-4 mb-2 h-12 bg-slate-900 backdrop-blur shadow-sm">
       <SidebarTrigger className="h-8 w-8 rounded-lg hover:bg-white/50" />
       <nav className="flex items-center gap-2" aria-label="Breadcrumb">
         {dashboardSegments.length === 0 ? (

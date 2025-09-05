@@ -184,13 +184,13 @@ export async function POST(req: NextRequest) {
       Team Advontier
 
       ---
-      Powered by Advontier Web Forms.
-      This email was sent on behalf of Advontier Accounting and Management Solutions.
+      Powered by Kounted Web Forms.
+      This email was sent on behalf of Kounted Accounting and Management Solutions.
     `
 
     // Send email with Resend
     const result = await resend.emails.send({
-      from: 'Kounted Payroll <payroll@kounted.ae>',
+      from: 'Kounted Payroll <payroll@resend.kounted.ae>',
       to,
       replyTo: 'Kounted Payroll <payroll@kounted.ae>',
       subject: emailSubject,

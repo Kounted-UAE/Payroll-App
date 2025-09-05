@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, TableFooter } from '@/components/ui/table'
 import {
   Popover,
   PopoverContent,
@@ -19,13 +19,14 @@ import {
   CommandList,
 } from '@/components/ui/command'
 import { Badge } from '@/components/ui/badge'
-import { ChevronDown, X } from 'lucide-react'
+import { ChevronDown, X, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 import { toast } from '@/hooks/use-toast'
-import { ExportXeroJournalsWizard } from '@/components/wizards/payroll-wizards/PayrunSummaryJournalExport'
-import { ExportDetailedXeroJournalsWizard } from '@/components/wizards/payroll-wizards/PayrunDetailedJournalExport'
-import { CreatePayrunWizard } from '@/components/wizards/payroll-wizards/CreatePayrunWizard'
+import { ExportXeroJournalsWizard } from '@/components/advontier-payroll/actions/PayrunSummaryJournalExport'
+import { ExportDetailedXeroJournalsWizard } from '@/components/advontier-payroll/actions/PayrunDetailedJournalExport'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious, PaginationLink } from '@/components/ui/pagination'
 
 const SUPABASE_PUBLIC_URL = 'https://alryjvnddvrrgbuvednm.supabase.co/storage/v1/object/public/generated-pdfs/payslips'
 
@@ -46,11 +47,21 @@ interface PayslipFiltersAndTableProps {
   selected: Set<string>
   onSelectionChange: (selected: Set<string>) => void
   onProceedToEmail: () => void
+  onProceedToGenerate?: () => void
   journalWizardOpen: boolean
   setJournalWizardOpen: (open: boolean) => void
   detailedWizardOpen: boolean
   setDetailedWizardOpen: (open: boolean) => void
   onPayrunSuccess?: () => void
+  total?: number
+  page?: number
+  pageSize?: number
+  onPageChange?: (page: number) => void
+  onPageSizeChange?: (size: number) => void
+  sortBy?: string
+  sortDir?: 'asc' | 'desc'
+  onSort?: (field: string) => void
+  onClearSort?: () => void
 }
 
 export function PayslipFiltersAndTable({
@@ -58,16 +69,25 @@ export function PayslipFiltersAndTable({
   selected,
   onSelectionChange,
   onProceedToEmail,
+  onProceedToGenerate,
   journalWizardOpen,
   setJournalWizardOpen,
   detailedWizardOpen,
   setDetailedWizardOpen,
   onPayrunSuccess,
+  total = 0,
+  page = 1,
+  pageSize = 200,
+  onPageChange,
+  onPageSizeChange,
+  sortBy = 'created_at',
+  sortDir = 'desc',
+  onSort,
+  onClearSort,
 }: PayslipFiltersAndTableProps) {
   const [search, setSearch] = useState('')
   const [selectedEmployers, setSelectedEmployers] = useState<Set<string>>(new Set())
   const [selectedDates, setSelectedDates] = useState<Set<string>>(new Set())
-  const [payrunWizardOpen, setPayrunWizardOpen] = useState(false)
 
   const downloadZip = async () => {
     const zip = new JSZip()
@@ -87,7 +107,7 @@ export function PayslipFiltersAndTable({
 
   // Get unique values for filters
   const uniqueEmployers = Array.from(new Set(rows.map(row => row.employer_name).filter(Boolean)))
-  const uniqueDates = Array.from(new Set(rows.map(row => row.pay_period_to).filter(Boolean)))
+  const uniqueDates = Array.from(new Set(rows.map(row => row.pay_period_to || '').filter(Boolean)))
 
   const filtered = rows.filter(row => {
     // Text search filter
@@ -103,7 +123,7 @@ export function PayslipFiltersAndTable({
     
     // Date filter
     const matchesDate = selectedDates.size === 0 || 
-      (row.pay_period_to && selectedDates.has(row.pay_period_to))
+      ((row.pay_period_to || '') && selectedDates.has(row.pay_period_to || ''))
     
     return matchesSearch && matchesEmployer && matchesDate
   })
@@ -121,11 +141,29 @@ export function PayslipFiltersAndTable({
     return selectedRows.some(r => r.payslip_token)
   }
 
+  const totalPages = Math.max(1, Math.ceil((total || 0) / pageSize))
+
+  const SortIcon = ({ field }: { field: string }) => {
+    if (sortBy !== field) return <ArrowUpDown className="h-3 w-3 opacity-50" />
+    return sortDir === 'asc' ? <ArrowUp className="h-3 w-3" /> : <ArrowDown className="h-3 w-3" />
+  }
+
+  const HeaderButton = ({ field, label }: { field: string; label: string }) => (
+    <button
+      className="inline-flex items-center gap-1 hover:underline"
+      onClick={() => onSort?.(field)}
+      type="button"
+    >
+      <span>{label}</span>
+      <SortIcon field={field} />
+    </button>
+  )
+
   return (
     <div className="space-y-4">
       {/* Filters Section */}
       <div className="space-y-4">
-        <div className="flex items-center gap-4 flex-wrap">
+        <div className="flex items-center gap-4 flex-wrap text-slate-600">
           <Input
             type="text"
             placeholder="Search employee, employer, or email..."
@@ -137,7 +175,7 @@ export function PayslipFiltersAndTable({
           {/* Employer Filter */}
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="outline" className="justify-between min-w-[200px]">
+              <Button variant="outline" className="justify-between min-w-[200px] bg-blue-100">
                 {selectedEmployers.size === 0 
                   ? "All Employers" 
                   : `${selectedEmployers.size} employer${selectedEmployers.size !== 1 ? 's' : ''}`
@@ -145,7 +183,7 @@ export function PayslipFiltersAndTable({
                 <ChevronDown className="ml-2 h-4 w-4" />
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-[300px] p-0">
+            <PopoverContent className="w-[300px] p-0 bg-slate-800 text-white">
               <Command>
                 <CommandInput placeholder="Search employers..." />
                 <CommandList>
@@ -180,9 +218,9 @@ export function PayslipFiltersAndTable({
           </Popover>
 
           {/* Date Filter */}
-          <Popover>
+          <Popover >
             <PopoverTrigger asChild>
-              <Button variant="outline" className="justify-between min-w-[200px]">
+              <Button variant="outline" className="justify-between min-w-[200px] bg-blue-100">
                 {selectedDates.size === 0 
                   ? "All Dates" 
                   : `${selectedDates.size} date${selectedDates.size !== 1 ? 's' : ''}`
@@ -190,7 +228,7 @@ export function PayslipFiltersAndTable({
                 <ChevronDown className="ml-2 h-4 w-4" />
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-[300px] p-0">
+            <PopoverContent className="w-[300px] p-0 bg-slate-800 text-white">
               <Command>
                 <CommandInput placeholder="Search dates..." />
                 <CommandList>
@@ -238,6 +276,10 @@ export function PayslipFiltersAndTable({
               Clear All Filters
             </Button>
           )}
+
+          {onClearSort && (
+            <Button variant="ghost" size="sm" onClick={onClearSort}>Clear Sort</Button>
+          )}
         </div>
 
         {/* Active Filter Badges */}
@@ -275,11 +317,11 @@ export function PayslipFiltersAndTable({
         </div>
 
         <div className="flex items-center justify-between">
-          <div className="text-sm text-cyan-600">
-            Showing {filtered.length} result{filtered.length !== 1 && 's'} of {rows.length} total
+          <div className="text-sm text-slate-600 font-bold">
+            Showing {rows.length} result{rows.length !== 1 && 's'} of {total || rows.length} total
             {selected.size > 0 && (
               <span className="ml-2">
-                • {selected.size} of {rows.length} selected
+                • {selected.size} selected
               </span>
             )}
           </div>
@@ -297,30 +339,10 @@ export function PayslipFiltersAndTable({
 
       {/* Action Buttons Section */}
       <div className="flex items-center justify-between mb-4">
+
         <div className="flex items-center gap-2">
-          <Button
-            onClick={onProceedToEmail}
-            disabled={!selected.size}
-            variant="default"
-          >
-            Send to Email
-          </Button>
-          <Button
-            variant="outline"
-            onClick={downloadZip}
-            disabled={!isZipDownloadEnabled()}
-          >
-            Download Selected (ZIP)
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() => setPayrunWizardOpen(true)}
-            disabled={!selected.size}
-          >
-            Create New Payrun
-          </Button>
-        </div>
-        <div className="flex items-center gap-2">
+          
+          
           <Button onClick={() => setDetailedWizardOpen(true)} variant="default">
             Export Xero Detailed Journals
           </Button>
@@ -330,44 +352,59 @@ export function PayslipFiltersAndTable({
           >
             Export Xero Summary Journals
           </Button>
+          <Button
+            variant="default"
+            onClick={downloadZip}
+            disabled={!isZipDownloadEnabled()}
+          >
+            Download Selected (ZIP)
+          </Button>
+          <Button
+            variant="default"
+            onClick={() => onProceedToGenerate?.()}
+            disabled={!selected.size}
+          >
+            Generate Selected Payslips
+          </Button>
+          <Button
+            onClick={onProceedToEmail}
+            disabled={!selected.size}
+            variant="default"
+          >
+            Send to Email
+          </Button>
+        </div>
+        <div className="flex items-center gap-2">
+          
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-bold text-slate-600">Rows per page</span>
+            <Select value={String(pageSize)} onValueChange={(v) => onPageSizeChange?.(Number(v))}>
+              <SelectTrigger className="w-[100px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="bg-slate-800 text-white">
+                <SelectItem value="50" >50</SelectItem>
+                <SelectItem value="200">200</SelectItem>
+                <SelectItem value="1000">1000</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       </div>
-
-      {/* Wizard Components */}
-      <ExportDetailedXeroJournalsWizard
-        open={detailedWizardOpen}
-        onOpenChange={setDetailedWizardOpen}
-        payrollRows={rows}
-      />
-      <ExportXeroJournalsWizard
-        open={journalWizardOpen}
-        onOpenChange={setJournalWizardOpen}
-        payrollRows={rows}
-      />
-      <CreatePayrunWizard
-        open={payrunWizardOpen}
-        onOpenChange={setPayrunWizardOpen}
-        selectedRows={rows.filter(r => selected.has(r.batch_id))}
-        onSuccess={() => {
-          onPayrunSuccess?.()
-          onSelectionChange(new Set()) // Clear selections after success
-        }}
-      />
-
       {/* Table Section */}
       <Table>
-        <TableHeader>
+        <TableHeader className="bg-slate-800 text-white">
           <TableRow>
-            <TableHead>
+            <TableHead >
               <Checkbox
-                checked={filtered.every(r => selected.has(r.batch_id))}
+                checked={rows.every(r => selected.has(r.batch_id))}
                 indeterminate={
-                  filtered.some(r => selected.has(r.batch_id)) &&
-                  !filtered.every(r => selected.has(r.batch_id))
+                  rows.some(r => selected.has(r.batch_id)) &&
+                  !rows.every(r => selected.has(r.batch_id))
                 }
                 onCheckedChange={(checked) => {
                   const next = new Set(selected)
-                  filtered.forEach(row => {
+                  rows.forEach(row => {
                     if (checked) {
                       next.add(row.batch_id)
                     } else {
@@ -377,12 +414,13 @@ export function PayslipFiltersAndTable({
                   onSelectionChange(next)
                 }}
               />
-            </TableHead>
-            <TableHead>Employee</TableHead>
-            <TableHead>Employer</TableHead>
-            <TableHead>Reviewer Email</TableHead>
-            <TableHead>Live Email</TableHead>
-            <TableHead>Pay Period To</TableHead>
+            </TableHead >
+            <TableHead><HeaderButton field="pay_period_to" label="Date" /></TableHead>
+            <TableHead><HeaderButton field="employer_name" label="Employer" /></TableHead>
+            <TableHead><HeaderButton field="employee_name" label="Employee" /></TableHead>
+            <TableHead><HeaderButton field="email_id" label="Email" /></TableHead>
+            <TableHead><HeaderButton field="reviewer_email" label="Reviewer" /></TableHead>
+            
             <TableHead>Payslip</TableHead>
           </TableRow>
         </TableHeader>
@@ -395,11 +433,11 @@ export function PayslipFiltersAndTable({
                   onCheckedChange={() => toggleSelection(row.batch_id)}
                 />
               </TableCell>
-              <TableCell>{row.employee_name}</TableCell>
-              <TableCell>{row.employer_name}</TableCell>
-              <TableCell>{row.reviewer_email}</TableCell>
-              <TableCell>{row.email_id}</TableCell>
               <TableCell>{row.pay_period_to || 'N/A'}</TableCell>
+              <TableCell>{row.employer_name}</TableCell>
+              <TableCell>{row.employee_name}</TableCell>
+              <TableCell>{row.email_id}</TableCell>
+              <TableCell>{row.reviewer_email}</TableCell>
               <TableCell>
                 {row.payslip_token ? (
                   <a
@@ -417,6 +455,24 @@ export function PayslipFiltersAndTable({
           ))}
         </TableBody>
       </Table>
+
+      {/* Footer with pagination */}
+      <div className="flex items-center justify-between mt-2">
+
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious onClick={(e) => { e.preventDefault(); onPageChange?.(Math.max(1, page - 1)) }} href="#" />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink isActive href="#">{page}</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationNext onClick={(e) => { e.preventDefault(); onPageChange?.(Math.min(totalPages, page + 1)) }} href="#" />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      </div>
 
 
     </div>

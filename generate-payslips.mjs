@@ -111,7 +111,8 @@ const main = async () => {
 
         await page.setContent(html, { waitUntil: 'networkidle0' })
 
-        const token = crypto.randomUUID()
+        // Use existing token if present, otherwise create new one
+        const token = row.payslip_token || crypto.randomUUID()
         const filename = `${token}.pdf`
         const tempPath = path.join(OUTPUT_DIR, filename)
         const storagePath = `${STORAGE_FOLDER}/${filename}`

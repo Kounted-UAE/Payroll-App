@@ -4,296 +4,124 @@
 
 import { useState, useEffect } from 'react'
 import { getSupabaseClient } from '@/lib/supabase/client'
-import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Input } from '@/components/ui/input'
 import { toast } from '@/hooks/use-toast'
-import PayslipSelectionTable, { type PayslipRow } from '@/components/advontier-payroll/actions/PayslipSelectionTable'
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-} from '@/components/ui/dialog'
-import JSZip from 'jszip'
-import { saveAs } from 'file-saver'
-import { ExportXeroJournalsWizard } from '@/components/advontier-payroll/actions/PayrunSummaryJournalExport'
-import { ExportDetailedXeroJournalsWizard } from '@/components/advontier-payroll/actions/PayrunDetailedJournalExport'
-
-const SUPABASE_PUBLIC_URL = 'https://alryjvnddvrrgbuvednm.supabase.co/storage/v1/object/public/generated-pdfs/payslips'
+import { PayslipFiltersAndTable, type PayslipRow } from '@/components/admin/PayslipFiltersAndTable'
+import { PayslipEmailFlow } from '@/components/admin/PayslipEmailFlow'
+import PayslipGenerateFlow from '@/components/admin/PayslipGenerateFlow'
 
 export default function SendPayslipsPage() {
   const [rows, setRows] = useState<PayslipRow[]>([])
+  const [total, setTotal] = useState(0)
   const [selected, setSelected] = useState<Set<string>>(new Set())
-  const [step, setStep] = useState<'select' | 'review'>('select')
-  const [confirmOpen, setConfirmOpen] = useState(false)
-  const [sendMode, setSendMode] = useState<'test' | 'reviewer' | 'live' | null>(null)
-  const [search, setSearch] = useState('')
-  const [journalWizardOpen, setJournalWizardOpen] = useState(false)
-  const [detailedWizardOpen, setDetailedWizardOpen] = useState(false)
-
-  const downloadZip = async () => {
-    const zip = new JSZip()
-    const selectedRows = rows.filter(r => selected.has(r.id))
-
-    for (const row of selectedRows) {
-      if (!row.payslip_token) continue
-      const fileUrl = `${SUPABASE_PUBLIC_URL}/${row.payslip_token}.pdf`
-      const res = await fetch(fileUrl)
-      const blob = await res.blob()
-      zip.file(`${row.payslip_token}.pdf`, blob)
-    }
-
-    const zipBlob = await zip.generateAsync({ type: 'blob' })
-    saveAs(zipBlob, 'selected-payslips.zip')
-  }
+  const [step, setStep] = useState<'select' | 'generate' | 'review'>('select')
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(200)
+  const [sortBy, setSortBy] = useState<string>('created_at')
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc')
 
   useEffect(() => {
-    const fetch = async () => {
-      const supabase = getSupabaseClient()
-      const { data, error } = await supabase
-        .from('payroll_ingest_excelpayrollimport')
-        .select('id, employer_name, employee_name, reviewer_email, email_id, payslip_url, payslip_token, created_at')
-        .order('created_at', { ascending: false })
+    const fetchServer = async (pg: number, size: number, sort: string, dir: 'asc' | 'desc') => {
+      const offset = (pg - 1) * size
+      const params = new URLSearchParams({ limit: String(size), offset: String(offset), sortBy: sort, sortDir: dir })
+      const res = await fetch(`/api/admin/payslips/list?${params.toString()}`)
+      if (!res.ok) throw new Error(await res.text())
+      const json = await res.json()
+      const rows: PayslipRow[] = (json.rows as any[])?.map((r: any) => ({
+        batch_id: r.batch_id,
+        employer_name: r.employer_name,
+        employee_name: r.employee_name,
+        reviewer_email: r.reviewer_email,
+        email_id: r.email_id,
+        payslip_url: r.payslip_url,
+        payslip_token: r.payslip_token,
+        created_at: r.created_at,
+        pay_period_to: r.pay_period_to,
+      })) ?? []
+      setRows(rows)
+      setTotal(Number(json.total || 0))
+    }
 
-      if (error) {
-        toast({ title: 'Error loading rows', description: error.message, variant: 'destructive' })
-      } else {
-        setRows(data as any)
+    const load = async () => {
+      try {
+        await fetchServer(page, pageSize, sortBy, sortDir)
+      } catch (e: any) {
+        toast({ title: 'Error loading rows', description: e.message, variant: 'destructive' })
       }
     }
 
-    fetch()
-  }, [])
-
-  const toggle = (id: string) => {
-    setSelected(prev => {
-      const next = new Set(prev)
-      next.has(id) ? next.delete(id) : next.add(id)
-      return next
-    })
-  }
-
-  const toggleAll = (checked: boolean) => {
-    const next = new Set(selected)
-    filtered.forEach(row => {
-      if (checked) {
-        next.add(row.id)
-      } else {
-        next.delete(row.id)
-      }
-    })
-    setSelected(next)
-  }
-
-  const sendEmails = async (mode: 'test' | 'reviewer' | 'live') => {
-    const filtered = rows.filter(r => selected.has(r.id))
-    const successLog: string[] = []
-
-    for (const row of filtered) {
-      const to =
-        mode === 'test'
-          ? 'payroll@kounted.ae'
-          : mode === 'reviewer'
-            ? row.reviewer_email
-            : row.email_id
-
-      const url = `${SUPABASE_PUBLIC_URL}/${row.payslip_token}.pdf`
-
-      if (!to || !row.payslip_token) {
-        toast({
-          title: `Skipping ${row.employee_name}`,
-          description: 'Missing email or payslip token',
-          variant: 'destructive',
-        })
-        continue
-      }
-
-      const res = await fetch('/api/send-payslip-email', {
-        method: 'POST',
-        body: JSON.stringify({
-          to,
-          name: row.employee_name,
-          url,
-        }),
-      })
-
-      if (res.ok) {
-        successLog.push(`${row.employee_name} → ${to}`)
-      } else {
-        toast({
-          title: `Failed to send to ${to}`,
-          description: await res.text(),
-          variant: 'destructive',
-        })
-      }
-    }
-
-    if (successLog.length) {
-      toast({
-        title: 'Emails sent',
-        description: `${successLog.length} emails delivered successfully.`,
-        action: (
-          <Button
-            variant="default"
-            size="sm"
-            onClick={() =>
-              navigator.clipboard.writeText(successLog.join('\n')).then(() =>
-                toast({ title: 'Copied to clipboard' })
-              )
-            }
-          >
-            Copy Log
-          </Button>
-        ),
-      })
-    }
-  }
-
-  const filtered = rows.filter(row =>
-    (row.employee_name?.toLowerCase() ?? '').includes(search.toLowerCase()) ||
-    (row.employer_name?.toLowerCase() ?? '').includes(search.toLowerCase()) ||
-    (row.reviewer_email?.toLowerCase() ?? '').includes(search.toLowerCase()) ||
-    (row.email_id?.toLowerCase() ?? '').includes(search.toLowerCase())
-  )
-
+    load()
+  }, [page, pageSize, sortBy, sortDir])
 
   return (
     <div className="p-6 space-y-6">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-lg text-zinc-600 font-bold">Send Payslips</h1>
-        <p className="text-blue-400">
-          Send payslips to employees and reviewers
-        </p>
-        <div className="flex items-center gap-2">
-          <Button onClick={() => setDetailedWizardOpen(true)} variant="default">
-            Export Xero Detailed Journals
-          </Button>
-          <ExportDetailedXeroJournalsWizard
-            open={detailedWizardOpen}
-            onOpenChange={setDetailedWizardOpen}
-            payrollRows={rows}
-          />
-
-
-          <Button
-            variant="default" onClick={() => setJournalWizardOpen(true)}            
-          >
-            Export Xero Summary Journals
-          </Button>
-
-          <ExportXeroJournalsWizard
-            open={journalWizardOpen}
-            onOpenChange={setJournalWizardOpen}
-            payrollRows={rows}
-          />
-
-        </div>
-
-
-
+        <p className="text-white text-sm bg-red-600 px-2 py-1 rounded-md shadow-xs">-temp payroll tool-</p>
       </div>
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <Input
-            type="text"
-            placeholder="Search employee, employer, or email..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full max-w-sm"
-          />
-          {search && (
-            <Button variant="ghost" size="sm" onClick={() => setSearch('')}>
-              Clear
-            </Button>
-          )}
-        </div>
-        <div className="text-sm text-blue-200">
-          Showing {filtered.length} result{filtered.length !== 1 && 's'}
-        </div>
-      </div>
-
-      <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Confirm Payslip Emails</DialogTitle>
-          </DialogHeader>
-          <div className="text-sm text-blue-200 space-y-2 max-h-[300px] overflow-auto">
-            {rows.filter(r => selected.has(r.id)).map(r => {
-              const to =
-                sendMode === 'test' ? 'payroll@kounted.ae' :
-                  sendMode === 'reviewer' ? r.reviewer_email :
-                    r.email_id
-
-              return (
-                <div key={r.id}>
-                  <strong>{r.employee_name}</strong> → {to || <em>Missing Email</em>}
-                </div>
-              )
-            })}
-          </div>
-          <DialogFooter className="mt-4">
-            <Button variant="ghost" onClick={() => setConfirmOpen(false)}>
-              Cancel
-            </Button>
-            <Button
-              onClick={async () => {
-                if (!sendMode) return
-                await sendEmails(sendMode)
-                setConfirmOpen(false)
-                setStep('select')
-              }}
-            >
-              Confirm Send
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-
-      {step === 'select' && (
-        <>
-          <PayslipSelectionTable
-            rows={rows}
-            filteredRows={filtered}
-            selectedIds={selected}
-            onToggleSelection={toggle}
-            onToggleAll={toggleAll}
-          />
-
-          <Button className="mt-4" onClick={() => setStep('review')} disabled={!selected.size}>
-            Continue
-          </Button>
-          <Button
-            variant="outline"
-            onClick={downloadZip}
-            disabled={!rows.some(r => selected.has(r.id) && r.payslip_token)}
-          >
-            Download Selected (ZIP)
-          </Button>
-        </>
-      )}
-
-      {step === 'review' && (
-        <>
-          <p className="text-blue-200 text-sm">
-            Send payslips for <strong>{selected.size}</strong> selected employees.
-          </p>
-          <div className="flex gap-4 mt-4">
-            <Button variant="outline" onClick={() => { setSendMode('test'); setConfirmOpen(true) }}>
-              Send to Test Email
-            </Button>
-            <Button variant="outline" onClick={() => { setSendMode('reviewer'); setConfirmOpen(true) }}>
-              Send to Reviewer Email
-            </Button>
-            <Button variant="default" onClick={() => { setSendMode('live'); setConfirmOpen(true) }}>
-              Send to Live Email
-            </Button>
-            <Button variant="ghost" onClick={() => setStep('select')}>
-              Cancel
-            </Button>
-          </div>
-        </>
+      {step === 'select' ? (
+        <PayslipFiltersAndTable
+          rows={rows}
+          selected={selected}
+          onSelectionChange={setSelected}
+          onProceedToEmail={() => setStep('review')}
+          onProceedToGenerate={() => setStep('generate')}
+          journalWizardOpen={false}
+          setJournalWizardOpen={() => {}}
+          detailedWizardOpen={false}
+          setDetailedWizardOpen={() => {}}
+          total={total}
+          page={page}
+          pageSize={pageSize}
+          onPageChange={setPage}
+          onPageSizeChange={(n) => { setPageSize(n); setPage(1) }}
+          sortBy={sortBy}
+          sortDir={sortDir}
+          onSort={(field) => {
+            if (sortBy === field) {
+              setSortDir(prev => (prev === 'asc' ? 'desc' : 'asc'))
+            } else {
+              setSortBy(field)
+              setSortDir('asc')
+            }
+            setPage(1)
+          }}
+          onClearSort={() => { setSortBy('created_at'); setSortDir('desc'); setPage(1) }}
+        />
+      ) : step === 'generate' ? (
+        <PayslipGenerateFlow
+          rows={rows}
+          selected={selected}
+          onBack={() => setStep('select')}
+          onDone={async () => {
+            setStep('select')
+            // refresh data
+            try {
+              const offset = (page - 1) * pageSize
+              const params = new URLSearchParams({ limit: String(pageSize), offset: String(offset), sortBy, sortDir })
+              const res = await fetch(`/api/admin/payslips/list?${params.toString()}`)
+              const json = await res.json()
+              const rows: PayslipRow[] = (json.rows as any[])?.map((r: any) => ({
+                batch_id: r.batch_id,
+                employer_name: r.employer_name,
+                employee_name: r.employee_name,
+                reviewer_email: r.reviewer_email,
+                email_id: r.email_id,
+                payslip_url: r.payslip_url,
+                payslip_token: r.payslip_token,
+                created_at: r.created_at,
+                pay_period_to: r.pay_period_to,
+              })) ?? []
+              setRows(rows)
+              setTotal(Number(json.total || 0))
+            } catch {}
+          }}
+        />
+      ) : (
+        <PayslipEmailFlow
+          rows={rows}
+          selected={selected}
+          onBack={() => setStep('select')}
+        />
       )}
     </div>
   )

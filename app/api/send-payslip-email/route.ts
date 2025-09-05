@@ -41,14 +41,15 @@ console.log('📄 PDF:', url)
     </p>
 
     <p style="font-size: 12px; color: #888; margin-top: 32px;">
-      This message was sent by the Advontier Business Suite. Do not reply directly to this email.
+      Do not reply directly to this email.
     </p>
   </div>
   `
 
   try {
     const result = await resend.emails.send({
-      from: 'Kounted Payroll <payroll@kounted.ae>',
+      from: 'Kounted Payroll <payroll@resend.kounted.ae>',
+      replyTo: 'Kounted Payroll <payroll@kounted.ae>',
       to,
       subject,
       html,

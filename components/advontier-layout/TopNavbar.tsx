@@ -20,7 +20,7 @@ export function TopNavbar() {
   const collapsed = state === "collapsed"
 
   return (
-    <header className="text-sm h-20 px-2 m-2 bg-slate-900 shadow-sm backdrop-blur top-0 z-50 sticky overflow-hidden rounded-2xl">
+    <header className="text-sm h-20 bg-slate-900 shadow-sm backdrop-blur top-0 z-50 sticky overflow-hidden">
       <div className="h-full flex items-center justify-between px-2 relative z-10  text-white font-bold">
         {/* Left side - Logo */}
         <div className="flex items-center">

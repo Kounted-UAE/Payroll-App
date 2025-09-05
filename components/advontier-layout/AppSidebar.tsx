@@ -32,8 +32,8 @@ export function AppSidebar() {
      
 
       {/* Scrollable Content */}
-      <ScrollArea className="flex-1 overflow-y-auto p-1 ml-1">
-        <div className=" bg-slate-900 p-1 rounded-t-xl">
+      <ScrollArea className="flex-1 overflow-y-auto">
+        <div className=" bg-slate-900 p-1">
           {sidebarSections.map((section) => (
             <div key={section.label} className="mb-4">
               {!collapsed && (
