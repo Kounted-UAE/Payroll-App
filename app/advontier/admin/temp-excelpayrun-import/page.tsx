@@ -18,6 +18,7 @@ export default function SendPayslipsPage() {
   const [pageSize, setPageSize] = useState(200)
   const [sortBy, setSortBy] = useState<string>('created_at')
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc')
+  const [filteredRows, setFilteredRows] = useState<PayslipRow[]>([])
 
   useEffect(() => {
     const fetchServer = async (pg: number, size: number, sort: string, dir: 'asc' | 'desc') => {
@@ -66,6 +67,7 @@ export default function SendPayslipsPage() {
           onSelectionChange={setSelected}
           onProceedToEmail={() => setStep('review')}
           onProceedToGenerate={() => setStep('generate')}
+          onFilteredRowsChange={setFilteredRows}
           journalWizardOpen={false}
           setJournalWizardOpen={() => {}}
           detailedWizardOpen={false}
@@ -90,7 +92,7 @@ export default function SendPayslipsPage() {
         />
       ) : step === 'generate' ? (
         <PayslipGenerateFlow
-          rows={rows}
+          rows={filteredRows}
           selected={selected}
           onBack={() => setStep('select')}
           onDone={async () => {
@@ -120,7 +122,7 @@ export default function SendPayslipsPage() {
         />
       ) : (
         <PayslipEmailFlow
-          rows={rows}
+          rows={filteredRows}
           selected={selected}
           onBack={() => setStep('select')}
         />

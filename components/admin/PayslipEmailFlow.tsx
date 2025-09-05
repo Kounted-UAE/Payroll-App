@@ -180,7 +180,7 @@ export function PayslipEmailFlow({
       </Dialog>
 
       <p className="text-cyan-600 text-sm">
-        Send payslips for <strong>{selected.size}</strong> selected employees.
+        Send payslips for <strong>{selectedRows.length}</strong> selected employees.
       </p>
       
       <div className="flex gap-4 mt-4">

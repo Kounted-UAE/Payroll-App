@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
@@ -49,6 +49,7 @@ interface PayslipFiltersAndTableProps {
   onSelectionChange: (selected: Set<string>) => void
   onProceedToEmail: () => void
   onProceedToGenerate?: () => void
+  onFilteredRowsChange?: (filteredRows: PayslipRow[]) => void
   journalWizardOpen: boolean
   setJournalWizardOpen: (open: boolean) => void
   detailedWizardOpen: boolean
@@ -71,6 +72,7 @@ export function PayslipFiltersAndTable({
   onSelectionChange,
   onProceedToEmail,
   onProceedToGenerate,
+  onFilteredRowsChange,
   journalWizardOpen,
   setJournalWizardOpen,
   detailedWizardOpen,
@@ -143,6 +145,11 @@ export function PayslipFiltersAndTable({
   })
 
   const selectedInFiltered = filtered.filter(r => selected.has(r.batch_id)).length
+
+  // Notify parent of filtered rows changes
+  React.useEffect(() => {
+    onFilteredRowsChange?.(filtered)
+  }, [filtered, onFilteredRowsChange])
 
   const toggleSelection = (batchId: string) => {
     const next = new Set(selected)
