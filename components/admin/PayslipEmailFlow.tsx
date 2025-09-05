@@ -27,13 +27,16 @@ export function PayslipEmailFlow({
 }: PayslipEmailFlowProps) {
   const [confirmOpen, setConfirmOpen] = useState(false)
   const [sendMode, setSendMode] = useState<'test' | 'reviewer' | 'live' | null>(null)
+  const [isSending, setIsSending] = useState(false)
 
   const sendEmails = async (mode: 'test' | 'reviewer' | 'live') => {
+    setIsSending(true)
     const filtered = rows.filter(r => selected.has(r.batch_id))
     const successLog: string[] = []
+    const errorLog: string[] = []
 
     for (const row of filtered) {
-      const to =
+      const rawTo =
         mode === 'test'
           ? 'payroll@kounted.ae'
           : mode === 'reviewer'
@@ -42,39 +45,60 @@ export function PayslipEmailFlow({
 
       const url = `${SUPABASE_PUBLIC_URL}/${row.payslip_token}.pdf`
 
-      if (!to || !row.payslip_token) {
+      if (!rawTo || !row.payslip_token) {
+        errorLog.push(`${row.employee_name}: Missing ${!rawTo ? 'email' : 'payslip token'}`)
         toast({
           title: `Skipping ${row.employee_name}`,
-          description: 'Missing email or payslip token',
+          description: !rawTo ? 'Missing email address' : 'Missing payslip token',
           variant: 'destructive',
         })
         continue
       }
 
-      const res = await fetch('/api/send-payslip-email', {
-        method: 'POST',
-        body: JSON.stringify({
-          to,
-          name: row.employee_name,
-          url,
-        }),
-      })
+      // Support multiple recipients separated by "," or ";"
+      const toList = Array.isArray(rawTo)
+        ? rawTo
+        : String(rawTo)
+            .split(/[;,]/)
+            .map(e => e.trim())
+            .filter(Boolean)
 
-      if (res.ok) {
-        successLog.push(`${row.employee_name} → ${to}`)
-      } else {
-        toast({
-          title: `Failed to send to ${to}`,
-          description: await res.text(),
-          variant: 'destructive',
+      try {
+        const res = await fetch('/api/send-payslip-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            to: toList.length === 1 ? toList[0] : toList,
+            name: row.employee_name,
+            url,
+            batch_id: row.batch_id,
+          }),
         })
+
+        if (res.ok) {
+          successLog.push(`${row.employee_name} → ${toList.join(', ')}`)
+        } else {
+          const msg = await res.text()
+          errorLog.push(`${row.employee_name} → ${toList.join(', ')}: ${msg}`)
+          toast({
+            title: `Failed to send: ${row.employee_name}`,
+            description: msg,
+            variant: 'destructive',
+          })
+        }
+      } catch (e: any) {
+        const msg = e?.message || 'Network error'
+        errorLog.push(`${row.employee_name} → ${toList.join(', ')}: ${msg}`)
+        toast({ title: `Failed to send: ${row.employee_name}`, description: msg, variant: 'destructive' })
       }
     }
+
+    setIsSending(false)
 
     if (successLog.length) {
       toast({
         title: 'Emails sent',
-        description: `${successLog.length} emails delivered successfully.`,
+        description: `${successLog.length} of ${filtered.length} emails delivered successfully.`,
         action: (
           <Button
             variant="default"
@@ -86,6 +110,27 @@ export function PayslipEmailFlow({
             }
           >
             Copy Log
+          </Button>
+        ),
+      })
+    }
+
+    if (errorLog.length) {
+      toast({
+        title: 'Some emails failed',
+        description: `${errorLog.length} failed. Click to copy error log.`,
+        variant: 'destructive',
+        action: (
+          <Button
+            variant="destructive"
+            size="sm"
+            onClick={() =>
+              navigator.clipboard.writeText(errorLog.join('\n')).then(() =>
+                toast({ title: 'Error log copied' })
+              )
+            }
+          >
+            Copy Errors
           </Button>
         ),
       })
@@ -116,7 +161,7 @@ export function PayslipEmailFlow({
             })}
           </div>
           <DialogFooter className="mt-4">
-            <Button variant="ghost" onClick={() => setConfirmOpen(false)}>
+            <Button variant="ghost" onClick={() => setConfirmOpen(false)} disabled={isSending}>
               Cancel
             </Button>
             <Button
@@ -126,8 +171,9 @@ export function PayslipEmailFlow({
                 setConfirmOpen(false)
                 onBack()
               }}
+              disabled={isSending}
             >
-              Confirm Send
+              {isSending ? 'Sending…' : 'Confirm Send'}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -138,16 +184,16 @@ export function PayslipEmailFlow({
       </p>
       
       <div className="flex gap-4 mt-4">
-        <Button variant="outline" onClick={() => { setSendMode('test'); setConfirmOpen(true) }}>
+        <Button variant="outline" onClick={() => { setSendMode('test'); setConfirmOpen(true) }} disabled={isSending}>
           Send to Test Email
         </Button>
-        <Button variant="outline" onClick={() => { setSendMode('reviewer'); setConfirmOpen(true) }}>
+        <Button variant="outline" onClick={() => { setSendMode('reviewer'); setConfirmOpen(true) }} disabled={isSending}>
           Send to Reviewer Email
         </Button>
-        <Button variant="default" onClick={() => { setSendMode('live'); setConfirmOpen(true) }}>
+        <Button variant="default" onClick={() => { setSendMode('live'); setConfirmOpen(true) }} disabled={isSending}>
           Send to Live Email
         </Button>
-        <Button variant="ghost" onClick={onBack}>
+        <Button variant="ghost" onClick={onBack} disabled={isSending}>
           Cancel
         </Button>
       </div>

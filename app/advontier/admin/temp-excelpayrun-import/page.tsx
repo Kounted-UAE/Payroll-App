@@ -36,6 +36,7 @@ export default function SendPayslipsPage() {
         payslip_token: r.payslip_token,
         created_at: r.created_at,
         pay_period_to: r.pay_period_to,
+        last_sent_at: r.last_sent_at || null,
       })) ?? []
       setRows(rows)
       setTotal(Number(json.total || 0))
@@ -110,6 +111,7 @@ export default function SendPayslipsPage() {
                 payslip_token: r.payslip_token,
                 created_at: r.created_at,
                 pay_period_to: r.pay_period_to,
+                last_sent_at: r.last_sent_at || null,
               })) ?? []
               setRows(rows)
               setTotal(Number(json.total || 0))

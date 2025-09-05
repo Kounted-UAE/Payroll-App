@@ -128,10 +128,10 @@ export default function FeatureDetailModal({
 
         <Tabs defaultValue="overview" className="w-full">
         <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="sessions">Sessions</TabsTrigger>
-            <TabsTrigger value="milestones">Milestones</TabsTrigger>
-            <TabsTrigger value="analytics">Analytics</TabsTrigger>
+            <TabsTrigger value="overview" className="flex items-center gap-2">Overview</TabsTrigger>
+            <TabsTrigger value="sessions" className="flex items-center gap-2">Sessions</TabsTrigger>
+            <TabsTrigger value="milestones" className="flex items-center gap-2">Milestones</TabsTrigger>
+            <TabsTrigger value="analytics" className="flex items-center gap-2">Analytics</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">

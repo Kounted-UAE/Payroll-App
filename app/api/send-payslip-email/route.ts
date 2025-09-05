@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { createClient } from '@supabase/supabase-js'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(req: NextRequest) {
-  const { to, name, url } = await req.json()
+  const { to, name, url, batch_id } = await req.json()
 
   if (!to || !name || !url) {
     return new NextResponse('Missing required fields', { status: 400 })
@@ -55,9 +56,47 @@ console.log('📄 PDF:', url)
       html,
     })
 
+    // Log send event (best-effort)
+    try {
+      const urlEnv = process.env.SUPABASE_URL
+      const keyEnv = process.env.SUPABASE_SERVICE_ROLE_KEY
+      if (urlEnv && keyEnv && batch_id) {
+        const supabase = createClient(urlEnv, keyEnv)
+        await supabase
+          .from('payroll_payslip_send_events')
+          .insert({
+            batch_id,
+            recipients: Array.isArray(to) ? to.join(', ') : String(to),
+            status: 'sent',
+            error_message: null,
+          })
+      }
+    } catch (e) {
+      console.warn('⚠️ Failed to log send event', e)
+    }
+
     return NextResponse.json({ success: true, result })
   } catch (err: any) {
     console.error('❌ Email send failed:', err)
+    // Log failure event (best-effort)
+    try {
+      const urlEnv = process.env.SUPABASE_URL
+      const keyEnv = process.env.SUPABASE_SERVICE_ROLE_KEY
+      if (urlEnv && keyEnv && batch_id) {
+        const supabase = createClient(urlEnv, keyEnv)
+        await supabase
+          .from('payroll_payslip_send_events')
+          .insert({
+            batch_id,
+            recipients: Array.isArray(to) ? to.join(', ') : String(to),
+            status: 'failed',
+            error_message: err?.message || 'Unknown error',
+          })
+      }
+    } catch (e) {
+      console.warn('⚠️ Failed to log send failure event', e)
+    }
+
     return new NextResponse('Email send failed', { status: 500 })
   }
 }

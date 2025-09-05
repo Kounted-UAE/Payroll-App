@@ -244,20 +244,20 @@ export default function DevProgressPage() {
       {/* Main Content */}
       <Tabs defaultValue="timeline" className="space-y-6">
         <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="timeline">
-            <Calendar className="h-4 w-4 mr-2" />
+          <TabsTrigger value="timeline" className="flex items-center gap-2">
+            <Calendar className="h-4 w-4" />
             Timeline
           </TabsTrigger>
-          <TabsTrigger value="sessions">
-            <FileText className="h-4 w-4 mr-2" />
+          <TabsTrigger value="sessions" className="flex items-center gap-2">
+            <FileText className="h-4 w-4" />
             Sessions
           </TabsTrigger>
-          <TabsTrigger value="analytics">
-            <BarChart3 className="h-4 w-4 mr-2" />
+          <TabsTrigger value="analytics" className="flex items-center gap-2">
+            <BarChart3 className="h-4 w-4" />
             Analytics
           </TabsTrigger>
-          <TabsTrigger value="logger">
-            <Plus className="h-4 w-4 mr-2" />
+          <TabsTrigger value="logger" className="flex items-center gap-2">
+            <Plus className="h-4 w-4" />
             Log Session
           </TabsTrigger>
         </TabsList>

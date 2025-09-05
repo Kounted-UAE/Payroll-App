@@ -47,5 +47,28 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
 
-  return NextResponse.json({ rows: data ?? [], total: count ?? 0 })
+  // Attach last_sent_at from events table (best-effort)
+  let lastSentMap: Record<string, string> = {}
+  try {
+    const batchIds = (data || []).map((r: any) => r.batch_id).filter(Boolean)
+    if (batchIds.length > 0) {
+      const { data: events, error: eventsError } = await supabase
+        .from('payroll_payslip_send_events')
+        .select('batch_id, created_at')
+        .in('batch_id', batchIds)
+        .order('created_at', { ascending: false })
+
+      if (!eventsError && Array.isArray(events)) {
+        for (const e of events) {
+          if (!lastSentMap[e.batch_id]) {
+            lastSentMap[e.batch_id] = e.created_at
+          }
+        }
+      }
+    }
+  } catch {}
+
+  const rowsWithLast = (data || []).map((r: any) => ({ ...r, last_sent_at: lastSentMap[r.batch_id] || null }))
+
+  return NextResponse.json({ rows: rowsWithLast, total: count ?? 0 })
 }

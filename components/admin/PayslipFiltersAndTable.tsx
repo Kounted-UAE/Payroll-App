@@ -40,6 +40,7 @@ export type PayslipRow = {
   payslip_token: string
   created_at: string
   pay_period_to: string | null
+  last_sent_at?: string | null
 }
 
 interface PayslipFiltersAndTableProps {
@@ -107,7 +108,20 @@ export function PayslipFiltersAndTable({
 
   // Get unique values for filters
   const uniqueEmployers = Array.from(new Set(rows.map(row => row.employer_name).filter(Boolean)))
-  const uniqueDates = Array.from(new Set(rows.map(row => row.pay_period_to || '').filter(Boolean)))
+  // Date options should reflect current search + employer filters (but not current date filter)
+  const dateOptionSource = rows.filter(row => {
+    const matchesSearch = !search || 
+      (row.employee_name?.toLowerCase() ?? '').includes(search.toLowerCase()) ||
+      (row.employer_name?.toLowerCase() ?? '').includes(search.toLowerCase()) ||
+      (row.reviewer_email?.toLowerCase() ?? '').includes(search.toLowerCase()) ||
+      (row.email_id?.toLowerCase() ?? '').includes(search.toLowerCase())
+
+    const matchesEmployer = selectedEmployers.size === 0 || 
+      (row.employer_name && selectedEmployers.has(row.employer_name))
+
+    return matchesSearch && matchesEmployer
+  })
+  const uniqueDates = Array.from(new Set(dateOptionSource.map(row => row.pay_period_to || '').filter(Boolean)))
 
   const filtered = rows.filter(row => {
     // Text search filter
@@ -127,6 +141,8 @@ export function PayslipFiltersAndTable({
     
     return matchesSearch && matchesEmployer && matchesDate
   })
+
+  const selectedInFiltered = filtered.filter(r => selected.has(r.batch_id)).length
 
   const toggleSelection = (batchId: string) => {
     const next = new Set(selected)
@@ -318,10 +334,10 @@ export function PayslipFiltersAndTable({
 
         <div className="flex items-center justify-between">
           <div className="text-sm text-slate-600 font-bold">
-            Showing {rows.length} result{rows.length !== 1 && 's'} of {total || rows.length} total
-            {selected.size > 0 && (
+            Showing {filtered.length} result{filtered.length !== 1 && 's'} of {total || rows.length} total
+            {selectedInFiltered > 0 && (
               <span className="ml-2">
-                • {selected.size} selected
+                • {selectedInFiltered} selected
               </span>
             )}
           </div>
@@ -397,14 +413,14 @@ export function PayslipFiltersAndTable({
           <TableRow>
             <TableHead >
               <Checkbox
-                checked={rows.every(r => selected.has(r.batch_id))}
+                checked={filtered.length > 0 && filtered.every(r => selected.has(r.batch_id))}
                 indeterminate={
-                  rows.some(r => selected.has(r.batch_id)) &&
-                  !rows.every(r => selected.has(r.batch_id))
+                  filtered.some(r => selected.has(r.batch_id)) &&
+                  !filtered.every(r => selected.has(r.batch_id))
                 }
                 onCheckedChange={(checked) => {
                   const next = new Set(selected)
-                  rows.forEach(row => {
+                  filtered.forEach(row => {
                     if (checked) {
                       next.add(row.batch_id)
                     } else {
@@ -420,6 +436,7 @@ export function PayslipFiltersAndTable({
             <TableHead><HeaderButton field="employee_name" label="Employee" /></TableHead>
             <TableHead><HeaderButton field="email_id" label="Email" /></TableHead>
             <TableHead><HeaderButton field="reviewer_email" label="Reviewer" /></TableHead>
+            <TableHead>Last Sent</TableHead>
             
             <TableHead>Payslip</TableHead>
           </TableRow>
@@ -438,6 +455,9 @@ export function PayslipFiltersAndTable({
               <TableCell>{row.employee_name}</TableCell>
               <TableCell>{row.email_id}</TableCell>
               <TableCell>{row.reviewer_email}</TableCell>
+              <TableCell>
+                {row.last_sent_at ? new Date(row.last_sent_at).toLocaleString() : <span className="text-cyan-600 text-xs">Never</span>}
+              </TableCell>
               <TableCell>
                 {row.payslip_token ? (
                   <a
