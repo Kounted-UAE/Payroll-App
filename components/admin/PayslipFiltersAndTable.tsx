@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
@@ -125,31 +125,35 @@ export function PayslipFiltersAndTable({
   })
   const uniqueDates = Array.from(new Set(dateOptionSource.map(row => row.pay_period_to || '').filter(Boolean)))
 
-  const filtered = rows.filter(row => {
-    // Text search filter
-    const matchesSearch = !search || 
-      (row.employee_name?.toLowerCase() ?? '').includes(search.toLowerCase()) ||
-      (row.employer_name?.toLowerCase() ?? '').includes(search.toLowerCase()) ||
-      (row.reviewer_email?.toLowerCase() ?? '').includes(search.toLowerCase()) ||
-      (row.email_id?.toLowerCase() ?? '').includes(search.toLowerCase())
-    
-    // Employer filter
-    const matchesEmployer = selectedEmployers.size === 0 || 
-      (row.employer_name && selectedEmployers.has(row.employer_name))
-    
-    // Date filter
-    const matchesDate = selectedDates.size === 0 || 
-      ((row.pay_period_to || '') && selectedDates.has(row.pay_period_to || ''))
-    
-    return matchesSearch && matchesEmployer && matchesDate
-  })
+  const filtered = useMemo(() => {
+    return rows.filter(row => {
+      // Text search filter
+      const matchesSearch = !search || 
+        (row.employee_name?.toLowerCase() ?? '').includes(search.toLowerCase()) ||
+        (row.employer_name?.toLowerCase() ?? '').includes(search.toLowerCase()) ||
+        (row.reviewer_email?.toLowerCase() ?? '').includes(search.toLowerCase()) ||
+        (row.email_id?.toLowerCase() ?? '').includes(search.toLowerCase())
+      
+      // Employer filter
+      const matchesEmployer = selectedEmployers.size === 0 || 
+        (row.employer_name && selectedEmployers.has(row.employer_name))
+      
+      // Date filter
+      const matchesDate = selectedDates.size === 0 || 
+        ((row.pay_period_to || '') && selectedDates.has(row.pay_period_to || ''))
+      
+      return matchesSearch && matchesEmployer && matchesDate
+    })
+  }, [rows, search, selectedEmployers, selectedDates])
 
-  const selectedInFiltered = filtered.filter(r => selected.has(r.batch_id)).length
+  const selectedInFiltered = useMemo(() => {
+    return filtered.filter(r => selected.has(r.batch_id)).length
+  }, [filtered, selected])
 
   // Notify parent of filtered rows changes
-  React.useEffect(() => {
+  useEffect(() => {
     onFilteredRowsChange?.(filtered)
-  }, [filtered, onFilteredRowsChange])
+  }, [filtered]) // onFilteredRowsChange should be stable, don't include in deps
 
   const toggleSelection = (batchId: string) => {
     const next = new Set(selected)

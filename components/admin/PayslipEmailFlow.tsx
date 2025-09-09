@@ -18,12 +18,14 @@ interface PayslipEmailFlowProps {
   rows: PayslipRow[]
   selected: Set<string>
   onBack: () => void
+  onRefresh?: () => void
 }
 
 export function PayslipEmailFlow({
   rows,
   selected,
   onBack,
+  onRefresh,
 }: PayslipEmailFlowProps) {
   const [confirmOpen, setConfirmOpen] = useState(false)
   const [sendMode, setSendMode] = useState<'test' | 'reviewer' | 'live' | null>(null)
@@ -113,6 +115,8 @@ export function PayslipEmailFlow({
           </Button>
         ),
       })
+      // Refresh data to show updated "Last Sent" times
+      onRefresh?.()
     }
 
     if (errorLog.length) {

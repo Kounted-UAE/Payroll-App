@@ -2,7 +2,7 @@
 
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { getSupabaseClient } from '@/lib/supabase/client'
 import { toast } from '@/hooks/use-toast'
 import { PayslipFiltersAndTable, type PayslipRow } from '@/components/admin/PayslipFiltersAndTable'
@@ -19,6 +19,36 @@ export default function SendPayslipsPage() {
   const [sortBy, setSortBy] = useState<string>('created_at')
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc')
   const [filteredRows, setFilteredRows] = useState<PayslipRow[]>([])
+
+  const refreshData = useCallback(async () => {
+    try {
+      const offset = (page - 1) * pageSize
+      const params = new URLSearchParams({ limit: String(pageSize), offset: String(offset), sortBy, sortDir })
+      const res = await fetch(`/api/admin/payslips/list?${params.toString()}`)
+      if (!res.ok) throw new Error(await res.text())
+      const json = await res.json()
+      const rows: PayslipRow[] = (json.rows as any[])?.map((r: any) => ({
+        batch_id: r.batch_id,
+        employer_name: r.employer_name,
+        employee_name: r.employee_name,
+        reviewer_email: r.reviewer_email,
+        email_id: r.email_id,
+        payslip_url: r.payslip_url,
+        payslip_token: r.payslip_token,
+        created_at: r.created_at,
+        pay_period_to: r.pay_period_to,
+        last_sent_at: r.last_sent_at || null,
+      })) ?? []
+      setRows(rows)
+      setTotal(Number(json.total || 0))
+    } catch (e: any) {
+      toast({ title: 'Error refreshing data', description: e.message, variant: 'destructive' })
+    }
+  }, [page, pageSize, sortBy, sortDir])
+
+  const handleFilteredRowsChange = useCallback((filteredRows: PayslipRow[]) => {
+    setFilteredRows(filteredRows)
+  }, [])
 
   useEffect(() => {
     const fetchServer = async (pg: number, size: number, sort: string, dir: 'asc' | 'desc') => {
@@ -67,7 +97,7 @@ export default function SendPayslipsPage() {
           onSelectionChange={setSelected}
           onProceedToEmail={() => setStep('review')}
           onProceedToGenerate={() => setStep('generate')}
-          onFilteredRowsChange={setFilteredRows}
+          onFilteredRowsChange={handleFilteredRowsChange}
           journalWizardOpen={false}
           setJournalWizardOpen={() => {}}
           detailedWizardOpen={false}
@@ -125,6 +155,7 @@ export default function SendPayslipsPage() {
           rows={filteredRows}
           selected={selected}
           onBack={() => setStep('select')}
+          onRefresh={refreshData}
         />
       )}
     </div>
