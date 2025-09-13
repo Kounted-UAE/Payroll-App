@@ -22,14 +22,14 @@ export function SectionIntro({
 }) {
   return (
     <Container {...props}>
-      <FadeIn className="max-w-2xl">
+      <FadeIn className="max-w-7xl">
         <h2>
           {eyebrow && (
             <>
               <span
                 className={clsx(
                   'mb-6 block font-display text-base font-semibold',
-                  invert ? 'text-white' : 'text-neutral-950',
+                  invert ? 'text-white' : 'text-blue-600',
                 )}
               >
                 {eyebrow}

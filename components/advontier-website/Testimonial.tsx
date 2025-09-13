@@ -5,21 +5,21 @@ import { Container } from '@/components/advontier-website/Container'
 import { FadeIn } from '@/components/advontier-website/FadeIn'
 import { GridPattern } from '@/components/advontier-website/GridPattern'
 
-export function TestimonialBody({ photo, alt, children }) {
+export function TestimonialBody({ photo, alt, children, size = 200 }: { photo: string; alt: string; children: React.ReactNode; size?: number }) {
   return (
-    <div className="flex items-start gap-10 md:gap-14">
+    <div className="flex items-start gap-8 md:gap-12">
       <div className="flex-shrink-0">
         <Image
           src={photo}
           alt={alt}
-          width={360}
-          height={360}
-          className="rounded-full shadow-md object-cover border-2 border-white"
+          width={size}
+          height={size}
+          className="rounded-full grayscale shadow-md object-cover border-2 border-white"
           unoptimized
           priority
         />
       </div>
-      <div className="flex flex-col justify-center w-full">{children}</div>
+      <div className="flex flex-col justify-center w-full p-2">{children}</div>
     </div>
   );
 }
@@ -34,7 +34,7 @@ export function Testimonial({
   return (
     <div
       className={clsx(
-        'relative isolate py-16 sm:py-28 md:py-32',
+        'relative isolate',
         className,
       )}
     >
@@ -46,7 +46,7 @@ export function Testimonial({
       <Container>
         <FadeIn>
           {/* Content: z-10 */}
-          <figure className="relative mx-auto max-w-4xl rounded-xl z-10">
+          <figure className="relative mx-auto max-w-4xl z-10">
             <div className="w-full">{children}</div>
           </figure>
         </FadeIn>

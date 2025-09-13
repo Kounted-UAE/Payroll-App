@@ -67,7 +67,7 @@ function Foundation() {
           Our journey began with building the{' '}
           <strong className="font-semibold text-neutral-950">core infrastructure</strong> for 
           Advontier Practice Manager, transitioning from a single-tenant enterprise solution 
-          to a multi-tenant SaaS platform designed specifically for UAE accounting firms.
+          to a multi-tenant SaaS platform designed for accounting and professional service providers globally.
         </p>
         <p>
           We established the foundational database schema with proper{' '}
@@ -77,9 +77,9 @@ function Foundation() {
         </p>
         <p>
           The platform architecture was designed to support{' '}
-          <strong className="font-semibold text-neutral-950">UAE Commercial, Financial, AML and Tax Regulations</strong>{' '}
+          <strong className="font-semibold text-neutral-950">international accounting standards and regulatory compliance</strong>{' '}
           from the ground up, ensuring all features align with local compliance requirements 
-          while providing the flexibility needed for independent accountants and small firms.
+          while providing the flexibility needed for independent accountants and professional service providers globally.
         </p>
       </div>
 
@@ -90,7 +90,7 @@ function Foundation() {
         <TagListItem>Multi-tenant database schema</TagListItem>
         <TagListItem>Supabase authentication & RLS</TagListItem>
         <TagListItem>Client profile management</TagListItem>
-        <TagListItem>UAE compliance calendar</TagListItem>
+        <TagListItem>Compliance calendar system</TagListItem>
         <TagListItem>Document management system</TagListItem>
         <TagListItem>Role-based access control</TagListItem>
       </TagList>
@@ -100,33 +100,33 @@ function Foundation() {
 
 function PayrollSuite() {
   return (
-    <Section title="UAE Payroll & HR Suite" image={{ src: imageLaptop, shape: 1 }}>
+    <Section title="Payroll & HR Suite" image={{ src: imageLaptop, shape: 1 }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
-          The UAE Payroll Suite represents our most comprehensive module, designed to handle 
+          The Payroll Suite represents our most comprehensive module, designed to handle 
           all aspects of{' '}
-          <strong className="font-semibold text-neutral-950">UAE employment compliance</strong>{' '}
-          including WPS (Wages Protection System) exports, EOSB (End of Service Benefits) 
-          calculations, and automated payslip generation with email delivery.
+          <strong className="font-semibold text-neutral-950">employment compliance</strong>{' '}
+          including wage protection systems, end of service benefits calculations, 
+          and automated payslip generation with email delivery across multiple jurisdictions.
         </p>
         <p>
           We built a sophisticated{' '}
           <strong className="font-semibold text-neutral-950">payrun engine</strong> that 
           supports multiple employers, complex allowance structures, expense claims, and 
-          generates audit-ready reports. The system integrates with Xero for seamless 
-          accounting workflow and maintains full compliance with UAE labor laws.
+          generates audit-ready reports.           The system integrates with Xero for seamless 
+          accounting workflow and maintains full compliance with local labor laws and regulations.
         </p>
         <p>
           The payroll module includes{' '}
           <strong className="font-semibold text-neutral-950">automated compliance checks</strong>{' '}
-          for visa status, contract types, and statutory requirements, ensuring all 
-          calculations meet UAE regulatory standards while providing flexibility for 
-          various employment arrangements.
+          for employment status, contract types, and statutory requirements, ensuring all 
+          calculations meet local regulatory standards while providing flexibility for 
+          various employment arrangements across different jurisdictions.
         </p>
       </div>
 
       <Blockquote
-        author={{ name: 'UAE Accounting Firm', role: 'Beta Tester' }}
+        author={{ name: 'Professional Service Firm', role: 'Beta Tester' }}
         className="mt-12"
       >
         The payroll system handles everything from basic salary calculations to complex 
@@ -200,8 +200,8 @@ function FutureRoadmap() {
       >
         <p>
           Our roadmap focuses on expanding Advontier Practice Manager into a comprehensive 
-          ecosystem that addresses every aspect of UAE accounting practice management, 
-          from client onboarding to regulatory compliance and business intelligence.
+          ecosystem that addresses every aspect of accounting and professional service practice management, 
+          from client onboarding to regulatory compliance and business intelligence across multiple jurisdictions.
         </p>
       </SectionIntro>
 
@@ -223,9 +223,9 @@ function FutureRoadmap() {
             Secure document verification and audit trails using blockchain technology 
             for enhanced compliance and trust in financial reporting.
           </GridListItem>
-          <GridListItem title="GCC Expansion">
-            Extend platform capabilities to support accounting regulations across 
-            the entire Gulf Cooperation Council region.
+          <GridListItem title="Global Expansion">
+            Extend platform capabilities to support accounting regulations and 
+            compliance requirements across multiple countries and regions.
           </GridListItem>
           <GridListItem title="API Ecosystem">
             Open API platform allowing third-party integrations with banking systems, 
@@ -296,10 +296,10 @@ function DevelopmentTracking() {
               </p>
             </div>
             <div className="rounded-lg bg-white p-4">
-              <h4 className="font-semibold text-neutral-950">UAE Compliance Enhancements</h4>
+              <h4 className="font-semibold text-neutral-950">Compliance Enhancements</h4>
               <p className="mt-2 text-sm text-neutral-600">
                 Expanding payroll and compliance features to cover additional 
-                UAE regulatory requirements and tax scenarios.
+                regulatory requirements and tax scenarios across multiple jurisdictions.
               </p>
             </div>
           </div>
@@ -314,28 +314,28 @@ function PlatformValues() {
     <Container className="mt-24">
       <SectionIntro
         eyebrow="Platform Values"
-        title="Built for UAE Accounting Excellence"
+        title="Built for Professional Service Excellence"
       >
         <p>
           Every feature and decision in Advontier Practice Manager is guided by our 
-          commitment to UAE accounting excellence and the success of independent 
-          accounting professionals.
+          commitment to professional service excellence and the success of accounting 
+          and professional service providers globally.
         </p>
       </SectionIntro>
 
       <div className="mt-16">
         <GridList>
           <GridListItem title="Compliance-First">
-            Every feature is designed with UAE regulatory requirements in mind, 
-            ensuring accountants can focus on their expertise rather than compliance overhead.
+            Every feature is designed with regulatory requirements in mind, 
+            ensuring professionals can focus on their expertise rather than compliance overhead.
           </GridListItem>
           <GridListItem title="Multi-Tenant Security">
             Robust data isolation and role-based access control ensure each firm's 
             data remains secure while enabling efficient collaboration.
           </GridListItem>
-          <GridListItem title="UAE-Specific">
-            Built specifically for UAE business environment, including Arabic language 
-            support, local tax calculations, and regional compliance requirements.
+          <GridListItem title="Multi-Jurisdictional">
+            Built to support multiple business environments, including local language 
+            support, regional tax calculations, and jurisdiction-specific compliance requirements.
           </GridListItem>
           <GridListItem title="Scalable Architecture">
             Designed to grow with your practice, from single accountant to multi-office 
@@ -358,18 +358,18 @@ function PlatformValues() {
 export const metadata: Metadata = {
   title: 'Advontier Practice Manager - Development Roadmap',
   description:
-    'Comprehensive development roadmap and progress tracking for Advontier Practice Manager, the multi-tenant platform for UAE accounting firms.',
+    'Comprehensive development roadmap and progress tracking for Advontier Practice Manager, the multi-tenant platform for accounting and professional service providers.',
 }
 
 export default function Roadmap() {
   return (
     <RootLayout>
-      <PageIntro eyebrow="Development Roadmap" title="Advontier Practice Manager Evolution">
+      <PageIntro eyebrow="Development Roadmap" title="Advontier, an evolution in professional service delivery">
         <p>
           From its origins as an internal enterprise solution to becoming a comprehensive 
-          multi-tenant platform for UAE accounting firms, Advontier Practice Manager 
+          multi-tenant platform for accounting and professional service providers, Advontier Practice Manager 
           represents our commitment to transforming how independent accountants and 
-          small firms operate in the UAE market.
+          professional service firms operate globally.
         </p>
       </PageIntro>
 

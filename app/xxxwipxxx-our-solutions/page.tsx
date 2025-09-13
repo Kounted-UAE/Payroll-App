@@ -27,8 +27,8 @@ const logoNorthAdventures = '/clients/north-adventures/logo-dark.svg'
 const logoPhobia = '/clients/phobia/logo-dark.svg'
 const logoUnseal = '/clients/unseal/logo-dark.svg'
 
-const testimonialPhoto = '/team/murray-baker.JPG'
-const testimonialLogo = '/kounted/LogoMark-light.webp'
+const testimonialPhoto = '/team/murray_baker_before_and_after.JPEG'
+const testimonialLogo = '/clients/kounted/LogoMark-light.webp'
 
 function CaseStudies({
   caseStudies,

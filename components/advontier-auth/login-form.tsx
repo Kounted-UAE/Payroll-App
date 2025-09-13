@@ -71,7 +71,7 @@ export default function LoginForm() {
           Sign in to our prototype
         </h1>
         <p className="mt-4 sm:mt-6 text-sm sm:text-md text-neutral-600">
-          A prototype for accountants and advisors. Access client records, compliance calendars, payroll, and more.
+          A prototype for firms and independent advisors. Access client records, compliance calendars, payroll, and more.
         </p>
       </FadeIn>
 
@@ -112,7 +112,7 @@ export default function LoginForm() {
           </div>
           <Button
             type="submit"
-            className="w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white text-sm sm:text-base font-semibold rounded-xl shadow-sm"
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white text-sm sm:text-base font-semibold rounded-xl shadow-sm"
             disabled={loading}
           >
             {loading ? 'Sending OTP...' : 'Send login code'}

@@ -137,14 +137,10 @@ function NavigationItem({
 function Navigation() {
   return (
     <nav className="mt-px font-display text-5xl font-medium tracking-tight text-white">
-      <NavigationRow>
-      <NavigationItem href="/about">About</NavigationItem>
-        <NavigationItem href="/articles">Perspectives</NavigationItem>
-            </NavigationRow>
-            <NavigationRow>
-              <NavigationItem href="/our-solutions">Solutions</NavigationItem>
-              <NavigationItem href="/our-roadmap">Roadmap</NavigationItem>
-            </NavigationRow>
+    <NavigationRow>
+      <NavigationItem href="/our-roadmap">Our Roadmap</NavigationItem>
+      <NavigationItem href="/about">About Us</NavigationItem>
+    </NavigationRow>
     </nav>
   )
 }

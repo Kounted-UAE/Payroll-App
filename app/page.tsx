@@ -4,7 +4,6 @@ import { type Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
-
 import { Container } from '@/components/advontier-website/Container'
 import { FadeIn, FadeInStagger } from '@/components/advontier-website/FadeIn'
 import { List, ListItem } from '@/components/advontier-website/List'
@@ -19,17 +18,15 @@ import { GridList, GridListItem } from '@/components/advontier-website/GridList'
 import { GridPattern } from '@/components/advontier-website/GridPattern'
 import { PageIntro } from '@/components/advontier-website/PageIntro'
 import { TagList, TagListItem } from '@/components/advontier-website/TagList'
+import { PageWidth } from '@/components/advontier-website/PageWidth'
 
 const imageServices = '/team/pexels-yankrukov-7793702.jpg'
-
 const imageMeeting = '/backgrounds/meeting.jpg'
 const imageWhiteboard = '/backgrounds/whiteboard.jpg'
 const imageLaptop = '/backgrounds/laptop.jpg'
 
-const testimonialPhoto = '/team/murray-baker.JPG'
+const testimonialPhoto = '/team/murray_baker_before_and_after.JPEG'
 const testimonialLogo = '/clients/kounted/LogoMark-light.webp'
-
-
 
 const logoNext = 'https://simpleicons.org/icons/nextdotjs.svg';
 const logoReact = 'https://simpleicons.org/icons/react.svg';
@@ -55,10 +52,28 @@ const integrationLogos = [
   ['Xero', logoXero],
 ];
 
+export const metadata: Metadata = {
+  description:
+    'A digital transformation studio working at the intersection of accounting and technology.',
+}
+
+function Hero() {
+  return (
+    <PageWidth className="mt-24 sm:mt-32 lg:mt-40 p-8 md:p-12">
+      <h1 className="font-display text-4xl md:text-7xl font-medium tracking-tight text-neutral-950">
+        Charting the Digital Frontier for Professional Service Providers!
+      </h1>
+      <p className="mt-6 text-md text-neutral-600">
+        Empowering firms and independent advisors to grow, adapt, and deliver better client outcomes—without the legacy overhead.
+      </p>
+    </PageWidth>
+  )
+}
+
 function LogoWall() {
   return (
-    <div className="mt-12 rounded-r-4xl bg-neutral-950 max-w-7xl mx-auto py-12 sm:mt-24 sm:py-20 lg:mt-24">
-      <Container>
+    <div className="mt-4 sm:mt-8 lg:mt-12 bg-neutral-950 p-8 md:p-12">
+      <PageWidth>
         {/* Section for Core Technologies */}
         <FadeIn className="flex items-center gap-x-4">
           <h2 className="text-center font-display text-sm font-semibold tracking-wider text-white sm:text-left">
@@ -117,20 +132,19 @@ function LogoWall() {
             ))}
           </ul>
         </FadeInStagger>
-      </Container>
+      </PageWidth>
     </div>
   );
 }
 
 
 
-function Services() {
+function ServicesSection() {
   return (
-    <>
+    <PageWidth className="mt-8 sm:mt-12 lg:mt-20 p-8 md:p-12">
       <SectionIntro
-        eyebrow="Services"
+        eyebrow="Our Services"
         title="We help accountants identify, explore and respond to new opportunities."
-        className="mt-24 sm:mt-32 lg:mt-40"
       >
         <p>
         Our platform and services are purpose-built to help accounting firms, independent advisors, and back-office teams manage work and resources centrally.
@@ -166,11 +180,27 @@ function Services() {
           </List>
         </div>
       </Container>
-    </>
+    </PageWidth>
   )
 }
 
-function Section({
+function ProcessSection() {
+  return (
+    <PageWidth className="mt-8 sm:mt-12 lg:mt-20 p-8 md:p-12">
+      <SectionIntro 
+      eyebrow="Our process" 
+      title="How we work"
+      >
+        <p>
+        We turn your requirements into actionable roadmaps and tangible solutions.
+        Our team works iteratively—keeping you informed every step of the way—using modular design and open standards to ensure rapid delivery and future-proof architecture.
+        </p>
+      </SectionIntro>
+    </PageWidth>
+  )
+}
+
+function ProcessStepsSection({
   title,
   image,
   children,
@@ -208,10 +238,10 @@ function Section({
   )
 }
 
-function Discover() {
+function Step01Discover() {
   return (
-    <Section title="Discover" image={{ src: imageWhiteboard }}>
-      <div className="space-y-6 text-base text-neutral-600">
+    <ProcessStepsSection title="Discover" image={{ src: imageWhiteboard }}>
+      <div className="space-y-6 text-base text-neutral-600 p-8 md:p-12">
         <p>
           We start by understanding your firm’s unique goals, challenges, and regulatory environment.
           Through in-depth discovery workshops and detailed process mapping, we identify opportunities to streamline workflows, enhance compliance, and increase your team’s capacity—without increasing headcount.
@@ -234,14 +264,14 @@ function Discover() {
         <TagListItem>Proofs-of-concept</TagListItem>
         <TagListItem>Compliance & risk assessment</TagListItem>
       </TagList>
-    </Section>
+    </ProcessStepsSection>
   )
 }
 
-function Build() {
+function Step02Build() {
   return (
-    <Section title="Build" image={{ src: imageLaptop, shape: 1 }}>
-      <div className="space-y-6 text-base text-neutral-600">
+    <ProcessStepsSection title="Build" image={{ src: imageLaptop, shape: 1 }}>
+      <div className="space-y-6 text-base text-neutral-600 p-8 md:p-12">
         <p>
           With requirements defined, we architect a tailored roadmap and begin iterative development. Each milestone is delivered with transparency, regular updates, and ongoing feedback.
         </p>
@@ -259,14 +289,14 @@ function Build() {
       >
         Advontier’s regular progress updates and open communication gave us total confidence throughout implementation.
       </Blockquote>
-    </Section>
+    </ProcessStepsSection>
   )
 }
 
-function Deliver() {
+function Step03Deliver() {
   return (
-    <Section title="Deliver" image={{ src: imageMeeting, shape: 2 }}>
-      <div className="space-y-6 text-base text-neutral-600">
+    <ProcessStepsSection title="Deliver" image={{ src: imageMeeting, shape: 2 }}>
+      <div className="space-y-6 text-base text-neutral-600 p-8 md:p-12">
         <p>
           We deploy, test, and optimize your solution for real-world use. Every module is validated for regulatory compliance, security, and seamless integration with your existing systems.
         </p>
@@ -292,107 +322,101 @@ function Deliver() {
           Ongoing technical support and continuous improvement to maximize value and uptime.
         </ListItem>
       </List>
-    </Section>
+    </ProcessStepsSection>
   )
 }
 
-
-function Values() {
+function TestimonialSection() {
   return (
-    <div className="relative mt-24 pt-24 sm:mt-32 sm:pt-32 lg:mt-40 lg:pt-40">
-      <div className="absolute inset-x-0 top-0 -z-10 h-[884px] overflow-hidden rounded-t-4xl bg-linear-to-b from-neutral-50">
-        <GridPattern
-          className="absolute inset-0 h-full w-full mask-[linear-gradient(to_bottom_left,white_40%,transparent_50%)] fill-neutral-100 stroke-neutral-950/5"
-          yOffset={-270}
-        />
-      </div>
+    <PageWidth className="mt-24 sm:mt-32 lg:mt-40">
+        <TestimonialBody photo={testimonialPhoto} alt="Murray Baker – CEO of Kounted" size={120} >
+          <blockquote className="font-display sm:text-xl md:text-2xl font-medium tracking-tight text-neutral-950">
+            <p>
+              "Partnering with Advontier has been amazing for my physical and mental wellbeing."
+            </p>
+            <p className="m-2 text-neutral-600 text-base">
+              Murray Baker - aspiring full-time amateur triathlete - and CEO of Kounted Accounting and Management Solutions.
+            </p>
+            <Image src={testimonialLogo} alt="Kounted logo" width={28} height={28} unoptimized className="m-2 bg-white rounded-full" />
+          </blockquote>
+        </TestimonialBody>
+    </PageWidth>
+    )
+}
 
-      <SectionIntro
-        eyebrow="Our values"
-        title="Built for trust, driven by innovation"
-      >
-        <p>
-          At Advontier, our values shape every partnership and every line of code. 
-          We believe in building tools that empower accounting firms and professionals to excel—through reliability, transparency, and continuous progress.
-        </p>
-      </SectionIntro>
+function ValuesSection() {
+  return (
+    
+      <PageWidth className="relative overflow-hidden rounded-t-4xl p-8 md:p-12">
+        <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[884px] w-full max-w-screen-xl -translate-x-1/2 bg-gradient-to-b from-neutral-50 to-neutral-100">
+          <GridPattern
+            className="h-full w-full mask-[linear-gradient(to_bottom_left,white_30%,transparent_50%)] fill-neutral-100 stroke-neutral-950/5"
+            yOffset={-270}
+          />
+        </div>
 
-      <Container className="mt-24">
-        <GridList>
-          <GridListItem title="Meticulous">
-            Every workflow is crafted with attention to detail—from data integrity to regulatory compliance—so you can trust your platform every day.
-          </GridListItem>
-          <GridListItem title="Efficient">
-            We help firms do more with less. Advontier automates routine work and streamlines collaboration, freeing your team to focus on high-value client service.
-          </GridListItem>
-          <GridListItem title="Adaptable">
-            Our platform evolves with your business and the UAE’s regulatory landscape. We quickly respond to changing needs and emerging best practices.
-          </GridListItem>
-          <GridListItem title="Transparent">
-            We communicate openly, provide clear roadmaps, and deliver on promises—ensuring you’re always informed and in control.
-          </GridListItem>
-          <GridListItem title="Loyal">
-            We’re committed to building enduring partnerships. Our team supports your growth from day one, providing guidance, support, and proactive improvements.
-          </GridListItem>
-          <GridListItem title="Innovative">
-            Advontier invests in new technologies and AI to solve real problems for firms in the UAE—helping you stay ahead, securely and confidently.
-          </GridListItem>
-        </GridList>
-      </Container>
-    </div>
+        <SectionIntro
+          eyebrow="Our values"
+          title="Built for trust, driven by innovation"
+        >
+          <p>
+            At Advontier, our values shape every partnership and every line of code. 
+            We believe in building tools that empower firms and professionals to excel—through reliability, transparency, and continuous progress.
+          </p>
+        </SectionIntro>
+
+        <Container className="mt-12">
+          <GridList>
+            <GridListItem title="Meticulous">
+              Every workflow is crafted with attention to detail—from data integrity to regulatory compliance—so you can trust your platform every day.
+            </GridListItem>
+            <GridListItem title="Efficient">
+              We help firms do more with less. Advontier automates routine work and streamlines collaboration, freeing your team to focus on high-value client service.
+            </GridListItem>
+            <GridListItem title="Adaptable">
+              Our platform evolves with your business and the UAE's regulatory landscape. We quickly respond to changing needs and emerging best practices.
+            </GridListItem>
+            <GridListItem title="Transparent">
+              We communicate openly, provide clear roadmaps, and deliver on promises—ensuring you're always informed and in control.
+            </GridListItem>
+            <GridListItem title="Loyal">
+              We're committed to building enduring partnerships. Our team supports your growth from day one, providing guidance, support, and proactive improvements.
+            </GridListItem>
+            <GridListItem title="Innovative">
+              Advontier invests in new technologies and AI to solve real problems for firms in the UAE—helping you stay ahead, securely and confidently.
+            </GridListItem>
+          </GridList>
+        </Container>
+        <TestimonialSection />
+      </PageWidth>
+    
   )
 }
 
 
-export const metadata: Metadata = {
-  description:
-    'We are a digital transformation studio working at the intersection of accounting and technology.',
-}
+
 
 export default async function Home() {
   let caseStudies = (await loadCaseStudies()).slice(0, 3)
 
   return (
     <RootLayout>
-      <Container className="mt-20 sm:mt-40 md:mt-56">
-        <FadeIn className="max-w-3xl lg:max-w-5xl font-display">
-          <h1 className="font-display text-xl font-medium tracking-tight text-balance sm:text-7xl">
-            Designed for Accountants!
-          </h1>
-          <p className="mt-6 text-md text-neutral-600">
-          Empowering firms and independents to grow, adapt, and deliver better client outcomes—without the legacy overhead.
-          </p>
-        </FadeIn>
-      </Container>
+      <Hero/>
       <LogoWall />
-      <Services />
-      <PageIntro eyebrow="Our process" title="How we work">
-        <p>
-        We turn your requirements into actionable roadmaps and tangible solutions.
-        Our team works iteratively—keeping you informed every step of the way—using modular design and open standards to ensure rapid delivery and future-proof architecture.
-        </p>
-      </PageIntro>
+      <ServicesSection />
+      <ProcessSection />
 
-      <div className="mt-24 space-y-24 [counter-reset:section] sm:mt-32 sm:space-y-32 lg:mt-40 lg:space-y-40">
-        <Discover />
-        <Build />
-        <Deliver />
-      </div>
+      <PageWidth>
+        <div className="mb-24 sm:mb-32 lg:mb-40 space-y-12 sm:space-y-20 lg:space-y-28 [counter-reset:section] ">
+          <Step01Discover />
+          <Step02Build />
+          <Step03Deliver />
+        </div>
+      </PageWidth>
 
-      <Values />
-      <Testimonial className="mt-24 sm:mt-32 lg:mt-40">
-        <TestimonialBody photo={testimonialPhoto} alt="Murray Baker – CEO of Kounted" >
-          <blockquote className="font-display text-4xl sm:text-3xl md:text-4xl font-medium tracking-tight text-neutral-950">
-            <p>
-              Partnering with <span className="text-zinc-900">advontier</span><span className="text-blue-500">.</span> has been amazing for my physical and mental wellbeing.
-            </p>
-            <p className="mt-4 text-neutral-600 text-base">
-              Murray Baker, aspiring Olympic triathlete and CEO of Kounted Accounting and Management Solutions.
-            </p>
-            <Image src={testimonialLogo} alt="Kounted logo" width={48} height={48} unoptimized className="mt-4 bg-white rounded-full" />
-          </blockquote>
-        </TestimonialBody>
-      </Testimonial>      
+      <ValuesSection />
+      
+      <ContactSection />
     </RootLayout>
   )
 }

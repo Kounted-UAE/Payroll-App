@@ -8,10 +8,9 @@ const navigation = [
   {
     title: 'Business Suite',
     links: [
-      { title: 'Advontier', href: '/advontier' },
-      { title: 'Payroll', href: '/advontier/payroll' },
-      { title: 'Compliance Calendar', href: '/advontier/compliance-calendar' },
-      { title: 'Knowledge Base', href: 'advontier/sop-resources' },
+      { title: 'Advontier Platform', href: '/advontier' },
+      { title: 'Compliance Calendar', href: '/auth/login' },
+      { title: 'Knowledge Base', href: 'auth/login' },
       {
         title: (
           <>
@@ -25,20 +24,13 @@ const navigation = [
   {
     title: 'Use Cases',
     links: [
-      { title: 'Accounting Firms', href: '#' },
-      { title: 'Corporate Service Providers', href: '#' },
-      { title: 'Client Onboarding', href: '#' },
-      { title: 'Client Management', href: '#' },
+      { title: ' Accounting Firms', href: '#' },
+      { title: ' Corporate Service Providers', href: '#' },
+      { title: ' Client Due Diligence', href: '#' },
+      { title: ' Contract Management', href: '#' },
       
     ],
   },  
-  {
-    title: 'Legal',
-    links: [
-      { title: 'Privacy Policy', href: '/privacy-policy' },
-      { title: 'Terms of Service', href: '/terms-of-service' },
-    ],
-  },
 ]
 
 function Navigation() {
