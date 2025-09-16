@@ -8,6 +8,7 @@ import { toast } from '@/hooks/use-toast'
 import { PayslipFiltersAndTable, type PayslipRow } from '@/components/admin/PayslipFiltersAndTable'
 import { PayslipEmailFlow } from '@/components/admin/PayslipEmailFlow'
 import PayslipGenerateFlow from '@/components/admin/PayslipGenerateFlow'
+import PayslipCSVImportDialog from '@/components/admin/PayslipCSVImportDialog'
 
 export default function SendPayslipsPage() {
   const [rows, setRows] = useState<PayslipRow[]>([])
@@ -19,6 +20,7 @@ export default function SendPayslipsPage() {
   const [sortBy, setSortBy] = useState<string>('created_at')
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc')
   const [filteredRows, setFilteredRows] = useState<PayslipRow[]>([])
+  const [importOpen, setImportOpen] = useState(false)
 
   const refreshData = useCallback(async () => {
     try {
@@ -33,6 +35,8 @@ export default function SendPayslipsPage() {
         employee_name: r.employee_name,
         reviewer_email: r.reviewer_email,
         email_id: r.email_id,
+        net_salary: r.net_salary,
+        currency: r.currency,
         payslip_url: r.payslip_url,
         payslip_token: r.payslip_token,
         created_at: r.created_at,
@@ -63,6 +67,8 @@ export default function SendPayslipsPage() {
         employee_name: r.employee_name,
         reviewer_email: r.reviewer_email,
         email_id: r.email_id,
+        net_salary: r.net_salary,
+        currency: r.currency,
         payslip_url: r.payslip_url,
         payslip_token: r.payslip_token,
         created_at: r.created_at,
@@ -88,8 +94,44 @@ export default function SendPayslipsPage() {
     <div className="p-6 space-y-6">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-lg text-zinc-600 font-bold">Send Payslips</h1>
-        <p className="text-white text-sm bg-red-600 px-2 py-1 rounded-md shadow-xs">-temp payroll tool-</p>
+        <div className="flex items-center gap-2">
+          <button
+            className="text-white text-sm bg-neutral-700 px-3 py-2 rounded-md shadow-xs hover:opacity-90"
+            onClick={() => setImportOpen(true)}
+          >
+            Import Rows
+          </button>
+          
+        </div>
       </div>
+      <PayslipCSVImportDialog open={importOpen} onOpenChange={setImportOpen} onSuccess={() => {
+        // refresh after import
+        (async () => {
+          try {
+            const offset = (page - 1) * pageSize
+            const params = new URLSearchParams({ limit: String(pageSize), offset: String(offset), sortBy, sortDir })
+            const res = await fetch(`/api/admin/payslips/list?${params.toString()}`)
+            if (!res.ok) throw new Error(await res.text())
+            const json = await res.json()
+            const rows: PayslipRow[] = (json.rows as any[])?.map((r: any) => ({
+              batch_id: r.batch_id,
+              employer_name: r.employer_name,
+              employee_name: r.employee_name,
+              reviewer_email: r.reviewer_email,
+              email_id: r.email_id,
+              net_salary: r.net_salary,
+              currency: r.currency,
+              payslip_url: r.payslip_url,
+              payslip_token: r.payslip_token,
+              created_at: r.created_at,
+              pay_period_to: r.pay_period_to,
+              last_sent_at: r.last_sent_at || null,
+            })) ?? []
+            setRows(rows)
+            setTotal(Number(json.total || 0))
+          } catch {}
+        })()
+      }} />
       {step === 'select' ? (
         <PayslipFiltersAndTable
           rows={rows}
@@ -139,6 +181,8 @@ export default function SendPayslipsPage() {
                 employee_name: r.employee_name,
                 reviewer_email: r.reviewer_email,
                 email_id: r.email_id,
+                net_salary: r.net_salary,
+                currency: r.currency,
                 payslip_url: r.payslip_url,
                 payslip_token: r.payslip_token,
                 created_at: r.created_at,

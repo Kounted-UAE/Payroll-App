@@ -78,7 +78,9 @@ export default function PayslipSelectionTable({
             <TableCell>
               {row.payslip_token ? (
                 <a
-                  href={`${SUPABASE_PUBLIC_URL}/${generatePayslipFilename(row.employee_name || 'unknown', row.payslip_token)}`}
+                  href={row.payslip_url && row.payslip_url.startsWith('http')
+                    ? row.payslip_url
+                    : `${SUPABASE_PUBLIC_URL}/${generatePayslipFilename(row.employee_name || 'unknown', row.payslip_token)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 underline text-xs"

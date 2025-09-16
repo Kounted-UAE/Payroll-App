@@ -22,11 +22,13 @@ export async function GET(request: Request) {
       employee_name: true,
       reviewer_email: true,
       email_id: true,
+      currency: true,
+      net_salary: true,
     }
 
     let query = supabase
       .from('payroll_ingest_excelpayrollimport')
-      .select('batch_id, employer_name, employee_name, reviewer_email, email_id, payslip_url, payslip_token, created_at, pay_period_to', { count: 'exact' })
+      .select('batch_id, employer_name, employee_name, reviewer_email, email_id, payslip_url, payslip_token, created_at, pay_period_to, currency, net_salary', { count: 'exact' })
       .range(from, to)
 
     if (sortBy && sortable[sortBy]) {

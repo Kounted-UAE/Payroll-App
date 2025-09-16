@@ -171,7 +171,7 @@ export default function TempPayrunHistoryImportDialog({ open, onOpenChange }: Pr
               accept=".csv"
               ref={fileInputRef}
               onChange={handleFileChange}
-              className="absolute inset-0 opacity-0 cursor-pointer"
+              className="hidden"
             />
           </div>
 

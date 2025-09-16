@@ -37,6 +37,8 @@ export type PayslipRow = {
   employer_name: string
   reviewer_email: string
   email_id: string
+  net_salary: number
+  currency: string
   payslip_url: string
   payslip_token: string
   created_at: string
@@ -100,9 +102,12 @@ export function PayslipFiltersAndTable({
     for (const row of selectedRows) {
       if (!row.payslip_token) continue
       const filename = generatePayslipFilename(row.employee_name || 'unknown', row.payslip_token)
-      const fileUrl = `${SUPABASE_PUBLIC_URL}/${filename}`
+      const fileUrl = row.payslip_url && row.payslip_url.startsWith('http')
+        ? row.payslip_url
+        : `${SUPABASE_PUBLIC_URL}/${filename}`
       const res = await fetch(fileUrl)
       const blob = await res.blob()
+      // Use the nice filename even if legacy URL was used to fetch
       zip.file(filename, blob)
     }
 
@@ -412,8 +417,8 @@ export function PayslipFiltersAndTable({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-slate-800 text-white">
-                <SelectItem value="50" >50</SelectItem>
-                <SelectItem value="200">200</SelectItem>
+                <SelectItem value="25" >25</SelectItem>
+                <SelectItem value="250">250</SelectItem>
                 <SelectItem value="1000">1000</SelectItem>
               </SelectContent>
             </Select>
@@ -448,9 +453,9 @@ export function PayslipFiltersAndTable({
             <TableHead><HeaderButton field="employer_name" label="Employer" /></TableHead>
             <TableHead><HeaderButton field="employee_name" label="Employee" /></TableHead>
             <TableHead><HeaderButton field="email_id" label="Email" /></TableHead>
-            <TableHead><HeaderButton field="reviewer_email" label="Reviewer" /></TableHead>
+            <TableHead><HeaderButton field="currency" label="Currency" /></TableHead>
+            <TableHead><HeaderButton field="net_salary" label="Net Salary" /></TableHead>
             <TableHead>Last Sent</TableHead>
-            
             <TableHead>Payslip</TableHead>
           </TableRow>
         </TableHeader>
@@ -467,14 +472,17 @@ export function PayslipFiltersAndTable({
               <TableCell>{row.employer_name}</TableCell>
               <TableCell>{row.employee_name}</TableCell>
               <TableCell>{row.email_id}</TableCell>
-              <TableCell>{row.reviewer_email}</TableCell>
+              <TableCell>{row.currency}</TableCell>
+              <TableCell>{row.net_salary}</TableCell>
               <TableCell>
                 {row.last_sent_at ? new Date(row.last_sent_at).toLocaleString() : <span className="text-cyan-600 text-xs">Never</span>}
               </TableCell>
               <TableCell>
                 {row.payslip_token ? (
                   <a
-                    href={`${SUPABASE_PUBLIC_URL}/${generatePayslipFilename(row.employee_name || 'unknown', row.payslip_token)}`}
+                    href={row.payslip_url && row.payslip_url.startsWith('http')
+                      ? row.payslip_url
+                      : `${SUPABASE_PUBLIC_URL}/${generatePayslipFilename(row.employee_name || 'unknown', row.payslip_token)}`}
                     target="_blank"
                     className="text-blue-600 underline text-xs"
                   >

@@ -3171,6 +3171,33 @@ export type Database = {
           },
         ]
       }
+      payroll_payslip_send_events: {
+        Row: {
+          batch_id: string
+          created_at: string
+          error_message: string | null
+          id: string
+          recipients: string
+          status: string
+        }
+        Insert: {
+          batch_id: string
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          recipients: string
+          status: string
+        }
+        Update: {
+          batch_id?: string
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          recipients?: string
+          status?: string
+        }
+        Relationships: []
+      }
       payroll_salary_templates: {
         Row: {
           amount: number

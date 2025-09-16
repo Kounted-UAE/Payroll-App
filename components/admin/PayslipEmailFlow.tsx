@@ -47,7 +47,9 @@ export function PayslipEmailFlow({
             : row.email_id
 
       const filename = generatePayslipFilename(row.employee_name || 'unknown', row.payslip_token)
-      const url = `${SUPABASE_PUBLIC_URL}/${filename}`
+      const url = row.payslip_url && row.payslip_url.startsWith('http')
+        ? row.payslip_url
+        : `${SUPABASE_PUBLIC_URL}/${filename}`
 
       if (!rawTo || !row.payslip_token) {
         errorLog.push(`${row.employee_name}: Missing ${!rawTo ? 'email' : 'payslip token'}`)
