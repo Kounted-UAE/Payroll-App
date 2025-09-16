@@ -1,0 +1,9 @@
+{
+  "functions": {
+    "app/api/admin/payslips/generate/route.ts": {
+      "maxDuration": 60
+    }
+  },
+  "buildCommand": "npm run build",
+  "installCommand": "npm install && npx puppeteer browsers install chrome"
+}

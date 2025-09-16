@@ -4,6 +4,7 @@
 
 import { Checkbox } from '@/components/ui/checkbox'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { generatePayslipFilename } from '@/lib/utils/pdf/payslipNaming'
 
 const SUPABASE_PUBLIC_URL = 'https://alryjvnddvrrgbuvednm.supabase.co/storage/v1/object/public/generated-pdfs/payslips'
 
@@ -77,7 +78,7 @@ export default function PayslipSelectionTable({
             <TableCell>
               {row.payslip_token ? (
                 <a
-                  href={`${SUPABASE_PUBLIC_URL}/${row.payslip_token}.pdf`}
+                  href={`${SUPABASE_PUBLIC_URL}/${generatePayslipFilename(row.employee_name || 'unknown', row.payslip_token)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 underline text-xs"

@@ -11,6 +11,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import type { PayslipRow } from './PayslipFiltersAndTable'
+import { generatePayslipFilename } from '@/lib/utils/pdf/payslipNaming'
 
 const SUPABASE_PUBLIC_URL = 'https://alryjvnddvrrgbuvednm.supabase.co/storage/v1/object/public/generated-pdfs/payslips'
 
@@ -45,7 +46,8 @@ export function PayslipEmailFlow({
             ? row.reviewer_email
             : row.email_id
 
-      const url = `${SUPABASE_PUBLIC_URL}/${row.payslip_token}.pdf`
+      const filename = generatePayslipFilename(row.employee_name || 'unknown', row.payslip_token)
+      const url = `${SUPABASE_PUBLIC_URL}/${filename}`
 
       if (!rawTo || !row.payslip_token) {
         errorLog.push(`${row.employee_name}: Missing ${!rawTo ? 'email' : 'payslip token'}`)

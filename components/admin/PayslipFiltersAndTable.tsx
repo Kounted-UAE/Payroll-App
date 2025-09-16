@@ -27,6 +27,7 @@ import { ExportXeroJournalsWizard } from '@/components/advontier-payroll/actions
 import { ExportDetailedXeroJournalsWizard } from '@/components/advontier-payroll/actions/PayrunDetailedJournalExport'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious, PaginationLink } from '@/components/ui/pagination'
+import { generatePayslipFilename, extractTokenFromFilename } from '@/lib/utils/pdf/payslipNaming'
 
 const SUPABASE_PUBLIC_URL = 'https://alryjvnddvrrgbuvednm.supabase.co/storage/v1/object/public/generated-pdfs/payslips'
 
@@ -98,10 +99,11 @@ export function PayslipFiltersAndTable({
 
     for (const row of selectedRows) {
       if (!row.payslip_token) continue
-      const fileUrl = `${SUPABASE_PUBLIC_URL}/${row.payslip_token}.pdf`
+      const filename = generatePayslipFilename(row.employee_name || 'unknown', row.payslip_token)
+      const fileUrl = `${SUPABASE_PUBLIC_URL}/${filename}`
       const res = await fetch(fileUrl)
       const blob = await res.blob()
-      zip.file(`${row.payslip_token}.pdf`, blob)
+      zip.file(filename, blob)
     }
 
     const zipBlob = await zip.generateAsync({ type: 'blob' })
@@ -472,7 +474,7 @@ export function PayslipFiltersAndTable({
               <TableCell>
                 {row.payslip_token ? (
                   <a
-                    href={`${SUPABASE_PUBLIC_URL}/${row.payslip_token}.pdf`}
+                    href={`${SUPABASE_PUBLIC_URL}/${generatePayslipFilename(row.employee_name || 'unknown', row.payslip_token)}`}
                     target="_blank"
                     className="text-blue-600 underline text-xs"
                   >

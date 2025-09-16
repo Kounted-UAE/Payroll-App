@@ -10,7 +10,9 @@
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
     "supabase:types": "tsx lib/scripts/extract-supabase-types.ts",
-    "sync-teamwork": "tsx scripts/sync-teamwork-tasks.ts"
+    "sync-teamwork": "tsx scripts/sync-teamwork-tasks.ts",
+    "migrate-payslips": "tsx scripts/migrate-payslip-filenames.ts",
+    "postinstall": "npx puppeteer browsers install chrome"
   },
   "dependencies": {
     "@geist-ui/react": "^2.2.5",
