@@ -21,7 +21,7 @@ console.log('📄 PDF:', url)
   <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 24px; color: #111;">
     <h2 style="font-size: 18px; font-weight: 600;">Hi ${name},</h2>
     <p style="font-size: 14px; line-height: 1.5; margin: 16px 0;">
-      Your latest payslip is now ready to view. Please click the button below to securely access and download your payslip.
+      Your payslip is now ready to view with correct employer name. Please click the button below to securely access and download your payslip.
     </p>
 
     <a href="${url}" target="_blank" style="
