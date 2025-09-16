@@ -1,13 +1,9 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { getSupabaseServiceClient } from '@/lib/supabase/server'
 
 export async function GET(request: Request) {
-  const url = process.env.SUPABASE_URL
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY
-
-  if (!url || !key) {
-    return NextResponse.json({ error: 'Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY' }, { status: 500 })
-  }
+  try {
+    const supabase = getSupabaseServiceClient()
 
   const { searchParams } = new URL(request.url)
   const limit = Number(searchParams.get('limit') || '200')
@@ -15,60 +11,62 @@ export async function GET(request: Request) {
   const sortBy = searchParams.get('sortBy') || ''
   const sortDir = (searchParams.get('sortDir') || 'desc').toLowerCase() === 'asc' ? 'asc' : 'desc'
 
-  const supabase = createClient(url, key)
+    const from = offset
+    const to = offset + limit - 1
 
-  const from = offset
-  const to = offset + limit - 1
+    // Whitelist sortable columns to avoid SQL injection
+    const sortable: Record<string, true> = {
+      created_at: true,
+      pay_period_to: true,
+      employer_name: true,
+      employee_name: true,
+      reviewer_email: true,
+      email_id: true,
+    }
 
-  // Whitelist sortable columns to avoid SQL injection
-  const sortable: Record<string, true> = {
-    created_at: true,
-    pay_period_to: true,
-    employer_name: true,
-    employee_name: true,
-    reviewer_email: true,
-    email_id: true,
-  }
+    let query = supabase
+      .from('payroll_ingest_excelpayrollimport')
+      .select('batch_id, employer_name, employee_name, reviewer_email, email_id, payslip_url, payslip_token, created_at, pay_period_to', { count: 'exact' })
+      .range(from, to)
 
-  let query = supabase
-    .from('payroll_ingest_excelpayrollimport')
-    .select('batch_id, employer_name, employee_name, reviewer_email, email_id, payslip_url, payslip_token, created_at, pay_period_to', { count: 'exact' })
-    .range(from, to)
+    if (sortBy && sortable[sortBy]) {
+      query = query.order(sortBy, { ascending: sortDir === 'asc', nullsFirst: sortDir === 'asc' })
+    } else {
+      query = query.order('created_at', { ascending: false })
+    }
 
-  if (sortBy && sortable[sortBy]) {
-    query = query.order(sortBy, { ascending: sortDir === 'asc', nullsFirst: sortDir === 'asc' })
-  } else {
-    query = query.order('created_at', { ascending: false })
-  }
+    const { data, error, count } = await query
 
-  const { data, error, count } = await query
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 })
+    }
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
-  }
+    // Attach last_sent_at from events table (best-effort)
+    let lastSentMap: Record<string, string> = {}
+    try {
+      const batchIds = (data || []).map((r: any) => r.batch_id).filter(Boolean)
+      if (batchIds.length > 0) {
+        const { data: events, error: eventsError } = await supabase
+          .from('payroll_payslip_send_events')
+          .select('batch_id, created_at')
+          .in('batch_id', batchIds)
+          .order('created_at', { ascending: false })
 
-  // Attach last_sent_at from events table (best-effort)
-  let lastSentMap: Record<string, string> = {}
-  try {
-    const batchIds = (data || []).map((r: any) => r.batch_id).filter(Boolean)
-    if (batchIds.length > 0) {
-      const { data: events, error: eventsError } = await supabase
-        .from('payroll_payslip_send_events')
-        .select('batch_id, created_at')
-        .in('batch_id', batchIds)
-        .order('created_at', { ascending: false })
-
-      if (!eventsError && Array.isArray(events)) {
-        for (const e of events) {
-          if (!lastSentMap[e.batch_id]) {
-            lastSentMap[e.batch_id] = e.created_at
+        if (!eventsError && Array.isArray(events)) {
+          for (const e of events) {
+            if (!lastSentMap[e.batch_id]) {
+              lastSentMap[e.batch_id] = e.created_at
+            }
           }
         }
       }
-    }
-  } catch {}
+    } catch {}
 
-  const rowsWithLast = (data || []).map((r: any) => ({ ...r, last_sent_at: lastSentMap[r.batch_id] || null }))
+    const rowsWithLast = (data || []).map((r: any) => ({ ...r, last_sent_at: lastSentMap[r.batch_id] || null }))
 
-  return NextResponse.json({ rows: rowsWithLast, total: count ?? 0 })
+    return NextResponse.json({ rows: rowsWithLast, total: count ?? 0 })
+  } catch (error) {
+    console.error('Error in payslips list API:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
 }

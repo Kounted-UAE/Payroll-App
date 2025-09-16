@@ -3,7 +3,8 @@ import 'dotenv/config'
 import dns from 'dns/promises'
 import https from 'https'
 
-const { SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY } = process.env
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL
+const { SUPABASE_SERVICE_ROLE_KEY } = process.env
 
 console.log('Node:', process.version)
 console.log('URL:', SUPABASE_URL)

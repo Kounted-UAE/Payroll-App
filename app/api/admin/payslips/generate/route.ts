@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { getSupabaseServiceClient } from '@/lib/supabase/server'
 import puppeteer from 'puppeteer'
 import crypto from 'crypto'
 import fs from 'fs/promises'
@@ -49,11 +49,8 @@ function renderHtml(template: string, row: any) {
 }
 
 export async function POST(req: NextRequest) {
-  const url = process.env.SUPABASE_URL
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY
-  if (!url || !key) return NextResponse.json({ error: 'Missing Supabase env' }, { status: 500 })
-
-  const supabase = createClient(url, key)
+  try {
+    const supabase = getSupabaseServiceClient()
   const { batchIds } = await req.json().catch(() => ({ batchIds: [] }))
   if (!Array.isArray(batchIds) || batchIds.length === 0) {
     return NextResponse.json({ error: 'batchIds required' }, { status: 400 })
@@ -116,6 +113,10 @@ export async function POST(req: NextRequest) {
   }
 
   return NextResponse.json({ results })
+  } catch (error) {
+    console.error('Error in payslips generate API:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
 }
 
 

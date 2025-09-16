@@ -58,7 +58,7 @@ console.log('📄 PDF:', url)
 
     // Log send event (best-effort)
     try {
-      const urlEnv = process.env.SUPABASE_URL
+      const urlEnv = process.env.NEXT_PUBLIC_SUPABASE_URL
       const keyEnv = process.env.SUPABASE_SERVICE_ROLE_KEY
       if (urlEnv && keyEnv && batch_id) {
         const supabase = createClient(urlEnv, keyEnv)
@@ -80,7 +80,7 @@ console.log('📄 PDF:', url)
     console.error('❌ Email send failed:', err)
     // Log failure event (best-effort)
     try {
-      const urlEnv = process.env.SUPABASE_URL
+      const urlEnv = process.env.NEXT_PUBLIC_SUPABASE_URL
       const keyEnv = process.env.SUPABASE_SERVICE_ROLE_KEY
       if (urlEnv && keyEnv && batch_id) {
         const supabase = createClient(urlEnv, keyEnv)
