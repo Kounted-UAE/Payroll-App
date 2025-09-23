@@ -1,7 +1,7 @@
 // components/admin/XeroSearchBar.tsx
 'use client'
 
-import { Input } from '@/components/ui/input'
+import { Input } from '@/components/react-ui/input'
 import { useCallback } from 'react'
 
 interface XeroSearchBarProps {

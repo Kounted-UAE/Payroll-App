@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/react-ui/dialog';
+import { Badge } from '@/components/react-ui/badge';
+import { Button } from '@/components/react-ui/button';
+import { Progress } from '@/components/react-ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/react-ui/tabs';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/react-ui/card';
 import { 
   Target, 
   Clock, 

@@ -1,16 +1,16 @@
 "use client"
 import { useState, useEffect } from 'react';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import { Switch } from "@/components/ui/switch";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/react-ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/react-ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/react-ui/tabs";
+import { Input } from "@/components/react-ui/input";
+import { Label } from "@/components/react-ui/label";
+import { Badge } from "@/components/react-ui/badge";
+import { Switch } from "@/components/react-ui/switch";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/react-ui/select";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/react-ui/dialog";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/react-ui/table";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/react-ui/dropdown-menu";
 import {
   Settings as SettingsIcon,
   Users,
@@ -65,6 +65,9 @@ const Settings = () => {
   const [twLoading, setTwLoading] = useState(false)
   const [xeroStatus, setXeroStatus] = useState<{ tenant_name: string | null; token_expires_at: string | null } | null>(null)
   const [xeroLoading, setXeroLoading] = useState(false)
+
+  // Create Supabase client instance
+  const supabase = createSupabaseClient();
 
   // Fetch users and roles from Supabase
   useEffect(() => {
@@ -126,8 +129,8 @@ const Settings = () => {
     if (error) {
       toast({ title: 'Error', description: error.message, variant: 'destructive' });
     } else if (data) {
-      setUsers((prev) => [...prev, data]);
-      toast({ title: 'User Created', description: `User ${data.first_name} ${data.last_name} created.` });
+      setUsers((prev) => [...prev, data as Profile]);
+      toast({ title: 'User Created', description: `User ${(data as Profile).first_name} ${(data as Profile).last_name} created.` });
     }
     setLoading(false);
   };
@@ -139,8 +142,8 @@ const Settings = () => {
     if (error) {
       toast({ title: 'Error', description: error.message, variant: 'destructive' });
     } else if (data) {
-      setUsers((prev) => prev.map((u) => (u.id === profile.id ? data : u)));
-      toast({ title: 'User Updated', description: `User ${data.first_name} ${data.last_name} updated.` });
+      setUsers((prev) => prev.map((u) => (u.id === profile.id ? data as Profile : u)));
+      toast({ title: 'User Updated', description: `User ${(data as Profile).first_name} ${(data as Profile).last_name} updated.` });
     }
     setLoading(false);
   };

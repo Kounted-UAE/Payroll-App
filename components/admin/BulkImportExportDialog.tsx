@@ -3,10 +3,10 @@
 'use client'
 
 import React, { useRef, useEffect, useState } from 'react'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/react-ui/dialog'
+import { Button } from '@/components/react-ui/button'
+import { Input } from '@/components/react-ui/input'
+import { Badge } from '@/components/react-ui/badge'
 import Papa from 'papaparse'
 import { z, ZodSchema } from 'zod'
 import { createClient } from '@supabase/supabase-js'
@@ -59,6 +59,9 @@ export function BulkImportExportDialog<T extends Record<string, any>>({
   const [exporting, setExporting] = useState(false)
   const [downloading, setDownloading] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  // Create Supabase client instance
+  const supabase = createSupabaseClient()
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]

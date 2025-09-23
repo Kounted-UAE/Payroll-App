@@ -1,13 +1,13 @@
 'use client'
 
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/react-ui/card";
+import { Button } from "@/components/react-ui/button";
+import { Input } from "@/components/react-ui/input";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/react-ui/avatar";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/react-ui/select";
+import { Label } from "@/components/react-ui/label";
+import { Textarea } from "@/components/react-ui/textarea";
 import { Send, Plus } from "lucide-react";
 
 export const SupportChatWidget = () => {

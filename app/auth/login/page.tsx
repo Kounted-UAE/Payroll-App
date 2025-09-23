@@ -2,10 +2,10 @@
 
 'use client'
 
-import LoginForm from '@/components/advontier-auth/login-form'
-import { Container } from '@/components/advontier-website/Container'
-import { FadeIn } from '@/components/advontier-website/FadeIn'
-import { RootLayout } from '@/components/advontier-website/layout/RootLayout'
+import LoginForm from '@/components/auth/login-form'
+import { Container } from '@/components/react-layout/Container'
+import { FadeIn } from '@/components/react-layout/FadeIn'
+import { RootLayout } from '@/components/react-layout/RootLayout'
 
 export default function LoginPage() {
   return (

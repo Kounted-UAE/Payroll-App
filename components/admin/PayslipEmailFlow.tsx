@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/react-ui/button'
 import { toast } from '@/hooks/use-toast'
 import {
   Dialog,
@@ -9,7 +9,7 @@ import {
   DialogHeader,
   DialogFooter,
   DialogTitle,
-} from '@/components/ui/dialog'
+} from '@/components/react-ui/dialog'
 import type { PayslipRow } from './PayslipFiltersAndTable'
 import { generatePayslipFilename } from '@/lib/utils/pdf/payslipNaming'
 

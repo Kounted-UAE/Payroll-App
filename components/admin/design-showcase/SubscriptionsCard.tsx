@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/react-ui/card";
+import { Button } from "@/components/react-ui/button";
 
 export const SubscriptionsCard = () => {
   // Sample data for the curved chart

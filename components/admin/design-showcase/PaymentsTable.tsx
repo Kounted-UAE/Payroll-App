@@ -1,7 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/react-ui/card";
+import { Button } from "@/components/react-ui/button";
+import { Badge } from "@/components/react-ui/badge";
+import { Checkbox } from "@/components/react-ui/checkbox";
 import { MoreHorizontal } from "lucide-react";
 
 export const PaymentsTable = () => {

@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
-import { Container } from '@/components/advontier-website/Container'
-import { FadeIn } from '@/components/advontier-website/FadeIn'
-import { RootLayout } from '@/components/advontier-website/layout/RootLayout'
+import { Container } from '@/components/react-layout/Container'
+import { FadeIn } from '@/components/react-layout/FadeIn'
+import { RootLayout } from '@/components/react-layout/RootLayout'
 
 export default function NotFound() {
   return (

@@ -5,9 +5,9 @@ import type React from "react"
 import { AppProviders } from './providers'
 import { Inter } from "next/font/google";
 import Script from "next/script"
-import  AuthProvider  from "@/components/advontier-auth/auth-provider"
-import { Toaster } from "@/components/ui/sonner"
-import { CookieConsentBanner } from "@/components/ui/cookie-consent"
+import  AuthProvider  from "@/components/auth/auth-provider"
+import { Toaster } from "@/components/react-ui/sonner"
+import { CookieConsentBanner } from "@/components/react-ui/cookie-consent"
 
 import { cn } from "@/lib/utils"
 

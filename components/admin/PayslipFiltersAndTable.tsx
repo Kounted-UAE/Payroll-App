@@ -1,15 +1,15 @@
 'use client'
 
 import React, { useState, useMemo, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Input } from '@/components/ui/input'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, TableFooter } from '@/components/ui/table'
+import { Button } from '@/components/react-ui/button'
+import { Checkbox } from '@/components/react-ui/checkbox'
+import { Input } from '@/components/react-ui/input'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, TableFooter } from '@/components/react-ui/table'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover'
+} from '@/components/react-ui/popover'
 import {
   Command,
   CommandEmpty,
@@ -17,16 +17,16 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/components/ui/command'
-import { Badge } from '@/components/ui/badge'
+} from '@/components/react-ui/command'
+import { Badge } from '@/components/react-ui/badge'
 import { ChevronDown, X, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 import { toast } from '@/hooks/use-toast'
-import { ExportXeroJournalsWizard } from '@/components/advontier-payroll/actions/PayrunSummaryJournalExport'
-import { ExportDetailedXeroJournalsWizard } from '@/components/advontier-payroll/actions/PayrunDetailedJournalExport'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious, PaginationLink } from '@/components/ui/pagination'
+import { ExportXeroJournalsWizard } from '@/components/payroll/actions/PayrunSummaryJournalExport'
+import { ExportDetailedXeroJournalsWizard } from '@/components/payroll/actions/PayrunDetailedJournalExport'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/react-ui/select'
+import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious, PaginationLink } from '@/components/react-ui/pagination'
 import { generatePayslipFilename, extractTokenFromFilename } from '@/lib/utils/pdf/payslipNaming'
 
 const SUPABASE_PUBLIC_URL = 'https://alryjvnddvrrgbuvednm.supabase.co/storage/v1/object/public/generated-pdfs/payslips'

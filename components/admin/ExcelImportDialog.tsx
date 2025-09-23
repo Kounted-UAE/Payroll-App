@@ -4,16 +4,16 @@
 
 import { useRef, useState, useEffect } from 'react'
 import Papa from 'papaparse'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/react-ui/dialog'
+import { Button } from '@/components/react-ui/button'
+import { Input } from '@/components/react-ui/input'
+import { Badge } from '@/components/react-ui/badge'
 import { Upload as UploadIcon, X, Trash2, Copy, Send, Download } from 'lucide-react'
 import { toast } from '@/hooks/use-toast'
 import { importExcelPayroll } from '@/lib/utils/importExcelPayroll'
 import { excelPayrollImportSchema, EXCEL_PAYROLL_IMPORT_TEMPLATE } from '@/lib/validators/excelPayrollImportSchema'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { ScrollArea } from '@/components/react-ui/scroll-area'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/react-ui/table'
 
 interface ExcelImportDialogProps {
   open: boolean

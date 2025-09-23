@@ -3,10 +3,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Papa from 'papaparse'
 import { createClient } from '@supabase/supabase-js'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/react-ui/dialog'
+import { Button } from '@/components/react-ui/button'
+import { Badge } from '@/components/react-ui/badge'
+import { Input } from '@/components/react-ui/input'
 import { toast } from '@/hooks/use-toast'
 
 type Props = {

@@ -3,9 +3,9 @@
 
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Button } from '@/components/ui/button'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/react-ui/table'
+import { Checkbox } from '@/components/react-ui/checkbox'
+import { Button } from '@/components/react-ui/button'
 import { ArrowUpDown } from 'lucide-react'
 
 interface Invoice {

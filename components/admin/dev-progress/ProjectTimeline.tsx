@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Button } from '@/components/ui/button';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Badge } from '@/components/react-ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/react-ui/card';
+import { Progress } from '@/components/react-ui/progress';
+import { Button } from '@/components/react-ui/button';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/react-ui/tooltip';
 import { Calendar, Clock, Target, AlertTriangle, CheckCircle, Circle, Pause } from 'lucide-react';
 import type { ProjectFeature, TimelineNode, SessionLog } from '@/lib/types/dev-progress';
 import { cn } from '@/lib/utils';

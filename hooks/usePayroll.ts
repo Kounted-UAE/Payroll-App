@@ -3,6 +3,7 @@
 
 import { useState, useEffect } from 'react'
 import { getSupabaseClient } from '@/lib/supabase/client'
+import { createClient } from '@supabase/supabase-js'
 import type { Database } from '@/lib/types/supabase'
 
 type PayrollEmployee = Database['public']['Tables']['payroll_objects_employees']['Row']
@@ -39,7 +40,10 @@ const getClient = () => {
   if (typeof window === 'undefined') {
     return null
   }
-  return getSupabaseClient()
+  return createClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
 }
 
 // Employers Hooks
@@ -71,7 +75,9 @@ export function usePayrollEmployers() {
   const createEmployer = async (employer: Omit<PayrollEmployer, 'id' | 'created_at' | 'updated_at'>) => {
     try {
       const supabase = getClient()
-      if (!supabase) throw new Error('Supabase client not available')
+      if (!supabase) {
+        throw new Error('Supabase client not available')
+      }
       
       const { data, error } = await supabase
         .from('payroll_objects_employers')
@@ -91,7 +97,9 @@ export function usePayrollEmployers() {
   const updateEmployer = async (id: string, updates: Partial<PayrollEmployer>) => {
     try {
       const supabase = getClient()
-      if (!supabase) throw new Error('Supabase client not available')
+      if (!supabase) {
+        throw new Error('Supabase client not available')
+      }
       
       const { data, error } = await supabase
         .from('payroll_objects_employers')
@@ -112,7 +120,9 @@ export function usePayrollEmployers() {
   const deleteEmployer = async (id: string) => {
     try {
       const supabase = getClient()
-      if (!supabase) throw new Error('Supabase client not available')
+      if (!supabase) {
+        throw new Error('Supabase client not available')
+      }
       
       const { error } = await supabase
         .from('payroll_objects_employers')
@@ -184,7 +194,9 @@ let query = supabase
   const createEmployee = async (employee: Omit<PayrollEmployee, 'id' | 'created_at' | 'updated_at'>) => {
     try {
       const supabase = getClient()
-      if (!supabase) throw new Error('Supabase client not available')
+      if (!supabase) {
+        throw new Error('Supabase client not available')
+      }
       
       const { data, error } = await supabase
         .from('payroll_objects_employees')
@@ -205,7 +217,9 @@ let query = supabase
   const updateEmployee = async (id: string, updates: Partial<PayrollEmployee>) => {
     try {
       const supabase = getClient()
-      if (!supabase) throw new Error('Supabase client not available')
+      if (!supabase) {
+        throw new Error('Supabase client not available')
+      }
       
       const { data, error } = await supabase
         .from('payroll_objects_employees')
@@ -227,7 +241,9 @@ let query = supabase
   const deleteEmployee = async (id: string) => {
     try {
       const supabase = getClient()
-      if (!supabase) throw new Error('Supabase client not available')
+      if (!supabase) {
+        throw new Error('Supabase client not available')
+      }
       
       const { error } = await supabase
         .from('payroll_objects_employees')
@@ -295,7 +311,9 @@ export function usePayrollPayruns(employerId?: string) {
   const createPayrun = async (payrun: Omit<PayrollPayrunRecord, 'id' | 'created_at' | 'updated_at'>) => {
     try {
       const supabase = getClient()
-      if (!supabase) throw new Error('Supabase client not available')
+      if (!supabase) {
+        throw new Error('Supabase client not available')
+      }
       
       const { data, error } = await supabase
         .from('payroll_payrun_records')
@@ -315,7 +333,9 @@ export function usePayrollPayruns(employerId?: string) {
   const updatePayrun = async (id: string, updates: Partial<PayrollPayrunRecord>) => {
     try {
       const supabase = getClient()
-      if (!supabase) throw new Error('Supabase client not available')
+      if (!supabase) {
+        throw new Error('Supabase client not available')
+      }
       
       const { data, error } = await supabase
         .from('payroll_payrun_records')
@@ -336,7 +356,9 @@ export function usePayrollPayruns(employerId?: string) {
   const closePayrun = async (id: string) => {
     try {
       const supabase = getClient()
-      if (!supabase) throw new Error('Supabase client not available')
+      if (!supabase) {
+        throw new Error('Supabase client not available')
+      }
       
       const { data, error } = await supabase
         .from('payroll_payrun_records')

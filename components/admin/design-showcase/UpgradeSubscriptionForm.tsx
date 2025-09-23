@@ -1,13 +1,13 @@
 'use client'
 
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/react-ui/card";
+import { Button } from "@/components/react-ui/button";
+import { Input } from "@/components/react-ui/input";
+import { Label } from "@/components/react-ui/label";
+import { Textarea } from "@/components/react-ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/react-ui/radio-group";
+import { Checkbox } from "@/components/react-ui/checkbox";
 
 export const UpgradeSubscriptionForm = () => {
   const [selectedPlan, setSelectedPlan] = useState("starter");
