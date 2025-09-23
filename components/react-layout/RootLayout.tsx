@@ -34,7 +34,7 @@ function Header({
       <div className="flex items-center justify-between gap-x-4">
         <Link
           href="/"
-          aria-label="Kounted Home Page"
+          aria-label="Kounted Business Suite"
           onMouseEnter={() => setLogoHovered(true)}
           onMouseLeave={() => setLogoHovered(false)}
         >

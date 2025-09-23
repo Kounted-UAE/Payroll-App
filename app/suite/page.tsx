@@ -1,4 +1,4 @@
-// app/kounted/page.tsx
+// app/suite/page.tsx
 
 'use client'
 
@@ -10,7 +10,7 @@ export default function KountedHome() {
 
   useEffect(() => {
     // Redirect to payroll page immediately
-    router.replace('/kounted/payroll')
+    router.replace('/suite/payroll')
   }, [router])
 
   return (

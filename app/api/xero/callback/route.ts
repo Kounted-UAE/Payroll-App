@@ -76,7 +76,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Token or tenant save failed' }, { status: 500 })
     }
 
-    return NextResponse.redirect(`${req.nextUrl.origin}/kounted/admin/xero-config`)
+    return NextResponse.redirect(`${req.nextUrl.origin}/suite/admin/xero-config`)
   } catch (err: any) {
     console.error('❌ Xero callback failed:', err)
     return NextResponse.json({ error: 'Xero callback crashed', message: err.message }, { status: 500 })

@@ -23,7 +23,7 @@ export const sidebarSections: SidebarSection[] = [
   {
     label: "Payroll Tools",
     items: [
-      { title: "Payroll Dashboard", url: "/kounted/payroll", icon: FileSpreadsheet, status: "active" },       
+      { title: "Payroll Dashboard", url: "/suite/payroll", icon: FileSpreadsheet, status: "active" },       
     ],
     collapsible: false,
   },

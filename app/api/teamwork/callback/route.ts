@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
     if (!resp.ok) {
       const text = await resp.text()
       console.error('Teamwork token exchange failed:', resp.status, text, 'origin:', originToSend, 'token_url:', TEAMWORK_TOKEN_URL)
-      return NextResponse.redirect(`${req.nextUrl.origin}/kounted/settings?teamwork_error=token_exchange_failed`)
+      return NextResponse.redirect(`${req.nextUrl.origin}/suite/settings?teamwork_error=token_exchange_failed`)
     }
     const tokenJson: any = await resp.json()
     const accessToken: string | null = tokenJson.access_token ?? null
@@ -64,8 +64,8 @@ export async function GET(req: NextRequest) {
     )
   } catch (e) {
     console.error('Teamwork callback error:', e)
-    return NextResponse.redirect(`${req.nextUrl.origin}/kounted/settings?teamwork_error=callback_failed`)
+    return NextResponse.redirect(`${req.nextUrl.origin}/suite/settings?teamwork_error=callback_failed`)
   }
 
-  return NextResponse.redirect(`${req.nextUrl.origin}/kounted/settings?teamwork_connected=1`)
+  return NextResponse.redirect(`${req.nextUrl.origin}/suite/settings?teamwork_connected=1`)
 }

@@ -14,6 +14,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/react-ui/avatar"
 import { useSidebar } from "./sidebar-context"
 import { KountedLogo } from '@/lib/assets/logos/KountedLogo'
+import { NavigationBreadcrumb } from "./navigation-breadcrumb"
 
 export function TopNavbar() {
   const { state } = useSidebar()
@@ -21,18 +22,25 @@ export function TopNavbar() {
 
   return (
     <header className="text-sm h-20 bg-slate-900 shadow-sm backdrop-blur overflow-hidden w-full">
-      <div className="h-full flex items-center justify-between px-2 relative z-10  text-white font-bold">
-        {/* Left side - KountedLogo */}
-        <div className="flex items-center">
+      <div className="h-full flex items-center relative z-10 text-white font-bold">
+        {/* Left side - Business Suite title that aligns with sidebar */}
+        <div className={`flex items-center justify-center transition-all duration-300 ${
+          collapsed ? 'w-20' : 'w-64'
+        }`}>
           {collapsed ? (
-            <KountedLogo variant="dark" className="h-10 w-10 flex-shrink-0" />
+            <KountedLogo variant="dark" className="h-8 w-8 flex-shrink-0" />
           ) : (
-            <KountedLogo variant="light" className="h-10 w-30 flex-shrink-0" />
+            <span className="text-lg font-semibold text-zinc-100">Business Suite</span>
           )}
         </div>
 
+        {/* Middle section - Breadcrumb */}
+        <div className="flex-1 flex items-center px-4">
+          <NavigationBreadcrumb />
+        </div>
+
         {/* Right side - Actions and user menu */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 px-4">
           <Button variant="ghost" size="sm" className="relative">
             <Bell className="h-4 w-4" />
           </Button>

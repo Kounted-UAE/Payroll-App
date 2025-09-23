@@ -5,7 +5,6 @@ import React from "react";
 import { AppSidebar } from "./AppSidebar";
 import { TopNavbar } from "./TopNavbar";
 import { useSidebar } from "./sidebar-context";
-import { NavigationBreadcrumb } from "./navigation-breadcrumb";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { state } = useSidebar();
@@ -23,16 +22,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           {/* Sidebar - Fixed positioned, no container needed */}
           <AppSidebar />
 
-          {/* Page content area with breadcrumbs - Add left margin to account for fixed sidebar */}
+          {/* Page content area - Add left margin to account for fixed sidebar */}
           <div className={React.useMemo(() => 
             `flex-1 flex flex-col transition-all duration-300 ${
-              collapsed ? 'ml-[12rem]' : 'ml-[16rem]'
+              collapsed ? 'ml-[5rem]' : 'ml-[16rem]'
             }`, 
             [collapsed]
           )}>
-            {/* Breadcrumb section above page content */}
-            <NavigationBreadcrumb />
-
             {/* Page content */}
             <main className="flex-1 bg-white shadow-inner-xl shadow-slate-900">
               {children}

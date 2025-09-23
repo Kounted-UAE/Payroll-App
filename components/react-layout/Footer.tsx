@@ -8,7 +8,7 @@ const navigation = [
   {
     title: 'Business Suite',
     links: [
-      { title: 'Kounted Prototype', href: '/kounted' },
+      { title: 'Kounted Prototype', href: '/suite' },
       { title: 'Compliance Calendar', href: '/auth/login' },
       { title: 'Knowledge Base', href: 'auth/login' },
       {
@@ -17,7 +17,7 @@ const navigation = [
             See all <span aria-hidden="true">&rarr;</span>
           </>
         ),
-        href: '/kounted',
+        href: '/suite',
       },
     ],
   },

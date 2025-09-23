@@ -30,19 +30,18 @@ export function NavigationBreadcrumb() {
   }
 
   const breadcrumbs: BreadcrumbItem[] = dashboardSegments.map((segment, idx) => {
-    const href = "/kounted/" + dashboardSegments.slice(0, idx + 1).join("/")
+    const href = "/suite/" + dashboardSegments.slice(0, idx + 1).join("/")
     return { name: getBreadcrumbName(segment, href), href }
   })
 
   return (
-    <div className="text-lowercase text-xs flex items-center gap-3 px-0 mb-2 h-12 bg-slate-900 backdrop-blur shadow-sm">
-      <SidebarTrigger className="h-8 w-8 rounded-lg hover:bg-white/50" />
-      <nav className="flex items-center gap-2 pr-4" aria-label="Breadcrumb">
+    <div className="text-lowercase text-xs flex items-center gap-3">
+      <nav className="flex items-center gap-2" aria-label="Breadcrumb">
         {dashboardSegments.length === 0 ? (
           <span className="text-zinc-100 font-semibold">Payroll Dashboard</span>
         ) : (
           <>
-            <Link href="/kounted/payroll" className="text-zinc-100 hover:underline font-bold">
+            <Link href="/suite/payroll" className="text-zinc-100 hover:underline font-bold">
               Payroll Dashboard
             </Link>
             <span className="text-zinc-400 font-normal">/</span>
