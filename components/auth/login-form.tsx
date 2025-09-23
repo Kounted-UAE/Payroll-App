@@ -8,7 +8,7 @@ import { Button } from '@/components/react-ui/button'
 import { Label } from '@/components/react-ui/label'
 import { Alert, AlertDescription } from '@/components/react-ui/alert'
 import { CheckCircle, Circle,AlertCircle, ArrowRight, Mail } from 'lucide-react'
-import { Logo, LogoMark } from '@/components/react-layout/Logo'
+import { KountedLogo} from '@/lib/assets/logos/KountedLogo'
 import { FadeIn } from '@/components/react-layout/FadeIn'
 
 export default function LoginForm() {

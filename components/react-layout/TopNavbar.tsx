@@ -13,21 +13,21 @@ import {
 } from "@/components/react-ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/react-ui/avatar"
 import { useSidebar } from "./sidebar-context"
-import { LogoMark, LogoText, Logo } from '@/components/react-layout/Logo'
+import { KountedLogo } from '@/lib/assets/logos/KountedLogo'
 
 export function TopNavbar() {
   const { state } = useSidebar()
   const collapsed = state === "collapsed"
 
   return (
-    <header className="text-sm h-20 bg-slate-900 shadow-sm backdrop-blur top-0 z-50 sticky overflow-hidden">
+    <header className="text-sm h-20 bg-slate-900 shadow-sm backdrop-blur overflow-hidden w-full">
       <div className="h-full flex items-center justify-between px-2 relative z-10  text-white font-bold">
-        {/* Left side - Logo */}
+        {/* Left side - KountedLogo */}
         <div className="flex items-center">
           {collapsed ? (
-            <LogoMark invert={false} className="h-10 w-10 flex-shrink-0" />
+            <KountedLogo variant="dark" className="h-10 w-10 flex-shrink-0" />
           ) : (
-            <Logo invert={true} className="h-10 w-30 flex-shrink-0" />
+            <KountedLogo variant="light" className="h-10 w-30 flex-shrink-0" />
           )}
         </div>
 

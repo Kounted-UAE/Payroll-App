@@ -12,24 +12,24 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const collapsed = state === "collapsed";
 
   return (
-      <div className="flex min-h-screen w-full flex-col bg-white ">
-        {/* Top Navbar - Full width across the top */}
-        <TopNavbar />
+      <div className="flex min-h-screen w-full flex-col bg-white">
+        {/* Top Navbar - Fixed at top */}
+        <div className="fixed top-0 left-0 right-0 z-50">
+          <TopNavbar />
+        </div>
         
-        {/* Main content area with sidebar and page content */}
-        <div className="flex flex-1 bg-white">
-          {/* Sidebar - Starts below navbar */}
+        {/* Main content area - starts below navbar */}
+        <div className="flex flex-1 bg-white pt-20">
+          {/* Sidebar - Fixed positioned, no container needed */}
+          <AppSidebar />
+
+          {/* Page content area with breadcrumbs - Add left margin to account for fixed sidebar */}
           <div className={React.useMemo(() => 
-            `hidden md:block flex-shrink-0 transition-all duration-300 ${
-              collapsed ? 'w-20' : 'w-64'
+            `flex-1 flex flex-col transition-all duration-300 ${
+              collapsed ? 'ml-[12rem]' : 'ml-[16rem]'
             }`, 
             [collapsed]
           )}>
-            <AppSidebar />
-          </div>
-
-          {/* Page content area with breadcrumbs */}
-          <div className="flex-1 flex flex-col ">
             {/* Breadcrumb section above page content */}
             <NavigationBreadcrumb />
 

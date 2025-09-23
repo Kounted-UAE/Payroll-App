@@ -5,10 +5,10 @@
 import { useState, useEffect, useCallback } from 'react'
 import { getSupabaseClient } from '@/lib/supabase/client'
 import { toast } from '@/hooks/use-toast'
-import { PayslipFiltersAndTable, type PayslipRow } from '@/components/admin/PayslipFiltersAndTable'
-import { PayslipEmailFlow } from '@/components/admin/PayslipEmailFlow'
-import PayslipGenerateFlow from '@/components/admin/PayslipGenerateFlow'
-import PayslipCSVImportDialog from '@/components/admin/PayslipCSVImportDialog'
+import { PayslipFiltersAndTable, type PayslipRow } from '@/components/payroll/PayslipFiltersAndTable'
+import { PayslipEmailFlow } from '@/components/payroll/PayslipEmailFlow'
+import PayslipGenerateFlow from '@/components/payroll/PayslipGenerateFlow'
+import PayslipCSVImportDialog from '@/components/payroll/PayslipCSVImportDialog'
 
 export default function SendPayslipsPage() {
   const [rows, setRows] = useState<PayslipRow[]>([])
@@ -91,7 +91,7 @@ export default function SendPayslipsPage() {
   }, [page, pageSize, sortBy, sortDir])
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="px-6 py-6 pl-0 space-y-6">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-lg text-zinc-600 font-bold">Send Payslips</h1>
         <div className="flex items-center gap-2">
@@ -140,10 +140,6 @@ export default function SendPayslipsPage() {
           onProceedToEmail={() => setStep('review')}
           onProceedToGenerate={() => setStep('generate')}
           onFilteredRowsChange={handleFilteredRowsChange}
-          journalWizardOpen={false}
-          setJournalWizardOpen={() => {}}
-          detailedWizardOpen={false}
-          setDetailedWizardOpen={() => {}}
           total={total}
           page={page}
           pageSize={pageSize}

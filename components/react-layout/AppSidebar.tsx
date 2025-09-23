@@ -28,12 +28,10 @@ export function AppSidebar() {
     setExpanded((prev) => ({ ...prev, [label]: !prev[label] }))
 
   return (
-    <div className="flex flex-col h-full text-xs">
-     
-
+    <div className={`fixed left-0 top-20 z-40 flex flex-col h-[calc(100vh-5rem)] text-xs bg-slate-900 ${collapsed ? 'w-20' : 'w-64'}`}>
       {/* Scrollable Content */}
       <ScrollArea className="flex-1 overflow-y-auto">
-        <div className=" bg-slate-900 p-1">
+        <div className="p-1">
           {sidebarSections.map((section) => (
             <div key={section.label} className="mb-4">
               {!collapsed && (
@@ -109,21 +107,21 @@ export function AppSidebar() {
         </div>
       </ScrollArea>
 
-      {/* Footer */}
-      <div className="p-4 flex-shrink-0">
+      {/* Footer - Fixed at bottom */}
+      <div className="p-4 flex-shrink-0 bg-slate-900 border-t border-zinc-700/50">
         {!collapsed ? (
-          <div className="flex items-center justify-between ">
-            <div className="text-xs text-slate-800">
+          <div className="flex items-center justify-between">
+            <div className="text-xs text-zinc-300">
               <div className="font-medium">kounted</div>
-              <div className="text-zinc-600">v2.0.0</div>
+              <div className="text-zinc-500">v2.0.0</div>
             </div>
-            <Button variant="default" size="sm" className="h-8 w-8 p-0">
+            <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-zinc-400 hover:text-zinc-200">
               <Plus className="h-4 w-4" />
             </Button>
           </div>
         ) : (
           <div className="flex justify-center">
-            <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+            <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-zinc-400 hover:text-zinc-200">
               <Plus className="h-4 w-4" />
             </Button>
           </div>

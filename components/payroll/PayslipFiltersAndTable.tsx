@@ -23,8 +23,6 @@ import { ChevronDown, X, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 import { toast } from '@/hooks/use-toast'
-import { ExportXeroJournalsWizard } from '@/components/payroll/actions/PayrunSummaryJournalExport'
-import { ExportDetailedXeroJournalsWizard } from '@/components/payroll/actions/PayrunDetailedJournalExport'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/react-ui/select'
 import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious, PaginationLink } from '@/components/react-ui/pagination'
 import { generatePayslipFilename, extractTokenFromFilename } from '@/lib/utils/pdf/payslipNaming'
@@ -53,10 +51,6 @@ interface PayslipFiltersAndTableProps {
   onProceedToEmail: () => void
   onProceedToGenerate?: () => void
   onFilteredRowsChange?: (filteredRows: PayslipRow[]) => void
-  journalWizardOpen: boolean
-  setJournalWizardOpen: (open: boolean) => void
-  detailedWizardOpen: boolean
-  setDetailedWizardOpen: (open: boolean) => void
   onPayrunSuccess?: () => void
   total?: number
   page?: number
@@ -76,10 +70,6 @@ export function PayslipFiltersAndTable({
   onProceedToEmail,
   onProceedToGenerate,
   onFilteredRowsChange,
-  journalWizardOpen,
-  setJournalWizardOpen,
-  detailedWizardOpen,
-  setDetailedWizardOpen,
   onPayrunSuccess,
   total = 0,
   page = 1,
@@ -375,17 +365,6 @@ export function PayslipFiltersAndTable({
       <div className="flex items-center justify-between mb-4">
 
         <div className="flex items-center gap-2">
-          
-          
-          <Button onClick={() => setDetailedWizardOpen(true)} variant="default">
-            Export Xero Detailed Journals
-          </Button>
-          <Button
-            variant="default"
-            onClick={() => setJournalWizardOpen(true)}
-          >
-            Export Xero Summary Journals
-          </Button>
           <Button
             variant="default"
             onClick={downloadZip}

@@ -4,7 +4,7 @@ import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
 import { PanelLeft } from "lucide-react"
-import { LogoMark } from '@/components/react-layout/Logo'
+import { KountedLogo } from '@/lib/assets/logos/KountedLogo'
 
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
@@ -279,7 +279,7 @@ const SidebarTrigger = React.forwardRef<
       }}
       {...props}
     >
-      <LogoMark className="h-6 w-6 bg-white/90 p-1 rounded-xs" />
+      <KountedLogo className="h-6 w-6 bg-white/90 p-1 rounded-xs" />
       <span className="sr-only ">Toggle Sidebar</span>
     </Button>
   )

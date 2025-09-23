@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from "react"
-import { LogoMark } from '@/components/react-layout/Logo'
+import { KountedLogo } from '@/lib/assets/logos/KountedLogo'
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/react-ui/button"
 import { useSidebar } from "./sidebar-context"
@@ -25,7 +25,7 @@ export const SidebarTrigger = React.forwardRef<
       }}
       {...props}
     >
-      <LogoMark className="h-6 w-6 bg-white/90 p-1 rounded-xs" />
+      <KountedLogo className="h-6 w-6 bg-white/90 p-1 rounded-xs" />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )

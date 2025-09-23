@@ -35,9 +35,9 @@ export function NavigationBreadcrumb() {
   })
 
   return (
-    <div className="text-lowercase text-xs flex items-center gap-3 px-4 mb-2 h-12 bg-slate-900 backdrop-blur shadow-sm">
+    <div className="text-lowercase text-xs flex items-center gap-3 px-0 mb-2 h-12 bg-slate-900 backdrop-blur shadow-sm">
       <SidebarTrigger className="h-8 w-8 rounded-lg hover:bg-white/50" />
-      <nav className="flex items-center gap-2" aria-label="Breadcrumb">
+      <nav className="flex items-center gap-2 pr-4" aria-label="Breadcrumb">
         {dashboardSegments.length === 0 ? (
           <span className="text-zinc-100 font-semibold">Payroll Dashboard</span>
         ) : (
