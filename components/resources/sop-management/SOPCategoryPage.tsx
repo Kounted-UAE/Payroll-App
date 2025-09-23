@@ -41,12 +41,12 @@ export default function SOPCategoryPage() {
       <div className="min-h-screen bg-white p-6">
         <div className="max-w-4xl mx-auto">
           <div className="animate-pulse">
-            <div className="h-8 bg-blue-100 rounded w-1/3 mb-4"></div>
-            <div className="h-4 bg-blue-100 rounded w-1/2 mb-6"></div>
+            <div className="h-8 bg-zinc-100 rounded w-1/3 mb-4"></div>
+            <div className="h-4 bg-zinc-100 rounded w-1/2 mb-6"></div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[...Array(6)].map((_, i) => (
                 <div key={i} className="animate-pulse">
-                  <div className="h-48 bg-blue-100 rounded"></div>
+                  <div className="h-48 bg-zinc-100 rounded"></div>
                 </div>
               ))}
             </div>
@@ -63,7 +63,7 @@ export default function SOPCategoryPage() {
           <Card>
             <CardContent className="p-8 text-center">
               <h2 className="text-lg font-semibold mb-2">Error Loading Category</h2>
-              <p className="text-blue-200 mb-4">{error}</p>
+              <p className="text-zinc-400 mb-4">{error}</p>
               <Button onClick={() => window.location.reload()}>
                 Retry
               </Button>
@@ -81,10 +81,10 @@ export default function SOPCategoryPage() {
           <Card>
             <CardContent className="p-8 text-center">
               <h2 className="text-lg font-semibold mb-2">Category Not Found</h2>
-              <p className="text-blue-200 mb-4">
+              <p className="text-zinc-400 mb-4">
                 The requested SOP category could not be found.
               </p>
-              <Button onClick={() => goTo('/advontier/sop-resources')}>
+              <Button onClick={() => goTo('/kounted/sop-resources')}>
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to SOP Center
               </Button>
@@ -97,7 +97,7 @@ export default function SOPCategoryPage() {
 
   const handleSOPClick = async (sopId: string) => {
     await incrementViewCount(sopId)
-    goTo(`/advontier/sop-resources/${categoryId}/${sopId}`)
+    goTo(`/kounted/sop-resources/${categoryId}/${sopId}`)
   }
 
   const handleCopyToClipboard = (sopId: string) => {
@@ -119,15 +119,15 @@ export default function SOPCategoryPage() {
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4 mb-6">
-          <Button variant="outline" onClick={() => goTo('/advontier/sop-resources')}>
+          <Button variant="outline" onClick={() => goTo('/kounted/sop-resources')}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to SOP Center
           </Button>
           <div className="flex-1">
           <h1 className="text-lg text-zinc-600 font-bold">{categoryInfo.name}</h1>
-            <p className="text-blue-400">{categoryInfo.description}</p>
+            <p className="text-zinc-400">{categoryInfo.description}</p>
           </div>
-          <Button onClick={() => goTo('/advontier/sop-resources/manage')}>
+          <Button onClick={() => goTo('/kounted/sop-resources/manage')}>
             <Plus className="mr-2 h-4 w-4" />
             Add SOP
           </Button>
@@ -136,7 +136,7 @@ export default function SOPCategoryPage() {
         {/* Search and Filters */}
         <div className="flex gap-4 mb-6">
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-3 h-4 w-4 text-blue-200" />
+            <Search className="absolute left-3 top-3 h-4 w-4 text-zinc-400" />
             <Input
               placeholder={`Search ${categoryInfo.name} SOPs...`}
               value={searchQuery}
@@ -163,12 +163,12 @@ export default function SOPCategoryPage() {
                     </Badge>
                   </div>
                 </div>
-                <p className="text-xs text-blue-200 mt-2">
+                <p className="text-xs text-zinc-400 mt-2">
                   {sop.description}
                 </p>
               </CardHeader>
               <CardContent>
-                <div className="flex items-center justify-between text-xs text-blue-200 mb-4">
+                <div className="flex items-center justify-between text-xs text-zinc-400 mb-4">
                   <span className="flex items-center gap-1">
                     <Clock className="h-4 w-4" />
                     {getTimeAgo(new Date(sop.updated_at))}
@@ -179,7 +179,7 @@ export default function SOPCategoryPage() {
                   </span>
                 </div>
 
-                <div className="text-xs text-blue-200 mb-4">
+                <div className="text-xs text-zinc-400 mb-4">
                   <span>{sop.template_count} templates available</span>
                 </div>
 
@@ -212,15 +212,15 @@ export default function SOPCategoryPage() {
         {filteredSOPs.length === 0 && (
           <Card>
             <CardContent className="p-12 text-center">
-              <FileText className="h-16 w-16 text-blue-200 mx-auto mb-4" />
+              <FileText className="h-16 w-16 text-zinc-400 mx-auto mb-4" />
               <h3 className="text-lg font-semibold mb-2">No SOPs Found</h3>
-              <p className="text-blue-200 mb-4">
+              <p className="text-zinc-400 mb-4">
                 {searchQuery || statusFilter !== 'all' 
                   ? 'No SOPs match your current filters.'
                   : `No SOPs have been created for ${categoryInfo.name} yet.`
                 }
               </p>
-              <Button onClick={() => goTo('/advontier/sop-resources/manage')}>
+              <Button onClick={() => goTo('/kounted/sop-resources/manage')}>
                 <Plus className="mr-2 h-4 w-4" />
                 Create First SOP
               </Button>

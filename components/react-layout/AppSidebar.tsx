@@ -21,8 +21,8 @@ export function AppSidebar() {
   const isActive = (path: string) => pathname === path
   const getNavCls = (path: string) =>
     isActive(path)
-      ? "text-neutral-700 bg-blue-100 font-bold"
-      : "text-neutral-200 hover:bg-blue-100 hover:text-slate-400"
+      ? "text-neutral-700 bg-zinc-100 font-bold"
+      : "text-neutral-200 hover:bg-zinc-100 hover:text-slate-400"
 
   const toggle = (label: string) =>
     setExpanded((prev) => ({ ...prev, [label]: !prev[label] }))
@@ -37,8 +37,8 @@ export function AppSidebar() {
           {sidebarSections.map((section) => (
             <div key={section.label} className="mb-4">
               {!collapsed && (
-                <div className="flex items-center justify-between px-2 py-2 border-b-1 m-2 border-blue-400/50">
-                  <div className="text-blue-300 text-xs font-bold uppercase tracking-normal">
+                <div className="flex items-center justify-between px-2 py-2 border-b-1 m-2 border-zinc-400/50">
+                  <div className="text-zinc-300 text-xs font-bold uppercase tracking-normal">
                     {section.label}
                   </div>
                   {section.collapsible !== false && (
@@ -46,7 +46,7 @@ export function AppSidebar() {
                       variant="ghost"
                       size="sm"
                       onClick={() => toggle(section.label)}
-                      className="h-auto p-1 hover:bg-blue-300 hover:text-blue-600"
+                      className="h-auto p-1 hover:bg-zinc-300 hover:text-zinc-600"
                     >
                       <ChevronDown
                         className={clsx(
@@ -69,7 +69,7 @@ export function AppSidebar() {
                           <div key={item.title}>
                             {isInactive ? (
                               <div className={clsx(
-                                "flex items-center py-2 mx-1 text-blue-300/50 cursor-not-allowed",
+                                "flex items-center py-2 mx-1 text-zinc-300/50 cursor-not-allowed",
                                 collapsed ? "justify-center px-0" : "gap-2 px-2"
                               )}>
                                 {item.icon && <item.icon className="h-4 w-4" />}
@@ -114,8 +114,8 @@ export function AppSidebar() {
         {!collapsed ? (
           <div className="flex items-center justify-between ">
             <div className="text-xs text-slate-800">
-              <div className="font-medium">Advontier</div>
-              <div className="text-blue-600">v2.0.0</div>
+              <div className="font-medium">kounted</div>
+              <div className="text-zinc-600">v2.0.0</div>
             </div>
             <Button variant="default" size="sm" className="h-8 w-8 p-0">
               <Plus className="h-4 w-4" />

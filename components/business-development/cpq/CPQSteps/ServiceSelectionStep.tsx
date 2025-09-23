@@ -112,7 +112,7 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
   return (
     <div className="space-y-6">
       <FormSection title="Service Packages">
-        <p className="text-xs text-blue-200 mb-4">
+        <p className="text-xs text-zinc-400 mb-4">
           Based on your requirements, we recommend the following service packages:
         </p>
         
@@ -127,10 +127,10 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
           {/* Standard Tier */}
-          <Card className={`border-2 ${data.selectedTier === 'standard' ? 'border-blue-500' : 'border-border'}`}>
+          <Card className={`border-2 ${data.selectedTier === 'standard' ? 'border-zinc-500' : 'border-border'}`}>
             <CardContent className="p-0">
               <div 
-                className={`p-4 ${data.selectedTier === 'standard' ? 'bg-blue-500 text-blue-500-foreground' : 'bg-blue-100'}`}
+                className={`p-4 ${data.selectedTier === 'standard' ? 'bg-zinc-500 text-zinc-500-foreground' : 'bg-zinc-100'}`}
                 onClick={() => updateField('selectedTier', 'standard')}
               >
                 <div className="flex items-center justify-between mb-1">
@@ -144,26 +144,26 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
                 <div className="mb-4">
                   <div className="flex items-baseline justify-between mb-1">
                     <span className="text-xs font-bold">AED {PRICING_MATRIX.standard[getComplexity() as keyof typeof PRICING_MATRIX.standard].base.toLocaleString()}</span>
-                    <span className="text-xs text-blue-200">/month</span>
+                    <span className="text-xs text-zinc-400">/month</span>
                   </div>
-                  <span className="text-xs text-blue-200">+ service fees</span>
+                  <span className="text-xs text-zinc-400">+ service fees</span>
                 </div>
 
                 <ul className="space-y-2 mb-4">
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
+                    <Check className="h-4 w-4 text-zinc-500 mt-0.5" />
                     <span>Basic Bookkeeping & Accounting</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
+                    <Check className="h-4 w-4 text-zinc-500 mt-0.5" />
                     <span>Quarterly Financial Statements</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
+                    <Check className="h-4 w-4 text-zinc-500 mt-0.5" />
                     <span>VAT & Tax Compliance</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
+                    <Check className="h-4 w-4 text-zinc-500 mt-0.5" />
                     <span>Basic Payroll Processing</span>
                   </li>
                 </ul>
@@ -177,10 +177,10 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
           </Card>
 
           {/* Premium Tier */}
-          <Card className={`border-2 ${data.selectedTier === 'premium' ? 'border-blue-500' : 'border-border'}`}>
+          <Card className={`border-2 ${data.selectedTier === 'premium' ? 'border-zinc-500' : 'border-border'}`}>
             <CardContent className="p-0">
               <div 
-                className={`p-4 ${data.selectedTier === 'premium' ? 'bg-blue-500 text-blue-500-foreground' : 'bg-blue-100'}`}
+                className={`p-4 ${data.selectedTier === 'premium' ? 'bg-zinc-500 text-zinc-500-foreground' : 'bg-zinc-100'}`}
                 onClick={() => updateField('selectedTier', 'premium')}
               >
                 <div className="flex items-center justify-between mb-1">
@@ -194,30 +194,30 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
                 <div className="mb-4">
                   <div className="flex items-baseline justify-between mb-1">
                     <span className="text-xs font-bold">AED {PRICING_MATRIX.premium[getComplexity() as keyof typeof PRICING_MATRIX.premium].base.toLocaleString()}</span>
-                    <span className="text-xs text-blue-200">/month</span>
+                    <span className="text-xs text-zinc-400">/month</span>
                   </div>
-                  <span className="text-xs text-blue-200">+ service fees</span>
+                  <span className="text-xs text-zinc-400">+ service fees</span>
                 </div>
 
                 <ul className="space-y-2 mb-4">
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
+                    <Check className="h-4 w-4 text-zinc-500 mt-0.5" />
                     <span>Full Bookkeeping & Accounting</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
+                    <Check className="h-4 w-4 text-zinc-500 mt-0.5" />
                     <span>Monthly Financial Statements</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
+                    <Check className="h-4 w-4 text-zinc-500 mt-0.5" />
                     <span>Advanced Tax Services</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
+                    <Check className="h-4 w-4 text-zinc-500 mt-0.5" />
                     <span>Complete Payroll & HR Services</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
+                    <Check className="h-4 w-4 text-zinc-500 mt-0.5" />
                     <span>Financial Advisory</span>
                   </li>
                 </ul>
@@ -232,10 +232,10 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
           </Card>
 
           {/* Enterprise Tier */}
-          <Card className={`border-2 ${data.selectedTier === 'enterprise' ? 'border-blue-500' : 'border-border'}`}>
+          <Card className={`border-2 ${data.selectedTier === 'enterprise' ? 'border-zinc-500' : 'border-border'}`}>
             <CardContent className="p-0">
               <div 
-                className={`p-4 ${data.selectedTier === 'enterprise' ? 'bg-blue-500 text-blue-500-foreground' : 'bg-blue-100'}`}
+                className={`p-4 ${data.selectedTier === 'enterprise' ? 'bg-zinc-500 text-zinc-500-foreground' : 'bg-zinc-100'}`}
                 onClick={() => updateField('selectedTier', 'enterprise')}
               >
                 <div className="flex items-center justify-between mb-1">
@@ -249,34 +249,34 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
                 <div className="mb-4">
                   <div className="flex items-baseline justify-between mb-1">
                     <span className="text-xs font-bold">AED {PRICING_MATRIX.enterprise[getComplexity() as keyof typeof PRICING_MATRIX.enterprise].base.toLocaleString()}</span>
-                    <span className="text-xs text-blue-200">/month</span>
+                    <span className="text-xs text-zinc-400">/month</span>
                   </div>
-                  <span className="text-xs text-blue-200">+ service fees</span>
+                  <span className="text-xs text-zinc-400">+ service fees</span>
                 </div>
 
                 <ul className="space-y-2 mb-4">
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
+                    <Check className="h-4 w-4 text-zinc-500 mt-0.5" />
                     <span>Comprehensive Finance Department</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
+                    <Check className="h-4 w-4 text-zinc-500 mt-0.5" />
                     <span>Dedicated Account Manager</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
+                    <Check className="h-4 w-4 text-zinc-500 mt-0.5" />
                     <span>CFO-Level Strategic Advisory</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
+                    <Check className="h-4 w-4 text-zinc-500 mt-0.5" />
                     <span>Complete Tax & Compliance</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
+                    <Check className="h-4 w-4 text-zinc-500 mt-0.5" />
                     <span>Full HR & Payroll Management</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs">
-                    <Check className="h-4 w-4 text-blue-500 mt-0.5" />
+                    <Check className="h-4 w-4 text-zinc-500 mt-0.5" />
                     <span>Custom Reporting & Analytics</span>
                   </li>
                 </ul>
@@ -297,11 +297,11 @@ export default function ServiceSelectionStep({ data, allData, onChange, onPricin
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-xs font-medium">Estimated Monthly Cost</h3>
-              <p className="text-xs text-blue-200">Based on your requirements</p>
+              <p className="text-xs text-zinc-400">Based on your requirements</p>
             </div>
             <div className="text-right">
               <div className="text-xs font-bold">AED {pricing.monthlyPrice.toLocaleString()}</div>
-              <div className="text-xs text-blue-200">AED {pricing.annualPrice.toLocaleString()} annually</div>
+              <div className="text-xs text-zinc-400">AED {pricing.annualPrice.toLocaleString()} annually</div>
             </div>
           </div>
         </div>

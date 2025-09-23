@@ -1,7 +1,7 @@
 
-# Advontier Business Suite – Project Context
+# kounted Business Suite – Project Context
 
-This file defines the core AI agent collaboration context for the Advontier Business Suite. Use this as a reference when restarting ChatGPT sessions, performing schema or code reviews, or onboarding new contributors.
+This file defines the core AI agent collaboration context for the kounted Business Suite. Use this as a reference when restarting ChatGPT sessions, performing schema or code reviews, or onboarding new contributors.
 
 Commands often used by Eben Johansen
 
@@ -14,9 +14,9 @@ Commands often used by Eben Johansen
 
 ---
 
-# Advontier Business Suite – Project Context
+# kounted Business Suite – Project Context
 
-This file defines the core AI agent collaboration context for the Advontier Business Suite. Use this as a reference when restarting ChatGPT sessions, performing schema or code reviews, or onboarding new contributors.
+This file defines the core AI agent collaboration context for the kounted Business Suite. Use this as a reference when restarting ChatGPT sessions, performing schema or code reviews, or onboarding new contributors.
 
 Commands often used by Eben Johansen
 
@@ -237,7 +237,7 @@ DATE: 2025-07-21
 STATUS: Closed  
 GRADE: A– (91%)  
 SUMMARY:  
-Focused on aligning the login interface of the Advontier Business Suite with Advontier’s brand styling, including structured OTP login, aesthetic refinement, and split layout using `LoginForm` and `LoginNotice`. Session followed up on dark vs. light theme behavior, resolved visual and layout issues for responsive login page experience, and restructured component presentation. Minor theme logic misalignment was self-identified and remediated. Project styling tokens, Tailwind configuration, and theming behavior were confirmed and applied.  
+Focused on aligning the login interface of the kounted Business Suite with kounted’s brand styling, including structured OTP login, aesthetic refinement, and split layout using `LoginForm` and `LoginNotice`. Session followed up on dark vs. light theme behavior, resolved visual and layout issues for responsive login page experience, and restructured component presentation. Minor theme logic misalignment was self-identified and remediated. Project styling tokens, Tailwind configuration, and theming behavior were confirmed and applied.  
 KEY DELIVERABLES:  
 - Final login layout with static dark theme pre-login and enforced light theme post-login  
 - Fully branded and responsive `LoginForm.tsx` and `LoginNotice.tsx` components  
@@ -254,7 +254,7 @@ session.02.20250721 — To continue with app-wide styling normalization, onboard
 
 ### 🤖 AI Agent Performance Evaluation: session.01.20250718
 
-**Evaluation Framework**: [Advontier_AI_Agent_Performance_Policy_Enhanced_v2.txt]  
+**Evaluation Framework**: [kounted_AI_Agent_Performance_Policy_Enhanced_v2.txt]  
 **Session Reference**: session.20250718.01txt  
 **Assessment Date**: 2025-07-18  
 **Evaluator**: Eben Johanse (via structured prompt evaluation)
@@ -291,7 +291,7 @@ session.02.20250721 — To continue with app-wide styling normalization, onboard
 
 ### 🤖 AI Agent Performance Evaluation: session.02.20250718
 
-**Evaluation Framework**: \[Advontier\_AI\_Agent\_Performance\_Policy\_Enhanced\_v2.txt]
+**Evaluation Framework**: \[kounted\_AI\_Agent\_Performance\_Policy\_Enhanced\_v2.txt]
 **Session Reference**: session.02.20250718
 **Assessment Date**: 2025-07-19
 **Evaluator**: Eben Johansen (via structured prompt evaluation)
@@ -398,12 +398,12 @@ The AI agent demonstrated high precision in executing design and logic for the l
 GRADE: A– (91%)
 STATUS: Pass
 
-Below is a structured to‑do list to anchor our engagement as we prepare Advontier Practice Manager for scale. It aligns with the stated goals and ensures that each deliverable—pitch decks, roadmap, business plan, and product requirements—addresses the needs of investors, early‑adopter firms and strategic partners.
+Below is a structured to‑do list to anchor our engagement as we prepare kounted Practice Manager for scale. It aligns with the stated goals and ensures that each deliverable—pitch decks, roadmap, business plan, and product requirements—addresses the needs of investors, early‑adopter firms and strategic partners.
 
 ### 1. Market & Competitive Research
 
 * **Size the UAE/GCC accounting and compliance market:** compile TAM/SAM/SOM estimates for small firms, independent contractors and boutique advisory practices.
-* **Competitor analysis:** benchmark existing practice‑management and compliance platforms (e.g. Teamwork, Karbon, TaxDome, Xero Practice Manager) on task management, client portals, KYC/AML, payroll, and pricing. Identify gaps that Advontier can exploit.
+* **Competitor analysis:** benchmark existing practice‑management and compliance platforms (e.g. Teamwork, Karbon, TaxDome, Xero Practice Manager) on task management, client portals, KYC/AML, payroll, and pricing. Identify gaps that kounted can exploit.
 * **Regulatory landscape:** map ADGM/DIFC/Mainland compliance requirements, WPS payroll mandates, KYC/AML obligations and upcoming corporate tax/VAT changes.
 
 ### 2. Pitch Deck Development
@@ -431,7 +431,7 @@ Create a high‑level timeline with the following phases:
 2. **Commercialisation & Beta (Q2–Q3):**
 
    * Develop pricing strategy and subscription tiers (starter, professional, enterprise) with features/capacity limits.
-   * Onboard Advontier Accounting & Management Solutions as pilot tenant to validate workflows and data isolation.
+   * Onboard kounted Accounting & Management Solutions as pilot tenant to validate workflows and data isolation.
    * Prepare demo workflows and training materials tailored to investors, early adopters and partners.
 3. **Market Launch (Q4):**
 
@@ -443,7 +443,7 @@ Create a high‑level timeline with the following phases:
 
 * **Revenue model:** subscription‑based tiers with add‑on modules (payroll, KYC/AML, AI tax advisor). Consider per‑employee/payrun fees for payroll and per‑verification fees for KYC.
 * **Pricing:** define starter/professional/enterprise tiers by number of clients, users and advanced modules. Offer white‑label licensing for large partners.
-* **Go‑to‑market:** leverage Advontier’s network for pilot customers; engage accounting associations in UAE/GCC; co‑market with compliance/KYC vendors; run webinars and targeted content.
+* **Go‑to‑market:** leverage kounted’s network for pilot customers; engage accounting associations in UAE/GCC; co‑market with compliance/KYC vendors; run webinars and targeted content.
 * **Financial projections:** model 3‑year revenue/expense scenarios; include headcount plan, product development costs and marketing spend.
 * **Operational considerations:** support and onboarding resources, customer success team, compliance/audit processes.
 

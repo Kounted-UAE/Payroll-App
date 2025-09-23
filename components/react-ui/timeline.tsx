@@ -77,7 +77,7 @@ function TimelineContent({
   return (
     <div
       data-slot="timeline-content"
-      className={cn("text-blue-200 text-sm", className)}
+      className={cn("text-zinc-400 text-sm", className)}
       {...props}
     />
   )
@@ -99,7 +99,7 @@ function TimelineDate({
     <Comp
       data-slot="timeline-date"
       className={cn(
-        "text-blue-200 mb-1 block text-xs font-medium group-data-[orientation=vertical]/timeline:max-sm:h-4",
+        "text-zinc-400 mb-1 block text-xs font-medium group-data-[orientation=vertical]/timeline:max-sm:h-4",
         className
       )}
       {...props}

@@ -1,6 +1,6 @@
 /**
  * Payroll route PDF generator (browser-safe) using pdf-lib.
- * Used by the payroll wizard components under `components/advontier-payroll/...`.
+ * Used by the payroll wizard components under `components/kounted-payroll/...`.
  */
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib'
 

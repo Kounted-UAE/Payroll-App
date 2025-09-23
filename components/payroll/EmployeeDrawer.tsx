@@ -126,7 +126,7 @@ export function EmployeeDrawer({ open, onOpenChange, employee, mode, onSave, onD
           <DrawerTitle>
             {employee.full_name}{' '}
             {employee.payroll_objects_employers?.legal_name && (
-              <span className="text-sm font-normal text-blue-200">
+              <span className="text-sm font-normal text-zinc-400">
                 ({employee.payroll_objects_employers.legal_name})
               </span>
             )}

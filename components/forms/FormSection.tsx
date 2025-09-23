@@ -12,7 +12,7 @@ export default function FormSection({ title, description, children }: FormSectio
     <Card className="mb-6">
       <CardHeader>
         <CardTitle className="text-xs">{title}</CardTitle>
-        {description && <p className="text-xs text-blue-200">{description}</p>}
+        {description && <p className="text-xs text-zinc-400">{description}</p>}
       </CardHeader>
       <CardContent className="space-y-4">
         {children}

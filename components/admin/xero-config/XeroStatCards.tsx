@@ -51,7 +51,7 @@ export default function XeroStatCards() {
       {stats.map((stat, i) => (
         <Card key={i} className="shadow-sm">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-blue-200">
+            <CardTitle className="text-sm font-medium text-zinc-400">
               {stat.label}
             </CardTitle>
           </CardHeader>

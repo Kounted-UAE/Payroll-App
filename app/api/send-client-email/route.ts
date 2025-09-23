@@ -4,7 +4,7 @@ import { Resend } from 'resend';
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": process.env.NODE_ENV === 'production' 
-    ? "https://www.advontier.com" 
+    ? "https://www.kounted.com" 
     : "http://localhost:3000",
   "Access-Control-Allow-Headers":
     "authorization, x-client-info, apikey, content-type",

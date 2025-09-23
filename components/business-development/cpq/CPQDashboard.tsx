@@ -63,7 +63,7 @@ export default function KwiverCPQ() {
 
               <div className="space-y-2">
                 <p className="text-xs font-medium">Thank you for your order!</p>
-                <p className="text-blue-400">
+                <p className="text-zinc-400">
                   Our team will contact you shortly to discuss the next steps.
                 </p>
               </div>
@@ -97,7 +97,7 @@ export default function KwiverCPQ() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-lg font-bold text-foreground">Order Management</h1>
-              <p className="text-blue-400">View and manage all service orders</p>
+              <p className="text-zinc-400">View and manage all service orders</p>
             </div>
             <Button onClick={() => setShowOrdersList(false)} variant="outline">
               ← Back to Kiosk
@@ -114,7 +114,7 @@ export default function KwiverCPQ() {
       <div className="max-w-5xl mx-auto space-y-6">
         <div>
           <h1 className="text-lg font-bold text-foreground">Service Order Kiosk</h1>
-          <p className="text-blue-400">
+          <p className="text-zinc-400">
             Configure and order accounting services for your business
           </p>
         </div>
@@ -127,7 +127,7 @@ export default function KwiverCPQ() {
                   <FileText className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-blue-200">Total Orders</p>
+                  <p className="text-xs font-medium text-zinc-400">Total Orders</p>
                   <p className="text-xs font-bold">{orderStats.total}</p>
                 </div>
               </div>
@@ -141,7 +141,7 @@ export default function KwiverCPQ() {
                   <CheckSquare className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-blue-200">Completed</p>
+                  <p className="text-xs font-medium text-zinc-400">Completed</p>
                   <p className="text-xs font-bold">{orderStats.completed}</p>
                 </div>
               </div>
@@ -155,7 +155,7 @@ export default function KwiverCPQ() {
                   <Building2 className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-blue-200">In Progress</p>
+                  <p className="text-xs font-medium text-zinc-400">In Progress</p>
                   <p className="text-xs font-bold">{orderStats.inProgress}</p>
                 </div>
               </div>
@@ -168,7 +168,7 @@ export default function KwiverCPQ() {
             <div className="md:col-span-3 p-6 md:p-8">
               <div className="space-y-4">
                 <h2 className="text-xs font-bold">Configure Your Accounting Services</h2>
-                <p className="text-blue-400">
+                <p className="text-zinc-400">
                   Use our self-service wizard to configure and order accounting, payroll, tax, and HR services
                   tailored to your business needs.
                 </p>
@@ -178,7 +178,7 @@ export default function KwiverCPQ() {
                     <CheckSquare className="h-4 w-4 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">8-Step Guided Process</p>
-                      <p className="text-xs text-blue-200">
+                      <p className="text-xs text-zinc-400">
                         Simple questions to understand your needs
                       </p>
                     </div>
@@ -188,7 +188,7 @@ export default function KwiverCPQ() {
                     <CheckSquare className="h-4 w-4 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">Instant Pricing</p>
-                      <p className="text-xs text-blue-200">
+                      <p className="text-xs text-zinc-400">
                         Get transparent pricing based on your selections
                       </p>
                     </div>
@@ -198,7 +198,7 @@ export default function KwiverCPQ() {
                     <CheckSquare className="h-4 w-4 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">Flexible Services</p>
-                      <p className="text-xs text-blue-200">
+                      <p className="text-xs text-zinc-400">
                         Customized to your business requirements
                       </p>
                     </div>
@@ -219,11 +219,11 @@ export default function KwiverCPQ() {
               </div>
             </div>
 
-            <div className="md:col-span-2 bg-blue-100 p-6 md:p-8 flex items-center justify-center">
+            <div className="md:col-span-2 bg-zinc-100 p-6 md:p-8 flex items-center justify-center">
               <div className="space-y-6">
                 <div className="space-y-2 text-center">
                   <h3 className="font-semibold text-xs">Services Available</h3>
-                  <p className="text-xs text-blue-200">
+                  <p className="text-xs text-zinc-400">
                     Configure your business services from these categories
                   </p>
                 </div>

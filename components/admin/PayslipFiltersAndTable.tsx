@@ -209,7 +209,7 @@ export function PayslipFiltersAndTable({
           {/* Employer Filter */}
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="outline" className="justify-between min-w-[200px] bg-blue-100">
+              <Button variant="outline" className="justify-between min-w-[200px] bg-zinc-100">
                 {selectedEmployers.size === 0 
                   ? "All Employers" 
                   : `${selectedEmployers.size} employer${selectedEmployers.size !== 1 ? 's' : ''}`
@@ -254,7 +254,7 @@ export function PayslipFiltersAndTable({
           {/* Date Filter */}
           <Popover >
             <PopoverTrigger asChild>
-              <Button variant="outline" className="justify-between min-w-[200px] bg-blue-100">
+              <Button variant="outline" className="justify-between min-w-[200px] bg-zinc-100">
                 {selectedDates.size === 0 
                   ? "All Dates" 
                   : `${selectedDates.size} date${selectedDates.size !== 1 ? 's' : ''}`
@@ -484,7 +484,7 @@ export function PayslipFiltersAndTable({
                       ? row.payslip_url
                       : `${SUPABASE_PUBLIC_URL}/${generatePayslipFilename(row.employee_name || 'unknown', row.payslip_token)}`}
                     target="_blank"
-                    className="text-blue-600 underline text-xs"
+                    className="text-zinc-600 underline text-xs"
                   >
                     View PDF
                   </a>

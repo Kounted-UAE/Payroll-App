@@ -51,7 +51,7 @@ export default function LoginForm() {
     if (authError) setError(authError.message)
     else if (user && session) {
       setSuccess('Login successful! Redirecting...')
-      setTimeout(() => router.push('/advontier'), 1000)
+      setTimeout(() => router.push('/kounted'), 1000)
     }
     setLoading(false)
   }
@@ -104,7 +104,7 @@ export default function LoginForm() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@yourfirm.ae"
-                className="pl-10 bg-white text-neutral-900 ring-1 ring-zinc-200 focus:ring-blue-500"
+                className="pl-10 bg-white text-neutral-900 ring-1 ring-zinc-200 focus:ring-zinc-500"
                 required
                 autoFocus
               />
@@ -112,7 +112,7 @@ export default function LoginForm() {
           </div>
           <Button
             type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white text-sm sm:text-base font-semibold rounded-xl shadow-sm"
+            className="w-full bg-zinc-500 hover:bg-zinc-600 text-white text-sm sm:text-base font-semibold rounded-xl shadow-sm"
             disabled={loading}
           >
             {loading ? 'Sending OTP...' : 'Send login code'}
@@ -134,7 +134,7 @@ export default function LoginForm() {
               value={otpToken}
               onChange={(e) => setOtpToken(e.target.value)}
               placeholder="123456"
-              className="text-center text-base tracking-widest text-neutral-900 bg-white ring-1 ring-zinc-200 focus:ring-blue-500"
+              className="text-center text-base tracking-widest text-neutral-900 bg-white ring-1 ring-zinc-200 focus:ring-zinc-500"
               maxLength={6}
               required
               autoFocus
@@ -142,7 +142,7 @@ export default function LoginForm() {
           </div>
           <Button
             type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white text-sm sm:text-base font-semibold rounded-xl shadow-sm"
+            className="w-full bg-zinc-500 hover:bg-zinc-600 text-white text-sm sm:text-base font-semibold rounded-xl shadow-sm"
             disabled={loading}
           >
             {loading ? 'Verifying...' : 'Verify & Sign In'}
@@ -163,8 +163,8 @@ export default function LoginForm() {
       <p className="text-center text-xs text-zinc-400 mt-2">
         Need help?{' '}
         <a 
-          href="mailto:info@advontier.com" 
-          className="text-blue-500 underline hover:text-blue-600"
+          href="mailto:info@kounted.com" 
+          className="text-zinc-500 underline hover:text-zinc-600"
         >
           Contact support
         </a>
@@ -172,21 +172,21 @@ export default function LoginForm() {
 
       {/* Feature Rollout - Hidden on mobile, shown on larger screens */}
       <div className="w-full max-w-2xl mx-auto bg-zinc-100 rounded-2xl px-4 sm:px-8 py-6 sm:py-8 flex flex-col gap-4 sm:gap-6">
-        <h2 className="text-base sm:text-lg font-semibold text-blue-600 mb-2 tracking-tight text-center">
-          Advontier Feature Rollout
+        <h2 className="text-base sm:text-lg font-semibold text-zinc-600 mb-2 tracking-tight text-center">
+          Kounted Feature Rollout
         </h2>
         <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
           {features.map(({ label, status }) => (
             <li key={label} className="flex items-center gap-2">
               {status === 'Live' ? (
-                <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-blue-500" />
+                <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-zinc-500" />
               ) : (
                 <Circle className="h-3 w-3 sm:h-4 sm:w-4 text-zinc-300" />
               )}
               <span className="text-zinc-700 flex-1">{label}</span>
               <span className="text-xs font-medium rounded px-2 py-0.5">
                 {status === 'Live' ? (
-                  <span className="text-blue-500 bg-blue-50 px-2 rounded font-semibold">Live</span>
+                  <span className="text-zinc-500 bg-zinc-50 px-2 rounded font-semibold">Live</span>
                 ) : (
                   <span className="text-zinc-400">{status}</span>
                 )}

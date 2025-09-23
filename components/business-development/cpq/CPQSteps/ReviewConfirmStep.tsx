@@ -87,7 +87,7 @@ export default function ReviewConfirmStep({ data, allData, onChange, pricing, re
   return (
     <div className="space-y-6">
       <FormSection title="Order Summary">
-        <div className="bg-blue-100 p-4 rounded-lg mb-4">
+        <div className="bg-zinc-100 p-4 rounded-lg mb-4">
           <div className="flex justify-between items-center mb-2">
             <h3 className="font-medium">Reference ID</h3>
             <Badge variant="outline">{referenceId}</Badge>
@@ -106,7 +106,7 @@ export default function ReviewConfirmStep({ data, allData, onChange, pricing, re
         <div className="space-y-3">
           {getServiceSummary().map((item, index) => (
             <div key={index} className="flex items-start gap-2">
-              <Check className="h-4 w-4 text-blue-500 mt-1" />
+              <Check className="h-4 w-4 text-zinc-500 mt-1" />
               <span>{item}</span>
             </div>
           ))}
@@ -147,15 +147,15 @@ export default function ReviewConfirmStep({ data, allData, onChange, pricing, re
           
           <ul className="space-y-2">
             <li className="flex items-start gap-2">
-              <Check className="h-4 w-4 text-blue-500 mt-0.5" />
+              <Check className="h-4 w-4 text-zinc-500 mt-0.5" />
               <span>Our team will contact you within 24 hours</span>
             </li>
             <li className="flex items-start gap-2">
-              <Check className="h-4 w-4 text-blue-500 mt-0.5" />
+              <Check className="h-4 w-4 text-zinc-500 mt-0.5" />
               <span>Customized proposal based on your requirements</span>
             </li>
             <li className="flex items-start gap-2">
-              <Check className="h-4 w-4 text-blue-500 mt-0.5" />
+              <Check className="h-4 w-4 text-zinc-500 mt-0.5" />
               <span>Onboarding process and timeline discussion</span>
             </li>
           </ul>

@@ -214,9 +214,9 @@ export default function SessionLogger({ features, onSessionCreated, className }:
 
           {/* AI Analysis Results */}
           {aiAnalysis && (
-            <Card className="border-blue-200 bg-blue-50">
+            <Card className="border-zinc-400 bg-zinc-50">
               <CardHeader className="pb-3">
-                <CardTitle className="text-sm text-blue-800">AI Analysis Results</CardTitle>
+                <CardTitle className="text-sm text-zinc-800">AI Analysis Results</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="grid grid-cols-2 gap-4 text-sm">
@@ -236,7 +236,7 @@ export default function SessionLogger({ features, onSessionCreated, className }:
                     <ul className="text-xs space-y-1">
                       {aiAnalysis.achievements.map((achievement, idx) => (
                         <li key={idx} className="flex items-start gap-1">
-                          <span className="text-blue-500">•</span>
+                          <span className="text-zinc-500">•</span>
                           <span>{achievement}</span>
                         </li>
                       ))}
@@ -261,7 +261,7 @@ export default function SessionLogger({ features, onSessionCreated, className }:
                 {aiAnalysis.technical_notes && (
                   <div>
                     <p className="font-medium text-sm mb-1">Technical Notes:</p>
-                    <p className="text-xs text-blue-700">{aiAnalysis.technical_notes}</p>
+                    <p className="text-xs text-zinc-700">{aiAnalysis.technical_notes}</p>
                   </div>
                 )}
               </CardContent>
@@ -271,7 +271,7 @@ export default function SessionLogger({ features, onSessionCreated, className }:
           {/* Features worked on */}
           <div>
             <Label>Features Worked On</Label>
-            <p className="text-sm text-blue-200 mb-3">
+            <p className="text-sm text-zinc-400 mb-3">
               Select the features you worked on in this session:
             </p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2 max-h-60 overflow-y-auto border rounded-md p-3">
@@ -281,8 +281,8 @@ export default function SessionLogger({ features, onSessionCreated, className }:
                   className={`
                     p-2 rounded border cursor-pointer transition-colors text-sm
                     ${formData.features_worked_on.includes(feature.feature_key)
-                      ? 'bg-blue-500 text-blue-500-foreground border-blue-500'
-                      : 'bg-white hover:bg-blue-100'
+                      ? 'bg-zinc-500 text-zinc-500-foreground border-zinc-500'
+                      : 'bg-white hover:bg-zinc-100'
                     }
                   `}
                   onClick={() => toggleFeature(feature.feature_key)}
@@ -292,7 +292,7 @@ export default function SessionLogger({ features, onSessionCreated, className }:
                 </div>
               ))}
             </div>
-            <p className="text-xs text-blue-200 mt-2">
+            <p className="text-xs text-zinc-400 mt-2">
               Selected: {formData.features_worked_on.length} feature{formData.features_worked_on.length !== 1 ? 's' : ''}
             </p>
           </div>

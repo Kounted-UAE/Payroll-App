@@ -61,14 +61,14 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
       case 'regulatory':
         return 'bg-purple-100 text-purple-800 border-purple-200';
       default:
-        return 'bg-blue-100 text-blue-200 border-border';
+        return 'bg-zinc-100 text-zinc-400 border-border';
     }
   };
 
   const getFrequencyColor = (frequency: string) => {
     switch (frequency) {
       case 'one-time':
-        return 'bg-blue-100 text-blue-200';
+        return 'bg-zinc-100 text-zinc-400';
       case 'monthly':
         return 'bg-primary/10 text-primary';
       case 'quarterly':
@@ -78,7 +78,7 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
       case 'annual':
         return 'bg-primary/10 text-primary';
       default:
-        return 'bg-blue-100 text-blue-200';
+        return 'bg-zinc-100 text-zinc-400';
     }
   };
 
@@ -104,7 +104,7 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
     }
     
     onClose();
-    router.push(`/advontier/compliance/sop/${sopId}`);
+    router.push(`/kounted/compliance/sop/${sopId}`);
   };
 
   return (
@@ -130,7 +130,7 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
                 <Calendar className="h-4 w-4 text-primary" />
                 <span className="font-medium">Due Date</span>
               </div>
-              <p className="text-xs text-blue-200 ml-6">{item.dueDate}</p>
+              <p className="text-xs text-zinc-400 ml-6">{item.dueDate}</p>
             </div>
 
             <div className="space-y-2">
@@ -138,7 +138,7 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
                 <Building2 className="h-4 w-4 text-primary" />
                 <span className="font-medium">Authority</span>
               </div>
-              <p className="text-xs text-blue-200 ml-6">{item.authority}</p>
+              <p className="text-xs text-zinc-400 ml-6">{item.authority}</p>
             </div>
 
             <div className="space-y-2">
@@ -160,7 +160,7 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
                 <Users className="h-4 w-4 text-primary" />
                 <span className="font-medium">Subject Matter</span>
               </div>
-              <p className="text-xs text-blue-200 ml-6">{item.subjectMatter}</p>
+              <p className="text-xs text-zinc-400 ml-6">{item.subjectMatter}</p>
             </div>
           </div>
 
@@ -169,19 +169,19 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
           {/* Jurisdiction */}
           <div>
             <h3 className="font-semibold mb-2">Jurisdiction</h3>
-            <p className="text-xs text-blue-200">{item.jurisdiction}</p>
+            <p className="text-xs text-zinc-400">{item.jurisdiction}</p>
           </div>
 
           {/* Applicable Entities */}
           <div>
             <h3 className="font-semibold mb-2">Applicable Entities</h3>
-            <p className="text-xs text-blue-200">{item.entities}</p>
+            <p className="text-xs text-zinc-400">{item.entities}</p>
           </div>
 
           {/* Requirements */}
           <div>
             <h3 className="font-semibold mb-2">Requirements & Documents</h3>
-            <p className="text-xs text-blue-200 leading-relaxed">{item.requirements}</p>
+            <p className="text-xs text-zinc-400 leading-relaxed">{item.requirements}</p>
           </div>
 
           {/* Penalties */}
@@ -205,7 +205,7 @@ export default function ComplianceItemModal({ item, isOpen, onClose }: Complianc
           </div>
 
           {/* Disclaimer */}
-          <div className="text-xs text-blue-200 p-3 bg-blue-100/50 rounded-lg">
+          <div className="text-xs text-zinc-400 p-3 bg-zinc-100/50 rounded-lg">
             <p className="font-medium mb-1">Important Note:</p>
             <p>
               This information is for reference only and should not replace professional legal or 

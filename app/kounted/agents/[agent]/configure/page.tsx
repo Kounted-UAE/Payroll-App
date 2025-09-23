@@ -39,13 +39,13 @@ const allowedAgents = new Set([
 ])
 
 function storageKey(agent: string) {
-  return `advontier.agent.config.${agent}`
+  return `kounted.agent.config.${agent}`
 }
 
 export default function AgentConfigurePage() {
   const router = useRouter()
   const { roleSlug, supabase, session } = useAuth() as any
-  const isAdmin = !!roleSlug && (roleSlug.startsWith("advontier-") || roleSlug.endsWith("admin"))
+  const isAdmin = !!roleSlug && (roleSlug.startsWith("kounted-") || roleSlug.endsWith("admin"))
 
   const params = useParams()
   const agent = (params?.agent as string) || ""
@@ -119,7 +119,7 @@ export default function AgentConfigurePage() {
   }, [agent, valid, supabase])
 
   if (!valid) return notFound()
-  if (!isAdmin) router.push(`/advontier/agents/${agent}`)
+  if (!isAdmin) router.push(`/kounted/agents/${agent}`)
 
   const save = async () => {
     // Upsert agent config into kyc_knowledge_base
@@ -200,9 +200,9 @@ export default function AgentConfigurePage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-lg text-zinc-600 font-bold">Configure Agent</h1>
-          <p className="text-sm text-blue-200">Manage prompts, frameworks, templates, and source references.</p>
+          <p className="text-sm text-zinc-400">Manage prompts, frameworks, templates, and source references.</p>
         </div>
-        <div className="flex items-center gap-2 text-xs text-blue-200">
+        <div className="flex items-center gap-2 text-xs text-zinc-400">
           <Shield className="h-4 w-4" /> Admin only
         </div>
       </div>
@@ -293,7 +293,7 @@ export default function AgentConfigurePage() {
 
       <div className="flex justify-end gap-2">
         <Button variant="outline" asChild>
-          <a href={`/advontier/agents/${agent}`}>Cancel</a>
+          <a href={`/kounted/agents/${agent}`}>Cancel</a>
         </Button>
         <Button onClick={save}>Save</Button>
       </div>

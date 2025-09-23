@@ -82,7 +82,7 @@ export function EmployeeSelectionStep({
     <div className="space-y-6 bg-zinc-100">
       <div>
         <h3 className="text-lg font-semibold mb-2">Select Employees</h3>
-        <p className="text-blue-400">
+        <p className="text-zinc-400">
           Choose which employees to generate payslips for
         </p>
       </div>
@@ -125,7 +125,7 @@ export function EmployeeSelectionStep({
         <CardContent className="p-4">
           <div className="flex items-center space-x-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-blue-200" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-zinc-400" />
               <Input
                 placeholder="Search employees by name, email, or MOL ID..."
                 value={searchTerm}
@@ -139,7 +139,7 @@ export function EmployeeSelectionStep({
                 checked={showOnlyWithEmail}
                 onCheckedChange={(checked) => setShowOnlyWithEmail(checked as boolean)}
               />
-              <label htmlFor="email-filter" className="text-sm text-blue-200">
+              <label htmlFor="email-filter" className="text-sm text-zinc-400">
                 Show only employees with email
               </label>
             </div>
@@ -220,7 +220,7 @@ export function EmployeeSelectionStep({
                     <TableCell className="font-medium">{employee.employee_name}</TableCell>
                     <TableCell>
                       {employee.email_id ? (
-                        <span className="text-blue-600">{employee.email_id}</span>
+                        <span className="text-zinc-600">{employee.email_id}</span>
                       ) : (
                         <span className="text-red-500 text-xs">No email</span>
                       )}
@@ -241,7 +241,7 @@ export function EmployeeSelectionStep({
                 ))}
                 {filteredEmployees.length === 0 && (
                   <TableRow>
-                    <TableCell colSpan={7} className="text-center text-blue-200 py-8">
+                    <TableCell colSpan={7} className="text-center text-zinc-400 py-8">
                       {searchTerm ? 'No employees found matching your search' : 'No employees available'}
                     </TableCell>
                   </TableRow>
@@ -254,22 +254,22 @@ export function EmployeeSelectionStep({
 
       {/* Summary */}
       {selectedEmployees.length > 0 && (
-        <Card className="border-green-200 bg-blue-50">
+        <Card className="border-green-200 bg-zinc-50">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <h4 className="font-medium text-blue-900">
+                <h4 className="font-medium text-zinc-900">
                   Selection Summary
                 </h4>
-                <div className="text-sm text-blue-700 mt-1 space-y-1">
+                <div className="text-sm text-zinc-700 mt-1 space-y-1">
                   <p>• {selectedEmployees.length} employees selected for payslip generation</p>
                   <p>• {selectedWithEmail} employees have email addresses</p>
                   <p>• {employeesWithEmail} total employees with emails available</p>
                 </div>
               </div>
               <div className="text-right">
-                <p className="text-sm text-blue-700">Total Net Salary</p>
-                <p className="text-lg font-bold text-blue-900">
+                <p className="text-sm text-zinc-700">Total Net Salary</p>
+                <p className="text-lg font-bold text-zinc-900">
                   {formatCurrency(totalSelectedSalary, employees[0]?.currency || 'AED')}
                 </p>
               </div>
@@ -282,9 +282,9 @@ export function EmployeeSelectionStep({
       {employees.length === 0 && (
         <Card className="border-dashed">
           <CardContent className="p-8 text-center">
-            <Users className="h-12 w-12 text-blue-200 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-blue-200 mb-2">No Employees Found</h3>
-            <p className="text-sm text-blue-200">
+            <Users className="h-12 w-12 text-zinc-400 mx-auto mb-4" />
+            <h3 className="text-lg font-medium text-zinc-400 mb-2">No Employees Found</h3>
+            <p className="text-sm text-zinc-400">
               No employee data is available for this batch. Please check the batch import.
             </p>
           </CardContent>

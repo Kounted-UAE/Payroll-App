@@ -42,16 +42,16 @@ export default function SOPDetailPage() {
       <div className="min-h-screen bg-white p-6">
         <div className="max-w-6xl mx-auto space-y-6">
           <div className="animate-pulse">
-            <div className="h-8 bg-blue-100 rounded w-1/3 mb-4"></div>
-            <div className="h-4 bg-blue-100 rounded w-1/2 mb-6"></div>
+            <div className="h-8 bg-zinc-100 rounded w-1/3 mb-4"></div>
+            <div className="h-4 bg-zinc-100 rounded w-1/2 mb-6"></div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               {[...Array(3)].map((_, i) => (
-                <div key={i} className="h-20 bg-blue-100 rounded"></div>
+                <div key={i} className="h-20 bg-zinc-100 rounded"></div>
               ))}
             </div>
             <div className="space-y-6">
               {[...Array(4)].map((_, i) => (
-                <div key={i} className="h-48 bg-blue-100 rounded"></div>
+                <div key={i} className="h-48 bg-zinc-100 rounded"></div>
               ))}
             </div>
           </div>
@@ -66,9 +66,9 @@ export default function SOPDetailPage() {
         <div className="max-w-4xl mx-auto">
           <Card>
             <CardContent className="p-8 text-center">
-              <AlertTriangle className="h-12 w-12 text-blue-200 mx-auto mb-4" />
+              <AlertTriangle className="h-12 w-12 text-zinc-400 mx-auto mb-4" />
               <h2 className="text-lg font-semibold mb-2">Error Loading SOP</h2>
-              <p className="text-blue-200 mb-4">{error}</p>
+              <p className="text-zinc-400 mb-4">{error}</p>
               <Button onClick={() => window.location.reload()}>
                 Retry
               </Button>
@@ -85,12 +85,12 @@ export default function SOPDetailPage() {
         <div className="max-w-4xl mx-auto">
           <Card>
             <CardContent className="p-8 text-center">
-              <AlertTriangle className="h-12 w-12 text-blue-200 mx-auto mb-4" />
+              <AlertTriangle className="h-12 w-12 text-zinc-400 mx-auto mb-4" />
               <h2 className="text-lg font-semibold mb-2">SOP Not Found</h2>
-              <p className="text-blue-200 mb-4">
+              <p className="text-zinc-400 mb-4">
                 The requested Standard Operating Procedure could not be found.
               </p>
-              <Button onClick={() => navigate.push('/advontier/sop-resources')}>
+              <Button onClick={() => navigate.push('/kounted/sop-resources')}>
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to SOP Center
               </Button>
@@ -148,13 +148,13 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
-          <Button variant="outline" onClick={() => navigate.push(`/advontier/sop-resources/${category}`)}>
+          <Button variant="outline" onClick={() => navigate.push(`/kounted/sop-resources/${category}`)}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to {categoryInfo?.name || category?.replace('-', ' ')}
           </Button>
           <div className="flex-1">
           <h1 className="text-lg text-zinc-600 font-bold">{sopData.title}</h1>
-            <p className="text-blue-400">Standard Operating Procedure</p>
+            <p className="text-zinc-400">Standard Operating Procedure</p>
           </div>
           <div className="flex gap-2">
             <Button variant="outline" onClick={handleCopyToClipboard}>
@@ -177,17 +177,17 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center gap-2 mb-2">
-                <Calendar className="h-4 w-4 text-blue-500" />
+                <Calendar className="h-4 w-4 text-zinc-500" />
                 <span className="text-xs font-medium">Last Updated</span>
               </div>
-              <p className="text-xs text-blue-200">{getTimeAgo(new Date(sopData.updated_at))}</p>
+              <p className="text-xs text-zinc-400">{getTimeAgo(new Date(sopData.updated_at))}</p>
             </CardContent>
           </Card>
           
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center gap-2 mb-2">
-                <FileText className="h-4 w-4 text-blue-500" />
+                <FileText className="h-4 w-4 text-zinc-500" />
                 <span className="text-xs font-medium">Category</span>
               </div>
               <Badge>{categoryInfo?.name || category?.replace('-', ' ')}</Badge>
@@ -197,7 +197,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center gap-2 mb-2">
-                <CheckCircle className="h-4 w-4 text-blue-500" />
+                <CheckCircle className="h-4 w-4 text-zinc-500" />
                 <span className="text-xs font-medium">Status</span>
               </div>
               <Badge variant={sopData.status === 'active' ? 'default' : 'secondary'}>
@@ -218,8 +218,8 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
           <CardContent>
             <ul className="space-y-2">
               {sopData.who_and_when.map((item, index) => (
-                <li key={index} className="text-blue-200 flex items-start gap-2">
-                  <span className="text-blue-500 mt-1">•</span>
+                <li key={index} className="text-zinc-400 flex items-start gap-2">
+                  <span className="text-zinc-500 mt-1">•</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -238,11 +238,11 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
           <CardContent className="space-y-6">
             {sopData.data_documents_required.map((section, index) => (
               <div key={index}>
-                <h4 className="font-semibold mb-2 text-blue-500">{section.category}</h4>
+                <h4 className="font-semibold mb-2 text-zinc-500">{section.category}</h4>
                 <ul className="space-y-1">
                   {section.items.map((item, itemIndex) => (
-                    <li key={itemIndex} className="text-blue-200 flex items-start gap-2">
-                      <span className="text-blue-500 mt-1">•</span>
+                    <li key={itemIndex} className="text-zinc-400 flex items-start gap-2">
+                      <span className="text-zinc-500 mt-1">•</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -265,12 +265,12 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
             {sopData.process_workflow.map((step, index) => (
               <div key={index} className="space-y-3">
                 <div className="flex items-start gap-3">
-                  <div className="flex items-center justify-center w-8 h-8 bg-blue-500 text-blue-500-foreground rounded-full text-xs font-medium">
+                  <div className="flex items-center justify-center w-8 h-8 bg-zinc-500 text-zinc-500-foreground rounded-full text-xs font-medium">
                     {step.step}
                   </div>
                   <div className="flex-1">
                     <h4 className="font-semibold text-sm">{step.title}</h4>
-                    <p className="text-blue-200 mt-1">{step.description}</p>
+                    <p className="text-zinc-400 mt-1">{step.description}</p>
                   </div>
                 </div>
                 
@@ -278,8 +278,8 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
                   <div className="ml-11">
                     <ul className="space-y-1">
                       {step.details.map((detail, detailIndex) => (
-                        <li key={detailIndex} className="text-xs text-blue-200 flex items-start gap-2">
-                          <span className="text-blue-500 mt-1">•</span>
+                        <li key={detailIndex} className="text-xs text-zinc-400 flex items-start gap-2">
+                          <span className="text-zinc-500 mt-1">•</span>
                           <span>{detail}</span>
                         </li>
                       ))}
@@ -304,7 +304,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {sopData.templates.map((template, index) => (
-                <div key={index} className="border rounded-lg p-4 hover:bg-blue-100/50 transition-colors">
+                <div key={index} className="border rounded-lg p-4 hover:bg-zinc-100/50 transition-colors">
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-semibold">{template.name}</h4>
                     <div className="flex gap-2">
@@ -317,7 +317,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
                       </Button>
                     </div>
                   </div>
-                  <p className="text-xs text-blue-200 mb-3">{template.description}</p>
+                  <p className="text-xs text-zinc-400 mb-3">{template.description}</p>
                   <div>
                     <p className="text-xs font-medium mb-2">Required Fields:</p>
                     <div className="flex flex-wrap gap-1">
@@ -350,7 +350,7 @@ ${sopData.templates.map(template => `• ${template.name}: ${template.descriptio
                     key={index}
                     variant="outline"
                     size="sm"
-                    onClick={() => navigate.push(`/advontier/sop-resources/${category}/${relatedSopId}`)}
+                    onClick={() => navigate.push(`/kounted/sop-resources/${category}/${relatedSopId}`)}
                   >
                     {relatedSopId.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                     <ExternalLink className="ml-2 h-3 w-3" />

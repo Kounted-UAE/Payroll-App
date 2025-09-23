@@ -40,7 +40,7 @@ export default function HRComplianceStep({ data, allData, onChange }: StepProps)
   if (allData?.step1?.employeeCount === 0) {
     return (
       <div className="text-center py-8">
-        <p className="text-blue-400">No employees indicated. Skipping HR & Compliance section.</p>
+        <p className="text-zinc-400">No employees indicated. Skipping HR & Compliance section.</p>
       </div>
     );
   }
@@ -49,7 +49,7 @@ export default function HRComplianceStep({ data, allData, onChange }: StepProps)
     <div className="space-y-6">
       <FormSection title="HR Services">
         <div className="space-y-4">
-          <p className="text-xs text-blue-200">Select the HR services you need:</p>
+          <p className="text-xs text-zinc-400">Select the HR services you need:</p>
           
           <div className="space-y-3">
             {HR_SERVICES.map(service => (

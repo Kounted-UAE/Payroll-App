@@ -85,7 +85,7 @@ export const CalendarWidget = () => {
           {daysOfWeek.map((day) => (
             <div
               key={day}
-              className="text-xs text-blue-200 text-center p-2 font-medium"
+              className="text-xs text-zinc-400 text-center p-2 font-medium"
             >
               {day}
             </div>
@@ -102,8 +102,8 @@ export const CalendarWidget = () => {
               className={cn(
                 "h-8 w-8 p-0 text-xs font-normal",
                 day === null && "invisible",
-                day === selectedDate && "bg-blue-500 text-blue-500-foreground hover:bg-blue-500/90",
-                day === 13 && day !== selectedDate && "bg-blue-100 text-blue-200"
+                day === selectedDate && "bg-zinc-500 text-zinc-500-foreground hover:bg-zinc-500/90",
+                day === 13 && day !== selectedDate && "bg-zinc-100 text-zinc-400"
               )}
               onClick={() => day && setSelectedDate(day)}
               disabled={day === null}

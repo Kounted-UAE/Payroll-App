@@ -1,4 +1,4 @@
-// app/advontier/admin/component-library/page.tsx
+// app/kounted/admin/component-library/page.tsx
 
 'use client'
 
@@ -93,7 +93,7 @@ export default function ComponentLibraryPage() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-lg font-bold text-foreground">Dashboard Components</h1>
-            <p className="text-blue-400">Interactive component library showcase</p>
+            <p className="text-zinc-400">Interactive component library showcase</p>
           </div>
           <Badge variant="secondary" className="text-xs font-medium">
             {COMPONENTS.length} Components
@@ -134,7 +134,7 @@ export default function ComponentLibraryPage() {
                         {comp.category}
                       </Badge>
                     </div>
-                    <p className="text-xs text-blue-200 mb-4">{comp.description}</p>
+                    <p className="text-xs text-zinc-400 mb-4">{comp.description}</p>
                     <div className="flex-1 flex items-center justify-center mb-4">
                       {comp.component}
                     </div>
@@ -148,7 +148,7 @@ export default function ComponentLibraryPage() {
           </TabsContent>
 
           <TabsContent value="playground">
-            <div className="text-center text-blue-200 py-16">
+            <div className="text-center text-zinc-400 py-16">
               <p>Component playground coming soon...</p>
             </div>
           </TabsContent>

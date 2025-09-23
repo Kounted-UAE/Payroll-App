@@ -75,8 +75,8 @@ export default function FeatureDetailModal({
 
   const statusConfig = {
     planned: { color: 'text-gray-500', bgColor: 'bg-gray-100' },
-    'in-progress': { color: 'text-blue-500', bgColor: 'bg-blue-100' },
-    completed: { color: 'text-blue-500', bgColor: 'bg-blue-100' },
+    'in-progress': { color: 'text-zinc-500', bgColor: 'bg-zinc-100' },
+    completed: { color: 'text-zinc-500', bgColor: 'bg-zinc-100' },
     deferred: { color: 'text-yellow-500', bgColor: 'bg-yellow-100' },
     blocked: { color: 'text-red-500', bgColor: 'bg-red-100' }
   };
@@ -142,7 +142,7 @@ export default function FeatureDetailModal({
                   <CardTitle className="text-lg">Description</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-blue-400">{feature.description}</p>
+                  <p className="text-zinc-400">{feature.description}</p>
                 </CardContent>
               </Card>
             )}
@@ -160,7 +160,7 @@ export default function FeatureDetailModal({
                   <ul className="space-y-2">
                     {feature.objectives.map((objective, index) => (
                       <li key={index} className="flex items-start gap-2">
-                        <CheckCircle className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
+                        <CheckCircle className="h-4 w-4 text-zinc-500 mt-0.5 flex-shrink-0" />
                         <span className="text-sm">{objective}</span>
                       </li>
                     ))}
@@ -177,15 +177,15 @@ export default function FeatureDetailModal({
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex items-center gap-2 text-sm">
-                    <Clock className="h-4 w-4 text-blue-200" />
+                    <Clock className="h-4 w-4 text-zinc-400" />
                     <span>Estimated: {feature.estimated_hours} hours</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
-                    <Calendar className="h-4 w-4 text-blue-200" />
+                    <Calendar className="h-4 w-4 text-zinc-400" />
                     <span>Created: {new Date(feature.created_at).toLocaleDateString()}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
-                    <Calendar className="h-4 w-4 text-blue-200" />
+                    <Calendar className="h-4 w-4 text-zinc-400" />
                     <span>Updated: {new Date(feature.updated_at).toLocaleDateString()}</span>
                   </div>
                 </CardContent>
@@ -213,7 +213,7 @@ export default function FeatureDetailModal({
 
           <TabsContent value="sessions" className="space-y-4">
             {loading ? (
-              <div className="text-center py-8 text-blue-200">
+              <div className="text-center py-8 text-zinc-400">
                 Loading sessions...
               </div>
             ) : recentSessions.length > 0 ? (
@@ -226,7 +226,7 @@ export default function FeatureDetailModal({
                           <CardTitle className="text-lg">
                             {session.session_title || 'Development Session'}
                           </CardTitle>
-                          <p className="text-sm text-blue-200">
+                          <p className="text-sm text-zinc-400">
                             {new Date(session.session_date).toLocaleDateString()}
                           </p>
                         </div>
@@ -246,7 +246,7 @@ export default function FeatureDetailModal({
                           <ul className="text-xs space-y-1">
                             {session.key_achievements.map((achievement, idx) => (
                               <li key={idx} className="flex items-start gap-1">
-                                <CheckCircle className="h-3 w-3 text-blue-500 mt-0.5" />
+                                <CheckCircle className="h-3 w-3 text-zinc-500 mt-0.5" />
                                 <span>{achievement}</span>
                               </li>
                             ))}
@@ -272,7 +272,7 @@ export default function FeatureDetailModal({
                 ))}
               </div>
             ) : (
-              <div className="text-center py-8 text-blue-200">
+              <div className="text-center py-8 text-zinc-400">
                 <MessageCircle className="h-12 w-12 mx-auto mb-4 opacity-50" />
                 <p>No sessions recorded for this feature yet</p>
               </div>
@@ -280,7 +280,7 @@ export default function FeatureDetailModal({
           </TabsContent>
 
           <TabsContent value="milestones" className="space-y-4">
-            <div className="text-center py-8 text-blue-200">
+            <div className="text-center py-8 text-zinc-400">
               <Target className="h-12 w-12 mx-auto mb-4 opacity-50" />
               <p>Milestone tracking coming soon</p>
             </div>

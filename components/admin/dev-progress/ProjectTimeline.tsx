@@ -94,7 +94,7 @@ export default function ProjectTimeline({
       {/* Timeline */}
       <div className="relative">
         {/* Timeline backbone */}
-        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-green-500 opacity-30" />
+        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-zinc-500 via-purple-500 to-green-500 opacity-30" />
         
         {/* Feature nodes */}
         <div className="space-y-6">
@@ -120,12 +120,12 @@ export default function ProjectTimeline({
         <StatCard
           title="Completed"
           value={features.filter(f => f.status === 'completed').length}
-          icon={<CheckCircle className="h-4 w-4 text-blue-500" />}
+          icon={<CheckCircle className="h-4 w-4 text-zinc-500" />}
         />
         <StatCard
           title="In Progress"
           value={features.filter(f => f.status === 'in-progress').length}
-          icon={<Circle className="h-4 w-4 text-blue-500" />}
+          icon={<Circle className="h-4 w-4 text-zinc-500" />}
         />
         <StatCard
           title="Blocked"
@@ -147,8 +147,8 @@ interface TimelineFeatureNodeProps {
 function TimelineFeatureNode({ feature, position, recentActivity, onClick }: TimelineFeatureNodeProps) {
   const statusConfig = {
     planned: { color: 'bg-gray-100 border-gray-300', icon: Circle, iconColor: 'text-gray-400' },
-    'in-progress': { color: 'bg-blue-100 border-blue-300', icon: Circle, iconColor: 'text-blue-500' },
-    completed: { color: 'bg-blue-100 border-green-300', icon: CheckCircle, iconColor: 'text-blue-500' },
+    'in-progress': { color: 'bg-zinc-100 border-zinc-300', icon: Circle, iconColor: 'text-zinc-500' },
+    completed: { color: 'bg-zinc-100 border-green-300', icon: CheckCircle, iconColor: 'text-zinc-500' },
     deferred: { color: 'bg-yellow-100 border-yellow-300', icon: Pause, iconColor: 'text-yellow-500' },
     blocked: { color: 'bg-red-100 border-red-300', icon: AlertTriangle, iconColor: 'text-red-500' }
   };
@@ -206,14 +206,14 @@ function TimelineFeatureNode({ feature, position, recentActivity, onClick }: Tim
 
       {/* Feature card */}
       <Card 
-        className="ml-6 flex-1 cursor-pointer transition-all duration-200 hover:shadow-lg group-hover:border-blue-500/50"
+        className="ml-6 flex-1 cursor-pointer transition-all duration-200 hover:shadow-lg group-hover:border-zinc-500/50"
         onClick={onClick}
       >
         <CardHeader className="pb-2">
           <div className="flex items-start justify-between">
             <div>
               <CardTitle className="text-lg">{feature.title}</CardTitle>
-              <p className="text-sm text-blue-200 mt-1">{feature.category}</p>
+              <p className="text-sm text-zinc-400 mt-1">{feature.category}</p>
             </div>
             <div className="flex items-center gap-2">
               <Badge variant={getStatusVariant(feature.status)}>
@@ -229,7 +229,7 @@ function TimelineFeatureNode({ feature, position, recentActivity, onClick }: Tim
         <CardContent className="space-y-3">
           {/* Description */}
           {feature.description && (
-            <p className="text-sm text-blue-200">{feature.description}</p>
+            <p className="text-sm text-zinc-400">{feature.description}</p>
           )}
           
           {/* Progress bar */}
@@ -242,7 +242,7 @@ function TimelineFeatureNode({ feature, position, recentActivity, onClick }: Tim
           </div>
           
           {/* Metadata */}
-          <div className="flex flex-wrap gap-4 text-xs text-blue-200">
+          <div className="flex flex-wrap gap-4 text-xs text-zinc-400">
             <div className="flex items-center gap-1">
               <Clock className="h-3 w-3" />
               <span>{feature.estimated_hours}h estimated</span>
@@ -258,14 +258,14 @@ function TimelineFeatureNode({ feature, position, recentActivity, onClick }: Tim
           {/* Dependencies */}
           {feature.dependencies.length > 0 && (
             <div className="text-xs">
-              <span className="text-blue-200">Depends on: </span>
-              <span className="text-blue-500">{feature.dependencies.join(', ')}</span>
+              <span className="text-zinc-400">Depends on: </span>
+              <span className="text-zinc-500">{feature.dependencies.join(', ')}</span>
             </div>
           )}
           
           {/* Recent activity indicator */}
           {recentActivity.length > 0 && (
-            <div className="text-xs text-blue-600 bg-blue-50 rounded px-2 py-1">
+            <div className="text-xs text-zinc-600 bg-zinc-50 rounded px-2 py-1">
               {recentActivity.length} recent session{recentActivity.length > 1 ? 's' : ''}
             </div>
           )}
@@ -281,7 +281,7 @@ function StatCard({ title, value, icon }: { title: string; value: number; icon: 
       <CardContent className="p-4">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm text-blue-200">{title}</p>
+            <p className="text-sm text-zinc-400">{title}</p>
             <p className="text-2xl font-bold">{value}</p>
           </div>
           {icon}

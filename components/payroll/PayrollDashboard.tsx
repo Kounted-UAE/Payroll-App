@@ -58,28 +58,28 @@ const PayrollDashboard = () => {
       title: "Add New Employer",
       description: "Onboard a new client company",
       icon: Building,
-      href: "/advontier/payroll/employers/new",
+      href: "/kounted/payroll/employers/new",
       color: "bg-primary"
     },
     {
       title: "Add Employee",
       description: "Register new employee",
       icon: Users,
-      href: "/advontier/payroll/employees/new",
+      href: "/kounted/payroll/employees/new",
       color: "bg-primary"
     },
     {
       title: "Create Payrun",
       description: "Process monthly payroll",
       icon: FileText,
-      href: "/advontier/payroll/payruns/new",
+      href: "/kounted/payroll/payruns/new",
       color: "bg-primary"
     },
     {
       title: "Review Claims",
       description: "Approve expense claims",
       icon: Receipt,
-      href: "/advontier/payroll/expenses",
+      href: "/kounted/payroll/expenses",
       color: "bg-primary"
     }
   ]
@@ -120,7 +120,7 @@ const PayrollDashboard = () => {
         </div>
         <Card>
           <CardContent className="p-6">
-            <p className="text-blue-400">{error}</p>
+            <p className="text-zinc-400">{error}</p>
             <Button 
               onClick={() => window.location.reload()} 
               className="mt-4"
@@ -138,18 +138,18 @@ const PayrollDashboard = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-md font-bold tracking-tight">Payroll under Management</h1>
-          <p className="text-blue-200 text-sm">
+          <p className="text-zinc-400 text-sm">
             Comprehensive payroll management for UAE businesses
           </p>
         </div>
         <div className="flex gap-2">
-          <Link href="/advontier/payroll/reports">
+          <Link href="/kounted/payroll/reports">
             <Button variant="outline">
               <BarChart3 className="mr-2 h-4 w-4" />
               Reports
             </Button>
           </Link>
-          <Link href="/advontier/payroll/payruns/new">
+          <Link href="/kounted/payroll/payruns/new">
             <Button>
               <Plus className="mr-2 h-4 w-4" />
               New Payrun
@@ -166,11 +166,11 @@ const PayrollDashboard = () => {
               <CardTitle className="text-xs font-medium">
                 {stat.title}
               </CardTitle>
-              <stat.icon className="h-4 w-4 text-blue-200" />
+              <stat.icon className="h-4 w-4 text-zinc-400" />
             </CardHeader>
             <CardContent>
               <div className="text-xs font-bold">{stat.value}</div>
-              <p className="text-xs text-blue-200">
+              <p className="text-xs text-zinc-400">
                 {stat.description}
               </p>
               <div className="flex items-center mt-2">
@@ -209,7 +209,7 @@ const PayrollDashboard = () => {
                 {quickActions.map((action) => (
                   action.href ? (
                     <Link key={action.title} href={action.href}>
-                      <Card className="cursor-pointer text-foreground bg-blue-100 hover:bg-primary hover:text-primary-foreground transition-colors border-none">
+                      <Card className="cursor-pointer text-foreground bg-zinc-100 hover:bg-primary hover:text-primary-foreground transition-colors border-none">
                         <CardContent className="p-2">
                           <div className="flex items-center space-x-3">
                             <div className={`p-2 rounded-md ${action.color}`}>
@@ -234,7 +234,7 @@ const PayrollDashboard = () => {
                           </div>
                           <div>
                             <h3 className="font-semibold">{action.title}</h3>
-                            <p className="text-xs text-blue-200">
+                            <p className="text-xs text-zinc-400">
                               {action.description}
                             </p>
                           </div>
@@ -262,9 +262,9 @@ const PayrollDashboard = () => {
                 <div key={index} className="flex flex-col space-y-1">
                   <div className="flex items-center justify-between">
                     <p className="text-xs font-medium">{activity.action}</p>
-                    <p className="text-xs text-blue-200">{activity.time}</p>
+                    <p className="text-xs text-zinc-400">{activity.time}</p>
                   </div>
-                  <p className="text-xs text-blue-200">{activity.company}</p>
+                  <p className="text-xs text-zinc-400">{activity.company}</p>
                   {activity.amount && (
                     <p className="text-xs font-semibold text-primary">{activity.amount}</p>
                   )}

@@ -39,11 +39,11 @@ export default function SOPResourceCenter() {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleCategoryClick = (categoryId: string) => {
-    navigate.push(`/advontier/sop-resources/${categoryId}`);
+    navigate.push(`/kounted/sop-resources/${categoryId}`);
   };
 
   const handleSOPClick = (categoryId: string, sopId: string) => {
-    navigate.push(`/advontier/sop-resources/${categoryId}/${sopId}`);
+    navigate.push(`/kounted/sop-resources/${categoryId}/${sopId}`);
   };
 
   const recentSOPs = getRecentSOPs(4);
@@ -53,13 +53,13 @@ export default function SOPResourceCenter() {
       <div className="min-h-screen bg-white p-6">
         <div className="max-w-7xl mx-auto space-y-8">
           <div className="animate-pulse">
-            <div className="h-8 bg-blue-100 rounded w-1/3 mb-2"></div>
-            <div className="h-4 bg-blue-100 rounded w-1/2"></div>
+            <div className="h-8 bg-zinc-100 rounded w-1/3 mb-2"></div>
+            <div className="h-4 bg-zinc-100 rounded w-1/2"></div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {[...Array(4)].map((_, i) => (
               <div key={i} className="animate-pulse">
-                <div className="h-24 bg-blue-100 rounded"></div>
+                <div className="h-24 bg-zinc-100 rounded"></div>
               </div>
             ))}
           </div>
@@ -75,7 +75,7 @@ export default function SOPResourceCenter() {
           <Card>
             <CardContent className="p-8 text-center">
               <h2 className="text-lg font-semibold mb-2">Error Loading SOPs</h2>
-              <p className="text-blue-200 mb-4">{error}</p>
+              <p className="text-zinc-400 mb-4">{error}</p>
               <Button onClick={() => window.location.reload()}>
                 Retry
               </Button>
@@ -93,16 +93,16 @@ export default function SOPResourceCenter() {
         <div className="flex items-center justify-between">
           <div>
           <h1 className="text-lg text-zinc-600 font-bold">SOP Resource Center</h1>
-            <p className="text-blue-400">
-              Comprehensive Standard Operating Procedures for Advontier's 7 Solution Groups
+            <p className="text-zinc-400">
+              Comprehensive Standard Operating Procedures for kounted's 7 Solution Groups
             </p>
           </div>
           <div className="flex gap-3">
-            <Button onClick={() => navigate.push('/advontier/sop-resources/manage')}>
+            <Button onClick={() => navigate.push('/kounted/sop-resources/manage')}>
               <Plus className="mr-2 h-4 w-4" />
               Add SOP
             </Button>
-            <Button variant="outline" onClick={() => navigate.push('/advontier/sop-resources/manage')}>
+            <Button variant="outline" onClick={() => navigate.push('/kounted/sop-resources/manage')}>
               <Settings className="mr-2 h-4 w-4" />
               Manage SOPs
             </Button>
@@ -119,7 +119,7 @@ export default function SOPResourceCenter() {
                 </div>
                 <div>
                   <p className="text-xs font-bold">{stats.total_sops}</p>
-                  <p className="text-xs text-blue-200">Total SOPs</p>
+                  <p className="text-xs text-zinc-400">Total SOPs</p>
                 </div>
               </div>
             </CardContent>
@@ -133,7 +133,7 @@ export default function SOPResourceCenter() {
                 </div>
                 <div>
                   <p className="text-xs font-bold">{stats.solution_groups}</p>
-                  <p className="text-xs text-blue-200">Solution Groups</p>
+                  <p className="text-xs text-zinc-400">Solution Groups</p>
                 </div>
               </div>
             </CardContent>
@@ -147,7 +147,7 @@ export default function SOPResourceCenter() {
                 </div>
                 <div>
                   <p className="text-xs font-bold">{stats.recent_updates}</p>
-                  <p className="text-xs text-blue-200">Recent Updates</p>
+                  <p className="text-xs text-zinc-400">Recent Updates</p>
                 </div>
               </div>
             </CardContent>
@@ -161,7 +161,7 @@ export default function SOPResourceCenter() {
                 </div>
                 <div>
                   <p className="text-xs font-bold">{stats.most_popular}</p>
-                  <p className="text-xs text-blue-200">Most Popular</p>
+                  <p className="text-xs text-zinc-400">Most Popular</p>
                 </div>
               </div>
             </CardContent>
@@ -172,7 +172,7 @@ export default function SOPResourceCenter() {
         <Card>
           <CardContent className="p-6">
             <div className="relative">
-              <Search className="absolute left-3 top-3 h-4 w-4 text-blue-200" />
+              <Search className="absolute left-3 top-3 h-4 w-4 text-zinc-400" />
               <Input
                 placeholder="Search SOPs across all categories..."
                 value={searchQuery}
@@ -185,7 +185,7 @@ export default function SOPResourceCenter() {
 
         {/* Solution Groups Grid */}
         <div>
-          <h2 className="text-xs font-semibold mb-6">Advontier Solution Groups</h2>
+          <h2 className="text-xs font-semibold mb-6">kounted Solution Groups</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {categories.map((category) => {
               const Icon = categoryIcons[category.id as keyof typeof categoryIcons] || FileText;
@@ -207,7 +207,7 @@ export default function SOPResourceCenter() {
                         </Badge>
                       </div>
                     </div>
-                    <p className="text-xs text-blue-200">
+                    <p className="text-xs text-zinc-400">
                       {category.description}
                     </p>
                   </CardContent>
@@ -232,7 +232,7 @@ export default function SOPResourceCenter() {
                 return (
                   <div 
                     key={sop.id}
-                    className="flex items-center justify-between p-4 border rounded-lg hover:bg-blue-100/50 cursor-pointer transition-colors"
+                    className="flex items-center justify-between p-4 border rounded-lg hover:bg-zinc-100/50 cursor-pointer transition-colors"
                     onClick={() => handleSOPClick(sop.category, sop.id)}
                   >
                     <div className="flex items-center gap-4">
@@ -241,7 +241,7 @@ export default function SOPResourceCenter() {
                       </div>
                       <div>
                         <h4 className="font-medium">{sop.title}</h4>
-                        <p className="text-xs text-blue-200">
+                        <p className="text-xs text-zinc-400">
                           {category?.name} • Updated {timeAgo}
                         </p>
                       </div>

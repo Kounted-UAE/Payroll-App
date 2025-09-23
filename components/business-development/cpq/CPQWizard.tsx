@@ -265,9 +265,9 @@ export default function KwiverKioskWizard({
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-xs font-semibold text-foreground">Service Order Kiosk</h1>
-              <p className="text-xs text-blue-200">
+              <p className="text-xs text-zinc-400">
                 {referenceId && <>Reference: {referenceId} · </>}
-                {autosaving && <span className="text-blue-200">Autosaving...</span>}
+                {autosaving && <span className="text-zinc-400">Autosaving...</span>}
               </p>
             </div>
             <Badge variant={pricing.monthlyPrice > 0 ? 'default' : 'secondary'}>
@@ -302,12 +302,12 @@ export default function KwiverKioskWizard({
                         onClick={() => setCurrentStep(step.id)}
                         className={`w-full text-left p-3 rounded-none border-l-2 transition-colors ${
                           status === 'complete'
-                            ? 'border-l-blue-500 bg-blue-500/5 text-blue-500'
+                            ? 'border-l-zinc-500 bg-zinc-500/5 text-zinc-500'
                             : status === 'current'
-                            ? 'border-l-blue-500 bg-blue-500/10 text-blue-500 font-medium'
+                            ? 'border-l-zinc-500 bg-zinc-500/10 text-zinc-500 font-medium'
                             : status === 'visited'
-                            ? 'border-l-muted-foreground bg-blue-100/30 text-foreground'
-                            : 'border-l-transparent hover:bg-blue-100/50'
+                            ? 'border-l-muted-foreground bg-zinc-100/30 text-foreground'
+                            : 'border-l-transparent hover:bg-zinc-100/50'
                         }`}
                       >
                         <div className="flex items-center gap-2">

@@ -186,8 +186,8 @@ export async function GET(request: NextRequest) {
     const legalNotice = {
       gdpr_compliance: {
         legal_basis: 'Article 20 GDPR - Right to data portability',
-        data_controller: 'Advontier Digital Solutions',
-        contact_dpo: 'info@advontier.com',
+        data_controller: 'kounted Digital Solutions',
+        contact_dpo: 'info@kounted.com',
         retention_policy: 'Data retained as per our Privacy Policy and applicable UAE/EU regulations',
         your_rights: [
           'Right to rectification (Article 16)',
@@ -209,7 +209,7 @@ export async function GET(request: NextRequest) {
     userDataExport.export_metadata = { ...userDataExport.export_metadata, ...legalNotice }
 
     // Create downloadable JSON file
-    const fileName = `advontier-data-export-${user.id}-${new Date().toISOString().split('T')[0]}.json`
+    const fileName = `kounted-data-export-${user.id}-${new Date().toISOString().split('T')[0]}.json`
     
     const response = new NextResponse(JSON.stringify(userDataExport, null, 2))
     response.headers.set('Content-Type', 'application/json')

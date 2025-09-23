@@ -73,7 +73,7 @@ const PayrollEmployers = () => {
         </div>
         <Card>
           <CardContent className="p-6">
-            <p className="text-blue-400">{error}</p>
+            <p className="text-zinc-400">{error}</p>
             <Button onClick={() => window.location.reload()} className="mt-4">
               Retry
             </Button>
@@ -88,20 +88,20 @@ const PayrollEmployers = () => {
       <div className="flex items-center justify-between">
         <div>
         <h1 className="text-lg text-zinc-600 font-bold">Employers</h1>
-          <p className="text-blue-400">
+          <p className="text-zinc-400">
             Manage client companies and their payroll setup
           </p>
         </div>
         <div className="flex items-center space-x-2">
           <Button
-            className={`p-2 rounded ${view === 'grid' ? 'bg-primary text-primary-foreground' : 'bg-blue-100'}`}
+            className={`p-2 rounded ${view === 'grid' ? 'bg-primary text-primary-foreground' : 'bg-zinc-100'}`}
             onClick={() => setView('grid')}
             aria-label="Grid view"
           >
             <LayoutGrid className="h-4 w-4" />
           </Button>
           <Button
-            className={`p-2 rounded ${view === 'list' ? 'bg-primary text-primary-foreground' : 'bg-blue-100'}`}
+            className={`p-2 rounded ${view === 'list' ? 'bg-primary text-primary-foreground' : 'bg-zinc-100'}`}
             onClick={() => setView('list')}
             aria-label="List view"
           >
@@ -110,7 +110,7 @@ const PayrollEmployers = () => {
           <Button variant="outline" onClick={() => setDialogOpen(true)}>
             Bulk Import/Export
           </Button>
-          <Link href="/advontier/payroll/employers/new">
+          <Link href="/kounted/payroll/employers/new">
             <Button>
               <Plus className="mr-2 h-4 w-4" />
               Add Employer
@@ -134,7 +134,7 @@ const PayrollEmployers = () => {
         <CardContent className="p-6">
           <div className="flex items-center space-x-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-blue-200" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-zinc-400" />
               <Input
                 placeholder="Search employers by name or license..."
                 value={searchQuery}
@@ -222,7 +222,7 @@ const PayrollEmployers = () => {
                 <div className="grid md:grid-cols-3 gap-6">
                   {/* Contact Info */}
                   <div className="space-y-3">
-                    <h4 className="font-semibold text-xs text-blue-200 uppercase tracking-wide">
+                    <h4 className="font-semibold text-xs text-zinc-400 uppercase tracking-wide">
                       Contact Information
                     </h4>
                     <div className="space-y-2">
@@ -235,7 +235,7 @@ const PayrollEmployers = () => {
 
                   {/* Compliance */}
                   <div className="space-y-3">
-                    <h4 className="font-semibold text-xs text-blue-200 uppercase tracking-wide">
+                    <h4 className="font-semibold text-xs text-zinc-400 uppercase tracking-wide">
                       Compliance Details
                     </h4>
                     <div className="space-y-1 text-xs">
@@ -248,16 +248,16 @@ const PayrollEmployers = () => {
 
                   {/* Actions */}
                   <div className="space-y-3">
-                    <h4 className="font-semibold text-xs text-blue-200 uppercase tracking-wide">
+                    <h4 className="font-semibold text-xs text-zinc-400 uppercase tracking-wide">
                       Actions
                     </h4>
                     <div className="space-y-2">
-                      <Link href={`/advontier/payroll/employees?employer=${employer.id}`}>
+                      <Link href={`/kounted/payroll/employees?employer=${employer.id}`}>
                         <Button variant="outline" size="sm" className="w-full">
                           View Employees
                         </Button>
                       </Link>
-                      <Link href={`/advontier/payroll/payruns?employer=${employer.id}`}>
+                      <Link href={`/kounted/payroll/payruns?employer=${employer.id}`}>
                         <Button variant="outline" size="sm" className="w-full">
                           View Payruns
                         </Button>

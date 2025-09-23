@@ -104,7 +104,7 @@ export default function AddEmployeeWizard({ onComplete, onCancel }: {
 
       toast({ title: 'Success', description: 'Employee added successfully.' })
       onComplete?.(employee)
-      router.push('/advontier/payroll/employees')
+      router.push('/kounted/payroll/employees')
     } catch (err: any) {
       toast({
         title: 'Error',
@@ -191,7 +191,7 @@ export default function AddEmployeeWizard({ onComplete, onCancel }: {
       </Card>
 
       <div className="flex justify-between">
-        <Button variant="outline" onClick={onCancel || (() => router.push('/advontier/payroll/employees'))}>Cancel</Button>
+        <Button variant="outline" onClick={onCancel || (() => router.push('/kounted/payroll/employees'))}>Cancel</Button>
         <div className="flex gap-2">
           {currentStep > 1 && (
             <Button variant="outline" onClick={() => setCurrentStep(s => s - 1)}>

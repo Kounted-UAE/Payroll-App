@@ -256,7 +256,7 @@ export default function ClientManagement() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-lg font-bold text-foreground">Client Management</h1>
-            <p className="text-blue-400">Manage clients and their onboarding progress</p>
+            <p className="text-zinc-400">Manage clients and their onboarding progress</p>
           </div>
           
           <Dialog open={showNewClientDialog} onOpenChange={setShowNewClientDialog}>
@@ -355,7 +355,7 @@ export default function ClientManagement() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           <div className="lg:col-span-2">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-200 h-4 w-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-400 h-4 w-4" />
               <Input
                 placeholder="Search clients..."
                 value={searchTerm}
@@ -400,12 +400,12 @@ export default function ClientManagement() {
           <CardContent>
             {loading ? (
               <div className="text-center py-8">
-                <p className="text-blue-400">Loading clients...</p>
+                <p className="text-zinc-400">Loading clients...</p>
               </div>
             ) : filteredClients.length === 0 ? (
               <div className="text-center py-8">
-                <Building2 className="h-12 w-12 text-blue-200 mx-auto mb-4" />
-                <p className="text-blue-400">
+                <Building2 className="h-12 w-12 text-zinc-400 mx-auto mb-4" />
+                <p className="text-zinc-400">
                   {searchTerm ? 'No clients found matching your search.' : 'No clients yet. Create your first client to get started.'}
                 </p>
               </div>
@@ -416,11 +416,11 @@ export default function ClientManagement() {
                   const StatusIcon = onboardingStatus.icon;
                   
                   return (
-                    <div key={client.id} className="border rounded-lg p-4 hover:bg-blue-100/50 transition-colors">
+                    <div key={client.id} className="border rounded-lg p-4 hover:bg-zinc-100/50 transition-colors">
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <Building2 className="h-4 w-4 text-blue-200" />
+                            <Building2 className="h-4 w-4 text-zinc-400" />
                             <h3 className="font-semibold text-xs">{client.name}</h3>
                             <Badge variant="default">
                               Active
@@ -431,7 +431,7 @@ export default function ClientManagement() {
                             </Badge>
                           </div>
                           
-                          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs text-blue-200">
+                          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs text-zinc-400">
                             <div className="flex items-center gap-2">
                               <Users className="h-4 w-4" />
                               {client.contact_person}

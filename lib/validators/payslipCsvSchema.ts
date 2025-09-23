@@ -22,7 +22,7 @@ export const PAYSLIP_CSV_TEMPLATE = [
 
 export const PAYSLIP_EXAMPLE_ROW = {
   employee_name: "Ali Hussain",
-  employer: "Advontier Accounting",
+  employer: "kounted Accounting",
   pay_period: "January 2024",
   gross_salary: 20000,
   net_salary: 18250,

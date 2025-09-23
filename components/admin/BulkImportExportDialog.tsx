@@ -300,7 +300,7 @@ export function BulkImportExportDialog<T extends Record<string, any>>({
               <div className="relative inline-block">
                 <label
                   htmlFor="csv-upload"
-                  className="flex items-center gap-2 px-4 py-2 text-xs font-medium text-blue-700  rounded-md bg-white cursor-pointer transition-colors duration-150 hover:bg-accent hover:text-accent-foreground"
+                  className="flex items-center gap-2 px-4 py-2 text-xs font-medium text-zinc-700  rounded-md bg-white cursor-pointer transition-colors duration-150 hover:bg-accent hover:text-accent-foreground"
                 >
                   <UploadIcon className="w-4 h-4" />
                   {csvFile ? csvFile.name : 'Upload CSV File'}
@@ -321,13 +321,13 @@ export function BulkImportExportDialog<T extends Record<string, any>>({
               <div className="space-y-4">
                 {/* Preview Table */}
                 <div>
-                  <div className="mb-2 text-sm font-medium text-blue-200">
+                  <div className="mb-2 text-sm font-medium text-zinc-400">
                     Preview ({parsedRows.length} rows):
                   </div>
                   <div className="overflow-x-auto border rounded-lg">
                     <table className="text-xs w-full">
                       <thead>
-                        <tr className="bg-blue-100">
+                        <tr className="bg-zinc-100">
                           {templateHeaders.map(h => (
                             <th key={h} className="px-3 py-2 text-left font-medium">
                               {h}
@@ -351,7 +351,7 @@ export function BulkImportExportDialog<T extends Record<string, any>>({
                 </div>
 
                 {/* Validation Status */}
-                <div className="flex items-center justify-between p-3 bg-blue-100/50 rounded-lg">
+                <div className="flex items-center justify-between p-3 bg-zinc-100/50 rounded-lg">
                   {validationResults.errors.length > 0 ? (
                     <>
                       <Badge variant="destructive" className="text-sm">
@@ -426,8 +426,8 @@ export function BulkImportExportDialog<T extends Record<string, any>>({
         {/* Export Tab */}
         {tab === 'export' && (
           <div className="space-y-4">
-            <div className="p-4 bg-blue-100/50 rounded-lg">
-              <div className="text-sm text-blue-200 mb-4">
+            <div className="p-4 bg-zinc-100/50 rounded-lg">
+              <div className="text-sm text-zinc-400 mb-4">
                 Export all or filtered {objectName}s as CSV.
               </div>
               <Button
@@ -451,8 +451,8 @@ export function BulkImportExportDialog<T extends Record<string, any>>({
         {/* Template Tab */}
         {tab === 'template' && (
           <div className="space-y-4">
-            <div className="p-4 bg-blue-100/50 rounded-lg">
-              <div className="text-sm text-blue-200 mb-4">
+            <div className="p-4 bg-zinc-100/50 rounded-lg">
+              <div className="text-sm text-zinc-400 mb-4">
                 Download a sample CSV template for {objectName}s.
               </div>
               <Button
@@ -473,10 +473,10 @@ export function BulkImportExportDialog<T extends Record<string, any>>({
 
             <div className="border rounded-lg p-4">
               <div className="text-sm font-medium mb-3">Template Fields:</div>
-              <div className="grid grid-cols-2 gap-2 text-xs text-blue-200">
+              <div className="grid grid-cols-2 gap-2 text-xs text-zinc-400">
                 {templateHeaders.map(h => (
                   <div key={h} className="flex items-center">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                    <span className="w-2 h-2 bg-zinc-500 rounded-full mr-2"></span>
                     {h}
                   </div>
                 ))}

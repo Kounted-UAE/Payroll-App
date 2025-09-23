@@ -1,5 +1,5 @@
 {
-  "name": "advontier_business_suite",
+  "name": "kounted_business_suite",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -131,5 +131,11 @@
     "tsx": "^4.20.3",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.0.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "react": "^18.3.1",
+      "react-dom": "^18.3.1"
+    }
   }
 }

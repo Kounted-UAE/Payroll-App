@@ -38,13 +38,13 @@ export const SupportChatWidget = () => {
           <div className="flex items-center gap-3">
             <Avatar className="h-8 w-8">
               <AvatarImage src="" />
-              <AvatarFallback className="text-xs bg-blue-500/10 text-blue-500">
+              <AvatarFallback className="text-xs bg-zinc-500/10 text-zinc-500">
                 SD
               </AvatarFallback>
             </Avatar>
             <div>
               <CardTitle className="text-xs">Sofia Davis</CardTitle>
-              <p className="text-xs text-blue-200">m@example.com</p>
+              <p className="text-xs text-zinc-400">m@example.com</p>
             </div>
             <Button variant="ghost" size="sm" className="ml-auto h-6 w-6 p-0">
               <Plus className="h-3 w-3" />
@@ -57,14 +57,14 @@ export const SupportChatWidget = () => {
             {messages.map((msg, index) => (
               <div key={index} className={`flex gap-2 ${msg.isSupport ? '' : 'flex-row-reverse'}`}>
                 <Avatar className="h-6 w-6">
-                  <AvatarFallback className="text-xs bg-blue-500/10 text-blue-500">
+                  <AvatarFallback className="text-xs bg-zinc-500/10 text-zinc-500">
                     {msg.isSupport ? 'SD' : 'Y'}
                   </AvatarFallback>
                 </Avatar>
                 <div className={`max-w-[70%] p-2 rounded-lg text-xs ${
                   msg.isSupport 
-                    ? 'bg-blue-100 text-blue-200' 
-                    : 'bg-blue-500 text-blue-500-foreground'
+                    ? 'bg-zinc-100 text-zinc-400' 
+                    : 'bg-zinc-500 text-zinc-500-foreground'
                 }`}>
                   {msg.message}
                 </div>
@@ -77,7 +77,7 @@ export const SupportChatWidget = () => {
             <Button variant="outline" size="sm" className="w-full h-8 text-xs justify-start">
               Hey, I'm having trouble with my account.
             </Button>
-            <div className="text-xs text-blue-200">
+            <div className="text-xs text-zinc-400">
               What seems to be the problem?
             </div>
             <Button variant="outline" size="sm" className="w-full h-8 text-xs justify-start">
@@ -104,7 +104,7 @@ export const SupportChatWidget = () => {
       <Card>
         <CardHeader className="pb-3">
           <CardTitle className="text-xs">Report an issue</CardTitle>
-          <p className="text-xs text-blue-200">
+          <p className="text-xs text-zinc-400">
             What area are you having problems with?
           </p>
         </CardHeader>
@@ -154,7 +154,7 @@ export const SupportChatWidget = () => {
       <Card>
         <CardHeader className="pb-3">
           <CardTitle className="text-xs">Share this document</CardTitle>
-          <p className="text-xs text-blue-200">
+          <p className="text-xs text-zinc-400">
             Anyone with the link can view this document.
           </p>
         </CardHeader>

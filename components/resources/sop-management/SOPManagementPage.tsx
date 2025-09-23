@@ -42,7 +42,7 @@ export default function SOPManagementPage() {
   };
 
   const handleView = (sopId: string, category: string) => {
-    navigate.push(`/advontier/sop-resources/${category}/${sopId}`);
+    navigate.push(`/kounted/sop-resources/${category}/${sopId}`);
   };
 
   const getStatusColor = (status: string) => {
@@ -102,11 +102,11 @@ export default function SOPManagementPage() {
       <div className="min-h-screen bg-white p-6">
         <div className="max-w-7xl mx-auto space-y-6">
           <div className="animate-pulse">
-            <div className="h-8 bg-blue-100 rounded w-1/3 mb-4"></div>
-            <div className="h-4 bg-blue-100 rounded w-1/2 mb-6"></div>
+            <div className="h-8 bg-zinc-100 rounded w-1/3 mb-4"></div>
+            <div className="h-4 bg-zinc-100 rounded w-1/2 mb-6"></div>
             <div className="space-y-4">
               {[...Array(5)].map((_, i) => (
-                <div key={i} className="h-20 bg-blue-100 rounded"></div>
+                <div key={i} className="h-20 bg-zinc-100 rounded"></div>
               ))}
             </div>
           </div>
@@ -122,7 +122,7 @@ export default function SOPManagementPage() {
           <Card>
             <CardContent className="p-8 text-center">
               <h2 className="text-lg font-semibold mb-2">Error Loading SOPs</h2>
-              <p className="text-blue-200 mb-4">{error}</p>
+              <p className="text-zinc-400 mb-4">{error}</p>
               <Button onClick={() => window.location.reload()}>
                 Retry
               </Button>
@@ -138,13 +138,13 @@ export default function SOPManagementPage() {
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4 mb-6">
-          <Button variant="outline" onClick={() => navigate.push('/advontier/sop-resources')}>
+          <Button variant="outline" onClick={() => navigate.push('/kounted/sop-resources')}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to SOP Center
           </Button>
           <div className="flex-1">
           <h1 className="text-lg text-zinc-600 font-bold">Manage SOPs</h1>
-            <p className="text-blue-400">Create, edit, and manage Standard Operating Procedures</p>
+            <p className="text-zinc-400">Create, edit, and manage Standard Operating Procedures</p>
           </div>
           <Button onClick={() => setShowWizard(true)}>
             <Plus className="mr-2 h-4 w-4" />
@@ -157,7 +157,7 @@ export default function SOPManagementPage() {
           <CardContent className="p-6">
             <div className="flex gap-4">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-3 h-4 w-4 text-blue-200" />
+                <Search className="absolute left-3 top-3 h-4 w-4 text-zinc-400" />
                 <Input
                   placeholder="Search SOPs..."
                   value={searchQuery}
@@ -187,7 +187,7 @@ export default function SOPManagementPage() {
               {filteredSOPs.map((sop) => {
                 const category = categories.find(c => c.id === sop.category);
                 return (
-                  <div key={sop.id} className="border rounded-lg p-4 hover:bg-blue-100/50 transition-colors">
+                  <div key={sop.id} className="border rounded-lg p-4 hover:bg-zinc-100/50 transition-colors">
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
@@ -199,13 +199,13 @@ export default function SOPManagementPage() {
                             {category?.name || sop.category.replace('-', ' ')}
                           </Badge>
                         </div>
-                        <div className="flex items-center gap-6 text-xs text-blue-200">
+                        <div className="flex items-center gap-6 text-xs text-zinc-400">
                           <span>Created: {getTimeAgo(new Date(sop.created_at))}</span>
                           <span>Updated: {getTimeAgo(new Date(sop.updated_at))}</span>
                           <span>{sop.view_count} views</span>
                           <span>{sop.template_count} templates</span>
                         </div>
-                        <p className="text-xs text-blue-200 mt-2">
+                        <p className="text-xs text-zinc-400 mt-2">
                           {sop.description}
                         </p>
                       </div>
@@ -248,7 +248,7 @@ export default function SOPManagementPage() {
             {filteredSOPs.length === 0 && (
               <div className="text-center py-12">
                 <h3 className="text-lg font-semibold mb-2">No SOPs Found</h3>
-                <p className="text-blue-200 mb-4">
+                <p className="text-zinc-400 mb-4">
                   {searchQuery || statusFilter !== 'all' || categoryFilter !== 'all'
                     ? 'No SOPs match your current filters.'
                     : 'No SOPs have been created yet.'

@@ -45,11 +45,11 @@ process.env['NEXT_PUBLIC_SUPABASE_ANON_KEY']!,
 
   const role = profile.role_slug
 
-  if (pathname.startsWith("/my-advontier/staff") && !role?.startsWith("advontier-")) {
+  if (pathname.startsWith("/my-kounted/staff") && !role?.startsWith("kounted-")) {
     return NextResponse.redirect(new URL("/unauthorized", req.url))
   }
 
-  if (pathname.startsWith("/my-advontier/client") && !role?.startsWith("client-")) {
+  if (pathname.startsWith("/my-kounted/client") && !role?.startsWith("client-")) {
     return NextResponse.redirect(new URL("/unauthorized", req.url))
   }
 
@@ -58,7 +58,7 @@ process.env['NEXT_PUBLIC_SUPABASE_ANON_KEY']!,
 
 export const config = {
   matcher: [
-    "/my-advontier/:path*",
+    "/my-kounted/:path*",
     "/admin/:path*",
   ],
 }

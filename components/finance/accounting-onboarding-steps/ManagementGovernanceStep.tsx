@@ -147,8 +147,8 @@ export default function ManagementGovernanceStep({ data, onChange }: StepProps) 
         <div className="space-y-4">
           <div className="p-4 border rounded-lg border-dashed">
             <div className="text-center">
-              <Upload className="h-8 w-8 mx-auto mb-2 text-blue-200" />
-              <p className="text-xs text-blue-200 mb-2">
+              <Upload className="h-8 w-8 mx-auto mb-2 text-zinc-400" />
+              <p className="text-xs text-zinc-400 mb-2">
                 Upload Organizational Chart
               </p>
               <Button variant="outline" size="sm">

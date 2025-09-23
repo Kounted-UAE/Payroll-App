@@ -1,4 +1,4 @@
-//app/advontier/payroll/reports/page.tsx
+//app/kounted/payroll/reports/page.tsx
 'use client'
 
 import PayrollReports from '@/components/payroll/interfaces/PayrollReports';

@@ -1,4 +1,4 @@
-// components/advontier-dashboard/TopNavbar.tsx
+// components/kounted-dashboard/TopNavbar.tsx
 'use client'
 
 import { Bell, User, Settings, LogOut } from "lucide-react"
@@ -51,7 +51,7 @@ export function TopNavbar() {
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
                   <p className="text-sm font-medium leading-none">Ben Jacobs</p>
-                  <p className="text-xs leading-none text-blue-200">kevin@kounted.ae</p>
+                  <p className="text-xs leading-none text-zinc-400">kevin@kounted.ae</p>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />

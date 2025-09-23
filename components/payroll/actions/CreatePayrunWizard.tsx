@@ -119,7 +119,7 @@ const CreatePayrunWizard = () => {
       }));
       await supabase.from('payrun_employees').insert(payrunEmployees);
       setLoading(false);
-      router.push("/advontier/payroll/payruns");
+      router.push("/kounted/payroll/payruns");
     }
   }
 
@@ -144,11 +144,11 @@ const CreatePayrunWizard = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-lg text-zinc-600 font-bold">Create New Payrun</h1>
-          <p className="text-blue-400">
+          <p className="text-zinc-400">
             Set up a new payroll run for processing employee salaries
           </p>
         </div>
-        <Button variant="outline" onClick={() => router.push("/advontier/payroll/payruns")}>
+        <Button variant="outline" onClick={() => router.push("/kounted/payroll/payruns")}>
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Payruns
         </Button>
@@ -161,21 +161,21 @@ const CreatePayrunWizard = () => {
             {steps.map((step, index) => (
               <div key={step.id} className="flex items-center">
                 <div className={`flex items-center space-x-2 ${
-                  currentStep >= step.id ? "text-blue-500" : "text-blue-200"
+                  currentStep >= step.id ? "text-zinc-500" : "text-zinc-400"
                 }`}>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${
-                    currentStep >= step.id ? "bg-blue-500 text-blue-500-foreground" : "bg-blue-100"
+                    currentStep >= step.id ? "bg-zinc-500 text-zinc-500-foreground" : "bg-zinc-100"
                   }`}>
                     {currentStep > step.id ? <CheckCircle className="h-4 w-4" /> : step.id}
                   </div>
                   <div>
                     <p className="font-medium">{step.title}</p>
-                    <p className="text-xs text-blue-200">{step.description}</p>
+                    <p className="text-xs text-zinc-400">{step.description}</p>
                   </div>
                 </div>
                 {index < steps.length - 1 && (
                   <div className={`h-px w-20 mx-4 ${
-                    currentStep > step.id ? "bg-blue-500" : "bg-blue-100"
+                    currentStep > step.id ? "bg-zinc-500" : "bg-zinc-100"
                   }`} />
                 )}
               </div>
@@ -191,7 +191,7 @@ const CreatePayrunWizard = () => {
             <div className="space-y-6">
               <div>
                 <h3 className="text-xs font-semibold mb-4">Select Employer Company</h3>
-                <p className="text-blue-200 mb-6">Choose the employer for this payrun</p>
+                <p className="text-zinc-400 mb-6">Choose the employer for this payrun</p>
               </div>
               
               <div className="grid gap-4">
@@ -200,21 +200,21 @@ const CreatePayrunWizard = () => {
                     key={employer.id}
                     className={`p-4 border rounded-lg cursor-pointer transition-all ${
                       data.employer_id === employer.id 
-                        ? "border-blue-500 bg-blue-500/5" 
-                        : "border-border hover:border-blue-500/50"
+                        ? "border-zinc-500 bg-zinc-500/5" 
+                        : "border-border hover:border-zinc-500/50"
                     }`}
                     onClick={() => setData(prev => ({ ...prev, employer_id: employer.id }))}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
-                        <Building className="h-8 w-8 text-blue-600" />
+                        <Building className="h-8 w-8 text-zinc-600" />
                         <div>
                           <h4 className="font-medium">{employer.name}</h4>
-                          <p className="text-xs text-blue-200">{employer.employees} employees</p>
+                          <p className="text-xs text-zinc-400">{employer.employees} employees</p>
                         </div>
                       </div>
                       {data.employer_id === employer.id && (
-                        <CheckCircle className="h-4 w-4 text-blue-500" />
+                        <CheckCircle className="h-4 w-4 text-zinc-500" />
                       )}
                     </div>
                   </div>
@@ -227,7 +227,7 @@ const CreatePayrunWizard = () => {
             <div className="space-y-6">
               <div>
                 <h3 className="text-xs font-semibold mb-4">Set Pay Period</h3>
-                <p className="text-blue-200 mb-6">Define the payroll period dates</p>
+                <p className="text-zinc-400 mb-6">Define the payroll period dates</p>
               </div>
               
               <div className="grid md:grid-cols-2 gap-6">
@@ -249,7 +249,7 @@ const CreatePayrunWizard = () => {
                 
                 <div className="space-y-2">
                   <Label>Selected Employer</Label>
-                  <div className="p-3 bg-blue-100 rounded-md">
+                  <div className="p-3 bg-zinc-100 rounded-md">
                     <p className="font-medium">{selectedEmployer?.name}</p>
                   </div>
                 </div>
@@ -278,12 +278,12 @@ const CreatePayrunWizard = () => {
               </div>
 
               {data.pay_period_start && data.pay_period_end && (
-                <div className="p-4 bg-blue-50 rounded-lg">
+                <div className="p-4 bg-zinc-50 rounded-lg">
                   <div className="flex items-center space-x-2">
-                    <Calendar className="h-4 w-4 text-blue-600" />
+                    <Calendar className="h-4 w-4 text-zinc-600" />
                     <div>
-                      <p className="font-medium text-blue-900">Pay Period Summary</p>
-                      <p className="text-blue-700">
+                      <p className="font-medium text-zinc-900">Pay Period Summary</p>
+                      <p className="text-zinc-700">
                         {data.pay_period_start} to {data.pay_period_end}
                       </p>
                     </div>
@@ -297,7 +297,7 @@ const CreatePayrunWizard = () => {
             <div className="space-y-6">
               <div>
                 <h3 className="text-xs font-semibold mb-4">Select Employees</h3>
-                <p className="text-blue-200 mb-6">Choose employees to include in this payrun</p>
+                <p className="text-zinc-400 mb-6">Choose employees to include in this payrun</p>
               </div>
               
               <div className="flex items-center justify-between mb-4">
@@ -339,12 +339,12 @@ const CreatePayrunWizard = () => {
                         }))
                       }}
                     />
-                    <Users className="h-4 w-4 text-blue-600" />
+                    <Users className="h-4 w-4 text-zinc-600" />
                     <div className="flex-1">
                       <div className="flex items-center justify-between">
                         <div>
                           <p className="font-medium">{employee.name}</p>
-                          <p className="text-xs text-blue-200">Basic Salary: AED {employee.basic_salary.toLocaleString()}</p>
+                          <p className="text-xs text-zinc-400">Basic Salary: AED {employee.basic_salary.toLocaleString()}</p>
                         </div>
                         <Badge variant="outline">{employee.status}</Badge>
                       </div>
@@ -359,7 +359,7 @@ const CreatePayrunWizard = () => {
             <div className="space-y-6">
               <div>
                 <h3 className="text-xs font-semibold mb-4">Review & Confirm</h3>
-                <p className="text-blue-200 mb-6">Review the payrun details before creation</p>
+                <p className="text-zinc-400 mb-6">Review the payrun details before creation</p>
               </div>
               
               <div className="grid md:grid-cols-2 gap-6">
@@ -369,15 +369,15 @@ const CreatePayrunWizard = () => {
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="text-blue-200">Employer:</span>
+                      <span className="text-zinc-400">Employer:</span>
                       <span className="font-medium">{selectedEmployer?.name}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-blue-200">Pay Period:</span>
+                      <span className="text-zinc-400">Pay Period:</span>
                       <span className="font-medium">{data.pay_period_start} - {data.pay_period_end}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-blue-200">Month:</span>
+                      <span className="text-zinc-400">Month:</span>
                       <span className="font-medium">{data.payroll_month}</span>
                     </div>
                   </CardContent>
@@ -389,15 +389,15 @@ const CreatePayrunWizard = () => {
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="text-blue-200">Total Employees:</span>
+                      <span className="text-zinc-400">Total Employees:</span>
                       <span className="font-medium">{selectedEmployees.length}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-blue-200">Estimated Gross:</span>
-                      <span className="font-medium text-blue-500">AED {totalGrossPay.toLocaleString()}</span>
+                      <span className="text-zinc-400">Estimated Gross:</span>
+                      <span className="font-medium text-zinc-500">AED {totalGrossPay.toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-blue-200">Status:</span>
+                      <span className="text-zinc-400">Status:</span>
                       <Badge variant="outline">Draft</Badge>
                     </div>
                   </CardContent>
@@ -443,7 +443,7 @@ const CreatePayrunWizard = () => {
         </Button>
 
         <div className="flex items-center space-x-2">
-          <span className="text-xs text-blue-200">
+          <span className="text-xs text-zinc-400">
             Step {currentStep} of {steps.length}
           </span>
         </div>

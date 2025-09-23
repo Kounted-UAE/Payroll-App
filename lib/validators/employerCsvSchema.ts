@@ -44,7 +44,7 @@ export const EMPLOYER_CSV_TEMPLATE = [
 ];
 
 export const EMPLOYER_EXAMPLE_ROW = {
-  legal_name: "Advontier Accounting Services Ltd",
+  legal_name: "kounted Accounting Services Ltd",
   email: "info@kounted.ae",
   phone: "+971501234567",
   mohre_id: "MOHRE123",

@@ -16,17 +16,17 @@ const agents = [
 
 export default function AgentsIndexPage() {
   const { roleSlug } = useAuth()
-  const isAdmin = !!roleSlug && (roleSlug.startsWith("advontier-") || roleSlug.endsWith("admin"))
+  const isAdmin = !!roleSlug && (roleSlug.startsWith("kounted-") || roleSlug.endsWith("admin"))
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
         <h1 className="text-lg text-zinc-600 font-bold">Specialist Agents</h1>
-          <p className="text-sm text-blue-200">UAE/GCC focused, aligned with international frameworks such as IFRS, CRS and AML.</p>
+          <p className="text-sm text-zinc-400">UAE/GCC focused, aligned with international frameworks such as IFRS, CRS and AML.</p>
         </div>
         {isAdmin && (
-          <div className="flex items-center gap-2 text-xs text-blue-200">
+          <div className="flex items-center gap-2 text-xs text-zinc-400">
             <Shield className="h-4 w-4" /> Admin configurable
           </div>
         )}
@@ -39,21 +39,21 @@ export default function AgentsIndexPage() {
               <CardTitle className="text-base">{agent.title}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              <p className="text-sm text-blue-200">{agent.description}</p>
+              <p className="text-sm text-zinc-400">{agent.description}</p>
               <div className="flex items-center gap-2">
                 <Button asChild size="sm">
-                  <Link href={`/advontier/agents/${agent.slug}`}>Open Agent</Link>
+                  <Link href={`/kounted/agents/${agent.slug}`}>Open Agent</Link>
                 </Button>
                 {isAdmin && (
                   <Button variant="outline" size="sm" asChild>
-                    <Link href={`/advontier/agents/${agent.slug}/configure`}>
+                    <Link href={`/kounted/agents/${agent.slug}/configure`}>
                       Configure
                     </Link>
                   </Button>
                 )}
               </div>
               {isAdmin && (
-                <div className="flex items-center gap-3 text-xs text-blue-200">
+                <div className="flex items-center gap-3 text-xs text-zinc-400">
                   <span className="inline-flex items-center gap-1"><FileText className="h-3 w-3" /> Templates</span>
                   <span className="inline-flex items-center gap-1"><Database className="h-3 w-3" /> Sources</span>
                 </div>

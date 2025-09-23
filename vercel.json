@@ -4,6 +4,6 @@
       "maxDuration": 60
     }
   },
-  "buildCommand": "npm run build",
-  "installCommand": "npm install && npx puppeteer browsers install chrome"
+  "buildCommand": "pnpm build",
+  "installCommand": "pnpm install && npx puppeteer browsers install chrome"
 }

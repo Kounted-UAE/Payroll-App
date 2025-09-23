@@ -1,7 +1,7 @@
 {
   "aiContext": {
-    "projectName": "Advontier Business Suite",
-    "description": "A secure, internal SaaS Tool built for managing Advontier Accounting and Management Solutions' client services, compliance, operating workflows, and other resource and knowledge management functions. Integrates with Supabase, Xero, and Teamwork.com.",
+    "projectName": "kounted Business Suite",
+    "description": "A secure, internal SaaS Tool built for managing kounted Accounting and Management Solutions' client services, compliance, operating workflows, and other resource and knowledge management functions. Integrates with Supabase, Xero, and Teamwork.com.",
     "entryFile": "app/layout.tsx",
     "frameworks": [
       "Next.js (App Router)",
@@ -89,18 +89,18 @@
     "keyRoutes": [
       "/login",
       "/auth/callback",
-      "/advontier",
+      "/kounted",
       "/kyc",
-      "/my-advontier/client/**",
-      "/my-advontier/staff/**"
+      "/my-kounted/client/**",
+      "/my-kounted/staff/**"
     ],
     "authentication": {
       "method": "Supabase Magic Link",
       "sessionProvider": "auth-provider.tsx (SSR)",
       "userRoles": [
-        "advontier-superadmin",
-        "advontier-admin",
-        "advontier-staff",
+        "kounted-superadmin",
+        "kounted-admin",
+        "kounted-staff",
         "client-admin",
         "client-standard"
       ],

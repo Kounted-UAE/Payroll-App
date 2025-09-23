@@ -47,7 +47,7 @@ function generateFeatureKey(url: string, title: string): string {
     // Extract from URL path
     const pathParts = url.split('/').filter(Boolean);
     if (pathParts.length > 1) {
-      return pathParts.slice(1).join('-'); // Remove 'advontier' prefix
+      return pathParts.slice(1).join('-'); // Remove 'kounted' prefix
     }
   }
   
@@ -80,7 +80,7 @@ function generateFeatureDescription(title: string, category: string): string {
     'Referral Programs': 'Sales referral tracking and commission management',
     '$Kwiver CPQ': 'Configure-Price-Quote system for service bundles',
     '$Kwiver Kiosk': 'Point-of-sale style service ordering interface',
-    'Advontier Payroll': 'Main payroll management dashboard',
+    'kounted Payroll': 'Main payroll management dashboard',
     'Employers': 'Employer profile and company management',
     'Employees': 'Employee database and profile management',
     'Payroll Payruns': 'Monthly payroll processing and WPS export',
@@ -89,7 +89,7 @@ function generateFeatureDescription(title: string, category: string): string {
     'Payroll Reports': 'Payroll analytics and compliance reporting',
     'KYC Compliance': 'Know Your Customer compliance management',
     'Key Dates': 'UAE compliance calendar and deadline tracking',
-    'Advontier SOPs': 'Standard Operating Procedures documentation',
+    'kounted SOPs': 'Standard Operating Procedures documentation',
     'Templates': 'Document templates and form builders',
     'Info Links': 'Quick access to regulatory and reference links',
     'Historic Payruns': 'Historical payroll data import and management',
@@ -214,7 +214,7 @@ export function createAdditionalFeatures(): CreateFeatureRequest[] {
       feature_key: 'multi-tenant-platform',
       category: 'Platform Architecture',
       title: 'Multi-Tenant Platform',
-      description: 'Transform to Advontier Practice Manager multi-tenant SaaS',
+      description: 'Transform to kounted Practice Manager multi-tenant SaaS',
       objectives: [
         'Design organization-based data isolation',
         'Implement tenant-aware routing',

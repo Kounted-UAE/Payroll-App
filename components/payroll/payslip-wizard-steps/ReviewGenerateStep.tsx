@@ -1,4 +1,4 @@
-// advontier-payrollsteps/ReviewGenerateStep.tsx
+// kounted-payrollsteps/ReviewGenerateStep.tsx
 
 'use client'
 
@@ -176,7 +176,7 @@ export function ReviewGenerateStep({
     <div className="space-y-6">
       <div>
         <h3 className="text-lg font-semibold mb-2">Review & Generate Payslips</h3>
-        <p className="text-blue-400">
+        <p className="text-zinc-400">
           Review your settings and generate payslips for the selected employees
         </p>
       </div>
@@ -186,7 +186,7 @@ export function ReviewGenerateStep({
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
-              <FileText className="h-4 w-4 text-blue-600" />
+              <FileText className="h-4 w-4 text-zinc-600" />
               <div>
                 <p className="text-sm font-medium">Batch ID</p>
                 <p className="text-lg font-bold font-mono">{batchData.batch_id}</p>
@@ -198,7 +198,7 @@ export function ReviewGenerateStep({
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
-              <Users className="h-4 w-4 text-blue-600" />
+              <Users className="h-4 w-4 text-zinc-600" />
               <div>
                 <p className="text-sm font-medium">Employees</p>
                 <p className="text-lg font-bold">{employees.length}</p>
@@ -246,17 +246,17 @@ export function ReviewGenerateStep({
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex justify-between">
-              <span className="text-blue-200">Employer:</span>
+              <span className="text-zinc-400">Employer:</span>
               <span className="font-medium">{batchData.employer_name}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-blue-200">Pay Period:</span>
+              <span className="text-zinc-400">Pay Period:</span>
               <span className="font-medium">
                 {formatDate(batchData.pay_period_from)} - {formatDate(batchData.pay_period_to)}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-blue-200">Currency:</span>
+              <span className="text-zinc-400">Currency:</span>
               <Badge variant="outline">{batchData.currency}</Badge>
             </div>
           </CardContent>
@@ -272,16 +272,16 @@ export function ReviewGenerateStep({
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex justify-between">
-              <span className="text-blue-200">Language:</span>
+              <span className="text-zinc-400">Language:</span>
               <Badge variant="outline">{getLanguageLabel(wizardData.language)}</Badge>
             </div>
             <div className="flex justify-between">
-              <span className="text-blue-200">Delivery:</span>
+              <span className="text-zinc-400">Delivery:</span>
               <Badge variant="outline">{getDeliveryLabel(wizardData.delivery_mode)}</Badge>
             </div>
             {(wizardData.delivery_mode === 'email' || wizardData.delivery_mode === 'both') && (
               <div className="flex justify-between">
-                <span className="text-blue-200">Email Subject:</span>
+                <span className="text-zinc-400">Email Subject:</span>
                 <span className="font-medium text-sm max-w-xs truncate">{wizardData.email_subject}</span>
               </div>
             )}
@@ -301,7 +301,7 @@ export function ReviewGenerateStep({
           <div className="flex items-center justify-between">
             <div>
               <p className="font-medium">Preview and Test</p>
-              <p className="text-sm text-blue-200">
+              <p className="text-sm text-zinc-400">
                 Test the payslip generation before processing all employees
               </p>
             </div>
@@ -314,7 +314,7 @@ export function ReviewGenerateStep({
           </div>
 
           {showTestOptions && (
-            <div className="space-y-4 p-4 border rounded-lg bg-blue-100/30">
+            <div className="space-y-4 p-4 border rounded-lg bg-zinc-100/30">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="test-email">Test Email Address</Label>
@@ -338,7 +338,7 @@ export function ReviewGenerateStep({
                       )}
                     </Button>
                   </div>
-                  <p className="text-xs text-blue-200 mt-1">
+                  <p className="text-xs text-zinc-400 mt-1">
                     Send a test payslip to verify email delivery
                   </p>
                 </div>
@@ -360,7 +360,7 @@ export function ReviewGenerateStep({
                       Download Preview
                     </Button>
                   </div>
-                  <p className="text-xs text-blue-200 mt-1">
+                  <p className="text-xs text-zinc-400 mt-1">
                     Download a sample payslip for review
                   </p>
                 </div>
@@ -371,17 +371,17 @@ export function ReviewGenerateStep({
       </Card>
 
       {/* Generation Process Info */}
-      <Card className="border-blue-200 bg-blue-50">
+      <Card className="border-zinc-400 bg-zinc-50">
         <CardContent className="p-4">
           <div className="flex items-start space-x-3">
             <div className="flex-shrink-0">
-              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                <FileText className="h-4 w-4 text-blue-600" />
+              <div className="w-8 h-8 bg-zinc-100 rounded-full flex items-center justify-center">
+                <FileText className="h-4 w-4 text-zinc-600" />
               </div>
             </div>
             <div>
-              <h4 className="font-medium text-blue-900">Generation Process</h4>
-              <ul className="text-blue-800 text-sm mt-1 space-y-1">
+              <h4 className="font-medium text-zinc-900">Generation Process</h4>
+              <ul className="text-zinc-800 text-sm mt-1 space-y-1">
                 <li>• Payslips will be generated in PDF format</li>
                 <li>• {wizardData.delivery_mode === 'email' ? 'Emails will be sent automatically to selected employees' : 
                      wizardData.delivery_mode === 'download' ? 'Files will be prepared for download' :

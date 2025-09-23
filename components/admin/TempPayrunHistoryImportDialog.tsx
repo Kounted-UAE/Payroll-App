@@ -160,7 +160,7 @@ export default function TempPayrunHistoryImportDialog({ open, onOpenChange }: Pr
           <div className="relative inline-block">
             <label
               htmlFor="csv-upload"
-              className="flex items-center gap-2 px-4 py-2 text-xs font-medium text-blue-700  rounded-md bg-white cursor-pointer transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="flex items-center gap-2 px-4 py-2 text-xs font-medium text-zinc-700  rounded-md bg-white cursor-pointer transition-colors hover:bg-accent hover:text-accent-foreground"
             >
               <UploadIcon className="w-4 h-4" />
               {csvFile ? csvFile.name : 'Upload CSV File'}
@@ -177,14 +177,14 @@ export default function TempPayrunHistoryImportDialog({ open, onOpenChange }: Pr
 
           {parsedRows.length > 0 && (
             <div className="space-y-4">
-              <div className="text-sm text-blue-200">
+              <div className="text-sm text-zinc-400">
                 Previewing {parsedRows.length} rows.
               </div>
 
               <div className="overflow-x-auto border rounded">
                 <table className="text-xs w-full">
                   <thead>
-                    <tr className="bg-blue-100">
+                    <tr className="bg-zinc-100">
                       {Object.keys(parsedRows[0]).map((col) => (
                         <th key={col} className="px-3 py-2 text-left font-medium">{col}</th>
                       ))}
@@ -203,7 +203,7 @@ export default function TempPayrunHistoryImportDialog({ open, onOpenChange }: Pr
               </div>
 
               {errorRows.length > 0 ? (
-                <div className="flex items-center justify-between p-3 bg-blue-100/50 rounded-lg">
+                <div className="flex items-center justify-between p-3 bg-zinc-100/50 rounded-lg">
                   <Badge variant="destructive">{errorRows.length} row(s) with errors</Badge>
                 </div>
               ) : (

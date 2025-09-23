@@ -46,7 +46,7 @@ const DrawerContent = React.forwardRef<
       )}
       {...props}
     >
-      <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-blue-100" />
+      <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-zinc-100" />
       {children}
     </DrawerPrimitive.Content>
   </DrawerPortal>
@@ -96,7 +96,7 @@ const DrawerDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DrawerPrimitive.Description
     ref={ref}
-    className={cn("text-xs text-blue-200", className)}
+    className={cn("text-xs text-zinc-400", className)}
     {...props}
   />
 ))

@@ -1,4 +1,4 @@
-// app/advontier/page.tsx
+// app/kounted/page.tsx
 
 'use client'
 
@@ -32,7 +32,7 @@ import type { KPI } from "@/components/react-layout/DashboardKPICards"
 import DashboardQuicklinks from '@/components/react-layout/DashboardQuicklinks'
 
 const metrics = [
-  { label: "Active Customers", count: 128, description: "Companies with ongoing engagement", link: "/advontier/clients" },
+  { label: "Active Customers", count: 128, description: "Companies with ongoing engagement", link: "/kounted/clients" },
   { label: "Kwiver Retainers", count: 62, description: "Ongoing fractional support agreements", link: "#" },
   { label: "Kwiver Quotes", count: 21, description: "Once-off or ad hoc engagement types", link: "#" },
   { label: "Corporate Profiles", count: 434, description: "Incorporated entities on file", link: "#" },
@@ -98,7 +98,7 @@ export default function DashboardHome() {
               <ChartBar className="h-4 w-4 text-primary" />
               Performance Overview
             </h1>
-            <p className="text-xs text-blue-200">Key metrics and performance indicators</p>
+            <p className="text-xs text-zinc-400">Key metrics and performance indicators</p>
           </div>
         </div>
         <DashboardKPICards kpis={kpiStats} />
@@ -112,7 +112,7 @@ export default function DashboardHome() {
               <Users className="h-4 w-4 text-primary" />
               Entity Statistics
             </h1>
-            <p className="text-xs text-blue-200">Overview of all system entities</p>
+            <p className="text-xs text-zinc-400">Overview of all system entities</p>
           </div>
         </div>
         <DashboardEntityStats metrics={metrics} />
@@ -155,7 +155,7 @@ export default function DashboardHome() {
                           <div className="ml-3 flex h-7 items-center">
                             <button
                               type="button"
-                              className="rounded-md bg-white text-blue-200 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                              className="rounded-md bg-white text-zinc-400 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                               onClick={() => setOpen(false)}
                             >
                               <span className="sr-only">Close panel</span>
@@ -176,7 +176,7 @@ export default function DashboardHome() {
                                     {item.icon && <item.icon className="h-4 w-4 text-primary" />}
                                     <div>
                                       <p className="text-sm font-medium text-foreground">{item.title}</p>
-                                      <p className="text-xs text-blue-200">{item.section}</p>
+                                      <p className="text-xs text-zinc-400">{item.section}</p>
                                     </div>
                                   </div>
                                   <Badge variant="default" className="text-xs">Active</Badge>
@@ -190,12 +190,12 @@ export default function DashboardHome() {
                             <h3 className="text-sm font-medium text-foreground mb-3">Coming Soon</h3>
                             <div className="space-y-2">
                               {comingSoon.map((item) => (
-                                <div key={item.title} className="flex items-center justify-between p-3 rounded-lg bg-blue-100/50 ">
+                                <div key={item.title} className="flex items-center justify-between p-3 rounded-lg bg-zinc-100/50 ">
                                   <div className="flex items-center gap-3">
-                                    {item.icon && <item.icon className="h-4 w-4 text-blue-200" />}
+                                    {item.icon && <item.icon className="h-4 w-4 text-zinc-400" />}
                                     <div>
-                                      <p className="text-sm font-medium text-blue-200">{item.title}</p>
-                                      <p className="text-xs text-blue-200">{item.section}</p>
+                                      <p className="text-sm font-medium text-zinc-400">{item.title}</p>
+                                      <p className="text-xs text-zinc-400">{item.section}</p>
                                     </div>
                                   </div>
                                   <Badge variant="secondary" className="text-xs">

@@ -21,7 +21,7 @@ const inter = Inter({
 
 
 export const metadata: Metadata = {
-  title: "Advontier Digital Solutions",
+  title: "kounted Digital Solutions",
   description: "A Central Business Suite for UAE Accounting Practices",
 }
 

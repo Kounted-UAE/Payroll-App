@@ -1,4 +1,4 @@
-// app/advontier/admin/xero-config/page.tsx
+// app/kounted/admin/xero-config/page.tsx
 
 'use client'
 
@@ -41,7 +41,7 @@ export default function XeroConfigPage() {
           </Button>
 
           <Button
-            className="bg-blue-500 hover:bg-blue-600"
+            className="bg-zinc-500 hover:bg-zinc-600"
             onClick={async () => {
               const supabase = getSupabaseClient()
               const { data: { user }, error } = await supabase.auth.getUser()

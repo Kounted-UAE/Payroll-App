@@ -148,7 +148,7 @@ export async function POST(req: NextRequest) {
   </div>
 
   <div class="footer">
-    Powered by <a href="https://www.advontier.com" target="_blank">Advontier Web Forms</a><br>
+    Powered by <a href="https://www.kounted.com" target="_blank">kounted Web Forms</a><br>
     This email was sent on behalf of Kounted Accounting and Management Solutions.
   </div>
 </body>
@@ -181,7 +181,7 @@ export async function POST(req: NextRequest) {
       To report errors or request support, please reply to payroll@kounted.ae.
 
       Warm regards,
-      Team Advontier
+      Team kounted
 
       ---
       Powered by Kounted Web Forms.

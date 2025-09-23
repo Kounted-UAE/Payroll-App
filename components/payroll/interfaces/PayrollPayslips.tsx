@@ -79,14 +79,14 @@ const PayrollPayslips = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-lg text-zinc-600 font-bold">Payslips</h1>
-          <p className="text-blue-400">Generate and distribute employee payslips</p>
+          <p className="text-zinc-400">Generate and distribute employee payslips</p>
         </div>
         <div className="flex items-center space-x-2">
           <ViewToggle view={view} setView={setView} />
           <Button variant="outline" onClick={() => setDialogOpen(true)}>
             Bulk Import/Export
           </Button>
-          <Link href="/advontier/payroll/payslips/generate">
+          <Link href="/kounted/payroll/payslips/generate">
             <Button>
               <Plus className="mr-2 h-4 w-4" />
               Generate Payslips
@@ -110,7 +110,7 @@ const PayrollPayslips = () => {
         <CardContent className="p-6">
           <div className="flex items-center space-x-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-blue-200" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-zinc-400" />
               <Input
                 placeholder="Search by employee, employer, or pay period..."
                 value={searchQuery}
@@ -208,12 +208,12 @@ const PayrollPayslips = () => {
       {filteredPayslips.length === 0 && (
         <Card>
           <CardContent className="p-12 text-center">
-            <FileText className="h-12 w-12 text-blue-200 mx-auto mb-4" />
+            <FileText className="h-12 w-12 text-zinc-400 mx-auto mb-4" />
             <h3 className="text-xs font-semibold mb-2">No payslips found</h3>
-            <p className="text-blue-200 mb-4">
+            <p className="text-zinc-400 mb-4">
               {searchQuery ? "Try adjusting your search criteria" : "Generate payslips from completed payruns"}
             </p>
-            <Link href="/advontier/payroll/payslips/generate">
+            <Link href="/kounted/payroll/payslips/generate">
               <Button>
                 <Plus className="mr-2 h-4 w-4" />
                 Generate Payslips

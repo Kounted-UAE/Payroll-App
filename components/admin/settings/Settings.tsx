@@ -208,7 +208,7 @@ const Settings = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-lg text-zinc-600 font-bold">Settings</h1>
-          <p className="text-blue-400">Manage your account settings and user permissions</p>
+          <p className="text-zinc-400">Manage your account settings and user permissions</p>
         </div>
       </div>
       <Tabs defaultValue="users" className="w-full">
@@ -346,7 +346,7 @@ const Settings = () => {
                       </TableCell>
                       <TableCell>{getRoleLabel(user.user_role_slug || '')}</TableCell>
                       <TableCell>{user.is_active ? 'Active' : 'Inactive'}</TableCell>
-                      <TableCell className="text-xs text-blue-200">{user.created_at ? new Date(user.created_at).toLocaleDateString() : ''}</TableCell>
+                      <TableCell className="text-xs text-zinc-400">{user.created_at ? new Date(user.created_at).toLocaleDateString() : ''}</TableCell>
                       <TableCell>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
@@ -391,7 +391,7 @@ const Settings = () => {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label>Two-Factor Authentication</Label>
-                  <p className="text-xs text-blue-200">
+                  <p className="text-xs text-zinc-400">
                     Add an extra layer of security to your account
                   </p>
                 </div>
@@ -400,7 +400,7 @@ const Settings = () => {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label>Session Timeout</Label>
-                  <p className="text-xs text-blue-200">
+                  <p className="text-xs text-zinc-400">
                     Automatically log out inactive users
                   </p>
                 </div>
@@ -434,7 +434,7 @@ const Settings = () => {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label>Email Notifications</Label>
-                  <p className="text-xs text-blue-200">
+                  <p className="text-xs text-zinc-400">
                     Receive email updates about important activities
                   </p>
                 </div>
@@ -443,7 +443,7 @@ const Settings = () => {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label>User Activity Alerts</Label>
-                  <p className="text-xs text-blue-200">
+                  <p className="text-xs text-zinc-400">
                     Get notified when users join or leave
                   </p>
                 </div>
@@ -452,7 +452,7 @@ const Settings = () => {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label>System Maintenance</Label>
-                  <p className="text-xs text-blue-200">
+                  <p className="text-xs text-zinc-400">
                     Receive notifications about system updates
                   </p>
                 </div>
@@ -465,7 +465,7 @@ const Settings = () => {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-black">
-                <SettingsIcon className="h-4 w-4 text-blue-500" />
+                <SettingsIcon className="h-4 w-4 text-zinc-500" />
                 General Settings
               </CardTitle>
               <CardDescription>
@@ -567,7 +567,7 @@ const Settings = () => {
             <CardContent className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="company-name">Company Name</Label>
-                <Input id="company-name" defaultValue="Advontier Digital Solutions" className="bg-white" />
+                <Input id="company-name" defaultValue="kounted Digital Solutions" className="bg-white" />
               </div>
               <div className="space-y-2 ">
                 <Label htmlFor="timezone">Timezone</Label>

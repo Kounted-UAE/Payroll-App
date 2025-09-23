@@ -9,7 +9,7 @@ export const RevenueCard = () => {
     <Card className="w-full max-w-sm">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-xs font-medium text-blue-200">
+          <CardTitle className="text-xs font-medium text-zinc-400">
             Total Revenue
           </CardTitle>
           <TrendingUp className="h-4 w-4 text-success" />

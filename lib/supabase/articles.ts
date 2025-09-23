@@ -132,7 +132,7 @@ function parseMdxMetadata(content: string, filename: string): SupabaseArticleMet
       }
     } else if (typeof data.author === 'object' && data.author !== null) {
       author = {
-        name: data.author.name || 'Advontier AI Analyst',
+        name: data.author.name || 'kounted AI Analyst',
         role: data.author.role || 'Research Agent',
         image: (typeof data.author.image === 'string'
           ? { src: data.author.image }
@@ -140,7 +140,7 @@ function parseMdxMetadata(content: string, filename: string): SupabaseArticleMet
       }
     } else {
       author = {
-        name: 'Advontier AI Analyst',
+        name: 'kounted AI Analyst',
         role: 'Research Agent',
         image: { src: '/team/ai-analyst.jpg' }
       }
@@ -159,7 +159,7 @@ function parseMdxMetadata(content: string, filename: string): SupabaseArticleMet
       date: new Date().toISOString().split('T')[0],
       description: 'Daily industry insight article',
       author: {
-        name: 'Advontier AI Analyst',
+        name: 'kounted AI Analyst',
         role: 'Research Agent',
         image: { src: '/team/ai-analyst.jpg' }
       }

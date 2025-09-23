@@ -151,7 +151,7 @@ const PayrollEmployees = () => {
       <div className="flex items-center justify-between">
         <div>
         <h1 className="text-lg text-zinc-600 font-bold">Employees</h1>
-          <p className="text-blue-400">
+          <p className="text-zinc-400">
             Manage employee profiles and their employment details
           </p>
         </div>
@@ -160,7 +160,7 @@ const PayrollEmployees = () => {
           <Button variant="outline" onClick={() => setDialogOpen(true)}>
             Bulk Import/Export
           </Button>
-          <Link href="/advontier/payroll/employees/new">
+          <Link href="/kounted/payroll/employees/new">
             <Button>
               <Plus className="mr-2 h-4 w-4" />
               Add Employee
@@ -268,7 +268,7 @@ const PayrollEmployees = () => {
         <CardContent className="p-6">
           <div className="flex items-center space-x-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-blue-200" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-zinc-400" />
               <Input
                 placeholder="Search by name, Emirates ID, or job title..."
                 value={searchQuery}
@@ -356,7 +356,7 @@ const PayrollEmployees = () => {
             <Card key={employee.id}>
               <CardHeader>
                 <CardTitle className="text-sm">{employee.full_name}</CardTitle>
-                <CardDescription className="text-xs text-blue-200">
+                <CardDescription className="text-xs text-zinc-400">
                   {employee.job_title} • {employee.emirates_id}
                 </CardDescription>
               </CardHeader>
@@ -492,12 +492,12 @@ const PayrollEmployees = () => {
       {!loading && filteredEmployees.length === 0 && (
         <Card>
           <CardContent className="p-12 text-center">
-            <Users className="h-12 w-12 text-blue-200 mx-auto mb-4" />
+            <Users className="h-12 w-12 text-zinc-400 mx-auto mb-4" />
             <h3 className="text-xs font-semibold mb-2">No employees found</h3>
-            <p className="text-blue-200 mb-4">
+            <p className="text-zinc-400 mb-4">
               {searchQuery ? "Try adjusting your search criteria" : "Get started by adding your first employee"}
             </p>
-            <Link href="/advontier/payroll/employees/new">
+            <Link href="/kounted/payroll/employees/new">
               <Button>
                 <Plus className="mr-2 h-4 w-4" />
                 Add First Employee

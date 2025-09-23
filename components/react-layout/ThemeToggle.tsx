@@ -19,7 +19,7 @@ export default function KountedThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="inline-flex text-zinc-300 outline-blue-500 hover:text-zinc-400 dark:text-zinc-500 dark:hover:text-zinc-400"
+      className="inline-flex text-zinc-300 outline-zinc-500 hover:text-zinc-400 dark:text-zinc-500 dark:hover:text-zinc-400"
       aria-label="Toggle theme"
     >
       {/* Light mode icon (shows in light mode only) */}

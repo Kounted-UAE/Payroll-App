@@ -2,13 +2,13 @@ import Link from 'next/link'
 
 import { Container } from '@/components/react-layout/Container'
 import { FadeIn } from '@/components/react-layout/FadeIn'
-import { Logo, LogoMark } from '@/components/react-layout/Logo'
+import { KountedLogo } from '@/lib/assets/logos/KountedLogo'
 
 const navigation = [
   {
     title: 'Business Suite',
     links: [
-      { title: 'Advontier Platform', href: '/advontier' },
+      { title: 'Kounted Prototype', href: '/kounted' },
       { title: 'Compliance Calendar', href: '/auth/login' },
       { title: 'Knowledge Base', href: 'auth/login' },
       {
@@ -17,7 +17,7 @@ const navigation = [
             See all <span aria-hidden="true">&rarr;</span>
           </>
         ),
-        href: '/advontier',
+        href: '/kounted',
       },
     ],
   },
@@ -82,7 +82,7 @@ function NewsletterForm() {
         Sign up for our waitlist
       </h2>
       <p className="mt-4 text-sm text-neutral-700">
-        If you are interested in using Advontier, please sign up for our waitlist.
+        If you are interested in using kounted, please sign up for our waitlist.
       </p>
       <div className="relative mt-6">
         <input
@@ -117,8 +117,8 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-24 mb-20 flex flex-wrap items-center justify-between gap-x-6 gap-y-4 border-t border-neutral-950/10 pt-12">
-          <Link href="/" aria-label="Advontier Home Page">
-            <LogoMark className="h-8" invert={true} />
+          <Link href="/" aria-label="kounted Home Page">
+            <KountedLogo className="h-8" variant="dark" />
           </Link>
           <div className="flex items-center gap-4 text-xs sm:text-sm text-neutral-700">
             <Link href="/privacy-policy" className="hover:underline">
@@ -130,7 +130,7 @@ export function Footer() {
             </Link>
           </div>
           <p className="h-8 text-xs sm:text-sm text-neutral-700 flex items-center">
-            © advontier. {new Date().getFullYear()}
+            © Kounted.{new Date().getFullYear()}
           </p>
         </div>
       </FadeIn>

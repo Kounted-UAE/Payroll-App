@@ -24,7 +24,7 @@ Updated payslip PDF filenames to include employee names for better organization 
 #### 3. Component Updates
 - **`components/admin/PayslipFiltersAndTable.tsx`** - Updated PDF links and ZIP download
 - **`components/admin/PayslipEmailFlow.tsx`** - Updated email PDF URLs
-- **`components/advontier-payroll/actions/PayslipSelectionTable.tsx`** - Updated PDF links
+- **`components/kounted-payroll/actions/PayslipSelectionTable.tsx`** - Updated PDF links
 
 #### 4. Migration Script
 - **`scripts/migrate-payslip-filenames.ts`** - Script to update existing payslips

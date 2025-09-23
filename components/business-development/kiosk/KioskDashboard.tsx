@@ -243,7 +243,7 @@ export default function KwiverKiosk() {
       </CardHeader>
       <CardContent>
         {cart.length === 0 ? (
-          <p className="text-blue-400">Your cart is empty</p>
+          <p className="text-zinc-400">Your cart is empty</p>
         ) : (
           <div className="space-y-4">
             {cart.map((item) => (
@@ -251,7 +251,7 @@ export default function KwiverKiosk() {
                 <div className="flex justify-between items-start">
                   <div className="flex-1">
                     <h4 className="font-medium">{item.name}</h4>
-                    <p className="text-xs text-blue-200">
+                    <p className="text-xs text-zinc-400">
                       Qty: {item.quantity}
                       {item.selectedDate && ` • Date: ${item.selectedDate}`}
                       {item.selectedDuration && ` • Duration: ${item.selectedDuration}`}
@@ -418,7 +418,7 @@ export default function KwiverKiosk() {
         <div className="max-w-2xl mx-auto">
           <div className="mb-6">
             <h1 className="text-lg font-bold">Checkout</h1>
-            <p className="text-blue-400">Complete your service order</p>
+            <p className="text-zinc-400">Complete your service order</p>
           </div>
           <CheckoutFlow />
         </div>
@@ -430,7 +430,7 @@ export default function KwiverKiosk() {
     <div className="container mx-auto px-6 py-8">
       <div className="mb-8">
         <h1 className="text-lg font-bold">$Kwiver Kiosk</h1>
-        <p className="text-blue-400">Self-service ordering for ad hoc professional services</p>
+        <p className="text-zinc-400">Self-service ordering for ad hoc professional services</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">

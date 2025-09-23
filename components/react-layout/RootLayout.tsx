@@ -17,7 +17,7 @@ import { Button } from '@/components/react-layout/Button'
 import { Container } from '@/components/react-layout/Container'
 import { Footer } from '@/components/react-layout/Footer'
 import { GridPattern } from '@/components/react-layout/GridPattern'
-import { Logo, LogoMark } from '@/components/react-layout/Logo'
+import { KountedLogo } from '@/lib/assets/logos/KountedLogo'
 import { Offices } from '@/components/react-layout/Offices'
 import { SocialMedia } from '@/components/react-layout/SocialMedia'
 
@@ -65,14 +65,14 @@ function Header({
       <div className="flex items-center justify-between gap-x-4">
         <Link
           href="/"
-          aria-label="Advontier Home Page"
+          aria-label="kounted Home Page"
           onMouseEnter={() => setLogoHovered(true)}
           onMouseLeave={() => setLogoHovered(false)}
         >
-                   <Logo
+                   <KountedLogo
             className="h-12 sm:h-32"
-            invert={invert}
-            filled={logoHovered}
+            variant={invert ? 'light' : 'dark'}
+            fill={logoHovered ? 'white' : 'black'}
           />
         </Link>
         <div className="flex items-center gap-x-8">

@@ -206,14 +206,14 @@ const mockCategories: SOPCategory[] = [
     id: 'hr-visas',
     name: 'HR & Visas',
     description: 'Employee relations, visa processing, work permits',
-    color: 'bg-blue-500',
+    color: 'bg-zinc-500',
     sop_count: 24
   },
   {
     id: 'accounting',
     name: 'Accounting',
     description: 'Financial reporting, bookkeeping, auditing',
-    color: 'bg-blue-500',
+    color: 'bg-zinc-500',
     sop_count: 18
   },
   {

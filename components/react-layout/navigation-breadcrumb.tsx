@@ -15,8 +15,8 @@ export function NavigationBreadcrumb() {
   const pathname = usePathname()
   const segments = pathname.split("/").filter(Boolean)
   
-  // Remove 'advontier' from segments since it's our dashboard base
-  const dashboardSegments = segments[0] === 'advontier' ? segments.slice(1) : segments
+  // Remove 'kounted' from segments since it's our dashboard base
+  const dashboardSegments = segments[0] === 'kounted' ? segments.slice(1) : segments
 
   function getBreadcrumbName(segment: string, fullPath: string): string {
     for (const section of sidebarSections) {
@@ -30,7 +30,7 @@ export function NavigationBreadcrumb() {
   }
 
   const breadcrumbs: BreadcrumbItem[] = dashboardSegments.map((segment, idx) => {
-    const href = "/advontier/" + dashboardSegments.slice(0, idx + 1).join("/")
+    const href = "/kounted/" + dashboardSegments.slice(0, idx + 1).join("/")
     return { name: getBreadcrumbName(segment, href), href }
   })
 
@@ -39,24 +39,24 @@ export function NavigationBreadcrumb() {
       <SidebarTrigger className="h-8 w-8 rounded-lg hover:bg-white/50" />
       <nav className="flex items-center gap-2" aria-label="Breadcrumb">
         {dashboardSegments.length === 0 ? (
-          <span className="text-blue-100 font-semibold">Home</span>
+          <span className="text-zinc-100 font-semibold">Home</span>
         ) : (
           <>
-            <Link href="/advontier" className="text-blue-100 hover:underline font-bold">
+            <Link href="/kounted" className="text-zinc-100 hover:underline font-bold">
               Home
             </Link>
-            <span className="text-blue-200 font-normal">/</span>
+            <span className="text-zinc-400 font-normal">/</span>
             {breadcrumbs.map((crumb, idx) => (
               <span key={crumb.href} className="flex items-center gap-2">
                 {idx < breadcrumbs.length - 1 ? (
                   <>
-                    <Link href={crumb.href} className="text-blue-200 hover:underline font-medium">
+                    <Link href={crumb.href} className="text-zinc-400 hover:underline font-medium">
                       {crumb.name}
                     </Link>
-                    <span className="text-blue-200">/</span>
+                    <span className="text-zinc-400">/</span>
                   </>
                 ) : (
-                  <span className="text-blue-300 font-semibold">{crumb.name}</span>
+                  <span className="text-zinc-300 font-semibold">{crumb.name}</span>
                 )}
               </span>
             ))}

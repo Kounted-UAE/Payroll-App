@@ -212,7 +212,7 @@ export default function SalesMatchingDashboard() {
         <div className="flex items-center justify-between">
           <div>
           <h1 className="text-lg text-zinc-600 font-bold">Advanced Sales Matching</h1>
-            <p className="text-blue-400">
+            <p className="text-zinc-400">
               AI-powered fuzzy matching for Tickets, Quotes, and Invoices
             </p>
           </div>
@@ -238,7 +238,7 @@ export default function SalesMatchingDashboard() {
                 </div>
                 <div>
                   <p className="text-xs font-bold">{totalMatches}</p>
-                  <p className="text-xs text-blue-200">Total Matches</p>
+                  <p className="text-xs text-zinc-400">Total Matches</p>
                 </div>
               </div>
             </CardContent>
@@ -251,7 +251,7 @@ export default function SalesMatchingDashboard() {
                 </div>
                 <div>
                   <p className="text-xs font-bold">{totalConfirmed}</p>
-                  <p className="text-xs text-blue-200">Confirmed</p>
+                  <p className="text-xs text-zinc-400">Confirmed</p>
                 </div>
               </div>
             </CardContent>
@@ -264,7 +264,7 @@ export default function SalesMatchingDashboard() {
                 </div>
                 <div>
                   <p className="text-xs font-bold">{totalPending}</p>
-                  <p className="text-xs text-blue-200">Pending</p>
+                  <p className="text-xs text-zinc-400">Pending</p>
                 </div>
               </div>
             </CardContent>
@@ -277,7 +277,7 @@ export default function SalesMatchingDashboard() {
                 </div>
                 <div>
                   <p className="text-xs font-bold">{totalRejected}</p>
-                  <p className="text-xs text-blue-200">Rejected</p>
+                  <p className="text-xs text-zinc-400">Rejected</p>
                 </div>
               </div>
             </CardContent>
@@ -289,7 +289,7 @@ export default function SalesMatchingDashboard() {
           <CardContent className="p-6">
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-3 h-4 w-4 text-blue-200" />
+                <Search className="absolute left-3 top-3 h-4 w-4 text-zinc-400" />
                 <Input
                   placeholder="Search by Ticket, Quote, or Invoice..."
                   value={search}
@@ -309,7 +309,7 @@ export default function SalesMatchingDashboard() {
                 </SelectContent>
               </Select>
               <div className="flex items-center gap-2">
-                <label className="text-sm text-blue-200">Min Score:</label>
+                <label className="text-sm text-zinc-400">Min Score:</label>
                 <Input
                   type="number"
                   min="0"
@@ -422,7 +422,7 @@ export default function SalesMatchingDashboard() {
                   })}
                   {filtered.length === 0 && (
                     <TableRow>
-                      <TableCell colSpan={8} className="text-center text-blue-200 py-12">
+                      <TableCell colSpan={8} className="text-center text-zinc-400 py-12">
                         No matches found. Try adjusting your search or confidence filter.
                       </TableCell>
                     </TableRow>
@@ -483,7 +483,7 @@ export default function SalesMatchingDashboard() {
                 </Table>
               </div>
             ) : (
-              <div className="text-center text-blue-200 py-12">
+              <div className="text-center text-zinc-400 py-12">
                 {previewMatches.length === 0 
                   ? "No preview matches. Run auto-match to generate results." 
                   : "No matches found with current confidence filter."}
@@ -626,7 +626,7 @@ export default function SalesMatchingDashboard() {
                       <ul className="space-y-1 text-sm">
                         {selectedPreview.match_reasons.map((reason, idx) => (
                           <li key={idx} className="flex items-start gap-2">
-                            <span className="text-blue-200">•</span>
+                            <span className="text-zinc-400">•</span>
                             <span>{reason}</span>
                           </li>
                         ))}

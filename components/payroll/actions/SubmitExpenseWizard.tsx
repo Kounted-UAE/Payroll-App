@@ -162,7 +162,7 @@ const SubmitExpenseWizard = () => {
     } else {
       // Submit expense run
       // ... (implementation placeholder)
-      router.push('/advontier/payroll/expenses');
+      router.push('/kounted/payroll/expenses');
     }
   };
 
@@ -177,7 +177,7 @@ const SubmitExpenseWizard = () => {
       <div className="flex items-center justify-between">
         <div>
         <h1 className="text-lg text-zinc-600 font-bold">Start Expense Run</h1>
-          <p className="text-blue-400">
+          <p className="text-zinc-400">
             Process and record employee expenses for a payroll period
           </p>
         </div>
@@ -189,15 +189,15 @@ const SubmitExpenseWizard = () => {
           <div className="flex items-center justify-between">
             {steps.map((step, index) => (
               <div key={step.id} className="flex items-center">
-                <div className={`flex items-center space-x-2 ${currentStep >= step.id ? "text-blue-500" : "text-blue-200"}`}>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${currentStep >= step.id ? "bg-blue-500 text-blue-500-foreground" : "bg-blue-100"}`}>{step.id}</div>
+                <div className={`flex items-center space-x-2 ${currentStep >= step.id ? "text-zinc-500" : "text-zinc-400"}`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${currentStep >= step.id ? "bg-zinc-500 text-zinc-500-foreground" : "bg-zinc-100"}`}>{step.id}</div>
                   <div>
                     <p className="font-medium">{step.title}</p>
-                    <p className="text-xs text-blue-200">{step.description}</p>
+                    <p className="text-xs text-zinc-400">{step.description}</p>
                   </div>
                 </div>
                 {index < steps.length - 1 && (
-                  <div className={`h-px w-20 mx-4 ${currentStep > step.id ? "bg-blue-500" : "bg-blue-100"}`} />
+                  <div className={`h-px w-20 mx-4 ${currentStep > step.id ? "bg-zinc-500" : "bg-zinc-100"}`} />
                 )}
               </div>
             ))}
@@ -238,7 +238,7 @@ const SubmitExpenseWizard = () => {
               <Label>Select Employees *</Label>
               <div className="grid grid-cols-2 gap-4">
                 {employees.map(emp => (
-                  <div key={emp.id} className={`border rounded p-2 flex items-center space-x-2 cursor-pointer ${data.selected_employee_ids.includes(emp.id) ? 'bg-blue-500/10 border-blue-500' : 'border-muted'}`}
+                  <div key={emp.id} className={`border rounded p-2 flex items-center space-x-2 cursor-pointer ${data.selected_employee_ids.includes(emp.id) ? 'bg-zinc-500/10 border-zinc-500' : 'border-muted'}`}
                     onClick={() => handleEmployeeSelect(emp.id)}>
                     <Checkbox checked={data.selected_employee_ids.includes(emp.id)} />
                     <span>{emp.full_name}</span>
@@ -338,7 +338,7 @@ const SubmitExpenseWizard = () => {
       <div className="flex items-center justify-between">
         <Button variant="outline" onClick={handlePrevious} disabled={currentStep === 1}>Previous</Button>
         <div className="flex items-center space-x-2">
-          <span className="text-xs text-blue-200">Step {currentStep} of {steps.length}</span>
+          <span className="text-xs text-zinc-400">Step {currentStep} of {steps.length}</span>
         </div>
         <Button onClick={handleNext} disabled={!canProceed()}>
           {currentStep === 4 ? "Submit Expense Run" : "Next"}

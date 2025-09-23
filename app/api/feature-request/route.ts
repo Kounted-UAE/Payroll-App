@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
     const html = `
     <div style="font-family: 'Geist', 'Inter', 'Segoe UI', Arial, sans-serif; color: #222;">
       <h2 style="font-family: 'Geist', 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 24px; font-weight: 600; color: #000; margin-bottom: 24px;">
-        Advontier Feature Request
+        kounted Feature Request
       </h2>
       <p><b>Name:</b> ${name}</p>
       <p><b>Email:</b> ${email}</p>
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
 
     await resend.emails.send({
       from: 'Online Notifications <notifications@kounted.ae>',
-      to: 'info@advontier.com',
+      to: 'info@kounted.com',
       subject: 'New Feature Request',
       html,
       replyTo: email,

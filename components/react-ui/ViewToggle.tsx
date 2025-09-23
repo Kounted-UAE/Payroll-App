@@ -6,7 +6,7 @@ export function ViewToggle({ view, setView }: { view: 'grid' | 'list'; setView: 
   return (
     <div className="flex items-center space-x-2">
       <button
-        className={`p-2 rounded ${view === 'grid' ? 'bg-blue-500 text-blue-500-foreground' : 'bg-blue-100'}`}
+        className={`p-2 rounded ${view === 'grid' ? 'bg-zinc-500 text-zinc-500-foreground' : 'bg-zinc-100'}`}
         onClick={() => setView('grid')}
         aria-label="Grid view"
         type="button"
@@ -14,7 +14,7 @@ export function ViewToggle({ view, setView }: { view: 'grid' | 'list'; setView: 
         <LayoutGrid className="h-4 w-4" />
       </button>
       <button
-        className={`p-2 rounded ${view === 'list' ? 'bg-blue-500 text-blue-500-foreground' : 'bg-blue-100'}`}
+        className={`p-2 rounded ${view === 'list' ? 'bg-zinc-500 text-zinc-500-foreground' : 'bg-zinc-100'}`}
         onClick={() => setView('list')}
         aria-label="List view"
         type="button"

@@ -200,7 +200,7 @@ const PayrollPayruns = () => {
         </div>
         <Card>
           <CardContent className="p-6">
-            <p className="text-blue-400">{error}</p>
+            <p className="text-zinc-400">{error}</p>
             <Button 
               onClick={() => window.location.reload()} 
               className="mt-4"
@@ -218,7 +218,7 @@ const PayrollPayruns = () => {
       <div className="flex items-center justify-between">
         <div>
         <h1 className="text-lg text-zinc-600 font-bold">Payruns</h1>
-          <p className="text-blue-400">
+          <p className="text-zinc-400">
             Process and manage monthly payroll calculations
           </p>
         </div>
@@ -236,7 +236,7 @@ const PayrollPayruns = () => {
           <Button variant="outline" onClick={() => setDialogOpen(true)}>
             Bulk Import/Export
           </Button>
-          <Link href="/advontier/payroll/payruns/new">
+          <Link href="/kounted/payroll/payruns/new">
             <Button>
               <Plus className="mr-2 h-4 w-4" />
               Create Payrun
@@ -250,7 +250,7 @@ const PayrollPayruns = () => {
         <Card>
           <CardContent className="p-6">
             <div className="flex flex-col items-center">
-              <div className="text-xs text-blue-200">Total Employers</div>
+              <div className="text-xs text-zinc-400">Total Employers</div>
               <div className="text-2xl font-bold">-</div>
             </div>
           </CardContent>
@@ -258,7 +258,7 @@ const PayrollPayruns = () => {
         <Card>
           <CardContent className="p-6">
             <div className="flex flex-col items-center">
-              <div className="text-xs text-blue-200">Total Employees</div>
+              <div className="text-xs text-zinc-400">Total Employees</div>
               <div className="text-2xl font-bold">-</div>
             </div>
           </CardContent>
@@ -266,7 +266,7 @@ const PayrollPayruns = () => {
         <Card>
           <CardContent className="p-6">
             <div className="flex flex-col items-center">
-              <div className="text-xs text-blue-200">Active Payruns</div>
+              <div className="text-xs text-zinc-400">Active Payruns</div>
               <div className="text-2xl font-bold">-</div>
             </div>
           </CardContent>
@@ -274,7 +274,7 @@ const PayrollPayruns = () => {
         <Card>
           <CardContent className="p-6">
             <div className="flex flex-col items-center">
-              <div className="text-xs text-blue-200">Monthly Payroll</div>
+              <div className="text-xs text-zinc-400">Monthly Payroll</div>
               <div className="text-2xl font-bold">-</div>
             </div>
           </CardContent>
@@ -289,13 +289,13 @@ const PayrollPayruns = () => {
         </CardHeader>
         <CardContent>
           <ul className="divide-y divide-border">
-            {recentActivity.length === 0 && <li className="py-2 text-blue-200 text-xs">No recent activity</li>}
+            {recentActivity.length === 0 && <li className="py-2 text-zinc-400 text-xs">No recent activity</li>}
             {recentActivity.map((payrun) => (
               <li key={payrun.id} className="py-2 flex items-center gap-4">
                 <span className="font-semibold text-xs">{payrun.payroll_objects_employers?.legal_name || 'Unknown Employer'}</span>
                 <span className="text-xs">{new Date(payrun.updated_at || '').toLocaleString()}</span>
                 <Badge variant={getStatusColor(payrun.status)}>{payrun.status}</Badge>
-                <Link href={`/advontier/payroll/payruns/${payrun.id}`} className="ml-auto text-primary underline text-xs">View</Link>
+                <Link href={`/kounted/payroll/payruns/${payrun.id}`} className="ml-auto text-primary underline text-xs">View</Link>
               </li>
             ))}
           </ul>
@@ -307,7 +307,7 @@ const PayrollPayruns = () => {
         <CardContent className="p-6">
           <div className="flex items-center space-x-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-blue-200" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-zinc-400" />
               <Input
                 placeholder="Search by employer or status..."
                 value={searchValue}

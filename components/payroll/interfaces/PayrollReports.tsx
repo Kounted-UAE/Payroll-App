@@ -120,7 +120,7 @@ const PayrollReports = () => {
       case "WPS": return "bg-primary/10 text-primary"
       case "Demographics": return "bg-primary/10 text-primary"
       case "Compliance": return "bg-primary/10 text-primary"
-      default: return "bg-blue-100 text-blue-200"
+      default: return "bg-zinc-100 text-zinc-400"
     }
   }
 
@@ -129,7 +129,7 @@ const PayrollReports = () => {
       <div className="flex items-center justify-between">
         <div>
         <h1 className="text-lg text-zinc-600 font-bold">Payroll Reports</h1>
-          <p className="text-blue-400">
+          <p className="text-zinc-400">
             Generate and download comprehensive payroll analytics
           </p>
         </div>
@@ -147,7 +147,7 @@ const PayrollReports = () => {
         <CardContent className="p-6">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <Calendar className="h-4 w-4 text-blue-200" />
+              <Calendar className="h-4 w-4 text-zinc-400" />
               <span className="font-medium">Reporting Period:</span>
             </div>
             <Input
@@ -170,7 +170,7 @@ const PayrollReports = () => {
                               <DollarSign className="h-4 w-4 text-primary" />
               <div>
                 <p className="text-xs font-bold">AED 892.5K</p>
-                <p className="text-xs text-blue-200">Total Payroll Cost</p>
+                <p className="text-xs text-zinc-400">Total Payroll Cost</p>
               </div>
             </div>
           </CardContent>
@@ -181,7 +181,7 @@ const PayrollReports = () => {
                               <Users className="h-4 w-4 text-primary" />
               <div>
                 <p className="text-xs font-bold">283</p>
-                <p className="text-xs text-blue-200">Active Employees</p>
+                <p className="text-xs text-zinc-400">Active Employees</p>
               </div>
             </div>
           </CardContent>
@@ -192,7 +192,7 @@ const PayrollReports = () => {
               <Calendar className="h-4 w-4 text-purple-600" />
               <div>
                 <p className="text-xs font-bold">AED 4.76M</p>
-                <p className="text-xs text-blue-200">EOSB Liability</p>
+                <p className="text-xs text-zinc-400">EOSB Liability</p>
               </div>
             </div>
           </CardContent>
@@ -203,7 +203,7 @@ const PayrollReports = () => {
               <Building className="h-4 w-4 text-orange-600" />
               <div>
                 <p className="text-xs font-bold">15</p>
-                <p className="text-xs text-blue-200">Employers</p>
+                <p className="text-xs text-zinc-400">Employers</p>
               </div>
             </div>
           </CardContent>
@@ -251,15 +251,15 @@ const PayrollReports = () => {
                       <>
                         <div>
                           <p className="text-xs font-bold text-primary">AED {((report.total_cost ?? 0) / 1000).toFixed(0)}K</p>
-                          <p className="text-xs text-blue-200">Total Cost</p>
+                          <p className="text-xs text-zinc-400">Total Cost</p>
                         </div>
                         <div>
                           <p className="text-xs font-bold text-primary">{report.employee_count ?? 0}</p>
-                          <p className="text-xs text-blue-200">Employees</p>
+                          <p className="text-xs text-zinc-400">Employees</p>
                         </div>
                         <div>
                           <p className="text-xs font-bold text-purple-600">{report.employer_count ?? 0}</p>
-                          <p className="text-xs text-blue-200">Employers</p>
+                          <p className="text-xs text-zinc-400">Employers</p>
                         </div>
                       </>
                     )}
@@ -268,15 +268,15 @@ const PayrollReports = () => {
                       <>
                         <div>
                           <p className="text-xs font-bold text-purple-600">AED {((report.total_liability ?? 0) / 1000000).toFixed(1)}M</p>
-                          <p className="text-xs text-blue-200">Total Liability</p>
+                          <p className="text-xs text-zinc-400">Total Liability</p>
                         </div>
                         <div>
                           <p className="text-xs font-bold text-primary">{report.employee_count ?? 0}</p>
-                          <p className="text-xs text-blue-200">Employees</p>
+                          <p className="text-xs text-zinc-400">Employees</p>
                         </div>
                         <div>
                           <p className="text-xs font-bold text-orange-600">AED {Math.round((report.total_liability ?? 0) / ((report.employee_count ?? 1) || 1)).toLocaleString()}</p>
-                          <p className="text-xs text-blue-200">Avg. per Employee</p>
+                          <p className="text-xs text-zinc-400">Avg. per Employee</p>
                         </div>
                       </>
                     )}
@@ -285,15 +285,15 @@ const PayrollReports = () => {
                       <>
                         <div>
                           <p className="text-xs font-bold text-primary">AED {((report.total_cost ?? 0) / 1000).toFixed(0)}K</p>
-                          <p className="text-xs text-blue-200">Total Cost</p>
+                          <p className="text-xs text-zinc-400">Total Cost</p>
                         </div>
                         <div>
                           <p className="text-xs font-bold text-primary">+{report.cost_increase ?? 0}%</p>
-                          <p className="text-xs text-blue-200">Month Growth</p>
+                          <p className="text-xs text-zinc-400">Month Growth</p>
                         </div>
                         <div>
                           <p className="text-xs font-bold text-primary">{report.employer_count ?? 0}</p>
-                          <p className="text-xs text-blue-200">Employers</p>
+                          <p className="text-xs text-zinc-400">Employers</p>
                         </div>
                       </>
                     )}
@@ -302,15 +302,15 @@ const PayrollReports = () => {
                       <>
                         <div>
                           <p className="text-xs font-bold text-orange-600">AED {((report.total_transfers ?? 0) / 1000).toFixed(0)}K</p>
-                          <p className="text-xs text-blue-200">Transfers</p>
+                          <p className="text-xs text-zinc-400">Transfers</p>
                         </div>
                         <div>
                           <p className="text-xs font-bold text-primary">{report.transfer_count ?? 0}</p>
-                          <p className="text-xs text-blue-200">WPS Files</p>
+                          <p className="text-xs text-zinc-400">WPS Files</p>
                         </div>
                         <div>
                           <p className="text-xs font-bold text-purple-600">{report.employer_count ?? 0}</p>
-                          <p className="text-xs text-blue-200">Employers</p>
+                          <p className="text-xs text-zinc-400">Employers</p>
                         </div>
                       </>
                     )}
@@ -319,15 +319,15 @@ const PayrollReports = () => {
                       <>
                         <div>
                           <p className="text-xs font-bold text-pink-600">{report.employee_count ?? 0}</p>
-                          <p className="text-xs text-blue-200">Employees</p>
+                          <p className="text-xs text-zinc-400">Employees</p>
                         </div>
                         <div>
                           <p className="text-xs font-bold text-primary">{report.nationality_count ?? 0}</p>
-                          <p className="text-xs text-blue-200">Nationalities</p>
+                          <p className="text-xs text-zinc-400">Nationalities</p>
                         </div>
                         <div>
                           <p className="text-xs font-bold text-primary">{report.avg_tenure_months ?? 0}m</p>
-                          <p className="text-xs text-blue-200">Avg. Tenure</p>
+                          <p className="text-xs text-zinc-400">Avg. Tenure</p>
                         </div>
                       </>
                     )}
@@ -336,22 +336,22 @@ const PayrollReports = () => {
                       <>
                         <div>
                           <p className="text-xs font-bold text-primary">{report.compliance_score ?? 0}%</p>
-                          <p className="text-xs text-blue-200">Compliance</p>
+                          <p className="text-xs text-zinc-400">Compliance</p>
                         </div>
                         <div>
                           <p className="text-xs font-bold text-orange-600">{report.pending_renewals}</p>
-                          <p className="text-xs text-blue-200">Pending</p>
+                          <p className="text-xs text-zinc-400">Pending</p>
                         </div>
                         <div>
                           <p className="text-xs font-bold text-red-600">{report.expired_visas}</p>
-                          <p className="text-xs text-blue-200">Expired</p>
+                          <p className="text-xs text-zinc-400">Expired</p>
                         </div>
                       </>
                     )}
                   </div>
                   
                   <div className="mt-6 pt-4 border-t flex items-center justify-between">
-                    <div className="text-xs text-blue-200">
+                    <div className="text-xs text-zinc-400">
                       Generated: {report.generated_date}
                     </div>
                     <div className="flex space-x-2">
@@ -384,7 +384,7 @@ const PayrollReports = () => {
                       </div>
                       <div>
                         <h3 className="font-semibold">{report.title}</h3>
-                        <p className="text-sm text-blue-200">{report.description}</p>
+                        <p className="text-sm text-zinc-400">{report.description}</p>
                         <div className="flex items-center space-x-2 mt-2">
                           <Badge variant="outline">{report.type}</Badge>
                           <Badge variant="outline">{report.period}</Badge>
@@ -402,7 +402,7 @@ const PayrollReports = () => {
                           {report.type === "Demographics" && `${report.employee_count ?? 0} employees`}
                           {report.type === "Compliance" && `${report.compliance_score ?? 0}% compliance`}
                         </div>
-                        <div className="text-xs text-blue-200">
+                        <div className="text-xs text-zinc-400">
                           Generated: {report.generated_date}
                         </div>
                       </div>

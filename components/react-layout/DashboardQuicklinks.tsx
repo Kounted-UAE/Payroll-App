@@ -46,7 +46,7 @@ export default function DashboardQuicklinks() {
             <div className="flex-1 flex items-center justify-between truncate rounded-r-md  bg-card">
               <div className="flex-1 truncate px-4 py-2 text-xs">
                 <span className="font-medium text-card-foreground">{quicklink.title}</span>
-                <p className="text-blue-400">{quicklink.members} Users Assigned</p>
+                <p className="text-zinc-400">{quicklink.members} Users Assigned</p>
               </div>
               <div className="shrink-0 pr-2">
                 <DropdownMenu deck={quicklink} />
@@ -67,7 +67,7 @@ function DropdownMenu({ deck }: { deck: Deck }) {
     <div className="relative inline-block text-left">
       <button
         type="button"
-        className="inline-flex size-8 items-center justify-center rounded-full text-blue-200 hover:text-foreground focus:outline-none"
+        className="inline-flex size-8 items-center justify-center rounded-full text-zinc-400 hover:text-foreground focus:outline-none"
       >
         <EllipsisVerticalIcon className="h-4 w-4" />
         <span className="sr-only">Open options</span>

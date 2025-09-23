@@ -1,4 +1,4 @@
-// app/advontier/layout.tsx
+// app/kounted/layout.tsx
 import DashboardLayout from "@/components/react-layout/DashboardLayout";
 import { SidebarProvider } from '@/components/react-layout/sidebar-context'
 import { AppProviders } from '../providers'

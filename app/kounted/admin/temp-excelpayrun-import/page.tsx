@@ -1,4 +1,4 @@
-//app/advontier/admin/temp-excelpayrun-import/page.tsx
+//app/kounted/admin/temp-excelpayrun-import/page.tsx
 
 'use client'
 

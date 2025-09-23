@@ -1,4 +1,4 @@
-// components/advontier-payroll/actions/PayslipSelectionTable.tsx
+// components/kounted-payroll/actions/PayslipSelectionTable.tsx
 
 'use client'
 
@@ -83,12 +83,12 @@ export default function PayslipSelectionTable({
                     : `${SUPABASE_PUBLIC_URL}/${generatePayslipFilename(row.employee_name || 'unknown', row.payslip_token)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 underline text-xs"
+                  className="text-zinc-600 underline text-xs"
                 >
                   View PDF
                 </a>
               ) : (
-                <span className="text-blue-200 text-xs">Not available</span>
+                <span className="text-zinc-400 text-xs">Not available</span>
               )}
             </TableCell>
           </TableRow>

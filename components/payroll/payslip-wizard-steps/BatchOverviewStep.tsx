@@ -1,4 +1,4 @@
-// componentsadvontier-payrollsteps/BatchOverviewStep.tsx
+// componentskounted-payrollsteps/BatchOverviewStep.tsx
 
 'use client'
 
@@ -42,7 +42,7 @@ export function BatchOverviewStep({ batchData, employees }: BatchOverviewStepPro
     <div className="space-y-6 bg-zinc-100">
       <div>
         <h3 className="text-lg font-semibold mb-2">Batch Overview</h3>
-        <p className="text-blue-400">
+        <p className="text-zinc-400">
           Review the imported payroll data before generating payslips
         </p>
       </div>
@@ -52,7 +52,7 @@ export function BatchOverviewStep({ batchData, employees }: BatchOverviewStepPro
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
-              <Building className="h-4 w-4 text-blue-600" />
+              <Building className="h-4 w-4 text-zinc-600" />
               <div>
                 <p className="text-sm font-medium">Employer</p>
                 <p className="text-lg font-bold">{batchData.employer_name}</p>
@@ -64,7 +64,7 @@ export function BatchOverviewStep({ batchData, employees }: BatchOverviewStepPro
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
-              <Calendar className="h-4 w-4 text-blue-600" />
+              <Calendar className="h-4 w-4 text-zinc-600" />
               <div>
                 <p className="text-sm font-medium">Pay Period</p>
                 <p className="text-lg font-bold">
@@ -136,7 +136,7 @@ export function BatchOverviewStep({ batchData, employees }: BatchOverviewStepPro
                 ))}
                 {employees.length > 10 && (
                   <TableRow>
-                    <TableCell colSpan={5} className="text-center text-blue-200">
+                    <TableCell colSpan={5} className="text-center text-zinc-400">
                       ... and {employees.length - 10} more employees
                     </TableCell>
                   </TableRow>
@@ -148,17 +148,17 @@ export function BatchOverviewStep({ batchData, employees }: BatchOverviewStepPro
       </Card>
 
       {/* Validation Summary */}
-      <Card className="border-green-200 bg-blue-50">
+      <Card className="border-green-200 bg-zinc-50">
         <CardContent className="p-4">
           <div className="flex items-start space-x-3">
             <div className="flex-shrink-0">
-              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                <FileText className="h-4 w-4 text-blue-600" />
+              <div className="w-8 h-8 bg-zinc-100 rounded-full flex items-center justify-center">
+                <FileText className="h-4 w-4 text-zinc-600" />
               </div>
             </div>
             <div>
-              <h4 className="font-medium text-blue-900">Data Validation Complete</h4>
-              <p className="text-sm text-blue-700 mt-1">
+              <h4 className="font-medium text-zinc-900">Data Validation Complete</h4>
+              <p className="text-sm text-zinc-700 mt-1">
                 All {employees.length} employee records have been validated and are ready for payslip generation.
               </p>
             </div>
