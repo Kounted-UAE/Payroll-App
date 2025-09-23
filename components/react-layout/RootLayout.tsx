@@ -18,8 +18,6 @@ import { Container } from '@/components/react-layout/Container'
 import { Footer } from '@/components/react-layout/Footer'
 import { GridPattern } from '@/components/react-layout/GridPattern'
 import { KountedLogo } from '@/lib/assets/logos/KountedLogo'
-import { Offices } from '@/components/react-layout/Offices'
-import { SocialMedia } from '@/components/react-layout/SocialMedia'
 
 const RootLayoutContext = createContext<{
   logoHovered: boolean
@@ -234,16 +232,13 @@ function RootLayoutInner({ children }: { children: React.ReactNode }) {
                     <h2 className="font-display text-base font-semibold text-white">
                       Our offices
                     </h2>
-                    <Offices
-                      invert
-                      className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2"
-                    />
+                    
                   </div>
                   <div className="sm:border-l sm:border-transparent sm:pl-16">
                     <h2 className="font-display text-base font-semibold text-white">
                       Follow us
                     </h2>
-                    <SocialMedia className="mt-6" invert />
+                  
                   </div>
                 </div>
               </Container>

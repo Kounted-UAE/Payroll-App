@@ -39,11 +39,11 @@ export function NavigationBreadcrumb() {
       <SidebarTrigger className="h-8 w-8 rounded-lg hover:bg-white/50" />
       <nav className="flex items-center gap-2" aria-label="Breadcrumb">
         {dashboardSegments.length === 0 ? (
-          <span className="text-zinc-100 font-semibold">Home</span>
+          <span className="text-zinc-100 font-semibold">Payroll Dashboard</span>
         ) : (
           <>
-            <Link href="/kounted" className="text-zinc-100 hover:underline font-bold">
-              Home
+            <Link href="/kounted/payroll" className="text-zinc-100 hover:underline font-bold">
+              Payroll Dashboard
             </Link>
             <span className="text-zinc-400 font-normal">/</span>
             {breadcrumbs.map((crumb, idx) => (

@@ -41,7 +41,7 @@ export function AppSidebar() {
                   <div className="text-zinc-300 text-xs font-bold uppercase tracking-normal">
                     {section.label}
                   </div>
-                  {section.collapsible !== false && (
+                  {section.collapsible !== true && (
                     <Button
                       variant="ghost"
                       size="sm"
