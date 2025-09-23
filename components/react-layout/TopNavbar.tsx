@@ -23,15 +23,11 @@ export function TopNavbar() {
   return (
     <header className="text-sm h-20 bg-slate-900 shadow-sm backdrop-blur overflow-hidden w-full">
       <div className="h-full flex items-center relative z-10 text-white font-bold">
-        {/* Left side - Business Suite title that aligns with sidebar */}
+        {/* Left side - Kounted logo that aligns with sidebar */}
         <div className={`flex items-center justify-center transition-all duration-300 ${
           collapsed ? 'w-20' : 'w-64'
         }`}>
-          {collapsed ? (
-            <KountedLogo variant="dark" className="h-8 w-8 flex-shrink-0" />
-          ) : (
-            <span className="text-lg font-semibold text-zinc-100">Business Suite</span>
-          )}
+          <KountedLogo variant="light" className="h-8 w-auto flex-shrink-0" />
         </div>
 
         {/* Middle section - Breadcrumb */}
