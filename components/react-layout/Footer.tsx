@@ -21,16 +21,6 @@ const navigation = [
       },
     ],
   },
-  {
-    title: 'Use Cases',
-    links: [
-      { title: ' Accounting Firms', href: '#' },
-      { title: ' Corporate Service Providers', href: '#' },
-      { title: ' Client Due Diligence', href: '#' },
-      { title: ' Contract Management', href: '#' },
-      
-    ],
-  },  
 ]
 
 function Navigation() {

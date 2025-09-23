@@ -23,13 +23,10 @@ export default function LoginForm() {
 
   const features = [
     { label: 'Payroll Processing', status: 'Live' },
+    { label: 'Knowledge Base', status: 'Coming soon' },
     { label: 'Compliance Tools', status: 'Coming soon' },
     { label: 'Client Onboarding', status: 'Coming soon' },
-    { label: 'On-Demand Service Ordering', status: 'Coming soon' },
-    { label: 'Comprehensive Retainer Configuration', status: 'Coming soon' },
-    { label: 'Client Portal', status: 'Coming soon' },
-    { label: 'Knowledge Base', status: 'Coming soon' },
-    { label: 'Accounting CRM', status: 'Coming soon' },
+    
   ]
   
 
