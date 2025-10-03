@@ -78,7 +78,6 @@ interface EmployeeData {
   education_allowance?: number
   flight_allowance?: number
   general_allowance?: number
-  gratuity_eosb?: number
   other_allowance?: number
   total_fixed_salary?: number
   bonus?: number
@@ -87,6 +86,7 @@ interface EmployeeData {
   expenses_deductions?: number
   other_reimbursements?: number
   expense_reimbursements?: number
+  gratuity_eosb?: number
   total_variable_salary?: number
   total_salary?: number
   wps_fees?: number

@@ -152,7 +152,6 @@ export async function generatePayslipPDF({
     { label: 'Education Allowance', value: employee.education_allowance },
     { label: 'Flight Allowance', value: employee.flight_allowance },
     { label: 'General Allowance', value: employee.general_allowance },
-    { label: 'Gratuity/EOSB', value: employee.gratuity_eosb },
     { label: 'Other Allowance', value: employee.other_allowance }
   ]
 
@@ -211,7 +210,8 @@ export async function generatePayslipPDF({
     { label: 'Salary in Arrears', value: employee.salary_in_arrears },
     { label: 'Adhoc Expenses', value: employee.expenses_deductions },
     { label: 'School Reimbursements', value: employee.other_reimbursements },
-    { label: 'Internet Reimbursements', value: employee.expense_reimbursements }
+    { label: 'Internet Reimbursements', value: employee.expense_reimbursements },
+    { label: 'Gratuity/EOSB', value: employee.gratuity_eosb }
   ]
 
   page.drawText('Variable Salary Components:', {

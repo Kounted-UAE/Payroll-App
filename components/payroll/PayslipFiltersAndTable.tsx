@@ -27,7 +27,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious, PaginationLink } from '@/components/react-ui/pagination'
 import { generatePayslipFilename, extractTokenFromFilename } from '@/lib/utils/pdf/payslipNaming'
 
-const SUPABASE_PUBLIC_URL = 'https://alryjvnddvrrgbuvednm.supabase.co/storage/v1/object/public/generated-pdfs/payslips'
+const SUPABASE_PUBLIC_URL = 'https://tyznabdlwpgldgxktlzo.supabase.co/storage/v1/object/public/Payroll'
 
 export type PayslipRow = {
   batch_id: string
@@ -84,25 +84,46 @@ export function PayslipFiltersAndTable({
   const [search, setSearch] = useState('')
   const [selectedEmployers, setSelectedEmployers] = useState<Set<string>>(new Set())
   const [selectedDates, setSelectedDates] = useState<Set<string>>(new Set())
+  const [downloadProgress, setDownloadProgress] = useState<{ current: number; total: number } | null>(null)
 
   const downloadZip = async () => {
     const zip = new JSZip()
     const selectedRows = rows.filter(r => selected.has(r.batch_id))
+    
+    setDownloadProgress({ current: 0, total: selectedRows.length })
 
-    for (const row of selectedRows) {
+    for (let i = 0; i < selectedRows.length; i++) {
+      const row = selectedRows[i]
+      setDownloadProgress({ current: i, total: selectedRows.length })
+      
       if (!row.payslip_token) continue
       const filename = generatePayslipFilename(row.employee_name || 'unknown', row.payslip_token)
       const fileUrl = row.payslip_url && row.payslip_url.startsWith('http')
         ? row.payslip_url
         : `${SUPABASE_PUBLIC_URL}/${filename}`
-      const res = await fetch(fileUrl)
-      const blob = await res.blob()
-      // Use the nice filename even if legacy URL was used to fetch
-      zip.file(filename, blob)
+      
+      try {
+        const res = await fetch(fileUrl)
+        if (!res.ok) {
+          console.error(`Failed to fetch ${filename}:`, res.statusText)
+          continue
+        }
+        const blob = await res.blob()
+        // Use the nice filename even if legacy URL was used to fetch
+        zip.file(filename, blob)
+      } catch (error) {
+        console.error(`Error downloading ${filename}:`, error)
+      }
     }
 
+    setDownloadProgress({ current: selectedRows.length, total: selectedRows.length })
+    
+    toast({ title: 'Creating ZIP file...', description: 'Please wait while we compress the files' })
     const zipBlob = await zip.generateAsync({ type: 'blob' })
     saveAs(zipBlob, 'selected-payslips.zip')
+    
+    setDownloadProgress(null)
+    toast({ title: 'Download complete', description: `Downloaded ${selectedRows.length} payslips` })
   }
 
   // Get unique values for filters
@@ -361,6 +382,26 @@ export function PayslipFiltersAndTable({
         </div>
       </div>
 
+      {/* Download Progress */}
+      {downloadProgress && (
+        <div className="bg-purple-50 border border-purple-200 rounded-md p-4 mb-4">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-medium text-purple-900">
+              Downloading payslips... {downloadProgress.current} / {downloadProgress.total}
+            </span>
+            <span className="text-sm text-purple-700">
+              {Math.round((downloadProgress.current / downloadProgress.total) * 100)}%
+            </span>
+          </div>
+          <div className="w-full bg-purple-200 rounded-full h-2">
+            <div 
+              className="bg-purple-600 h-2 rounded-full transition-all duration-300"
+              style={{ width: `${(downloadProgress.current / downloadProgress.total) * 100}%` }}
+            />
+          </div>
+        </div>
+      )}
+
       {/* Action Buttons Section */}
       <div className="flex items-center justify-between mb-4">
 
@@ -368,9 +409,19 @@ export function PayslipFiltersAndTable({
           <Button
             variant="default"
             onClick={downloadZip}
-            disabled={!isZipDownloadEnabled()}
+            disabled={!isZipDownloadEnabled() || !!downloadProgress}
           >
-            Download Selected (ZIP)
+            {downloadProgress ? (
+              <>
+                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Downloading...
+              </>
+            ) : (
+              'Download Selected (ZIP)'
+            )}
           </Button>
           <Button
             variant="default"

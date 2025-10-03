@@ -293,7 +293,6 @@ interface EmployeeData {
   education_allowance?: number
   flight_allowance?: number
   general_allowance?: number
-  gratuity_eosb?: number
   other_allowance?: number
   total_fixed_salary?: number
   bonus?: number
@@ -302,6 +301,7 @@ interface EmployeeData {
   expenses_deductions?: number
   other_reimbursements?: number
   expense_reimbursements?: number
+  gratuity_eosb?: number
   total_variable_salary?: number
   total_salary?: number
   wps_fees?: number
@@ -359,13 +359,13 @@ const PayslipDocument: React.FC<PayslipInput> = ({ employee, batch }) => {
     { label: 'Education Allowance', amount: employee.education_allowance, type: 'fixed' },
     { label: 'Flight Allowance', amount: employee.flight_allowance, type: 'fixed' },
     { label: 'General Allowance', amount: employee.general_allowance, type: 'fixed' },
-    { label: 'Gratuity/EOSB', amount: employee.gratuity_eosb, type: 'fixed' },
     { label: 'Other Allowance', amount: employee.other_allowance, type: 'fixed' },
     { label: 'Bonus', amount: employee.bonus, type: 'variable' },
     { label: 'Overtime', amount: employee.overtime, type: 'variable' },
     { label: 'Salary in Arrears', amount: employee.salary_in_arrears, type: 'variable' },
     { label: 'Adhoc Expenses', amount: employee.expenses_deductions, type: 'variable' },
     { label: 'School Reimbursements', amount: employee.other_reimbursements, type: 'variable' },
+    { label: 'Gratuity/EOSB', amount: employee.gratuity_eosb, type: 'variable' },
     { label: 'Internet Reimbursements', amount: employee.expense_reimbursements, type: 'variable' }
   ].filter(item => item.amount && item.amount > 0)
 
@@ -512,7 +512,7 @@ export async function generatePayslipPDF(data: PayslipInput): Promise<Blob> {
     }
   }
   
-  const blob = new Blob(chunks, { type: 'application/pdf' })
+  const blob = new Blob(chunks as BlobPart[], { type: 'application/pdf' })
   return blob
 }
 

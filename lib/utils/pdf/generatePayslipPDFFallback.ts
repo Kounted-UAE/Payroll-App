@@ -252,6 +252,18 @@ export async function generatePayslipPDFFallback({
     currentY -= lineHeight
   }
 
+  // Gratuity / EOSB (Adjustment)
+  if (employee.gratuity_eosb) {
+    page.drawText(`Gratuity / EOSB: ${formatCurrency(employee.gratuity_eosb, employee.currency || 'AED')}`, {
+      x: 50,
+      y: currentY,
+      size: 10,
+      font: font,
+      color: rgb(0.3, 0.3, 0.3)
+    })
+    currentY -= lineHeight
+  }
+
   // Overtime
   if (employee.overtime) {
     page.drawText(`Overtime: ${formatCurrency(employee.overtime, employee.currency || 'AED')}`, {

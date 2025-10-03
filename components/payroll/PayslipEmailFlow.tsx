@@ -13,7 +13,7 @@ import {
 import type { PayslipRow } from './PayslipFiltersAndTable'
 import { generatePayslipFilename } from '@/lib/utils/pdf/payslipNaming'
 
-const SUPABASE_PUBLIC_URL = 'https://alryjvnddvrrgbuvednm.supabase.co/storage/v1/object/public/generated-pdfs/payslips'
+const SUPABASE_PUBLIC_URL = 'https://tyznabdlwpgldgxktlzo.supabase.co/storage/v1/object/public/Payroll'
 
 interface PayslipEmailFlowProps {
   rows: PayslipRow[]
@@ -31,14 +31,19 @@ export function PayslipEmailFlow({
   const [confirmOpen, setConfirmOpen] = useState(false)
   const [sendMode, setSendMode] = useState<'test' | 'reviewer' | 'live' | null>(null)
   const [isSending, setIsSending] = useState(false)
+  const [progress, setProgress] = useState<{ current: number; total: number } | null>(null)
 
   const sendEmails = async (mode: 'test' | 'reviewer' | 'live') => {
     setIsSending(true)
     const filtered = rows.filter(r => selected.has(r.batch_id))
     const successLog: string[] = []
     const errorLog: string[] = []
+    
+    setProgress({ current: 0, total: filtered.length })
 
-    for (const row of filtered) {
+    for (let i = 0; i < filtered.length; i++) {
+      const row = filtered[i]
+      setProgress({ current: i, total: filtered.length })
       const rawTo =
         mode === 'test'
           ? 'payroll@kounted.ae'
@@ -100,6 +105,7 @@ export function PayslipEmailFlow({
     }
 
     setIsSending(false)
+    setProgress({ current: filtered.length, total: filtered.length })
 
     if (successLog.length) {
       toast({
@@ -190,6 +196,26 @@ export function PayslipEmailFlow({
       <p className="text-cyan-600 text-sm">
         Send payslips for <strong>{selectedRows.length}</strong> selected employees.
       </p>
+      
+      {/* Progress indicator */}
+      {progress && isSending && (
+        <div className="bg-green-50 border border-green-200 rounded-md p-4">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-medium text-green-900">
+              Sending emails... {progress.current} / {progress.total}
+            </span>
+            <span className="text-sm text-green-700">
+              {Math.round((progress.current / progress.total) * 100)}%
+            </span>
+          </div>
+          <div className="w-full bg-green-200 rounded-full h-2">
+            <div 
+              className="bg-green-600 h-2 rounded-full transition-all duration-300"
+              style={{ width: `${(progress.current / progress.total) * 100}%` }}
+            />
+          </div>
+        </div>
+      )}
       
       <div className="flex gap-4 mt-4">
         <Button variant="outline" onClick={() => { setSendMode('test'); setConfirmOpen(true) }} disabled={isSending}>

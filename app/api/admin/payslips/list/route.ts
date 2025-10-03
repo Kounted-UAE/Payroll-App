@@ -27,8 +27,8 @@ export async function GET(request: Request) {
     }
 
     let query = supabase
-      .from('payroll_ingest_excelpayrollimport')
-      .select('batch_id, employer_name, employee_name, reviewer_email, email_id, payslip_url, payslip_token, created_at, pay_period_to, currency, net_salary', { count: 'exact' })
+      .from('payroll_excel_imports')
+      .select('id, employer_name, employee_name, reviewer_email, email_id, payslip_url, payslip_token, created_at, pay_period_to, currency, net_salary', { count: 'exact' })
       .range(from, to)
 
     if (sortBy && sortable[sortBy]) {
@@ -43,15 +43,21 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
+    // Map id to batch_id for backward compatibility with frontend
+    const rowsWithBatchId = (data || []).map((r: any) => ({ 
+      ...r, 
+      batch_id: r.id  // Map id to batch_id for frontend compatibility
+    }))
+
     // Attach last_sent_at from events table (best-effort)
     let lastSentMap: Record<string, string> = {}
     try {
-      const batchIds = (data || []).map((r: any) => r.batch_id).filter(Boolean)
-      if (batchIds.length > 0) {
+      const ids = (data || []).map((r: any) => r.id).filter(Boolean)
+      if (ids.length > 0) {
         const { data: events, error: eventsError } = await supabase
           .from('payroll_payslip_send_events')
           .select('batch_id, created_at')
-          .in('batch_id', batchIds)
+          .in('batch_id', ids)
           .order('created_at', { ascending: false })
 
         if (!eventsError && Array.isArray(events)) {
@@ -64,7 +70,7 @@ export async function GET(request: Request) {
       }
     } catch {}
 
-    const rowsWithLast = (data || []).map((r: any) => ({ ...r, last_sent_at: lastSentMap[r.batch_id] || null }))
+    const rowsWithLast = rowsWithBatchId.map((r: any) => ({ ...r, last_sent_at: lastSentMap[r.id] || null }))
 
     return NextResponse.json({ rows: rowsWithLast, total: count ?? 0 })
   } catch (error) {

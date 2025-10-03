@@ -7,8 +7,8 @@ import path from 'path'
 import { generatePayslipPDFFallback } from '@/lib/utils/pdf/generatePayslipPDFFallback'
 import { generatePayslipFilename } from '@/lib/utils/pdf/payslipNaming'
 
-const STORAGE_BUCKET = 'generated-pdfs'
-const STORAGE_FOLDER = 'payslips'
+const STORAGE_BUCKET = 'Payroll'
+const STORAGE_FOLDER = '' // Root of Payroll bucket
 const TEMPLATE_PATH = path.join(process.cwd(), 'payslip-template.html')
 
 function formatMoney(value: any, currencyCode: string) {
@@ -43,7 +43,6 @@ function renderHtml(template: string, row: any) {
     .replace('{{education_allowance}}', inject('Education Allowance', row.education_allowance))
     .replace('{{general_allowance}}', inject('General Allowance', row.general_allowance))
     .replace('{{other_allowance}}', inject('Other Allowance', row.other_allowance))
-    .replace('{{gratuity_eosb}}', inject('ESOP Adjustment', row.gratuity_eosb))
     .replace('{{total_gross_salary}}', inject('TOTAL EARNINGS', row.total_gross_salary))
     .replace('{{bonus}}', inject('Bonuses', row.bonus))
     .replace('{{overtime}}', inject('Overtime', row.overtime))
@@ -51,6 +50,7 @@ function renderHtml(template: string, row: any) {
     .replace('{{expenses_deductions}}', inject('Expense Deductions', row.expenses_deductions))
     .replace('{{expense_reimbursements}}', inject('Expense Reimbursements', row.expense_reimbursements))
     .replace('{{other_reimbursements}}', inject('Other Reimbursements', row.other_reimbursements))
+    .replace('{{gratuity_eosb}}', inject('ESOP Adjustment', row.gratuity_eosb))
     .replaceAll('{{total_adjustments}}', inject('TOTAL ADJUSTMENTS', row.total_adjustments))
     .replace('{{net_salary}}', inject('NET', row.net_salary))
 }
@@ -59,19 +59,39 @@ export async function POST(req: NextRequest) {
   try {
     console.log('Starting payslip generation API...')
     const supabase = getSupabaseServiceClient()
-    const { batchIds } = await req.json().catch(() => ({ batchIds: [] }))
     
-    if (!Array.isArray(batchIds) || batchIds.length === 0) {
+    // Support both direct batchIds array or chunked approach with filters
+    const body = await req.json().catch(() => ({}))
+    let batchIds: string[] = []
+    
+    if (Array.isArray(body.batchIds)) {
+      batchIds = body.batchIds
+    } else if (body.filters) {
+      // Fetch IDs based on filters (for large batches)
+      const { data, error } = await supabase
+        .from('payroll_excel_imports')
+        .select('id')
+        .in('id', body.filters.ids || [])
+      
+      if (error) {
+        console.error('Error fetching batch IDs:', error)
+        return NextResponse.json({ error: error.message }, { status: 500 })
+      }
+      
+      batchIds = (data || []).map(r => r.id)
+    }
+    
+    if (batchIds.length === 0) {
       console.log('No batch IDs provided')
       return NextResponse.json({ error: 'batchIds required' }, { status: 400 })
     }
     
-    console.log(`Processing ${batchIds.length} batch IDs:`, batchIds)
+    console.log(`Processing ${batchIds.length} batch IDs`)
 
   const { data: rows, error } = await supabase
-    .from('payroll_ingest_excelpayrollimport')
+    .from('payroll_excel_imports')
     .select('*')
-    .in('batch_id', batchIds)
+    .in('id', batchIds)
 
   if (error) {
     console.error('Database error:', error)
@@ -139,7 +159,7 @@ export async function POST(req: NextRequest) {
         // Use existing token if present, otherwise create new one
         const token = row.payslip_token || crypto.randomUUID()
         const filename = generatePayslipFilename(row.employee_name || 'unknown', token)
-        const storagePath = `${STORAGE_FOLDER}/${filename}`
+        const storagePath = STORAGE_FOLDER ? `${STORAGE_FOLDER}/${filename}` : filename
 
         const { error: uploadError } = await supabase.storage
           .from(STORAGE_BUCKET)
@@ -149,7 +169,7 @@ export async function POST(req: NextRequest) {
           })
 
         if (uploadError) {
-          results.push({ batch_id: row.batch_id, ok: false, message: uploadError.message })
+          results.push({ batch_id: row.id, ok: false, message: uploadError.message })
           continue
         }
 
@@ -159,24 +179,24 @@ export async function POST(req: NextRequest) {
 
         const publicUrl = publicUrlData?.publicUrl
         const { error: updateError } = await supabase
-          .from('payroll_ingest_excelpayrollimport')
+          .from('payroll_excel_imports')
           .update({ payslip_url: publicUrl, payslip_token: token })
-          .eq('batch_id', row.batch_id)
+          .eq('id', row.id)
 
         if (updateError) {
-          results.push({ batch_id: row.batch_id, ok: false, message: updateError.message })
+          results.push({ batch_id: row.id, ok: false, message: updateError.message })
         } else {
-          results.push({ batch_id: row.batch_id, ok: true })
+          results.push({ batch_id: row.id, ok: true })
         }
       } catch (pageError) {
-        console.error(`Error processing row ${row.batch_id} with Puppeteer:`, pageError)
+        console.error(`Error processing row ${row.id} with Puppeteer:`, pageError)
         
         // Try fallback PDF generation
         try {
-          console.log(`Attempting fallback PDF generation for ${row.batch_id}`)
+          console.log(`Attempting fallback PDF generation for ${row.id}`)
           const fallbackPdf = await generatePayslipPDFFallback({
             employee: {
-              id: row.batch_id,
+              id: row.id,
               employee_name: row.employee_name || '',
               email_id: row.email_id,
               basic_salary: row.basic_salary,
@@ -184,7 +204,6 @@ export async function POST(req: NextRequest) {
               education_allowance: row.education_allowance,
               flight_allowance: row.flight_allowance,
               general_allowance: row.general_allowance,
-              gratuity_eosb: row.gratuity_eosb,
               other_allowance: row.other_allowance,
               total_fixed_salary: row.total_gross_salary,
               bonus: row.bonus,
@@ -193,12 +212,13 @@ export async function POST(req: NextRequest) {
               expenses_deductions: row.expenses_deductions,
               other_reimbursements: row.other_reimbursements,
               expense_reimbursements: row.expense_reimbursements,
+              gratuity_eosb: row.gratuity_eosb,
               total_variable_salary: row.total_adjustments,
               total_salary: row.net_salary,
               currency: (row.currency || 'AED') as string
             },
             batchData: {
-              batch_id: row.batch_id,
+              batch_id: row.id,
               employer_name: row.employer_name || '',
               pay_period_from: row.pay_period_from || '',
               pay_period_to: row.pay_period_to || ''
@@ -209,7 +229,7 @@ export async function POST(req: NextRequest) {
           // Use existing token if present, otherwise create new one
           const token = row.payslip_token || crypto.randomUUID()
           const filename = generatePayslipFilename(row.employee_name || 'unknown', token)
-          const storagePath = `${STORAGE_FOLDER}/${filename}`
+          const storagePath = STORAGE_FOLDER ? `${STORAGE_FOLDER}/${filename}` : filename
 
           const { error: uploadError } = await supabase.storage
             .from(STORAGE_BUCKET)
@@ -219,7 +239,7 @@ export async function POST(req: NextRequest) {
             })
 
           if (uploadError) {
-            results.push({ batch_id: row.batch_id, ok: false, message: `Fallback upload failed: ${uploadError.message}` })
+            results.push({ batch_id: row.id, ok: false, message: `Fallback upload failed: ${uploadError.message}` })
           } else {
             const { data: publicUrlData } = supabase.storage
               .from(STORAGE_BUCKET)
@@ -227,20 +247,20 @@ export async function POST(req: NextRequest) {
 
             const publicUrl = publicUrlData?.publicUrl
             const { error: updateError } = await supabase
-              .from('payroll_ingest_excelpayrollimport')
+              .from('payroll_excel_imports')
               .update({ payslip_url: publicUrl, payslip_token: token })
-              .eq('batch_id', row.batch_id)
+              .eq('id', row.id)
 
             if (updateError) {
-              results.push({ batch_id: row.batch_id, ok: false, message: `Fallback update failed: ${updateError.message}` })
+              results.push({ batch_id: row.id, ok: false, message: `Fallback update failed: ${updateError.message}` })
             } else {
-              results.push({ batch_id: row.batch_id, ok: true, message: 'Generated using fallback method' })
+              results.push({ batch_id: row.id, ok: true, message: 'Generated using fallback method' })
             }
           }
         } catch (fallbackError) {
-          console.error(`Fallback PDF generation also failed for ${row.batch_id}:`, fallbackError)
+          console.error(`Fallback PDF generation also failed for ${row.id}:`, fallbackError)
           results.push({ 
-            batch_id: row.batch_id, 
+            batch_id: row.id, 
             ok: false, 
             message: `Both Puppeteer and fallback failed: ${pageError instanceof Error ? pageError.message : 'Unknown error'}` 
           })
