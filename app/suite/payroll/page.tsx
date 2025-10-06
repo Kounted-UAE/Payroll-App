@@ -140,6 +140,7 @@ export default function SendPayslipsPage() {
           onProceedToEmail={() => setStep('review')}
           onProceedToGenerate={() => setStep('generate')}
           onFilteredRowsChange={handleFilteredRowsChange}
+          onPayrunSuccess={refreshData}
           total={total}
           page={page}
           pageSize={pageSize}

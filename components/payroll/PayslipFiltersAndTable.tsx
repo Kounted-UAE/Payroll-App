@@ -86,6 +86,75 @@ export function PayslipFiltersAndTable({
   const [selectedDates, setSelectedDates] = useState<Set<string>>(new Set())
   const [downloadProgress, setDownloadProgress] = useState<{ current: number; total: number } | null>(null)
 
+  // Export selected rows to Excel (XLSX) reflecting current table columns and order
+  const handleExportSelected = async () => {
+    const selectedRows = rows.filter(r => selected.has(r.batch_id))
+    if (selectedRows.length === 0) return
+    try {
+      const { utils, writeFile } = await import('xlsx')
+
+      // Column order should mirror the table headers currently displayed
+      const columns: { key: keyof PayslipRow | 'payslip_link'; header: string }[] = [
+        { key: 'pay_period_to', header: 'Date' },
+        { key: 'employee_name', header: 'Employee' },
+        { key: 'payslip_link', header: 'Payslip' },
+        { key: 'employer_name', header: 'Employer' },
+        { key: 'email_id', header: 'Email' },
+        { key: 'currency', header: 'Currency' },
+        { key: 'net_salary', header: 'Net Salary' },
+        { key: 'last_sent_at', header: 'Last Sent' },
+      ]
+
+      const data = selectedRows.map((r) => {
+        const payslipLink = r.payslip_token
+          ? (r.payslip_url && r.payslip_url.startsWith('http')
+              ? r.payslip_url
+              : `${SUPABASE_PUBLIC_URL}/${generatePayslipFilename(r.employee_name || 'unknown', r.payslip_token)}`)
+          : ''
+        return {
+          Date: r.pay_period_to || '',
+          Employee: r.employee_name || '',
+          Payslip: payslipLink,
+          Employer: r.employer_name || '',
+          Email: r.email_id || '',
+          Currency: r.currency || '',
+          'Net Salary': r.net_salary ?? '',
+          'Last Sent': r.last_sent_at ? new Date(r.last_sent_at).toLocaleString() : 'Never',
+        }
+      })
+
+      const worksheet = utils.json_to_sheet(data, { header: columns.map(c => c.header) })
+      const workbook = utils.book_new()
+      utils.book_append_sheet(workbook, worksheet, 'Selected Payslips')
+      writeFile(workbook, 'selected-payslips.xlsx')
+    } catch (e: any) {
+      toast({ title: 'Export failed', description: e?.message || 'Unknown error', variant: 'destructive' })
+    }
+  }
+
+  // Delete selected rows
+  const handleDeleteSelected = async () => {
+    const ids = rows.filter(r => selected.has(r.batch_id)).map(r => r.batch_id)
+    if (ids.length === 0) return
+    try {
+      const res = await fetch('/api/admin/payslips/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ids }),
+      })
+      if (!res.ok) {
+        const msg = await res.text()
+        throw new Error(msg)
+      }
+      toast({ title: 'Deleted', description: `Removed ${ids.length} row(s).` })
+      onSelectionChange(new Set())
+      onPayrunSuccess?.()
+      // Also try to call onClearSort? No - keep as is. Parent should refresh via provided callbacks.
+    } catch (e: any) {
+      toast({ title: 'Delete failed', description: e?.message || 'Unknown error', variant: 'destructive' })
+    }
+  }
+
   const downloadZip = async () => {
     const zip = new JSZip()
     const selectedRows = rows.filter(r => selected.has(r.batch_id))
@@ -425,6 +494,13 @@ export function PayslipFiltersAndTable({
           </Button>
           <Button
             variant="default"
+            onClick={handleExportSelected}
+            disabled={!selected.size}
+          >
+            Export Selected (Excel)
+          </Button>
+          <Button
+            variant="default"
             onClick={() => onProceedToGenerate?.()}
             disabled={!selected.size}
           >
@@ -436,6 +512,13 @@ export function PayslipFiltersAndTable({
             variant="default"
           >
             Send to Email
+          </Button>
+          <Button
+            variant="destructive"
+            onClick={handleDeleteSelected}
+            disabled={!selected.size}
+          >
+            Delete Selected
           </Button>
         </div>
         <div className="flex items-center gap-2">
@@ -480,13 +563,13 @@ export function PayslipFiltersAndTable({
               />
             </TableHead >
             <TableHead><HeaderButton field="pay_period_to" label="Date" /></TableHead>
-            <TableHead><HeaderButton field="employer_name" label="Employer" /></TableHead>
             <TableHead><HeaderButton field="employee_name" label="Employee" /></TableHead>
+            <TableHead>Payslip</TableHead>
+            <TableHead><HeaderButton field="employer_name" label="Employer" /></TableHead>
             <TableHead><HeaderButton field="email_id" label="Email" /></TableHead>
             <TableHead><HeaderButton field="currency" label="Currency" /></TableHead>
             <TableHead><HeaderButton field="net_salary" label="Net Salary" /></TableHead>
             <TableHead>Last Sent</TableHead>
-            <TableHead>Payslip</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -499,14 +582,7 @@ export function PayslipFiltersAndTable({
                 />
               </TableCell>
               <TableCell>{row.pay_period_to || 'N/A'}</TableCell>
-              <TableCell>{row.employer_name}</TableCell>
               <TableCell>{row.employee_name}</TableCell>
-              <TableCell>{row.email_id}</TableCell>
-              <TableCell>{row.currency}</TableCell>
-              <TableCell>{row.net_salary}</TableCell>
-              <TableCell>
-                {row.last_sent_at ? new Date(row.last_sent_at).toLocaleString() : <span className="text-cyan-600 text-xs">Never</span>}
-              </TableCell>
               <TableCell>
                 {row.payslip_token ? (
                   <a
@@ -521,6 +597,13 @@ export function PayslipFiltersAndTable({
                 ) : (
                   <span className="text-cyan-600 text-xs">Not available</span>
                 )}
+              </TableCell>
+              <TableCell>{row.employer_name}</TableCell>
+              <TableCell>{row.email_id}</TableCell>
+              <TableCell>{row.currency}</TableCell>
+              <TableCell>{row.net_salary}</TableCell>
+              <TableCell>
+                {row.last_sent_at ? new Date(row.last_sent_at).toLocaleString() : <span className="text-cyan-600 text-xs">Never</span>}
               </TableCell>
             </TableRow>
           ))}
