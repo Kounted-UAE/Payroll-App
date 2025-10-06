@@ -81,6 +81,8 @@ next-env.d.ts
 # -----------------------
 coverage/
 *.lcov
+*z_ref_docs
+z_ref_docs*
 
 # -----------------------
 # Custom project exclusions
