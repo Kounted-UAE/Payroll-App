@@ -23,6 +23,7 @@ import { ChevronDown, X, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 import { toast } from '@/hooks/use-toast'
+import * as XLSX from 'xlsx'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/react-ui/select'
 import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious, PaginationLink } from '@/components/react-ui/pagination'
 import { generatePayslipFilename, extractTokenFromFilename } from '@/lib/utils/pdf/payslipNaming'
@@ -87,12 +88,14 @@ export function PayslipFiltersAndTable({
   const [downloadProgress, setDownloadProgress] = useState<{ current: number; total: number } | null>(null)
 
   // Export selected rows to Excel (XLSX) reflecting current table columns and order
-  const handleExportSelected = async () => {
+  const handleExportSelected = () => {
     const selectedRows = rows.filter(r => selected.has(r.batch_id))
-    if (selectedRows.length === 0) return
+    if (selectedRows.length === 0) {
+      toast({ title: 'No selection', description: 'Please select payslips to export', variant: 'destructive' })
+      return
+    }
+    
     try {
-      const { utils, writeFile } = await import('xlsx')
-
       // Column order should mirror the table headers currently displayed
       const columns: { key: keyof PayslipRow | 'payslip_link'; header: string }[] = [
         { key: 'pay_period_to', header: 'Date' },
@@ -123,12 +126,43 @@ export function PayslipFiltersAndTable({
         }
       })
 
-      const worksheet = utils.json_to_sheet(data, { header: columns.map(c => c.header) })
-      const workbook = utils.book_new()
-      utils.book_append_sheet(workbook, worksheet, 'Selected Payslips')
-      writeFile(workbook, 'selected-payslips.xlsx')
+      const worksheet = XLSX.utils.json_to_sheet(data, { 
+        header: ['Date', 'Employee', 'Payslip', 'Employer', 'Email', 'Currency', 'Net Salary', 'Last Sent']
+      })
+      
+      // Set column widths for better readability
+      worksheet['!cols'] = [
+        { width: 12 }, // Date
+        { width: 20 }, // Employee
+        { width: 40 }, // Payslip
+        { width: 20 }, // Employer
+        { width: 25 }, // Email
+        { width: 8 },  // Currency
+        { width: 12 }, // Net Salary
+        { width: 20 }, // Last Sent
+      ]
+      
+      const workbook = XLSX.utils.book_new()
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Selected Payslips')
+      
+      // Generate filename with timestamp
+      const timestamp = new Date().toISOString().split('T')[0]
+      const filename = `selected-payslips-${timestamp}.xlsx`
+      
+      XLSX.writeFile(workbook, filename)
+      
+      toast({ 
+        title: 'Export successful', 
+        description: `Exported ${selectedRows.length} payslips to ${filename}`,
+        variant: 'default'
+      })
     } catch (e: any) {
-      toast({ title: 'Export failed', description: e?.message || 'Unknown error', variant: 'destructive' })
+      console.error('Excel export error:', e)
+      toast({ 
+        title: 'Export failed', 
+        description: e?.message || 'Unknown error occurred during export', 
+        variant: 'destructive' 
+      })
     }
   }
 

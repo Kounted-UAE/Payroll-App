@@ -58,6 +58,16 @@ const nextConfig = {
       type: 'asset/resource',
     })
     
+    // XLSX library configuration for client-side usage
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        path: false,
+        crypto: false,
+      }
+    }
+    
     // Path aliases for better imports
     config.resolve.alias = {
       ...config.resolve.alias,
