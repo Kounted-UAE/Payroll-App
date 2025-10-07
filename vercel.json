@@ -1,9 +1,14 @@
 {
   "functions": {
     "app/api/admin/payslips/generate/route.ts": {
-      "maxDuration": 60
+      "maxDuration": 60,
+      "memory": 1024
     }
   },
   "buildCommand": "pnpm build",
-  "installCommand": "pnpm install && npx puppeteer browsers install chrome"
+  "installCommand": "pnpm install && npx puppeteer browsers install chrome",
+  "env": {
+    "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD": "false",
+    "PUPPETEER_EXECUTABLE_PATH": "/usr/bin/google-chrome-stable"
+  }
 }

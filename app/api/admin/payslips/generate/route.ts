@@ -55,6 +55,90 @@ function renderHtml(template: string, row: any) {
     .replace('{{net_salary}}', inject('NET', row.net_salary))
 }
 
+async function processAllWithFallback(rows: any[], supabase: any, template: string) {
+  const results: { batch_id: string; ok: boolean; message?: string }[] = []
+  
+  for (const row of rows) {
+    try {
+      console.log(`Processing fallback PDF for ${row.id}`)
+      const fallbackPdf = await generatePayslipPDFFallback({
+        employee: {
+          id: row.id,
+          employee_name: row.employee_name || '',
+          email_id: row.email_id,
+          basic_salary: row.basic_salary,
+          housing_allowance: row.housing_allowance,
+          education_allowance: row.education_allowance,
+          flight_allowance: row.flight_allowance,
+          general_allowance: row.general_allowance,
+          other_allowance: row.other_allowance,
+          total_fixed_salary: row.total_gross_salary,
+          bonus: row.bonus,
+          overtime: row.overtime,
+          salary_in_arrears: row.salary_in_arrears,
+          expenses_deductions: row.expenses_deductions,
+          other_reimbursements: row.other_reimbursements,
+          expense_reimbursements: row.expense_reimbursements,
+          gratuity_eosb: row.gratuity_eosb,
+          total_variable_salary: row.total_adjustments,
+          total_salary: row.net_salary,
+          currency: (row.currency || 'AED') as string
+        },
+        batchData: {
+          batch_id: row.id,
+          employer_name: row.employer_name || '',
+          pay_period_from: row.pay_period_from || '',
+          pay_period_to: row.pay_period_to || ''
+        },
+        language: 'english'
+      })
+      
+      const token = row.payslip_token || crypto.randomUUID()
+      const filename = generatePayslipFilename(row.employee_name || 'unknown', token)
+      const storagePath = STORAGE_FOLDER ? `${STORAGE_FOLDER}/${filename}` : filename
+
+      const { error: uploadError } = await supabase.storage
+        .from(STORAGE_BUCKET)
+        .upload(storagePath, fallbackPdf, {
+          contentType: 'application/pdf',
+          upsert: true,
+        })
+
+      if (uploadError) {
+        console.error(`Upload error for ${row.id}:`, uploadError)
+        results.push({ batch_id: row.id, ok: false, message: `Upload failed: ${uploadError.message}` })
+        continue
+      }
+
+      // Update database with payslip info
+      const { error: updateError } = await supabase
+        .from('payroll_excel_imports')
+        .update({
+          payslip_filename: filename,
+          payslip_token: token,
+          payslip_generated_at: new Date().toISOString(),
+          payslip_generation_method: 'fallback'
+        })
+        .eq('id', row.id)
+
+      if (updateError) {
+        console.error(`Database update error for ${row.id}:`, updateError)
+        results.push({ batch_id: row.id, ok: false, message: `Database update failed: ${updateError.message}` })
+        continue
+      }
+
+      results.push({ batch_id: row.id, ok: true, message: 'Generated using fallback method' })
+      console.log(`Successfully processed fallback PDF for ${row.id}`)
+      
+    } catch (error) {
+      console.error(`Fallback processing failed for ${row.id}:`, error)
+      results.push({ batch_id: row.id, ok: false, message: `Fallback processing failed: ${error instanceof Error ? error.message : 'Unknown error'}` })
+    }
+  }
+  
+  return results
+}
+
 export async function POST(req: NextRequest) {
   try {
     console.log('Starting payslip generation API...')
@@ -114,7 +198,9 @@ export async function POST(req: NextRequest) {
   
   // Configure Puppeteer for production
   console.log('Launching Puppeteer browser...')
-  const browser = await puppeteer.launch({
+  
+  // Configure Puppeteer for Vercel environment
+  const puppeteerConfig: any = {
     headless: true,
     args: [
       '--no-sandbox',
@@ -132,8 +218,28 @@ export async function POST(req: NextRequest) {
       '--disable-ipc-flooding-protection',
     ],
     timeout: 30000, // 30 second timeout
-  })
-  console.log('Browser launched successfully')
+  }
+
+  // For Vercel deployment, set the executable path
+  if (process.env.VERCEL) {
+    puppeteerConfig.executablePath = '/usr/bin/google-chrome-stable'
+  }
+
+  let browser
+  try {
+    browser = await puppeteer.launch(puppeteerConfig)
+    console.log('Browser launched successfully')
+  } catch (browserError) {
+    console.error('Failed to launch Puppeteer browser:', browserError)
+    // If browser launch fails, we'll use fallback for all rows
+    console.log('Using fallback PDF generation for all rows due to browser launch failure')
+    const fallbackResults = await processAllWithFallback(rows || [], supabase, template)
+    return NextResponse.json({ 
+      success: true, 
+      results: fallbackResults,
+      message: 'Generated using fallback method due to browser issues'
+    })
+  }
   
   const results: { batch_id: string; ok: boolean; message?: string }[] = []
 
